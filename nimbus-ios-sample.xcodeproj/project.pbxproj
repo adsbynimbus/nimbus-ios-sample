@@ -35,7 +35,6 @@
 		4D901D81273DAFD400037C54 /* AdManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D80273DAFD400037C54 /* AdManagerViewController.swift */; };
 		4D901D83273DC28500037C54 /* AdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D82273DC28500037C54 /* AdViewController.swift */; };
 		4D901D86273DC8CD00037C54 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D85273DC8CD00037C54 /* ConfigManager.swift */; };
-		4D901D89273DCC7100037C54 /* parse_secrets.rb in Resources */ = {isa = PBXBuildFile; fileRef = 4D901D87273DCC7100037C54 /* parse_secrets.rb */; };
 		4D901D8A273DCC7100037C54 /* secrets.json in Resources */ = {isa = PBXBuildFile; fileRef = 4D901D88273DCC7100037C54 /* secrets.json */; };
 		4DADE24627396E0700E7E766 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE24527396E0700E7E766 /* AppDelegate.swift */; };
 		4DADE24827396E0700E7E766 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE24727396E0700E7E766 /* SceneDelegate.swift */; };
@@ -85,7 +84,6 @@
 		4D901D80273DAFD400037C54 /* AdManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManagerViewController.swift; sourceTree = "<group>"; };
 		4D901D82273DC28500037C54 /* AdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdViewController.swift; sourceTree = "<group>"; };
 		4D901D85273DC8CD00037C54 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
-		4D901D87273DCC7100037C54 /* parse_secrets.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = parse_secrets.rb; sourceTree = "<group>"; };
 		4D901D88273DCC7100037C54 /* secrets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = secrets.json; sourceTree = "<group>"; };
 		4DADE24227396E0700E7E766 /* nimbus-ios-sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nimbus-ios-sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DADE24527396E0700E7E766 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -232,7 +230,6 @@
 			isa = PBXGroup;
 			children = (
 				4D901D85273DC8CD00037C54 /* ConfigManager.swift */,
-				4D901D87273DCC7100037C54 /* parse_secrets.rb */,
 				4D901D88273DCC7100037C54 /* secrets.json */,
 			);
 			path = Config;
@@ -385,7 +382,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DADE25227396E0900E7E766 /* LaunchScreen.storyboard in Resources */,
-				4D901D89273DCC7100037C54 /* parse_secrets.rb in Resources */,
 				4DADE24F27396E0900E7E766 /* Assets.xcassets in Resources */,
 				4DB9A146273AE8550005D1D0 /* ProximaNova-Semibold.otf in Resources */,
 				4DB9A145273AE8550005D1D0 /* ProximaNova-Bold.ttf in Resources */,

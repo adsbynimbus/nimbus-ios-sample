@@ -8,7 +8,7 @@
 import UIKit
 
 class DemoCell: UITableViewCell {
-    private let label: UILabel = {
+    let label: UILabel = {
         let label = UILabel()
         label.font = UIFont.proximaNova(size: 18, weight: .bold)
         label.textColor = .pink
