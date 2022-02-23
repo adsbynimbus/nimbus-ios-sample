@@ -20,6 +20,10 @@ In order to see APS/FAN/MoPub/GAM/Unity examples you must also supply it's IDs
 - Locate `secrets.json` file at `Config` folder
 - Replace the empty fields with the IDs you have
 
+#### GAM Extra Configs
+- For GAM Ads it is also required to inform the string value of your Ad Manager app ID for the key `GADApplicationIdentifier` in the Sample App plist. [GAM Update your Info.plist](https://developers.google.com/ad-manager/mobile-ads-sdk/ios/quick-start#update_your_infoplist)
+- For testing in real devices please refer to [GAM Enable test devices](https://developers.google.com/ad-manager/mobile-ads-sdk/ios/test-ads#enable_test_devices)
+
 ## How to run
 After running `pod install` and setting up the required keys you're good to go
 - Locale `nimbus-ios-sample.xcworkspace`

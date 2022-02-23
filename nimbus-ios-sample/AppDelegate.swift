@@ -114,6 +114,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func setupGAM() {
+        /*
+         In order to test GAM in real devices please follow the steps below.
+         For more info please refer to https://developers.google.com/ad-manager/mobile-ads-sdk/ios/test-ads#enable_test_devices
+         If you want to test ads in your app as you're developing, follow the steps below to programmatically register your test device.
+
+         Load your ads-integrated app and make an ad request.
+         Check the console for a message that looks like this:
+
+         <Google> To get test ads on this device, set:
+         GADMobileAds.sharedInstance.requestConfiguration.testDeviceIdentifiers =
+         @[ @"2077ef9a63d2b398840261c8221a0c9b" ];
+         */
         GADMobileAds.sharedInstance().start(completionHandler: nil)
     }
 }
