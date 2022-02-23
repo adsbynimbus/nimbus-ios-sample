@@ -34,7 +34,7 @@ You will be able to see several examples categorized by specific sections, such 
 - Ad Markup Renderer
 
 ## Need help?
-You can check out [Nimbus iOS Quick Start Guide](https://adsbynimbus-public.s3.amazonaws.com/iOS/docs/1.10.8/docs/index.html)
+You can check out [Nimbus iOS Quick Start Guide](https://adsbynimbus-public.s3.amazonaws.com/iOS/docs/1.11.1/docs/index.html)
 
 ## License
 Distributed under [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
