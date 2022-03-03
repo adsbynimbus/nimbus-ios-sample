@@ -4,8 +4,8 @@ Welcome to Nimbus Sample App - ads by publishers, for publishers.
 
 ## Build Setup
 
-### Requeriments
-- `XCode` version must be at least 13 (min. macOS Big Sur 11.3)
+### Requirements
+- `Xcode` version must be at least 13 (min. macOS Big Sur 11.3)
 - `NimbusSDK` and it's subspecs requires Cocoapods >= 1.10.0
 
 ### Installation
@@ -27,7 +27,7 @@ In order to see APS/FAN/MoPub/GAM/Unity examples you must also supply it's IDs
 ## How to run
 After running `pod install` and setting up the required keys you're good to go
 - Locale `nimbus-ios-sample.xcworkspace`
-- Open it with `XCode`
+- Open it with `Xcode`
 - Run the app
 
 ### What you'll see
