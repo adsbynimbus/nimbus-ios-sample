@@ -23,7 +23,7 @@ final class DemoHeader: UITableViewHeaderFooterView {
     private let label: UILabel = {
         let label = UILabel()
         label.font = .proximaNova(size: 18, weight: .bold)
-        label.textColor = .black
+        label.textColor = UIColor(named: "labelText")
         return label
     }()
     
