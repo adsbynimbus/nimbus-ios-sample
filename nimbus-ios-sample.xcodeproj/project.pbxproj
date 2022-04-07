@@ -22,7 +22,7 @@
 		4D5C798D274C259A00033307 /* TestRenderAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C798C274C259A00033307 /* TestRenderAdViewController.swift */; };
 		4D5C798F274C290E00033307 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C798E274C290E00033307 /* UIViewController+Extension.swift */; };
 		4D5C7991274C60BE00033307 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C7990274C60BE00033307 /* UIImage+Extension.swift */; };
-		4D84B1B82743FFF300CA9CE2 /* GoogleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D84B1B72743FFF300CA9CE2 /* GoogleViewController.swift */; };
+		4D84B1B82743FFF300CA9CE2 /* GAMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D84B1B72743FFF300CA9CE2 /* GAMViewController.swift */; };
 		4D8A3FA92742CA1100201485 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8A3FA82742CA1100201485 /* NSObject+Extension.swift */; };
 		4D8A3FAB2742CAC700201485 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8A3FAA2742CAC700201485 /* UITableView+Extension.swift */; };
 		4D8A3FAF274306F100201485 /* DemoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8A3FAE274306F100201485 /* DemoDataSource.swift */; };
@@ -70,7 +70,7 @@
 		4D5C798C274C259A00033307 /* TestRenderAdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRenderAdViewController.swift; sourceTree = "<group>"; };
 		4D5C798E274C290E00033307 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		4D5C7990274C60BE00033307 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
-		4D84B1B72743FFF300CA9CE2 /* GoogleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleViewController.swift; sourceTree = "<group>"; };
+		4D84B1B72743FFF300CA9CE2 /* GAMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GAMViewController.swift; sourceTree = "<group>"; };
 		4D8A3FA82742CA1100201485 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 		4D8A3FAA2742CAC700201485 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		4D8A3FAE274306F100201485 /* DemoDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoDataSource.swift; sourceTree = "<group>"; };
@@ -198,7 +198,7 @@
 				4DE1FE4D27FF58C2002C41BC /* MediationAdType.swift */,
 				4DE1FE4B27FF58C2002C41BC /* MediationIntegrationType.swift */,
 				4DE1FE4C27FF58C2002C41BC /* MediationViewController.swift */,
-				4DDD7A54274470760075FDAE /* Google */,
+				4DDD7A54274470760075FDAE /* GAM */,
 			);
 			path = "Mediation Platforms";
 			sourceTree = "<group>";
@@ -291,12 +291,12 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		4DDD7A54274470760075FDAE /* Google */ = {
+		4DDD7A54274470760075FDAE /* GAM */ = {
 			isa = PBXGroup;
 			children = (
-				4D84B1B72743FFF300CA9CE2 /* GoogleViewController.swift */,
+				4D84B1B72743FFF300CA9CE2 /* GAMViewController.swift */,
 			);
-			path = Google;
+			path = GAM;
 			sourceTree = "<group>";
 		};
 		E5DCED80B52711EBE29811DC /* Pods */ = {
@@ -462,7 +462,7 @@
 				4D5C7991274C60BE00033307 /* UIImage+Extension.swift in Sources */,
 				4D563C432746FD4F00294A7B /* FacebookAdType.swift in Sources */,
 				4D563C412746FD3B00294A7B /* AdManagerAdType.swift in Sources */,
-				4D84B1B82743FFF300CA9CE2 /* GoogleViewController.swift in Sources */,
+				4D84B1B82743FFF300CA9CE2 /* GAMViewController.swift in Sources */,
 				4D563C452746FD6300294A7B /* DemoItem.swift in Sources */,
 				4D5BAE7D273C3CA8009B7F95 /* SettingsCell.swift in Sources */,
 			);

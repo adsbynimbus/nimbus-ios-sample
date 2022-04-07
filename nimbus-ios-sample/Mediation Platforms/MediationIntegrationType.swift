@@ -6,7 +6,7 @@
 //
 
 enum MediationIntegrationType: String, DemoItem {
-    case google
+    case gam
     
     var description: String {
         rawValue.firstUppercased

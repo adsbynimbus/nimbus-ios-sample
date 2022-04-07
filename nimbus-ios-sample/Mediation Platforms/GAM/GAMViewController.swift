@@ -1,5 +1,5 @@
 //
-//  GoogleViewController.swift
+//  GAMViewController.swift
 //  nimbus-ios-sample
 //
 //  Created by Victor Takai on 16/11/21.
@@ -17,7 +17,7 @@ import NimbusSDK
 import NimbusGAMKit
 #endif
 
-final class GoogleViewController: DemoViewController {
+final class GAMViewController: DemoViewController {
     
     private let adType: MediationAdType
     private var bannerView: GAMBannerView!
@@ -108,7 +108,7 @@ final class GoogleViewController: DemoViewController {
 
 // MARK: - GADBannerViewDelegate
 
-extension GoogleViewController: GADBannerViewDelegate {
+extension GAMViewController: GADBannerViewDelegate {
     
     func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
         print("bannerViewDidReceiveAd")
@@ -137,7 +137,7 @@ extension GoogleViewController: GADBannerViewDelegate {
 
 // MARK: - GADFullScreenContentDelegate
 
-extension GoogleViewController: GADFullScreenContentDelegate {
+extension GAMViewController: GADFullScreenContentDelegate {
     
     func adDidRecordImpression(_ ad: GADFullScreenPresentingAd) {
         print("adDidRecordImpression")
@@ -158,7 +158,7 @@ extension GoogleViewController: GADFullScreenContentDelegate {
 
 // MARK: - NimbusRequestManagerDelegate
 
-extension GoogleViewController: NimbusRequestManagerDelegate {
+extension GAMViewController: NimbusRequestManagerDelegate {
     
     func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
         print("didCompleteNimbusRequest")

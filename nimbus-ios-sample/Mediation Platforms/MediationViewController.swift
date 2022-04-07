@@ -31,7 +31,7 @@ final class MediationViewController: DemoViewController {
     }()
     
     private var dataSource: [DemoDataSource<MediationIntegrationType, MediationAdType>] {
-        [DemoDataSource(type: .google, values: MediationAdType.allCases)]
+        [DemoDataSource(type: .gam, values: MediationAdType.allCases)]
     }
     
     override func viewDidLoad() {
@@ -58,7 +58,7 @@ final class MediationViewController: DemoViewController {
             showCustomAlert("google_dynamic_price_interstitial_id")
         } else {
             navigationController?.pushViewController(
-                GoogleViewController(
+                GAMViewController(
                     adType: adType,
                     headerSubTitle: integrationType.description + " - " + headerTitle
                 ),
