@@ -31,10 +31,7 @@ final class MediationViewController: DemoViewController {
     }()
     
     private var dataSource: [DemoDataSource<MediationIntegrationType, MediationAdType>] {
-        [
-            DemoDataSource(type: .google, values: MediationAdType.allCases),
-            DemoDataSource(type: .moPub, values: MediationAdType.allCases)
-        ]
+        [DemoDataSource(type: .google, values: MediationAdType.allCases)]
     }
     
     override func viewDidLoad() {
@@ -47,46 +44,26 @@ final class MediationViewController: DemoViewController {
         integrationType: MediationIntegrationType,
         adType: MediationAdType
     ) {
-        
-        switch integrationType {
-        case .google:
-            if adType == .banner
-                && ConfigManager.shared.googleBannerId.isEmptyOrNil {
-                showCustomAlert("google_banner_id")
-            } else if adType == .dynamicPriceBanner
-                        && ConfigManager.shared.googleDynamicPriceBannerId.isEmptyOrNil {
-                showCustomAlert("google_dynamic_price_banner_id")
-            } else if adType == .interstitial
-                        && ConfigManager.shared.googleInterstitialId.isEmptyOrNil {
-                showCustomAlert("google_interstitial_id")
-            } else if adType == .dynamicPriceInterstitial
-                        && ConfigManager.shared.googleDynamicPriceInterstitialId.isEmptyOrNil {
-                showCustomAlert("google_dynamic_price_interstitial_id")
-            } else {
-                navigationController?.pushViewController(
-                    GoogleViewController(
-                        adType: adType,
-                        headerSubTitle: integrationType.description + " - " + headerTitle
-                    ),
-                    animated: true
-                )
-            }
-        case .moPub:
-            if (adType == .banner || adType == .dynamicPriceBanner)
-                && ConfigManager.shared.mopubBannerId.isEmptyOrNil {
-                showCustomAlert("mopub_banner_id")
-            } else if (adType == .interstitial || adType == .dynamicPriceInterstitial)
-                        && ConfigManager.shared.mopubInterstitialId.isEmptyOrNil {
-                showCustomAlert("mopub_interstitial_id")
-            } else {
-                navigationController?.pushViewController(
-                    MopubViewController(
-                        adType: adType,
-                        headerSubTitle: integrationType.description + " - " + headerTitle
-                    ),
-                    animated: true
-                )
-            }
+        if adType == .banner
+            && ConfigManager.shared.googleBannerId.isEmptyOrNil {
+            showCustomAlert("google_banner_id")
+        } else if adType == .dynamicPriceBanner
+                    && ConfigManager.shared.googleDynamicPriceBannerId.isEmptyOrNil {
+            showCustomAlert("google_dynamic_price_banner_id")
+        } else if adType == .interstitial
+                    && ConfigManager.shared.googleInterstitialId.isEmptyOrNil {
+            showCustomAlert("google_interstitial_id")
+        } else if adType == .dynamicPriceInterstitial
+                    && ConfigManager.shared.googleDynamicPriceInterstitialId.isEmptyOrNil {
+            showCustomAlert("google_dynamic_price_interstitial_id")
+        } else {
+            navigationController?.pushViewController(
+                GoogleViewController(
+                    adType: adType,
+                    headerSubTitle: integrationType.description + " - " + headerTitle
+                ),
+                animated: true
+            )
         }
     }
 }

@@ -16,8 +16,6 @@ public final class ConfigManager {
     public let fbNativePlacementId: String?
     public let fbInterstitialPlacementId: String?
     public let fbBannerPlacementId: String?
-    public let mopubBannerId: String?
-    public let mopubInterstitialId: String?
     public let googleBannerId: String?
     public let googleInterstitialId: String?
     public let googleDynamicPriceBannerId: String?
@@ -31,8 +29,6 @@ public final class ConfigManager {
         let fbNativePlacementId: String?
         let fbInterstitialPlacementId: String?
         let fbBannerPlacementId: String?
-        let mopubBannerId: String?
-        let mopubInterstitialId: String?
         let googleBannerId: String?
         let googleInterstitialId: String?
         let googleDynamicPriceBannerId: String?
@@ -46,8 +42,6 @@ public final class ConfigManager {
             case fbNativePlacementId = "facebook_native_placement_id"
             case fbInterstitialPlacementId = "facebook_interstitial_placement_id"
             case fbBannerPlacementId = "facebook_banner_placement_id"
-            case mopubBannerId = "mopub_banner_id"
-            case mopubInterstitialId = "mopub_interstitial_id"
             case googleBannerId = "google_banner_id"
             case googleInterstitialId = "google_interstitial_id"
             case googleDynamicPriceBannerId = "google_dynamic_price_banner_id"
@@ -67,8 +61,6 @@ public final class ConfigManager {
         fbNativePlacementId = config.fbNativePlacementId
         fbInterstitialPlacementId = config.fbInterstitialPlacementId
         fbBannerPlacementId = config.fbBannerPlacementId
-        mopubBannerId = config.mopubBannerId
-        mopubInterstitialId = config.mopubInterstitialId
         googleBannerId = config.googleBannerId
         googleDynamicPriceBannerId = config.googleDynamicPriceBannerId
         googleInterstitialId = config.googleInterstitialId
