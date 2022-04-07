@@ -6,14 +6,9 @@
 //
 
 enum MediationIntegrationType: String, DemoItem {
-    case google, moPub
+    case gam
     
     var description: String {
-        switch self {
-        case .google:
-            return "Google"
-        case .moPub:
-            return "MoPub"
-        }
+        rawValue.firstUppercased
     }
 }

@@ -9,6 +9,6 @@ target 'nimbus-ios-sample' do
   pod 'NimbusSDK', '1.11.1', subspecs: [
      'NimbusKit', 'NimbusRenderStaticKit', 'NimbusRenderVideoKit',
      'NimbusRequestAPSKit', 'NimbusRequestFANKit', 'NimbusRenderFANKit', 'NimbusRenderOMKit',
-     'NimbusMopubKit', 'NimbusGAMKit', 'NimbusUnityKit'
+     'NimbusGAMKit', 'NimbusUnityKit'
    ]
 end

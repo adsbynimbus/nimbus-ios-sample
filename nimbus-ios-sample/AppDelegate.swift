@@ -14,7 +14,6 @@ import NimbusRenderVideoKit
 import NimbusRenderOMKit
 
 import FBAudienceNetwork
-import MoPubSDK
 import GoogleMobileAds
 
 import AppTrackingTransparency
@@ -37,7 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         setupNimbusSDK()
         setupFAN()
-        setupMopub()
         setupGAM()
         
         return true
@@ -99,18 +97,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         // Required for test ads
         FBAdSettings.setAdvertiserTrackingEnabled(true)
-    }
-    
-    private func setupMopub() {
-        guard let mopubBannerId = ConfigManager.shared.mopubBannerId,
-            !mopubBannerId.isEmpty else {
-            return
-        }
-        let config = MPMoPubConfiguration(adUnitIdForAppInitialization: mopubBannerId)
-        #if DEBUG
-        config.loggingLevel = .debug
-        #endif
-        MoPub.sharedInstance().initializeSdk(with: config, completion: nil)
     }
 
     private func setupGAM() {
