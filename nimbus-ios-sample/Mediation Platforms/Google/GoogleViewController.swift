@@ -147,8 +147,8 @@ extension GoogleViewController: GADFullScreenContentDelegate {
         print("ad:didFailToPresentFullScreenContentWithError: \(error.localizedDescription)")
     }
     
-    func adDidPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        print("adDidPresentFullScreenContent")
+    func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+        print("adWillPresentFullScreenContent")
     }
     
     func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
