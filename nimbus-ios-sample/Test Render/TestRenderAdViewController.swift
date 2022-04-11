@@ -89,6 +89,7 @@ final class TestRenderAdViewController: UIViewController {
             markup: markup,
             isInterstitial: isInterstitial,
             placementId: placementId ?? "",
+            duration: nil,
             adDimensions: adDimensions,
             trackers: nil,
             isMraid: isMraid,

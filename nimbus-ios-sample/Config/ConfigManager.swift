@@ -16,10 +16,7 @@ public final class ConfigManager {
     public let fbNativePlacementId: String?
     public let fbInterstitialPlacementId: String?
     public let fbBannerPlacementId: String?
-    public let googleBannerId: String?
-    public let googleInterstitialId: String?
-    public let googleDynamicPriceBannerId: String?
-    public let googleDynamicPriceInterstitialId: String?
+    public let googlePlacementId: String?
     public let unityGameId: String?
 
     private struct InternalConfig: Decodable {
@@ -29,10 +26,7 @@ public final class ConfigManager {
         let fbNativePlacementId: String?
         let fbInterstitialPlacementId: String?
         let fbBannerPlacementId: String?
-        let googleBannerId: String?
-        let googleInterstitialId: String?
-        let googleDynamicPriceBannerId: String?
-        let googleDynamicPriceInterstitialId: String?
+        let googlePlacementId: String
         let unityGameId: String?
 
         enum CodingKeys: String, CodingKey {
@@ -42,10 +36,7 @@ public final class ConfigManager {
             case fbNativePlacementId = "facebook_native_placement_id"
             case fbInterstitialPlacementId = "facebook_interstitial_placement_id"
             case fbBannerPlacementId = "facebook_banner_placement_id"
-            case googleBannerId = "google_banner_id"
-            case googleInterstitialId = "google_interstitial_id"
-            case googleDynamicPriceBannerId = "google_dynamic_price_banner_id"
-            case googleDynamicPriceInterstitialId = "google_dynamic_price_interstitial_id"
+            case googlePlacementId = "google_placement_id"
             case unityGameId = "unity_game_id"
         }
     }
@@ -61,10 +52,7 @@ public final class ConfigManager {
         fbNativePlacementId = config.fbNativePlacementId
         fbInterstitialPlacementId = config.fbInterstitialPlacementId
         fbBannerPlacementId = config.fbBannerPlacementId
-        googleBannerId = config.googleBannerId
-        googleDynamicPriceBannerId = config.googleDynamicPriceBannerId
-        googleInterstitialId = config.googleInterstitialId
-        googleDynamicPriceInterstitialId = config.googleDynamicPriceInterstitialId
+        googlePlacementId = config.googlePlacementId
         unityGameId = config.unityGameId
     }
 }

@@ -8,8 +8,6 @@
 import Foundation
 
 enum MediationAdType: String, DemoItem {
-    case banner
-    case dynamicPriceBanner
-    case interstitial
-    case dynamicPriceInterstitial
+    case banner, interstitial, dynamicPriceBanner
+    case dynamicPriceInterstitial, dynamicPriceInterstitialStatic, dynamicPriceInterstitialVideo
 }
