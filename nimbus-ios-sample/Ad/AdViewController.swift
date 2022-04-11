@@ -12,18 +12,21 @@ import NimbusRenderVideoKit
 final class AdViewController: DemoViewController {
     
     private let ad: NimbusAd
+    private let dimensions: NimbusAdDimensions?
     private let adViewIdentifier: String
     private let isMaxSize: Bool
     private lazy var adView = AdView(ad: ad, viewController: self)
 
     init(
         ad: NimbusAd,
+        dimensions: NimbusAdDimensions? = nil,
         adViewIdentifier: String,
         headerTitle: String,
         headerSubTitle: String,
         isMaxSize: Bool = false
     ) {
         self.ad = ad
+        self.dimensions = dimensions
         self.adViewIdentifier = adViewIdentifier
         self.isMaxSize = isMaxSize
         super.init(headerTitle: headerTitle, headerSubTitle: headerSubTitle)
@@ -51,20 +54,27 @@ final class AdViewController: DemoViewController {
         adView.accessibilityIdentifier = adViewIdentifier
         adView.translatesAutoresizingMaskIntoConstraints = false
         
-        if isMaxSize {
+        if let dimensions = dimensions {
             NSLayoutConstraint.activate([
-                adView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
-                adView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-                adView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-                adView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+                adView.safeAreaLayoutGuide.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+                adView.safeAreaLayoutGuide.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+                adView.safeAreaLayoutGuide.widthAnchor.constraint(equalToConstant: CGFloat(dimensions.width)),
+                adView.safeAreaLayoutGuide.heightAnchor.constraint(equalToConstant: CGFloat(dimensions.height)),
+            ])
+        } else if isMaxSize {
+            NSLayoutConstraint.activate([
+                adView.safeAreaLayoutGuide.topAnchor.constraint(equalTo: headerView.bottomAnchor),
+                adView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+                adView.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+                adView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
             ])
         } else {
             NSLayoutConstraint.activate([
                 adView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
-                adView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor),
-                adView.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor),
-                adView.trailingAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor),
-                adView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
+                adView.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor),
+                adView.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor),
+                adView.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor),
+                adView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
             ])
         }
     }

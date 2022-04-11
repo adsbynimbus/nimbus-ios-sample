@@ -45,15 +45,7 @@ final class MediationViewController: DemoViewController {
         adType: MediationAdType
     ) {
         if ConfigManager.shared.googlePlacementId.isEmptyOrNil {
-            if adType == .banner {
-                showCustomAlert("google_banner_id")
-            } else if adType == .dynamicPriceBanner {
-                showCustomAlert("google_dynamic_price_banner_id")
-            } else if adType == .interstitial {
-                showCustomAlert("google_interstitial_id")
-            } else if adType == .dynamicPriceInterstitial {
-                showCustomAlert("google_dynamic_price_interstitial_id")
-            }
+            showCustomAlert("google_placement_id")
         } else {
             navigationController?.pushViewController(
                 GAMViewController(
