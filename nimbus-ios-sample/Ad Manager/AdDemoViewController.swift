@@ -104,6 +104,7 @@ final class AdDemoViewController: DemoViewController {
             markup: markup,
             isInterstitial: isInterstitial,
             placementId: placementId ?? "",
+            duration: nil,
             adDimensions: adDimensions,
             trackers: nil,
             isMraid: isMraid,

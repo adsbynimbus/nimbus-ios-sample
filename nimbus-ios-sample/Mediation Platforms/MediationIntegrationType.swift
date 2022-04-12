@@ -9,6 +9,6 @@ enum MediationIntegrationType: String, DemoItem {
     case gam
     
     var description: String {
-        rawValue.firstUppercased
+        rawValue.uppercased()
     }
 }
