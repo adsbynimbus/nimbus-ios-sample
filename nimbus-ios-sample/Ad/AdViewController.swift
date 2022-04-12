@@ -12,13 +12,15 @@ import NimbusRenderVideoKit
 final class AdViewController: DemoViewController {
     
     private let ad: NimbusAd
+    private let companionAd: NimbusCompanionAd?
     private let dimensions: NimbusAdDimensions?
     private let adViewIdentifier: String
     private let isMaxSize: Bool
-    private lazy var adView = AdView(ad: ad, viewController: self)
+    private lazy var adView = AdView(ad: ad, companionAd: companionAd, viewController: self)
 
     init(
         ad: NimbusAd,
+        companionAd: NimbusCompanionAd? = nil,
         dimensions: NimbusAdDimensions? = nil,
         adViewIdentifier: String,
         headerTitle: String,
@@ -26,9 +28,11 @@ final class AdViewController: DemoViewController {
         isMaxSize: Bool = false
     ) {
         self.ad = ad
+        self.companionAd = companionAd
         self.dimensions = dimensions
         self.adViewIdentifier = adViewIdentifier
         self.isMaxSize = isMaxSize
+        
         super.init(headerTitle: headerTitle, headerSubTitle: headerSubTitle)
     }
     
@@ -38,6 +42,8 @@ final class AdViewController: DemoViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = .black
         
         setupAdView()
     }
