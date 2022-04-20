@@ -10,12 +10,14 @@ import NimbusKit
 
 final class AdView: UIView {
     private let ad: NimbusAd
+    private let companionAd: NimbusCompanionAd?
     private let viewController: UIViewController
     private var hasLoaded = false
     private lazy var nimbusAdView = NimbusAdView(adPresentingViewController: viewController)
     
-    init(ad: NimbusAd, viewController: UIViewController) {
+    init(ad: NimbusAd, companionAd: NimbusCompanionAd? = nil, viewController: UIViewController) {
         self.ad = ad
+        self.companionAd = companionAd
         self.viewController = viewController
         
         super.init(frame: CGRect.zero)
@@ -49,7 +51,7 @@ final class AdView: UIView {
             nimbusAdView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
         
-        nimbusAdView.render(ad: ad)
+        nimbusAdView.render(ad: ad, companionAd: companionAd)
         nimbusAdView.start()
     }
 }

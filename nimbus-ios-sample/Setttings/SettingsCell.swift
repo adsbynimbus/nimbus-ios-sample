@@ -15,15 +15,7 @@ final class SettingsCell: UITableViewCell {
         return label
     }()
     
-    private let switchButton: UISwitch = {
-        let switchButton = UISwitch()
-        switchButton.addTarget(
-            self,
-            action: #selector(didChangeSwitch(_:)),
-            for: .valueChanged
-        )
-        return switchButton
-    }()
+    private let switchButton = UISwitch()
     
     var switchAction: ((Bool) -> Void)?
     
@@ -46,6 +38,12 @@ final class SettingsCell: UITableViewCell {
             label.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
             label.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
+        
+        switchButton.addTarget(
+            self,
+            action: #selector(didChangeSwitch(_:)),
+            for: .valueChanged
+        )
     }
     
     required init?(coder: NSCoder) {
