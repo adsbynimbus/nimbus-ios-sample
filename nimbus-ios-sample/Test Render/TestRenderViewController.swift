@@ -16,19 +16,21 @@ class TestRenderViewController: DemoViewController {
         "Paste in a VAST or HTML Nimbus response"
     }
     
-    private lazy var markupTextView: UITextView = {
-        let textView = UITextView()
-        textView.textColor = .turquoise
-        textView.tintColor = .turquoise
-        textView.font = .proximaNova(size: 15, weight: .regular)
-        textView.autocorrectionType = .no
-        textView.contentInset = .zero
-        textView.textContainer.lineFragmentPadding = 0
-        textView.textContainerInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        textView.layer.borderWidth = 0.5
-        textView.layer.borderColor = UIColor.lightGray.cgColor
-        textView.accessibilityIdentifier = "testRenderMarkupTextView"
-        return textView
+    private lazy var markupTexField: UITextField = {
+        let textField = UITextField()
+        textField.textColor = .turquoise
+        textField.tintColor = .turquoise
+        textField.font = .proximaNova(size: 15, weight: .regular)
+        textField.autocorrectionType = .no
+        textField.contentVerticalAlignment = .top
+        textField.clearButtonMode = .always
+        textField.layer.borderWidth = 0.5
+        textField.layer.borderColor = UIColor.lightGray.cgColor
+        textField.accessibilityIdentifier = "testRenderMarkupTextField"
+        
+        textField.delegate = self
+        textField.returnKeyType = .done
+        return textField
     }()
     
     private lazy var testButton: UIButton = {
@@ -46,18 +48,18 @@ class TestRenderViewController: DemoViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupTextView()
+        setupTextField()
         setupTestButton()
     }
     
-    private func setupTextView() {
-        view.addSubview(markupTextView)
+    private func setupTextField() {
+        view.addSubview(markupTexField)
         
-        markupTextView.translatesAutoresizingMaskIntoConstraints = false
+        markupTexField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            markupTextView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 16),
-            markupTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            markupTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+            markupTexField.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 16),
+            markupTexField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            markupTexField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
         ])
     }
     
@@ -67,7 +69,7 @@ class TestRenderViewController: DemoViewController {
         testButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             testButton.heightAnchor.constraint(equalToConstant: 50),
-            testButton.topAnchor.constraint(equalTo: markupTextView.bottomAnchor, constant: 30),
+            testButton.topAnchor.constraint(equalTo: markupTexField.bottomAnchor, constant: 30),
             testButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -45),
             testButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 40),
             testButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -40)
@@ -75,9 +77,20 @@ class TestRenderViewController: DemoViewController {
     }
     
     @objc private func testButtonTapped() {
+        guard let adMarkup = markupTexField.text, !adMarkup.isEmpty else { return }
+        
         navigationController?.pushViewController(
-            TestRenderAdViewController(adMarkup: markupTextView.text),
+            TestRenderAdViewController(adMarkup: adMarkup),
             animated: true
         )
     }
+}
+
+extension TestRenderViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
 }
