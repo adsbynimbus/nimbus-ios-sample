@@ -77,7 +77,7 @@ class TestRenderViewController: DemoViewController {
     }
     
     @objc private func testButtonTapped() {
-        guard let adMarkup = markupTexField.text, !adMarkup.isEmpty else { return  }
+        guard let adMarkup = markupTexField.text, !adMarkup.isEmpty else { return }
         
         navigationController?.pushViewController(
             TestRenderAdViewController(adMarkup: adMarkup),
