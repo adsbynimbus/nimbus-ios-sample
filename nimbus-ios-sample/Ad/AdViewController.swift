@@ -8,6 +8,7 @@
 import UIKit
 import NimbusKit
 import NimbusRenderVideoKit
+import WebKit
 
 final class AdViewController: DemoViewController {
     
@@ -16,7 +17,8 @@ final class AdViewController: DemoViewController {
     private let dimensions: NimbusAdDimensions?
     private let adViewIdentifier: String
     private let isMaxSize: Bool
-    private lazy var adView = AdView(ad: ad, companionAd: companionAd, viewController: self)
+    private let shouldInjectIFrameScript: Bool
+    private lazy var adView = AdView(ad: ad, companionAd: companionAd, viewController: self, delegate: self)
 
     init(
         ad: NimbusAd,
@@ -25,13 +27,15 @@ final class AdViewController: DemoViewController {
         adViewIdentifier: String,
         headerTitle: String,
         headerSubTitle: String,
-        isMaxSize: Bool = false
+        isMaxSize: Bool = false,
+        shouldInjectIFrameScript: Bool = false
     ) {
         self.ad = ad
         self.companionAd = companionAd
         self.dimensions = dimensions
         self.adViewIdentifier = adViewIdentifier
         self.isMaxSize = isMaxSize
+        self.shouldInjectIFrameScript = shouldInjectIFrameScript
         
         super.init(headerTitle: headerTitle, headerSubTitle: headerSubTitle)
     }
@@ -84,4 +88,27 @@ final class AdViewController: DemoViewController {
             ])
         }
     }
+    
+    private func injectIFrameScript() {
+        if let nimbusAdView = adView.subviews.first as? NimbusAdView,
+            let webView = nimbusAdView.subviews.first as? WKWebView {
+            let path = Bundle.main.path(forResource: "mraid_iframe", ofType: "js")!
+            let jsString = (try? String(contentsOfFile: path, encoding: .utf8)) ?? ""
+            webView.evaluateJavaScript(jsString, completionHandler: { _, error in
+                if let error = error {
+                    print("Failed to inject IFrame script \(error)")
+                }
+            })
+        }
+    }
+}
+
+extension AdViewController: AdControllerDelegate {
+    func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {
+        if event == .loaded && shouldInjectIFrameScript {
+            injectIFrameScript()
+        }
+    }
+    
+    func didReceiveNimbusError(controller: AdController, error: NimbusError) {}
 }
