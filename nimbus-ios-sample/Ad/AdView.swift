@@ -9,31 +9,31 @@ import UIKit
 import NimbusKit
 
 final class AdView: UIView {
+    
     private let ad: NimbusAd
     private let companionAd: NimbusCompanionAd?
     private let viewController: UIViewController
-    private var hasLoaded = false
     private lazy var nimbusAdView = NimbusAdView(adPresentingViewController: viewController)
+    private weak var delegate: AdControllerDelegate?
     
-    init(ad: NimbusAd, companionAd: NimbusCompanionAd? = nil, viewController: UIViewController) {
+    init(
+        ad: NimbusAd,
+        companionAd: NimbusCompanionAd? = nil,
+        viewController: UIViewController,
+        delegate: AdControllerDelegate? = nil
+    ) {
         self.ad = ad
         self.companionAd = companionAd
         self.viewController = viewController
+        self.delegate = delegate
         
         super.init(frame: CGRect.zero)
+        
+        setupAdView()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        if !hasLoaded {
-            setupAdView()
-            hasLoaded = true
-        }
     }
     
     func destroy() {
@@ -50,7 +50,9 @@ final class AdView: UIView {
             nimbusAdView.leadingAnchor.constraint(equalTo: leadingAnchor),
             nimbusAdView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
-        
+
+        nimbusAdView.delegate = delegate
+
         nimbusAdView.render(ad: ad, companionAd: companionAd)
         nimbusAdView.start()
     }

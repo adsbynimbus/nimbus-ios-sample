@@ -78,9 +78,6 @@ extension MainViewController: UITableViewDelegate {
             viewController = SettingsViewController()
         }
         
-        navigationController?.pushViewController(
-            viewController,
-            animated: true
-        )
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
