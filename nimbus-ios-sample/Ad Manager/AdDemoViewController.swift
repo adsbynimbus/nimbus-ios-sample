@@ -38,6 +38,10 @@ final class AdDemoViewController: DemoViewController {
         FacebookAdType.allCases
     }
     
+    private var specificAdsDataSource: [AdManagerSpecificAdType] {
+        AdManagerSpecificAdType.allCases
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -114,13 +118,15 @@ final class AdDemoViewController: DemoViewController {
 }
 
 extension AdDemoViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int { 2 }
+    func numberOfSections(in tableView: UITableView) -> Int { 3 }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return adManagerDataSource.count
-        } else {
+        } else if section == 1 {
             return facebookDataSource.count
+        } else {
+            return specificAdsDataSource.count
         }
     }
     
@@ -129,9 +135,11 @@ extension AdDemoViewController: UITableViewDataSource {
         if indexPath.section == 0 {
             let adType = adManagerDataSource[indexPath.row]
             cell.updateWithAdManagerAdType(adType)
-        } else {
+        } else if indexPath.section == 1 {
             let adType = facebookDataSource[indexPath.row]
             cell.updateWithFacebookAdType(adType)
+        } else {
+            cell.updateWithSpecificAdManagerAdType(.adsInScrollList)
         }
         return cell
     }
@@ -153,7 +161,7 @@ extension AdDemoViewController: UITableViewDelegate {
                     animated: true
                 )
             }
-        } else {
+        } else if indexPath.section == 1 {
             let adType = facebookDataSource[indexPath.row]
             if adType == .facebookBanner
                 && ConfigManager.shared.fbBannerPlacementId.isEmptyOrNil {
@@ -185,6 +193,11 @@ extension AdDemoViewController: UITableViewDelegate {
                     animated: true
                 )
             }
+        } else {
+            navigationController?.pushViewController(
+                AdManagerSpecificAdViewController(),
+                animated: true
+            )
         }
     }
 }
