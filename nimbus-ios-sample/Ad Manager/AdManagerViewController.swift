@@ -156,7 +156,6 @@ final class AdManagerViewController: DemoViewController {
                 request: NimbusRequest.forVideoAd(position: "Rewarded_iOS"),
                 adPresentingViewController: self
             )
-   
         }
     }
     

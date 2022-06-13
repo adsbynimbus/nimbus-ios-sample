@@ -52,6 +52,12 @@ class DemoCell: UITableViewCell {
         label.accessibilityIdentifier = adType.getIdentifier(prefix: "adDemo", .cellLabel)
     }
     
+    func updateWithSpecificAdManagerAdType(_ adType: AdManagerSpecificAdType) {
+        accessibilityIdentifier = adType.getIdentifier(prefix: "adDemo", .cell)
+        label.text = adType.description
+        label.accessibilityIdentifier = adType.getIdentifier(prefix: "adDemo", .cellLabel)
+    }
+    
     func updateWithFacebookAdType(_ adType: FacebookAdType) {
         accessibilityIdentifier = adType.getIdentifier(prefix: "adDemo", .cell)
         label.text = adType.description
