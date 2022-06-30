@@ -14,7 +14,6 @@ enum AdManagerAdType: String, DemoItem {
     case interstitialStatic
     case interstitialVideo
     case interstitialHybrid
-    case blockingInterstitial
     case rewardedStatic
     case rewardedVideo
     case rewardedVideoUnity
@@ -23,8 +22,10 @@ enum AdManagerAdType: String, DemoItem {
         switch self {
         case .manualRequestRenderAd:
             return "Manual Request/Render Ad"
-        case .blockingInterstitial, .rewardedStatic, .rewardedVideo, .rewardedVideoUnity:
+        case .rewardedStatic:
             return rawValue.camelCaseToWords() + " (5 sec)"
+        case .rewardedVideo, .rewardedVideoUnity:
+            return rawValue.camelCaseToWords()
         default:
             return rawValue.camelCaseToWords()
         }

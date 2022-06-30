@@ -119,13 +119,6 @@ final class AdManagerViewController: DemoViewController {
                 adPresentingViewController: self
             )
             
-        case .blockingInterstitial:
-            let request = NimbusRequest.forInterstitialAd(position: "test_blocking_interstitial")
-            
-            adManager = NimbusAdManager()
-            adManager.delegate = self
-            adManager.showBlockingAd(request: request, adPresentingViewController: self)
-            
         case .rewardedStatic:
             let request = NimbusRequest.forInterstitialAd(position: "test_rewarded_static")
             request.impressions[0].video = nil
