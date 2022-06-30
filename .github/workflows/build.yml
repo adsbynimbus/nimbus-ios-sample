@@ -1,0 +1,33 @@
+name: Build
+
+on:
+   pull_request:
+     branches:
+       - main
+
+jobs:
+  build:
+    name: Build Project
+    runs-on: macos-12
+
+    steps:
+    - name: Select Xcode Version
+      run: sudo xcode-select --switch /Applications/Xcode_13.2.1.app
+
+    - uses: actions/checkout@v3
+
+    - name: Restore cached Pods
+      id: pod-cache
+      uses: actions/cache@v3
+      with:
+        path: Pods
+        key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-pods-
+
+    - name: Install pods
+      run: pod install --repo-update
+
+    - name: Build project
+      run: xcodebuild -scheme nimbus-ios-sample build
+      xcodebuild test -scheme nimbus-ios-sample -destination 'platform=iOS,arch=x86_64'
