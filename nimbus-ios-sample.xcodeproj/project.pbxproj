@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15014CFE286C7DA4009DB195 /* AdManagerSpecificAdTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15014CFA286C7DA4009DB195 /* AdManagerSpecificAdTextCell.swift */; };
+		15014CFF286C7DA4009DB195 /* AdManagerSpecificAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15014CFB286C7DA4009DB195 /* AdManagerSpecificAdType.swift */; };
+		15014D00286C7DA4009DB195 /* AdManagerSpecificAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15014CFC286C7DA4009DB195 /* AdManagerSpecificAdViewController.swift */; };
+		15014D01286C7DA4009DB195 /* AdManagerSpecificAdNimbusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15014CFD286C7DA4009DB195 /* AdManagerSpecificAdNimbusCell.swift */; };
 		2013D50F279087F500CB5DCF /* MainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2013D50E279087F500CB5DCF /* MainItem.swift */; };
 		2013D5112790886600CB5DCF /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2013D5102790886600CB5DCF /* SettingsSection.swift */; };
 		4D0AA887279F3FE100CD2F7C /* DemoDemandProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0AA886279F3FE100CD2F7C /* DemoDemandProviders.swift */; };
@@ -54,6 +58,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		15014CFA286C7DA4009DB195 /* AdManagerSpecificAdTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdManagerSpecificAdTextCell.swift; sourceTree = "<group>"; };
+		15014CFB286C7DA4009DB195 /* AdManagerSpecificAdType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdManagerSpecificAdType.swift; sourceTree = "<group>"; };
+		15014CFC286C7DA4009DB195 /* AdManagerSpecificAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdManagerSpecificAdViewController.swift; sourceTree = "<group>"; };
+		15014CFD286C7DA4009DB195 /* AdManagerSpecificAdNimbusCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdManagerSpecificAdNimbusCell.swift; sourceTree = "<group>"; };
 		2013D50E279087F500CB5DCF /* MainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainItem.swift; sourceTree = "<group>"; };
 		2013D5102790886600CB5DCF /* SettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSection.swift; sourceTree = "<group>"; };
 		23CC9107A7F29EE5FF1A8745 /* Pods-NimbusDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NimbusDemo.release.xcconfig"; path = "Target Support Files/Pods-NimbusDemo/Pods-NimbusDemo.release.xcconfig"; sourceTree = "<group>"; };
@@ -215,6 +223,10 @@
 		4D901D79273D931C00037C54 /* Ad Manager */ = {
 			isa = PBXGroup;
 			children = (
+				15014CFD286C7DA4009DB195 /* AdManagerSpecificAdNimbusCell.swift */,
+				15014CFA286C7DA4009DB195 /* AdManagerSpecificAdTextCell.swift */,
+				15014CFB286C7DA4009DB195 /* AdManagerSpecificAdType.swift */,
+				15014CFC286C7DA4009DB195 /* AdManagerSpecificAdViewController.swift */,
 				4D563C402746FD3B00294A7B /* AdManagerAdType.swift */,
 				4D563C422746FD4F00294A7B /* FacebookAdType.swift */,
 				4D901D7C273D936E00037C54 /* AdDemoViewController.swift */,
@@ -432,9 +444,11 @@
 				4DADE24627396E0700E7E766 /* AppDelegate.swift in Sources */,
 				4D8AF6DF274D2776002A3783 /* DemoAdCell.swift in Sources */,
 				4DADE24827396E0700E7E766 /* SceneDelegate.swift in Sources */,
+				15014D00286C7DA4009DB195 /* AdManagerSpecificAdViewController.swift in Sources */,
 				4D5C798B274C184000033307 /* TestRenderViewController.swift in Sources */,
 				4D8A3FAB2742CAC700201485 /* UITableView+Extension.swift in Sources */,
 				4DADE25A273993D600E7E766 /* MainViewController.swift in Sources */,
+				15014D01286C7DA4009DB195 /* AdManagerSpecificAdNimbusCell.swift in Sources */,
 				4DB9A148273AE95A0005D1D0 /* DemoCell.swift in Sources */,
 				4D5BAE81273C6A16009B7F95 /* Setting.swift in Sources */,
 				4D901D86273DC8CD00037C54 /* ConfigManager.swift in Sources */,
@@ -442,6 +456,7 @@
 				4DB9A143273AE5240005D1D0 /* UIFont+Extension.swift in Sources */,
 				4D901D83273DC28500037C54 /* AdViewController.swift in Sources */,
 				4D5BAE7F273C5E9F009B7F95 /* DemoHeader.swift in Sources */,
+				15014CFE286C7DA4009DB195 /* AdManagerSpecificAdTextCell.swift in Sources */,
 				4D5BAE7B273C362B009B7F95 /* SettingsViewController.swift in Sources */,
 				4DB9A14A273AF8040005D1D0 /* DemoNavigationController.swift in Sources */,
 				4D0AA887279F3FE100CD2F7C /* DemoDemandProviders.swift in Sources */,
@@ -450,6 +465,7 @@
 				4D901D7D273D936E00037C54 /* AdDemoViewController.swift in Sources */,
 				4D901D81273DAFD400037C54 /* AdManagerViewController.swift in Sources */,
 				2013D5112790886600CB5DCF /* SettingsSection.swift in Sources */,
+				15014CFF286C7DA4009DB195 /* AdManagerSpecificAdType.swift in Sources */,
 				4DE1FE5027FF58C2002C41BC /* MediationAdType.swift in Sources */,
 				4DB9A14C273AF81A0005D1D0 /* DemoViewController.swift in Sources */,
 				4DADE25C2739BF9F00E7E766 /* UIColor+Extension.swift in Sources */,

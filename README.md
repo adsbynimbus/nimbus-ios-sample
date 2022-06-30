@@ -7,6 +7,7 @@ Welcome to Nimbus Sample App - ads by publishers, for publishers.
 ### Requirements
 - `Xcode` version must be at least 13 (min. macOS Big Sur 11.3)
 - `NimbusSDK` and it's subspecs requires Cocoapods >= 1.10.0
+- Rosetta must be turned ON if using a M1 Mac
 
 ### Installation
 After cloning this repo, run `pod install` in the root folder
