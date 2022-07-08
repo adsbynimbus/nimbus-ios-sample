@@ -139,7 +139,7 @@ extension AdDemoViewController: UITableViewDataSource {
             let adType = facebookDataSource[indexPath.row]
             cell.updateWithFacebookAdType(adType)
         } else {
-            cell.updateWithSpecificAdManagerAdType(.adsInScrollList)
+            cell.updateWithSpecificAdManagerAdType(indexPath.row == 0 ? .refreshingBanner : .adsInScrollList)
         }
         return cell
     }
@@ -195,7 +195,7 @@ extension AdDemoViewController: UITableViewDelegate {
             }
         } else {
             navigationController?.pushViewController(
-                AdManagerSpecificAdViewController(),
+                AdManagerSpecificAdViewController(type: indexPath.row == 0 ? .refreshingBanner : .adsInScrollList),
                 animated: true
             )
         }
