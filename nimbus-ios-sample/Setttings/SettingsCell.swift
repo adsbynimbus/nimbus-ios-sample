@@ -8,15 +8,13 @@
 import UIKit
 
 final class SettingsCell: UITableViewCell {
-    private let label: UILabel = {
+    let label: UILabel = {
         let label = UILabel()
         label.font = UIFont.proximaNova(size: 18, weight: .bold)
         label.textColor = .turquoise
         return label
     }()
-    
-    private let switchButton = UISwitch()
-    
+    let switchButton = UISwitch()
     var switchAction: ((Bool) -> Void)?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
