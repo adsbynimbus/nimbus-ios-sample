@@ -8,6 +8,7 @@
 import UIKit
 import NimbusKit
 import GoogleMobileAds
+import DTBiOSSDK
 
 #if canImport(NimbusSDK)
 import NimbusSDK
@@ -26,6 +27,23 @@ final class GAMViewController: DemoViewController {
     private var gamDynamicPrice: NimbusGAMDynamicPrice?
     private lazy var gamRequest = GAMRequest()
     
+    let adLoaderOne: DTBAdLoader = {
+        let loader = DTBAdLoader()
+        loader.setAdSizes([DTBAdSize(interstitialAdSizeWithSlotUUID: "") as Any])
+        return loader
+    }()
+    let adLoaderTwo: DTBAdLoader = {
+        let loader = DTBAdLoader()
+        loader.setAdSizes([DTBAdSize(bannerAdSizeWithWidth: 300, height: 250, andSlotUUID: "") as Any])
+        return loader
+    }()
+    lazy var bidders: [Bidder] = [
+        APSBidder(adLoader: adLoaderOne),
+        APSBidder(adLoader: adLoaderTwo),
+        NimbusBidder(request: .forBannerAd(position: "position"))
+    ]
+    lazy var dynamicPriceManager = DynamicPriceManager(bidders: bidders)
+    
     init(adType: MediationAdType, headerSubTitle: String) {
         self.adType = adType
         super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle)
@@ -39,6 +57,11 @@ final class GAMViewController: DemoViewController {
         super.viewDidLoad()
         
         setupAdRendering()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        dynamicPriceManager.cancelRefresh()
     }
     
     private func setupAdRendering() {
@@ -72,11 +95,9 @@ final class GAMViewController: DemoViewController {
                 bannerView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
             ])
             
-            gamDynamicPrice = NimbusGAMDynamicPrice(request: gamRequest)
-            gamDynamicPrice?.requestDelegate = self
-            
-            requestManager.delegate = gamDynamicPrice
-            requestManager.performRequest(request: NimbusRequest.forBannerAd(position: "banner_position"))
+            dynamicPriceManager.autoRefresh { [weak self] request in
+                self?.bannerView.load(request)
+            }
             
         case .interstitial:
             GAMInterstitialAd.load(
@@ -181,9 +202,7 @@ extension GAMViewController: NimbusRequestManagerDelegate {
     func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
         print("didCompleteNimbusRequest")
         
-        if adType == .dynamicPriceBanner {
-            bannerView.load(gamRequest)
-        } else {
+        if adType != .dynamicPriceBanner {
             GADInterstitialAd.load(
                 withAdUnitID: ConfigManager.shared.googlePlacementId!,
                 request: gamRequest

@@ -7,6 +7,8 @@
 
 import UIKit
 
+import DTBiOSSDK
+
 import NimbusKit
 import NimbusRequestAPSKit
 import NimbusRenderStaticKit
@@ -63,9 +65,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NimbusAdManager.demandProviders = []
         
         // Demand Providers
-        if let aps = DemoDemandProviders.shared.aps {
-            NimbusAdManager.demandProviders?.append(aps)
-        }
+//        if let aps = DemoDemandProviders.shared.aps {
+//            NimbusAdManager.demandProviders?.append(aps)
+//        }
+        DTBAds.sharedInstance().setAppKey("")
+        DTBAds.sharedInstance().mraidPolicy = CUSTOM_MRAID
+        DTBAds.sharedInstance().mraidCustomVersions = ["1.0", "2.0", "3.0"]
+        DTBAds.sharedInstance().setLogLevel(DTBLogLevelAll)
+        DTBAds.sharedInstance().testMode = true
                         
         // Renderers
         let videoRenderer = NimbusVideoAdRenderer()

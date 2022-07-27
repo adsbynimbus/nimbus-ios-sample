@@ -14,6 +14,8 @@
 		15014D01286C7DA4009DB195 /* AdManagerSpecificAdNimbusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15014CFD286C7DA4009DB195 /* AdManagerSpecificAdNimbusCell.swift */; };
 		2013D50F279087F500CB5DCF /* MainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2013D50E279087F500CB5DCF /* MainItem.swift */; };
 		2013D5112790886600CB5DCF /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2013D5102790886600CB5DCF /* SettingsSection.swift */; };
+		20D7BDD5289093C300AC57B1 /* DynamicPriceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D7BDD4289093C300AC57B1 /* DynamicPriceManager.swift */; };
+		20D7BDD7289093CB00AC57B1 /* Bidder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D7BDD6289093CB00AC57B1 /* Bidder.swift */; };
 		4D0AA887279F3FE100CD2F7C /* DemoDemandProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0AA886279F3FE100CD2F7C /* DemoDemandProviders.swift */; };
 		4D15A0DD274824A500D4DBCB /* AdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D15A0DC274824A500D4DBCB /* AdView.swift */; };
 		4D563C412746FD3B00294A7B /* AdManagerAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D563C402746FD3B00294A7B /* AdManagerAdType.swift */; };
@@ -65,6 +67,8 @@
 		1881BD5A11929D13628B761F /* Pods_nimbus_ios_sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_nimbus_ios_sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2013D50E279087F500CB5DCF /* MainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainItem.swift; sourceTree = "<group>"; };
 		2013D5102790886600CB5DCF /* SettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSection.swift; sourceTree = "<group>"; };
+		20D7BDD4289093C300AC57B1 /* DynamicPriceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicPriceManager.swift; sourceTree = "<group>"; };
+		20D7BDD6289093CB00AC57B1 /* Bidder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bidder.swift; sourceTree = "<group>"; };
 		3DFAAB9DAD1927FFE1DC952D /* Pods-nimbus-ios-sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nimbus-ios-sample.debug.xcconfig"; path = "Target Support Files/Pods-nimbus-ios-sample/Pods-nimbus-ios-sample.debug.xcconfig"; sourceTree = "<group>"; };
 		4B1EA9980FABE1DCFE8CE12A /* Pods-nimbus-ios-sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nimbus-ios-sample.release.xcconfig"; path = "Target Support Files/Pods-nimbus-ios-sample/Pods-nimbus-ios-sample.release.xcconfig"; sourceTree = "<group>"; };
 		4D0AA886279F3FE100CD2F7C /* DemoDemandProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoDemandProviders.swift; sourceTree = "<group>"; };
@@ -124,6 +128,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		20D7BDD3289093B900AC57B1 /* Bidder */ = {
+			isa = PBXGroup;
+			children = (
+				20D7BDD4289093C300AC57B1 /* DynamicPriceManager.swift */,
+				20D7BDD6289093CB00AC57B1 /* Bidder.swift */,
+			);
+			path = Bidder;
+			sourceTree = "<group>";
+		};
 		4D0AA885279F3FA700CD2F7C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,6 +268,7 @@
 		4DADE24427396E0700E7E766 /* nimbus-ios-sample */ = {
 			isa = PBXGroup;
 			children = (
+				20D7BDD3289093B900AC57B1 /* Bidder */,
 				4D0AA885279F3FA700CD2F7C /* Helpers */,
 				4D901D79273D931C00037C54 /* Ad Manager */,
 				4D901D84273DC8B700037C54 /* Config */,
@@ -445,6 +459,7 @@
 				4D8A3FAB2742CAC700201485 /* UITableView+Extension.swift in Sources */,
 				4DADE25A273993D600E7E766 /* MainViewController.swift in Sources */,
 				15014D01286C7DA4009DB195 /* AdManagerSpecificAdNimbusCell.swift in Sources */,
+				20D7BDD7289093CB00AC57B1 /* Bidder.swift in Sources */,
 				4DB9A148273AE95A0005D1D0 /* DemoCell.swift in Sources */,
 				4D5BAE81273C6A16009B7F95 /* Setting.swift in Sources */,
 				4D901D86273DC8CD00037C54 /* ConfigManager.swift in Sources */,
@@ -463,6 +478,7 @@
 				2013D5112790886600CB5DCF /* SettingsSection.swift in Sources */,
 				15014CFF286C7DA4009DB195 /* AdManagerSpecificAdType.swift in Sources */,
 				4DE1FE5027FF58C2002C41BC /* MediationAdType.swift in Sources */,
+				20D7BDD5289093C300AC57B1 /* DynamicPriceManager.swift in Sources */,
 				4DB9A14C273AF81A0005D1D0 /* DemoViewController.swift in Sources */,
 				4DADE25C2739BF9F00E7E766 /* UIColor+Extension.swift in Sources */,
 				4D8A3FA92742CA1100201485 /* NSObject+Extension.swift in Sources */,
