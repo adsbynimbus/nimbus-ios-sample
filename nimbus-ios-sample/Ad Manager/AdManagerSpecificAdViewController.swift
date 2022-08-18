@@ -8,10 +8,13 @@
 
 import UIKit
 import NimbusRequestKit
+import NimbusKit
 
 final class AdManagerSpecificAdViewController: UIViewController {
     
     let labels = ["Banner Ad below", "Static Image Ad below", "Video Ad below"]
+    private let type: AdManagerSpecificAdType
+    private lazy var adManager = NimbusAdManager()
     
     private let collectionView : UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -20,23 +23,37 @@ final class AdManagerSpecificAdViewController: UIViewController {
         return collectionView
     }()
     
+    init(type: AdManagerSpecificAdType) {
+        self.type = type
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
                 
         view.backgroundColor = .white
         
-        view.addSubview(collectionView)
-        
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        ])
-        
-        collectionView.dataSource = self
-        collectionView.delegate = self
+        if type == .refreshingBanner {
+            let request = NimbusRequest.forBannerAd(position: "refreshing_banner")
+            adManager.showAd(request: request, container: view, refreshInterval: 30, adPresentingViewController: self)
+        } else {
+            view.addSubview(collectionView)
+            
+            collectionView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+                collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            ])
+            
+            collectionView.dataSource = self
+            collectionView.delegate = self
+        }
     }
 }
 
