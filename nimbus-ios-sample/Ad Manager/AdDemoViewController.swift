@@ -51,9 +51,9 @@ final class AdDemoViewController: DemoViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        NimbusAdManager.demandProviders?.removeAll()
-        if let aps = DemoDemandProviders.shared.aps {
-            NimbusAdManager.demandProviders?.append(aps)
+        NimbusAdManager.requestInterceptors?.removeAll()
+        if let aps = DemoRequestInterceptors.shared.aps {
+            NimbusAdManager.requestInterceptors?.append(aps)
         }
     }
     
@@ -173,12 +173,11 @@ extension AdDemoViewController: UITableViewDelegate {
                         && ConfigManager.shared.fbNativePlacementId.isEmptyOrNil {
                 showCustomAlert("facebook_native_placement_id")
             } else {
-                // Remove all demand providers
-                NimbusAdManager.demandProviders?.removeAll()
+                NimbusAdManager.requestInterceptors?.removeAll()
                 
                 #if canImport(NimbusRequestFANKit) && canImport(NimbusSDK)
-                if let fan = DemoDemandProviders.shared.fan {
-                    NimbusAdManager.demandProviders?.append(fan)
+                if let fan = DemoRequestInterceptors.shared.fan {
+                    NimbusAdManager.requestInterceptors?.append(fan)
                 }
                 #endif
                 

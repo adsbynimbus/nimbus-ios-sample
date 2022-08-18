@@ -7,14 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		10BD543CA6313BDB126E8221 /* Pods_nimbus_ios_sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1881BD5A11929D13628B761F /* Pods_nimbus_ios_sample.framework */; };
 		15014CFE286C7DA4009DB195 /* AdManagerSpecificAdTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15014CFA286C7DA4009DB195 /* AdManagerSpecificAdTextCell.swift */; };
 		15014CFF286C7DA4009DB195 /* AdManagerSpecificAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15014CFB286C7DA4009DB195 /* AdManagerSpecificAdType.swift */; };
 		15014D00286C7DA4009DB195 /* AdManagerSpecificAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15014CFC286C7DA4009DB195 /* AdManagerSpecificAdViewController.swift */; };
 		15014D01286C7DA4009DB195 /* AdManagerSpecificAdNimbusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15014CFD286C7DA4009DB195 /* AdManagerSpecificAdNimbusCell.swift */; };
 		2013D50F279087F500CB5DCF /* MainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2013D50E279087F500CB5DCF /* MainItem.swift */; };
 		2013D5112790886600CB5DCF /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2013D5102790886600CB5DCF /* SettingsSection.swift */; };
-		4D0AA887279F3FE100CD2F7C /* DemoDemandProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0AA886279F3FE100CD2F7C /* DemoDemandProviders.swift */; };
+		4D0AA887279F3FE100CD2F7C /* DemoRequestInterceptors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0AA886279F3FE100CD2F7C /* DemoRequestInterceptors.swift */; };
 		4D15A0DD274824A500D4DBCB /* AdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D15A0DC274824A500D4DBCB /* AdView.swift */; };
 		4D563C412746FD3B00294A7B /* AdManagerAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D563C402746FD3B00294A7B /* AdManagerAdType.swift */; };
 		4D563C432746FD4F00294A7B /* FacebookAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D563C422746FD4F00294A7B /* FacebookAdType.swift */; };
@@ -55,6 +54,7 @@
 		4DE1FE4E27FF58C2002C41BC /* MediationIntegrationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE1FE4B27FF58C2002C41BC /* MediationIntegrationType.swift */; };
 		4DE1FE4F27FF58C2002C41BC /* MediationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE1FE4C27FF58C2002C41BC /* MediationViewController.swift */; };
 		4DE1FE5027FF58C2002C41BC /* MediationAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE1FE4D27FF58C2002C41BC /* MediationAdType.swift */; };
+		832112A161941F96CAFFEF40 /* Pods_nimbus_ios_sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2097BB627A822642FCDAED23 /* Pods_nimbus_ios_sample.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,12 +62,10 @@
 		15014CFB286C7DA4009DB195 /* AdManagerSpecificAdType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdManagerSpecificAdType.swift; sourceTree = "<group>"; };
 		15014CFC286C7DA4009DB195 /* AdManagerSpecificAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdManagerSpecificAdViewController.swift; sourceTree = "<group>"; };
 		15014CFD286C7DA4009DB195 /* AdManagerSpecificAdNimbusCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdManagerSpecificAdNimbusCell.swift; sourceTree = "<group>"; };
-		1881BD5A11929D13628B761F /* Pods_nimbus_ios_sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_nimbus_ios_sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2013D50E279087F500CB5DCF /* MainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainItem.swift; sourceTree = "<group>"; };
 		2013D5102790886600CB5DCF /* SettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSection.swift; sourceTree = "<group>"; };
-		3DFAAB9DAD1927FFE1DC952D /* Pods-nimbus-ios-sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nimbus-ios-sample.debug.xcconfig"; path = "Target Support Files/Pods-nimbus-ios-sample/Pods-nimbus-ios-sample.debug.xcconfig"; sourceTree = "<group>"; };
-		4B1EA9980FABE1DCFE8CE12A /* Pods-nimbus-ios-sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nimbus-ios-sample.release.xcconfig"; path = "Target Support Files/Pods-nimbus-ios-sample/Pods-nimbus-ios-sample.release.xcconfig"; sourceTree = "<group>"; };
-		4D0AA886279F3FE100CD2F7C /* DemoDemandProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoDemandProviders.swift; sourceTree = "<group>"; };
+		2097BB627A822642FCDAED23 /* Pods_nimbus_ios_sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_nimbus_ios_sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D0AA886279F3FE100CD2F7C /* DemoRequestInterceptors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoRequestInterceptors.swift; sourceTree = "<group>"; };
 		4D15A0DC274824A500D4DBCB /* AdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdView.swift; sourceTree = "<group>"; };
 		4D563C402746FD3B00294A7B /* AdManagerAdType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManagerAdType.swift; sourceTree = "<group>"; };
 		4D563C422746FD4F00294A7B /* FacebookAdType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookAdType.swift; sourceTree = "<group>"; };
@@ -110,6 +108,8 @@
 		4DE1FE4B27FF58C2002C41BC /* MediationIntegrationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediationIntegrationType.swift; sourceTree = "<group>"; };
 		4DE1FE4C27FF58C2002C41BC /* MediationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediationViewController.swift; sourceTree = "<group>"; };
 		4DE1FE4D27FF58C2002C41BC /* MediationAdType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediationAdType.swift; sourceTree = "<group>"; };
+		7A1EFCD6C445CE0E05DCF1E2 /* Pods-nimbus-ios-sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nimbus-ios-sample.debug.xcconfig"; path = "Target Support Files/Pods-nimbus-ios-sample/Pods-nimbus-ios-sample.debug.xcconfig"; sourceTree = "<group>"; };
+		A5BAF223A49112C89514E23B /* Pods-nimbus-ios-sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nimbus-ios-sample.release.xcconfig"; path = "Target Support Files/Pods-nimbus-ios-sample/Pods-nimbus-ios-sample.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,17 +117,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10BD543CA6313BDB126E8221 /* Pods_nimbus_ios_sample.framework in Frameworks */,
+				832112A161941F96CAFFEF40 /* Pods_nimbus_ios_sample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E9F3A51B0EBD991F97ED97F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2097BB627A822642FCDAED23 /* Pods_nimbus_ios_sample.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		4D0AA885279F3FA700CD2F7C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				4D0AA886279F3FE100CD2F7C /* DemoDemandProviders.swift */,
+				4D0AA886279F3FE100CD2F7C /* DemoRequestInterceptors.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -240,7 +248,7 @@
 				4DADE24427396E0700E7E766 /* nimbus-ios-sample */,
 				4DADE24327396E0700E7E766 /* Products */,
 				E5DCED80B52711EBE29811DC /* Pods */,
-				AD52AACD6A78EA2707CDF708 /* Frameworks */,
+				3E9F3A51B0EBD991F97ED97F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -301,19 +309,11 @@
 			path = GAM;
 			sourceTree = "<group>";
 		};
-		AD52AACD6A78EA2707CDF708 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				1881BD5A11929D13628B761F /* Pods_nimbus_ios_sample.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		E5DCED80B52711EBE29811DC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3DFAAB9DAD1927FFE1DC952D /* Pods-nimbus-ios-sample.debug.xcconfig */,
-				4B1EA9980FABE1DCFE8CE12A /* Pods-nimbus-ios-sample.release.xcconfig */,
+				7A1EFCD6C445CE0E05DCF1E2 /* Pods-nimbus-ios-sample.debug.xcconfig */,
+				A5BAF223A49112C89514E23B /* Pods-nimbus-ios-sample.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -325,11 +325,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4DADE25627396E0900E7E766 /* Build configuration list for PBXNativeTarget "nimbus-ios-sample" */;
 			buildPhases = (
-				1373D52F2804ECA94264B709 /* [CP] Check Pods Manifest.lock */,
+				478CF82B5EDAB30DA13D5E84 /* [CP] Check Pods Manifest.lock */,
 				4DADE23E27396E0700E7E766 /* Sources */,
 				4DADE23F27396E0700E7E766 /* Frameworks */,
 				4DADE24027396E0700E7E766 /* Resources */,
-				DAA03260CBCA5C27A772F7E0 /* [CP] Embed Pods Frameworks */,
+				01F45762119697E0DD2A1EF4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -390,7 +390,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1373D52F2804ECA94264B709 /* [CP] Check Pods Manifest.lock */ = {
+		01F45762119697E0DD2A1EF4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-nimbus-ios-sample/Pods-nimbus-ios-sample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-nimbus-ios-sample/Pods-nimbus-ios-sample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-nimbus-ios-sample/Pods-nimbus-ios-sample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		478CF82B5EDAB30DA13D5E84 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -410,23 +427,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DAA03260CBCA5C27A772F7E0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-nimbus-ios-sample/Pods-nimbus-ios-sample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-nimbus-ios-sample/Pods-nimbus-ios-sample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-nimbus-ios-sample/Pods-nimbus-ios-sample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -455,7 +455,7 @@
 				15014CFE286C7DA4009DB195 /* AdManagerSpecificAdTextCell.swift in Sources */,
 				4D5BAE7B273C362B009B7F95 /* SettingsViewController.swift in Sources */,
 				4DB9A14A273AF8040005D1D0 /* DemoNavigationController.swift in Sources */,
-				4D0AA887279F3FE100CD2F7C /* DemoDemandProviders.swift in Sources */,
+				4D0AA887279F3FE100CD2F7C /* DemoRequestInterceptors.swift in Sources */,
 				4D5C798D274C259A00033307 /* TestRenderAdViewController.swift in Sources */,
 				2013D50F279087F500CB5DCF /* MainItem.swift in Sources */,
 				4D901D7D273D936E00037C54 /* AdDemoViewController.swift in Sources */,
@@ -612,12 +612,12 @@
 		};
 		4DADE25727396E0900E7E766 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3DFAAB9DAD1927FFE1DC952D /* Pods-nimbus-ios-sample.debug.xcconfig */;
+			baseConfigurationReference = 7A1EFCD6C445CE0E05DCF1E2 /* Pods-nimbus-ios-sample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 75;
+				CURRENT_PROJECT_VERSION = 76;
 				DEVELOPMENT_TEAM = SYMQPHZ6U8;
 				ENABLE_BITCODE = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -644,12 +644,12 @@
 		};
 		4DADE25827396E0900E7E766 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4B1EA9980FABE1DCFE8CE12A /* Pods-nimbus-ios-sample.release.xcconfig */;
+			baseConfigurationReference = A5BAF223A49112C89514E23B /* Pods-nimbus-ios-sample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 75;
+				CURRENT_PROJECT_VERSION = 76;
 				DEVELOPMENT_TEAM = SYMQPHZ6U8;
 				ENABLE_BITCODE = NO;
 				GENERATE_INFOPLIST_FILE = YES;
