@@ -1,25 +1,25 @@
 PODS:
-  - AmazonPublisherServicesSDK (4.5.2)
+  - AmazonPublisherServicesSDK (4.5.3)
   - FBAudienceNetwork (6.11.2)
-  - Google-Mobile-Ads-SDK (9.8.0):
+  - Google-Mobile-Ads-SDK (9.9.0):
     - GoogleAppMeasurement (< 10.0, >= 7.0)
     - GoogleUserMessagingPlatform (>= 1.1)
   - GoogleAds-IMA-iOS-SDK (3.13.0)
-  - GoogleAppMeasurement (9.3.0):
-    - GoogleAppMeasurement/AdIdSupport (= 9.3.0)
+  - GoogleAppMeasurement (9.4.0):
+    - GoogleAppMeasurement/AdIdSupport (= 9.4.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
     - GoogleUtilities/MethodSwizzler (~> 7.7)
     - GoogleUtilities/Network (~> 7.7)
     - "GoogleUtilities/NSData+zlib (~> 7.7)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleAppMeasurement/AdIdSupport (9.3.0):
-    - GoogleAppMeasurement/WithoutAdIdSupport (= 9.3.0)
+  - GoogleAppMeasurement/AdIdSupport (9.4.0):
+    - GoogleAppMeasurement/WithoutAdIdSupport (= 9.4.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
     - GoogleUtilities/MethodSwizzler (~> 7.7)
     - GoogleUtilities/Network (~> 7.7)
     - "GoogleUtilities/NSData+zlib (~> 7.7)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleAppMeasurement/WithoutAdIdSupport (9.3.0):
+  - GoogleAppMeasurement/WithoutAdIdSupport (9.4.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
     - GoogleUtilities/MethodSwizzler (~> 7.7)
     - GoogleUtilities/Network (~> 7.7)
@@ -48,49 +48,49 @@ PODS:
     - nanopb/encode (= 2.30909.0)
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
-  - NimbusSDK/NimbusCoreKit (1.12.0)
-  - NimbusSDK/NimbusGAMKit (1.12.0):
+  - NimbusSDK/NimbusCoreKit (1.12.1)
+  - NimbusSDK/NimbusGAMKit (1.12.1):
     - Google-Mobile-Ads-SDK (>= 8.9.0)
     - NimbusSDK/NimbusKit
-  - NimbusSDK/NimbusKit (1.12.0):
+  - NimbusSDK/NimbusKit (1.12.1):
     - NimbusSDK/NimbusRenderKit
     - NimbusSDK/NimbusRequestKit
-  - NimbusSDK/NimbusRenderFANKit (1.12.0):
+  - NimbusSDK/NimbusRenderFANKit (1.12.1):
     - FBAudienceNetwork (>= 6.6.0)
     - NimbusSDK/NimbusRenderKit
-  - NimbusSDK/NimbusRenderKit (1.12.0):
+  - NimbusSDK/NimbusRenderKit (1.12.1):
     - NimbusSDK/NimbusCoreKit
-  - NimbusSDK/NimbusRenderOMKit (1.12.0):
+  - NimbusSDK/NimbusRenderOMKit (1.12.1):
     - NimbusSDK/NimbusRenderKit
-  - NimbusSDK/NimbusRenderStaticKit (1.12.0):
+  - NimbusSDK/NimbusRenderStaticKit (1.12.1):
     - NimbusSDK/NimbusRenderKit
-  - NimbusSDK/NimbusRenderVideoKit (1.12.0):
+  - NimbusSDK/NimbusRenderVideoKit (1.12.1):
     - GoogleAds-IMA-iOS-SDK (= 3.13.0)
     - NimbusSDK/NimbusRenderKit
-  - NimbusSDK/NimbusRequestAPSKit (1.12.0):
+  - NimbusSDK/NimbusRequestAPSKit (1.12.1):
     - AmazonPublisherServicesSDK (>= 4.2.2)
     - NimbusSDK/NimbusRequestKit
-  - NimbusSDK/NimbusRequestFANKit (1.12.0):
+  - NimbusSDK/NimbusRequestFANKit (1.12.1):
     - FBAudienceNetwork (>= 6.6.0)
     - NimbusSDK/NimbusRequestKit
-  - NimbusSDK/NimbusRequestKit (1.12.0):
+  - NimbusSDK/NimbusRequestKit (1.12.1):
     - NimbusSDK/NimbusCoreKit
-  - NimbusSDK/NimbusUnityKit (1.12.0):
+  - NimbusSDK/NimbusUnityKit (1.12.1):
     - NimbusSDK/NimbusKit
     - UnityAds (>= 4.0.0)
   - PromisesObjC (2.1.1)
   - UnityAds (4.3.0)
 
 DEPENDENCIES:
-  - NimbusSDK/NimbusGAMKit (= 1.12.0)
-  - NimbusSDK/NimbusKit (= 1.12.0)
-  - NimbusSDK/NimbusRenderFANKit (= 1.12.0)
-  - NimbusSDK/NimbusRenderOMKit (= 1.12.0)
-  - NimbusSDK/NimbusRenderStaticKit (= 1.12.0)
-  - NimbusSDK/NimbusRenderVideoKit (= 1.12.0)
-  - NimbusSDK/NimbusRequestAPSKit (= 1.12.0)
-  - NimbusSDK/NimbusRequestFANKit (= 1.12.0)
-  - NimbusSDK/NimbusUnityKit (= 1.12.0)
+  - NimbusSDK/NimbusGAMKit (= 1.12.1)
+  - NimbusSDK/NimbusKit (= 1.12.1)
+  - NimbusSDK/NimbusRenderFANKit (= 1.12.1)
+  - NimbusSDK/NimbusRenderOMKit (= 1.12.1)
+  - NimbusSDK/NimbusRenderStaticKit (= 1.12.1)
+  - NimbusSDK/NimbusRenderVideoKit (= 1.12.1)
+  - NimbusSDK/NimbusRequestAPSKit (= 1.12.1)
+  - NimbusSDK/NimbusRequestFANKit (= 1.12.1)
+  - NimbusSDK/NimbusUnityKit (= 1.12.1)
 
 SPEC REPOS:
   trunk:
@@ -107,18 +107,18 @@ SPEC REPOS:
     - UnityAds
 
 SPEC CHECKSUMS:
-  AmazonPublisherServicesSDK: 94d65bbaa78af25addec28b29edf8ea738a9a24b
+  AmazonPublisherServicesSDK: 0f435088120b7cea8c1acfeae70fb8a2de101881
   FBAudienceNetwork: 4600bc7fa9bd925b1e397b7c9bbef02923062bbc
-  Google-Mobile-Ads-SDK: a6a8fe7ebb1daf345ccdc225a99c1b3074ce0376
+  Google-Mobile-Ads-SDK: 8822993da940ab920bad131b5bffce7eb3f62c6a
   GoogleAds-IMA-iOS-SDK: b8d3693d370edcbd1440c827897c2b2a0b76673d
-  GoogleAppMeasurement: b907bdad775b6975a8108762345b2cfbf1a93c37
+  GoogleAppMeasurement: 5d69e04287fc2c10cc43724bfa4bf31fc12c3dff
   GoogleUserMessagingPlatform: ab890ce5f6620f293a21b6bdd82e416a2c73aeca
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
-  NimbusSDK: 1f80792a27dc9948efa1d1807ca818d2b11520de
+  NimbusSDK: 544e619e31d741d7d6310e4f0a465fb0646559dd
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   UnityAds: 53f7a71da8a16b3eedb57d3930e672687939f643
 
-PODFILE CHECKSUM: 088b73ce1a76a0046699307c5bb626c84d290566
+PODFILE CHECKSUM: e4c915460e4299abcafb036c52dc672751d40365
 
 COCOAPODS: 1.11.3
