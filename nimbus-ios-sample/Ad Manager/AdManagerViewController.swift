@@ -48,9 +48,9 @@ final class AdManagerViewController: DemoViewController {
         nimbusAdView?.destroy()
         adView?.destroy()
         
-        NimbusAdManager.demandProviders?.removeAll()
-        if let aps = DemoDemandProviders.shared.aps {
-            NimbusAdManager.demandProviders?.append(aps)
+        NimbusAdManager.requestInterceptors?.removeAll()
+        if let aps = DemoRequestInterceptors.shared.aps {
+            NimbusAdManager.requestInterceptors?.append(aps)
         }
     }
     
@@ -136,11 +136,11 @@ final class AdManagerViewController: DemoViewController {
             )
         
         case .rewardedVideoUnity:
-            // Remove all demand providers - required for unity
-            NimbusAdManager.demandProviders?.removeAll()
+            // Required for unity
+            NimbusAdManager.requestInterceptors?.removeAll()
             
-            if let unity = DemoDemandProviders.shared.unity {
-                NimbusAdManager.demandProviders?.append(unity)
+            if let unity = DemoRequestInterceptors.shared.unity {
+                NimbusAdManager.requestInterceptors?.append(unity)
             }
             
             adManager = NimbusAdManager()

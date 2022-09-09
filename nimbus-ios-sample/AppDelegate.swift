@@ -60,11 +60,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Nimbus.shared.testMode = UserDefaults.standard.nimbusTestMode
         Nimbus.shared.coppa = UserDefaults.standard.coppaOn
 
-        NimbusAdManager.demandProviders = []
+        NimbusAdManager.requestInterceptors = []
         
-        // Demand Providers
-        if let aps = DemoDemandProviders.shared.aps {
-            NimbusAdManager.demandProviders?.append(aps)
+        if let aps = DemoRequestInterceptors.shared.aps {
+            NimbusAdManager.requestInterceptors?.append(aps)
         }
                         
         // Renderers

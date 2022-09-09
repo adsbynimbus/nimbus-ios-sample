@@ -1,5 +1,5 @@
 //
-//  DemoDemandProviders.swift
+//  DemoRequestInterceptors.swift
 //  nimbus-ios-sample
 //
 //  Created by Victor Takai on 24/01/22.
@@ -20,33 +20,33 @@ import NimbusUnityKit
 import NimbusSDK
 #endif
 
-class DemoDemandProviders {
+final class DemoRequestInterceptors {
 
-    private(set) var aps: NimbusAPSDemandProvider?
+    private(set) var aps: NimbusAPSRequestInterceptor?
     #if canImport(NimbusRequestFANKit) && canImport(NimbusSDK)
-    private(set) var fan: NimbusFANDemandProvider?
+    private(set) var fan: NimbusFANRequestInterceptor?
     #endif
-    private(set) var unity: NimbusUnityDemandProvider?
+    private(set) var unity: NimbusUnityRequestInterceptor?
 
-    static var shared: DemoDemandProviders = DemoDemandProviders()
+    static var shared = DemoRequestInterceptors()
     
     private init() {
         if let apsAppKey = ConfigManager.shared.apsAppKey, !apsAppKey.isEmpty {
-            aps = NimbusAPSDemandProvider(appKey: apsAppKey, adSizes: [])
+            aps = NimbusAPSRequestInterceptor(appKey: apsAppKey, adSizes: [])
         }
         
         #if canImport(NimbusRequestFANKit) && canImport(NimbusSDK)
         if let facebookAppId =
             ConfigManager.shared.fbNativePlacementId?.components(separatedBy: "_").first,
            !facebookAppId.isEmpty {
-            fan = NimbusFANDemandProvider(appId: facebookAppId)
+            fan = NimbusFANRequestInterceptor(appId: facebookAppId)
             fan?.forceTestAd = true
         }
         #endif
         
         if let unityGameId =
             ConfigManager.shared.unityGameId, !unityGameId.isEmpty {
-            unity = NimbusUnityDemandProvider(gameId: unityGameId)
+            unity = NimbusUnityRequestInterceptor(gameId: unityGameId)
         }
     }
 }
