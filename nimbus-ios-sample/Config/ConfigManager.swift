@@ -40,7 +40,7 @@ public final class ConfigManager {
             case fbBannerPlacementId = "facebook_banner_placement_id"
             case googlePlacementId = "google_placement_id"
             case unityGameId = "unity_game_id"
-            case liveRampConfigId = "liveramp_id"
+            case liveRampConfigId = "live_ramp_config_id"
         }
     }
 
