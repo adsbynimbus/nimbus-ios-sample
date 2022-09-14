@@ -90,13 +90,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func setupFAN() {
-        FBAdSettings.addTestDevice(FBAdSettings.testDeviceHash())
-        if ATTrackingManager.trackingAuthorizationStatus == .notDetermined {
-            ATTrackingManager.requestTrackingAuthorization(completionHandler: { _ in () })
-        }
-        // Required for test ads
-        FBAdSettings.setAdvertiserTrackingEnabled(true)
+//        FBAdSettings.addTestDevice(FBAdSettings.testDeviceHash())
+//        if ATTrackingManager.trackingAuthorizationStatus == .notDetermined {
+//            ATTrackingManager.requestTrackingAuthorization(completionHandler: { _ in () })
+//        }
+//        // Required for test ads
+//        FBAdSettings.setAdvertiserTrackingEnabled(true)
     }
+    
 
     private func setupGAM() {
         /*
