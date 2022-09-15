@@ -7,9 +7,22 @@
 
 import UIKit
 import NimbusKit
+
+#if canImport(NimbusSDK)
+import NimbusSDK
+#endif
+
+#if canImport(NimbusRequestFANKit)
 import NimbusRequestFANKit
-import NimbusRequestAPSKit
+#endif
+
+#if canImport(NimbusUnityKit)
 import NimbusUnityKit
+#endif
+
+#if canImport(NimbusRequestAPSKit)
+import NimbusRequestAPSKit
+#endif
 
 final class AdManagerViewController: DemoViewController {
     

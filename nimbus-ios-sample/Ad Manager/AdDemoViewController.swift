@@ -8,8 +8,14 @@
 import UIKit
 import NimbusKit
 import NimbusRequestAPSKit
+
+#if canImport(NimbusRequestFANKit)
 import NimbusRequestFANKit
+#endif
+
+#if canImport(NimbusUnityKit)
 import NimbusUnityKit
+#endif
 
 final class AdDemoViewController: DemoViewController {
     override var headerTitle: String {
