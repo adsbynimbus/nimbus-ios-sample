@@ -7,6 +7,9 @@
 
 import UIKit
 import NimbusKit
+import NimbusRequestAPSKit
+import NimbusRequestFANKit
+import NimbusUnityKit
 
 final class AdDemoViewController: DemoViewController {
     override var headerTitle: String {
@@ -46,15 +49,6 @@ final class AdDemoViewController: DemoViewController {
         super.viewDidLoad()
         
         setupScrollView(tableView)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        NimbusAdManager.requestInterceptors?.removeAll()
-        if let aps = DemoRequestInterceptors.shared.aps {
-            NimbusAdManager.requestInterceptors?.append(aps)
-        }
     }
     
     private func createNimbusAd(adType: FacebookAdType) -> NimbusAd {
@@ -173,9 +167,12 @@ extension AdDemoViewController: UITableViewDelegate {
                         && ConfigManager.shared.fbNativePlacementId.isEmptyOrNil {
                 showCustomAlert("facebook_native_placement_id")
             } else {
-                NimbusAdManager.requestInterceptors?.removeAll()
                 
                 #if canImport(NimbusRequestFANKit) && canImport(NimbusSDK)
+                // Remove other demand providers. It MUST not remove LiveRampInterceptor
+                NimbusAdManager.requestInterceptors?.removeAll(where: {
+                    $0 is NimbusAPSRequestInterceptor || $0 is NimbusUnityRequestInterceptor
+                })
                 if let fan = DemoRequestInterceptors.shared.fan {
                     NimbusAdManager.requestInterceptors?.append(fan)
                 }
