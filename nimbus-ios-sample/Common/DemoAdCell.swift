@@ -9,7 +9,7 @@ import UIKit
 import NimbusKit
 
 final class DemoAdCell: UITableViewCell {
-    private(set) var adView: AdView?
+    private(set) var adView: CustomAdContainerView?
     
     static let spacing: CGFloat = 25
     
@@ -19,7 +19,7 @@ final class DemoAdCell: UITableViewCell {
         selectionStyle = .none
     }
   
-    func setupAdView(adView: AdView) {
+    func setupAdView(adView: CustomAdContainerView) {
         self.adView = adView
         guard let adView = self.adView else { return }
 
@@ -40,7 +40,7 @@ final class DemoAdCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        if let adView = subviews.first(where: { $0 is AdView }) {
+        if let adView = subviews.first(where: { $0 is CustomAdContainerView }) {
             adView.removeFromSuperview()
         }
     }
