@@ -89,7 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             builder: NimbusAdViewabilityTrackerBuilder(verificationProviders: nil)
         )
         
-        // Facebook and LiveRamp requires att to permissions to run properly
+        // Facebook and LiveRamp requires att permissions to run properly
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) { [weak self] in
             self?.startTrackingATT()
             self?.setupFAN()
