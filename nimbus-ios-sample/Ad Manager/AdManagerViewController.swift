@@ -22,6 +22,7 @@ import NimbusUnityKit
 
 #if canImport(NimbusRequestAPSKit)
 import NimbusRequestAPSKit
+import NimbusRenderStaticKit
 #endif
 
 final class AdManagerViewController: DemoViewController {
@@ -30,7 +31,8 @@ final class AdManagerViewController: DemoViewController {
     
     private let adType: AdManagerAdType
     private var adManager: NimbusAdManager!
-    private var adView: AdView?
+    private var customAdContainerView: CustomAdContainerView?
+    private var adController: AdController?
     private var manualRequest: NimbusRequest?
     private var requestManager: NimbusRequestManager?
 
@@ -57,12 +59,16 @@ final class AdManagerViewController: DemoViewController {
         setupAdRendering()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
+    deinit {
         let nimbusAdView = contentView.subviews.first(where: { $0 is NimbusAdView }) as? NimbusAdView
         nimbusAdView?.destroy()
-        adView?.destroy()
+        customAdContainerView?.destroy()
+        
+        adController?.destroy()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         
         // Remove other demand providers. It MUST not remove LiveRampInterceptor
         NimbusAdManager.requestInterceptors?.removeAll(where: {
@@ -174,7 +180,7 @@ final class AdManagerViewController: DemoViewController {
         }
     }
     
-    private func setupAdView(adView: AdView?) {
+    private func setupAdView(adView: CustomAdContainerView?) {
         guard let adView = adView else { return }
         contentView.addSubview(adView)
 
@@ -194,19 +200,21 @@ final class AdManagerViewController: DemoViewController {
 extension AdManagerViewController: NimbusAdManagerDelegate {
     func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
         print("didRenderAd")
+        adController = controller
     }
 }
 
 // MARK: NimbusRequestManagerDelegate
 
 extension AdManagerViewController: NimbusRequestManagerDelegate {
+    
     func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
         print("didCompleteNimbusRequest")
         
         if manualRequest == request {
-            adView = AdView(ad: ad, viewController: self)
-            adView?.accessibilityIdentifier = "adManagerManualRequestRenderAdView"
-            setupAdView(adView: adView)
+            customAdContainerView = CustomAdContainerView(ad: ad, viewController: self)
+            customAdContainerView?.accessibilityIdentifier = "adManagerManualRequestRenderAdView"
+            setupAdView(adView: customAdContainerView)
         }
     }
 
