@@ -55,7 +55,11 @@ final class AdViewController: DemoViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        adView.destroy()
+        // If ad is interstitial, this controller will be the one presenting it,
+        // so destroying the adView is required otherwise
+        if !ad.isInterstitial {
+            adView.destroy()
+        }
     }
     
     private func setupAdView() {

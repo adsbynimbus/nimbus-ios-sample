@@ -6,18 +6,12 @@
 //
 
 import UIKit
+import NimbusSDK
 import NimbusKit
 import NimbusRequestAPSKit
 
-#if canImport(NimbusRequestFANKit)
-import NimbusRequestFANKit
-#endif
-
-#if canImport(NimbusUnityKit)
-import NimbusUnityKit
-#endif
-
 final class AdDemoViewController: DemoViewController {
+    
     override var headerTitle: String {
         "Show Ad Demo"
     }
@@ -47,6 +41,10 @@ final class AdDemoViewController: DemoViewController {
         FacebookAdType.allCases
     }
     
+    private var vungleDataSource: [VungleAdType] {
+        VungleAdType.allCases
+    }
+    
     private var specificAdsDataSource: [AdManagerSpecificAdType] {
         AdManagerSpecificAdType.allCases
     }
@@ -68,6 +66,14 @@ final class AdDemoViewController: DemoViewController {
                 isInterstitial: false
             )
             
+        case .facebookInterstitial:
+            return createNimbusAd(
+                network: "facebook",
+                placementId: "IMG_16_9_LINK#\(ConfigManager.shared.fbInterstitialPlacementId!)",
+                auctionType: .static,
+                isInterstitial: true
+            )
+            
         case .facebookNative:
             return createNimbusAd(
                 network: "facebook",
@@ -75,13 +81,34 @@ final class AdDemoViewController: DemoViewController {
                 auctionType: .native,
                 isInterstitial: false
             )
+        }
+    }
+    
+    private func createNimbusAd(adType: VungleAdType) -> NimbusAd {
+        switch adType {
             
-        case .facebookInterstitial:
+        case .vungleBanner:
             return createNimbusAd(
-                network: "facebook",
-                placementId: "IMG_16_9_LINK#\(ConfigManager.shared.fbInterstitialPlacementId!)",
+                network: "vungle",
+                placementId: ConfigManager.shared.vungleBannerPlacementId,
+                auctionType: .static,
+                isInterstitial: false
+            )
+            
+        case .vungleInterstitial:
+            return createNimbusAd(
+                network: "vungle",
+                placementId: ConfigManager.shared.vungleInterstitialPlacementId,
                 auctionType: .static,
                 isInterstitial: true
+            )
+            
+        case .vungleNative:
+            return createNimbusAd(
+                network: "vungle",
+                placementId: ConfigManager.shared.vungleNativePlacementId,
+                auctionType: .native,
+                isInterstitial: false
             )
         }
     }
@@ -118,13 +145,16 @@ final class AdDemoViewController: DemoViewController {
 }
 
 extension AdDemoViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int { 3 }
+    
+    func numberOfSections(in tableView: UITableView) -> Int { 4 }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return adManagerDataSource.count
         } else if section == 1 {
             return facebookDataSource.count
+        } else if section == 2 {
+            return vungleDataSource.count
         } else {
             return specificAdsDataSource.count
         }
@@ -138,6 +168,9 @@ extension AdDemoViewController: UITableViewDataSource {
         } else if indexPath.section == 1 {
             let adType = facebookDataSource[indexPath.row]
             cell.updateWithFacebookAdType(adType)
+        } else if indexPath.section == 2 {
+            let adType = vungleDataSource[indexPath.row]
+            cell.updateWithVungleAdType(adType)
         } else {
             cell.updateWithSpecificAdManagerAdType(indexPath.row == 0 ? .refreshingBanner : .adsInScrollList)
         }
@@ -146,6 +179,7 @@ extension AdDemoViewController: UITableViewDataSource {
 }
 
 extension AdDemoViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             let adType = adManagerDataSource[indexPath.row]
@@ -174,15 +208,15 @@ extension AdDemoViewController: UITableViewDelegate {
                 showCustomAlert("facebook_native_placement_id")
             } else {
                 
-                #if canImport(NimbusRequestFANKit) && canImport(NimbusSDK)
                 // Remove other demand providers. It MUST not remove LiveRampInterceptor
                 NimbusAdManager.requestInterceptors?.removeAll(where: {
-                    $0 is NimbusAPSRequestInterceptor || $0 is NimbusUnityRequestInterceptor
+                    $0 is NimbusAPSRequestInterceptor ||
+                    $0 is NimbusUnityRequestInterceptor ||
+                    $0 is NimbusVungleRequestInterceptor
                 })
                 if let fan = DemoRequestInterceptors.shared.fan {
                     NimbusAdManager.requestInterceptors?.append(fan)
                 }
-                #endif
                 
                 navigationController?.pushViewController(
                     AdViewController(
@@ -191,6 +225,40 @@ extension AdDemoViewController: UITableViewDelegate {
                         headerTitle: adType.description,
                         headerSubTitle: headerTitle,
                         isMaxSize: true
+                    ),
+                    animated: true
+                )
+            }
+        } else if indexPath.section == 2 {
+            let adType = vungleDataSource[indexPath.row]
+            if adType == .vungleNative
+                && ConfigManager.shared.vungleBannerPlacementId.isEmptyOrNil {
+                showCustomAlert("vungle_banner_placement_id")
+            } else if adType == .vungleInterstitial
+                        && ConfigManager.shared.vungleInterstitialPlacementId.isEmptyOrNil {
+                showCustomAlert("vungle_interstitial_placement_id")
+            } else if adType == .vungleNative
+                        && ConfigManager.shared.vungleNativePlacementId.isEmptyOrNil {
+                showCustomAlert("vungle_native_placement_id")
+            } else {
+                
+                // Remove other demand providers. It MUST not remove LiveRampInterceptor
+                NimbusAdManager.requestInterceptors?.removeAll(where: {
+                    $0 is NimbusAPSRequestInterceptor ||
+                    $0 is NimbusUnityRequestInterceptor ||
+                    $0 is NimbusFANRequestInterceptor
+                })
+                if let vungle = DemoRequestInterceptors.shared.vungle {
+                    NimbusAdManager.requestInterceptors?.append(vungle)
+                }
+                
+                navigationController?.pushViewController(
+                    AdViewController(
+                        ad: createNimbusAd(adType: adType),
+                        adViewIdentifier: adType.getIdentifier(prefix: "adDemo", .adView),
+                        headerTitle: adType.description,
+                        headerSubTitle: headerTitle,
+                        isMaxSize: adType == .vungleNative ? true : false
                     ),
                     animated: true
                 )

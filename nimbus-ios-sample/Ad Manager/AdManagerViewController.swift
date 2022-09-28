@@ -6,24 +6,9 @@
 //
 
 import UIKit
-import NimbusKit
-
-#if canImport(NimbusSDK)
 import NimbusSDK
-#endif
-
-#if canImport(NimbusRequestFANKit)
-import NimbusRequestFANKit
-#endif
-
-#if canImport(NimbusUnityKit)
-import NimbusUnityKit
-#endif
-
-#if canImport(NimbusRequestAPSKit)
+import NimbusKit
 import NimbusRequestAPSKit
-import NimbusRenderStaticKit
-#endif
 
 final class AdManagerViewController: DemoViewController {
     
@@ -72,7 +57,9 @@ final class AdManagerViewController: DemoViewController {
         
         // Remove other demand providers. It MUST not remove LiveRampInterceptor
         NimbusAdManager.requestInterceptors?.removeAll(where: {
-            $0 is NimbusFANRequestInterceptor || $0 is NimbusUnityRequestInterceptor
+            $0 is NimbusFANRequestInterceptor ||
+            $0 is NimbusUnityRequestInterceptor ||
+            $0 is NimbusVungleRequestInterceptor
         })
         
         if let aps = DemoRequestInterceptors.shared.aps {
@@ -164,7 +151,9 @@ final class AdManagerViewController: DemoViewController {
         case .rewardedVideoUnity:
             // Remove other demand providers. It MUST not remove LiveRampInterceptor
             NimbusAdManager.requestInterceptors?.removeAll(where: {
-                $0 is NimbusFANRequestInterceptor || $0 is NimbusAPSRequestInterceptor
+                $0 is NimbusFANRequestInterceptor ||
+                $0 is NimbusAPSRequestInterceptor ||
+                $0 is NimbusVungleRequestInterceptor
             })
             
             if let unity = DemoRequestInterceptors.shared.unity {

@@ -64,6 +64,12 @@ class DemoCell: UITableViewCell {
         label.accessibilityIdentifier = adType.getIdentifier(prefix: "adDemo", .cellLabel)
     }
     
+    func updateWithVungleAdType(_ adType: VungleAdType) {
+        accessibilityIdentifier = adType.getIdentifier(prefix: "adDemo", .cell)
+        label.text = adType.description
+        label.accessibilityIdentifier = adType.getIdentifier(prefix: "adDemo", .cellLabel)
+    }
+    
     func updateWithMediationAdType(_ adType: MediationAdType) {
         accessibilityIdentifier = adType.getIdentifier(prefix: "mediationPlatforms", .cell)
         label.text = adType.description

@@ -8,6 +8,7 @@
 import UIKit
 import SwiftUI
 
+import NimbusSDK
 import NimbusKit
 import NimbusRequestAPSKit
 import NimbusRenderStaticKit
@@ -18,18 +19,6 @@ import FBAudienceNetwork
 import GoogleMobileAds
 
 import AppTrackingTransparency
-
-#if canImport(NimbusSDK)
-import NimbusSDK
-#endif
-
-#if canImport(NimbusRenderFANKit)
-import NimbusRenderFANKit
-#endif
-
-#if canImport(NimbusUnityKit)
-import NimbusUnityKit
-#endif
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -66,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let aps = DemoRequestInterceptors.shared.aps {
             NimbusAdManager.requestInterceptors?.append(aps)
         }
-                        
+        
         // Renderers
         let videoRenderer = NimbusVideoAdRenderer()
         videoRenderer.showMuteButton = true
@@ -74,7 +63,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .forAuctionType(.static): NimbusStaticAdRenderer(),
             .forAuctionType(.video): videoRenderer,
             .forNetwork("facebook"): NimbusFANAdRenderer(),
-            .forNetwork("unity"): NimbusUnityAdRenderer()
+            .forNetwork("unity"): NimbusUnityAdRenderer(),
+            .forNetwork("vungle"): NimbusVungleAdRenderer()
         ]
 
         // User
