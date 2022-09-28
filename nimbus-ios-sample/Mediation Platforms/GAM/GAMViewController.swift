@@ -7,8 +7,15 @@
 
 import UIKit
 import NimbusKit
-import NimbusSDK
 import GoogleMobileAds
+
+#if canImport(NimbusSDK)
+import NimbusSDK
+#endif
+
+#if canImport(NimbusGAMKit)
+import NimbusGAMKit
+#endif
 
 final class GAMViewController: DemoViewController {
     

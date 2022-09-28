@@ -8,7 +8,6 @@
 import UIKit
 import SwiftUI
 
-import NimbusSDK
 import NimbusKit
 import NimbusRequestAPSKit
 import NimbusRenderStaticKit
@@ -19,6 +18,22 @@ import FBAudienceNetwork
 import GoogleMobileAds
 
 import AppTrackingTransparency
+
+#if canImport(NimbusSDK)
+import NimbusSDK
+#endif
+
+#if canImport(NimbusRenderFANKit)
+import NimbusRenderFANKit
+#endif
+
+#if canImport(NimbusRenderVungleKit)
+import NimbusRenderVungleKit
+#endif
+
+#if canImport(NimbusUnityKit)
+import NimbusUnityKit
+#endif
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
