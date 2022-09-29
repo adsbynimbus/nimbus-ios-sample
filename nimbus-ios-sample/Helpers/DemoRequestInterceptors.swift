@@ -40,25 +40,21 @@ final class DemoRequestInterceptors {
             aps = NimbusAPSRequestInterceptor(appKey: apsAppKey, adSizes: [])
         }
         
-        #if canImport(NimbusRequestFANKit) && canImport(NimbusSDK)
         if let facebookAppId =
             ConfigManager.shared.fbNativePlacementId?.components(separatedBy: "_").first,
            !facebookAppId.isEmpty {
             fan = NimbusFANRequestInterceptor(appId: facebookAppId)
             fan?.forceTestAd = true
         }
-        #endif
         
         if let unityGameId =
             ConfigManager.shared.unityGameId, !unityGameId.isEmpty {
             unity = NimbusUnityRequestInterceptor(gameId: unityGameId)
         }
         
-        #if canImport(NimbusRequestVungleKit) && canImport(NimbusSDK)
         if let vungleAppId =
             ConfigManager.shared.vungleAppId, !vungleAppId.isEmpty {
             vungle = NimbusVungleRequestInterceptor(appId: vungleAppId)
         }
-        #endif
     }
 }

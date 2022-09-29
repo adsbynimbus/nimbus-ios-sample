@@ -78,7 +78,8 @@ final class AdDemoViewController: DemoViewController {
                 network: "facebook",
                 placementId: "IMG_16_9_LINK#\(ConfigManager.shared.fbBannerPlacementId!)",
                 auctionType: .static,
-                isInterstitial: false
+                isInterstitial: false,
+                adDimensions: NimbusAdDimensions(width: 300, height: 50)
             )
             
         case .facebookInterstitial:
@@ -86,7 +87,8 @@ final class AdDemoViewController: DemoViewController {
                 network: "facebook",
                 placementId: "IMG_16_9_LINK#\(ConfigManager.shared.fbInterstitialPlacementId!)",
                 auctionType: .static,
-                isInterstitial: true
+                isInterstitial: true,
+                adDimensions: nil
             )
             
         case .facebookNative:
@@ -94,7 +96,8 @@ final class AdDemoViewController: DemoViewController {
                 network: "facebook",
                 placementId: "IMG_16_9_LINK#\(ConfigManager.shared.fbNativePlacementId!)",
                 auctionType: .native,
-                isInterstitial: false
+                isInterstitial: false,
+                adDimensions: NimbusAdDimensions(width: 320, height: 480)
             )
         }
     }
@@ -107,7 +110,17 @@ final class AdDemoViewController: DemoViewController {
                 network: "vungle",
                 placementId: ConfigManager.shared.vungleBannerPlacementId,
                 auctionType: .static,
-                isInterstitial: false
+                isInterstitial: false,
+                adDimensions: NimbusAdDimensions(width: 320, height: 50)
+            )
+            
+        case .vungleMREC:
+            return createNimbusAd(
+                network: "vungle",
+                placementId: ConfigManager.shared.vungleMRECPlacementId,
+                auctionType: .static,
+                isInterstitial: false,
+                adDimensions: NimbusAdDimensions(width: 300, height: 250)
             )
             
         case .vungleInterstitial:
@@ -115,7 +128,17 @@ final class AdDemoViewController: DemoViewController {
                 network: "vungle",
                 placementId: ConfigManager.shared.vungleInterstitialPlacementId,
                 auctionType: .static,
-                isInterstitial: true
+                isInterstitial: true,
+                adDimensions: nil
+            )
+            
+        case .vungleRewarded:
+            return createNimbusAd(
+                network: "vungle",
+                placementId: ConfigManager.shared.vungleRewardedPlacementId,
+                auctionType: .static,
+                isInterstitial: true,
+                adDimensions: nil
             )
             
         case .vungleNative:
@@ -123,7 +146,8 @@ final class AdDemoViewController: DemoViewController {
                 network: "vungle",
                 placementId: ConfigManager.shared.vungleNativePlacementId,
                 auctionType: .native,
-                isInterstitial: false
+                isInterstitial: false,
+                adDimensions: nil
             )
         }
     }
@@ -134,11 +158,9 @@ final class AdDemoViewController: DemoViewController {
         auctionType: NimbusAuctionType,
         markup: String = "",
         isMraid: Bool = true,
-        isInterstitial: Bool
+        isInterstitial: Bool,
+        adDimensions: NimbusAdDimensions? = nil
     ) -> NimbusAd {
-        let adDimensions = isInterstitial ?
-        NimbusAdDimensions(width: 320, height: 480) :
-        NimbusAdDimensions(width: 300, height: 50)
         return NimbusAd(
             position: "",
             auctionType: auctionType,
@@ -233,9 +255,11 @@ extension AdDemoViewController: UITableViewDelegate {
                     NimbusAdManager.requestInterceptors?.append(fan)
                 }
                 
+                let ad = createNimbusAd(adType: adType)
                 navigationController?.pushViewController(
                     AdViewController(
-                        ad: createNimbusAd(adType: adType),
+                        ad: ad,
+                        dimensions: ad.adDimensions,
                         adViewIdentifier: adType.getIdentifier(prefix: "adDemo", .adView),
                         headerTitle: adType.description,
                         headerSubTitle: headerTitle,
@@ -252,6 +276,9 @@ extension AdDemoViewController: UITableViewDelegate {
             } else if adType == .vungleInterstitial
                         && ConfigManager.shared.vungleInterstitialPlacementId.isEmptyOrNil {
                 showCustomAlert("vungle_interstitial_placement_id")
+            } else if adType == .vungleRewarded
+                        && ConfigManager.shared.vungleRewardedPlacementId.isEmptyOrNil {
+                showCustomAlert("vungle_rewarded_placement_id")
             } else if adType == .vungleNative
                         && ConfigManager.shared.vungleNativePlacementId.isEmptyOrNil {
                 showCustomAlert("vungle_native_placement_id")
@@ -267,9 +294,11 @@ extension AdDemoViewController: UITableViewDelegate {
                     NimbusAdManager.requestInterceptors?.append(vungle)
                 }
                 
+                let ad = createNimbusAd(adType: adType)
                 navigationController?.pushViewController(
                     AdViewController(
-                        ad: createNimbusAd(adType: adType),
+                        ad: ad,
+                        dimensions: ad.adDimensions,
                         adViewIdentifier: adType.getIdentifier(prefix: "adDemo", .adView),
                         headerTitle: adType.description,
                         headerSubTitle: headerTitle,

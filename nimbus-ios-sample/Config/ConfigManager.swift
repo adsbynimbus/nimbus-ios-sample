@@ -12,31 +12,47 @@ public final class ConfigManager {
     
     public let publisherKey: String
     public let apiKey: String
+    
     public let apsAppKey: String?
+    
     public let fbNativePlacementId: String?
     public let fbInterstitialPlacementId: String?
     public let fbBannerPlacementId: String?
+    
     public let googlePlacementId: String?
+    
     public let unityGameId: String?
+    
     public let liveRampConfigId: String?
+    
     public let vungleAppId: String?
     public let vungleBannerPlacementId: String?
+    public let vungleMRECPlacementId: String?
     public let vungleInterstitialPlacementId: String?
+    public let vungleRewardedPlacementId: String?
     public let vungleNativePlacementId: String?
     
     private struct InternalConfig: Decodable {
         let publisherKey: String
         let apiKey: String
+        
         let apsAppKey: String?
+        
         let fbNativePlacementId: String?
         let fbInterstitialPlacementId: String?
         let fbBannerPlacementId: String?
-        let googlePlacementId: String
+        
+        let googlePlacementId: String?
+        
         let unityGameId: String?
+        
         let liveRampConfigId: String?
+        
         let vungleAppId: String?
         let vungleBannerPlacementId: String?
+        let vungleMRECPlacementId: String?
         let vungleInterstitialPlacementId: String?
+        let vungleRewardedPlacementId: String?
         let vungleNativePlacementId: String?
         
         enum CodingKeys: String, CodingKey {
@@ -59,7 +75,9 @@ public final class ConfigManager {
             
             case vungleAppId = "vungle_app_id"
             case vungleBannerPlacementId = "vungle_banner_placement_id"
+            case vungleMRECPlacementId = "vungle_mrec_placement_id"
             case vungleInterstitialPlacementId = "vungle_interstitial_placement_id"
+            case vungleRewardedPlacementId = "vungle_rewarded_placement_id"
             case vungleNativePlacementId = "vungle_native_placement_id"
         }
     }
@@ -71,16 +89,24 @@ public final class ConfigManager {
 
         publisherKey = config.publisherKey
         apiKey = config.apiKey
+        
         apsAppKey = config.apsAppKey
+        
         fbNativePlacementId = config.fbNativePlacementId
         fbInterstitialPlacementId = config.fbInterstitialPlacementId
         fbBannerPlacementId = config.fbBannerPlacementId
+        
         googlePlacementId = config.googlePlacementId
+        
         unityGameId = config.unityGameId
+        
         liveRampConfigId = config.liveRampConfigId
+        
         vungleAppId = config.vungleAppId
         vungleBannerPlacementId = config.vungleBannerPlacementId
+        vungleMRECPlacementId = config.vungleMRECPlacementId
         vungleInterstitialPlacementId = config.vungleInterstitialPlacementId
+        vungleRewardedPlacementId = config.vungleRewardedPlacementId
         vungleNativePlacementId = config.vungleNativePlacementId
     }
 }
