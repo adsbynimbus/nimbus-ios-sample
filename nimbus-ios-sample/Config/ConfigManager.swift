@@ -58,7 +58,6 @@ public final class ConfigManager {
         enum CodingKeys: String, CodingKey {
             
             case publisherKey = "publisher_key"
-            
             case apiKey = "api_key"
             
             case apsAppKey = "aps_app_key"

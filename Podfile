@@ -6,7 +6,7 @@ platform :ios, '15.0'
 target 'nimbus-ios-sample' do
   use_frameworks!
 
-  pod 'NimbusSDK', '2.1.0-internal.6', subspecs: [
+  pod 'NimbusSDK', '2.1.0-internal.8', subspecs: [
      'NimbusKit', 'NimbusRenderStaticKit', 'NimbusRenderVideoKit',
      'NimbusRequestAPSKit', 'NimbusRequestFANKit', 'NimbusRenderFANKit', 'NimbusRenderOMKit',
      'NimbusGAMKit', 'NimbusUnityKit', 'NimbusRequestVungleKit', 'NimbusRenderVungleKit'
