@@ -48,40 +48,40 @@ PODS:
     - nanopb/encode (= 2.30909.0)
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
-  - NimbusSDK/NimbusCoreKit (2.1.1-internal.3)
-  - NimbusSDK/NimbusGAMKit (2.1.1-internal.3):
+  - NimbusSDK/NimbusCoreKit (2.1.1-internal.4)
+  - NimbusSDK/NimbusGAMKit (2.1.1-internal.4):
     - Google-Mobile-Ads-SDK (>= 8.13.0)
     - NimbusSDK/NimbusKit
-  - NimbusSDK/NimbusKit (2.1.1-internal.3):
+  - NimbusSDK/NimbusKit (2.1.1-internal.4):
     - NimbusSDK/NimbusRenderKit
     - NimbusSDK/NimbusRequestKit
-  - NimbusSDK/NimbusRenderFANKit (2.1.1-internal.3):
+  - NimbusSDK/NimbusRenderFANKit (2.1.1-internal.4):
     - FBAudienceNetwork (>= 6.11.2)
     - NimbusSDK/NimbusRenderKit
-  - NimbusSDK/NimbusRenderKit (2.1.1-internal.3):
+  - NimbusSDK/NimbusRenderKit (2.1.1-internal.4):
     - NimbusSDK/NimbusCoreKit
-  - NimbusSDK/NimbusRenderOMKit (2.1.1-internal.3):
+  - NimbusSDK/NimbusRenderOMKit (2.1.1-internal.4):
     - NimbusSDK/NimbusRenderKit
-  - NimbusSDK/NimbusRenderStaticKit (2.1.1-internal.3):
+  - NimbusSDK/NimbusRenderStaticKit (2.1.1-internal.4):
     - NimbusSDK/NimbusRenderKit
-  - NimbusSDK/NimbusRenderVideoKit (2.1.1-internal.3):
+  - NimbusSDK/NimbusRenderVideoKit (2.1.1-internal.4):
     - GoogleAds-IMA-iOS-SDK (= 3.16.3)
     - NimbusSDK/NimbusRenderKit
-  - NimbusSDK/NimbusRenderVungleKit (2.1.1-internal.3):
+  - NimbusSDK/NimbusRenderVungleKit (2.1.1-internal.4):
     - NimbusSDK/NimbusRenderKit
     - VungleSDK-iOS (>= 6.12.0)
-  - NimbusSDK/NimbusRequestAPSKit (2.1.1-internal.3):
+  - NimbusSDK/NimbusRequestAPSKit (2.1.1-internal.4):
     - AmazonPublisherServicesSDK (>= 4.5.3)
     - NimbusSDK/NimbusRequestKit
-  - NimbusSDK/NimbusRequestFANKit (2.1.1-internal.3):
+  - NimbusSDK/NimbusRequestFANKit (2.1.1-internal.4):
     - FBAudienceNetwork (>= 6.11.2)
     - NimbusSDK/NimbusRequestKit
-  - NimbusSDK/NimbusRequestKit (2.1.1-internal.3):
+  - NimbusSDK/NimbusRequestKit (2.1.1-internal.4):
     - NimbusSDK/NimbusCoreKit
-  - NimbusSDK/NimbusRequestVungleKit (2.1.1-internal.3):
+  - NimbusSDK/NimbusRequestVungleKit (2.1.1-internal.4):
     - NimbusSDK/NimbusRequestKit
     - VungleSDK-iOS (>= 6.12.0)
-  - NimbusSDK/NimbusUnityKit (2.1.1-internal.3):
+  - NimbusSDK/NimbusUnityKit (2.1.1-internal.4):
     - NimbusSDK/NimbusKit
     - UnityAds (= 4.3.0)
   - PromisesObjC (2.1.1)
@@ -89,17 +89,17 @@ PODS:
   - VungleSDK-iOS (6.12.0)
 
 DEPENDENCIES:
-  - NimbusSDK/NimbusGAMKit (= 2.1.1-internal.3)
-  - NimbusSDK/NimbusKit (= 2.1.1-internal.3)
-  - NimbusSDK/NimbusRenderFANKit (= 2.1.1-internal.3)
-  - NimbusSDK/NimbusRenderOMKit (= 2.1.1-internal.3)
-  - NimbusSDK/NimbusRenderStaticKit (= 2.1.1-internal.3)
-  - NimbusSDK/NimbusRenderVideoKit (= 2.1.1-internal.3)
-  - NimbusSDK/NimbusRenderVungleKit (= 2.1.1-internal.3)
-  - NimbusSDK/NimbusRequestAPSKit (= 2.1.1-internal.3)
-  - NimbusSDK/NimbusRequestFANKit (= 2.1.1-internal.3)
-  - NimbusSDK/NimbusRequestVungleKit (= 2.1.1-internal.3)
-  - NimbusSDK/NimbusUnityKit (= 2.1.1-internal.3)
+  - NimbusSDK/NimbusGAMKit (= 2.1.1-internal.4)
+  - NimbusSDK/NimbusKit (= 2.1.1-internal.4)
+  - NimbusSDK/NimbusRenderFANKit (= 2.1.1-internal.4)
+  - NimbusSDK/NimbusRenderOMKit (= 2.1.1-internal.4)
+  - NimbusSDK/NimbusRenderStaticKit (= 2.1.1-internal.4)
+  - NimbusSDK/NimbusRenderVideoKit (= 2.1.1-internal.4)
+  - NimbusSDK/NimbusRenderVungleKit (= 2.1.1-internal.4)
+  - NimbusSDK/NimbusRequestAPSKit (= 2.1.1-internal.4)
+  - NimbusSDK/NimbusRequestFANKit (= 2.1.1-internal.4)
+  - NimbusSDK/NimbusRequestVungleKit (= 2.1.1-internal.4)
+  - NimbusSDK/NimbusUnityKit (= 2.1.1-internal.4)
 
 SPEC REPOS:
   "git@github.com:timehop/Specs.git":
@@ -126,11 +126,11 @@ SPEC CHECKSUMS:
   GoogleUserMessagingPlatform: 5f8b30daf181805317b6b985bb51c1ff3beca054
   GoogleUtilities: 1d20a6ad97ef46f67bbdec158ce00563a671ebb7
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
-  NimbusSDK: 3cc588995e47f0cac30805b51096043623ac5490
+  NimbusSDK: 0709feae7aa8f4cb5c8829a03e9872d9b4896512
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   UnityAds: 53f7a71da8a16b3eedb57d3930e672687939f643
   VungleSDK-iOS: 1936f966dd5828d171fc514343741480bf219496
 
-PODFILE CHECKSUM: 70c8ecf1c1ade41a102477b0f73c6dd98541984f
+PODFILE CHECKSUM: 67721ea145b0ab9994661a7db44a15cf1cdac262
 
 COCOAPODS: 1.11.3

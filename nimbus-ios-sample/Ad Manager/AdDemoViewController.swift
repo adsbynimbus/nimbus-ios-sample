@@ -270,9 +270,12 @@ extension AdDemoViewController: UITableViewDelegate {
             }
         } else if indexPath.section == 2 {
             let adType = vungleDataSource[indexPath.row]
-            if adType == .vungleNative
+            if adType == .vungleBanner
                 && ConfigManager.shared.vungleBannerPlacementId.isEmptyOrNil {
                 showCustomAlert("vungle_banner_placement_id")
+            } else if adType == .vungleMREC
+                        && ConfigManager.shared.vungleMRECPlacementId.isEmptyOrNil {
+                showCustomAlert("vungle_mrec_placement_id")
             } else if adType == .vungleInterstitial
                         && ConfigManager.shared.vungleInterstitialPlacementId.isEmptyOrNil {
                 showCustomAlert("vungle_interstitial_placement_id")
