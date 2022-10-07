@@ -89,14 +89,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             builder: NimbusAdViewabilityTrackerBuilder(verificationProviders: nil)
         )
         
+        self.setupFAN()
+        
         // Facebook and LiveRamp requires att permissions to run properly
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) { [weak self] in
             self?.startTrackingATT()
-            self?.setupFAN()
         }
     }
     
     private func startTrackingATT() {
+        print("ATTrackingManager.trackingAuthorizationStatus: \(ATTrackingManager.trackingAuthorizationStatus)")
         if ATTrackingManager.trackingAuthorizationStatus == .notDetermined {
             var message = ""
             ATTrackingManager.requestTrackingAuthorization {
@@ -127,9 +129,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func setupFAN() {
+        FBAdSettings.clearTestDevices()
         FBAdSettings.addTestDevice(FBAdSettings.testDeviceHash())
         // Required for test ads
         FBAdSettings.setAdvertiserTrackingEnabled(true)
+        FBAdSettings.testAdType = .default
+        print("Facebook Test Mode: \(FBAdSettings.isTestMode())")
     }
 
     private func setupGAM() {
