@@ -12,20 +12,11 @@ jobs:
 
     steps:
     - name: Select Xcode Version
-      run: sudo xcode-select --switch /Applications/Xcode_13.4.1.app
+      run: sudo xcode-select --switch /Applications/Xcode_14.0.1.app
 
     - uses: actions/checkout@v3
       with:
         lfs: true
-
-    - name: Restore cached Pods
-      id: pod-cache
-      uses: actions/cache@v3
-      with:
-        path: Pods
-        key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-pods-
 
     - name: Install pods
       run: pod install --repo-update
