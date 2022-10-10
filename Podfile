@@ -1,5 +1,4 @@
 source 'https://cdn.cocoapods.org/'
-# source 'git@github.com:timehop/Specs.git'
 
 platform :ios, '15.0'
 
