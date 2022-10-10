@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 import NimbusKit
 import NimbusRequestAPSKit
@@ -87,15 +88,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Nimbus.shared.viewabilityProvider = .init(
             builder: NimbusAdViewabilityTrackerBuilder(verificationProviders: nil)
         )
-    }
-
-    private func setupFAN() {
-        FBAdSettings.addTestDevice(FBAdSettings.testDeviceHash())
-        if ATTrackingManager.trackingAuthorizationStatus == .notDetermined {
-            ATTrackingManager.requestTrackingAuthorization(completionHandler: { _ in () })
+        
+        self.setupFAN()
+        
+        // Facebook and LiveRamp requires att permissions to run properly
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) { [weak self] in
+            self?.startTrackingATT()
         }
+    }
+    
+    private func startTrackingATT() {
+        print("ATTrackingManager.trackingAuthorizationStatus: \(ATTrackingManager.trackingAuthorizationStatus)")
+        if ATTrackingManager.trackingAuthorizationStatus == .notDetermined {
+            var message = ""
+            ATTrackingManager.requestTrackingAuthorization {
+                switch $0 {
+                case .authorized:
+                    print("ATT authorized")
+                    message = "authorized"
+                case .denied:
+                    print("ATT denied")
+                    message = "denied"
+                case .notDetermined:
+                    print("ATT notDetermined")
+                    message = "notDetermined"
+                case .restricted:
+                    print("ATT restricted")
+                    message = "restricted"
+                @unknown default:
+                    print("ATT unknown default")
+                    message = "unknown default"
+                }
+                
+                DispatchQueue.main.async {
+                    Alert.showAlert(title: "Request Tracking Authorization Result",
+                                    message: message)
+                }
+            }
+        }
+    }
+    
+    private func setupFAN() {
+        FBAdSettings.clearTestDevices()
+        FBAdSettings.addTestDevice(FBAdSettings.testDeviceHash())
         // Required for test ads
         FBAdSettings.setAdvertiserTrackingEnabled(true)
+        FBAdSettings.testAdType = .default
+        print("Facebook Test Mode: \(FBAdSettings.isTestMode())")
     }
 
     private func setupGAM() {
@@ -115,3 +154,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+extension Alert {
+    public static func showAlert(title: String, message: String) {
+        DispatchQueue.main.async {
+            let alertController: UIAlertController = UIAlertController(title: title,
+                                                                       message: message,
+                                                                       preferredStyle: .alert)
+            let okAction: UIAlertAction = UIAlertAction(title: "OK", style: .default) { (action) -> Void in
+                NSLog("OK was selected")
+            }
+            alertController.addAction(okAction)
+            
+            let viewController = UIApplication.shared.windows.first!.rootViewController!
+            viewController.present(alertController, animated: true, completion: nil)
+        }
+    }
+}

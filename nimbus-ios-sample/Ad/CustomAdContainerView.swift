@@ -8,7 +8,7 @@
 import UIKit
 import NimbusKit
 
-final class AdView: UIView {
+final class CustomAdContainerView: UIView {
     
     private let ad: NimbusAd
     private let companionAd: NimbusCompanionAd?

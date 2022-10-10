@@ -18,6 +18,7 @@ public final class ConfigManager {
     public let fbBannerPlacementId: String?
     public let googlePlacementId: String?
     public let unityGameId: String?
+    public let liveRampConfigId: String?
 
     private struct InternalConfig: Decodable {
         let publisherKey: String
@@ -28,6 +29,7 @@ public final class ConfigManager {
         let fbBannerPlacementId: String?
         let googlePlacementId: String
         let unityGameId: String?
+        let liveRampConfigId: String?
 
         enum CodingKeys: String, CodingKey {
             case publisherKey = "publisher_key"
@@ -38,6 +40,7 @@ public final class ConfigManager {
             case fbBannerPlacementId = "facebook_banner_placement_id"
             case googlePlacementId = "google_placement_id"
             case unityGameId = "unity_game_id"
+            case liveRampConfigId = "live_ramp_config_id"
         }
     }
 
@@ -54,5 +57,6 @@ public final class ConfigManager {
         fbBannerPlacementId = config.fbBannerPlacementId
         googlePlacementId = config.googlePlacementId
         unityGameId = config.unityGameId
+        liveRampConfigId = config.liveRampConfigId
     }
 }

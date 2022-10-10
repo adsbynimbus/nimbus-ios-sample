@@ -11,10 +11,10 @@
 		15014CFF286C7DA4009DB195 /* AdManagerSpecificAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15014CFB286C7DA4009DB195 /* AdManagerSpecificAdType.swift */; };
 		15014D00286C7DA4009DB195 /* AdManagerSpecificAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15014CFC286C7DA4009DB195 /* AdManagerSpecificAdViewController.swift */; };
 		15014D01286C7DA4009DB195 /* AdManagerSpecificAdNimbusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15014CFD286C7DA4009DB195 /* AdManagerSpecificAdNimbusCell.swift */; };
+		150B4B5828D3E6F7002F233D /* CustomAdContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150B4B5728D3E6F7002F233D /* CustomAdContainerView.swift */; };
 		2013D50F279087F500CB5DCF /* MainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2013D50E279087F500CB5DCF /* MainItem.swift */; };
 		2013D5112790886600CB5DCF /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2013D5102790886600CB5DCF /* SettingsSection.swift */; };
 		4D0AA887279F3FE100CD2F7C /* DemoRequestInterceptors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0AA886279F3FE100CD2F7C /* DemoRequestInterceptors.swift */; };
-		4D15A0DD274824A500D4DBCB /* AdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D15A0DC274824A500D4DBCB /* AdView.swift */; };
 		4D563C412746FD3B00294A7B /* AdManagerAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D563C402746FD3B00294A7B /* AdManagerAdType.swift */; };
 		4D563C432746FD4F00294A7B /* FacebookAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D563C422746FD4F00294A7B /* FacebookAdType.swift */; };
 		4D563C452746FD6300294A7B /* DemoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D563C442746FD6300294A7B /* DemoItem.swift */; };
@@ -62,11 +62,11 @@
 		15014CFB286C7DA4009DB195 /* AdManagerSpecificAdType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdManagerSpecificAdType.swift; sourceTree = "<group>"; };
 		15014CFC286C7DA4009DB195 /* AdManagerSpecificAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdManagerSpecificAdViewController.swift; sourceTree = "<group>"; };
 		15014CFD286C7DA4009DB195 /* AdManagerSpecificAdNimbusCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdManagerSpecificAdNimbusCell.swift; sourceTree = "<group>"; };
+		150B4B5728D3E6F7002F233D /* CustomAdContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAdContainerView.swift; sourceTree = "<group>"; };
 		2013D50E279087F500CB5DCF /* MainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainItem.swift; sourceTree = "<group>"; };
 		2013D5102790886600CB5DCF /* SettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSection.swift; sourceTree = "<group>"; };
 		2097BB627A822642FCDAED23 /* Pods_nimbus_ios_sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_nimbus_ios_sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D0AA886279F3FE100CD2F7C /* DemoRequestInterceptors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoRequestInterceptors.swift; sourceTree = "<group>"; };
-		4D15A0DC274824A500D4DBCB /* AdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdView.swift; sourceTree = "<group>"; };
 		4D563C402746FD3B00294A7B /* AdManagerAdType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManagerAdType.swift; sourceTree = "<group>"; };
 		4D563C422746FD4F00294A7B /* FacebookAdType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookAdType.swift; sourceTree = "<group>"; };
 		4D563C442746FD6300294A7B /* DemoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoItem.swift; sourceTree = "<group>"; };
@@ -143,7 +143,7 @@
 		4D15A0D8274802CE00D4DBCB /* Ad */ = {
 			isa = PBXGroup;
 			children = (
-				4D15A0DC274824A500D4DBCB /* AdView.swift */,
+				150B4B5728D3E6F7002F233D /* CustomAdContainerView.swift */,
 				4D901D82273DC28500037C54 /* AdViewController.swift */,
 			);
 			path = Ad;
@@ -448,7 +448,6 @@
 				4DB9A148273AE95A0005D1D0 /* DemoCell.swift in Sources */,
 				4D5BAE81273C6A16009B7F95 /* Setting.swift in Sources */,
 				4D901D86273DC8CD00037C54 /* ConfigManager.swift in Sources */,
-				4D15A0DD274824A500D4DBCB /* AdView.swift in Sources */,
 				4DB9A143273AE5240005D1D0 /* UIFont+Extension.swift in Sources */,
 				4D901D83273DC28500037C54 /* AdViewController.swift in Sources */,
 				4D5BAE7F273C5E9F009B7F95 /* DemoHeader.swift in Sources */,
@@ -474,6 +473,7 @@
 				4D5C7991274C60BE00033307 /* UIImage+Extension.swift in Sources */,
 				4D563C432746FD4F00294A7B /* FacebookAdType.swift in Sources */,
 				4D563C412746FD3B00294A7B /* AdManagerAdType.swift in Sources */,
+				150B4B5828D3E6F7002F233D /* CustomAdContainerView.swift in Sources */,
 				4D84B1B82743FFF300CA9CE2 /* GAMViewController.swift in Sources */,
 				4D563C452746FD6300294A7B /* DemoItem.swift in Sources */,
 				4D5BAE7D273C3CA8009B7F95 /* SettingsCell.swift in Sources */,
@@ -623,7 +623,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "nimbus-ios-sample/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Nimbus Sample";
-				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This is required for FB test ads to work";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This is required for FB and LiveRamp test ads to work";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -634,7 +634,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.adsbynimbus.ios.NimbusDemoDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.adsbynimbus.ios.NimbusDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -655,7 +655,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "nimbus-ios-sample/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Nimbus Sample";
-				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This is required for FB test ads to work";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This is required for FB and LiveRamp test ads to work";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

@@ -8,13 +8,31 @@
 import UIKit
 import NimbusKit
 
+#if canImport(NimbusSDK)
+import NimbusSDK
+#endif
+
+#if canImport(NimbusRequestFANKit)
+import NimbusRequestFANKit
+#endif
+
+#if canImport(NimbusUnityKit)
+import NimbusUnityKit
+#endif
+
+#if canImport(NimbusRequestAPSKit)
+import NimbusRequestAPSKit
+import NimbusRenderStaticKit
+#endif
+
 final class AdManagerViewController: DemoViewController {
     
     private let contentView = UIView()
     
     private let adType: AdManagerAdType
     private var adManager: NimbusAdManager!
-    private var adView: AdView?
+    private var customAdContainerView: CustomAdContainerView?
+    private var adController: AdController?
     private var manualRequest: NimbusRequest?
     private var requestManager: NimbusRequestManager?
 
@@ -41,14 +59,22 @@ final class AdManagerViewController: DemoViewController {
         setupAdRendering()
     }
     
+    deinit {
+        let nimbusAdView = contentView.subviews.first(where: { $0 is NimbusAdView }) as? NimbusAdView
+        nimbusAdView?.destroy()
+        customAdContainerView?.destroy()
+        
+        adController?.destroy()
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        let nimbusAdView = contentView.subviews.first(where: { $0 is NimbusAdView }) as? NimbusAdView
-        nimbusAdView?.destroy()
-        adView?.destroy()
+        // Remove other demand providers. It MUST not remove LiveRampInterceptor
+        NimbusAdManager.requestInterceptors?.removeAll(where: {
+            $0 is NimbusFANRequestInterceptor || $0 is NimbusUnityRequestInterceptor
+        })
         
-        NimbusAdManager.requestInterceptors?.removeAll()
         if let aps = DemoRequestInterceptors.shared.aps {
             NimbusAdManager.requestInterceptors?.append(aps)
         }
@@ -136,8 +162,10 @@ final class AdManagerViewController: DemoViewController {
             )
         
         case .rewardedVideoUnity:
-            // Required for unity
-            NimbusAdManager.requestInterceptors?.removeAll()
+            // Remove other demand providers. It MUST not remove LiveRampInterceptor
+            NimbusAdManager.requestInterceptors?.removeAll(where: {
+                $0 is NimbusFANRequestInterceptor || $0 is NimbusAPSRequestInterceptor
+            })
             
             if let unity = DemoRequestInterceptors.shared.unity {
                 NimbusAdManager.requestInterceptors?.append(unity)
@@ -152,7 +180,7 @@ final class AdManagerViewController: DemoViewController {
         }
     }
     
-    private func setupAdView(adView: AdView?) {
+    private func setupAdView(adView: CustomAdContainerView?) {
         guard let adView = adView else { return }
         contentView.addSubview(adView)
 
@@ -172,19 +200,21 @@ final class AdManagerViewController: DemoViewController {
 extension AdManagerViewController: NimbusAdManagerDelegate {
     func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
         print("didRenderAd")
+        adController = controller
     }
 }
 
 // MARK: NimbusRequestManagerDelegate
 
 extension AdManagerViewController: NimbusRequestManagerDelegate {
+    
     func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
         print("didCompleteNimbusRequest")
         
         if manualRequest == request {
-            adView = AdView(ad: ad, viewController: self)
-            adView?.accessibilityIdentifier = "adManagerManualRequestRenderAdView"
-            setupAdView(adView: adView)
+            customAdContainerView = CustomAdContainerView(ad: ad, viewController: self)
+            customAdContainerView?.accessibilityIdentifier = "adManagerManualRequestRenderAdView"
+            setupAdView(adView: customAdContainerView)
         }
     }
 

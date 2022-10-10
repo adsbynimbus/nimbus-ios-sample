@@ -18,7 +18,7 @@ final class AdViewController: DemoViewController {
     private let adViewIdentifier: String
     private let isMaxSize: Bool
     private let shouldInjectIFrameScript: Bool
-    private lazy var adView = AdView(ad: ad, companionAd: companionAd, viewController: self, delegate: self)
+    private lazy var adView = CustomAdContainerView(ad: ad, companionAd: companionAd, viewController: self, delegate: self)
 
     init(
         ad: NimbusAd,
