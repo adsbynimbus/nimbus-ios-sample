@@ -17,8 +17,8 @@ import NimbusSDK
 import NimbusRequestFANKit
 #endif
 
-#if canImport(NimbusRequestVungleKit)
-import NimbusRequestVungleKit
+#if canImport(NimbusVungleKit)
+import NimbusVungleKit
 #endif
 
 #if canImport(NimbusUnityKit)

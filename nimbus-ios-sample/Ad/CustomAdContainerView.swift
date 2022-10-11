@@ -11,6 +11,7 @@ import NimbusKit
 final class CustomAdContainerView: UIView {
     
     private let ad: NimbusAd
+    private let volume: Int
     private let companionAd: NimbusCompanionAd?
     private let viewController: UIViewController
     private lazy var nimbusAdView = NimbusAdView(adPresentingViewController: viewController)
@@ -18,11 +19,13 @@ final class CustomAdContainerView: UIView {
     
     init(
         ad: NimbusAd,
+        volume: Int = 0,
         companionAd: NimbusCompanionAd? = nil,
         viewController: UIViewController,
         delegate: AdControllerDelegate? = nil
     ) {
         self.ad = ad
+        self.volume = volume
         self.companionAd = companionAd
         self.viewController = viewController
         self.delegate = delegate
@@ -51,6 +54,7 @@ final class CustomAdContainerView: UIView {
             nimbusAdView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
 
+        nimbusAdView.volume = volume
         nimbusAdView.delegate = delegate
 
         nimbusAdView.render(ad: ad, companionAd: companionAd)

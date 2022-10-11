@@ -27,8 +27,8 @@ import NimbusSDK
 import NimbusRenderFANKit
 #endif
 
-#if canImport(NimbusRenderVungleKit)
-import NimbusRenderVungleKit
+#if canImport(NimbusVungleKit)
+import NimbusVungleKit
 #endif
 
 #if canImport(NimbusUnityKit)
