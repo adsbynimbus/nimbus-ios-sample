@@ -19,7 +19,7 @@ final class AdViewController: DemoViewController {
     private let adViewIdentifier: String
     private let isMaxSize: Bool
     private let shouldInjectIFrameScript: Bool
-    private lazy var adContinerView = CustomAdContainerView(
+    private lazy var adContainerView = CustomAdContainerView(
         ad: ad,
         volume: volume,
         companionAd: companionAd,
@@ -67,43 +67,43 @@ final class AdViewController: DemoViewController {
         // If ad is interstitial, this controller will be the one presenting it,
         // so destroying the adView is required otherwise
         if !ad.isInterstitial {
-            adContinerView.destroy()
+            adContainerView.destroy()
         }
     }
     
     private func setupAdView() {
-        view.addSubview(adContinerView)
+        view.addSubview(adContainerView)
         
-        adContinerView.accessibilityIdentifier = adViewIdentifier
-        adContinerView.translatesAutoresizingMaskIntoConstraints = false
+        adContainerView.accessibilityIdentifier = adViewIdentifier
+        adContainerView.translatesAutoresizingMaskIntoConstraints = false
         
         if let dimensions = dimensions {
             NSLayoutConstraint.activate([
-                adContinerView.safeAreaLayoutGuide.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-                adContinerView.safeAreaLayoutGuide.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
-                adContinerView.safeAreaLayoutGuide.widthAnchor.constraint(equalToConstant: CGFloat(dimensions.width)),
-                adContinerView.safeAreaLayoutGuide.heightAnchor.constraint(equalToConstant: CGFloat(dimensions.height)),
+                adContainerView.safeAreaLayoutGuide.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+                adContainerView.safeAreaLayoutGuide.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+                adContainerView.safeAreaLayoutGuide.widthAnchor.constraint(equalToConstant: CGFloat(dimensions.width)),
+                adContainerView.safeAreaLayoutGuide.heightAnchor.constraint(equalToConstant: CGFloat(dimensions.height)),
             ])
         } else if isMaxSize {
             NSLayoutConstraint.activate([
-                adContinerView.safeAreaLayoutGuide.topAnchor.constraint(equalTo: headerView.bottomAnchor),
-                adContinerView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-                adContinerView.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-                adContinerView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+                adContainerView.safeAreaLayoutGuide.topAnchor.constraint(equalTo: headerView.bottomAnchor),
+                adContainerView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+                adContainerView.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+                adContainerView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
             ])
         } else {
             NSLayoutConstraint.activate([
-                adContinerView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
-                adContinerView.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor),
-                adContinerView.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor),
-                adContinerView.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor),
-                adContinerView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+                adContainerView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
+                adContainerView.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor),
+                adContainerView.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor),
+                adContainerView.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor),
+                adContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
             ])
         }
     }
     
     private func injectIFrameScript() {
-        if let nimbusAdView = adContinerView.subviews.first as? NimbusAdView,
+        if let nimbusAdView = adContainerView.subviews.first as? NimbusAdView,
             let webView = nimbusAdView.subviews.first as? WKWebView {
             let path = Bundle.main.path(forResource: "mraid_iframe", ofType: "js")!
             let jsString = (try? String(contentsOfFile: path, encoding: .utf8)) ?? ""
