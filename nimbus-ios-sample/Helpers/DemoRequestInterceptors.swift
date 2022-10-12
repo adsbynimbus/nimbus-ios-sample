@@ -6,7 +6,14 @@
 //
 
 import UnityAds
+
+#if canImport(NimbusSDK)
+import NimbusSDK
+#endif
+
+#if canImport(NimbusRequestAPSKit)
 import NimbusRequestAPSKit
+#endif
 
 #if canImport(NimbusRequestFANKit)
 import NimbusRequestFANKit
@@ -18,10 +25,6 @@ import NimbusUnityKit
 
 #if canImport(NimbusVungleKit)
 import NimbusVungleKit
-#endif
-
-#if canImport(NimbusSDK)
-import NimbusSDK
 #endif
 
 import NimbusRequestAPSKit
@@ -51,7 +54,7 @@ final class DemoRequestInterceptors {
             ConfigManager.shared.unityGameId, !unityGameId.isEmpty {
             unity = NimbusUnityRequestInterceptor(gameId: unityGameId)
         }
-        
+
         if let vungleAppId =
             ConfigManager.shared.vungleAppId, !vungleAppId.isEmpty {
             vungle = NimbusVungleRequestInterceptor(appId: vungleAppId)

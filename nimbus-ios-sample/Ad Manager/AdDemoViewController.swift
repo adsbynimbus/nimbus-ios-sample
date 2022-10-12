@@ -7,10 +7,13 @@
 
 import UIKit
 import NimbusKit
-import NimbusRequestAPSKit
 
 #if canImport(NimbusSDK)
 import NimbusSDK
+#endif
+
+#if canImport(NimbusRequestAPSKit)
+import NimbusRequestAPSKit
 #endif
 
 #if canImport(NimbusRequestFANKit)
