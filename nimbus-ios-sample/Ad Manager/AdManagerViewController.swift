@@ -26,6 +26,9 @@ import NimbusVungleKit
 
 #if canImport(NimbusRequestAPSKit)
 import NimbusRequestAPSKit
+#endif
+
+#if canImport(NimbusRenderStaticKit)
 import NimbusRenderStaticKit
 #endif
 
