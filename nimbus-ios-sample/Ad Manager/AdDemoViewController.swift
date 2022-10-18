@@ -289,17 +289,7 @@ extension AdDemoViewController: UITableViewDelegate {
                         && ConfigManager.shared.vungleNativePlacementId.isEmptyOrNil {
                 showCustomAlert("vungle_native_placement_id")
             } else {
-                
-                // Remove other demand providers. It MUST not remove LiveRampInterceptor
-                NimbusAdManager.requestInterceptors?.removeAll(where: {
-                    $0 is NimbusAPSRequestInterceptor ||
-                    $0 is NimbusUnityRequestInterceptor ||
-                    $0 is NimbusFANRequestInterceptor
-                })
-                if let vungle = DemoRequestInterceptors.shared.vungle {
-                    NimbusAdManager.requestInterceptors?.append(vungle)
-                }
-                
+                                
                 let ad = createNimbusAd(adType: adType)
                 navigationController?.pushViewController(
                     AdViewController(
