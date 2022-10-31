@@ -12,7 +12,6 @@ enum VungleAdType: String, DemoItem {
     case vungleMREC
     case vungleInterstitial
     case vungleRewarded
-    case vungleNative
     
     var description: String {
         if self == .vungleMREC {

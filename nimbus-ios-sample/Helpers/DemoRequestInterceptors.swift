@@ -57,7 +57,8 @@ final class DemoRequestInterceptors {
 
         if let vungleAppId =
             ConfigManager.shared.vungleAppId, !vungleAppId.isEmpty {
-            vungle = NimbusVungleRequestInterceptor(appId: vungleAppId)
+            vungle = NimbusVungleRequestInterceptor(appId: vungleAppId, isLoggingEnabled: true)
+            
         }
     }
 }
