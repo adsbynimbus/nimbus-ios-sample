@@ -30,7 +30,6 @@ public final class ConfigManager {
     public let vungleMRECPlacementId: String?
     public let vungleInterstitialPlacementId: String?
     public let vungleRewardedPlacementId: String?
-    public let vungleNativePlacementId: String?
     
     private struct InternalConfig: Decodable {
         let publisherKey: String
@@ -53,7 +52,6 @@ public final class ConfigManager {
         let vungleMRECPlacementId: String?
         let vungleInterstitialPlacementId: String?
         let vungleRewardedPlacementId: String?
-        let vungleNativePlacementId: String?
         
         enum CodingKeys: String, CodingKey {
             
@@ -77,7 +75,6 @@ public final class ConfigManager {
             case vungleMRECPlacementId = "vungle_mrec_placement_id"
             case vungleInterstitialPlacementId = "vungle_interstitial_placement_id"
             case vungleRewardedPlacementId = "vungle_rewarded_placement_id"
-            case vungleNativePlacementId = "vungle_native_placement_id"
         }
     }
 
@@ -106,6 +103,5 @@ public final class ConfigManager {
         vungleMRECPlacementId = config.vungleMRECPlacementId
         vungleInterstitialPlacementId = config.vungleInterstitialPlacementId
         vungleRewardedPlacementId = config.vungleRewardedPlacementId
-        vungleNativePlacementId = config.vungleNativePlacementId
     }
 }

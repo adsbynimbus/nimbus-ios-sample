@@ -11,7 +11,7 @@ import NimbusKit
 import AdSupport
 
 class VungleAdManagerViewController: DemoViewController {
-
+    
     private let contentView = UIView()
     
     private let adType: VungleAdType
@@ -30,7 +30,7 @@ class VungleAdManagerViewController: DemoViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupContentView()
         setupAdRendering()
     }
@@ -61,7 +61,7 @@ class VungleAdManagerViewController: DemoViewController {
         adManager?.delegate = self
         
         switch adType {
-
+            
         case .vungleBanner:
             adManager?.showAd(request: request,
                               container: contentView,
@@ -77,7 +77,7 @@ class VungleAdManagerViewController: DemoViewController {
                 mrecView.widthAnchor.constraint(equalToConstant: 300),
                 mrecView.heightAnchor.constraint(equalToConstant: 250)
             ])
-
+            
             adManager?.showAd(request: request, container: mrecView, adPresentingViewController: self)
         case .vungleInterstitial:
             adManager?.showRewardedAd(request: request, closeButtonDelay: 0, adPresentingViewController: self)
@@ -99,10 +99,8 @@ class VungleAdManagerViewController: DemoViewController {
             return NimbusRequest.forBannerAd(position: ConfigManager.shared.vungleMRECPlacementId ?? "",
                                              format: .letterbox)
         case .vungleInterstitial:
-            print("vungleInterstitial")
             return NimbusRequest.forInterstitialAd(position: ConfigManager.shared.vungleInterstitialPlacementId ?? "")
         case .vungleRewarded:
-            print("vungleRewarded")
             return customNimbusRequestForRewardedVideo(position: ConfigManager.shared.vungleRewardedPlacementId ?? "")
         }
     }
@@ -164,7 +162,7 @@ extension VungleAdManagerViewController: NimbusRequestManagerDelegate {
     func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
         print("didCompleteNimbusRequest")
     }
-
+    
     func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
         print("didFailNimbusRequest: \(error.localizedDescription)")
     }
