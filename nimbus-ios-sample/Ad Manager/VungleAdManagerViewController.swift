@@ -63,9 +63,11 @@ class VungleAdManagerViewController: DemoViewController {
         switch adType {
             
         case .vungleBanner:
-            adManager?.showAd(request: request,
-                              container: contentView,
-                              adPresentingViewController: self)
+            adManager?.showAd(
+                request: request,
+                container: contentView,
+                adPresentingViewController: self
+            )
         case .vungleMREC:
             let mrecView = UIView()
             mrecView.translatesAutoresizingMaskIntoConstraints = false
@@ -78,12 +80,23 @@ class VungleAdManagerViewController: DemoViewController {
                 mrecView.heightAnchor.constraint(equalToConstant: 250)
             ])
             
-            adManager?.showAd(request: request, container: mrecView, adPresentingViewController: self)
+            adManager?.showAd(
+                request: request,
+                container: mrecView,
+                adPresentingViewController: self
+            )
         case .vungleInterstitial:
-            adManager?.showRewardedAd(request: request, closeButtonDelay: 0, adPresentingViewController: self)
+            adManager?.showBlockingAd(
+                request: request,
+                closeButtonDelay: 0,
+                adPresentingViewController: self
+            )
         case .vungleRewarded:
             request.impressions[0].banner = nil
-            adManager.showBlockingAd(request: request, adPresentingViewController: self)
+            adManager.showRewardedAd(
+                request: request,
+                adPresentingViewController: self
+            )
         }
     }
     
@@ -91,17 +104,25 @@ class VungleAdManagerViewController: DemoViewController {
         switch adType {
             
         case .vungleBanner:
-            let request = NimbusRequest.forBannerAd(position: ConfigManager.shared.vungleBannerPlacementId ?? "",
-                                                    format: .banner320x50)
+            let request = NimbusRequest.forBannerAd(
+                position: ConfigManager.shared.vungleBannerPlacementId ?? "",
+                format: .banner320x50
+            )
             request.impressions[0].banner?.position = NimbusPosition.unknown
             return request
         case .vungleMREC:
-            return NimbusRequest.forBannerAd(position: ConfigManager.shared.vungleMRECPlacementId ?? "",
-                                             format: .letterbox)
+            return NimbusRequest.forBannerAd(
+                position: ConfigManager.shared.vungleMRECPlacementId ?? "",
+                format: .letterbox
+            )
         case .vungleInterstitial:
-            return NimbusRequest.forInterstitialAd(position: ConfigManager.shared.vungleInterstitialPlacementId ?? "")
+            return NimbusRequest.forInterstitialAd(
+                position: ConfigManager.shared.vungleInterstitialPlacementId ?? ""
+            )
         case .vungleRewarded:
-            return customNimbusRequestForRewardedVideo(position: ConfigManager.shared.vungleRewardedPlacementId ?? "")
+            return customNimbusRequestForRewardedVideo(
+                position: ConfigManager.shared.vungleRewardedPlacementId ?? ""
+            )
         }
     }
     
