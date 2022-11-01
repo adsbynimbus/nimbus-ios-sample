@@ -208,7 +208,8 @@ extension AdDemoViewController: UITableViewDelegate {
                     $0 is NimbusUnityRequestInterceptor ||
                     $0 is NimbusVungleRequestInterceptor
                 })
-                if let fan = DemoRequestInterceptors.shared.fan {
+                if let fan = DemoRequestInterceptors.shared.fan,
+                   !(NimbusAdManager.requestInterceptors?.contains(where: { $0 is NimbusFANRequestInterceptor }) ?? true) {
                     NimbusAdManager.requestInterceptors?.append(fan)
                 }
 
@@ -241,13 +242,16 @@ extension AdDemoViewController: UITableViewDelegate {
                 showCustomAlert("vungle_rewarded_placement_id")
             } else {
 
-                if let vungle = DemoRequestInterceptors.shared.vungle {
+                if let vungle = DemoRequestInterceptors.shared.vungle,
+                   !(NimbusAdManager.requestInterceptors?.contains(where: { $0 is NimbusVungleRequestInterceptor }) ?? true) {
                     NimbusAdManager.requestInterceptors?.append(vungle)
                 }
-
-                let vungleViewController = VungleAdManagerViewController(adType: adType,
-                                                                         headerTitle: "Vungle Test Ad",
-                                                                         headerSubTitle: "Testing \(adType) ad")
+                
+                let vungleViewController = VungleAdManagerViewController(
+                    adType: adType,
+                    headerTitle: "Vungle Test Ad",
+                    headerSubTitle: "Testing \(adType) ad"
+                )
 
                 navigationController?.pushViewController(vungleViewController, animated: true)
             }
