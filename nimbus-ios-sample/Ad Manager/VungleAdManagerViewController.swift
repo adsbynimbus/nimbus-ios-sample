@@ -173,6 +173,7 @@ extension VungleAdManagerViewController: NimbusAdManagerDelegate {
     func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
         print("didRenderAd")
         adController = controller
+        adController?.delegate = self
     }
 }
 
@@ -186,5 +187,16 @@ extension VungleAdManagerViewController: NimbusRequestManagerDelegate {
     
     func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
         print("didFailNimbusRequest: \(error.localizedDescription)")
+    }
+}
+
+extension VungleAdManagerViewController: AdControllerDelegate {
+    
+    func didReceiveNimbusEvent(controller: NimbusCoreKit.AdController, event: NimbusCoreKit.NimbusEvent) {
+        print("Nimbus didReceiveNimbusEvent: \(event)")
+    }
+    
+    func didReceiveNimbusError(controller: NimbusCoreKit.AdController, error: NimbusCoreKit.NimbusError) {
+        print("Nimbus didReceiveNimbusError: \(error)")
     }
 }
