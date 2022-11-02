@@ -62,7 +62,7 @@ final class AdDemoViewController: DemoViewController {
     }
 
     private var vungleDataSource: [VungleAdType] {
-        VungleAdType.allCases
+        [VungleAdType.vungleMREC, VungleAdType.vungleInterstitial]        
     }
 
     private var specificAdsDataSource: [AdManagerSpecificAdType] {
