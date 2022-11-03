@@ -32,11 +32,11 @@ final class SettingsViewController: DemoViewController {
         [
             DemoDataSource(
                 type: .main,
-                values: Setting.allCases.filter { $0 != .gdprConsent }
+                values: Setting.allCases.filter { !$0.isUserPrivacySetting }
             ),
             DemoDataSource(
                 type: .userDetails,
-                values: [Setting.gdprConsent]
+                values: [Setting.gdprConsent, Setting.ccpaConsent]
             )
         ]
     }
