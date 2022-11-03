@@ -117,7 +117,9 @@ extension UserDefaults {
         set {
             set(newValue, forKey: #function)
             if var user = NimbusAdManager.user {
-                user.configureGdprConsent(didConsent: newValue)
+                // Same string as Android sample app
+                user.configureGdprConsent(consentString: "CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEgAA.argAC0gAAAAAAAAAAAA")
+                
                 NimbusAdManager.user = user
             }
         }
