@@ -69,20 +69,9 @@ class VungleAdManagerViewController: DemoViewController {
                 adPresentingViewController: self
             )
         case .vungleMREC:
-            let mrecView = UIView()
-            mrecView.translatesAutoresizingMaskIntoConstraints = false
-            contentView.addSubview(mrecView)
-            
-            NSLayoutConstraint.activate([
-                mrecView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-                mrecView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-                mrecView.widthAnchor.constraint(equalToConstant: 300),
-                mrecView.heightAnchor.constraint(equalToConstant: 250)
-            ])
-            
             adManager?.showAd(
                 request: request,
-                container: mrecView,
+                container: contentView,
                 adPresentingViewController: self
             )
         case .vungleInterstitial:
