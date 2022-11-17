@@ -170,9 +170,9 @@ final class AdManagerViewController: DemoViewController {
                 $0 is NimbusFANRequestInterceptor || $0 is NimbusAPSRequestInterceptor
             })
             
-            if let unity = DemoRequestInterceptors.shared.unity {
+           /* if let unity = DemoRequestInterceptors.shared.unity {
                 NimbusAdManager.requestInterceptors?.append(unity)
-            }
+            } */
             
             adManager = NimbusAdManager()
             adManager.delegate = self
@@ -183,18 +183,27 @@ final class AdManagerViewController: DemoViewController {
         }
     }
     
-    private func setupAdView(adView: CustomAdContainerView?) {
+    private func setupAdView(adView: CustomAdContainerView?, ad: NimbusAd) {
         guard let adView = adView else { return }
         contentView.addSubview(adView)
 
         adView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            adView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            adView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor),
-            adView.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor),
-            adView.trailingAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor),
-            adView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-        ])
+        if let dimensions = ad.adDimensions, dimensions.width > 0 && dimensions.height > 0 {
+            NSLayoutConstraint.activate([
+                adView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+                adView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+                adView.heightAnchor.constraint(equalToConstant: CGFloat(dimensions.height)),
+                adView.widthAnchor.constraint(equalToConstant: CGFloat(dimensions.width)),
+            ])
+        } else {
+            NSLayoutConstraint.activate([
+                adView.topAnchor.constraint(equalTo: contentView.topAnchor),
+                adView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor),
+                adView.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor),
+                adView.trailingAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor),
+                adView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            ])
+        }
     }
 }
 
@@ -217,7 +226,7 @@ extension AdManagerViewController: NimbusRequestManagerDelegate {
         if manualRequest == request {
             customAdContainerView = CustomAdContainerView(ad: ad, viewController: self)
             customAdContainerView?.accessibilityIdentifier = "adManagerManualRequestRenderAdView"
-            setupAdView(adView: customAdContainerView)
+            setupAdView(adView: customAdContainerView, ad: ad)
         }
     }
 

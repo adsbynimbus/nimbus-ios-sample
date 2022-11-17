@@ -26,7 +26,7 @@ final class DemoRequestInterceptors {
     #if canImport(NimbusRequestFANKit) && canImport(NimbusSDK)
     private(set) var fan: NimbusFANRequestInterceptor?
     #endif
-    private(set) var unity: NimbusUnityRequestInterceptor?
+    //private(set) var unity: NimbusUnityRequestInterceptor?
 
     static var shared = DemoRequestInterceptors()
     
@@ -44,9 +44,10 @@ final class DemoRequestInterceptors {
         }
         #endif
         
+        /*
         if let unityGameId =
             ConfigManager.shared.unityGameId, !unityGameId.isEmpty {
             unity = NimbusUnityRequestInterceptor(gameId: unityGameId)
-        }
+        } */
     }
 }
