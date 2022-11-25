@@ -20,10 +20,6 @@ import NimbusRequestFANKit
 import NimbusUnityKit
 #endif
 
-#if canImport(NimbusVungleKit)
-import NimbusVungleKit
-#endif
-
 #if canImport(NimbusRequestAPSKit)
 import NimbusRequestAPSKit
 #endif
@@ -80,8 +76,7 @@ final class AdManagerViewController: DemoViewController {
         // Remove other demand providers. It MUST not remove LiveRampInterceptor
         NimbusAdManager.requestInterceptors?.removeAll(where: {
             $0 is NimbusFANRequestInterceptor ||
-            $0 is NimbusUnityRequestInterceptor ||
-            $0 is NimbusVungleRequestInterceptor
+            $0 is NimbusUnityRequestInterceptor
         })
         
         if let aps = DemoRequestInterceptors.shared.aps {
@@ -173,8 +168,7 @@ final class AdManagerViewController: DemoViewController {
             // Remove other demand providers. It MUST not remove LiveRampInterceptor
             NimbusAdManager.requestInterceptors?.removeAll(where: {
                 $0 is NimbusFANRequestInterceptor ||
-                $0 is NimbusAPSRequestInterceptor ||
-                $0 is NimbusVungleRequestInterceptor
+                $0 is NimbusAPSRequestInterceptor
             })
             
             if let unity = DemoRequestInterceptors.shared.unity {

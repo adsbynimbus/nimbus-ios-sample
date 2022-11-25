@@ -20,10 +20,6 @@ import NimbusRequestAPSKit
 import NimbusRequestFANKit
 #endif
 
-#if canImport(NimbusVungleKit)
-import NimbusVungleKit
-#endif
-
 #if canImport(NimbusUnityKit)
 import NimbusUnityKit
 #endif
@@ -59,10 +55,6 @@ final class AdDemoViewController: DemoViewController {
 
     private var facebookDataSource: [FacebookAdType] {
         FacebookAdType.allCases
-    }
-
-    private var vungleDataSource: [VungleAdType] {
-        [VungleAdType.vungleMREC, VungleAdType.vungleInterstitial]        
     }
 
     private var specificAdsDataSource: [AdManagerSpecificAdType] {
@@ -147,8 +139,6 @@ extension AdDemoViewController: UITableViewDataSource {
             return adManagerDataSource.count
         } else if section == 1 {
             return facebookDataSource.count
-        } else if section == 2 {
-            return vungleDataSource.count
         } else {
             return specificAdsDataSource.count
         }
@@ -162,9 +152,6 @@ extension AdDemoViewController: UITableViewDataSource {
         } else if indexPath.section == 1 {
             let adType = facebookDataSource[indexPath.row]
             cell.updateWithFacebookAdType(adType)
-        } else if indexPath.section == 2 {
-            let adType = vungleDataSource[indexPath.row]
-            cell.updateWithVungleAdType(adType)
         } else {
             cell.updateWithSpecificAdManagerAdType(indexPath.row == 0 ? .refreshingBanner : .adsInScrollList)
         }
@@ -205,8 +192,7 @@ extension AdDemoViewController: UITableViewDelegate {
                 // Remove other demand providers. It MUST not remove LiveRampInterceptor
                 NimbusAdManager.requestInterceptors?.removeAll(where: {
                     $0 is NimbusAPSRequestInterceptor ||
-                    $0 is NimbusUnityRequestInterceptor ||
-                    $0 is NimbusVungleRequestInterceptor
+                    $0 is NimbusUnityRequestInterceptor
                 })
                 if let fan = DemoRequestInterceptors.shared.fan,
                    !(NimbusAdManager.requestInterceptors?.contains(where: { $0 is NimbusFANRequestInterceptor }) ?? false) {
@@ -225,41 +211,6 @@ extension AdDemoViewController: UITableViewDelegate {
                     ),
                     animated: true
                 )
-            }
-        } else if indexPath.section == 2 {
-            let adType = vungleDataSource[indexPath.row]
-            if adType == .vungleBanner
-                && ConfigManager.shared.vungleBannerPlacementId.isEmptyOrNil {
-                showCustomAlert("vungle_banner_placement_id")
-            } else if adType == .vungleMREC
-                        && ConfigManager.shared.vungleMRECPlacementId.isEmptyOrNil {
-                showCustomAlert("vungle_mrec_placement_id")
-            } else if adType == .vungleInterstitial
-                        && ConfigManager.shared.vungleInterstitialPlacementId.isEmptyOrNil {
-                showCustomAlert("vungle_interstitial_placement_id")
-            } else if adType == .vungleRewarded
-                        && ConfigManager.shared.vungleRewardedPlacementId.isEmptyOrNil {
-                showCustomAlert("vungle_rewarded_placement_id")
-            } else {
-
-                // Remove other demand providers. It MUST not remove LiveRampInterceptor
-                NimbusAdManager.requestInterceptors?.removeAll(where: {
-                    $0 is NimbusAPSRequestInterceptor ||
-                    $0 is NimbusUnityRequestInterceptor ||
-                    $0 is NimbusFANRequestInterceptor
-                })
-                if let vungle = DemoRequestInterceptors.shared.vungle,
-                   !(NimbusAdManager.requestInterceptors?.contains(where: { $0 is NimbusVungleRequestInterceptor }) ?? false) {
-                    NimbusAdManager.requestInterceptors?.append(vungle)
-                }
-                
-                let vungleViewController = VungleAdManagerViewController(
-                    adType: adType,
-                    headerTitle: adType.description,
-                    headerSubTitle: headerTitle
-                )
-
-                navigationController?.pushViewController(vungleViewController, animated: true)
             }
         } else {
             navigationController?.pushViewController(

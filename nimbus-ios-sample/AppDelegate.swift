@@ -31,10 +31,6 @@ import NimbusRequestAPSKit
 import NimbusRenderFANKit
 #endif
 
-#if canImport(NimbusVungleKit)
-import NimbusVungleKit
-#endif
-
 #if canImport(NimbusUnityKit)
 import NimbusUnityKit
 #endif
@@ -81,8 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .forAuctionType(.static): NimbusStaticAdRenderer(),
             .forAuctionType(.video): videoRenderer,
             .forNetwork("facebook"): NimbusFANAdRenderer(),
-            .forNetwork("unity"): NimbusUnityAdRenderer(),
-            .forNetwork("vungle"): NimbusVungleAdRenderer()
+            .forNetwork("unity"): NimbusUnityAdRenderer()
         ]
 
         // User

@@ -23,10 +23,6 @@ import NimbusRequestFANKit
 import NimbusUnityKit
 #endif
 
-#if canImport(NimbusVungleKit)
-import NimbusVungleKit
-#endif
-
 import NimbusRequestAPSKit
 
 final class DemoRequestInterceptors {
@@ -34,7 +30,6 @@ final class DemoRequestInterceptors {
     private(set) var aps: NimbusAPSRequestInterceptor?
     private(set) var fan: NimbusFANRequestInterceptor?
     private(set) var unity: NimbusUnityRequestInterceptor?
-    private(set) var vungle: NimbusVungleRequestInterceptor?
 
     static var shared = DemoRequestInterceptors()
     
@@ -53,12 +48,6 @@ final class DemoRequestInterceptors {
         if let unityGameId =
             ConfigManager.shared.unityGameId, !unityGameId.isEmpty {
             unity = NimbusUnityRequestInterceptor(gameId: unityGameId)
-        }
-
-        if let vungleAppId =
-            ConfigManager.shared.vungleAppId, !vungleAppId.isEmpty {
-            vungle = NimbusVungleRequestInterceptor(appId: vungleAppId, isLoggingEnabled: true)
-            
         }
     }
 }

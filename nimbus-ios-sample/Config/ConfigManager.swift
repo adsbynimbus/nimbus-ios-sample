@@ -25,12 +25,6 @@ public final class ConfigManager {
     
     public let liveRampConfigId: String?
     
-    public let vungleAppId: String?
-    public let vungleBannerPlacementId: String?
-    public let vungleMRECPlacementId: String?
-    public let vungleInterstitialPlacementId: String?
-    public let vungleRewardedPlacementId: String?
-    
     private struct InternalConfig: Decodable {
         let publisherKey: String
         let apiKey: String
@@ -46,12 +40,6 @@ public final class ConfigManager {
         let unityGameId: String?
         
         let liveRampConfigId: String?
-        
-        let vungleAppId: String?
-        let vungleBannerPlacementId: String?
-        let vungleMRECPlacementId: String?
-        let vungleInterstitialPlacementId: String?
-        let vungleRewardedPlacementId: String?
         
         enum CodingKeys: String, CodingKey {
             
@@ -69,12 +57,6 @@ public final class ConfigManager {
             case unityGameId = "unity_game_id"
             
             case liveRampConfigId = "live_ramp_config_id"
-            
-            case vungleAppId = "vungle_app_id"
-            case vungleBannerPlacementId = "vungle_banner_placement_id"
-            case vungleMRECPlacementId = "vungle_mrec_placement_id"
-            case vungleInterstitialPlacementId = "vungle_interstitial_placement_id"
-            case vungleRewardedPlacementId = "vungle_rewarded_placement_id"
         }
     }
 
@@ -97,11 +79,5 @@ public final class ConfigManager {
         unityGameId = config.unityGameId
         
         liveRampConfigId = config.liveRampConfigId
-        
-        vungleAppId = config.vungleAppId
-        vungleBannerPlacementId = config.vungleBannerPlacementId
-        vungleMRECPlacementId = config.vungleMRECPlacementId
-        vungleInterstitialPlacementId = config.vungleInterstitialPlacementId
-        vungleRewardedPlacementId = config.vungleRewardedPlacementId
     }
 }

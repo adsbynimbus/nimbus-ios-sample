@@ -15,7 +15,6 @@
 		2013D50F279087F500CB5DCF /* MainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2013D50E279087F500CB5DCF /* MainItem.swift */; };
 		2013D5112790886600CB5DCF /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2013D5102790886600CB5DCF /* SettingsSection.swift */; };
 		4D0AA887279F3FE100CD2F7C /* DemoRequestInterceptors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0AA886279F3FE100CD2F7C /* DemoRequestInterceptors.swift */; };
-		4D436A722910408F009D5156 /* VungleAdManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D436A712910408F009D5156 /* VungleAdManagerViewController.swift */; };
 		4D563C412746FD3B00294A7B /* AdManagerAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D563C402746FD3B00294A7B /* AdManagerAdType.swift */; };
 		4D563C432746FD4F00294A7B /* FacebookAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D563C422746FD4F00294A7B /* FacebookAdType.swift */; };
 		4D563C452746FD6300294A7B /* DemoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D563C442746FD6300294A7B /* DemoItem.swift */; };
@@ -44,7 +43,6 @@
 		4DADE25227396E0900E7E766 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DADE25027396E0900E7E766 /* LaunchScreen.storyboard */; };
 		4DADE25A273993D600E7E766 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE259273993D600E7E766 /* MainViewController.swift */; };
 		4DADE25C2739BF9F00E7E766 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE25B2739BF9F00E7E766 /* UIColor+Extension.swift */; };
-		4DB5EC6528DBE2FF00139F88 /* VungleAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB5EC6428DBE2FF00139F88 /* VungleAdType.swift */; };
 		4DB9A143273AE5240005D1D0 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A142273AE5240005D1D0 /* UIFont+Extension.swift */; };
 		4DB9A144273AE8550005D1D0 /* ProximaNova-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB9A13F273AE4A70005D1D0 /* ProximaNova-Regular.ttf */; };
 		4DB9A145273AE8550005D1D0 /* ProximaNova-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB9A140273AE4A70005D1D0 /* ProximaNova-Bold.ttf */; };
@@ -68,7 +66,6 @@
 		2013D50E279087F500CB5DCF /* MainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainItem.swift; sourceTree = "<group>"; };
 		2013D5102790886600CB5DCF /* SettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSection.swift; sourceTree = "<group>"; };
 		4D0AA886279F3FE100CD2F7C /* DemoRequestInterceptors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoRequestInterceptors.swift; sourceTree = "<group>"; };
-		4D436A712910408F009D5156 /* VungleAdManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VungleAdManagerViewController.swift; sourceTree = "<group>"; };
 		4D563C402746FD3B00294A7B /* AdManagerAdType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManagerAdType.swift; sourceTree = "<group>"; };
 		4D563C422746FD4F00294A7B /* FacebookAdType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookAdType.swift; sourceTree = "<group>"; };
 		4D563C442746FD6300294A7B /* DemoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoItem.swift; sourceTree = "<group>"; };
@@ -99,7 +96,6 @@
 		4DADE25327396E0900E7E766 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DADE259273993D600E7E766 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		4DADE25B2739BF9F00E7E766 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
-		4DB5EC6428DBE2FF00139F88 /* VungleAdType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VungleAdType.swift; sourceTree = "<group>"; };
 		4DB9A13E273AE4A70005D1D0 /* ProximaNova-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Semibold.otf"; sourceTree = "<group>"; };
 		4DB9A13F273AE4A70005D1D0 /* ProximaNova-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.ttf"; sourceTree = "<group>"; };
 		4DB9A140273AE4A70005D1D0 /* ProximaNova-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.ttf"; sourceTree = "<group>"; };
@@ -231,8 +227,6 @@
 				15014CFC286C7DA4009DB195 /* AdManagerSpecificAdViewController.swift */,
 				4D563C402746FD3B00294A7B /* AdManagerAdType.swift */,
 				4D563C422746FD4F00294A7B /* FacebookAdType.swift */,
-				4D436A712910408F009D5156 /* VungleAdManagerViewController.swift */,
-				4DB5EC6428DBE2FF00139F88 /* VungleAdType.swift */,
 				4D901D7C273D936E00037C54 /* AdDemoViewController.swift */,
 				4D901D80273DAFD400037C54 /* AdManagerViewController.swift */,
 			);
@@ -443,7 +437,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D5C798F274C290E00033307 /* UIViewController+Extension.swift in Sources */,
-				4DB5EC6528DBE2FF00139F88 /* VungleAdType.swift in Sources */,
 				4DADE24627396E0700E7E766 /* AppDelegate.swift in Sources */,
 				4D8AF6DF274D2776002A3783 /* DemoAdCell.swift in Sources */,
 				4DADE24827396E0700E7E766 /* SceneDelegate.swift in Sources */,
@@ -457,7 +450,6 @@
 				4D901D86273DC8CD00037C54 /* ConfigManager.swift in Sources */,
 				4DB9A143273AE5240005D1D0 /* UIFont+Extension.swift in Sources */,
 				4D901D83273DC28500037C54 /* AdViewController.swift in Sources */,
-				4D436A722910408F009D5156 /* VungleAdManagerViewController.swift in Sources */,
 				4D5BAE7F273C5E9F009B7F95 /* DemoHeader.swift in Sources */,
 				15014CFE286C7DA4009DB195 /* AdManagerSpecificAdTextCell.swift in Sources */,
 				4D5BAE7B273C362B009B7F95 /* SettingsViewController.swift in Sources */,
