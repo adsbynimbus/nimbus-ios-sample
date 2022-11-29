@@ -15,7 +15,6 @@ final class DynamicPriceManager {
     var lastRequestTime: TimeInterval = 0
     var callback: ((GAMRequest) -> Void)?
     var autoRefreshTask: Task<Void, Error>?
-    var isAutoRefreshingEnabled = true
     
     init(
         bidders: [Bidder],
@@ -29,15 +28,15 @@ final class DynamicPriceManager {
     
     func autoRefresh(_ callback: @escaping (GAMRequest) -> Void) {
         self.callback = callback
-        
-        if isAutoRefreshingEnabled {
-            setupNotifications()
-        }
+
         setupAutoRefreshingTask()
+
+        setupNotifications()
     }
     
     func cancelRefresh() {
         autoRefreshTask?.cancel()
+        autoRefreshTask = nil
     }
     
     private func auction() async throws -> GAMRequest {
@@ -101,9 +100,11 @@ final class DynamicPriceManager {
     }
     
     private func setupAutoRefreshingTask() {
-        autoRefreshTask = Task {
-            while !Task.isCancelled {
-                callback?(try await auction())
+        if autoRefreshTask == nil || autoRefreshTask?.isCancelled == true {
+            autoRefreshTask = Task {
+                while !Task.isCancelled {
+                    callback?(try await auction())
+                }
             }
         }
     }
