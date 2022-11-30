@@ -75,7 +75,8 @@ final class AdManagerViewController: DemoViewController {
         
         // Remove other demand providers. It MUST not remove LiveRampInterceptor
         NimbusAdManager.requestInterceptors?.removeAll(where: {
-            $0 is NimbusFANRequestInterceptor || $0 is NimbusUnityRequestInterceptor
+            $0 is NimbusFANRequestInterceptor ||
+            $0 is NimbusUnityRequestInterceptor
         })
         
         if let aps = DemoRequestInterceptors.shared.aps {
@@ -91,8 +92,7 @@ final class AdManagerViewController: DemoViewController {
             contentView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
             contentView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor),
             contentView.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor),
-            contentView.trailingAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor),
-            contentView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
+            contentView.trailingAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
     
@@ -167,7 +167,8 @@ final class AdManagerViewController: DemoViewController {
         case .rewardedVideoUnity:
             // Remove other demand providers. It MUST not remove LiveRampInterceptor
             NimbusAdManager.requestInterceptors?.removeAll(where: {
-                $0 is NimbusFANRequestInterceptor || $0 is NimbusAPSRequestInterceptor
+                $0 is NimbusFANRequestInterceptor ||
+                $0 is NimbusAPSRequestInterceptor
             })
             
             if let unity = DemoRequestInterceptors.shared.unity {

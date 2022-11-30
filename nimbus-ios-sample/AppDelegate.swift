@@ -7,20 +7,24 @@
 
 import UIKit
 import SwiftUI
+import AppTrackingTransparency
 
 import NimbusKit
-import NimbusRequestAPSKit
+
 import NimbusRenderStaticKit
 import NimbusRenderVideoKit
+
 import NimbusRenderOMKit
 
 import FBAudienceNetwork
 import GoogleMobileAds
 
-import AppTrackingTransparency
-
 #if canImport(NimbusSDK)
 import NimbusSDK
+#endif
+
+#if canImport(NimbusRequestAPSKit)
+import NimbusRequestAPSKit
 #endif
 
 #if canImport(NimbusRenderFANKit)
@@ -36,7 +40,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         setupNimbusSDK()
-        setupFAN()
         setupGAM()
         
         return true
@@ -66,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let aps = DemoRequestInterceptors.shared.aps {
             NimbusAdManager.requestInterceptors?.append(aps)
         }
-                        
+        
         // Renderers
         let videoRenderer = NimbusVideoAdRenderer()
         videoRenderer.showMuteButton = true
@@ -89,16 +92,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             builder: NimbusAdViewabilityTrackerBuilder(verificationProviders: nil)
         )
         
-        self.setupFAN()
-        
         // Facebook and LiveRamp requires att permissions to run properly
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) { [weak self] in
             self?.startTrackingATT()
+            self?.setupFAN()
         }
     }
     
     private func startTrackingATT() {
-        print("ATTrackingManager.trackingAuthorizationStatus: \(ATTrackingManager.trackingAuthorizationStatus)")
         if ATTrackingManager.trackingAuthorizationStatus == .notDetermined {
             var message = ""
             ATTrackingManager.requestTrackingAuthorization {
@@ -121,20 +122,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
                 
                 DispatchQueue.main.async {
-                    Alert.showAlert(title: "Request Tracking Authorization Result",
-                                    message: message)
+                    Alert.showAlert(
+                        title: "Request Tracking Authorization Result",
+                        message: message
+                    )
                 }
             }
         }
     }
     
     private func setupFAN() {
-        FBAdSettings.clearTestDevices()
         FBAdSettings.addTestDevice(FBAdSettings.testDeviceHash())
         // Required for test ads
         FBAdSettings.setAdvertiserTrackingEnabled(true)
-        FBAdSettings.testAdType = .default
-        print("Facebook Test Mode: \(FBAdSettings.isTestMode())")
     }
 
     private func setupGAM() {
@@ -157,15 +157,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension Alert {
     public static func showAlert(title: String, message: String) {
         DispatchQueue.main.async {
-            let alertController: UIAlertController = UIAlertController(title: title,
-                                                                       message: message,
-                                                                       preferredStyle: .alert)
-            let okAction: UIAlertAction = UIAlertAction(title: "OK", style: .default) { (action) -> Void in
+            let alertController = UIAlertController(
+                title: title,
+                message: message,
+                preferredStyle: .alert
+            )
+            let okAction = UIAlertAction(title: "OK", style: .default) { _ in
                 NSLog("OK was selected")
             }
             alertController.addAction(okAction)
             
-            let viewController = UIApplication.shared.windows.first!.rootViewController!
+            guard let firstScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let firstWindow = firstScene.windows.first,
+                  let viewController = firstWindow.rootViewController else {
+                return
+            }
             viewController.present(alertController, animated: true, completion: nil)
         }
     }
