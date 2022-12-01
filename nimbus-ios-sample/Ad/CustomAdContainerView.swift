@@ -7,6 +7,7 @@
 
 import UIKit
 import NimbusKit
+import NimbusRenderStaticKit
 
 final class CustomAdContainerView: UIView {
     
@@ -14,6 +15,9 @@ final class CustomAdContainerView: UIView {
     private let volume: Int
     private let companionAd: NimbusCompanionAd?
     private let viewController: UIViewController
+    private let creativeScalingEnabledForStaticAds: Bool
+    private let staticAdRenderer = Nimbus.shared.renderers.first(where: { $0.key == .forAuctionType(.static) })?.value
+           as? NimbusStaticAdRenderer
     private lazy var nimbusAdView = NimbusAdView(adPresentingViewController: viewController)
     private weak var delegate: AdControllerDelegate?
     
@@ -22,16 +26,19 @@ final class CustomAdContainerView: UIView {
         volume: Int = 0,
         companionAd: NimbusCompanionAd? = nil,
         viewController: UIViewController,
+        creativeScalingEnabledForStaticAds: Bool = true,
         delegate: AdControllerDelegate? = nil
     ) {
         self.ad = ad
         self.volume = volume
         self.companionAd = companionAd
         self.viewController = viewController
+        self.creativeScalingEnabledForStaticAds = creativeScalingEnabledForStaticAds
         self.delegate = delegate
         
         super.init(frame: CGRect.zero)
         
+        staticAdRenderer?.creativeScalingEnabled = creativeScalingEnabledForStaticAds
         setupAdView()
     }
     
@@ -41,6 +48,7 @@ final class CustomAdContainerView: UIView {
     
     func destroy() {
         nimbusAdView.destroy()
+        staticAdRenderer?.creativeScalingEnabled = true
     }
     
     private func setupAdView() {
