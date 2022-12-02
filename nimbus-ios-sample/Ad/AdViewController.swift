@@ -7,6 +7,7 @@
 
 import UIKit
 import NimbusKit
+import NimbusRenderStaticKit
 import NimbusRenderVideoKit
 import WebKit
 
@@ -17,15 +18,10 @@ final class AdViewController: DemoViewController {
     private let companionAd: NimbusCompanionAd?
     private let dimensions: NimbusAdDimensions?
     private let adViewIdentifier: String
+    private let creativeScalingEnabledForStaticAds: Bool
     private let isMaxSize: Bool
     private let shouldInjectIFrameScript: Bool
-    private lazy var adContainerView = CustomAdContainerView(
-        ad: ad,
-        volume: volume,
-        companionAd: companionAd,
-        viewController: self,
-        delegate: self
-    )
+    private var adContainerView: CustomAdContainerView!
 
     init(
         ad: NimbusAd,
@@ -35,6 +31,7 @@ final class AdViewController: DemoViewController {
         adViewIdentifier: String,
         headerTitle: String,
         headerSubTitle: String,
+        creativeScalingEnabledForStaticAds: Bool = true,
         isMaxSize: Bool = false,
         shouldInjectIFrameScript: Bool = false
     ) {
@@ -43,10 +40,19 @@ final class AdViewController: DemoViewController {
         self.companionAd = companionAd
         self.dimensions = dimensions
         self.adViewIdentifier = adViewIdentifier
+        self.creativeScalingEnabledForStaticAds = creativeScalingEnabledForStaticAds
         self.isMaxSize = isMaxSize
         self.shouldInjectIFrameScript = shouldInjectIFrameScript
         
         super.init(headerTitle: headerTitle, headerSubTitle: headerSubTitle)
+
+        self.adContainerView = CustomAdContainerView(
+            ad: ad,
+            companionAd: companionAd,
+            viewController: self,
+            creativeScalingEnabledForStaticAds: creativeScalingEnabledForStaticAds,
+            delegate: self
+        )
     }
     
     required init?(coder: NSCoder) {
