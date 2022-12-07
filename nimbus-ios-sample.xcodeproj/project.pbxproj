@@ -65,6 +65,53 @@
 		968ABE88293F8E2B00B22255 /* NimbusRequestAPSKit in Frameworks */ = {isa = PBXBuildFile; productRef = 968ABE87293F8E2B00B22255 /* NimbusRequestAPSKit */; };
 		968ABE8A293F8E2B00B22255 /* NimbusRequestKit in Frameworks */ = {isa = PBXBuildFile; productRef = 968ABE89293F8E2B00B22255 /* NimbusRequestKit */; };
 		968ABE8C293F8E2B00B22255 /* NimbusUnityKit in Frameworks */ = {isa = PBXBuildFile; productRef = 968ABE8B293F8E2B00B22255 /* NimbusUnityKit */; };
+		96C445E829414A9300DF35B2 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C798E274C290E00033307 /* UIViewController+Extension.swift */; };
+		96C445E929414A9300DF35B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE24527396E0700E7E766 /* AppDelegate.swift */; };
+		96C445EA29414A9300DF35B2 /* DemoAdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8AF6DE274D2776002A3783 /* DemoAdCell.swift */; };
+		96C445EB29414A9300DF35B2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE24727396E0700E7E766 /* SceneDelegate.swift */; };
+		96C445EC29414A9300DF35B2 /* AdManagerSpecificAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15014CFC286C7DA4009DB195 /* AdManagerSpecificAdViewController.swift */; };
+		96C445ED29414A9300DF35B2 /* TestRenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C798A274C184000033307 /* TestRenderViewController.swift */; };
+		96C445EE29414A9300DF35B2 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8A3FAA2742CAC700201485 /* UITableView+Extension.swift */; };
+		96C445EF29414A9300DF35B2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE259273993D600E7E766 /* MainViewController.swift */; };
+		96C445F029414A9300DF35B2 /* AdManagerSpecificAdNimbusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15014CFD286C7DA4009DB195 /* AdManagerSpecificAdNimbusCell.swift */; };
+		96C445F129414A9300DF35B2 /* DemoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A147273AE95A0005D1D0 /* DemoCell.swift */; };
+		96C445F229414A9300DF35B2 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5BAE80273C6A16009B7F95 /* Setting.swift */; };
+		96C445F329414A9300DF35B2 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D85273DC8CD00037C54 /* ConfigManager.swift */; };
+		96C445F429414A9300DF35B2 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A142273AE5240005D1D0 /* UIFont+Extension.swift */; };
+		96C445F529414A9300DF35B2 /* AdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D82273DC28500037C54 /* AdViewController.swift */; };
+		96C445F629414A9300DF35B2 /* DemoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5BAE7E273C5E9F009B7F95 /* DemoHeader.swift */; };
+		96C445F729414A9300DF35B2 /* AdManagerSpecificAdTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15014CFA286C7DA4009DB195 /* AdManagerSpecificAdTextCell.swift */; };
+		96C445F829414A9300DF35B2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5BAE7A273C362B009B7F95 /* SettingsViewController.swift */; };
+		96C445F929414A9300DF35B2 /* DemoNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A149273AF8040005D1D0 /* DemoNavigationController.swift */; };
+		96C445FA29414A9300DF35B2 /* DemoRequestInterceptors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0AA886279F3FE100CD2F7C /* DemoRequestInterceptors.swift */; };
+		96C445FB29414A9300DF35B2 /* TestRenderAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C798C274C259A00033307 /* TestRenderAdViewController.swift */; };
+		96C445FC29414A9300DF35B2 /* MainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2013D50E279087F500CB5DCF /* MainItem.swift */; };
+		96C445FD29414A9300DF35B2 /* AdDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D7C273D936E00037C54 /* AdDemoViewController.swift */; };
+		96C445FE29414A9300DF35B2 /* AdManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D80273DAFD400037C54 /* AdManagerViewController.swift */; };
+		96C445FF29414A9300DF35B2 /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2013D5102790886600CB5DCF /* SettingsSection.swift */; };
+		96C4460029414A9300DF35B2 /* AdManagerSpecificAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15014CFB286C7DA4009DB195 /* AdManagerSpecificAdType.swift */; };
+		96C4460129414A9300DF35B2 /* MediationAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE1FE4D27FF58C2002C41BC /* MediationAdType.swift */; };
+		96C4460229414A9300DF35B2 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A14B273AF81A0005D1D0 /* DemoViewController.swift */; };
+		96C4460329414A9300DF35B2 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE25B2739BF9F00E7E766 /* UIColor+Extension.swift */; };
+		96C4460429414A9300DF35B2 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8A3FA82742CA1100201485 /* NSObject+Extension.swift */; };
+		96C4460529414A9300DF35B2 /* MediationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE1FE4C27FF58C2002C41BC /* MediationViewController.swift */; };
+		96C4460629414A9300DF35B2 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A14D273B19C20005D1D0 /* UILabel+Extension.swift */; };
+		96C4460729414A9300DF35B2 /* MediationIntegrationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE1FE4B27FF58C2002C41BC /* MediationIntegrationType.swift */; };
+		96C4460829414A9300DF35B2 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D7E273D982500037C54 /* String+Extension.swift */; };
+		96C4460929414A9300DF35B2 /* DemoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8A3FAE274306F100201485 /* DemoDataSource.swift */; };
+		96C4460A29414A9300DF35B2 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C7990274C60BE00033307 /* UIImage+Extension.swift */; };
+		96C4460B29414A9300DF35B2 /* FacebookAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D563C422746FD4F00294A7B /* FacebookAdType.swift */; };
+		96C4460C29414A9300DF35B2 /* AdManagerAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D563C402746FD3B00294A7B /* AdManagerAdType.swift */; };
+		96C4460D29414A9300DF35B2 /* CustomAdContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150B4B5728D3E6F7002F233D /* CustomAdContainerView.swift */; };
+		96C4460E29414A9300DF35B2 /* GAMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D84B1B72743FFF300CA9CE2 /* GAMViewController.swift */; };
+		96C4460F29414A9300DF35B2 /* DemoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D563C442746FD6300294A7B /* DemoItem.swift */; };
+		96C4461029414A9300DF35B2 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5BAE7C273C3CA8009B7F95 /* SettingsCell.swift */; };
+		96C4461E29414A9300DF35B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DADE25027396E0900E7E766 /* LaunchScreen.storyboard */; };
+		96C4461F29414A9300DF35B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DADE24E27396E0900E7E766 /* Assets.xcassets */; };
+		96C4462029414A9300DF35B2 /* ProximaNova-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB9A13E273AE4A70005D1D0 /* ProximaNova-Semibold.otf */; };
+		96C4462129414A9300DF35B2 /* ProximaNova-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB9A140273AE4A70005D1D0 /* ProximaNova-Bold.ttf */; };
+		96C4462229414A9300DF35B2 /* ProximaNova-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB9A13F273AE4A70005D1D0 /* ProximaNova-Regular.ttf */; };
+		96C4462329414A9300DF35B2 /* secrets.json in Resources */ = {isa = PBXBuildFile; fileRef = 4D901D88273DCC7100037C54 /* secrets.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,6 +164,7 @@
 		4DE1FE4B27FF58C2002C41BC /* MediationIntegrationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediationIntegrationType.swift; sourceTree = "<group>"; };
 		4DE1FE4C27FF58C2002C41BC /* MediationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediationViewController.swift; sourceTree = "<group>"; };
 		4DE1FE4D27FF58C2002C41BC /* MediationAdType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediationAdType.swift; sourceTree = "<group>"; };
+		96C4462729414A9300DF35B2 /* nimbus-ios-sample-pods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nimbus-ios-sample-pods.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +183,13 @@
 				968ABE7E293F8E2B00B22255 /* NimbusLiveRampKit in Frameworks */,
 				968ABE82293F8E2B00B22255 /* NimbusRenderOMKit in Frameworks */,
 				968ABE84293F8E2B00B22255 /* NimbusRenderStaticKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96C4461129414A9300DF35B2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +318,7 @@
 			isa = PBXGroup;
 			children = (
 				4DADE24227396E0700E7E766 /* nimbus-ios-sample.app */,
+				96C4462729414A9300DF35B2 /* nimbus-ios-sample-pods.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -349,6 +405,25 @@
 			productReference = 4DADE24227396E0700E7E766 /* nimbus-ios-sample.app */;
 			productType = "com.apple.product-type.application";
 		};
+		96C445DA29414A9300DF35B2 /* nimbus-ios-sample-pods */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 96C4462429414A9300DF35B2 /* Build configuration list for PBXNativeTarget "nimbus-ios-sample-pods" */;
+			buildPhases = (
+				96C445E729414A9300DF35B2 /* Sources */,
+				96C4461129414A9300DF35B2 /* Frameworks */,
+				96C4461D29414A9300DF35B2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "nimbus-ios-sample-pods";
+			packageProductDependencies = (
+			);
+			productName = NimbusDemoApp;
+			productReference = 96C4462729414A9300DF35B2 /* nimbus-ios-sample-pods.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -381,6 +456,7 @@
 			projectRoot = "";
 			targets = (
 				4DADE24127396E0700E7E766 /* nimbus-ios-sample */,
+				96C445DA29414A9300DF35B2 /* nimbus-ios-sample-pods */,
 			);
 		};
 /* End PBXProject section */
@@ -396,6 +472,19 @@
 				4DB9A145273AE8550005D1D0 /* ProximaNova-Bold.ttf in Resources */,
 				4DB9A144273AE8550005D1D0 /* ProximaNova-Regular.ttf in Resources */,
 				4D901D8A273DCC7100037C54 /* secrets.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96C4461D29414A9300DF35B2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96C4461E29414A9300DF35B2 /* LaunchScreen.storyboard in Resources */,
+				96C4461F29414A9300DF35B2 /* Assets.xcassets in Resources */,
+				96C4462029414A9300DF35B2 /* ProximaNova-Semibold.otf in Resources */,
+				96C4462129414A9300DF35B2 /* ProximaNova-Bold.ttf in Resources */,
+				96C4462229414A9300DF35B2 /* ProximaNova-Regular.ttf in Resources */,
+				96C4462329414A9300DF35B2 /* secrets.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,6 +536,54 @@
 				4D84B1B82743FFF300CA9CE2 /* GAMViewController.swift in Sources */,
 				4D563C452746FD6300294A7B /* DemoItem.swift in Sources */,
 				4D5BAE7D273C3CA8009B7F95 /* SettingsCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96C445E729414A9300DF35B2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96C445E829414A9300DF35B2 /* UIViewController+Extension.swift in Sources */,
+				96C445E929414A9300DF35B2 /* AppDelegate.swift in Sources */,
+				96C445EA29414A9300DF35B2 /* DemoAdCell.swift in Sources */,
+				96C445EB29414A9300DF35B2 /* SceneDelegate.swift in Sources */,
+				96C445EC29414A9300DF35B2 /* AdManagerSpecificAdViewController.swift in Sources */,
+				96C445ED29414A9300DF35B2 /* TestRenderViewController.swift in Sources */,
+				96C445EE29414A9300DF35B2 /* UITableView+Extension.swift in Sources */,
+				96C445EF29414A9300DF35B2 /* MainViewController.swift in Sources */,
+				96C445F029414A9300DF35B2 /* AdManagerSpecificAdNimbusCell.swift in Sources */,
+				96C445F129414A9300DF35B2 /* DemoCell.swift in Sources */,
+				96C445F229414A9300DF35B2 /* Setting.swift in Sources */,
+				96C445F329414A9300DF35B2 /* ConfigManager.swift in Sources */,
+				96C445F429414A9300DF35B2 /* UIFont+Extension.swift in Sources */,
+				96C445F529414A9300DF35B2 /* AdViewController.swift in Sources */,
+				96C445F629414A9300DF35B2 /* DemoHeader.swift in Sources */,
+				96C445F729414A9300DF35B2 /* AdManagerSpecificAdTextCell.swift in Sources */,
+				96C445F829414A9300DF35B2 /* SettingsViewController.swift in Sources */,
+				96C445F929414A9300DF35B2 /* DemoNavigationController.swift in Sources */,
+				96C445FA29414A9300DF35B2 /* DemoRequestInterceptors.swift in Sources */,
+				96C445FB29414A9300DF35B2 /* TestRenderAdViewController.swift in Sources */,
+				96C445FC29414A9300DF35B2 /* MainItem.swift in Sources */,
+				96C445FD29414A9300DF35B2 /* AdDemoViewController.swift in Sources */,
+				96C445FE29414A9300DF35B2 /* AdManagerViewController.swift in Sources */,
+				96C445FF29414A9300DF35B2 /* SettingsSection.swift in Sources */,
+				96C4460029414A9300DF35B2 /* AdManagerSpecificAdType.swift in Sources */,
+				96C4460129414A9300DF35B2 /* MediationAdType.swift in Sources */,
+				96C4460229414A9300DF35B2 /* DemoViewController.swift in Sources */,
+				96C4460329414A9300DF35B2 /* UIColor+Extension.swift in Sources */,
+				96C4460429414A9300DF35B2 /* NSObject+Extension.swift in Sources */,
+				96C4460529414A9300DF35B2 /* MediationViewController.swift in Sources */,
+				96C4460629414A9300DF35B2 /* UILabel+Extension.swift in Sources */,
+				96C4460729414A9300DF35B2 /* MediationIntegrationType.swift in Sources */,
+				96C4460829414A9300DF35B2 /* String+Extension.swift in Sources */,
+				96C4460929414A9300DF35B2 /* DemoDataSource.swift in Sources */,
+				96C4460A29414A9300DF35B2 /* UIImage+Extension.swift in Sources */,
+				96C4460B29414A9300DF35B2 /* FacebookAdType.swift in Sources */,
+				96C4460C29414A9300DF35B2 /* AdManagerAdType.swift in Sources */,
+				96C4460D29414A9300DF35B2 /* CustomAdContainerView.swift in Sources */,
+				96C4460E29414A9300DF35B2 /* GAMViewController.swift in Sources */,
+				96C4460F29414A9300DF35B2 /* DemoItem.swift in Sources */,
+				96C4461029414A9300DF35B2 /* SettingsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -644,6 +781,70 @@
 			};
 			name = Release;
 		};
+		96C4462529414A9300DF35B2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 79;
+				DEVELOPMENT_TEAM = SYMQPHZ6U8;
+				ENABLE_BITCODE = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "nimbus-ios-sample/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Nimbus Sample";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This is required for FB and LiveRamp test ads to work";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.adsbynimbus.ios.NimbusDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		96C4462629414A9300DF35B2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 79;
+				DEVELOPMENT_TEAM = SYMQPHZ6U8;
+				ENABLE_BITCODE = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "nimbus-ios-sample/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Nimbus Sample";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This is required for FB and LiveRamp test ads to work";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.adsbynimbus.ios.NimbusDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -661,6 +862,15 @@
 			buildConfigurations = (
 				4DADE25727396E0900E7E766 /* Debug */,
 				4DADE25827396E0900E7E766 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		96C4462429414A9300DF35B2 /* Build configuration list for PBXNativeTarget "nimbus-ios-sample-pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				96C4462529414A9300DF35B2 /* Debug */,
+				96C4462629414A9300DF35B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
