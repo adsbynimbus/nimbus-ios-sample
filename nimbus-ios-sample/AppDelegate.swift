@@ -31,6 +31,10 @@ import NimbusRequestAPSKit
 import NimbusRenderFANKit
 #endif
 
+#if canImport(NimbusFANKit)
+import NimbusFANKit
+#endif
+
 #if canImport(NimbusUnityKit)
 import NimbusUnityKit
 #endif
