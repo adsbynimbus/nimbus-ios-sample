@@ -1,9 +1,10 @@
 name: CocoaPods
 
 on:
-   pull_request:
-     branches:
-       - main
+  push:
+    branches: main
+  pull_request:
+    branches: main
 
 jobs:
   build:
@@ -20,5 +21,8 @@ jobs:
     - name: Install pods
       run: pod install --repo-update
 
+    - name: Install xcbeautify
+      run: brew install xcbeautify
+
     - name: Build Sample App
-      run: xcodebuild -workspace "nimbus-ios-sample.xcworkspace" -scheme "nimbus-ios-sample-pods" -configuration "Debug" -sdk "iphonesimulator16.0" ARCHS=x86_64 ONLY_ACTIVE_ARCH=YES
+      run: set -o pipefail && xcodebuild -workspace "nimbus-ios-sample.xcworkspace" -scheme "nimbus-ios-sample-pods" -configuration "Debug" -sdk "iphonesimulator16.0" -derivedDataPath .build/DerivedData | xcbeautify

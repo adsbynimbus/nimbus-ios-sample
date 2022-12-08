@@ -1,4 +1,6 @@
-# Nimbus iOS Sample
+# Nimbus iOS Sample 
+[![CocoaPods](https://github.com/timehop/nimbus-ios-sample/actions/workflows/cocoapods.yml/badge.svg)](https://github.com/timehop/nimbus-ios-sample/actions/workflows/cocoapods.yml)
+[![Swift Package Manager](https://github.com/timehop/nimbus-ios-sample/actions/workflows/spm.yml/badge.svg)](https://github.com/timehop/nimbus-ios-sample/actions/workflows/spm.yml)
 
 Welcome to Nimbus Sample App - ads by publishers, for publishers.
 

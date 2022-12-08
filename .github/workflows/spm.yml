@@ -1,9 +1,10 @@
 name: Swift Package Manager
 
 on:
-   pull_request:
-     branches:
-       - main
+  push:
+    branches: main
+  pull_request:
+    branches: main
 
 jobs:
   build:
@@ -17,5 +18,8 @@ jobs:
       with:
         lfs: true
 
+    - name: Install xcbeautify
+      run: brew install xcbeautify
+
     - name: Build Sample App
-      run: xcodebuild -scheme "nimbus-ios-sample" -configuration "Debug" -sdk "iphonesimulator16.1"
+      run: set -o pipefail && xcodebuild -scheme "nimbus-ios-sample" -configuration "Debug" -sdk "iphonesimulator16.1" -derivedDataPath .build/DerivedData | xcbeautify
