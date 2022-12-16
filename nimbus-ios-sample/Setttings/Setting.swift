@@ -13,7 +13,7 @@ enum Setting: String, DemoItem {
     case forceNoFill
     case omThirdPartyViewability
     
-    case gdprConsent, ccpaConsent
+    case gdprConsent, ccpaConsent, gppConsent
     
     var description: String {
         switch self {
@@ -30,6 +30,8 @@ enum Setting: String, DemoItem {
             return "GDPR Consent"
         case .ccpaConsent:
             return "CCPA Consent"
+        case .gppConsent:
+            return "GPP Consent"
         }
     }
     
@@ -48,6 +50,8 @@ enum Setting: String, DemoItem {
             return UserDefaults.standard.gdprConsent
         case .ccpaConsent:
             return UserDefaults.standard.ccpaConsent
+        case .gppConsent:
+            return UserDefaults.standard.gppConsent
         }
     }
     
@@ -66,6 +70,8 @@ enum Setting: String, DemoItem {
             UserDefaults.standard.gdprConsent = isOn
         case .ccpaConsent:
             UserDefaults.standard.ccpaConsent = isOn
+        case .gppConsent:
+            UserDefaults.standard.gppConsent = isOn
         }
     }
     
@@ -136,6 +142,33 @@ extension UserDefaults {
         set {
             set(newValue, forKey: #function)
             Nimbus.shared.usPrivacyString = newValue ? "1NYN" : nil
+        }
+    }
+}
+
+// GPP Consent
+
+private let gppConsentStringKey = "IABGPP_HDR_GppString"
+private let gppSectionIdKey = "IABGPP_GppSID"
+private let testGppConsentString = "DBABMA~CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEgAA.argAC0gAAAAAAAAAAAA"
+private let testGppSectionId = "2"
+
+extension UserDefaults {
+    
+    var gppConsent: Bool {
+        get {
+            register(defaults: [#function: false])
+            return bool(forKey: #function)
+        }
+        set {
+            set(newValue, forKey: #function)
+            if newValue {
+                UserDefaults.standard.set(testGppConsentString, forKey: gppConsentStringKey)
+                UserDefaults.standard.set(testGppSectionId, forKey: gppSectionIdKey)
+            } else {
+                UserDefaults.standard.removeObject(forKey: gppConsentStringKey)
+                UserDefaults.standard.removeObject(forKey: gppSectionIdKey)
+            }
         }
     }
 }
