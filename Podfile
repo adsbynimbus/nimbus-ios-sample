@@ -5,7 +5,7 @@ platform :ios, '15.0'
 target 'nimbus-ios-sample-pods' do
   use_frameworks!
 
-  pod 'NimbusSDK', '2.1.2', subspecs: [
+  pod 'NimbusSDK', '2.2.0', subspecs: [
      'NimbusKit',               # Nimbus SDK
      'NimbusRenderStaticKit',   # Static Ad Renderer
      'NimbusRenderVideoKit',    # Video Ad Renderer
