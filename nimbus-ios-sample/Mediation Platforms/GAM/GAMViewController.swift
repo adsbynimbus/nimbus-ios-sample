@@ -83,7 +83,7 @@ final class GAMViewController: DemoViewController {
                 withAdManagerAdUnitID: ConfigManager.shared.googlePlacementId!,
                 request: gamRequest
             ) { (ad, error) in
-                if let error = error {
+                if let error {
                     print("Failed to load interstitial ad with error: \(error.localizedDescription)")
                     return
                 }
@@ -188,7 +188,7 @@ extension GAMViewController: NimbusRequestManagerDelegate {
                 withAdUnitID: ConfigManager.shared.googlePlacementId!,
                 request: gamRequest
             ) { gadAd, error in
-                if let error = error {
+                if let error {
                     print("Failed to load dynamic price interstitial ad with error: \(error.localizedDescription)")
                     return
                 }

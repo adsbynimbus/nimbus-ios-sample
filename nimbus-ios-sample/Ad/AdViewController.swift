@@ -83,7 +83,7 @@ final class AdViewController: DemoViewController {
         adContainerView.accessibilityIdentifier = adViewIdentifier
         adContainerView.translatesAutoresizingMaskIntoConstraints = false
         
-        if let dimensions = dimensions {
+        if let dimensions {
             NSLayoutConstraint.activate([
                 adContainerView.safeAreaLayoutGuide.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
                 adContainerView.safeAreaLayoutGuide.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
@@ -114,7 +114,7 @@ final class AdViewController: DemoViewController {
             let path = Bundle.main.path(forResource: "mraid_iframe", ofType: "js")!
             let jsString = (try? String(contentsOfFile: path, encoding: .utf8)) ?? ""
             webView.evaluateJavaScript(jsString, completionHandler: { _, error in
-                if let error = error {
+                if let error {
                     print("Failed to inject IFrame script \(error)")
                 }
             })
