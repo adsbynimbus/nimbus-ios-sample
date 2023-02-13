@@ -193,12 +193,12 @@ extension UserDefaults {
 extension UserDefaults {
     var omThirdPartyViewability: Bool {
         get {
-            register(defaults: [#function: false])
+            register(defaults: [#function: true])
             return bool(forKey: #function)
         }
         set {
             set(newValue, forKey: #function)
-            Nimbus.shared.viewabilityProvider?.isThirdPartyViewabilityEnabled = newValue
+            Nimbus.shared.isThirdPartyViewabilityEnabled = newValue
         }
     }
 }

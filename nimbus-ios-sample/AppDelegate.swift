@@ -89,13 +89,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         user.configureGdprConsent(didConsent: UserDefaults.standard.gdprConsent)
         NimbusAdManager.user = user
         
-        // OM Viewability initialization
-        // Verification providers can be added here
-        // OMID flag can be turned ON (example in the Settings)
-        Nimbus.shared.viewabilityProvider = .init(
-            builder: NimbusAdViewabilityTrackerBuilder(verificationProviders: nil)
-        )
-        
         // Facebook and LiveRamp requires att permissions to run properly
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) { [weak self] in
             self?.startTrackingATT()
