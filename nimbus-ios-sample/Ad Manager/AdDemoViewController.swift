@@ -172,10 +172,12 @@ extension AdDemoViewController: UITableViewDelegate {
                 && ConfigManager.shared.unityGameId.isEmptyOrNil {
                 showCustomAlert("unity_game_id")
             } else {
+                let shouldShowVideoUI = adType == .interstitialVideoWithUI
                 navigationController?.pushViewController(
                     AdManagerViewController(
                         adType: adType,
-                        headerSubTitle: headerTitle
+                        headerSubTitle: headerTitle,
+                        shouldShowVideoUI: shouldShowVideoUI
                     ),
                     animated: true
                 )

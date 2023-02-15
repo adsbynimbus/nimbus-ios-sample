@@ -7,6 +7,8 @@
 
 import UIKit
 import NimbusKit
+import NimbusRenderVideoKit
+import GoogleInteractiveMediaAds
 
 #if canImport(NimbusSDK)
 import NimbusSDK
@@ -37,21 +39,29 @@ final class AdManagerViewController: DemoViewController {
     private let contentView = UIView()
     
     private let adType: AdManagerAdType
+    private let shouldShowVideoUI: Bool
     private var adManager: NimbusAdManager!
     private var customAdContainerView: CustomAdContainerView?
     private var adController: AdController?
     private var manualRequest: NimbusRequest?
     private var requestManager: NimbusRequestManager?
 
-    init(adType: AdManagerAdType, headerTitle: String, headerSubTitle: String) {
+    init(
+        adType: AdManagerAdType,
+        headerTitle: String,
+        headerSubTitle: String,
+        shouldShowVideoUI: Bool = false
+    ) {
         self.adType = adType
+        self.shouldShowVideoUI = shouldShowVideoUI
         
         super.init(headerTitle: headerTitle, headerSubTitle: headerSubTitle)
     }
     
-    init(adType: AdManagerAdType, headerSubTitle: String) {
+    init(adType: AdManagerAdType, headerSubTitle: String, shouldShowVideoUI: Bool = false) {
         self.adType = adType
-        
+        self.shouldShowVideoUI = shouldShowVideoUI
+
         super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle)
     }
     
@@ -62,11 +72,19 @@ final class AdManagerViewController: DemoViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if shouldShowVideoUI {
+            setupCustomVideoSettings()
+        }
+        
         setupContentView()
         setupAdRendering()
     }
     
     deinit {
+        if shouldShowVideoUI {
+            resetVideoSettings()
+        }
+        
         let nimbusAdView = contentView.subviews.first(where: { $0 is NimbusAdView }) as? NimbusAdView
         nimbusAdView?.destroy()
         customAdContainerView?.destroy()
@@ -136,11 +154,11 @@ final class AdManagerViewController: DemoViewController {
                 adPresentingViewController: self
             )
             
-        case .interstitialStatic, .interstitialVideo, .interstitialHybrid:
+        case .interstitialStatic, .interstitialVideo, .interstitialVideoWithUI, .interstitialHybrid:
             let request = NimbusRequest.forInterstitialAd(position: "test_interstitial")
             if adType == .interstitialStatic {
                 request.impressions[0].video = nil
-            } else if adType == .interstitialVideo {
+            } else if adType == .interstitialVideo || adType == .interstitialVideoWithUI {
                 request.impressions[0].banner = nil
             }
 
@@ -201,6 +219,22 @@ final class AdManagerViewController: DemoViewController {
             adView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
         ])
     }
+    
+    private func setupCustomVideoSettings() {
+        if let videoRenderer = Nimbus.shared.renderers.first(
+            where: { $0.key.type == .video }
+        )?.value as? NimbusVideoAdRenderer {
+            videoRenderer.videoAdSettingsProvider = CustomVideoAdSettingsProvider()
+        }
+    }
+    
+    private func resetVideoSettings() {
+        if let videoRenderer = Nimbus.shared.renderers.first(
+            where: { $0.key.type == .video }
+        )?.value as? NimbusVideoAdRenderer {
+            videoRenderer.videoAdSettingsProvider = NimbusVideoSettingsProvider()
+        }
+    }
 }
 
 // MARK: NimbusAdManagerDelegate
@@ -228,5 +262,13 @@ extension AdManagerViewController: NimbusRequestManagerDelegate {
 
     func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
         print("didFailNimbusRequest: \(error.localizedDescription)")
+    }
+}
+
+final class CustomVideoAdSettingsProvider: NimbusVideoSettingsProvider {
+    override func adsRenderingSettings() -> IMAAdsRenderingSettings {
+        let settings = IMAAdsRenderingSettings()
+        settings.disableUi = false
+        return settings
     }
 }
