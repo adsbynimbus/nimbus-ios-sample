@@ -43,7 +43,7 @@ final class TestRenderAdViewController: UIViewController {
     }
     
     private func setupAdView() {
-        guard let adView = adView else { return }
+        guard let adView else { return }
         view.addSubview(adView)
         
         adView.accessibilityIdentifier = "testRenderAdView"

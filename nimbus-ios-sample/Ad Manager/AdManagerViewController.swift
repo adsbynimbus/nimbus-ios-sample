@@ -189,7 +189,7 @@ final class AdManagerViewController: DemoViewController {
     }
     
     private func setupAdView(adView: CustomAdContainerView?) {
-        guard let adView = adView else { return }
+        guard let adView else { return }
         contentView.addSubview(adView)
 
         adView.translatesAutoresizingMaskIntoConstraints = false
