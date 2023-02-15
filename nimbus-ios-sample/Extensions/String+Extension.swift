@@ -25,7 +25,7 @@ extension String {
 
 extension Optional where Wrapped == String {
     var isEmptyOrNil: Bool {
-        guard let self = self else {
+        guard let self else {
             return true
         }
         return self.isEmpty
