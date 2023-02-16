@@ -165,10 +165,6 @@ extension GAMViewController: GADFullScreenContentDelegate {
         print("ad:didFailToPresentFullScreenContentWithError: \(error.localizedDescription)")
     }
     
-    func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        print("adWillPresentFullScreenContent")
-    }
-    
     func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
         print("adDidDismissFullScreenContent")
     }
