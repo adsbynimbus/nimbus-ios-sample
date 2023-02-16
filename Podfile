@@ -9,7 +9,6 @@ target 'nimbus-ios-sample-pods' do
      'NimbusKit',               # Nimbus SDK
      'NimbusRenderStaticKit',   # Static Ad Renderer
      'NimbusRenderVideoKit',    # Video Ad Renderer
-     'NimbusRenderOMKit',       # OM SDK Support
      'NimbusRequestAPSKit',     # Amazon Publisher Services Request Support
      'NimbusRequestFANKit',     # Meta Audience Network Request Support
      'NimbusRenderFANKit',      # Meta Audience Network Ad Renderer
