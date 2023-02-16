@@ -11,13 +11,38 @@ import NimbusKit
 
 final class AdManagerSpecificAdNimbusCell: UICollectionViewCell {
     
-    let adManager = NimbusAdManager()
+    private let adManager = NimbusAdManager()
+    private var adController: AdController?
 
-    func requestNimbusAd(_ request: NimbusRequest, with vc: UIViewController) {        
+    func requestNimbusAd(_ request: NimbusRequest, with vc: UIViewController) {
+        adManager.delegate = self
         adManager.showAd(
             request: request,
             container: contentView,
             adPresentingViewController: vc
         )
     }
+    
+    deinit {
+        adController?.destroy()
+    }
+    
+}
+
+extension AdManagerSpecificAdNimbusCell: NimbusAdManagerDelegate {
+    
+    func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
+        print("didRenderAd")
+        self.adController = controller
+    }
+    
+    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
+        print("didCompleteNimbusRequest")
+    }
+    
+    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
+        print("didFailNimbusRequest")
+    }
+    
+    
 }

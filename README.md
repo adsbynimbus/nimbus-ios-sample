@@ -1,23 +1,37 @@
-# Nimbus iOS Sample
+# Nimbus iOS Sample 
+[![CocoaPods](https://github.com/timehop/nimbus-ios-sample/actions/workflows/cocoapods.yml/badge.svg)](https://github.com/timehop/nimbus-ios-sample/actions/workflows/cocoapods.yml)
+[![Swift Package Manager](https://github.com/timehop/nimbus-ios-sample/actions/workflows/spm.yml/badge.svg)](https://github.com/timehop/nimbus-ios-sample/actions/workflows/spm.yml)
 
 Welcome to Nimbus Sample App - ads by publishers, for publishers.
 
-## Build Setup
+## How to run
 
-### Requirements
 - `Xcode` version must be at least 13 (min. macOS Big Sur 11.3)
-- `NimbusSDK` and it's subspecs requires Cocoapods >= 1.10.0
-- Rosetta must be turned ON if using a M1 Mac
 
-### Installation
-After cloning this repo, run `pod install --repo-update` in the root folder
+### Swift Package Manager: nimbus-ios-sample
 
-### Required Keys
-- Nimbus Sample App has already configured a publisher and API keys for testing purposes. Get your `Publisher Key` and Nimbus SDK `API Key` by contacting Nimbus Support
-- These keys are configured in the `secrets.json` file at `Config` folder
+- Open `nimbus-ios-sample.xcodeproj`
+- Select the `nimbus-ios-sample` target
+- Run the app
+
+### CocoaPods (requires CocoaPods >= 1.10.0): nimbus-ios-sample-pods 
+
+- From the project root run `pod install --repo-update`
+- Open the newly created `nimbus-ios-sample.xcworkspace`
+- Select the `nimbus-ios-sample-pods` target
+- Run the app
+
+## Build Configuration: [Config/secrets.json](nimbus-ios-sample/Config/secrets.json)
+
+The Nimbus Sample App uses the [secrets.json](nimbus-ios-sample/Config/secrets.json) file to configure the keys and ids 
+necessary to initialize the different components of the Nimbus SDK.
+
+### Required Keys 
+- Nimbus Sample App has already configured a publisher and API keys for testing purposes. 
+- Get your `Publisher Key` and Nimbus SDK `API Key` by contacting Nimbus Support
 
 ### Optional IDs
-In order to see APS/FAN/MoPub/GAM/Unity examples you must also supply it's IDs
+In order to see APS/FAN/GAM/Unity examples you must also supply it's IDs
 - Locate `secrets.json` file at `Config` folder
 - Replace the empty fields with the IDs you have
 
@@ -25,26 +39,20 @@ In order to see APS/FAN/MoPub/GAM/Unity examples you must also supply it's IDs
 - For GAM Ads it is also required to inform the string value of your Ad Manager app ID for the key `GADApplicationIdentifier` in the Sample App plist. [GAM Update your Info.plist](https://developers.google.com/ad-manager/mobile-ads-sdk/ios/quick-start#update_your_infoplist)
 - For testing in real devices please refer to [GAM Enable test devices](https://developers.google.com/ad-manager/mobile-ads-sdk/ios/test-ads#enable_test_devices)
 
-## How to run
-After running `pod install` and setting up the required keys you're good to go
-- Locale `nimbus-ios-sample.xcworkspace`
-- Open it with `Xcode`
-- Run the app
-
 ### What you'll see
 You will be able to see several examples categorized by specific sections, such as:
 - Examples of different types of Ads
-- Ads by mediation platforms (Google, MoPub)
-- Ads with MOAT viewability integration
+- Ads by mediation platforms (Google)
+- Ads with OM SDK viewability integration
 - Ad Markup Renderer
 
 ## Testing Ad Markup
 
 The `Test Render` section of the sample app provides basic functionality for rendering ad markup using the latest
-version of the Nimbus SDK. The tool provides a text input field that can receive any well formed HTML or VAST markup
+version of the Nimbus SDK. The tool provides a text input field that can receive any well-formed HTML or VAST markup
 and will render the ad as a full screen ad.
 
-1. Copy the contents of the `markup` field, without the any leading or trailing quotes, from a Nimbus
+1. Copy the contents of the `markup` field, without the leading or trailing quotes, from a Nimbus
    response and paste it into the input field.
 2. Click the `Test` button. The markup will be rendered into a full screen container.
 
@@ -67,13 +75,13 @@ removed or properly escaped prior to pasting it into the tool.
 
 ### Verifying Video Ads
 
-Errors rendering a video ad can be identified by a completely black screen with the the close button appearing at the
+Errors rendering a video ad can be identified by a completely black screen with the close button appearing at the
 top left of the ad container.
 
 #### Companion Ads
 
 If the VAST creative contains a companion ad that does not render, check the size of the Companion Ad in the markup.
-The `Test Render` tool is setup with a 320 by 480 end card Companion Ad by default; if another size Companion Ad is
+The `Test Render` tool is set up with a 320 by 480 end card Companion Ad by default; if another size Companion Ad is
 defined in the VAST it will not render without rebuilding the Sample app with an additional Companion Ad definition
 that matches the size defined in the VAST markup.
 

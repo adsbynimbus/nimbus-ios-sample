@@ -11,11 +11,11 @@ import NimbusKit
 final class TestRenderAdViewController: UIViewController {
     private let adMarkup: String
     
-    private lazy var adView: AdView? = {
+    private lazy var adView: CustomAdContainerView? = {
         guard let ad = getAdFromMarkup(adMarkup: adMarkup) else {
             return nil
         }
-        return AdView(ad: ad, viewController: self)
+        return CustomAdContainerView(ad: ad, viewController: self)
     }()
     
     init(adMarkup: String) {
@@ -43,7 +43,7 @@ final class TestRenderAdViewController: UIViewController {
     }
     
     private func setupAdView() {
-        guard let adView = adView else { return }
+        guard let adView else { return }
         view.addSubview(adView)
         
         adView.accessibilityIdentifier = "testRenderAdView"

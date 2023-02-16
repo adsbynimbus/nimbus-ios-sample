@@ -10,9 +10,10 @@ import NimbusKit
 enum Setting: String, DemoItem {
     case nimbusTestMode
     case coppaOn
-    case gdprConsent
     case forceNoFill
     case omThirdPartyViewability
+    
+    case gdprConsent, ccpaConsent, gppConsent
     
     var description: String {
         switch self {
@@ -20,12 +21,17 @@ enum Setting: String, DemoItem {
             return "Nimbus Test Mode"
         case .coppaOn:
             return "Set COPPA On"
-        case .gdprConsent:
-            return "GDPR Consent"
         case .forceNoFill:
             return "Force No Fill"
         case .omThirdPartyViewability:
             return "Send OMID Viewability Flag"
+            
+        case .gdprConsent:
+            return "GDPR Consent"
+        case .ccpaConsent:
+            return "CCPA Consent"
+        case .gppConsent:
+            return "GPP Consent"
         }
     }
     
@@ -35,12 +41,17 @@ enum Setting: String, DemoItem {
             return UserDefaults.standard.nimbusTestMode
         case .coppaOn:
             return UserDefaults.standard.coppaOn
-        case .gdprConsent:
-            return UserDefaults.standard.gdprConsent
         case .forceNoFill:
             return UserDefaults.standard.forceNoFill
         case .omThirdPartyViewability:
             return UserDefaults.standard.omThirdPartyViewability
+            
+        case .gdprConsent:
+            return UserDefaults.standard.gdprConsent
+        case .ccpaConsent:
+            return UserDefaults.standard.ccpaConsent
+        case .gppConsent:
+            return UserDefaults.standard.gppConsent
         }
     }
     
@@ -50,12 +61,26 @@ enum Setting: String, DemoItem {
             UserDefaults.standard.nimbusTestMode = isOn
         case .coppaOn:
             UserDefaults.standard.coppaOn = isOn
-        case .gdprConsent:
-            UserDefaults.standard.gdprConsent = isOn
         case .forceNoFill:
             UserDefaults.standard.forceNoFill = isOn
         case .omThirdPartyViewability:
             UserDefaults.standard.omThirdPartyViewability = isOn
+            
+        case .gdprConsent:
+            UserDefaults.standard.gdprConsent = isOn
+        case .ccpaConsent:
+            UserDefaults.standard.ccpaConsent = isOn
+        case .gppConsent:
+            UserDefaults.standard.gppConsent = isOn
+        }
+    }
+    
+    var isUserPrivacySetting: Bool {
+        switch self {
+        case .gdprConsent, .ccpaConsent:
+            return true
+        default:
+            return false
         }
     }
 }
@@ -98,12 +123,56 @@ extension UserDefaults {
         set {
             set(newValue, forKey: #function)
             if var user = NimbusAdManager.user {
-                user.configureGdprConsent(didConsent: newValue)
+                // Same string as Android sample app
+                user.configureGdprConsent(consentString: "CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEgAA.argAC0gAAAAAAAAAAAA")
+                
                 NimbusAdManager.user = user
             }
         }
     }
 }
+
+// CCPA Consent
+extension UserDefaults {
+    var ccpaConsent: Bool {
+        get {
+            register(defaults: [#function: false])
+            return bool(forKey: #function)
+        }
+        set {
+            set(newValue, forKey: #function)
+            Nimbus.shared.usPrivacyString = newValue ? "1NYN" : nil
+        }
+    }
+}
+
+// GPP Consent
+
+private let gppConsentStringKey = "IABGPP_HDR_GppString"
+private let gppSectionIdKey = "IABGPP_GppSID"
+private let testGppConsentString = "DBABMA~CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEgAA.argAC0gAAAAAAAAAAAA"
+private let testGppSectionId = "2"
+
+extension UserDefaults {
+    
+    var gppConsent: Bool {
+        get {
+            register(defaults: [#function: false])
+            return bool(forKey: #function)
+        }
+        set {
+            set(newValue, forKey: #function)
+            if newValue {
+                UserDefaults.standard.set(testGppConsentString, forKey: gppConsentStringKey)
+                UserDefaults.standard.set(testGppSectionId, forKey: gppSectionIdKey)
+            } else {
+                UserDefaults.standard.removeObject(forKey: gppConsentStringKey)
+                UserDefaults.standard.removeObject(forKey: gppSectionIdKey)
+            }
+        }
+    }
+}
+
 
 // Force Ad Request Error
 extension UserDefaults {
@@ -124,12 +193,12 @@ extension UserDefaults {
 extension UserDefaults {
     var omThirdPartyViewability: Bool {
         get {
-            register(defaults: [#function: false])
+            register(defaults: [#function: true])
             return bool(forKey: #function)
         }
         set {
             set(newValue, forKey: #function)
-            Nimbus.shared.viewabilityProvider?.isThirdPartyViewabilityEnabled = newValue
+            Nimbus.shared.isThirdPartyViewabilityEnabled = newValue
         }
     }
 }

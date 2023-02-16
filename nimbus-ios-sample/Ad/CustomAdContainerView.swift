@@ -7,28 +7,38 @@
 
 import UIKit
 import NimbusKit
+import NimbusRenderStaticKit
 
-final class AdView: UIView {
+final class CustomAdContainerView: UIView {
     
     private let ad: NimbusAd
+    private let volume: Int
     private let companionAd: NimbusCompanionAd?
     private let viewController: UIViewController
+    private let creativeScalingEnabledForStaticAds: Bool
+    private let staticAdRenderer = Nimbus.shared.renderers.first(where: { $0.key == .forAuctionType(.static) })?.value
+           as? NimbusStaticAdRenderer
     private lazy var nimbusAdView = NimbusAdView(adPresentingViewController: viewController)
     private weak var delegate: AdControllerDelegate?
     
     init(
         ad: NimbusAd,
+        volume: Int = 0,
         companionAd: NimbusCompanionAd? = nil,
         viewController: UIViewController,
+        creativeScalingEnabledForStaticAds: Bool = true,
         delegate: AdControllerDelegate? = nil
     ) {
         self.ad = ad
+        self.volume = volume
         self.companionAd = companionAd
         self.viewController = viewController
+        self.creativeScalingEnabledForStaticAds = creativeScalingEnabledForStaticAds
         self.delegate = delegate
         
         super.init(frame: CGRect.zero)
         
+        staticAdRenderer?.creativeScalingEnabled = creativeScalingEnabledForStaticAds
         setupAdView()
     }
     
@@ -38,6 +48,7 @@ final class AdView: UIView {
     
     func destroy() {
         nimbusAdView.destroy()
+        staticAdRenderer?.creativeScalingEnabled = true
     }
     
     private func setupAdView() {
@@ -51,6 +62,7 @@ final class AdView: UIView {
             nimbusAdView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
 
+        nimbusAdView.volume = volume
         nimbusAdView.delegate = delegate
 
         nimbusAdView.render(ad: ad, companionAd: companionAd)

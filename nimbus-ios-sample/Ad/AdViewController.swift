@@ -7,37 +7,52 @@
 
 import UIKit
 import NimbusKit
+import NimbusRenderStaticKit
 import NimbusRenderVideoKit
 import WebKit
 
 final class AdViewController: DemoViewController {
     
     private let ad: NimbusAd
+    private let volume: Int
     private let companionAd: NimbusCompanionAd?
     private let dimensions: NimbusAdDimensions?
     private let adViewIdentifier: String
+    private let creativeScalingEnabledForStaticAds: Bool
     private let isMaxSize: Bool
     private let shouldInjectIFrameScript: Bool
-    private lazy var adView = AdView(ad: ad, companionAd: companionAd, viewController: self, delegate: self)
+    private var adContainerView: CustomAdContainerView!
 
     init(
         ad: NimbusAd,
+        volume: Int = 0,
         companionAd: NimbusCompanionAd? = nil,
         dimensions: NimbusAdDimensions? = nil,
         adViewIdentifier: String,
         headerTitle: String,
         headerSubTitle: String,
+        creativeScalingEnabledForStaticAds: Bool = true,
         isMaxSize: Bool = false,
         shouldInjectIFrameScript: Bool = false
     ) {
         self.ad = ad
+        self.volume = volume
         self.companionAd = companionAd
         self.dimensions = dimensions
         self.adViewIdentifier = adViewIdentifier
+        self.creativeScalingEnabledForStaticAds = creativeScalingEnabledForStaticAds
         self.isMaxSize = isMaxSize
         self.shouldInjectIFrameScript = shouldInjectIFrameScript
         
         super.init(headerTitle: headerTitle, headerSubTitle: headerSubTitle)
+
+        self.adContainerView = CustomAdContainerView(
+            ad: ad,
+            companionAd: companionAd,
+            viewController: self,
+            creativeScalingEnabledForStaticAds: creativeScalingEnabledForStaticAds,
+            delegate: self
+        )
     }
     
     required init?(coder: NSCoder) {
@@ -55,47 +70,51 @@ final class AdViewController: DemoViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        adView.destroy()
+        // If ad is interstitial, this controller will be the one presenting it,
+        // so destroying the adView is required otherwise
+        if !ad.isInterstitial {
+            adContainerView.destroy()
+        }
     }
     
     private func setupAdView() {
-        view.addSubview(adView)
+        view.addSubview(adContainerView)
         
-        adView.accessibilityIdentifier = adViewIdentifier
-        adView.translatesAutoresizingMaskIntoConstraints = false
+        adContainerView.accessibilityIdentifier = adViewIdentifier
+        adContainerView.translatesAutoresizingMaskIntoConstraints = false
         
-        if let dimensions = dimensions {
+        if let dimensions {
             NSLayoutConstraint.activate([
-                adView.safeAreaLayoutGuide.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-                adView.safeAreaLayoutGuide.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
-                adView.safeAreaLayoutGuide.widthAnchor.constraint(equalToConstant: CGFloat(dimensions.width)),
-                adView.safeAreaLayoutGuide.heightAnchor.constraint(equalToConstant: CGFloat(dimensions.height)),
+                adContainerView.safeAreaLayoutGuide.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+                adContainerView.safeAreaLayoutGuide.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+                adContainerView.safeAreaLayoutGuide.widthAnchor.constraint(equalToConstant: CGFloat(dimensions.width)),
+                adContainerView.safeAreaLayoutGuide.heightAnchor.constraint(equalToConstant: CGFloat(dimensions.height)),
             ])
         } else if isMaxSize {
             NSLayoutConstraint.activate([
-                adView.safeAreaLayoutGuide.topAnchor.constraint(equalTo: headerView.bottomAnchor),
-                adView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-                adView.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-                adView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+                adContainerView.safeAreaLayoutGuide.topAnchor.constraint(equalTo: headerView.bottomAnchor),
+                adContainerView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+                adContainerView.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+                adContainerView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
             ])
         } else {
             NSLayoutConstraint.activate([
-                adView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
-                adView.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor),
-                adView.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor),
-                adView.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor),
-                adView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+                adContainerView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
+                adContainerView.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor),
+                adContainerView.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor),
+                adContainerView.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor),
+                adContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
             ])
         }
     }
     
     private func injectIFrameScript() {
-        if let nimbusAdView = adView.subviews.first as? NimbusAdView,
+        if let nimbusAdView = adContainerView.subviews.first as? NimbusAdView,
             let webView = nimbusAdView.subviews.first as? WKWebView {
             let path = Bundle.main.path(forResource: "mraid_iframe", ofType: "js")!
             let jsString = (try? String(contentsOfFile: path, encoding: .utf8)) ?? ""
             webView.evaluateJavaScript(jsString, completionHandler: { _, error in
-                if let error = error {
+                if let error {
                     print("Failed to inject IFrame script \(error)")
                 }
             })
