@@ -100,10 +100,6 @@ final class AdManagerViewController: DemoViewController {
             $0 is NimbusFANRequestInterceptor ||
             $0 is NimbusUnityRequestInterceptor
         })
-        
-        if let aps = DemoRequestInterceptors.shared.aps {
-            NimbusAdManager.requestInterceptors?.append(aps)
-        }
     }
     
     private func setupContentView() {

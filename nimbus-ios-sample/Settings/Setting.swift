@@ -5,6 +5,7 @@
 //  Created by Victor Takai on 10/11/21.
 //
 
+import DTBiOSSDK
 import NimbusKit
 
 enum Setting: String, DemoItem {
@@ -59,6 +60,7 @@ enum Setting: String, DemoItem {
         switch self {
         case .nimbusTestMode:
             UserDefaults.standard.nimbusTestMode = isOn
+            DTBAds.sharedInstance().testMode = isOn
         case .coppaOn:
             UserDefaults.standard.coppaOn = isOn
         case .forceNoFill:

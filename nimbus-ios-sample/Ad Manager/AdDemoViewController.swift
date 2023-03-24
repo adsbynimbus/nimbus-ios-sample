@@ -103,8 +103,6 @@ final class AdDemoViewController: DemoViewController {
         }
     }
 
-
-
     private func createNimbusAd(
         network: String = "",
         placementId: String? = nil,
@@ -114,7 +112,7 @@ final class AdDemoViewController: DemoViewController {
         isInterstitial: Bool,
         adDimensions: NimbusAdDimensions? = nil
     ) -> NimbusAd {
-        return NimbusAd(
+        NimbusAd(
             position: "",
             auctionType: auctionType,
             bidRaw: 0,
@@ -136,7 +134,7 @@ final class AdDemoViewController: DemoViewController {
 
 extension AdDemoViewController: UITableViewDataSource {
 
-    func numberOfSections(in tableView: UITableView) -> Int { 4 }
+    func numberOfSections(in tableView: UITableView) -> Int { 3 }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
@@ -157,7 +155,9 @@ extension AdDemoViewController: UITableViewDataSource {
             let adType = facebookDataSource[indexPath.row]
             cell.updateWithFacebookAdType(adType)
         } else {
-            cell.updateWithSpecificAdManagerAdType(indexPath.row == 0 ? .refreshingBanner : .adsInScrollList)
+            cell.updateWithSpecificAdManagerAdType(
+                indexPath.row == 0 ? .refreshingBanner : .interstitialWithAPS
+            )
         }
         return cell
     }
@@ -194,7 +194,6 @@ extension AdDemoViewController: UITableViewDelegate {
                         && ConfigManager.shared.fbNativePlacementId.isEmptyOrNil {
                 showCustomAlert("facebook_native_placement_id")
             } else {
-
                 // Remove other demand providers. It MUST not remove LiveRampInterceptor
                 NimbusAdManager.requestInterceptors?.removeAll(where: {
                     $0 is NimbusAPSRequestInterceptor ||
@@ -220,7 +219,9 @@ extension AdDemoViewController: UITableViewDelegate {
             }
         } else {
             navigationController?.pushViewController(
-                AdManagerSpecificAdViewController(type: indexPath.row == 0 ? .refreshingBanner : .adsInScrollList),
+                AdManagerSpecificAdViewController(
+                    type: indexPath.row == 0 ? .refreshingBanner : .interstitialWithAPS
+                ),
                 animated: true
             )
         }
@@ -240,6 +241,4 @@ extension AdDemoViewController: NimbusAdManagerDelegate {
     func didFailNimbusRequest(request: NimbusRequestKit.NimbusRequest, error: NimbusCoreKit.NimbusError) {
         print("didFailNimbusRequest")
     }
-
-
 }

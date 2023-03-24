@@ -9,14 +9,14 @@
 import Foundation
 
 enum AdManagerSpecificAdType: String, DemoItem  {
-    case refreshingBanner, adsInScrollList
+    case refreshingBanner, interstitialWithAPS
     
     var description: String {
         switch self {
         case .refreshingBanner:
             return "Refreshing Banner (30 sec)"
-        case .adsInScrollList:
-            return "Ads In Scroll List"
+        case .interstitialWithAPS:
+            return "Interstitial with APS params"
         }
     }
 }

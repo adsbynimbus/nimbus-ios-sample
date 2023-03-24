@@ -40,8 +40,14 @@ import NimbusUnityKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
         setupNimbusSDK()
+        if let apsAppKey = ConfigManager.shared.apsAppKey, !apsAppKey.isEmpty {
+            setupAPS(with: apsAppKey)
+        }
         setupGAM()
         
         return true
@@ -65,13 +71,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
         Nimbus.shared.testMode = UserDefaults.standard.nimbusTestMode
         Nimbus.shared.coppa = UserDefaults.standard.coppaOn
-
+        
         NimbusAdManager.requestInterceptors = []
-        
-        if let aps = DemoRequestInterceptors.shared.aps {
-            NimbusAdManager.requestInterceptors?.append(aps)
-        }
-        
+
         // Renderers
         let videoRenderer = NimbusVideoAdRenderer()
         videoRenderer.showMuteButton = true
@@ -124,6 +126,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         }
+    }
+    
+    private func setupAPS(with appKey: String) {
+        DTBAds.sharedInstance().setAppKey(appKey)
+        DTBAds.sharedInstance().mraidPolicy = CUSTOM_MRAID
+        DTBAds.sharedInstance().mraidCustomVersions = ["1.0", "2.0", "3.0"]
+#if DEBUG
+        DTBAds.sharedInstance().setLogLevel(DTBLogLevelDebug)
+#endif
+        DTBAds.sharedInstance().testMode = UserDefaults.standard.nimbusTestMode
     }
     
     private func setupFAN() {

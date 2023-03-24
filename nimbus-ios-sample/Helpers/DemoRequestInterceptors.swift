@@ -11,10 +11,6 @@ import UnityAds
 import NimbusSDK
 #endif
 
-#if canImport(NimbusRequestAPSKit)
-import NimbusRequestAPSKit
-#endif
-
 #if canImport(NimbusRequestFANKit)
 import NimbusRequestFANKit
 #endif
@@ -27,21 +23,13 @@ import NimbusFANKit
 import NimbusUnityKit
 #endif
 
-import NimbusRequestAPSKit
-
 final class DemoRequestInterceptors {
-
-    private(set) var aps: NimbusAPSRequestInterceptor?
     private(set) var fan: NimbusFANRequestInterceptor?
     private(set) var unity: NimbusUnityRequestInterceptor?
 
     static var shared = DemoRequestInterceptors()
     
     private init() {
-        if let apsAppKey = ConfigManager.shared.apsAppKey, !apsAppKey.isEmpty {
-            aps = NimbusAPSRequestInterceptor(appKey: apsAppKey, adSizes: [])
-        }
-        
         if let facebookAppId =
             ConfigManager.shared.fbNativePlacementId?.components(separatedBy: "_").first,
            !facebookAppId.isEmpty {

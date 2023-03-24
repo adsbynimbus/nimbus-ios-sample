@@ -6,15 +6,19 @@
 //  Copyright © 2022 Timehop. All rights reserved.
 //
 
-import UIKit
+import DTBiOSSDK
+import NimbusRequestAPSKit
 import NimbusRequestKit
 import NimbusKit
+import UIKit
 
 final class AdManagerSpecificAdViewController: UIViewController {
     
     let labels = ["Banner Ad below", "Static Image Ad below", "Video Ad below"]
     private let type: AdManagerSpecificAdType
     private lazy var adManager = NimbusAdManager()
+    private var nimbusRequestForAPS: NimbusRequest?
+    private var apsAdLoader: DTBAdLoader?
     
     private let collectionView : UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -34,81 +38,52 @@ final class AdManagerSpecificAdViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         view.backgroundColor = .white
         
-        if type == .refreshingBanner {
-            let request = NimbusRequest.forBannerAd(position: "refreshing_banner")
-            adManager.showAd(request: request, container: view, refreshInterval: 30, adPresentingViewController: self)
-        } else {
-            view.addSubview(collectionView)
-            
-            collectionView.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-                collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            ])
-            
-            collectionView.dataSource = self
-            collectionView.delegate = self
+        switch type {
+        case .refreshingBanner:
+            showRefreshingBanner()
+        case .interstitialWithAPS:
+            showInterstitialWithAPS()
+        }
+    }
+    
+    private func showRefreshingBanner() {
+        let request = NimbusRequest.forBannerAd(position: "refreshing_banner")
+        adManager.showAd(request: request, container: view, refreshInterval: 30, adPresentingViewController: self)
+    }
+    
+    private func showInterstitialWithAPS() {
+        nimbusRequestForAPS = NimbusRequest.forInterstitialAd(position: "interstitial_with_aps")
+        
+        apsAdLoader = DTBAdLoader()
+        apsAdLoader?.setAdSizes([apsAdSizes as Any])
+        apsAdLoader?.loadAd(self)
+    }
+    
+    private func showAdWithAPS() {
+        if let nimbusRequestForAPS {
+            adManager.showAd(request: nimbusRequestForAPS, container: view, adPresentingViewController: self)
         }
     }
 }
 
-extension AdManagerSpecificAdViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch indexPath.row {
-            
-        case 0, 2, 4:
-            let label = labels[indexPath.row / 2]
-            let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: "cellReuse1",
-                for: indexPath
-            ) as! AdManagerSpecificAdTextCell
-            cell.update(with: label)
-            return cell
-            
-        case 1:
-            let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: "cellReuse2",
-                for: indexPath
-            ) as! AdManagerSpecificAdNimbusCell
-            cell.requestNimbusAd(.forBannerAd(position: "banner_ad_in_scroll_view"), with: self)
-            
-            return cell
-            
-        case 3:
-            let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: "cellReuse2",
-                for: indexPath
-            ) as! AdManagerSpecificAdNimbusCell
-            let request = NimbusRequest.forInterstitialAd(position: "static_ad_in_scroll_view")
-            request.impressions[0].video = nil
-            
-            cell.requestNimbusAd(request, with: self)
-            return cell
-            
-        default:
-            let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: "cellReuse2",
-                for: indexPath
-            ) as! AdManagerSpecificAdNimbusCell
-            let request = NimbusRequest.forInterstitialAd(position: "video_ad_in_scroll_view")
-            request.impressions[0].banner = nil
-            
-            cell.requestNimbusAd(request, with: self)
-            return cell
-        }
+// MARK: DTBAdCallback
+
+extension AdManagerSpecificAdViewController: DTBAdCallback {
+
+    /// :nodoc:
+    func onSuccess(_ adResponse: DTBAdResponse!) {
+        print("APS response successful!")
+        
+        nimbusRequestForAPS?.addAPSResponse(adResponse)
+        showAdWithAPS()
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        6
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let isLabelCell = indexPath.row % 2 == 0
-        return .init(width: UIScreen.main.bounds.width, height: isLabelCell ? 50 :  UIScreen.main.bounds.width)
+    func onFailure(_ error: DTBAdError) {
+        print("APS response failed! Error: \(error)")
+
+        showAdWithAPS()
     }
 }
