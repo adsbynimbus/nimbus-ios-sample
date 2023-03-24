@@ -19,6 +19,7 @@ final class AdManagerSpecificAdViewController: UIViewController {
     private lazy var adManager = NimbusAdManager()
     private var nimbusRequestForAPS: NimbusRequest?
     private var apsAdLoader: DTBAdLoader?
+    private var adSizes: [DTBAdSize]?
     
     private let collectionView : UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -58,7 +59,8 @@ final class AdManagerSpecificAdViewController: UIViewController {
         nimbusRequestForAPS = NimbusRequest.forInterstitialAd(position: "interstitial_with_aps")
         
         apsAdLoader = DTBAdLoader()
-        apsAdLoader?.setAdSizes([apsAdSizes as Any])
+        let adSizes: [Any] = apsAdSizes.map { $0 as Any }
+        apsAdLoader?.setAdSizes(adSizes)
         apsAdLoader?.loadAd(self)
     }
     
