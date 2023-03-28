@@ -10,6 +10,7 @@ import SwiftUI
 import AppTrackingTransparency
 
 import NimbusKit
+import DTBiOSSDK
 
 import NimbusRenderStaticKit
 import NimbusRenderVideoKit
