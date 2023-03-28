@@ -18,7 +18,10 @@ final class AdManagerSpecificAdViewController: UIViewController {
     private let type: AdManagerSpecificAdType
     private lazy var adManager = NimbusAdManager()
     private var nimbusRequestForAPS: NimbusRequest?
-    private var apsAdLoader: DTBAdLoader?
+    
+    private lazy var apsRequestsDispatchGroup = DispatchGroup()
+    private var callbacks: [DTBCallback] = []
+    private var apsAdLoaders: [DTBAdLoader] = []
     private var adSizes: [DTBAdSize]?
     
     private let collectionView : UICollectionView = {
@@ -45,8 +48,10 @@ final class AdManagerSpecificAdViewController: UIViewController {
         switch type {
         case .refreshingBanner:
             showRefreshingBanner()
-        case .interstitialWithAPS:
-            showInterstitialWithAPS()
+        case .apsRefreshingBanner:
+            showAPSAd(isRefreshingBanner: true)
+        case .apsInterstitialHybrid:
+            showAPSAd(isRefreshingBanner: false)
         }
     }
     
@@ -55,37 +60,110 @@ final class AdManagerSpecificAdViewController: UIViewController {
         adManager.showAd(request: request, container: view, refreshInterval: 30, adPresentingViewController: self)
     }
     
-    private func showInterstitialWithAPS() {
-        nimbusRequestForAPS = NimbusRequest.forInterstitialAd(position: "interstitial_with_aps")
-        
-        apsAdLoader = DTBAdLoader()
-        let adSizes: [Any] = apsAdSizes.map { $0 as Any }
-        apsAdLoader?.setAdSizes(adSizes)
-        apsAdLoader?.loadAd(self)
+    private func showAPSAd(isRefreshingBanner: Bool) {
+        DispatchQueue.global().async { [weak self] in
+            guard let self else { return }
+            
+            self.apsRequestsDispatchGroup.enter()
+            
+            if isRefreshingBanner {
+                self.loadAPSBannerAds()
+            } else {
+                self.loadAPSInterstitialAds()
+            }
+            
+            let result = self.apsRequestsDispatchGroup.wait(timeout: .now() + 0.5)
+            switch result {
+            case .success:
+                print("APS refreshing banner requests completed successfully")
+            case .timedOut:
+                print("APS refreshing banner requests timed out")
+            }
+            
+            let request: NimbusRequest
+            if isRefreshingBanner {
+                request = NimbusRequest.forBannerAd(position: "refreshing_banner")
+            } else {
+                request = NimbusRequest.forInterstitialAd(position: "interstitial_with_aps")
+            }
+            
+            self.callbacks.compactMap { $0.response }.forEach { request.addAPSResponse($0) }
+            if isRefreshingBanner {
+                self.apsAdLoaders.forEach { request.addAPSLoader($0) }
+            }
+
+            DispatchQueue.main.async {
+                if isRefreshingBanner {
+                    self.adManager.showAd(
+                        request: request,
+                        container: self.view,
+                        refreshInterval: 30,
+                        adPresentingViewController: self
+                    )
+                } else {
+                    self.adManager.showAd(request: request, container: self.view, adPresentingViewController: self)
+                }
+            }
+        }
     }
     
-    private func showAdWithAPS() {
-        if let nimbusRequestForAPS {
-            adManager.showAd(request: nimbusRequestForAPS, container: view, adPresentingViewController: self)
+    private func loadAPSBannerAds() {
+        apsBannerSizes.forEach { [weak self] size in
+            guard let self else { return }
+            
+            self.apsRequestsDispatchGroup.enter()
+            
+            let adLoader = DTBAdLoader()
+            adLoader.setAdSizes([size as Any])
+            self.apsAdLoaders.append(adLoader)
+            
+            let callback = DTBCallback(requestsDispatchGroup: self.apsRequestsDispatchGroup)
+            self.callbacks.append(callback)
+            adLoader.loadAd(callback)
+        }
+    }
+    
+    private func loadAPSInterstitialAds() {
+        apsInterstitialSizes.forEach { [weak self] size in
+            guard let self else { return }
+            
+            self.apsRequestsDispatchGroup.enter()
+
+            let adLoader = DTBAdLoader()
+            adLoader.setAdSizes([size as Any])
+            self.apsAdLoaders.append(adLoader)
+            
+            let callback = DTBCallback(requestsDispatchGroup: self.apsRequestsDispatchGroup)
+            self.callbacks.append(callback)
+            adLoader.loadAd(callback)
         }
     }
 }
 
 // MARK: DTBAdCallback
 
-extension AdManagerSpecificAdViewController: DTBAdCallback {
+/// :nodoc:
+final class DTBCallback: DTBAdCallback {
+    
+    private let requestsDispatchGroup: DispatchGroup
+    var response: DTBAdResponse?
+    
+    init(requestsDispatchGroup: DispatchGroup) {
+        self.requestsDispatchGroup = requestsDispatchGroup
+    }
 
     /// :nodoc:
-    func onSuccess(_ adResponse: DTBAdResponse!) {
-        print("APS response successful!")
+    public func onFailure(_ error: DTBAdError) {
+        print("onFailure \(error))")
         
-        nimbusRequestForAPS?.addAPSResponse(adResponse)
-        showAdWithAPS()
+        requestsDispatchGroup.leave()
     }
-    
-    func onFailure(_ error: DTBAdError) {
-        print("APS response failed! Error: \(error)")
 
-        showAdWithAPS()
+    /// :nodoc:
+    public func onSuccess(_ adResponse: DTBAdResponse!) {
+        print("onSuccess \(response))")
+        
+        response = adResponse
+        requestsDispatchGroup.leave()
     }
 }
