@@ -64,8 +64,6 @@ final class AdManagerSpecificAdViewController: UIViewController {
         DispatchQueue.global().async { [weak self] in
             guard let self else { return }
             
-            self.apsRequestsDispatchGroup.enter()
-            
             if isRefreshingBanner {
                 self.loadAPSBannerAds()
             } else {
