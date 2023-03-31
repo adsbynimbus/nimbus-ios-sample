@@ -49,7 +49,7 @@ class DemoViewController: UIViewController {
         subTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
-            subTitleLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            subTitleLabel.bottomAnchor.constraint(greaterThanOrEqualTo: view.bottomAnchor, constant: -20),
             subTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             subTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15)
         ])
