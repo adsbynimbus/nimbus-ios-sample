@@ -27,7 +27,7 @@ enum Setting: String, DemoItem {
         case .omThirdPartyViewability:
             return "Send OMID Viewability Flag"
         case .tradeDesk:
-            return "Trade Desk"
+            return "Send Trade Desk Identity"
             
         case .gdprConsent:
             return "GDPR Consent"
