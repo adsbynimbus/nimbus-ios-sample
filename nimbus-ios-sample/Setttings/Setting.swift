@@ -12,6 +12,7 @@ enum Setting: String, DemoItem {
     case coppaOn
     case forceNoFill
     case omThirdPartyViewability
+    case tradeDesk
     
     case gdprConsent, ccpaConsent, gppConsent
     
@@ -25,6 +26,8 @@ enum Setting: String, DemoItem {
             return "Force No Fill"
         case .omThirdPartyViewability:
             return "Send OMID Viewability Flag"
+        case .tradeDesk:
+            return "Send Trade Desk Identity"
             
         case .gdprConsent:
             return "GDPR Consent"
@@ -45,6 +48,8 @@ enum Setting: String, DemoItem {
             return UserDefaults.standard.forceNoFill
         case .omThirdPartyViewability:
             return UserDefaults.standard.omThirdPartyViewability
+        case .tradeDesk:
+            return UserDefaults.standard.tradeDesk
             
         case .gdprConsent:
             return UserDefaults.standard.gdprConsent
@@ -65,6 +70,8 @@ enum Setting: String, DemoItem {
             UserDefaults.standard.forceNoFill = isOn
         case .omThirdPartyViewability:
             UserDefaults.standard.omThirdPartyViewability = isOn
+        case .tradeDesk:
+            UserDefaults.standard.tradeDesk = isOn
             
         case .gdprConsent:
             UserDefaults.standard.gdprConsent = isOn
@@ -125,7 +132,6 @@ extension UserDefaults {
             if var user = NimbusAdManager.user {
                 // Same string as Android sample app
                 user.configureGdprConsent(consentString: "CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEgAA.argAC0gAAAAAAAAAAAA")
-                
                 NimbusAdManager.user = user
             }
         }
@@ -147,14 +153,12 @@ extension UserDefaults {
 }
 
 // GPP Consent
-
 private let gppConsentStringKey = "IABGPP_HDR_GppString"
 private let gppSectionIdKey = "IABGPP_GppSID"
 private let testGppConsentString = "DBABMA~CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEgAA.argAC0gAAAAAAAAAAAA"
 private let testGppSectionId = "2"
 
 extension UserDefaults {
-    
     var gppConsent: Bool {
         get {
             register(defaults: [#function: false])
@@ -190,6 +194,7 @@ extension UserDefaults {
     }
 }
 
+// Send OMID Viewability Flag
 extension UserDefaults {
     var omThirdPartyViewability: Bool {
         get {
@@ -199,6 +204,28 @@ extension UserDefaults {
         set {
             set(newValue, forKey: #function)
             Nimbus.shared.isThirdPartyViewabilityEnabled = newValue
+        }
+    }
+}
+
+// Trade Desk
+extension UserDefaults {
+    var tradeDesk: Bool {
+        get {
+            register(defaults: [#function: false])
+            return bool(forKey: #function)
+        }
+        set {
+            set(newValue, forKey: #function)
+            if newValue && nimbusTestMode && NimbusAdManager.extendedIds?.first(where: { $0.source == "tradedesk.com" }) == nil {
+                var extendedIds = NimbusAdManager.extendedIds ?? []
+                extendedIds.insert(NimbusExtendedId(source: "tradedesk.com", id: "TestUID2Token"))
+                NimbusAdManager.extendedIds = extendedIds
+            } else {
+                if let extendedId = NimbusAdManager.extendedIds?.first(where: { $0.source == "tradedesk.com" }) {
+                    NimbusAdManager.extendedIds?.remove(extendedId)
+                }
+            }
         }
     }
 }

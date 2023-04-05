@@ -14,6 +14,7 @@
 		150B4B5828D3E6F7002F233D /* CustomAdContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150B4B5728D3E6F7002F233D /* CustomAdContainerView.swift */; };
 		2013D50F279087F500CB5DCF /* MainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2013D50E279087F500CB5DCF /* MainItem.swift */; };
 		2013D5112790886600CB5DCF /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2013D5102790886600CB5DCF /* SettingsSection.swift */; };
+		4D082DF029CCA1100083DF6F /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 4D082DEF29CCA1100083DF6F /* GoogleMobileAds */; };
 		4D0AA887279F3FE100CD2F7C /* DemoRequestInterceptors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0AA886279F3FE100CD2F7C /* DemoRequestInterceptors.swift */; };
 		4D563C412746FD3B00294A7B /* AdManagerAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D563C402746FD3B00294A7B /* AdManagerAdType.swift */; };
 		4D563C432746FD4F00294A7B /* FacebookAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D563C422746FD4F00294A7B /* FacebookAdType.swift */; };
@@ -176,6 +177,7 @@
 				962B1C07299E917B001BF3B7 /* NimbusFANKit in Frameworks */,
 				962B1C0B299E917B001BF3B7 /* NimbusKit in Frameworks */,
 				962B1C13299E917C001BF3B7 /* NimbusRenderVideoKit in Frameworks */,
+				4D082DF029CCA1100083DF6F /* GoogleMobileAds in Frameworks */,
 				962B1C09299E917B001BF3B7 /* NimbusGAMKit in Frameworks */,
 				962B1C17299E917C001BF3B7 /* NimbusRequestKit in Frameworks */,
 				962B1C0D299E917C001BF3B7 /* NimbusLiveRampKit in Frameworks */,
@@ -397,6 +399,7 @@
 				962B1C14299E917C001BF3B7 /* NimbusRequestAPSKit */,
 				962B1C16299E917C001BF3B7 /* NimbusRequestKit */,
 				962B1C18299E917C001BF3B7 /* NimbusUnityKit */,
+				4D082DEF29CCA1100083DF6F /* GoogleMobileAds */,
 			);
 			productName = NimbusDemoApp;
 			productReference = 4DADE24227396E0700E7E766 /* nimbus-ios-sample.app */;
@@ -406,11 +409,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 96C4462429414A9300DF35B2 /* Build configuration list for PBXNativeTarget "nimbus-ios-sample-pods" */;
 			buildPhases = (
-				8B07979EA79149ADC2E2D7A7 /* [CP] Check Pods Manifest.lock */,
 				96C445E729414A9300DF35B2 /* Sources */,
 				96C4461129414A9300DF35B2 /* Frameworks */,
 				96C4461D29414A9300DF35B2 /* Resources */,
-				7544635CB3E43EF52C3CAD19 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -447,6 +448,7 @@
 			mainGroup = 4DADE23927396E0700E7E766;
 			packageReferences = (
 				962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */,
+				4D082DEE29CCA1100083DF6F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			productRefGroup = 4DADE24327396E0700E7E766 /* Products */;
 			projectDirPath = "";
@@ -486,48 +488,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		7544635CB3E43EF52C3CAD19 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-nimbus-ios-sample-pods/Pods-nimbus-ios-sample-pods-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-nimbus-ios-sample-pods/Pods-nimbus-ios-sample-pods-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-nimbus-ios-sample-pods/Pods-nimbus-ios-sample-pods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8B07979EA79149ADC2E2D7A7 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-nimbus-ios-sample-pods-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4DADE23E27396E0700E7E766 /* Sources */ = {
@@ -779,6 +739,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adsbynimbus.ios.NimbusDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -811,6 +772,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adsbynimbus.ios.NimbusDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -917,6 +879,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		4D082DEE29CCA1100083DF6F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 		962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/timehop/nimbus-ios-sdk.git";
@@ -928,6 +898,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		4D082DEF29CCA1100083DF6F /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4D082DEE29CCA1100083DF6F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
 		962B1C06299E917B001BF3B7 /* NimbusFANKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
