@@ -14,6 +14,18 @@
 		150B4B5828D3E6F7002F233D /* CustomAdContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150B4B5728D3E6F7002F233D /* CustomAdContainerView.swift */; };
 		2013D50F279087F500CB5DCF /* MainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2013D50E279087F500CB5DCF /* MainItem.swift */; };
 		2013D5112790886600CB5DCF /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2013D5102790886600CB5DCF /* SettingsSection.swift */; };
+		20BE3FB329E47A9C00E1A662 /* NimbusFANKit in Frameworks */ = {isa = PBXBuildFile; productRef = 962B1C06299E917B001BF3B7 /* NimbusFANKit */; };
+		20BE3FB429E47B6200E1A662 /* APSAds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2052050629CD4D5E004D7024 /* APSAds.swift */; };
+		20BE3FB529E47B6200E1A662 /* APSAds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2052050629CD4D5E004D7024 /* APSAds.swift */; };
+		20BE3FBB29E47D8500E1A662 /* NimbusGAMKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FBA29E47D8500E1A662 /* NimbusGAMKit */; };
+		20BE3FBD29E47D8500E1A662 /* NimbusKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FBC29E47D8500E1A662 /* NimbusKit */; };
+		20BE3FBF29E47D8500E1A662 /* NimbusLiveRampKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FBE29E47D8500E1A662 /* NimbusLiveRampKit */; };
+		20BE3FC129E47D8500E1A662 /* NimbusRenderKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FC029E47D8500E1A662 /* NimbusRenderKit */; };
+		20BE3FC329E47D8500E1A662 /* NimbusRenderStaticKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FC229E47D8500E1A662 /* NimbusRenderStaticKit */; };
+		20BE3FC529E47D8500E1A662 /* NimbusRenderVideoKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FC429E47D8500E1A662 /* NimbusRenderVideoKit */; };
+		20BE3FC729E47D8500E1A662 /* NimbusRequestAPSKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FC629E47D8500E1A662 /* NimbusRequestAPSKit */; };
+		20BE3FC929E47D8500E1A662 /* NimbusRequestKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FC829E47D8500E1A662 /* NimbusRequestKit */; };
+		20BE3FCB29E47D8500E1A662 /* NimbusUnityKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FCA29E47D8500E1A662 /* NimbusUnityKit */; };
 		4D082DF029CCA1100083DF6F /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 4D082DEF29CCA1100083DF6F /* GoogleMobileAds */; };
 		4D0AA887279F3FE100CD2F7C /* DemoRequestInterceptors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0AA886279F3FE100CD2F7C /* DemoRequestInterceptors.swift */; };
 		4D563C412746FD3B00294A7B /* AdManagerAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D563C402746FD3B00294A7B /* AdManagerAdType.swift */; };
@@ -55,16 +67,6 @@
 		4DE1FE4E27FF58C2002C41BC /* MediationIntegrationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE1FE4B27FF58C2002C41BC /* MediationIntegrationType.swift */; };
 		4DE1FE4F27FF58C2002C41BC /* MediationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE1FE4C27FF58C2002C41BC /* MediationViewController.swift */; };
 		4DE1FE5027FF58C2002C41BC /* MediationAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE1FE4D27FF58C2002C41BC /* MediationAdType.swift */; };
-		962B1C07299E917B001BF3B7 /* NimbusFANKit in Frameworks */ = {isa = PBXBuildFile; productRef = 962B1C06299E917B001BF3B7 /* NimbusFANKit */; };
-		962B1C09299E917B001BF3B7 /* NimbusGAMKit in Frameworks */ = {isa = PBXBuildFile; productRef = 962B1C08299E917B001BF3B7 /* NimbusGAMKit */; };
-		962B1C0B299E917B001BF3B7 /* NimbusKit in Frameworks */ = {isa = PBXBuildFile; productRef = 962B1C0A299E917B001BF3B7 /* NimbusKit */; };
-		962B1C0D299E917C001BF3B7 /* NimbusLiveRampKit in Frameworks */ = {isa = PBXBuildFile; productRef = 962B1C0C299E917C001BF3B7 /* NimbusLiveRampKit */; };
-		962B1C0F299E917C001BF3B7 /* NimbusRenderKit in Frameworks */ = {isa = PBXBuildFile; productRef = 962B1C0E299E917C001BF3B7 /* NimbusRenderKit */; };
-		962B1C11299E917C001BF3B7 /* NimbusRenderStaticKit in Frameworks */ = {isa = PBXBuildFile; productRef = 962B1C10299E917C001BF3B7 /* NimbusRenderStaticKit */; };
-		962B1C13299E917C001BF3B7 /* NimbusRenderVideoKit in Frameworks */ = {isa = PBXBuildFile; productRef = 962B1C12299E917C001BF3B7 /* NimbusRenderVideoKit */; };
-		962B1C15299E917C001BF3B7 /* NimbusRequestAPSKit in Frameworks */ = {isa = PBXBuildFile; productRef = 962B1C14299E917C001BF3B7 /* NimbusRequestAPSKit */; };
-		962B1C17299E917C001BF3B7 /* NimbusRequestKit in Frameworks */ = {isa = PBXBuildFile; productRef = 962B1C16299E917C001BF3B7 /* NimbusRequestKit */; };
-		962B1C19299E917C001BF3B7 /* NimbusUnityKit in Frameworks */ = {isa = PBXBuildFile; productRef = 962B1C18299E917C001BF3B7 /* NimbusUnityKit */; };
 		96C445E829414A9300DF35B2 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C798E274C290E00033307 /* UIViewController+Extension.swift */; };
 		96C445E929414A9300DF35B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE24527396E0700E7E766 /* AppDelegate.swift */; };
 		96C445EA29414A9300DF35B2 /* DemoAdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8AF6DE274D2776002A3783 /* DemoAdCell.swift */; };
@@ -112,6 +114,7 @@
 		96C4462129414A9300DF35B2 /* ProximaNova-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB9A140273AE4A70005D1D0 /* ProximaNova-Bold.ttf */; };
 		96C4462229414A9300DF35B2 /* ProximaNova-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB9A13F273AE4A70005D1D0 /* ProximaNova-Regular.ttf */; };
 		96C4462329414A9300DF35B2 /* secrets.json in Resources */ = {isa = PBXBuildFile; fileRef = 4D901D88273DCC7100037C54 /* secrets.json */; };
+		9986B1C7E0CB6C3DCC2103E7 /* Pods_nimbus_ios_sample_pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D747D97B2333462611B9D24 /* Pods_nimbus_ios_sample_pods.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -122,6 +125,8 @@
 		150B4B5728D3E6F7002F233D /* CustomAdContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAdContainerView.swift; sourceTree = "<group>"; };
 		2013D50E279087F500CB5DCF /* MainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainItem.swift; sourceTree = "<group>"; };
 		2013D5102790886600CB5DCF /* SettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSection.swift; sourceTree = "<group>"; };
+		2052050629CD4D5E004D7024 /* APSAds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APSAds.swift; sourceTree = "<group>"; };
+		20BE3FB629E47D6400E1A662 /* DTBiOSSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = DTBiOSSDK.xcframework; path = "Pods/AmazonPublisherServicesSDK/APS_iOS_SDK-4.6.0/DTBiOSSDK.xcframework"; sourceTree = "<group>"; };
 		4D0AA886279F3FE100CD2F7C /* DemoRequestInterceptors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoRequestInterceptors.swift; sourceTree = "<group>"; };
 		4D563C402746FD3B00294A7B /* AdManagerAdType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManagerAdType.swift; sourceTree = "<group>"; };
 		4D563C422746FD4F00294A7B /* FacebookAdType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookAdType.swift; sourceTree = "<group>"; };
@@ -165,6 +170,9 @@
 		4DE1FE4C27FF58C2002C41BC /* MediationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediationViewController.swift; sourceTree = "<group>"; };
 		4DE1FE4D27FF58C2002C41BC /* MediationAdType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediationAdType.swift; sourceTree = "<group>"; };
 		96C4462729414A9300DF35B2 /* nimbus-ios-sample-pods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nimbus-ios-sample-pods.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D747D97B2333462611B9D24 /* Pods_nimbus_ios_sample_pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_nimbus_ios_sample_pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9D00992466C6CB9A09A4C90 /* Pods-nimbus-ios-sample-pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nimbus-ios-sample-pods.debug.xcconfig"; path = "Target Support Files/Pods-nimbus-ios-sample-pods/Pods-nimbus-ios-sample-pods.debug.xcconfig"; sourceTree = "<group>"; };
+		F213016D581139F9708AB326 /* Pods-nimbus-ios-sample-pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nimbus-ios-sample-pods.release.xcconfig"; path = "Target Support Files/Pods-nimbus-ios-sample-pods/Pods-nimbus-ios-sample-pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,17 +180,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				962B1C0F299E917C001BF3B7 /* NimbusRenderKit in Frameworks */,
-				962B1C19299E917C001BF3B7 /* NimbusUnityKit in Frameworks */,
-				962B1C07299E917B001BF3B7 /* NimbusFANKit in Frameworks */,
-				962B1C0B299E917B001BF3B7 /* NimbusKit in Frameworks */,
-				962B1C13299E917C001BF3B7 /* NimbusRenderVideoKit in Frameworks */,
+				20BE3FB329E47A9C00E1A662 /* NimbusFANKit in Frameworks */,
+				20BE3FC929E47D8500E1A662 /* NimbusRequestKit in Frameworks */,
+				20BE3FC529E47D8500E1A662 /* NimbusRenderVideoKit in Frameworks */,
+				20BE3FCB29E47D8500E1A662 /* NimbusUnityKit in Frameworks */,
+				20BE3FC729E47D8500E1A662 /* NimbusRequestAPSKit in Frameworks */,
 				4D082DF029CCA1100083DF6F /* GoogleMobileAds in Frameworks */,
-				962B1C09299E917B001BF3B7 /* NimbusGAMKit in Frameworks */,
-				962B1C17299E917C001BF3B7 /* NimbusRequestKit in Frameworks */,
-				962B1C0D299E917C001BF3B7 /* NimbusLiveRampKit in Frameworks */,
-				962B1C15299E917C001BF3B7 /* NimbusRequestAPSKit in Frameworks */,
-				962B1C11299E917C001BF3B7 /* NimbusRenderStaticKit in Frameworks */,
+				20BE3FBB29E47D8500E1A662 /* NimbusGAMKit in Frameworks */,
+				20BE3FC129E47D8500E1A662 /* NimbusRenderKit in Frameworks */,
+				20BE3FBD29E47D8500E1A662 /* NimbusKit in Frameworks */,
+				20BE3FBF29E47D8500E1A662 /* NimbusLiveRampKit in Frameworks */,
+				20BE3FC329E47D8500E1A662 /* NimbusRenderStaticKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,6 +198,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9986B1C7E0CB6C3DCC2103E7 /* Pods_nimbus_ios_sample_pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,7 +231,7 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		4D5BAE79273C3614009B7F95 /* Setttings */ = {
+		4D5BAE79273C3614009B7F95 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
 				4D5BAE80273C6A16009B7F95 /* Setting.swift */,
@@ -230,7 +239,7 @@
 				2013D5102790886600CB5DCF /* SettingsSection.swift */,
 				4D5BAE7A273C362B009B7F95 /* SettingsViewController.swift */,
 			);
-			path = Setttings;
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		4D5BAE82273C6C64009B7F95 /* Common */ = {
@@ -285,6 +294,7 @@
 		4D901D79273D931C00037C54 /* Ad Manager */ = {
 			isa = PBXGroup;
 			children = (
+				2052050629CD4D5E004D7024 /* APSAds.swift */,
 				15014CFD286C7DA4009DB195 /* AdManagerSpecificAdNimbusCell.swift */,
 				15014CFA286C7DA4009DB195 /* AdManagerSpecificAdTextCell.swift */,
 				15014CFB286C7DA4009DB195 /* AdManagerSpecificAdType.swift */,
@@ -311,6 +321,8 @@
 			children = (
 				4DADE24427396E0700E7E766 /* nimbus-ios-sample */,
 				4DADE24327396E0700E7E766 /* Products */,
+				7E2A6DEB1401D3EAC9322998 /* Pods */,
+				99498655172AA174E2FD6926 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -333,7 +345,7 @@
 				4D15A0D8274802CE00D4DBCB /* Ad */,
 				4D8A3FA52742C74B00201485 /* Mediation Platforms */,
 				4D8A3FB027430AAE00201485 /* Test Render */,
-				4D5BAE79273C3614009B7F95 /* Setttings */,
+				4D5BAE79273C3614009B7F95 /* Settings */,
 				4D5BAE83273C6C81009B7F95 /* Extensions */,
 				4D5BAE82273C6C64009B7F95 /* Common */,
 				4DB9A13D273AE46F0005D1D0 /* Resources */,
@@ -372,6 +384,24 @@
 			path = GAM;
 			sourceTree = "<group>";
 		};
+		7E2A6DEB1401D3EAC9322998 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B9D00992466C6CB9A09A4C90 /* Pods-nimbus-ios-sample-pods.debug.xcconfig */,
+				F213016D581139F9708AB326 /* Pods-nimbus-ios-sample-pods.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		99498655172AA174E2FD6926 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				20BE3FB629E47D6400E1A662 /* DTBiOSSDK.xcframework */,
+				9D747D97B2333462611B9D24 /* Pods_nimbus_ios_sample_pods.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -390,16 +420,16 @@
 			name = "nimbus-ios-sample";
 			packageProductDependencies = (
 				962B1C06299E917B001BF3B7 /* NimbusFANKit */,
-				962B1C08299E917B001BF3B7 /* NimbusGAMKit */,
-				962B1C0A299E917B001BF3B7 /* NimbusKit */,
-				962B1C0C299E917C001BF3B7 /* NimbusLiveRampKit */,
-				962B1C0E299E917C001BF3B7 /* NimbusRenderKit */,
-				962B1C10299E917C001BF3B7 /* NimbusRenderStaticKit */,
-				962B1C12299E917C001BF3B7 /* NimbusRenderVideoKit */,
-				962B1C14299E917C001BF3B7 /* NimbusRequestAPSKit */,
-				962B1C16299E917C001BF3B7 /* NimbusRequestKit */,
-				962B1C18299E917C001BF3B7 /* NimbusUnityKit */,
 				4D082DEF29CCA1100083DF6F /* GoogleMobileAds */,
+				20BE3FBA29E47D8500E1A662 /* NimbusGAMKit */,
+				20BE3FBC29E47D8500E1A662 /* NimbusKit */,
+				20BE3FBE29E47D8500E1A662 /* NimbusLiveRampKit */,
+				20BE3FC029E47D8500E1A662 /* NimbusRenderKit */,
+				20BE3FC229E47D8500E1A662 /* NimbusRenderStaticKit */,
+				20BE3FC429E47D8500E1A662 /* NimbusRenderVideoKit */,
+				20BE3FC629E47D8500E1A662 /* NimbusRequestAPSKit */,
+				20BE3FC829E47D8500E1A662 /* NimbusRequestKit */,
+				20BE3FCA29E47D8500E1A662 /* NimbusUnityKit */,
 			);
 			productName = NimbusDemoApp;
 			productReference = 4DADE24227396E0700E7E766 /* nimbus-ios-sample.app */;
@@ -409,9 +439,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 96C4462429414A9300DF35B2 /* Build configuration list for PBXNativeTarget "nimbus-ios-sample-pods" */;
 			buildPhases = (
+				433DA87E2996EA5A7539F110 /* [CP] Check Pods Manifest.lock */,
 				96C445E729414A9300DF35B2 /* Sources */,
 				96C4461129414A9300DF35B2 /* Frameworks */,
 				96C4461D29414A9300DF35B2 /* Resources */,
+				3DED376DE62976588B7D230E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -489,6 +521,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3DED376DE62976588B7D230E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-nimbus-ios-sample-pods/Pods-nimbus-ios-sample-pods-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-nimbus-ios-sample-pods/Pods-nimbus-ios-sample-pods-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-nimbus-ios-sample-pods/Pods-nimbus-ios-sample-pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		433DA87E2996EA5A7539F110 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-nimbus-ios-sample-pods-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4DADE23E27396E0700E7E766 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -499,6 +573,7 @@
 				4D8AF6DF274D2776002A3783 /* DemoAdCell.swift in Sources */,
 				4DADE24827396E0700E7E766 /* SceneDelegate.swift in Sources */,
 				15014D00286C7DA4009DB195 /* AdManagerSpecificAdViewController.swift in Sources */,
+				20BE3FB429E47B6200E1A662 /* APSAds.swift in Sources */,
 				4D5C798B274C184000033307 /* TestRenderViewController.swift in Sources */,
 				4D8A3FAB2742CAC700201485 /* UITableView+Extension.swift in Sources */,
 				4DADE25A273993D600E7E766 /* MainViewController.swift in Sources */,
@@ -547,6 +622,7 @@
 				96C445EA29414A9300DF35B2 /* DemoAdCell.swift in Sources */,
 				96C445EB29414A9300DF35B2 /* SceneDelegate.swift in Sources */,
 				96C445EC29414A9300DF35B2 /* AdManagerSpecificAdViewController.swift in Sources */,
+				20BE3FB529E47B6200E1A662 /* APSAds.swift in Sources */,
 				96C445ED29414A9300DF35B2 /* TestRenderViewController.swift in Sources */,
 				96C445EE29414A9300DF35B2 /* UITableView+Extension.swift in Sources */,
 				96C445EF29414A9300DF35B2 /* MainViewController.swift in Sources */,
@@ -784,6 +860,7 @@
 		};
 		96C4462529414A9300DF35B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B9D00992466C6CB9A09A4C90 /* Pods-nimbus-ios-sample-pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -815,6 +892,7 @@
 		};
 		96C4462629414A9300DF35B2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F213016D581139F9708AB326 /* Pods-nimbus-ios-sample-pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -889,15 +967,60 @@
 		};
 		962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/timehop/nimbus-ios-sdk.git";
+			repositoryURL = "https://github.com/timehop/nimbus-ios-sdk";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = exactVersion;
+				version = 2.5.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		20BE3FBA29E47D8500E1A662 /* NimbusGAMKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
+			productName = NimbusGAMKit;
+		};
+		20BE3FBC29E47D8500E1A662 /* NimbusKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
+			productName = NimbusKit;
+		};
+		20BE3FBE29E47D8500E1A662 /* NimbusLiveRampKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
+			productName = NimbusLiveRampKit;
+		};
+		20BE3FC029E47D8500E1A662 /* NimbusRenderKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
+			productName = NimbusRenderKit;
+		};
+		20BE3FC229E47D8500E1A662 /* NimbusRenderStaticKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
+			productName = NimbusRenderStaticKit;
+		};
+		20BE3FC429E47D8500E1A662 /* NimbusRenderVideoKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
+			productName = NimbusRenderVideoKit;
+		};
+		20BE3FC629E47D8500E1A662 /* NimbusRequestAPSKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
+			productName = NimbusRequestAPSKit;
+		};
+		20BE3FC829E47D8500E1A662 /* NimbusRequestKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
+			productName = NimbusRequestKit;
+		};
+		20BE3FCA29E47D8500E1A662 /* NimbusUnityKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
+			productName = NimbusUnityKit;
+		};
 		4D082DEF29CCA1100083DF6F /* GoogleMobileAds */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4D082DEE29CCA1100083DF6F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
@@ -905,53 +1028,7 @@
 		};
 		962B1C06299E917B001BF3B7 /* NimbusFANKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
 			productName = NimbusFANKit;
-		};
-		962B1C08299E917B001BF3B7 /* NimbusGAMKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
-			productName = NimbusGAMKit;
-		};
-		962B1C0A299E917B001BF3B7 /* NimbusKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
-			productName = NimbusKit;
-		};
-		962B1C0C299E917C001BF3B7 /* NimbusLiveRampKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
-			productName = NimbusLiveRampKit;
-		};
-		962B1C0E299E917C001BF3B7 /* NimbusRenderKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
-			productName = NimbusRenderKit;
-		};
-		962B1C10299E917C001BF3B7 /* NimbusRenderStaticKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
-			productName = NimbusRenderStaticKit;
-		};
-		962B1C12299E917C001BF3B7 /* NimbusRenderVideoKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
-			productName = NimbusRenderVideoKit;
-		};
-		962B1C14299E917C001BF3B7 /* NimbusRequestAPSKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
-			productName = NimbusRequestAPSKit;
-		};
-		962B1C16299E917C001BF3B7 /* NimbusRequestKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
-			productName = NimbusRequestKit;
-		};
-		962B1C18299E917C001BF3B7 /* NimbusUnityKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
-			productName = NimbusUnityKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

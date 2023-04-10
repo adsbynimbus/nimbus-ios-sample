@@ -29,17 +29,17 @@ import NimbusUnityKit
 #endif
 
 final class AdDemoViewController: DemoViewController {
-
+    
     private var adManager: NimbusAdManager?
-
+    
     override var headerTitle: String {
         "Show Ad Demo"
     }
-
+    
     override var headerSubTitle: String {
         "Select to see Nimbus' request and render flow"
     }
-
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.sectionHeaderTopPadding = 0
@@ -52,28 +52,28 @@ final class AdDemoViewController: DemoViewController {
         tableView.accessibilityIdentifier = "adDemoTableView"
         return tableView
     }()
-
+    
     private var adManagerDataSource: [AdManagerAdType] {
         AdManagerAdType.allCases.filter { $0 != .video }
     }
-
+    
     private var facebookDataSource: [FacebookAdType] {
         FacebookAdType.allCases
     }
-
+    
     private var specificAdsDataSource: [AdManagerSpecificAdType] {
         AdManagerSpecificAdType.allCases
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupScrollView(tableView)
     }
-
+    
     private func createNimbusAd(adType: FacebookAdType) -> NimbusAd {
         switch adType {
-
+            
         case .facebookBanner:
             return createNimbusAd(
                 network: "facebook",
@@ -82,7 +82,7 @@ final class AdDemoViewController: DemoViewController {
                 isInterstitial: false,
                 adDimensions: NimbusAdDimensions(width: 300, height: 50)
             )
-
+            
         case .facebookInterstitial:
             return createNimbusAd(
                 network: "facebook",
@@ -91,7 +91,7 @@ final class AdDemoViewController: DemoViewController {
                 isInterstitial: true,
                 adDimensions: nil
             )
-
+            
         case .facebookNative:
             return createNimbusAd(
                 network: "facebook",
@@ -102,9 +102,7 @@ final class AdDemoViewController: DemoViewController {
             )
         }
     }
-
-
-
+    
     private func createNimbusAd(
         network: String = "",
         placementId: String? = nil,
@@ -114,7 +112,7 @@ final class AdDemoViewController: DemoViewController {
         isInterstitial: Bool,
         adDimensions: NimbusAdDimensions? = nil
     ) -> NimbusAd {
-        return NimbusAd(
+        NimbusAd(
             position: "",
             auctionType: auctionType,
             bidRaw: 0,
@@ -132,12 +130,25 @@ final class AdDemoViewController: DemoViewController {
             extensions: nil
         )
     }
+    
+    private func getSpecificAdTypeFromTableRow(_ row: Int) -> AdManagerSpecificAdType? {
+        switch row {
+        case 0:
+            return .refreshingBanner
+        case 1:
+            return .apsRefreshingBanner
+        case 2:
+            return .apsInterstitialHybrid
+        default:
+            return nil
+        }
+    }
 }
 
 extension AdDemoViewController: UITableViewDataSource {
-
-    func numberOfSections(in tableView: UITableView) -> Int { 4 }
-
+    
+    func numberOfSections(in tableView: UITableView) -> Int { 3 }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return adManagerDataSource.count
@@ -147,7 +158,7 @@ extension AdDemoViewController: UITableViewDataSource {
             return specificAdsDataSource.count
         }
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: DemoCell = tableView.dequeueReusableCell(for: indexPath)
         if indexPath.section == 0 {
@@ -156,15 +167,15 @@ extension AdDemoViewController: UITableViewDataSource {
         } else if indexPath.section == 1 {
             let adType = facebookDataSource[indexPath.row]
             cell.updateWithFacebookAdType(adType)
-        } else {
-            cell.updateWithSpecificAdManagerAdType(indexPath.row == 0 ? .refreshingBanner : .adsInScrollList)
+        } else if let type = getSpecificAdTypeFromTableRow(indexPath.row) {
+            cell.updateWithSpecificAdManagerAdType(type)
         }
         return cell
     }
 }
 
 extension AdDemoViewController: UITableViewDelegate {
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             let adType = adManagerDataSource[indexPath.row]
@@ -194,7 +205,6 @@ extension AdDemoViewController: UITableViewDelegate {
                         && ConfigManager.shared.fbNativePlacementId.isEmptyOrNil {
                 showCustomAlert("facebook_native_placement_id")
             } else {
-
                 // Remove other demand providers. It MUST not remove LiveRampInterceptor
                 NimbusAdManager.requestInterceptors?.removeAll(where: {
                     $0 is NimbusAPSRequestInterceptor ||
@@ -204,7 +214,7 @@ extension AdDemoViewController: UITableViewDelegate {
                    !(NimbusAdManager.requestInterceptors?.contains(where: { $0 is NimbusFANRequestInterceptor }) ?? false) {
                     NimbusAdManager.requestInterceptors?.append(fan)
                 }
-
+                
                 let ad = createNimbusAd(adType: adType)
                 navigationController?.pushViewController(
                     AdViewController(
@@ -218,9 +228,9 @@ extension AdDemoViewController: UITableViewDelegate {
                     animated: true
                 )
             }
-        } else {
+        } else if let type = getSpecificAdTypeFromTableRow(indexPath.row) {
             navigationController?.pushViewController(
-                AdManagerSpecificAdViewController(type: indexPath.row == 0 ? .refreshingBanner : .adsInScrollList),
+                AdManagerSpecificAdViewController(type: type),
                 animated: true
             )
         }
@@ -228,18 +238,16 @@ extension AdDemoViewController: UITableViewDelegate {
 }
 
 extension AdDemoViewController: NimbusAdManagerDelegate {
-
+    
     func didRenderAd(request: NimbusRequestKit.NimbusRequest, ad: NimbusCoreKit.NimbusAd, controller: NimbusCoreKit.AdController) {
         print("didRenderAd")
     }
-
+    
     func didCompleteNimbusRequest(request: NimbusRequestKit.NimbusRequest, ad: NimbusCoreKit.NimbusAd) {
         print("didCompleteNimbusRequest")
     }
-
+    
     func didFailNimbusRequest(request: NimbusRequestKit.NimbusRequest, error: NimbusCoreKit.NimbusError) {
         print("didFailNimbusRequest")
     }
-
-
 }

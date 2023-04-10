@@ -6,15 +6,23 @@
 //  Copyright © 2022 Timehop. All rights reserved.
 //
 
-import UIKit
+import DTBiOSSDK
+import NimbusRequestAPSKit
 import NimbusRequestKit
 import NimbusKit
+import UIKit
 
 final class AdManagerSpecificAdViewController: UIViewController {
     
     let labels = ["Banner Ad below", "Static Image Ad below", "Video Ad below"]
     private let type: AdManagerSpecificAdType
     private lazy var adManager = NimbusAdManager()
+    private var nimbusRequestForAPS: NimbusRequest?
+    
+    private lazy var apsRequestsDispatchGroup = DispatchGroup()
+    private var callbacks: [DTBCallback] = []
+    private var apsAdLoaders: [DTBAdLoader] = []
+    private var adSizes: [DTBAdSize]?
     
     private let collectionView : UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -34,81 +42,126 @@ final class AdManagerSpecificAdViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         view.backgroundColor = .white
         
-        if type == .refreshingBanner {
-            let request = NimbusRequest.forBannerAd(position: "refreshing_banner")
-            adManager.showAd(request: request, container: view, refreshInterval: 30, adPresentingViewController: self)
-        } else {
-            view.addSubview(collectionView)
+        switch type {
+        case .refreshingBanner:
+            showRefreshingBanner()
+        case .apsRefreshingBanner:
+            showAPSAd(isRefreshingBanner: true)
+        case .apsInterstitialHybrid:
+            showAPSAd(isRefreshingBanner: false)
+        }
+    }
+    
+    private func showRefreshingBanner() {
+        let request = NimbusRequest.forBannerAd(position: "refreshing_banner")
+        adManager.showAd(request: request, container: view, refreshInterval: 30, adPresentingViewController: self)
+    }
+    
+    private func showAPSAd(isRefreshingBanner: Bool) {
+        DispatchQueue.global().async { [weak self] in
+            guard let self else { return }
             
-            collectionView.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-                collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            ])
+            if isRefreshingBanner {
+                self.loadAPSBannerAds()
+            } else {
+                self.loadAPSInterstitialAds()
+            }
             
-            collectionView.dataSource = self
-            collectionView.delegate = self
+            let result = self.apsRequestsDispatchGroup.wait(timeout: .now() + 0.5)
+            switch result {
+            case .success:
+                print("APS refreshing banner requests completed successfully")
+            case .timedOut:
+                print("APS refreshing banner requests timed out")
+            }
+            
+            let request: NimbusRequest
+            if isRefreshingBanner {
+                request = NimbusRequest.forBannerAd(position: "refreshing_banner")
+            } else {
+                request = NimbusRequest.forInterstitialAd(position: "interstitial_with_aps")
+            }
+            
+            self.callbacks.compactMap { $0.response }.forEach { request.addAPSResponse($0) }
+            if isRefreshingBanner {
+                self.apsAdLoaders.forEach { request.addAPSLoader($0) }
+            }
+
+            DispatchQueue.main.async {
+                if isRefreshingBanner {
+                    self.adManager.showAd(
+                        request: request,
+                        container: self.view,
+                        refreshInterval: 30,
+                        adPresentingViewController: self
+                    )
+                } else {
+                    self.adManager.showAd(request: request, container: self.view, adPresentingViewController: self)
+                }
+            }
+        }
+    }
+    
+    private func loadAPSBannerAds() {
+        apsBannerSizes.forEach { [weak self] size in
+            guard let self else { return }
+            
+            self.apsRequestsDispatchGroup.enter()
+            
+            let adLoader = DTBAdLoader()
+            adLoader.setAdSizes([size as Any])
+            self.apsAdLoaders.append(adLoader)
+            
+            let callback = DTBCallback(requestsDispatchGroup: self.apsRequestsDispatchGroup)
+            self.callbacks.append(callback)
+            adLoader.loadAd(callback)
+        }
+    }
+    
+    private func loadAPSInterstitialAds() {
+        apsInterstitialSizes.forEach { [weak self] size in
+            guard let self else { return }
+            
+            self.apsRequestsDispatchGroup.enter()
+
+            let adLoader = DTBAdLoader()
+            adLoader.setAdSizes([size as Any])
+            self.apsAdLoaders.append(adLoader)
+            
+            let callback = DTBCallback(requestsDispatchGroup: self.apsRequestsDispatchGroup)
+            self.callbacks.append(callback)
+            adLoader.loadAd(callback)
         }
     }
 }
 
-extension AdManagerSpecificAdViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch indexPath.row {
-            
-        case 0, 2, 4:
-            let label = labels[indexPath.row / 2]
-            let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: "cellReuse1",
-                for: indexPath
-            ) as! AdManagerSpecificAdTextCell
-            cell.update(with: label)
-            return cell
-            
-        case 1:
-            let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: "cellReuse2",
-                for: indexPath
-            ) as! AdManagerSpecificAdNimbusCell
-            cell.requestNimbusAd(.forBannerAd(position: "banner_ad_in_scroll_view"), with: self)
-            
-            return cell
-            
-        case 3:
-            let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: "cellReuse2",
-                for: indexPath
-            ) as! AdManagerSpecificAdNimbusCell
-            let request = NimbusRequest.forInterstitialAd(position: "static_ad_in_scroll_view")
-            request.impressions[0].video = nil
-            
-            cell.requestNimbusAd(request, with: self)
-            return cell
-            
-        default:
-            let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: "cellReuse2",
-                for: indexPath
-            ) as! AdManagerSpecificAdNimbusCell
-            let request = NimbusRequest.forInterstitialAd(position: "video_ad_in_scroll_view")
-            request.impressions[0].banner = nil
-            
-            cell.requestNimbusAd(request, with: self)
-            return cell
-        }
-    }
+// MARK: DTBAdCallback
+
+/// :nodoc:
+final class DTBCallback: DTBAdCallback {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        6
-    }
+    private let requestsDispatchGroup: DispatchGroup
+    var response: DTBAdResponse?
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let isLabelCell = indexPath.row % 2 == 0
-        return .init(width: UIScreen.main.bounds.width, height: isLabelCell ? 50 :  UIScreen.main.bounds.width)
+    init(requestsDispatchGroup: DispatchGroup) {
+        self.requestsDispatchGroup = requestsDispatchGroup
+    }
+
+    /// :nodoc:
+    public func onFailure(_ error: DTBAdError) {
+        print("onFailure \(error))")
+        
+        requestsDispatchGroup.leave()
+    }
+
+    /// :nodoc:
+    public func onSuccess(_ adResponse: DTBAdResponse!) {
+        print("onSuccess \(response))")
+        
+        response = adResponse
+        requestsDispatchGroup.leave()
     }
 }
