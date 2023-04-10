@@ -9,7 +9,9 @@ import UIKit
 import SwiftUI
 import AppTrackingTransparency
 
+#if canImport(NimbusKit)
 import NimbusKit
+#endif
 import DTBiOSSDK
 
 import NimbusRenderStaticKit
