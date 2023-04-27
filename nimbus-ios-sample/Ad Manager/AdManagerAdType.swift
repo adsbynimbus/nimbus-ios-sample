@@ -16,7 +16,6 @@ enum AdManagerAdType: String, DemoItem {
     case interstitialHybrid
     case rewardedStatic
     case rewardedVideo
-    case rewardedVideoUnity
     
     var description: String {
         switch self {

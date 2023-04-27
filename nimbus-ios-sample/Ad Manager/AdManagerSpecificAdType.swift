@@ -9,16 +9,11 @@
 import Foundation
 
 enum AdManagerSpecificAdType: String, DemoItem  {
-    case refreshingBanner, apsRefreshingBanner, apsInterstitialHybrid
+    case refreshingBanner
     
     var description: String {
         switch self {
         case .refreshingBanner:
             return "Refreshing Banner (30 sec)"
-        case .apsRefreshingBanner:
-            return "APS Refreshing Banner (30 sec)"
-        case .apsInterstitialHybrid:
-            return "APS Interstitial Hybrid"
-        }
     }
 }

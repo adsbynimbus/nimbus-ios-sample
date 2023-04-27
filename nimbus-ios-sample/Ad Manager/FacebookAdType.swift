@@ -8,7 +8,4 @@
 import Foundation
 
 enum FacebookAdType: String, DemoItem  {
-    case facebookBanner
-    case facebookInterstitial
-    case facebookNative
 }

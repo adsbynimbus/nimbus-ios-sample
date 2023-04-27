@@ -12,6 +12,12 @@
 		15014D00286C7DA4009DB195 /* AdManagerSpecificAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15014CFC286C7DA4009DB195 /* AdManagerSpecificAdViewController.swift */; };
 		15014D01286C7DA4009DB195 /* AdManagerSpecificAdNimbusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15014CFD286C7DA4009DB195 /* AdManagerSpecificAdNimbusCell.swift */; };
 		150B4B5828D3E6F7002F233D /* CustomAdContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150B4B5728D3E6F7002F233D /* CustomAdContainerView.swift */; };
+		1541C30629F1CFB4007E8852 /* VungleAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1541C30329F1CFB4007E8852 /* VungleAdType.swift */; };
+		1541C30729F1CFB4007E8852 /* VungleAdManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1541C30429F1CFB4007E8852 /* VungleAdManagerViewController.swift */; };
+		1541C30829F1CFB4007E8852 /* VungleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1541C30529F1CFB4007E8852 /* VungleViewController.swift */; };
+		1541C30A29F1CFDE007E8852 /* ThirdPartyDemandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1541C30929F1CFDE007E8852 /* ThirdPartyDemandViewController.swift */; };
+		1541C30C29F1D2D0007E8852 /* ThirdPartyDemandIntegrationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1541C30B29F1D2D0007E8852 /* ThirdPartyDemandIntegrationType.swift */; };
+		1541C30E29F1D369007E8852 /* ThirdPartyDemandAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1541C30D29F1D369007E8852 /* ThirdPartyDemandAdType.swift */; };
 		2013D50F279087F500CB5DCF /* MainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2013D50E279087F500CB5DCF /* MainItem.swift */; };
 		2013D5112790886600CB5DCF /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2013D5102790886600CB5DCF /* SettingsSection.swift */; };
 		20BE3FB329E47A9C00E1A662 /* NimbusFANKit in Frameworks */ = {isa = PBXBuildFile; productRef = 962B1C06299E917B001BF3B7 /* NimbusFANKit */; };
@@ -123,6 +129,12 @@
 		15014CFC286C7DA4009DB195 /* AdManagerSpecificAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdManagerSpecificAdViewController.swift; sourceTree = "<group>"; };
 		15014CFD286C7DA4009DB195 /* AdManagerSpecificAdNimbusCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdManagerSpecificAdNimbusCell.swift; sourceTree = "<group>"; };
 		150B4B5728D3E6F7002F233D /* CustomAdContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAdContainerView.swift; sourceTree = "<group>"; };
+		1541C30329F1CFB4007E8852 /* VungleAdType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VungleAdType.swift; sourceTree = "<group>"; };
+		1541C30429F1CFB4007E8852 /* VungleAdManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VungleAdManagerViewController.swift; sourceTree = "<group>"; };
+		1541C30529F1CFB4007E8852 /* VungleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VungleViewController.swift; sourceTree = "<group>"; };
+		1541C30929F1CFDE007E8852 /* ThirdPartyDemandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdPartyDemandViewController.swift; sourceTree = "<group>"; };
+		1541C30B29F1D2D0007E8852 /* ThirdPartyDemandIntegrationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdPartyDemandIntegrationType.swift; sourceTree = "<group>"; };
+		1541C30D29F1D369007E8852 /* ThirdPartyDemandAdType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdPartyDemandAdType.swift; sourceTree = "<group>"; };
 		2013D50E279087F500CB5DCF /* MainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainItem.swift; sourceTree = "<group>"; };
 		2013D5102790886600CB5DCF /* SettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSection.swift; sourceTree = "<group>"; };
 		2052050629CD4D5E004D7024 /* APSAds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APSAds.swift; sourceTree = "<group>"; };
@@ -205,6 +217,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1541C30129F1CFB4007E8852 /* Third Party Demand */ = {
+			isa = PBXGroup;
+			children = (
+				1541C30929F1CFDE007E8852 /* ThirdPartyDemandViewController.swift */,
+				1541C30B29F1D2D0007E8852 /* ThirdPartyDemandIntegrationType.swift */,
+				1541C30229F1CFB4007E8852 /* Vungle */,
+				1541C30D29F1D369007E8852 /* ThirdPartyDemandAdType.swift */,
+			);
+			path = "Third Party Demand";
+			sourceTree = "<group>";
+		};
+		1541C30229F1CFB4007E8852 /* Vungle */ = {
+			isa = PBXGroup;
+			children = (
+				1541C30329F1CFB4007E8852 /* VungleAdType.swift */,
+				1541C30429F1CFB4007E8852 /* VungleAdManagerViewController.swift */,
+				1541C30529F1CFB4007E8852 /* VungleViewController.swift */,
+			);
+			path = Vungle;
+			sourceTree = "<group>";
+		};
 		4D0AA885279F3FA700CD2F7C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -344,6 +377,7 @@
 				4D5BAE78273C3584009B7F95 /* Main */,
 				4D15A0D8274802CE00D4DBCB /* Ad */,
 				4D8A3FA52742C74B00201485 /* Mediation Platforms */,
+				1541C30129F1CFB4007E8852 /* Third Party Demand */,
 				4D8A3FB027430AAE00201485 /* Test Render */,
 				4D5BAE79273C3614009B7F95 /* Settings */,
 				4D5BAE83273C6C81009B7F95 /* Extensions */,
@@ -570,12 +604,15 @@
 			files = (
 				4D5C798F274C290E00033307 /* UIViewController+Extension.swift in Sources */,
 				4DADE24627396E0700E7E766 /* AppDelegate.swift in Sources */,
+				1541C30A29F1CFDE007E8852 /* ThirdPartyDemandViewController.swift in Sources */,
 				4D8AF6DF274D2776002A3783 /* DemoAdCell.swift in Sources */,
 				4DADE24827396E0700E7E766 /* SceneDelegate.swift in Sources */,
+				1541C30E29F1D369007E8852 /* ThirdPartyDemandAdType.swift in Sources */,
 				15014D00286C7DA4009DB195 /* AdManagerSpecificAdViewController.swift in Sources */,
 				20BE3FB429E47B6200E1A662 /* APSAds.swift in Sources */,
 				4D5C798B274C184000033307 /* TestRenderViewController.swift in Sources */,
 				4D8A3FAB2742CAC700201485 /* UITableView+Extension.swift in Sources */,
+				1541C30629F1CFB4007E8852 /* VungleAdType.swift in Sources */,
 				4DADE25A273993D600E7E766 /* MainViewController.swift in Sources */,
 				15014D01286C7DA4009DB195 /* AdManagerSpecificAdNimbusCell.swift in Sources */,
 				4DB9A148273AE95A0005D1D0 /* DemoCell.swift in Sources */,
@@ -585,9 +622,11 @@
 				4D901D83273DC28500037C54 /* AdViewController.swift in Sources */,
 				4D5BAE7F273C5E9F009B7F95 /* DemoHeader.swift in Sources */,
 				15014CFE286C7DA4009DB195 /* AdManagerSpecificAdTextCell.swift in Sources */,
+				1541C30729F1CFB4007E8852 /* VungleAdManagerViewController.swift in Sources */,
 				4D5BAE7B273C362B009B7F95 /* SettingsViewController.swift in Sources */,
 				4DB9A14A273AF8040005D1D0 /* DemoNavigationController.swift in Sources */,
 				4D0AA887279F3FE100CD2F7C /* DemoRequestInterceptors.swift in Sources */,
+				1541C30C29F1D2D0007E8852 /* ThirdPartyDemandIntegrationType.swift in Sources */,
 				4D5C798D274C259A00033307 /* TestRenderAdViewController.swift in Sources */,
 				2013D50F279087F500CB5DCF /* MainItem.swift in Sources */,
 				4D901D7D273D936E00037C54 /* AdDemoViewController.swift in Sources */,
@@ -595,6 +634,7 @@
 				2013D5112790886600CB5DCF /* SettingsSection.swift in Sources */,
 				15014CFF286C7DA4009DB195 /* AdManagerSpecificAdType.swift in Sources */,
 				4DE1FE5027FF58C2002C41BC /* MediationAdType.swift in Sources */,
+				1541C30829F1CFB4007E8852 /* VungleViewController.swift in Sources */,
 				4DB9A14C273AF81A0005D1D0 /* DemoViewController.swift in Sources */,
 				4DADE25C2739BF9F00E7E766 /* UIColor+Extension.swift in Sources */,
 				4D8A3FA92742CA1100201485 /* NSObject+Extension.swift in Sources */,

@@ -8,6 +8,7 @@
 enum MainItem: String, DemoItem {
     case showAdDemo
     case mediationPlatforms
+    case thirdPartyDemand
     case testRender
     case settings
 }

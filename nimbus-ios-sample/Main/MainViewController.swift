@@ -72,6 +72,8 @@ extension MainViewController: UITableViewDelegate {
             viewController = AdDemoViewController()
         case .mediationPlatforms:
             viewController = MediationViewController()
+        case .thirdPartyDemand:
+            break
         case .testRender:
             viewController = TestRenderViewController()
         case .settings:
