@@ -970,7 +970,7 @@
 			repositoryURL = "https://github.com/timehop/nimbus-ios-sdk";
 			requirement = {
 				kind = exactVersion;
-				version = 2.5.0;
+				version = 2.7.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
