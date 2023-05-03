@@ -143,6 +143,7 @@ extension UserDefaults {
 }
 
 // CCPA Consent
+let usPrivacyStringKey = "IABUSPrivacy_String"
 extension UserDefaults {
     var ccpaConsent: Bool {
         get {
@@ -151,7 +152,11 @@ extension UserDefaults {
         }
         set {
             set(newValue, forKey: #function)
-            Nimbus.shared.usPrivacyString = newValue ? "1NYN" : nil
+            if newValue {
+                UserDefaults.standard.set("1NYN", forKey: usPrivacyStringKey)
+            } else {
+                UserDefaults.standard.removeObject(forKey: usPrivacyStringKey)
+            }
         }
     }
 }
