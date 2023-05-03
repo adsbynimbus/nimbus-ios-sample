@@ -89,7 +89,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // User
         var user = NimbusUser(age: 20, gender: .male)
-        user.configureGdprConsent(didConsent: UserDefaults.standard.gdprConsent)
         NimbusAdManager.user = user
         
         // Facebook and LiveRamp requires att permissions to run properly
