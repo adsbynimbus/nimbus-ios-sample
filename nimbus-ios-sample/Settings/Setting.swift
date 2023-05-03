@@ -131,16 +131,19 @@ extension UserDefaults {
         }
         set {
             set(newValue, forKey: #function)
-            if var user = NimbusAdManager.user {
+            if newValue, var user = NimbusAdManager.user {
                 // Same string as Android sample app
                 user.configureGdprConsent(consentString: "CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEgAA.argAC0gAAAAAAAAAAAA")
                 NimbusAdManager.user = user
+            } else {
+                NimbusAdManager.user?.extensions?.removeValue(forKey: "consent")
             }
         }
     }
 }
 
 // CCPA Consent
+let usPrivacyStringKey = "IABUSPrivacy_String"
 extension UserDefaults {
     var ccpaConsent: Bool {
         get {
@@ -149,7 +152,11 @@ extension UserDefaults {
         }
         set {
             set(newValue, forKey: #function)
-            Nimbus.shared.usPrivacyString = newValue ? "1NYN" : nil
+            if newValue {
+                UserDefaults.standard.set("1NYN", forKey: usPrivacyStringKey)
+            } else {
+                UserDefaults.standard.removeObject(forKey: usPrivacyStringKey)
+            }
         }
     }
 }
