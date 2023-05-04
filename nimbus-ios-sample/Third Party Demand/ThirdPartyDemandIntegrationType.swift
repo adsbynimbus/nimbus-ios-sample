@@ -12,7 +12,11 @@ enum ThirdPartyDemandIntegrationType: String, DemoItem {
     case vungle
     
     var description: String {
-        switch
-        rawValue.uppercased()
+        switch self {
+        case .aps, .fan:
+            return rawValue.uppercased()
+        default:
+            return rawValue.camelCaseToWords()
+        }
     }
 }

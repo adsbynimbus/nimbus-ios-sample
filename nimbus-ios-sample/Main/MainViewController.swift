@@ -8,6 +8,7 @@
 import UIKit
 
 final class MainViewController: DemoViewController {
+    
     override var headerTitle: String {
         "Integration Assist".uppercased()
     }
@@ -50,6 +51,7 @@ final class MainViewController: DemoViewController {
 }
 
 extension MainViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         dataSource.count
     }
@@ -63,6 +65,7 @@ extension MainViewController: UITableViewDataSource {
 }
 
 extension MainViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let menuItem = dataSource[indexPath.row]
         let viewController: DemoViewController
@@ -73,7 +76,7 @@ extension MainViewController: UITableViewDelegate {
         case .mediationPlatforms:
             viewController = MediationViewController()
         case .thirdPartyDemand:
-            break
+            viewController = ThirdPartyDemandViewController()
         case .testRender:
             viewController = TestRenderViewController()
         case .settings:

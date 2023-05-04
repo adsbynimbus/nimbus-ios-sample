@@ -21,8 +21,8 @@ final class GAMViewController: DemoViewController {
     
     private let adType: MediationAdType
     private let requestManager = NimbusRequestManager()
-    private var bannerView: GAMBannerView!
-    private var interstitial: GADInterstitialAd!
+    private var bannerView: GAMBannerView?
+    private var interstitial: GADInterstitialAd?
     private var gamDynamicPrice: NimbusGAMDynamicPrice?
     private lazy var gamRequest = GAMRequest()
     
@@ -46,6 +46,7 @@ final class GAMViewController: DemoViewController {
             
         case .banner:
             bannerView = GAMBannerView(adSize: GADAdSizeBanner)
+            guard let bannerView else { return }
             bannerView.rootViewController = self
             bannerView.adUnitID = ConfigManager.shared.googlePlacementId
             bannerView.delegate = self
@@ -61,6 +62,7 @@ final class GAMViewController: DemoViewController {
             
         case .dynamicPriceBanner:
             bannerView = GAMBannerView(adSize: GADAdSizeBanner)
+            guard let bannerView else { return }
             bannerView.rootViewController = self
             bannerView.adUnitID = ConfigManager.shared.googlePlacementId
             bannerView.delegate = self
@@ -88,7 +90,7 @@ final class GAMViewController: DemoViewController {
                     return
                 }
                 self.interstitial = ad
-                self.interstitial.fullScreenContentDelegate = self
+                self.interstitial?.fullScreenContentDelegate = self
                 ad?.present(fromRootViewController: self)
             }
             
@@ -178,7 +180,7 @@ extension GAMViewController: NimbusRequestManagerDelegate {
         print("didCompleteNimbusRequest")
         
         if adType == .dynamicPriceBanner {
-            bannerView.load(gamRequest)
+            bannerView?.load(gamRequest)
         } else {
             GADInterstitialAd.load(
                 withAdUnitID: ConfigManager.shared.googlePlacementId!,
@@ -189,7 +191,7 @@ extension GAMViewController: NimbusRequestManagerDelegate {
                     return
                 }
                 self.interstitial = gadAd
-                self.interstitial.fullScreenContentDelegate = self
+                self.interstitial?.fullScreenContentDelegate = self
                 
                 gadAd?.present(fromRootViewController: self)
             }

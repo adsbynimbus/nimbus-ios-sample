@@ -1,39 +1,34 @@
 //
-//  AdManagerSpecificAdViewController.swift
-//  NimbusInternalSampleApp
+//  APSViewController.swift
+//  nimbus-ios-sample
 //
-//  Created by Inder Dhir on 6/10/22.
-//  Copyright © 2022 Timehop. All rights reserved.
+//  Created by Victor Takai on 02/05/23.
 //
 
-import DTBiOSSDK
-import NimbusRequestAPSKit
-import NimbusRequestKit
-import NimbusKit
 import UIKit
+import NimbusKit
+import NimbusRequestKit
+import NimbusRequestAPSKit
+import DTBiOSSDK
 
-final class AdManagerSpecificAdViewController: UIViewController {
+final class APSViewController: DemoViewController {
     
-    let labels = ["Banner Ad below", "Static Image Ad below", "Video Ad below"]
-    private let type: AdManagerSpecificAdType
-    private lazy var adManager = NimbusAdManager()
-    private var nimbusRequestForAPS: NimbusRequest?
+    private let adType: ThirdPartyDemandAdType
+    private var adManager: NimbusAdManager?
+    private lazy var requestDispatchGroup = DispatchGroup()
     
-    private lazy var apsRequestsDispatchGroup = DispatchGroup()
     private var callbacks: [DTBCallback] = []
-    private var apsAdLoaders: [DTBAdLoader] = []
+    private var adLoaders: [DTBAdLoader] = []
     private var adSizes: [DTBAdSize]?
     
-    private let collectionView : UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        collectionView.register(AdManagerSpecificAdTextCell.self, forCellWithReuseIdentifier: "cellReuse1")
-        collectionView.register(AdManagerSpecificAdNimbusCell.self, forCellWithReuseIdentifier: "cellReuse2")
-        return collectionView
-    }()
-    
-    init(type: AdManagerSpecificAdType) {
-        self.type = type
-        super.init(nibName: nil, bundle: nil)
+    init(
+        adType: ThirdPartyDemandAdType,
+        headerTitle: String,
+        headerSubTitle: String
+    ) {
+        self.adType = adType
+        
+        super.init(headerTitle: headerTitle, headerSubTitle: headerSubTitle)
     }
     
     required init?(coder: NSCoder) {
@@ -43,34 +38,23 @@ final class AdManagerSpecificAdViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
-        
-        switch type {
-        case .refreshingBanner:
-            showRefreshingBanner()
-        case .apsRefreshingBanner:
-            showAPSAd(isRefreshingBanner: true)
-        case .apsInterstitialHybrid:
-            showAPSAd(isRefreshingBanner: false)
-        }
+        setupAdRendering()
     }
     
-    private func showRefreshingBanner() {
-        let request = NimbusRequest.forBannerAd(position: "refreshing_banner")
-        adManager.showAd(request: request, container: view, refreshInterval: 30, adPresentingViewController: self)
-    }
-    
-    private func showAPSAd(isRefreshingBanner: Bool) {
+    private func setupAdRendering() {
         DispatchQueue.global().async { [weak self] in
             guard let self else { return }
             
-            if isRefreshingBanner {
+            self.adManager = NimbusAdManager()
+            self.adManager?.delegate = self
+            
+            if self.adType == .apsRefreshingBanner {
                 self.loadAPSBannerAds()
-            } else {
+            } else if self.adType == .apsInterstitialHybrid {
                 self.loadAPSInterstitialAds()
             }
             
-            let result = self.apsRequestsDispatchGroup.wait(timeout: .now() + 0.5)
+            let result = self.requestDispatchGroup.wait(timeout: .now() + 0.5)
             switch result {
             case .success:
                 print("APS refreshing banner requests completed successfully")
@@ -79,27 +63,32 @@ final class AdManagerSpecificAdViewController: UIViewController {
             }
             
             let request: NimbusRequest
-            if isRefreshingBanner {
+            if self.adType == .apsRefreshingBanner {
                 request = NimbusRequest.forBannerAd(position: "refreshing_banner")
             } else {
                 request = NimbusRequest.forInterstitialAd(position: "interstitial_with_aps")
             }
             
             self.callbacks.compactMap { $0.response }.forEach { request.addAPSResponse($0) }
-            if isRefreshingBanner {
-                self.apsAdLoaders.forEach { request.addAPSLoader($0) }
+            
+            if self.adType == .apsRefreshingBanner {
+                self.adLoaders.forEach { request.addAPSLoader($0) }
             }
-
+            
             DispatchQueue.main.async {
-                if isRefreshingBanner {
-                    self.adManager.showAd(
+                if self.adType == .apsRefreshingBanner {
+                    self.adManager?.showAd(
                         request: request,
                         container: self.view,
                         refreshInterval: 30,
                         adPresentingViewController: self
                     )
                 } else {
-                    self.adManager.showAd(request: request, container: self.view, adPresentingViewController: self)
+                    self.adManager?.showAd(
+                        request: request,
+                        container: self.view,
+                        adPresentingViewController: self
+                    )
                 }
             }
         }
@@ -109,13 +98,13 @@ final class AdManagerSpecificAdViewController: UIViewController {
         apsBannerSizes.forEach { [weak self] size in
             guard let self else { return }
             
-            self.apsRequestsDispatchGroup.enter()
+            self.requestDispatchGroup.enter()
             
             let adLoader = DTBAdLoader()
             adLoader.setAdSizes([size as Any])
-            self.apsAdLoaders.append(adLoader)
+            self.adLoaders.append(adLoader)
             
-            let callback = DTBCallback(requestsDispatchGroup: self.apsRequestsDispatchGroup)
+            let callback = DTBCallback(requestsDispatchGroup: self.requestDispatchGroup)
             self.callbacks.append(callback)
             adLoader.loadAd(callback)
         }
@@ -125,16 +114,38 @@ final class AdManagerSpecificAdViewController: UIViewController {
         apsInterstitialSizes.forEach { [weak self] size in
             guard let self else { return }
             
-            self.apsRequestsDispatchGroup.enter()
-
+            self.requestDispatchGroup.enter()
+            
             let adLoader = DTBAdLoader()
             adLoader.setAdSizes([size as Any])
-            self.apsAdLoaders.append(adLoader)
+            self.adLoaders.append(adLoader)
             
-            let callback = DTBCallback(requestsDispatchGroup: self.apsRequestsDispatchGroup)
+            let callback = DTBCallback(requestsDispatchGroup: self.requestDispatchGroup)
             self.callbacks.append(callback)
             adLoader.loadAd(callback)
         }
+    }
+}
+
+// MARK: NimbusAdManagerDelegate
+
+extension APSViewController: NimbusAdManagerDelegate {
+    
+    func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
+        print("didRenderAd")
+    }
+}
+
+// MARK: NimbusRequestManagerDelegate
+
+extension APSViewController: NimbusRequestManagerDelegate {
+    
+    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
+        print("didCompleteNimbusRequest")
+    }
+    
+    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
+        print("didFailNimbusRequest: \(error.localizedDescription)")
     }
 }
 
@@ -149,17 +160,17 @@ final class DTBCallback: DTBAdCallback {
     init(requestsDispatchGroup: DispatchGroup) {
         self.requestsDispatchGroup = requestsDispatchGroup
     }
-
+    
     /// :nodoc:
     public func onFailure(_ error: DTBAdError) {
         print("onFailure \(error))")
         
         requestsDispatchGroup.leave()
     }
-
+    
     /// :nodoc:
     public func onSuccess(_ adResponse: DTBAdResponse!) {
-        print("onSuccess \(response))")
+        print("onSuccess \(adResponse!))")
         
         response = adResponse
         requestsDispatchGroup.leave()

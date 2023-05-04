@@ -77,4 +77,11 @@ final class DemoHeader: UITableViewHeaderFooterView {
         label.text = type.description
         label.accessibilityIdentifier = type.getIdentifier(prefix: "mediationPlatforms", .headerLabel)
     }
+    
+    func updateWithThirdPartyIntegrationType(_ type: ThirdPartyDemandIntegrationType) {
+        let identifier = "thirdPartyDemandIntegration\(type.rawValue.camelCaseToWords())"
+        accessibilityIdentifier = type.getIdentifier(prefix: identifier, .header)
+        label.text = type.description
+        label.accessibilityIdentifier = type.getIdentifier(prefix: identifier, .headerLabel)
+    }
 }

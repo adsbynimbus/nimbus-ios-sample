@@ -19,12 +19,17 @@ import NimbusRequestFANKit
 import NimbusFANKit
 #endif
 
+#if canImport(NimbusVungleKit)
+import NimbusVungleKit
+#endif
+
 #if canImport(NimbusUnityKit)
 import NimbusUnityKit
 #endif
 
 final class DemoRequestInterceptors {
     private(set) var fan: NimbusFANRequestInterceptor?
+    private(set) var vungle: NimbusVungleRequestInterceptor?
     private(set) var unity: NimbusUnityRequestInterceptor?
 
     static var shared = DemoRequestInterceptors()
@@ -35,6 +40,10 @@ final class DemoRequestInterceptors {
            !facebookAppId.isEmpty {
             fan = NimbusFANRequestInterceptor(appId: facebookAppId)
             fan?.forceTestAd = true
+        }
+        
+        if let vungleAppId = ConfigManager.shared.vungleAppId, !vungleAppId.isEmpty {
+            vungle = NimbusVungleRequestInterceptor(appId: vungleAppId, isLoggingEnabled: true)
         }
         
         if let unityGameId =

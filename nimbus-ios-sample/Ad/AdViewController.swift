@@ -21,7 +21,7 @@ final class AdViewController: DemoViewController {
     private let creativeScalingEnabledForStaticAds: Bool
     private let isMaxSize: Bool
     private let shouldInjectIFrameScript: Bool
-    private var adContainerView: CustomAdContainerView!
+    private var adContainerView: CustomAdContainerView?
 
     init(
         ad: NimbusAd,
@@ -73,11 +73,12 @@ final class AdViewController: DemoViewController {
         // If ad is interstitial, this controller will be the one presenting it,
         // so destroying the adView is required otherwise
         if !ad.isInterstitial {
-            adContainerView.destroy()
+            adContainerView?.destroy()
         }
     }
     
     private func setupAdView() {
+        guard let adContainerView else { return }
         view.addSubview(adContainerView)
         
         adContainerView.accessibilityIdentifier = adViewIdentifier
@@ -109,7 +110,7 @@ final class AdViewController: DemoViewController {
     }
     
     private func injectIFrameScript() {
-        if let nimbusAdView = adContainerView.subviews.first as? NimbusAdView,
+        if let nimbusAdView = adContainerView?.subviews.first as? NimbusAdView,
             let webView = nimbusAdView.subviews.first as? WKWebView {
             let path = Bundle.main.path(forResource: "mraid_iframe", ofType: "js")!
             let jsString = (try? String(contentsOfFile: path, encoding: .utf8)) ?? ""

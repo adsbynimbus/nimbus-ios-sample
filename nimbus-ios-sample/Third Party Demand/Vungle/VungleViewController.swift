@@ -1,150 +1,202 @@
 //
 //  VungleViewController.swift
-//  NimbusInternalSampleApp
+//  nimbus-ios-sample
 //
-//  Created by Bruno Bruggemann on 11/25/22.
+//  Created by Bruno Bruggemann on 10/25/22.
 //  Copyright © 2022 Timehop. All rights reserved.
 //
 
 import UIKit
 import NimbusKit
+import AdSupport
 
-#if canImport(NimbusSDK)
-import NimbusSDK
-#endif
-
-#if canImport(NimbusRequestAPSKit)
-import NimbusRequestAPSKit
-#endif
-
-#if canImport(NimbusRequestFANKit)
-import NimbusRequestFANKit
+#if canImport(NimbusLiveRampKit)
+import NimbusLiveRampKit
 #endif
 
 #if canImport(NimbusVungleKit)
 import NimbusVungleKit
 #endif
 
-#if canImport(NimbusUnityKit)
-import NimbusUnityKit
-#endif
-
-
 class VungleViewController: DemoViewController {
-
+    
+    private let contentView = UIView()
+    
+    private let adType: ThirdPartyDemandAdType
     private var adManager: NimbusAdManager?
-    private var vungle: NimbusVungleRequestInterceptor?
-
-    override var headerTitle: String {
-        "Vungle Test Ads"
-    }
-
-    override var headerSubTitle: String {
-        "Select to open a Vungle Ad"
-    }
-
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.sectionHeaderTopPadding = 0
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 75
-        tableView.separatorInset = .zero
-        tableView.registerCell(DemoCell.self)
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.accessibilityIdentifier = "vungleTableView"
-        return tableView
-    }()
-
-    private var vungleDataSource: [VungleAdType] {
-        [
-            VungleAdType.vungleBanner,
-            VungleAdType.vungleMREC,
-            VungleAdType.vungleInterstitial,
-            VungleAdType.vungleRewarded
-        ]
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let vungleAppId = ConfigManager.shared.vungleAppId
-        if !vungleAppId.isEmpty {
-            vungle = NimbusVungleRequestInterceptor(appId: vungleAppId, isLoggingEnabled: true)
-        }
-
-        setupScrollView(tableView)
+    private var adController: AdController?
+    
+    init(adType: ThirdPartyDemandAdType, headerTitle: String, headerSubTitle: String) {
+        self.adType = adType
+        
+        super.init(headerTitle: headerTitle, headerSubTitle: headerSubTitle)
     }
     
-    deinit {
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupContentView()
+        setupRequestInterceptor()
+        setupAdRendering()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Remove vungle demand provider. It MUST not remove LiveRampInterceptor
         NimbusAdManager.requestInterceptors?.removeAll(where: {
             $0 is NimbusVungleRequestInterceptor
         })
     }
-}
-
-extension VungleViewController: UITableViewDataSource {
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        vungleDataSource.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: DemoCell = tableView.dequeueReusableCell(for: indexPath)
-        cell.updateWithVungleAdType(vungleDataSource[indexPath.row])
-        return cell
-    }
-}
-
-extension VungleViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let adType = vungleDataSource[indexPath.row]
-        if adType == .vungleBanner
-            && ConfigManager.shared.vungleBannerPlacementId.isEmpty {
-            showCustomAlert("vungle_banner_placement_id")
-        } else if adType == .vungleMREC
-                    && ConfigManager.shared.vungleMRECPlacementId.isEmpty {
-            showCustomAlert("vungle_mrec_placement_id")
-        } else if adType == .vungleInterstitial
-                    && ConfigManager.shared.vungleInterstitialPlacementId.isEmpty {
-            showCustomAlert("vungle_interstitial_placement_id")
-        } else if adType == .vungleRewarded
-                    && ConfigManager.shared.vungleRewardedPlacementId.isEmpty {
-            showCustomAlert("vungle_rewarded_placement_id")
-        } else {
-            // Remove other demand providers. It MUST not remove LiveRampInterceptor
-            NimbusAdManager.requestInterceptors?.removeAll(where: {
-                $0 is NimbusAPSRequestInterceptor ||
-                $0 is NimbusUnityRequestInterceptor ||
-                $0 is NimbusFANRequestInterceptor
-            })
-            if let vungle = self.vungle,
-               !(NimbusAdManager.requestInterceptors?.contains(where: { $0 is NimbusVungleRequestInterceptor }) ?? false) {
-                NimbusAdManager.requestInterceptors?.append(vungle)
-            }
-            
-            let vungleViewController = VungleAdManagerViewController(
-                adType: adType,
-                headerTitle: adType.description,
-                headerSubTitle: headerTitle
-            )
-            navigationController?.pushViewController(vungleViewController, animated: true)
+    private func setupContentView() {
+        view.addSubview(contentView)
+        
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            contentView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
+            contentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            contentView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        ])
+    }
+    
+    private func setupRequestInterceptor() {
+        // Remove other demand providers. It MUST not remove LiveRampInterceptor
+        NimbusAdManager.requestInterceptors?.removeAll(where: {
+            !($0 is NimbusLiveRampInterceptor)
+        })
+        
+        if let vungle = DemoRequestInterceptors.shared.vungle {
+            NimbusAdManager.requestInterceptors?.append(vungle)
         }
     }
+    
+    private func setupAdRendering() {
+        guard let request = createNimbusRequest(adType: adType) else {
+            return
+        }
+        
+        adManager = NimbusAdManager()
+        adManager?.delegate = self
+        
+        switch adType {
+            
+        case .vungleBanner:
+            adManager?.showAd(
+                request: request,
+                container: contentView,
+                adPresentingViewController: self
+            )
+        case .vungleMREC:
+            adManager?.showAd(
+                request: request,
+                container: contentView,
+                adPresentingViewController: self
+            )
+        case .vungleInterstitial:
+            adManager?.showBlockingAd(
+                request: request,
+                closeButtonDelay: 0,
+                adPresentingViewController: self
+            )
+        case .vungleRewarded:
+            request.impressions[0].banner = nil
+            adManager?.showRewardedAd(
+                request: request,
+                adPresentingViewController: self
+            )
+            
+        default:
+            break
+        }
+    }
+    
+    private func createNimbusRequest(adType: ThirdPartyDemandAdType) -> NimbusRequest? {
+        switch adType {
+            
+        case .vungleBanner:
+            let request = NimbusRequest.forBannerAd(
+                position: ConfigManager.shared.vungleBannerPlacementId!,
+                format: .banner320x50
+            )
+            request.impressions[0].banner?.position = NimbusPosition.unknown
+            return request
+            
+        case .vungleMREC:
+            return NimbusRequest.forBannerAd(
+                position: ConfigManager.shared.vungleMRECPlacementId!,
+                format: .letterbox
+            )
+            
+        case .vungleInterstitial:
+            return NimbusRequest.forInterstitialAd(
+                position: ConfigManager.shared.vungleInterstitialPlacementId!
+            )
+            
+        case .vungleRewarded:
+            return customNimbusRequestForRewardedVideo(
+                position: ConfigManager.shared.vungleRewardedPlacementId!
+            )
+            
+        default:
+            return nil
+        }
+    }
+    
+    // Used to force the backend to return a Rewarded Ad.
+    private func customNimbusRequestForRewardedVideo(position: String) -> NimbusRequest {
+        let request = NimbusRequest.forRewardedVideo(position: position)
+        
+        let adFormat = NimbusAdFormat.halfScreen
+        request.format = adFormat
+        
+        let banner = NimbusBanner(
+            width: adFormat.width,
+            height: adFormat.height,
+            companionAdRenderMode: .endCard
+        )
+        request.impressions[0].video?.companionAds = [banner]
+        
+        return request
+    }
 }
+
+// MARK: NimbusAdManagerDelegate
 
 extension VungleViewController: NimbusAdManagerDelegate {
-
-    func didRenderAd(request: NimbusRequestKit.NimbusRequest, ad: NimbusCoreKit.NimbusAd, controller: NimbusCoreKit.AdController) {
+    func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
         print("didRenderAd")
-    }
-
-    func didCompleteNimbusRequest(request: NimbusRequestKit.NimbusRequest, ad: NimbusCoreKit.NimbusAd) {
-        print("didCompleteNimbusRequest")
-    }
-
-    func didFailNimbusRequest(request: NimbusRequestKit.NimbusRequest, error: NimbusCoreKit.NimbusError) {
-        print("didFailNimbusRequest")
+        
+        adController = controller
+        adController?.delegate = self
     }
 }
 
+// MARK: NimbusRequestManagerDelegate
+
+extension VungleViewController: NimbusRequestManagerDelegate {
+    
+    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
+        print("didCompleteNimbusRequest")
+    }
+    
+    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
+        print("didFailNimbusRequest: \(error.localizedDescription)")
+    }
+}
+
+extension VungleViewController: AdControllerDelegate {
+    
+    func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {
+        print("Nimbus didReceiveNimbusEvent: \(event)")
+    }
+    
+    func didReceiveNimbusError(controller: AdController, error: NimbusError) {
+        print("Nimbus didReceiveNimbusError: \(error)")
+    }
+}

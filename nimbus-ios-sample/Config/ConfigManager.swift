@@ -23,6 +23,12 @@ public final class ConfigManager {
     
     public let unityGameId: String?
     
+    public let vungleAppId: String?
+    public let vungleBannerPlacementId: String?
+    public let vungleMRECPlacementId: String?
+    public let vungleInterstitialPlacementId: String?
+    public let vungleRewardedPlacementId: String?
+    
     public let liveRampConfigId: String?
     
     private struct InternalConfig: Decodable {
@@ -38,6 +44,12 @@ public final class ConfigManager {
         let googlePlacementId: String?
         
         let unityGameId: String?
+        
+        let vungleAppId: String?
+        let vungleBannerPlacementId: String?
+        let vungleMRECPlacementId: String?
+        let vungleInterstitialPlacementId: String?
+        let vungleRewardedPlacementId: String?
         
         let liveRampConfigId: String?
         
@@ -55,6 +67,12 @@ public final class ConfigManager {
             case googlePlacementId = "google_placement_id"
             
             case unityGameId = "unity_game_id"
+            
+            case vungleAppId = "vungle_app_id"
+            case vungleBannerPlacementId = "vungle_banner_placement_id"
+            case vungleMRECPlacementId = "vungle_mrec_placement_id"
+            case vungleInterstitialPlacementId = "vungle_interstitial_placement_id"
+            case vungleRewardedPlacementId = "vungle_rewarded_placement_id"
             
             case liveRampConfigId = "live_ramp_config_id"
         }
@@ -77,6 +95,12 @@ public final class ConfigManager {
         googlePlacementId = config.googlePlacementId
         
         unityGameId = config.unityGameId
+        
+        vungleAppId = config.vungleAppId
+        vungleBannerPlacementId = config.vungleBannerPlacementId
+        vungleMRECPlacementId = config.vungleMRECPlacementId
+        vungleInterstitialPlacementId = config.vungleInterstitialPlacementId
+        vungleRewardedPlacementId = config.vungleRewardedPlacementId
         
         liveRampConfigId = config.liveRampConfigId
     }
