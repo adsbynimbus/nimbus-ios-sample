@@ -8,7 +8,7 @@
 import Foundation
 
 enum IdentifierType {
-    case cell, cellLabel, cellSwitch, header, headerLabel
+    case cell, cellLabel, cellSwitch, header, headerLabel, adView
 }
 
 protocol Identifier {
@@ -35,6 +35,8 @@ extension RawRepresentable where RawValue == String, Self: DemoItem {
             identifier += "Header"
         case .headerLabel:
             identifier += "HeaderLabel"
+        case .adView:
+            identifier += "AdView"
         }
         return identifier
     }
