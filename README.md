@@ -14,12 +14,16 @@ Welcome to Nimbus Sample App - ads by publishers, for publishers.
 - Select the `nimbus-ios-sample` target
 - Run the app
 
+#####  If you had CocoaPods installed previously, running `pod deintegrate` will prevent any possible conflicts.
+
 ### CocoaPods (requires CocoaPods >= 1.10.0): nimbus-ios-sample-pods 
 
 - From the project root run `pod install --repo-update`
 - Open the newly created `nimbus-ios-sample.xcworkspace`
 - Select the `nimbus-ios-sample-pods` target
 - Run the app
+
+#####  If you run into `ambiguous for type lookup` errors, remove all package dependencies from `nimbus-ios-sample` project.
 
 ## Build Configuration: [Config/secrets.json](nimbus-ios-sample/Config/secrets.json)
 

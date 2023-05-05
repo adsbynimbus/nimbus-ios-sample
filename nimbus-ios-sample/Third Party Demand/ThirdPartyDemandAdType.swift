@@ -24,8 +24,8 @@ enum ThirdPartyDemandAdType: String, DemoItem {
         }
     }
     
-    public static var apsAdType = [apsRefreshingBanner, apsInterstitialHybrid]
-    public static var fanAdType = [facebookBanner, facebookInterstitial, facebookNative]
-    public static var unityAdType = [unityRewardedVideo]
-    public static var vungleAdType = [vungleBanner, vungleMREC, vungleInterstitial, vungleRewarded]
+    public static var apsAdTypes = [apsRefreshingBanner, apsInterstitialHybrid]
+    public static var fanAdTypes = [facebookBanner, facebookInterstitial, facebookNative]
+    public static var unityAdTypes = [unityRewardedVideo]
+    public static var vungleAdTypes = [vungleBanner, vungleMREC, vungleInterstitial, vungleRewarded]
 }

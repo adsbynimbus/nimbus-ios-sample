@@ -56,10 +56,10 @@ final class ThirdPartyDemandViewController: DemoViewController {
     
     private var dataSource: [DemoDataSource<ThirdPartyDemandIntegrationType, ThirdPartyDemandAdType>] {
         [
-            DemoDataSource(type: .unity, values: ThirdPartyDemandAdType.unityAdType),
-            DemoDataSource(type: .aps, values: ThirdPartyDemandAdType.apsAdType),
-            DemoDataSource(type: .fan, values: ThirdPartyDemandAdType.fanAdType),
-            DemoDataSource(type: .vungle, values: ThirdPartyDemandAdType.vungleAdType)
+            DemoDataSource(type: .unity, values: ThirdPartyDemandAdType.unityAdTypes),
+            DemoDataSource(type: .aps, values: ThirdPartyDemandAdType.apsAdTypes),
+            DemoDataSource(type: .fan, values: ThirdPartyDemandAdType.fanAdTypes),
+            DemoDataSource(type: .vungle, values: ThirdPartyDemandAdType.vungleAdTypes)
         ]
     }
     
@@ -172,7 +172,7 @@ extension ThirdPartyDemandViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: DemoCell = tableView.dequeueReusableCell(for: indexPath)
         let adType = dataSource[indexPath.section].values[indexPath.row]
-        cell.updateWithThirdPartyDemanAdType(adType)
+        cell.updateWithThirdPartyDemandAdType(adType)
         return cell
     }
 }

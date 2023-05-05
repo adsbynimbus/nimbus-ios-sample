@@ -58,7 +58,7 @@ class DemoCell: UITableViewCell {
         label.accessibilityIdentifier = adType.getIdentifier(prefix: "mediationPlatforms", .cellLabel)
     }
     
-    func updateWithThirdPartyDemanAdType(_ adType: ThirdPartyDemandAdType) {
+    func updateWithThirdPartyDemandAdType(_ adType: ThirdPartyDemandAdType) {
         accessibilityIdentifier = adType.getIdentifier(prefix: "thirdPartyDemand", .cell)
         label.text = adType.description
         label.accessibilityIdentifier = adType.getIdentifier(prefix: "thirdPartyDemand", .cellLabel)
