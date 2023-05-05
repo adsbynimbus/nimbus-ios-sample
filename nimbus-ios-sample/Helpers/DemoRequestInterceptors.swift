@@ -6,6 +6,7 @@
 //
 
 import UnityAds
+import NimbusKit
 
 #if canImport(NimbusSDK)
 import NimbusSDK
