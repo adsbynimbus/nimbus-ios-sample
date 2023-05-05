@@ -35,15 +35,6 @@ final class FANViewController: DemoViewController {
        
         ad = createNimbusAd(adType: adType)
         dimensions = ad?.adDimensions
-        
-        guard let ad else { return }
-        adContainerView = CustomAdContainerView(
-            ad: ad,
-            companionAd: nil,
-            viewController: self,
-            creativeScalingEnabledForStaticAds: true,
-            delegate: self
-        )
     }
     
     required init?(coder: NSCoder) {
@@ -85,7 +76,18 @@ final class FANViewController: DemoViewController {
     }
     
     private func setupAdView() {
+        guard let ad else { return }
+        
+        adContainerView = CustomAdContainerView(
+            ad: ad,
+            companionAd: nil,
+            viewController: self,
+            creativeScalingEnabledForStaticAds: true,
+            delegate: self
+        )
+        
         guard let adContainerView else { return }
+        
         view.addSubview(adContainerView)
         
         adContainerView.translatesAutoresizingMaskIntoConstraints = false
