@@ -14,22 +14,6 @@ import GoogleInteractiveMediaAds
 import NimbusSDK
 #endif
 
-#if canImport(NimbusRequestFANKit)
-import NimbusRequestFANKit
-#endif
-
-#if canImport(NimbusFANKit)
-import NimbusFANKit
-#endif
-
-#if canImport(NimbusUnityKit)
-import NimbusUnityKit
-#endif
-
-#if canImport(NimbusRequestAPSKit)
-import NimbusRequestAPSKit
-#endif
-
 #if canImport(NimbusRenderStaticKit)
 import NimbusRenderStaticKit
 #endif
@@ -40,7 +24,7 @@ final class AdManagerViewController: DemoViewController {
     
     private let adType: AdManagerAdType
     private let shouldShowVideoUI: Bool
-    private var adManager: NimbusAdManager!
+    private var adManager: NimbusAdManager?
     private var customAdContainerView: CustomAdContainerView?
     private var adController: AdController?
     private var manualRequest: NimbusRequest?
@@ -92,16 +76,6 @@ final class AdManagerViewController: DemoViewController {
         adController?.destroy()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        // Remove other demand providers. It MUST not remove LiveRampInterceptor
-        NimbusAdManager.requestInterceptors?.removeAll(where: {
-            $0 is NimbusFANRequestInterceptor ||
-            $0 is NimbusUnityRequestInterceptor
-        })
-    }
-    
     private func setupContentView() {
         view.addSubview(contentView)
         
@@ -130,11 +104,22 @@ final class AdManagerViewController: DemoViewController {
             let request = NimbusRequest.forBannerAd(position: "test_banner")
 
             adManager = NimbusAdManager()
-            adManager.delegate = self
-            
-            adManager.showAd(
+            adManager?.delegate = self
+            adManager?.showAd(
                 request: request,
                 container: contentView,
+                adPresentingViewController: self
+            )
+        
+        case .refreshingBanner:
+            let request = NimbusRequest.forBannerAd(position: "refreshing_banner")
+            
+            adManager = NimbusAdManager()
+            adManager?.delegate = self
+            adManager?.showAd(
+                request: request,
+                container: view,
+                refreshInterval: 30,
                 adPresentingViewController: self
             )
             
@@ -143,8 +128,8 @@ final class AdManagerViewController: DemoViewController {
             request.impressions[0].banner = nil
             
             adManager = NimbusAdManager()
-            adManager.delegate = self
-            adManager.showAd(
+            adManager?.delegate = self
+            adManager?.showAd(
                 request: request,
                 container: view,
                 adPresentingViewController: self
@@ -159,8 +144,8 @@ final class AdManagerViewController: DemoViewController {
             }
 
             adManager = NimbusAdManager()
-            adManager.delegate = self
-            adManager.showBlockingAd(
+            adManager?.delegate = self
+            adManager?.showBlockingAd(
                 request: request,
                 closeButtonDelay: 0,
                 adPresentingViewController: self
@@ -171,32 +156,14 @@ final class AdManagerViewController: DemoViewController {
             request.impressions[0].video = nil
             
             adManager = NimbusAdManager()
-            adManager.delegate = self
-            adManager.showRewardedAd(request: request, adPresentingViewController: self)
+            adManager?.delegate = self
+            adManager?.showRewardedAd(request: request, adPresentingViewController: self)
                         
         case .rewardedVideo:
             adManager = NimbusAdManager()
-            adManager.delegate = self
-            adManager.showRewardedAd(
+            adManager?.delegate = self
+            adManager?.showRewardedAd(
                 request: NimbusRequest.forVideoAd(position: "test_rewarded_video"),
-                adPresentingViewController: self
-            )
-        
-        case .rewardedVideoUnity:
-            // Remove other demand providers. It MUST not remove LiveRampInterceptor
-            NimbusAdManager.requestInterceptors?.removeAll(where: {
-                $0 is NimbusFANRequestInterceptor ||
-                $0 is NimbusAPSRequestInterceptor
-            })
-            
-            if let unity = DemoRequestInterceptors.shared.unity {
-                NimbusAdManager.requestInterceptors?.append(unity)
-            }
-            
-            adManager = NimbusAdManager()
-            adManager.delegate = self
-            adManager.showRewardedAd(
-                request: NimbusRequest.forVideoAd(position: "Rewarded_iOS"),
                 adPresentingViewController: self
             )
         }

@@ -52,22 +52,16 @@ class DemoCell: UITableViewCell {
         label.accessibilityIdentifier = adType.getIdentifier(prefix: "adDemo", .cellLabel)
     }
     
-    func updateWithSpecificAdManagerAdType(_ adType: AdManagerSpecificAdType) {
-        accessibilityIdentifier = adType.getIdentifier(prefix: "adDemo", .cell)
-        label.text = adType.description
-        label.accessibilityIdentifier = adType.getIdentifier(prefix: "adDemo", .cellLabel)
-    }
-    
-    func updateWithFacebookAdType(_ adType: FacebookAdType) {
-        accessibilityIdentifier = adType.getIdentifier(prefix: "adDemo", .cell)
-        label.text = adType.description
-        label.accessibilityIdentifier = adType.getIdentifier(prefix: "adDemo", .cellLabel)
-    }
-    
     func updateWithMediationAdType(_ adType: MediationAdType) {
         accessibilityIdentifier = adType.getIdentifier(prefix: "mediationPlatforms", .cell)
         label.text = adType.description
         label.accessibilityIdentifier = adType.getIdentifier(prefix: "mediationPlatforms", .cellLabel)
+    }
+    
+    func updateWithThirdPartyDemandAdType(_ adType: ThirdPartyDemandAdType) {
+        accessibilityIdentifier = adType.getIdentifier(prefix: "thirdPartyDemand", .cell)
+        label.text = adType.description
+        label.accessibilityIdentifier = adType.getIdentifier(prefix: "thirdPartyDemand", .cellLabel)
     }
         
     private func setupAccessoryType() {

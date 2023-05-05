@@ -7,16 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		15014CFE286C7DA4009DB195 /* AdManagerSpecificAdTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15014CFA286C7DA4009DB195 /* AdManagerSpecificAdTextCell.swift */; };
-		15014CFF286C7DA4009DB195 /* AdManagerSpecificAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15014CFB286C7DA4009DB195 /* AdManagerSpecificAdType.swift */; };
-		15014D00286C7DA4009DB195 /* AdManagerSpecificAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15014CFC286C7DA4009DB195 /* AdManagerSpecificAdViewController.swift */; };
-		15014D01286C7DA4009DB195 /* AdManagerSpecificAdNimbusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15014CFD286C7DA4009DB195 /* AdManagerSpecificAdNimbusCell.swift */; };
 		150B4B5828D3E6F7002F233D /* CustomAdContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150B4B5728D3E6F7002F233D /* CustomAdContainerView.swift */; };
+		1541C30729F1CFB4007E8852 /* VungleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1541C30429F1CFB4007E8852 /* VungleViewController.swift */; };
+		1541C30A29F1CFDE007E8852 /* ThirdPartyDemandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1541C30929F1CFDE007E8852 /* ThirdPartyDemandViewController.swift */; };
+		1541C30C29F1D2D0007E8852 /* ThirdPartyDemandIntegrationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1541C30B29F1D2D0007E8852 /* ThirdPartyDemandIntegrationType.swift */; };
+		1541C30E29F1D369007E8852 /* ThirdPartyDemandAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1541C30D29F1D369007E8852 /* ThirdPartyDemandAdType.swift */; };
 		2013D50F279087F500CB5DCF /* MainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2013D50E279087F500CB5DCF /* MainItem.swift */; };
 		2013D5112790886600CB5DCF /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2013D5102790886600CB5DCF /* SettingsSection.swift */; };
 		20BE3FB329E47A9C00E1A662 /* NimbusFANKit in Frameworks */ = {isa = PBXBuildFile; productRef = 962B1C06299E917B001BF3B7 /* NimbusFANKit */; };
 		20BE3FB429E47B6200E1A662 /* APSAds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2052050629CD4D5E004D7024 /* APSAds.swift */; };
-		20BE3FB529E47B6200E1A662 /* APSAds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2052050629CD4D5E004D7024 /* APSAds.swift */; };
 		20BE3FBB29E47D8500E1A662 /* NimbusGAMKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FBA29E47D8500E1A662 /* NimbusGAMKit */; };
 		20BE3FBD29E47D8500E1A662 /* NimbusKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FBC29E47D8500E1A662 /* NimbusKit */; };
 		20BE3FBF29E47D8500E1A662 /* NimbusLiveRampKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FBE29E47D8500E1A662 /* NimbusLiveRampKit */; };
@@ -26,10 +25,18 @@
 		20BE3FC729E47D8500E1A662 /* NimbusRequestAPSKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FC629E47D8500E1A662 /* NimbusRequestAPSKit */; };
 		20BE3FC929E47D8500E1A662 /* NimbusRequestKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FC829E47D8500E1A662 /* NimbusRequestKit */; };
 		20BE3FCB29E47D8500E1A662 /* NimbusUnityKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FCA29E47D8500E1A662 /* NimbusUnityKit */; };
+		4D07F6672A041F7000E2B094 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5BAE80273C6A16009B7F95 /* Setting.swift */; };
+		4D07F66E2A043B2500E2B094 /* ThirdPartyDemandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1541C30929F1CFDE007E8852 /* ThirdPartyDemandViewController.swift */; };
+		4D07F66F2A043B2800E2B094 /* ThirdPartyDemandIntegrationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1541C30B29F1D2D0007E8852 /* ThirdPartyDemandIntegrationType.swift */; };
+		4D07F6702A043B2B00E2B094 /* ThirdPartyDemandAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1541C30D29F1D369007E8852 /* ThirdPartyDemandAdType.swift */; };
+		4D07F6712A043B2E00E2B094 /* APSAds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2052050629CD4D5E004D7024 /* APSAds.swift */; };
+		4D07F6722A043B3100E2B094 /* APSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEA6B102A016F7F003E6A20 /* APSViewController.swift */; };
+		4D07F6732A043B3400E2B094 /* FANViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC70F7A2A002CEF0037E424 /* FANViewController.swift */; };
+		4D07F6742A043B4500E2B094 /* UnityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEA6B122A016F8F003E6A20 /* UnityViewController.swift */; };
+		4D07F6752A043B4800E2B094 /* VungleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1541C30429F1CFB4007E8852 /* VungleViewController.swift */; };
 		4D082DF029CCA1100083DF6F /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 4D082DEF29CCA1100083DF6F /* GoogleMobileAds */; };
 		4D0AA887279F3FE100CD2F7C /* DemoRequestInterceptors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0AA886279F3FE100CD2F7C /* DemoRequestInterceptors.swift */; };
 		4D563C412746FD3B00294A7B /* AdManagerAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D563C402746FD3B00294A7B /* AdManagerAdType.swift */; };
-		4D563C432746FD4F00294A7B /* FacebookAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D563C422746FD4F00294A7B /* FacebookAdType.swift */; };
 		4D563C452746FD6300294A7B /* DemoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D563C442746FD6300294A7B /* DemoItem.swift */; };
 		4D5BAE7B273C362B009B7F95 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5BAE7A273C362B009B7F95 /* SettingsViewController.swift */; };
 		4D5BAE7D273C3CA8009B7F95 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5BAE7C273C3CA8009B7F95 /* SettingsCell.swift */; };
@@ -43,7 +50,6 @@
 		4D8A3FA92742CA1100201485 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8A3FA82742CA1100201485 /* NSObject+Extension.swift */; };
 		4D8A3FAB2742CAC700201485 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8A3FAA2742CAC700201485 /* UITableView+Extension.swift */; };
 		4D8A3FAF274306F100201485 /* DemoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8A3FAE274306F100201485 /* DemoDataSource.swift */; };
-		4D8AF6DF274D2776002A3783 /* DemoAdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8AF6DE274D2776002A3783 /* DemoAdCell.swift */; };
 		4D901D7D273D936E00037C54 /* AdDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D7C273D936E00037C54 /* AdDemoViewController.swift */; };
 		4D901D7F273D982500037C54 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D7E273D982500037C54 /* String+Extension.swift */; };
 		4D901D81273DAFD400037C54 /* AdManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D80273DAFD400037C54 /* AdManagerViewController.swift */; };
@@ -64,25 +70,24 @@
 		4DB9A14A273AF8040005D1D0 /* DemoNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A149273AF8040005D1D0 /* DemoNavigationController.swift */; };
 		4DB9A14C273AF81A0005D1D0 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A14B273AF81A0005D1D0 /* DemoViewController.swift */; };
 		4DB9A14E273B19C20005D1D0 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A14D273B19C20005D1D0 /* UILabel+Extension.swift */; };
+		4DC70F762A0003B80037E424 /* NimbusVungleKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4DC70F752A0003B80037E424 /* NimbusVungleKit */; };
+		4DC70F7B2A002CEF0037E424 /* FANViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC70F7A2A002CEF0037E424 /* FANViewController.swift */; };
 		4DE1FE4E27FF58C2002C41BC /* MediationIntegrationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE1FE4B27FF58C2002C41BC /* MediationIntegrationType.swift */; };
 		4DE1FE4F27FF58C2002C41BC /* MediationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE1FE4C27FF58C2002C41BC /* MediationViewController.swift */; };
 		4DE1FE5027FF58C2002C41BC /* MediationAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE1FE4D27FF58C2002C41BC /* MediationAdType.swift */; };
+		4DEA6B112A016F7F003E6A20 /* APSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEA6B102A016F7F003E6A20 /* APSViewController.swift */; };
+		4DEA6B132A016F8F003E6A20 /* UnityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEA6B122A016F8F003E6A20 /* UnityViewController.swift */; };
 		96C445E829414A9300DF35B2 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C798E274C290E00033307 /* UIViewController+Extension.swift */; };
 		96C445E929414A9300DF35B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE24527396E0700E7E766 /* AppDelegate.swift */; };
-		96C445EA29414A9300DF35B2 /* DemoAdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8AF6DE274D2776002A3783 /* DemoAdCell.swift */; };
 		96C445EB29414A9300DF35B2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE24727396E0700E7E766 /* SceneDelegate.swift */; };
-		96C445EC29414A9300DF35B2 /* AdManagerSpecificAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15014CFC286C7DA4009DB195 /* AdManagerSpecificAdViewController.swift */; };
 		96C445ED29414A9300DF35B2 /* TestRenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C798A274C184000033307 /* TestRenderViewController.swift */; };
 		96C445EE29414A9300DF35B2 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8A3FAA2742CAC700201485 /* UITableView+Extension.swift */; };
 		96C445EF29414A9300DF35B2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE259273993D600E7E766 /* MainViewController.swift */; };
-		96C445F029414A9300DF35B2 /* AdManagerSpecificAdNimbusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15014CFD286C7DA4009DB195 /* AdManagerSpecificAdNimbusCell.swift */; };
 		96C445F129414A9300DF35B2 /* DemoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A147273AE95A0005D1D0 /* DemoCell.swift */; };
-		96C445F229414A9300DF35B2 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5BAE80273C6A16009B7F95 /* Setting.swift */; };
 		96C445F329414A9300DF35B2 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D85273DC8CD00037C54 /* ConfigManager.swift */; };
 		96C445F429414A9300DF35B2 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A142273AE5240005D1D0 /* UIFont+Extension.swift */; };
 		96C445F529414A9300DF35B2 /* AdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D82273DC28500037C54 /* AdViewController.swift */; };
 		96C445F629414A9300DF35B2 /* DemoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5BAE7E273C5E9F009B7F95 /* DemoHeader.swift */; };
-		96C445F729414A9300DF35B2 /* AdManagerSpecificAdTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15014CFA286C7DA4009DB195 /* AdManagerSpecificAdTextCell.swift */; };
 		96C445F829414A9300DF35B2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5BAE7A273C362B009B7F95 /* SettingsViewController.swift */; };
 		96C445F929414A9300DF35B2 /* DemoNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A149273AF8040005D1D0 /* DemoNavigationController.swift */; };
 		96C445FA29414A9300DF35B2 /* DemoRequestInterceptors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0AA886279F3FE100CD2F7C /* DemoRequestInterceptors.swift */; };
@@ -91,7 +96,6 @@
 		96C445FD29414A9300DF35B2 /* AdDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D7C273D936E00037C54 /* AdDemoViewController.swift */; };
 		96C445FE29414A9300DF35B2 /* AdManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D80273DAFD400037C54 /* AdManagerViewController.swift */; };
 		96C445FF29414A9300DF35B2 /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2013D5102790886600CB5DCF /* SettingsSection.swift */; };
-		96C4460029414A9300DF35B2 /* AdManagerSpecificAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15014CFB286C7DA4009DB195 /* AdManagerSpecificAdType.swift */; };
 		96C4460129414A9300DF35B2 /* MediationAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE1FE4D27FF58C2002C41BC /* MediationAdType.swift */; };
 		96C4460229414A9300DF35B2 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A14B273AF81A0005D1D0 /* DemoViewController.swift */; };
 		96C4460329414A9300DF35B2 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE25B2739BF9F00E7E766 /* UIColor+Extension.swift */; };
@@ -102,7 +106,6 @@
 		96C4460829414A9300DF35B2 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D7E273D982500037C54 /* String+Extension.swift */; };
 		96C4460929414A9300DF35B2 /* DemoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8A3FAE274306F100201485 /* DemoDataSource.swift */; };
 		96C4460A29414A9300DF35B2 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C7990274C60BE00033307 /* UIImage+Extension.swift */; };
-		96C4460B29414A9300DF35B2 /* FacebookAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D563C422746FD4F00294A7B /* FacebookAdType.swift */; };
 		96C4460C29414A9300DF35B2 /* AdManagerAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D563C402746FD3B00294A7B /* AdManagerAdType.swift */; };
 		96C4460D29414A9300DF35B2 /* CustomAdContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150B4B5728D3E6F7002F233D /* CustomAdContainerView.swift */; };
 		96C4460E29414A9300DF35B2 /* GAMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D84B1B72743FFF300CA9CE2 /* GAMViewController.swift */; };
@@ -118,18 +121,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		15014CFA286C7DA4009DB195 /* AdManagerSpecificAdTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdManagerSpecificAdTextCell.swift; sourceTree = "<group>"; };
-		15014CFB286C7DA4009DB195 /* AdManagerSpecificAdType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdManagerSpecificAdType.swift; sourceTree = "<group>"; };
-		15014CFC286C7DA4009DB195 /* AdManagerSpecificAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdManagerSpecificAdViewController.swift; sourceTree = "<group>"; };
-		15014CFD286C7DA4009DB195 /* AdManagerSpecificAdNimbusCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdManagerSpecificAdNimbusCell.swift; sourceTree = "<group>"; };
 		150B4B5728D3E6F7002F233D /* CustomAdContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAdContainerView.swift; sourceTree = "<group>"; };
+		1541C30429F1CFB4007E8852 /* VungleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VungleViewController.swift; sourceTree = "<group>"; };
+		1541C30929F1CFDE007E8852 /* ThirdPartyDemandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdPartyDemandViewController.swift; sourceTree = "<group>"; };
+		1541C30B29F1D2D0007E8852 /* ThirdPartyDemandIntegrationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdPartyDemandIntegrationType.swift; sourceTree = "<group>"; };
+		1541C30D29F1D369007E8852 /* ThirdPartyDemandAdType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdPartyDemandAdType.swift; sourceTree = "<group>"; };
 		2013D50E279087F500CB5DCF /* MainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainItem.swift; sourceTree = "<group>"; };
 		2013D5102790886600CB5DCF /* SettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSection.swift; sourceTree = "<group>"; };
 		2052050629CD4D5E004D7024 /* APSAds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APSAds.swift; sourceTree = "<group>"; };
 		20BE3FB629E47D6400E1A662 /* DTBiOSSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = DTBiOSSDK.xcframework; path = "Pods/AmazonPublisherServicesSDK/APS_iOS_SDK-4.6.0/DTBiOSSDK.xcframework"; sourceTree = "<group>"; };
 		4D0AA886279F3FE100CD2F7C /* DemoRequestInterceptors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoRequestInterceptors.swift; sourceTree = "<group>"; };
 		4D563C402746FD3B00294A7B /* AdManagerAdType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManagerAdType.swift; sourceTree = "<group>"; };
-		4D563C422746FD4F00294A7B /* FacebookAdType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookAdType.swift; sourceTree = "<group>"; };
 		4D563C442746FD6300294A7B /* DemoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoItem.swift; sourceTree = "<group>"; };
 		4D5BAE7A273C362B009B7F95 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4D5BAE7C273C3CA8009B7F95 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
@@ -143,7 +145,6 @@
 		4D8A3FA82742CA1100201485 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 		4D8A3FAA2742CAC700201485 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		4D8A3FAE274306F100201485 /* DemoDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoDataSource.swift; sourceTree = "<group>"; };
-		4D8AF6DE274D2776002A3783 /* DemoAdCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoAdCell.swift; sourceTree = "<group>"; };
 		4D901D7C273D936E00037C54 /* AdDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdDemoViewController.swift; sourceTree = "<group>"; };
 		4D901D7E273D982500037C54 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		4D901D80273DAFD400037C54 /* AdManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManagerViewController.swift; sourceTree = "<group>"; };
@@ -166,9 +167,12 @@
 		4DB9A149273AF8040005D1D0 /* DemoNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoNavigationController.swift; sourceTree = "<group>"; };
 		4DB9A14B273AF81A0005D1D0 /* DemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
 		4DB9A14D273B19C20005D1D0 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		4DC70F7A2A002CEF0037E424 /* FANViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FANViewController.swift; sourceTree = "<group>"; };
 		4DE1FE4B27FF58C2002C41BC /* MediationIntegrationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediationIntegrationType.swift; sourceTree = "<group>"; };
 		4DE1FE4C27FF58C2002C41BC /* MediationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediationViewController.swift; sourceTree = "<group>"; };
 		4DE1FE4D27FF58C2002C41BC /* MediationAdType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediationAdType.swift; sourceTree = "<group>"; };
+		4DEA6B102A016F7F003E6A20 /* APSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APSViewController.swift; sourceTree = "<group>"; };
+		4DEA6B122A016F8F003E6A20 /* UnityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnityViewController.swift; sourceTree = "<group>"; };
 		96C4462729414A9300DF35B2 /* nimbus-ios-sample-pods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nimbus-ios-sample-pods.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D747D97B2333462611B9D24 /* Pods_nimbus_ios_sample_pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_nimbus_ios_sample_pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9D00992466C6CB9A09A4C90 /* Pods-nimbus-ios-sample-pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nimbus-ios-sample-pods.debug.xcconfig"; path = "Target Support Files/Pods-nimbus-ios-sample-pods/Pods-nimbus-ios-sample-pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -182,6 +186,7 @@
 			files = (
 				20BE3FB329E47A9C00E1A662 /* NimbusFANKit in Frameworks */,
 				20BE3FC929E47D8500E1A662 /* NimbusRequestKit in Frameworks */,
+				4DC70F762A0003B80037E424 /* NimbusVungleKit in Frameworks */,
 				20BE3FC529E47D8500E1A662 /* NimbusRenderVideoKit in Frameworks */,
 				20BE3FCB29E47D8500E1A662 /* NimbusUnityKit in Frameworks */,
 				20BE3FC729E47D8500E1A662 /* NimbusRequestAPSKit in Frameworks */,
@@ -205,6 +210,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1541C30129F1CFB4007E8852 /* Third Party Demand */ = {
+			isa = PBXGroup;
+			children = (
+				1541C30929F1CFDE007E8852 /* ThirdPartyDemandViewController.swift */,
+				1541C30B29F1D2D0007E8852 /* ThirdPartyDemandIntegrationType.swift */,
+				1541C30D29F1D369007E8852 /* ThirdPartyDemandAdType.swift */,
+				4DC70F792A00078E0037E424 /* APS */,
+				4DC70F782A0007880037E424 /* FAN */,
+				4DC70F772A0007800037E424 /* Unity */,
+				1541C30229F1CFB4007E8852 /* Vungle */,
+			);
+			path = "Third Party Demand";
+			sourceTree = "<group>";
+		};
+		1541C30229F1CFB4007E8852 /* Vungle */ = {
+			isa = PBXGroup;
+			children = (
+				1541C30429F1CFB4007E8852 /* VungleViewController.swift */,
+			);
+			path = Vungle;
+			sourceTree = "<group>";
+		};
 		4D0AA885279F3FA700CD2F7C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,7 +274,6 @@
 			children = (
 				4D563C442746FD6300294A7B /* DemoItem.swift */,
 				4DB9A147273AE95A0005D1D0 /* DemoCell.swift */,
-				4D8AF6DE274D2776002A3783 /* DemoAdCell.swift */,
 				4D5BAE7E273C5E9F009B7F95 /* DemoHeader.swift */,
 				4DB9A149273AF8040005D1D0 /* DemoNavigationController.swift */,
 				4DB9A14B273AF81A0005D1D0 /* DemoViewController.swift */,
@@ -294,13 +320,7 @@
 		4D901D79273D931C00037C54 /* Ad Manager */ = {
 			isa = PBXGroup;
 			children = (
-				2052050629CD4D5E004D7024 /* APSAds.swift */,
-				15014CFD286C7DA4009DB195 /* AdManagerSpecificAdNimbusCell.swift */,
-				15014CFA286C7DA4009DB195 /* AdManagerSpecificAdTextCell.swift */,
-				15014CFB286C7DA4009DB195 /* AdManagerSpecificAdType.swift */,
-				15014CFC286C7DA4009DB195 /* AdManagerSpecificAdViewController.swift */,
 				4D563C402746FD3B00294A7B /* AdManagerAdType.swift */,
-				4D563C422746FD4F00294A7B /* FacebookAdType.swift */,
 				4D901D7C273D936E00037C54 /* AdDemoViewController.swift */,
 				4D901D80273DAFD400037C54 /* AdManagerViewController.swift */,
 			);
@@ -344,6 +364,7 @@
 				4D5BAE78273C3584009B7F95 /* Main */,
 				4D15A0D8274802CE00D4DBCB /* Ad */,
 				4D8A3FA52742C74B00201485 /* Mediation Platforms */,
+				1541C30129F1CFB4007E8852 /* Third Party Demand */,
 				4D8A3FB027430AAE00201485 /* Test Render */,
 				4D5BAE79273C3614009B7F95 /* Settings */,
 				4D5BAE83273C6C81009B7F95 /* Extensions */,
@@ -374,6 +395,31 @@
 				4DB9A13E273AE4A70005D1D0 /* ProximaNova-Semibold.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		4DC70F772A0007800037E424 /* Unity */ = {
+			isa = PBXGroup;
+			children = (
+				4DEA6B122A016F8F003E6A20 /* UnityViewController.swift */,
+			);
+			path = Unity;
+			sourceTree = "<group>";
+		};
+		4DC70F782A0007880037E424 /* FAN */ = {
+			isa = PBXGroup;
+			children = (
+				4DC70F7A2A002CEF0037E424 /* FANViewController.swift */,
+			);
+			path = FAN;
+			sourceTree = "<group>";
+		};
+		4DC70F792A00078E0037E424 /* APS */ = {
+			isa = PBXGroup;
+			children = (
+				2052050629CD4D5E004D7024 /* APSAds.swift */,
+				4DEA6B102A016F7F003E6A20 /* APSViewController.swift */,
+			);
+			path = APS;
 			sourceTree = "<group>";
 		};
 		4DDD7A54274470760075FDAE /* GAM */ = {
@@ -430,6 +476,7 @@
 				20BE3FC629E47D8500E1A662 /* NimbusRequestAPSKit */,
 				20BE3FC829E47D8500E1A662 /* NimbusRequestKit */,
 				20BE3FCA29E47D8500E1A662 /* NimbusUnityKit */,
+				4DC70F752A0003B80037E424 /* NimbusVungleKit */,
 			);
 			productName = NimbusDemoApp;
 			productReference = 4DADE24227396E0700E7E766 /* nimbus-ios-sample.app */;
@@ -570,30 +617,32 @@
 			files = (
 				4D5C798F274C290E00033307 /* UIViewController+Extension.swift in Sources */,
 				4DADE24627396E0700E7E766 /* AppDelegate.swift in Sources */,
-				4D8AF6DF274D2776002A3783 /* DemoAdCell.swift in Sources */,
+				1541C30A29F1CFDE007E8852 /* ThirdPartyDemandViewController.swift in Sources */,
 				4DADE24827396E0700E7E766 /* SceneDelegate.swift in Sources */,
-				15014D00286C7DA4009DB195 /* AdManagerSpecificAdViewController.swift in Sources */,
+				1541C30E29F1D369007E8852 /* ThirdPartyDemandAdType.swift in Sources */,
 				20BE3FB429E47B6200E1A662 /* APSAds.swift in Sources */,
+				4DEA6B112A016F7F003E6A20 /* APSViewController.swift in Sources */,
 				4D5C798B274C184000033307 /* TestRenderViewController.swift in Sources */,
 				4D8A3FAB2742CAC700201485 /* UITableView+Extension.swift in Sources */,
 				4DADE25A273993D600E7E766 /* MainViewController.swift in Sources */,
-				15014D01286C7DA4009DB195 /* AdManagerSpecificAdNimbusCell.swift in Sources */,
 				4DB9A148273AE95A0005D1D0 /* DemoCell.swift in Sources */,
 				4D5BAE81273C6A16009B7F95 /* Setting.swift in Sources */,
 				4D901D86273DC8CD00037C54 /* ConfigManager.swift in Sources */,
 				4DB9A143273AE5240005D1D0 /* UIFont+Extension.swift in Sources */,
 				4D901D83273DC28500037C54 /* AdViewController.swift in Sources */,
 				4D5BAE7F273C5E9F009B7F95 /* DemoHeader.swift in Sources */,
-				15014CFE286C7DA4009DB195 /* AdManagerSpecificAdTextCell.swift in Sources */,
+				1541C30729F1CFB4007E8852 /* VungleViewController.swift in Sources */,
 				4D5BAE7B273C362B009B7F95 /* SettingsViewController.swift in Sources */,
 				4DB9A14A273AF8040005D1D0 /* DemoNavigationController.swift in Sources */,
 				4D0AA887279F3FE100CD2F7C /* DemoRequestInterceptors.swift in Sources */,
+				1541C30C29F1D2D0007E8852 /* ThirdPartyDemandIntegrationType.swift in Sources */,
 				4D5C798D274C259A00033307 /* TestRenderAdViewController.swift in Sources */,
 				2013D50F279087F500CB5DCF /* MainItem.swift in Sources */,
+				4DC70F7B2A002CEF0037E424 /* FANViewController.swift in Sources */,
+				4DEA6B132A016F8F003E6A20 /* UnityViewController.swift in Sources */,
 				4D901D7D273D936E00037C54 /* AdDemoViewController.swift in Sources */,
 				4D901D81273DAFD400037C54 /* AdManagerViewController.swift in Sources */,
 				2013D5112790886600CB5DCF /* SettingsSection.swift in Sources */,
-				15014CFF286C7DA4009DB195 /* AdManagerSpecificAdType.swift in Sources */,
 				4DE1FE5027FF58C2002C41BC /* MediationAdType.swift in Sources */,
 				4DB9A14C273AF81A0005D1D0 /* DemoViewController.swift in Sources */,
 				4DADE25C2739BF9F00E7E766 /* UIColor+Extension.swift in Sources */,
@@ -604,7 +653,6 @@
 				4D901D7F273D982500037C54 /* String+Extension.swift in Sources */,
 				4D8A3FAF274306F100201485 /* DemoDataSource.swift in Sources */,
 				4D5C7991274C60BE00033307 /* UIImage+Extension.swift in Sources */,
-				4D563C432746FD4F00294A7B /* FacebookAdType.swift in Sources */,
 				4D563C412746FD3B00294A7B /* AdManagerAdType.swift in Sources */,
 				150B4B5828D3E6F7002F233D /* CustomAdContainerView.swift in Sources */,
 				4D84B1B82743FFF300CA9CE2 /* GAMViewController.swift in Sources */,
@@ -619,45 +667,46 @@
 			files = (
 				96C445E829414A9300DF35B2 /* UIViewController+Extension.swift in Sources */,
 				96C445E929414A9300DF35B2 /* AppDelegate.swift in Sources */,
-				96C445EA29414A9300DF35B2 /* DemoAdCell.swift in Sources */,
 				96C445EB29414A9300DF35B2 /* SceneDelegate.swift in Sources */,
-				96C445EC29414A9300DF35B2 /* AdManagerSpecificAdViewController.swift in Sources */,
-				20BE3FB529E47B6200E1A662 /* APSAds.swift in Sources */,
 				96C445ED29414A9300DF35B2 /* TestRenderViewController.swift in Sources */,
 				96C445EE29414A9300DF35B2 /* UITableView+Extension.swift in Sources */,
 				96C445EF29414A9300DF35B2 /* MainViewController.swift in Sources */,
-				96C445F029414A9300DF35B2 /* AdManagerSpecificAdNimbusCell.swift in Sources */,
 				96C445F129414A9300DF35B2 /* DemoCell.swift in Sources */,
-				96C445F229414A9300DF35B2 /* Setting.swift in Sources */,
 				96C445F329414A9300DF35B2 /* ConfigManager.swift in Sources */,
 				96C445F429414A9300DF35B2 /* UIFont+Extension.swift in Sources */,
 				96C445F529414A9300DF35B2 /* AdViewController.swift in Sources */,
+				4D07F6742A043B4500E2B094 /* UnityViewController.swift in Sources */,
+				4D07F6752A043B4800E2B094 /* VungleViewController.swift in Sources */,
 				96C445F629414A9300DF35B2 /* DemoHeader.swift in Sources */,
-				96C445F729414A9300DF35B2 /* AdManagerSpecificAdTextCell.swift in Sources */,
 				96C445F829414A9300DF35B2 /* SettingsViewController.swift in Sources */,
 				96C445F929414A9300DF35B2 /* DemoNavigationController.swift in Sources */,
 				96C445FA29414A9300DF35B2 /* DemoRequestInterceptors.swift in Sources */,
 				96C445FB29414A9300DF35B2 /* TestRenderAdViewController.swift in Sources */,
 				96C445FC29414A9300DF35B2 /* MainItem.swift in Sources */,
 				96C445FD29414A9300DF35B2 /* AdDemoViewController.swift in Sources */,
+				4D07F6712A043B2E00E2B094 /* APSAds.swift in Sources */,
 				96C445FE29414A9300DF35B2 /* AdManagerViewController.swift in Sources */,
 				96C445FF29414A9300DF35B2 /* SettingsSection.swift in Sources */,
-				96C4460029414A9300DF35B2 /* AdManagerSpecificAdType.swift in Sources */,
 				96C4460129414A9300DF35B2 /* MediationAdType.swift in Sources */,
+				4D07F6722A043B3100E2B094 /* APSViewController.swift in Sources */,
 				96C4460229414A9300DF35B2 /* DemoViewController.swift in Sources */,
+				4D07F66F2A043B2800E2B094 /* ThirdPartyDemandIntegrationType.swift in Sources */,
 				96C4460329414A9300DF35B2 /* UIColor+Extension.swift in Sources */,
 				96C4460429414A9300DF35B2 /* NSObject+Extension.swift in Sources */,
 				96C4460529414A9300DF35B2 /* MediationViewController.swift in Sources */,
 				96C4460629414A9300DF35B2 /* UILabel+Extension.swift in Sources */,
+				4D07F6732A043B3400E2B094 /* FANViewController.swift in Sources */,
+				4D07F6672A041F7000E2B094 /* Setting.swift in Sources */,
 				96C4460729414A9300DF35B2 /* MediationIntegrationType.swift in Sources */,
 				96C4460829414A9300DF35B2 /* String+Extension.swift in Sources */,
 				96C4460929414A9300DF35B2 /* DemoDataSource.swift in Sources */,
 				96C4460A29414A9300DF35B2 /* UIImage+Extension.swift in Sources */,
-				96C4460B29414A9300DF35B2 /* FacebookAdType.swift in Sources */,
 				96C4460C29414A9300DF35B2 /* AdManagerAdType.swift in Sources */,
 				96C4460D29414A9300DF35B2 /* CustomAdContainerView.swift in Sources */,
 				96C4460E29414A9300DF35B2 /* GAMViewController.swift in Sources */,
+				4D07F6702A043B2B00E2B094 /* ThirdPartyDemandAdType.swift in Sources */,
 				96C4460F29414A9300DF35B2 /* DemoItem.swift in Sources */,
+				4D07F66E2A043B2500E2B094 /* ThirdPartyDemandViewController.swift in Sources */,
 				96C4461029414A9300DF35B2 /* SettingsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1025,6 +1074,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4D082DEE29CCA1100083DF6F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
 			productName = GoogleMobileAds;
+		};
+		4DC70F752A0003B80037E424 /* NimbusVungleKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
+			productName = NimbusVungleKit;
 		};
 		962B1C06299E917B001BF3B7 /* NimbusFANKit */ = {
 			isa = XCSwiftPackageProductDependency;

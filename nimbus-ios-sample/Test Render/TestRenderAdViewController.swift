@@ -11,7 +11,7 @@ import NimbusKit
 final class TestRenderAdViewController: UIViewController {
     private let adMarkup: String
     
-    private lazy var adView: CustomAdContainerView? = {
+    private lazy var adContainerView: CustomAdContainerView? = {
         guard let ad = getAdFromMarkup(adMarkup: adMarkup) else {
             return nil
         }
@@ -39,20 +39,20 @@ final class TestRenderAdViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        adView?.destroy()
+        adContainerView?.destroy()
     }
     
     private func setupAdView() {
-        guard let adView else { return }
-        view.addSubview(adView)
+        guard let adContainerView else { return }
+        view.addSubview(adContainerView)
         
-        adView.accessibilityIdentifier = "testRenderAdView"
-        adView.translatesAutoresizingMaskIntoConstraints = false
+        adContainerView.accessibilityIdentifier = "testRenderAdView"
+        adContainerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            adView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            adView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            adView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            adView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+            adContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            adContainerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            adContainerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            adContainerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
     
