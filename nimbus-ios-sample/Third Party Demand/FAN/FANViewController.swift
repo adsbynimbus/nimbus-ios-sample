@@ -8,14 +8,17 @@
 import UIKit
 import NimbusKit
 
-#if canImport(NimbusLiveRampKit)
-import NimbusLiveRampKit
+#if canImport(NimbusSDK)
+import NimbusSDK
 #endif
 
 #if canImport(NimbusRequestFANKit)
 import NimbusRequestFANKit
 #endif
 
+#if canImport(NimbusFANKit)
+import NimbusFANKit
+#endif
 
 final class FANViewController: DemoViewController {
     
@@ -59,20 +62,13 @@ final class FANViewController: DemoViewController {
             adContainerView?.destroy()
         }
         
-        NimbusAdManager.requestInterceptors?.removeAll(where: {
-            $0 is NimbusFANRequestInterceptor
-        })
+        // For testing purposes, this will clear all request interceptors
+        DemoRequestInterceptors.shared.removeRequestInterceptors()
     }
     
     private func setupRequestInterceptor() {
-        // Remove other demand providers. It MUST not remove LiveRampInterceptor
-        NimbusAdManager.requestInterceptors?.removeAll(where: {
-            !($0 is NimbusLiveRampInterceptor)
-        })
-        
-        if let fan = DemoRequestInterceptors.shared.fan {
-            NimbusAdManager.requestInterceptors?.append(fan)
-        }
+        // For testing purposes, this ensures only the required interceptors will be set
+        DemoRequestInterceptors.shared.setFANRequestInterceptor()
     }
     
     private func setupAdView() {

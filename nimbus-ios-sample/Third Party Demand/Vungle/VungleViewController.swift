@@ -10,8 +10,8 @@ import UIKit
 import NimbusKit
 import AdSupport
 
-#if canImport(NimbusLiveRampKit)
-import NimbusLiveRampKit
+#if canImport(NimbusSDK)
+import NimbusSDK
 #endif
 
 #if canImport(NimbusVungleKit)
@@ -47,10 +47,8 @@ class VungleViewController: DemoViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        // Remove vungle demand provider. It MUST not remove LiveRampInterceptor
-        NimbusAdManager.requestInterceptors?.removeAll(where: {
-            $0 is NimbusVungleRequestInterceptor
-        })
+        // For testing purposes, this will clear all request interceptors
+        DemoRequestInterceptors.shared.removeRequestInterceptors()
     }
     
     private func setupContentView() {
@@ -66,14 +64,8 @@ class VungleViewController: DemoViewController {
     }
     
     private func setupRequestInterceptor() {
-        // Remove other demand providers. It MUST not remove LiveRampInterceptor
-        NimbusAdManager.requestInterceptors?.removeAll(where: {
-            !($0 is NimbusLiveRampInterceptor)
-        })
-        
-        if let vungle = DemoRequestInterceptors.shared.vungle {
-            NimbusAdManager.requestInterceptors?.append(vungle)
-        }
+        // For testing purposes, this ensures only the required interceptors will be set
+        DemoRequestInterceptors.shared.setVungleRequestInterceptor()
     }
     
     private func setupAdRendering() {

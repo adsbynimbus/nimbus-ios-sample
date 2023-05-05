@@ -8,8 +8,8 @@
 import UIKit
 import NimbusKit
 
-#if canImport(NimbusLiveRampKit)
-import NimbusLiveRampKit
+#if canImport(NimbusSDK)
+import NimbusSDK
 #endif
 
 #if canImport(NimbusUnityKit)
@@ -47,21 +47,13 @@ final class UnityViewController: DemoViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        // Remove unity demand provider. It MUST not remove LiveRampInterceptor
-        NimbusAdManager.requestInterceptors?.removeAll(where: {
-            $0 is NimbusUnityRequestInterceptor
-        })
+        // For testing purposes, this will clear all request interceptors
+        DemoRequestInterceptors.shared.removeRequestInterceptors()
     }
 
     private func setupRequestInterceptor() {
-        // Remove other demand providers. It MUST not remove LiveRampInterceptor
-        NimbusAdManager.requestInterceptors?.removeAll(where: {
-            !($0 is NimbusLiveRampInterceptor)
-        })
-        
-        if let unity = DemoRequestInterceptors.shared.unity {
-            NimbusAdManager.requestInterceptors?.append(unity)
-        }
+        // For testing purposes, this ensures only the required interceptors will be set
+        DemoRequestInterceptors.shared.setUnityRequestInterceptor()
     }
     
     private func setupAdRendering() {

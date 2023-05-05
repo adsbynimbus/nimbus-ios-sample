@@ -27,6 +27,11 @@ import NimbusVungleKit
 import NimbusUnityKit
 #endif
 
+#if canImport(NimbusLiveRampKit)
+import NimbusLiveRampKit
+#endif
+
+
 final class DemoRequestInterceptors {
     private(set) var fan: NimbusFANRequestInterceptor?
     private(set) var vungle: NimbusVungleRequestInterceptor?
@@ -50,5 +55,39 @@ final class DemoRequestInterceptors {
             ConfigManager.shared.unityGameId, !unityGameId.isEmpty {
             unity = NimbusUnityRequestInterceptor(gameId: unityGameId)
         }
+    }
+    
+    func setFANRequestInterceptor() {
+        removeRequestInterceptors()
+        
+        let interceptors = NimbusAdManager.requestInterceptors ?? []
+        if let fan, !interceptors.contains(where: { $0 is NimbusFANRequestInterceptor }) {
+            NimbusAdManager.requestInterceptors?.append(fan)
+        }
+    }
+    
+    func setVungleRequestInterceptor() {
+        removeRequestInterceptors()
+        
+        let interceptors = NimbusAdManager.requestInterceptors ?? []
+        if let vungle, !interceptors.contains(where: { $0 is NimbusVungleRequestInterceptor }) {
+            NimbusAdManager.requestInterceptors?.append(vungle)
+        }
+    }
+    
+    func setUnityRequestInterceptor() {
+        removeRequestInterceptors()
+        
+        let interceptors = NimbusAdManager.requestInterceptors ?? []
+        if let unity, !interceptors.contains(where: { $0 is NimbusUnityRequestInterceptor }) {
+            NimbusAdManager.requestInterceptors?.append(unity)
+        }
+    }
+    
+    func removeRequestInterceptors() {
+        // It MUST not remove LiveRampInterceptor
+        NimbusAdManager.requestInterceptors?.removeAll(where: {
+            !($0 is NimbusLiveRampInterceptor)
+        })
     }
 }
