@@ -117,7 +117,6 @@
 		96C4462129414A9300DF35B2 /* ProximaNova-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB9A140273AE4A70005D1D0 /* ProximaNova-Bold.ttf */; };
 		96C4462229414A9300DF35B2 /* ProximaNova-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB9A13F273AE4A70005D1D0 /* ProximaNova-Regular.ttf */; };
 		96C4462329414A9300DF35B2 /* secrets.json in Resources */ = {isa = PBXBuildFile; fileRef = 4D901D88273DCC7100037C54 /* secrets.json */; };
-		9986B1C7E0CB6C3DCC2103E7 /* Pods_nimbus_ios_sample_pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D747D97B2333462611B9D24 /* Pods_nimbus_ios_sample_pods.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -129,7 +128,6 @@
 		2013D50E279087F500CB5DCF /* MainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainItem.swift; sourceTree = "<group>"; };
 		2013D5102790886600CB5DCF /* SettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSection.swift; sourceTree = "<group>"; };
 		2052050629CD4D5E004D7024 /* APSAds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APSAds.swift; sourceTree = "<group>"; };
-		20BE3FB629E47D6400E1A662 /* DTBiOSSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = DTBiOSSDK.xcframework; path = "Pods/AmazonPublisherServicesSDK/APS_iOS_SDK-4.6.0/DTBiOSSDK.xcframework"; sourceTree = "<group>"; };
 		4D0AA886279F3FE100CD2F7C /* DemoRequestInterceptors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoRequestInterceptors.swift; sourceTree = "<group>"; };
 		4D563C402746FD3B00294A7B /* AdManagerAdType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManagerAdType.swift; sourceTree = "<group>"; };
 		4D563C442746FD6300294A7B /* DemoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoItem.swift; sourceTree = "<group>"; };
@@ -174,9 +172,6 @@
 		4DEA6B102A016F7F003E6A20 /* APSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APSViewController.swift; sourceTree = "<group>"; };
 		4DEA6B122A016F8F003E6A20 /* UnityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnityViewController.swift; sourceTree = "<group>"; };
 		96C4462729414A9300DF35B2 /* nimbus-ios-sample-pods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nimbus-ios-sample-pods.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D747D97B2333462611B9D24 /* Pods_nimbus_ios_sample_pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_nimbus_ios_sample_pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B9D00992466C6CB9A09A4C90 /* Pods-nimbus-ios-sample-pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nimbus-ios-sample-pods.debug.xcconfig"; path = "Target Support Files/Pods-nimbus-ios-sample-pods/Pods-nimbus-ios-sample-pods.debug.xcconfig"; sourceTree = "<group>"; };
-		F213016D581139F9708AB326 /* Pods-nimbus-ios-sample-pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nimbus-ios-sample-pods.release.xcconfig"; path = "Target Support Files/Pods-nimbus-ios-sample-pods/Pods-nimbus-ios-sample-pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,7 +198,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9986B1C7E0CB6C3DCC2103E7 /* Pods_nimbus_ios_sample_pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,8 +335,6 @@
 			children = (
 				4DADE24427396E0700E7E766 /* nimbus-ios-sample */,
 				4DADE24327396E0700E7E766 /* Products */,
-				7E2A6DEB1401D3EAC9322998 /* Pods */,
-				99498655172AA174E2FD6926 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -430,24 +422,6 @@
 			path = GAM;
 			sourceTree = "<group>";
 		};
-		7E2A6DEB1401D3EAC9322998 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				B9D00992466C6CB9A09A4C90 /* Pods-nimbus-ios-sample-pods.debug.xcconfig */,
-				F213016D581139F9708AB326 /* Pods-nimbus-ios-sample-pods.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
-		99498655172AA174E2FD6926 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				20BE3FB629E47D6400E1A662 /* DTBiOSSDK.xcframework */,
-				9D747D97B2333462611B9D24 /* Pods_nimbus_ios_sample_pods.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -486,11 +460,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 96C4462429414A9300DF35B2 /* Build configuration list for PBXNativeTarget "nimbus-ios-sample-pods" */;
 			buildPhases = (
-				433DA87E2996EA5A7539F110 /* [CP] Check Pods Manifest.lock */,
 				96C445E729414A9300DF35B2 /* Sources */,
 				96C4461129414A9300DF35B2 /* Frameworks */,
 				96C4461D29414A9300DF35B2 /* Resources */,
-				3DED376DE62976588B7D230E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -527,7 +499,7 @@
 			mainGroup = 4DADE23927396E0700E7E766;
 			packageReferences = (
 				962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */,
-				4D082DEE29CCA1100083DF6F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				4D082DEE29CCA1100083DF6F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads.git" */,
 			);
 			productRefGroup = 4DADE24327396E0700E7E766 /* Products */;
 			projectDirPath = "";
@@ -567,48 +539,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		3DED376DE62976588B7D230E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-nimbus-ios-sample-pods/Pods-nimbus-ios-sample-pods-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-nimbus-ios-sample-pods/Pods-nimbus-ios-sample-pods-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-nimbus-ios-sample-pods/Pods-nimbus-ios-sample-pods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		433DA87E2996EA5A7539F110 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-nimbus-ios-sample-pods-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4DADE23E27396E0700E7E766 /* Sources */ = {
@@ -909,7 +839,6 @@
 		};
 		96C4462529414A9300DF35B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B9D00992466C6CB9A09A4C90 /* Pods-nimbus-ios-sample-pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -941,7 +870,6 @@
 		};
 		96C4462629414A9300DF35B2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F213016D581139F9708AB326 /* Pods-nimbus-ios-sample-pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1006,7 +934,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		4D082DEE29CCA1100083DF6F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+		4D082DEE29CCA1100083DF6F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
 			requirement = {
@@ -1072,7 +1000,7 @@
 		};
 		4D082DEF29CCA1100083DF6F /* GoogleMobileAds */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4D082DEE29CCA1100083DF6F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			package = 4D082DEE29CCA1100083DF6F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads.git" */;
 			productName = GoogleMobileAds;
 		};
 		4DC70F752A0003B80037E424 /* NimbusVungleKit */ = {
