@@ -17,6 +17,18 @@ jobs:
     - uses: actions/checkout@v3
       with:
         lfs: true
+    
+    - name: Restore Build Cache
+      uses: actions/cache@v3
+      with:
+        path: |
+          Pods
+          .build
+          !.build/Logs/**
+          !.build/TestResults/**
+        key: ${{ runner.os }}-build-${{ hashFiles('**/Podfile*') }}
+        restore-keys: |
+          ${{ runner.os }}-build-
 
     - name: Install pods
       run: pod install --repo-update

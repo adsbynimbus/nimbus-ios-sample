@@ -20,6 +20,17 @@ jobs:
 
     - name: Install xcbeautify
       run: brew install xcbeautify
+    
+    - name: Restore Build Cache
+      uses: actions/cache@v3
+      with:
+        path: |
+          .build
+          !.build/Logs/**
+          !.build/TestResults/**
+        key: ${{ runner.os }}-build-${{ hashFiles('**/Package.*') }}
+        restore-keys: |
+          ${{ runner.os }}-build-
 
     - name: Build Sample App
       run: set -o pipefail && xcodebuild -scheme "nimbus-ios-sample" -configuration "Debug" -sdk "iphonesimulator16.2" -derivedDataPath .build/DerivedData | xcbeautify
