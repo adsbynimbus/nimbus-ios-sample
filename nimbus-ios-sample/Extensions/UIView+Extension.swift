@@ -10,7 +10,7 @@ import UIKit
 
 extension UIView {
     
-    func setUiTestIdenfifiers(for nimbusAd: NimbusAd) {
+    func setUiTestIdentifiers(for nimbusAd: NimbusAd) {
         let adString = "\(nimbusAd.network) \(nimbusAd.auctionType.rawValue) ad"
         accessibilityIdentifier = "nimbus_ad_view"
         accessibilityLabel = adString

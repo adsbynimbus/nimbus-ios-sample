@@ -206,7 +206,7 @@ extension AdManagerViewController: NimbusAdManagerDelegate {
     func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
         print("didRenderAd")
         adController = controller
-        controller.adView?.setUiTestIdenfifiers(for: ad)
+        controller.adView?.setUiTestIdentifiers(for: ad)
     }
 }
 

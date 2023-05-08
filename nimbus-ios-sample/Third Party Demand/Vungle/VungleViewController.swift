@@ -163,7 +163,7 @@ class VungleViewController: DemoViewController {
 extension VungleViewController: NimbusAdManagerDelegate {
     func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
         print("didRenderAd")
-        controller.adView?.setUiTestIdenfifiers(for: ad)
+        controller.adView?.setUiTestIdentifiers(for: ad)
         adController = controller
         adController?.delegate = self
     }
