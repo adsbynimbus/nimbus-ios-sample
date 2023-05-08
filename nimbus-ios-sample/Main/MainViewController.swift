@@ -25,7 +25,6 @@ final class MainViewController: DemoViewController {
         tableView.registerCell(DemoCell.self)
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.accessibilityIdentifier = "mainTableView"
         return tableView
     }()
     

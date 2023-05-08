@@ -50,7 +50,6 @@ final class ThirdPartyDemandViewController: DemoViewController {
         tableView.registerHeaderFooter(DemoHeader.self)
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.accessibilityIdentifier = "thirdPartyDemandTableView"
         return tableView
     }()
     

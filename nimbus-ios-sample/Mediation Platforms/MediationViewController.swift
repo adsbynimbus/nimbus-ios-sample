@@ -26,7 +26,6 @@ final class MediationViewController: DemoViewController {
         tableView.registerHeaderFooter(DemoHeader.self)
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.accessibilityIdentifier = "mediationTableView"
         return tableView
     }()
     

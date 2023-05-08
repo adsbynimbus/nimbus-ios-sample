@@ -76,6 +76,7 @@ extension UnityViewController: NimbusAdManagerDelegate {
   
     func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
         print("didRenderAd")
+        controller.adView?.setUiTestIdentifiers(for: ad)
     }
 }
 

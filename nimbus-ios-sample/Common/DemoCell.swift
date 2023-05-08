@@ -41,27 +41,19 @@ class DemoCell: UITableViewCell {
     }
     
     func updateWithMainItem(_ item: MainItem) {
-        accessibilityIdentifier = item.getIdentifier(prefix: "main", .cell)
         label.text = item.description
-        label.accessibilityIdentifier = item.getIdentifier(prefix: "main", .cellLabel)
     }
     
     func updateWithAdManagerAdType(_ adType: AdManagerAdType) {
-        accessibilityIdentifier = adType.getIdentifier(prefix: "adDemo", .cell)
         label.text = adType.description
-        label.accessibilityIdentifier = adType.getIdentifier(prefix: "adDemo", .cellLabel)
     }
     
     func updateWithMediationAdType(_ adType: MediationAdType) {
-        accessibilityIdentifier = adType.getIdentifier(prefix: "mediationPlatforms", .cell)
         label.text = adType.description
-        label.accessibilityIdentifier = adType.getIdentifier(prefix: "mediationPlatforms", .cellLabel)
     }
     
     func updateWithThirdPartyDemandAdType(_ adType: ThirdPartyDemandAdType) {
-        accessibilityIdentifier = adType.getIdentifier(prefix: "thirdPartyDemand", .cell)
         label.text = adType.description
-        label.accessibilityIdentifier = adType.getIdentifier(prefix: "thirdPartyDemand", .cellLabel)
     }
         
     private func setupAccessoryType() {

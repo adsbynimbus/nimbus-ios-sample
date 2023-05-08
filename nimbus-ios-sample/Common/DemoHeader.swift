@@ -67,21 +67,14 @@ final class DemoHeader: UITableViewHeaderFooterView {
     }
     
     func updateWithSection(_ settingsSection: SettingsSection) {
-        accessibilityIdentifier = settingsSection.getIdentifier(prefix: "settings", .header)
         label.text = settingsSection.description
-        label.accessibilityIdentifier = settingsSection.getIdentifier(prefix: "settings", .headerLabel)
     }
     
     func updateWithMediationIntegrationType(_ type: MediationIntegrationType) {
-        accessibilityIdentifier = type.getIdentifier(prefix: "mediationPlatforms", .header)
         label.text = type.description
-        label.accessibilityIdentifier = type.getIdentifier(prefix: "mediationPlatforms", .headerLabel)
     }
     
     func updateWithThirdPartyIntegrationType(_ type: ThirdPartyDemandIntegrationType) {
-        let identifier = "thirdPartyDemandIntegration\(type.rawValue.camelCaseToWords())"
-        accessibilityIdentifier = type.getIdentifier(prefix: identifier, .header)
         label.text = type.description
-        label.accessibilityIdentifier = type.getIdentifier(prefix: identifier, .headerLabel)
     }
 }

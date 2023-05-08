@@ -46,7 +46,6 @@ final class TestRenderAdViewController: UIViewController {
         guard let adContainerView else { return }
         view.addSubview(adContainerView)
         
-        adContainerView.accessibilityIdentifier = "testRenderAdView"
         adContainerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             adContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
