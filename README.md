@@ -41,6 +41,7 @@ In order to see APS/FAN/GAM/Unity examples you must also supply it's IDs
 
 #### GAM Extra Configs
 - For GAM Ads it is also required to inform the string value of your Ad Manager app ID for the key `GADApplicationIdentifier` in the Sample App plist. [GAM Update your Info.plist](https://developers.google.com/ad-manager/mobile-ads-sdk/ios/quick-start#update_your_infoplist)
+- The sample app is configured with a test `GADApplicationIdentifier` to ensure the app does not throw an exception during startup due to changes in v10 of the GoogleMobileAds SDK.
 - For testing in real devices please refer to [GAM Enable test devices](https://developers.google.com/ad-manager/mobile-ads-sdk/ios/test-ads#enable_test_devices)
 
 ### What you'll see
