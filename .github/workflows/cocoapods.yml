@@ -32,9 +32,9 @@ jobs:
           .build
           !.build/Logs/**
           !.build/TestResults/**
-        key: ${{ runner.os }}-build-${{ hashFiles('**/Podfile*') }}
+        key: ${{ runner.os }}-cocoapods-${{ hashFiles('**/Podfile*') }}
         restore-keys: |
-          ${{ runner.os }}-build-
+          ${{ runner.os }}-cocoapods-
 
     - name: Install pods
       run: pod install --repo-update

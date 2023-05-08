@@ -28,9 +28,9 @@ jobs:
           .build
           !.build/Logs/**
           !.build/TestResults/**
-        key: ${{ runner.os }}-build-${{ hashFiles('**/Package.*') }}
+        key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.*') }}
         restore-keys: |
-          ${{ runner.os }}-build-
+          ${{ runner.os }}-spm-
 
     - name: Build Sample App
       run: set -o pipefail && xcodebuild -scheme "nimbus-ios-sample" -configuration "Debug" -sdk "iphonesimulator16.2" -derivedDataPath .build/DerivedData | xcbeautify
