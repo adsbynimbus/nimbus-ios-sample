@@ -27,7 +27,6 @@ final class AdDemoViewController: DemoViewController {
         tableView.registerCell(DemoCell.self)
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.accessibilityIdentifier = "adDemoTableView"
         return tableView
     }()
     

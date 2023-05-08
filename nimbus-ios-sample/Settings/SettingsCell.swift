@@ -52,7 +52,6 @@ final class SettingsCell: UITableViewCell {
         accessibilityIdentifier = setting.getIdentifier(prefix: "settings", .cell)
         
         label.text = setting.description
-        label.accessibilityIdentifier = setting.getIdentifier(prefix: "settings", .cellLabel)
         
         switchButton.setOn(setting.getPrefs(), animated: false)
         switchButton.accessibilityIdentifier = setting.getIdentifier(prefix: "settings", .cellSwitch)

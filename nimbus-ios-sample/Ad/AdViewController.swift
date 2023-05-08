@@ -17,7 +17,6 @@ final class AdViewController: DemoViewController {
     private let volume: Int
     private let companionAd: NimbusCompanionAd?
     private let dimensions: NimbusAdDimensions?
-    private let adViewIdentifier: String
     private let creativeScalingEnabledForStaticAds: Bool
     private let isMaxSize: Bool
     private let shouldInjectIFrameScript: Bool
@@ -28,7 +27,6 @@ final class AdViewController: DemoViewController {
         volume: Int = 0,
         companionAd: NimbusCompanionAd? = nil,
         dimensions: NimbusAdDimensions? = nil,
-        adViewIdentifier: String,
         headerTitle: String,
         headerSubTitle: String,
         creativeScalingEnabledForStaticAds: Bool = true,
@@ -39,7 +37,6 @@ final class AdViewController: DemoViewController {
         self.volume = volume
         self.companionAd = companionAd
         self.dimensions = dimensions
-        self.adViewIdentifier = adViewIdentifier
         self.creativeScalingEnabledForStaticAds = creativeScalingEnabledForStaticAds
         self.isMaxSize = isMaxSize
         self.shouldInjectIFrameScript = shouldInjectIFrameScript
@@ -81,7 +78,6 @@ final class AdViewController: DemoViewController {
         guard let adContainerView else { return }
         view.addSubview(adContainerView)
         
-        adContainerView.accessibilityIdentifier = adViewIdentifier
         adContainerView.translatesAutoresizingMaskIntoConstraints = false
         
         if let dimensions {

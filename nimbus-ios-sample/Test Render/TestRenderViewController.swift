@@ -26,7 +26,6 @@ class TestRenderViewController: DemoViewController {
         textField.clearButtonMode = .always
         textField.layer.borderWidth = 0.5
         textField.layer.borderColor = UIColor.lightGray.cgColor
-        textField.accessibilityIdentifier = "testRenderMarkupTextField"
         
         textField.delegate = self
         textField.returnKeyType = .done
@@ -41,7 +40,6 @@ class TestRenderViewController: DemoViewController {
         button.backgroundColor = .pink
         button.layer.cornerRadius = 25
         button.addTarget(self, action: #selector(testButtonTapped), for: .touchUpInside)
-        button.accessibilityIdentifier = "testRenderTestButton"
         return button
     }()
     
