@@ -8,6 +8,12 @@
 import UIKit
 import NimbusKit
 import NimbusRenderVideoKit
+#if canImport(Shuffle)
+import Shuffle
+#endif
+#if canImport(Shuffle_iOS)
+import Shuffle_iOS
+#endif
 import GoogleInteractiveMediaAds
 
 #if canImport(NimbusSDK)
@@ -45,6 +51,7 @@ final class AdManagerViewController: DemoViewController {
     private var adController: AdController?
     private var manualRequest: NimbusRequest?
     private var requestManager: NimbusRequestManager?
+    private let cardStack = SwipeCardStack()
 
     init(
         adType: AdManagerAdType,
@@ -116,6 +123,27 @@ final class AdManagerViewController: DemoViewController {
     
     private func setupAdRendering() {
         switch adType {
+            
+        case .swipeInterstitial:
+//            adManager = NimbusAdManager()
+//            adManager.delegate = self
+//
+//            contentView.addSubview(cardStack)
+//
+//            cardStack.translatesAutoresizingMaskIntoConstraints = false
+//            NSLayoutConstraint.activate([
+//                cardStack.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//                cardStack.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//                cardStack.topAnchor.constraint(equalTo: view.topAnchor),
+//                cardStack.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+//            ])
+//
+//            cardStack.dataSource = self
+//
+            let vc = SwipeInterstitialViewController()
+            present(vc, animated: true)
+            //            pushViewController(vc, animated: true)
+//            navigationController?.pushViewController(vc, animated: true)
                      
         case .manualRequestRenderAd:
             // Manual Request Ad
@@ -266,5 +294,23 @@ final class CustomVideoAdSettingsProvider: NimbusVideoSettingsProvider {
         let settings = IMAAdsRenderingSettings()
         settings.disableUi = false
         return settings
+    }
+}
+
+extension AdManagerViewController: SwipeCardStackDataSource {
+    func cardStack(_ cardStack: SwipeCardStack, cardForIndexAt index: Int) -> SwipeCard {
+        let card = SwipeCard()
+        card.swipeDirections = [.left, .right]
+        adManager.showAd(
+            request: .forInterstitialAd(position: "position"),
+            container: card,
+            adPresentingViewController: self
+        )
+        
+        return card
+    }
+    
+    func numberOfCards(in cardStack: SwipeCardStack) -> Int {
+        2
     }
 }

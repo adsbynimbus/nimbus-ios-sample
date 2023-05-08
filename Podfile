@@ -5,7 +5,7 @@ platform :ios, '15.0'
 target 'nimbus-ios-sample-pods' do
   use_frameworks!
 
-  pod 'NimbusSDK', '2.7.0', subspecs: [
+  pod 'NimbusSDK', '2.8.0', subspecs: [
      'NimbusKit',               # Nimbus SDK
      'NimbusRenderStaticKit',   # Static Ad Renderer
      'NimbusRenderVideoKit',    # Video Ad Renderer
@@ -15,4 +15,5 @@ target 'nimbus-ios-sample-pods' do
      'NimbusGAMKit',            # Google Dynamic Price and Mediation Adapters
      'NimbusUnityKit',          # Unity Ads Request Support and Renderer
    ]
+   pod 'Shuffle-iOS'
 end

@@ -14,6 +14,8 @@
 		150B4B5828D3E6F7002F233D /* CustomAdContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150B4B5728D3E6F7002F233D /* CustomAdContainerView.swift */; };
 		2013D50F279087F500CB5DCF /* MainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2013D50E279087F500CB5DCF /* MainItem.swift */; };
 		2013D5112790886600CB5DCF /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2013D5102790886600CB5DCF /* SettingsSection.swift */; };
+		20BB4D0029E9B129001E68FB /* SwipeInterstitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BB4CFF29E9B129001E68FB /* SwipeInterstitialViewController.swift */; };
+		20BB4D0129E9B1CB001E68FB /* SwipeInterstitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BB4CFF29E9B129001E68FB /* SwipeInterstitialViewController.swift */; };
 		20BE3FB329E47A9C00E1A662 /* NimbusFANKit in Frameworks */ = {isa = PBXBuildFile; productRef = 962B1C06299E917B001BF3B7 /* NimbusFANKit */; };
 		20BE3FB429E47B6200E1A662 /* APSAds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2052050629CD4D5E004D7024 /* APSAds.swift */; };
 		20BE3FB529E47B6200E1A662 /* APSAds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2052050629CD4D5E004D7024 /* APSAds.swift */; };
@@ -126,6 +128,7 @@
 		2013D50E279087F500CB5DCF /* MainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainItem.swift; sourceTree = "<group>"; };
 		2013D5102790886600CB5DCF /* SettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSection.swift; sourceTree = "<group>"; };
 		2052050629CD4D5E004D7024 /* APSAds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APSAds.swift; sourceTree = "<group>"; };
+		20BB4CFF29E9B129001E68FB /* SwipeInterstitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeInterstitialViewController.swift; sourceTree = "<group>"; };
 		20BE3FB629E47D6400E1A662 /* DTBiOSSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = DTBiOSSDK.xcframework; path = "Pods/AmazonPublisherServicesSDK/APS_iOS_SDK-4.6.0/DTBiOSSDK.xcframework"; sourceTree = "<group>"; };
 		4D0AA886279F3FE100CD2F7C /* DemoRequestInterceptors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoRequestInterceptors.swift; sourceTree = "<group>"; };
 		4D563C402746FD3B00294A7B /* AdManagerAdType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManagerAdType.swift; sourceTree = "<group>"; };
@@ -303,6 +306,7 @@
 				4D563C422746FD4F00294A7B /* FacebookAdType.swift */,
 				4D901D7C273D936E00037C54 /* AdDemoViewController.swift */,
 				4D901D80273DAFD400037C54 /* AdManagerViewController.swift */,
+				20BB4CFF29E9B129001E68FB /* SwipeInterstitialViewController.swift */,
 			);
 			path = "Ad Manager";
 			sourceTree = "<group>";
@@ -607,6 +611,7 @@
 				4D563C432746FD4F00294A7B /* FacebookAdType.swift in Sources */,
 				4D563C412746FD3B00294A7B /* AdManagerAdType.swift in Sources */,
 				150B4B5828D3E6F7002F233D /* CustomAdContainerView.swift in Sources */,
+				20BB4D0029E9B129001E68FB /* SwipeInterstitialViewController.swift in Sources */,
 				4D84B1B82743FFF300CA9CE2 /* GAMViewController.swift in Sources */,
 				4D563C452746FD6300294A7B /* DemoItem.swift in Sources */,
 				4D5BAE7D273C3CA8009B7F95 /* SettingsCell.swift in Sources */,
@@ -656,6 +661,7 @@
 				96C4460B29414A9300DF35B2 /* FacebookAdType.swift in Sources */,
 				96C4460C29414A9300DF35B2 /* AdManagerAdType.swift in Sources */,
 				96C4460D29414A9300DF35B2 /* CustomAdContainerView.swift in Sources */,
+				20BB4D0129E9B1CB001E68FB /* SwipeInterstitialViewController.swift in Sources */,
 				96C4460E29414A9300DF35B2 /* GAMViewController.swift in Sources */,
 				96C4460F29414A9300DF35B2 /* DemoItem.swift in Sources */,
 				96C4461029414A9300DF35B2 /* SettingsCell.swift in Sources */,
@@ -970,7 +976,7 @@
 			repositoryURL = "https://github.com/timehop/nimbus-ios-sdk";
 			requirement = {
 				kind = exactVersion;
-				version = 2.7.0;
+				version = 2.8.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

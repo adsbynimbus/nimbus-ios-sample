@@ -8,6 +8,7 @@
 import Foundation
 
 enum AdManagerAdType: String, DemoItem {
+    case swipeInterstitial
     case manualRequestRenderAd
     case banner
     case video
@@ -20,6 +21,8 @@ enum AdManagerAdType: String, DemoItem {
     
     var description: String {
         switch self {
+        case .swipeInterstitial:
+            return "Swipe Interstitial"
         case .manualRequestRenderAd:
             return "Manual Request/Render Ad"
         case .interstitialVideoWithUI:
