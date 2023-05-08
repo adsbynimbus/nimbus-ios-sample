@@ -20,9 +20,7 @@ jobs:
 
     - name: Ensure Project does not contain Pods before build
       run: |
-        if [grep -q Pods nimbus-ios-sample.xcodeproj/project.pbxproj]; then
-            exit 1
-        fi
+        ! grep -q Pods nimbus-ios-sample.xcodeproj/project.pbxproj
 
     - name: Restore Build Cache
       uses: actions/cache@v3
