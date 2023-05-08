@@ -207,6 +207,7 @@ extension AdManagerViewController: NimbusAdManagerDelegate {
         print("didRenderAd")
         adController = controller
         controller.adView?.accessibilityIdentifier = "nimbus_ad_view"
+        controller.adView?.accessibilityLabel = "\(ad.network) \(ad.auctionType.rawValue) ad"
     }
 }
 
