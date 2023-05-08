@@ -12,7 +12,7 @@ jobs:
     runs-on: macos-12
     steps:
     - name: Select Xcode Version
-      run: sudo xcode-select --switch /Applications/Xcode_14.1.app
+      run: sudo xcode-select --switch /Applications/Xcode_14.2.app
 
     - uses: actions/checkout@v3
       with:
@@ -20,6 +20,17 @@ jobs:
 
     - name: Install xcbeautify
       run: brew install xcbeautify
+    
+    - name: Restore Build Cache
+      uses: actions/cache@v3
+      with:
+        path: |
+          .build
+          !.build/Logs/**
+          !.build/TestResults/**
+        key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.*') }}
+        restore-keys: |
+          ${{ runner.os }}-spm-
 
     - name: Build Sample App
-      run: set -o pipefail && xcodebuild -scheme "nimbus-ios-sample" -configuration "Debug" -sdk "iphonesimulator16.1" -derivedDataPath .build/DerivedData | xcbeautify
+      run: set -o pipefail && xcodebuild -scheme "nimbus-ios-sample" -configuration "Debug" -sdk "iphonesimulator16.2" -derivedDataPath .build/DerivedData | xcbeautify
