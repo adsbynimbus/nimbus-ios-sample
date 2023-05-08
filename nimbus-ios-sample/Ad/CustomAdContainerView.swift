@@ -53,8 +53,7 @@ final class CustomAdContainerView: UIView {
     
     private func setupAdView() {
         addSubview(nimbusAdView)
-        nimbusAdView.accessibilityIdentifier = "nimbus_ad_view"
-        nimbusAdView.accessibilityLabel = "\(ad.network) \(ad.auctionType.rawValue) ad"
+        nimbusAdView.setUiTestIdenfifiers(for: ad)
         nimbusAdView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             nimbusAdView.topAnchor.constraint(equalTo: topAnchor),

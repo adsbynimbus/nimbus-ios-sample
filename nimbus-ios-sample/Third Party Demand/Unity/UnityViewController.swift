@@ -76,8 +76,7 @@ extension UnityViewController: NimbusAdManagerDelegate {
   
     func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
         print("didRenderAd")
-        controller.adView?.accessibilityIdentifier = "nimbus_ad_view"
-        controller.adView?.accessibilityLabel = "\(ad.network) \(ad.auctionType.rawValue) ad"
+        controller.adView?.setUiTestIdenfifiers(for: ad)
     }
 }
 
