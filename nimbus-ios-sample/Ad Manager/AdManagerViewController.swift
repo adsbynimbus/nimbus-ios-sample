@@ -21,7 +21,7 @@ import NimbusRenderStaticKit
 final class AdManagerViewController: DemoViewController {
     
     private let contentView = UIView()
-    private var adManager: NimbusAdManager = NimbusAdManager()
+    private var adManager = NimbusAdManager()
     
     private let adType: AdManagerAdType
     private let shouldHideVideoUI: Bool
@@ -120,8 +120,8 @@ final class AdManagerViewController: DemoViewController {
             
         case .inlineVideo:
             NSLayoutConstraint.activate([
-                contentView.heightAnchor.constraint(equalToConstant: CGFloat(480)),
-                contentView.widthAnchor.constraint(equalToConstant: CGFloat(320)),
+                contentView.heightAnchor.constraint(equalToConstant: 480),
+                contentView.widthAnchor.constraint(equalToConstant: 320),
             ])
             
             let request = NimbusRequest.forVideoAd(position: adType.description)
