@@ -109,25 +109,25 @@ final class FANViewController: DemoViewController {
     private func createNimbusAd(adType: ThirdPartyDemandAdType) -> NimbusAd? {
         switch adType {
             
-        case .facebookBanner:
+        case .metaBanner:
             return createNimbusAd(
                 network: "facebook",
                 placementId: "IMG_16_9_LINK#\(ConfigManager.shared.fbBannerPlacementId!)",
                 auctionType: .static,
                 isInterstitial: false,
-                adDimensions: NimbusAdDimensions(width: 300, height: 50)
+                adDimensions: NimbusAdDimensions(width: 320, height: 50)
             )
             
-        case .facebookInterstitial:
+        case .metaInterstitial:
             return createNimbusAd(
                 network: "facebook",
                 placementId: "IMG_16_9_LINK#\(ConfigManager.shared.fbInterstitialPlacementId!)",
                 auctionType: .static,
                 isInterstitial: true,
-                adDimensions: nil
+                adDimensions: NimbusAdDimensions(width: 320, height: 480)
             )
             
-        case .facebookNative:
+        case .metaNative:
             return createNimbusAd(
                 network: "facebook",
                 placementId: "IMG_16_9_LINK#\(ConfigManager.shared.fbNativePlacementId!)",

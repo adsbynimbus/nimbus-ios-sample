@@ -50,13 +50,18 @@ final class GAMViewController: DemoViewController {
             bannerView.rootViewController = self
             bannerView.adUnitID = ConfigManager.shared.googlePlacementId
             bannerView.delegate = self
+            bannerView.isAccessibilityElement = true
+            bannerView.accessibilityIdentifier = "google_ad_view"
             
             bannerView.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(bannerView)
             
             NSLayoutConstraint.activate([
+                bannerView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
+                bannerView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor),
+                bannerView.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor),
+                bannerView.trailingAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor),
                 bannerView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-                bannerView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
             ])
             bannerView.load(gamRequest)
             
@@ -66,12 +71,16 @@ final class GAMViewController: DemoViewController {
             bannerView.rootViewController = self
             bannerView.adUnitID = ConfigManager.shared.googlePlacementId
             bannerView.delegate = self
+            bannerView.accessibilityIdentifier = "google_ad_view"
             
             bannerView.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(bannerView)
             NSLayoutConstraint.activate([
+                bannerView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
+                bannerView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor),
+                bannerView.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor),
+                bannerView.trailingAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor),
                 bannerView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-                bannerView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
             ])
             
             gamDynamicPrice = NimbusGAMDynamicPrice(request: gamRequest)
@@ -99,7 +108,7 @@ final class GAMViewController: DemoViewController {
             gamDynamicPrice?.requestDelegate = self
             
             requestManager.delegate = gamDynamicPrice
-            requestManager.performRequest(request: NimbusRequest.forInterstitialAd(position: "interstitial_position"))
+            requestManager.performRequest(request: NimbusRequest.forInterstitialAd(position: adType.description))
             
         case .dynamicPriceInterstitialStatic:
             gamDynamicPrice = NimbusGAMDynamicPrice(request: gamRequest)
@@ -107,7 +116,7 @@ final class GAMViewController: DemoViewController {
             
             requestManager.delegate = gamDynamicPrice
             
-            let request = NimbusRequest.forInterstitialAd(position: "interstitial_static_position")
+            let request = NimbusRequest.forInterstitialAd(position: adType.description)
             request.impressions[0].video = nil
             
             requestManager.performRequest(request: request)
@@ -118,7 +127,7 @@ final class GAMViewController: DemoViewController {
             
             requestManager.delegate = gamDynamicPrice
             
-            let request = NimbusRequest.forInterstitialAd(position: "interstitial_video_position")
+            let request = NimbusRequest.forInterstitialAd(position: adType.description)
             request.impressions[0].banner = nil
             
             requestManager.performRequest(request: request)
@@ -132,6 +141,7 @@ extension GAMViewController: GADBannerViewDelegate {
     
     func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
         print("bannerViewDidReceiveAd")
+        bannerView.nimbusAdView?.setUiTestIdentifiers(for: "test_demand static ad")
     }
     
     func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
@@ -201,5 +211,16 @@ extension GAMViewController: NimbusRequestManagerDelegate {
     
     func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
         print("didFailNimbusRequest: \(error.localizedDescription)")
+    }
+}
+
+extension GADBannerView {
+    
+    var nimbusAdView: NimbusAdView? {
+        var currentView = subviews.first
+        while currentView != nil && !(currentView is NimbusAdView){
+            currentView = currentView?.subviews.first
+        }
+        return currentView as? NimbusAdView
     }
 }

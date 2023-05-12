@@ -113,7 +113,7 @@ class VungleViewController: DemoViewController {
             
         case .vungleBanner:
             let request = NimbusRequest.forBannerAd(
-                position: ConfigManager.shared.vungleBannerPlacementId!,
+                position: adType.description,
                 format: .banner320x50
             )
             request.impressions[0].banner?.position = NimbusPosition.unknown
@@ -121,19 +121,15 @@ class VungleViewController: DemoViewController {
             
         case .vungleMREC:
             return NimbusRequest.forBannerAd(
-                position: ConfigManager.shared.vungleMRECPlacementId!,
+                position: adType.description,
                 format: .letterbox
             )
             
         case .vungleInterstitial:
-            return NimbusRequest.forInterstitialAd(
-                position: ConfigManager.shared.vungleInterstitialPlacementId!
-            )
+            return NimbusRequest.forInterstitialAd(position: adType.description)
             
         case .vungleRewarded:
-            return customNimbusRequestForRewardedVideo(
-                position: ConfigManager.shared.vungleRewardedPlacementId!
-            )
+            return customNimbusRequestForRewardedVideo(position: adType.description)
             
         default:
             return nil

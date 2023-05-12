@@ -19,23 +19,20 @@ enum Setting: String, DemoItem {
     
     var description: String {
         switch self {
-        case .nimbusTestMode:
-            return "Nimbus Test Mode"
         case .coppaOn:
             return "Set COPPA On"
-        case .forceNoFill:
-            return "Force No Fill"
         case .omThirdPartyViewability:
             return "Send OMID Viewability Flag"
         case .tradeDesk:
             return "Send Trade Desk Identity"
-            
         case .gdprConsent:
             return "GDPR Consent"
         case .ccpaConsent:
             return "CCPA Consent"
         case .gppConsent:
             return "GPP Consent"
+        default:
+            return rawValue.camelCaseToWords()
         }
     }
     
@@ -86,7 +83,7 @@ enum Setting: String, DemoItem {
     
     var isUserPrivacySetting: Bool {
         switch self {
-        case .gdprConsent, .ccpaConsent:
+        case .gdprConsent, .ccpaConsent, .gppConsent:
             return true
         default:
             return false

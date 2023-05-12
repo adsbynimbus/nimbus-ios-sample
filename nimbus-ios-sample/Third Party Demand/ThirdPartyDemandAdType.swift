@@ -6,15 +6,15 @@
 //
 
 enum ThirdPartyDemandAdType: String, DemoItem {
-    case apsRefreshingBanner, apsInterstitialHybrid
-    case facebookBanner, facebookInterstitial, facebookNative
+    case apsBannerWithRefresh, apsInterstitialHybrid
+    case metaBanner, metaInterstitial, metaNative
     case unityRewardedVideo
     case vungleBanner, vungleMREC, vungleInterstitial, vungleRewarded
     
     var description: String {
         switch self {
-        case .apsRefreshingBanner:
-            return "APS Refreshing Banner (30 sec)"
+        case .apsBannerWithRefresh:
+            return "APS Banner With Refresh"
         case .apsInterstitialHybrid:
             return "APS Interstitial Hybrid"
         case .vungleMREC:
@@ -24,8 +24,8 @@ enum ThirdPartyDemandAdType: String, DemoItem {
         }
     }
     
-    public static var apsAdTypes = [apsRefreshingBanner, apsInterstitialHybrid]
-    public static var fanAdTypes = [facebookBanner, facebookInterstitial, facebookNative]
+    public static var apsAdTypes = [apsBannerWithRefresh, apsInterstitialHybrid]
+    public static var metaAdTypes = [metaBanner, metaInterstitial, metaNative]
     public static var unityAdTypes = [unityRewardedVideo]
     public static var vungleAdTypes = [vungleBanner, vungleMREC, vungleInterstitial, vungleRewarded]
 }

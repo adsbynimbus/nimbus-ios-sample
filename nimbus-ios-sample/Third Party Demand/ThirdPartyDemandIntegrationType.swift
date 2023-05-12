@@ -7,13 +7,13 @@
 
 enum ThirdPartyDemandIntegrationType: String, DemoItem {
     case aps
-    case fan
+    case meta
     case unity
     case vungle
     
     var description: String {
         switch self {
-        case .aps, .fan:
+        case .aps:
             return rawValue.uppercased()
         default:
             return rawValue.camelCaseToWords()

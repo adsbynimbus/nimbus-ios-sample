@@ -67,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
         
         // This is only for testing environment, do NOT add this on production environment
-        let url = URL(string: "https://dev-sdk.adsbynimbus.com/rta/test")!
+        let url = URL(string: "https://\(ConfigManager.shared.publisherKey).adsbynimbus.com/rta/test")!
         NimbusAdManager.requestUrl = url
         NimbusAdManager.additionalRequestHeaders = [
             "Nimbus-Test-No-Fill": String(UserDefaults.standard.forceNoFill)
@@ -84,6 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Renderers
         let videoRenderer = NimbusVideoAdRenderer()
         videoRenderer.showMuteButton = true
+        videoRenderer.videoAdSettingsProvider = CustomVideoAdSettingsProvider.shared
         Nimbus.shared.renderers = [
             .forAuctionType(.static): NimbusStaticAdRenderer(),
             .forAuctionType(.video): videoRenderer,
