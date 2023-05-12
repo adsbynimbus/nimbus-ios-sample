@@ -21,10 +21,10 @@ import NimbusRenderStaticKit
 final class AdManagerViewController: DemoViewController {
     
     private let contentView = UIView()
+    private var adManager: NimbusAdManager = NimbusAdManager()
     
     private let adType: AdManagerAdType
-    private let shouldShowVideoUI: Bool
-    private var adManager: NimbusAdManager?
+    private let shouldHideVideoUI: Bool
     private var customAdContainerView: CustomAdContainerView?
     private var adController: AdController?
     private var manualRequest: NimbusRequest?
@@ -37,14 +37,13 @@ final class AdManagerViewController: DemoViewController {
         shouldShowVideoUI: Bool = false
     ) {
         self.adType = adType
-        self.shouldShowVideoUI = shouldShowVideoUI
-        
+        self.shouldHideVideoUI = shouldShowVideoUI
         super.init(headerTitle: headerTitle, headerSubTitle: headerSubTitle)
     }
     
     init(adType: AdManagerAdType, headerSubTitle: String, shouldShowVideoUI: Bool = false) {
         self.adType = adType
-        self.shouldShowVideoUI = shouldShowVideoUI
+        self.shouldHideVideoUI = shouldShowVideoUI
 
         super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle)
     }
@@ -56,8 +55,8 @@ final class AdManagerViewController: DemoViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if shouldShowVideoUI {
-            setupCustomVideoSettings()
+        if shouldHideVideoUI {
+            CustomVideoAdSettingsProvider.shared.disableUi = true
         }
         
         setupContentView()
@@ -65,10 +64,7 @@ final class AdManagerViewController: DemoViewController {
     }
     
     deinit {
-        if shouldShowVideoUI {
-            resetVideoSettings()
-        }
-        
+        CustomVideoAdSettingsProvider.shared.disableUi = false
         let nimbusAdView = contentView.subviews.first(where: { $0 is NimbusAdView }) as? NimbusAdView
         nimbusAdView?.destroy()
         customAdContainerView?.destroy()
@@ -84,16 +80,17 @@ final class AdManagerViewController: DemoViewController {
             contentView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
             contentView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor),
             contentView.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor),
-            contentView.trailingAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor)
+            contentView.trailingAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor),
+            contentView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
         ])
     }
     
     private func setupAdRendering() {
         switch adType {
                      
-        case .manualRequestRenderAd:
+        case .manuallyRenderedAd:
             // Manual Request Ad
-            manualRequest = NimbusRequest.forBannerAd(position: "test_manual_request_banner")
+            manualRequest = NimbusRequest.forBannerAd(position: adType.description)
             
             // Manual Render Ad
             requestManager = NimbusRequestManager()
@@ -101,69 +98,60 @@ final class AdManagerViewController: DemoViewController {
             requestManager?.performRequest(request: manualRequest!)
             
         case .banner:
-            let request = NimbusRequest.forBannerAd(position: "test_banner")
+            let request = NimbusRequest.forBannerAd(position: adType.description)
 
-            adManager = NimbusAdManager()
-            adManager?.delegate = self
-            adManager?.showAd(
+            adManager.delegate = self
+            adManager.showAd(
                 request: request,
                 container: contentView,
                 adPresentingViewController: self
             )
         
-        case .refreshingBanner:
-            let request = NimbusRequest.forBannerAd(position: "refreshing_banner")
+        case .bannerWithRefresh:
+            let request = NimbusRequest.forBannerAd(position: adType.description)
             
-            adManager = NimbusAdManager()
-            adManager?.delegate = self
-            adManager?.showAd(
+            adManager.delegate = self
+            adManager.showAd(
                 request: request,
-                container: view,
+                container: contentView,
                 refreshInterval: 30,
                 adPresentingViewController: self
             )
             
-        case .video:
-            let request = NimbusRequest.forInterstitialAd(position: "test_video")
-            request.impressions[0].banner = nil
+        case .inlineVideo:
+            NSLayoutConstraint.activate([
+                contentView.heightAnchor.constraint(equalToConstant: CGFloat(480)),
+                contentView.widthAnchor.constraint(equalToConstant: CGFloat(320)),
+            ])
             
-            adManager = NimbusAdManager()
-            adManager?.delegate = self
-            adManager?.showAd(
+            let request = NimbusRequest.forVideoAd(position: adType.description)
+            
+            adManager.delegate = self
+            adManager.showAd(
                 request: request,
-                container: view,
+                container: contentView,
                 adPresentingViewController: self
             )
             
-        case .interstitialStatic, .interstitialVideo, .interstitialVideoWithUI, .interstitialHybrid:
-            let request = NimbusRequest.forInterstitialAd(position: "test_interstitial")
+        case .interstitialStatic, .interstitialVideo, .interstitialVideoWithoutUI, .interstitialHybrid:
+            let request = NimbusRequest.forInterstitialAd(position: adType.description)
             if adType == .interstitialStatic {
                 request.impressions[0].video = nil
-            } else if adType == .interstitialVideo || adType == .interstitialVideoWithUI {
+            } else if adType == .interstitialVideo || adType == .interstitialVideoWithoutUI {
                 request.impressions[0].banner = nil
             }
 
-            adManager = NimbusAdManager()
-            adManager?.delegate = self
-            adManager?.showBlockingAd(
+
+            adManager.delegate = self
+            adManager.showBlockingAd(
                 request: request,
                 closeButtonDelay: 0,
                 adPresentingViewController: self
             )
-            
-        case .rewardedStatic:
-            let request = NimbusRequest.forInterstitialAd(position: "test_rewarded_static")
-            request.impressions[0].video = nil
-            
-            adManager = NimbusAdManager()
-            adManager?.delegate = self
-            adManager?.showRewardedAd(request: request, adPresentingViewController: self)
-                        
         case .rewardedVideo:
-            adManager = NimbusAdManager()
-            adManager?.delegate = self
-            adManager?.showRewardedAd(
-                request: NimbusRequest.forVideoAd(position: "test_rewarded_video"),
+            adManager.delegate = self
+            adManager.showRewardedAd(
+                request: NimbusRequest.forVideoAd(position: adType.description),
                 adPresentingViewController: self
             )
         }
@@ -229,9 +217,17 @@ extension AdManagerViewController: NimbusRequestManagerDelegate {
 }
 
 final class CustomVideoAdSettingsProvider: NimbusVideoSettingsProvider {
+    
+    static let shared = CustomVideoAdSettingsProvider()
+    
+    public var disableUi = false
+    
     override func adsRenderingSettings() -> IMAAdsRenderingSettings {
         let settings = IMAAdsRenderingSettings()
-        settings.disableUi = false
+        settings.disableUi = disableUi
+        if disableUi {
+            settings.uiElements = []
+        }
         return settings
     }
 }

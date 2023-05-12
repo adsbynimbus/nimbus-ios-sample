@@ -30,10 +30,6 @@ final class AdDemoViewController: DemoViewController {
         return tableView
     }()
     
-    private var dataSource: [AdManagerAdType] {
-        AdManagerAdType.allCases.filter { $0 != .video }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,12 +42,12 @@ extension AdDemoViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int { 1 }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        dataSource.count
+        AdManagerAdType.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: DemoCell = tableView.dequeueReusableCell(for: indexPath)
-        let adType = dataSource[indexPath.row]
+        let adType = AdManagerAdType.allCases[indexPath.row]
         cell.updateWithAdManagerAdType(adType)
         return cell
     }
@@ -60,8 +56,8 @@ extension AdDemoViewController: UITableViewDataSource {
 extension AdDemoViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let adType = dataSource[indexPath.row]
-        let shouldShowVideoUI = adType == .interstitialVideoWithUI
+        let adType = AdManagerAdType.allCases[indexPath.row]
+        let shouldShowVideoUI = adType == .interstitialVideoWithoutUI
         
         navigationController?.pushViewController(
             AdManagerViewController(

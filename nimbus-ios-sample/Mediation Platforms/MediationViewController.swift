@@ -30,7 +30,7 @@ final class MediationViewController: DemoViewController {
     }()
     
     private var dataSource: [DemoDataSource<MediationIntegrationType, MediationAdType>] {
-        [DemoDataSource(type: .gam, values: MediationAdType.allCases)]
+        [DemoDataSource(type: .googleAdManager, values: MediationAdType.allCases)]
     }
     
     override func viewDidLoad() {
@@ -49,7 +49,7 @@ final class MediationViewController: DemoViewController {
             navigationController?.pushViewController(
                 GAMViewController(
                     adType: adType,
-                    headerSubTitle: integrationType.description + " - " + headerTitle
+                    headerSubTitle: integrationType.description
                 ),
                 animated: true
             )

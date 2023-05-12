@@ -35,7 +35,7 @@ final class SettingsViewController: DemoViewController {
             ),
             DemoDataSource(
                 type: .userDetails,
-                values: [Setting.gdprConsent, Setting.ccpaConsent]
+                values: [Setting.gdprConsent, Setting.ccpaConsent, Setting.gppConsent]
             )
         ]
     }

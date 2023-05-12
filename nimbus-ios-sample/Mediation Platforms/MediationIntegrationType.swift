@@ -6,9 +6,9 @@
 //
 
 enum MediationIntegrationType: String, DemoItem {
-    case gam
+    case googleAdManager
     
     var description: String {
-        rawValue.uppercased()
+        rawValue.camelCaseToWords()
     }
 }

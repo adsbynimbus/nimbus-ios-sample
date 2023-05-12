@@ -99,7 +99,7 @@ final class GAMViewController: DemoViewController {
             gamDynamicPrice?.requestDelegate = self
             
             requestManager.delegate = gamDynamicPrice
-            requestManager.performRequest(request: NimbusRequest.forInterstitialAd(position: "interstitial_position"))
+            requestManager.performRequest(request: NimbusRequest.forInterstitialAd(position: adType.description))
             
         case .dynamicPriceInterstitialStatic:
             gamDynamicPrice = NimbusGAMDynamicPrice(request: gamRequest)
@@ -107,7 +107,7 @@ final class GAMViewController: DemoViewController {
             
             requestManager.delegate = gamDynamicPrice
             
-            let request = NimbusRequest.forInterstitialAd(position: "interstitial_static_position")
+            let request = NimbusRequest.forInterstitialAd(position: adType.description)
             request.impressions[0].video = nil
             
             requestManager.performRequest(request: request)
@@ -118,7 +118,7 @@ final class GAMViewController: DemoViewController {
             
             requestManager.delegate = gamDynamicPrice
             
-            let request = NimbusRequest.forInterstitialAd(position: "interstitial_video_position")
+            let request = NimbusRequest.forInterstitialAd(position: adType.description)
             request.impressions[0].banner = nil
             
             requestManager.performRequest(request: request)

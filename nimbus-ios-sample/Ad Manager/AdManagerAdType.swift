@@ -8,25 +8,18 @@
 import Foundation
 
 enum AdManagerAdType: String, DemoItem {
-    case manualRequestRenderAd
-    case banner, refreshingBanner
-    case video
-    case interstitialStatic
-    case interstitialVideo, interstitialVideoWithUI
+    case manuallyRenderedAd
+    case banner, bannerWithRefresh
+    case inlineVideo
     case interstitialHybrid
-    case rewardedStatic
+    case interstitialStatic
+    case interstitialVideo, interstitialVideoWithoutUI
     case rewardedVideo
     
     var description: String {
         switch self {
-        case .manualRequestRenderAd:
-            return "Manual Request/Render Ad"
-        case .refreshingBanner:
-            return "Refreshing Banner (30 sec)"
-        case .interstitialVideoWithUI:
-            return "Interstitial Video With UI"
-        case .rewardedStatic:
-            return rawValue.camelCaseToWords() + " (5 sec)"
+        case .interstitialVideoWithoutUI:
+            return "Interstitial Video Without UI"
         default:
             return rawValue.camelCaseToWords()
         }

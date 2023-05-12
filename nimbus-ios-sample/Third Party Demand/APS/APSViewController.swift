@@ -48,7 +48,7 @@ final class APSViewController: DemoViewController {
             self.adManager = NimbusAdManager()
             self.adManager?.delegate = self
             
-            if self.adType == .apsRefreshingBanner {
+            if self.adType == .apsBannerWithRefresh {
                 self.loadAPSBannerAds()
             } else if self.adType == .apsInterstitialHybrid {
                 self.loadAPSInterstitialAds()
@@ -63,20 +63,20 @@ final class APSViewController: DemoViewController {
             }
             
             let request: NimbusRequest
-            if self.adType == .apsRefreshingBanner {
-                request = NimbusRequest.forBannerAd(position: "refreshing_banner")
+            if self.adType == .apsBannerWithRefresh {
+                request = NimbusRequest.forBannerAd(position: adType.description)
             } else {
-                request = NimbusRequest.forInterstitialAd(position: "interstitial_with_aps")
+                request = NimbusRequest.forInterstitialAd(position: adType.description)
             }
             
             self.callbacks.compactMap { $0.response }.forEach { request.addAPSResponse($0) }
             
-            if self.adType == .apsRefreshingBanner {
+            if self.adType == .apsBannerWithRefresh {
                 self.adLoaders.forEach { request.addAPSLoader($0) }
             }
             
             DispatchQueue.main.async {
-                if self.adType == .apsRefreshingBanner {
+                if self.adType == .apsBannerWithRefresh {
                     self.adManager?.showAd(
                         request: request,
                         container: self.view,

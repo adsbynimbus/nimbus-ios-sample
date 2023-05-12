@@ -65,7 +65,7 @@ final class UnityViewController: DemoViewController {
         adManager = NimbusAdManager()
         adManager?.delegate = self
         adManager?.showRewardedAd(
-            request: NimbusRequest.forVideoAd(position: "Rewarded_iOS"),
+            request: NimbusRequest.forVideoAd(position: adType.description),
             adPresentingViewController: self
         )
     }
