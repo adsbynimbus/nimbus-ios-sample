@@ -64,9 +64,9 @@ final class APSViewController: DemoViewController {
             
             let request: NimbusRequest
             if self.adType == .apsBannerWithRefresh {
-                request = NimbusRequest.forBannerAd(position: adType.description)
+                request = NimbusRequest.forBannerAd(position: self.adType.description)
             } else {
-                request = NimbusRequest.forInterstitialAd(position: adType.description)
+                request = NimbusRequest.forInterstitialAd(position: self.adType.description)
             }
             
             self.callbacks.compactMap { $0.response }.forEach { request.addAPSResponse($0) }
