@@ -98,10 +98,9 @@ final class FANViewController: DemoViewController {
         } else {
             NSLayoutConstraint.activate([
                 adContainerView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
-                adContainerView.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor),
-                adContainerView.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor),
-                adContainerView.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor),
-                adContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+                adContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                adContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                adContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             ])
         }
     }
