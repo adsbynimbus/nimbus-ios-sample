@@ -53,7 +53,6 @@ final class CustomAdContainerView: UIView {
     
     private func setupAdView() {
         addSubview(nimbusAdView)
-        nimbusAdView.setUiTestIdentifiers(for: ad)
         nimbusAdView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             nimbusAdView.topAnchor.constraint(equalTo: topAnchor),
@@ -67,5 +66,6 @@ final class CustomAdContainerView: UIView {
 
         nimbusAdView.render(ad: ad, companionAd: companionAd)
         nimbusAdView.start()
+        nimbusAdView.setUiTestIdentifiers(for: ad)
     }
 }
