@@ -7,6 +7,7 @@
 
 import NimbusRenderKit
 import UIKit
+import WebKit
 
 extension UIView {
     
@@ -15,12 +16,15 @@ extension UIView {
     }
     
     func setUiTestIdentifiers(for adString: String) {
-        isAccessibilityElement = true
+        accessibilityContainerType = .semanticGroup
         accessibilityIdentifier = "nimbus_ad_view"
         accessibilityLabel = adString
         accessibilityValue = adString
         subviews.forEach {
             $0.isAccessibilityElement = true
+            if #available(macOS 13.3, iOS 16.4, tvOS 16.4, *),  let webView = $0 as? WKWebView {
+                webView.isInspectable = true
+            }
         }
     }
 }
