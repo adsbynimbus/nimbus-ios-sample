@@ -20,7 +20,6 @@ extension UIView {
     }
     
     func setUiTestIdentifiers(for adString: String) {
-        isAccessibilityElement = true
         accessibilityContainerType = .semanticGroup
         accessibilityIdentifier = "nimbus_ad_view"
         accessibilityLabel = adString

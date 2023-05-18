@@ -215,6 +215,16 @@ extension AdManagerViewController: NimbusRequestManagerDelegate {
     }
 }
 
+extension AdManagerViewController: AdControllerDelegate {
+    func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {
+        if event == .loaded {
+            controller.adView?.setUiTestIdentifiers(for: ad)
+        }
+    }
+    
+    func didReceiveNimbusError(controller: AdController, error: NimbusError) {    }
+}
+
 final class CustomVideoAdSettingsProvider: NimbusVideoSettingsProvider {
     
     static let shared = CustomVideoAdSettingsProvider()
