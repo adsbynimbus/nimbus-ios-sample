@@ -29,6 +29,7 @@ final class AdManagerViewController: DemoViewController {
     private var adController: AdController?
     private var manualRequest: NimbusRequest?
     private var requestManager: NimbusRequestManager?
+    private var nimbusAd: NimbusAd?
 
     init(
         adType: AdManagerAdType,
@@ -203,7 +204,7 @@ extension AdManagerViewController: NimbusRequestManagerDelegate {
     
     func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
         print("didCompleteNimbusRequest")
-        
+        nimbusAd = ad
         if manualRequest == request {
             customAdContainerView = CustomAdContainerView(ad: ad, viewController: self)
             setupAdView(adView: customAdContainerView)
@@ -217,7 +218,7 @@ extension AdManagerViewController: NimbusRequestManagerDelegate {
 
 extension AdManagerViewController: AdControllerDelegate {
     func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {
-        if event == .loaded {
+        if let ad = nimbusAd, event == .loaded {
             controller.adView?.setUiTestIdentifiers(for: ad)
         }
     }
