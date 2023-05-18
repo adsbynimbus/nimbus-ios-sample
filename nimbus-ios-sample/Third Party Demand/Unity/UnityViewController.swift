@@ -21,6 +21,7 @@ final class UnityViewController: DemoViewController {
     private let adType: ThirdPartyDemandAdType
     private var adManager: NimbusAdManager?
     private var adController: AdController?
+    private var nimbusAd: NimbusAd?
 
     init(
         adType: ThirdPartyDemandAdType,
@@ -79,8 +80,8 @@ extension UnityViewController: NimbusAdManagerDelegate {
         print("didRenderAd")
         
         adController = controller
-        adController?.adView?.setUiTestIdentifiers(for: ad)
         adController?.delegate = self
+        nimbusAd = ad
     }
 }
 
@@ -101,6 +102,9 @@ extension UnityViewController: AdControllerDelegate {
     
     func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {
         print("Nimbus didReceiveNimbusEvent: \(event)")
+        if let ad = nimbusAd, event == .loaded {
+            controller.adView?.setUiTestIdentifiers(for: ad)
+        }
     }
     
     func didReceiveNimbusError(controller: AdController, error: NimbusError) {

@@ -9,8 +9,8 @@ import UIKit
 import NimbusKit
 import NimbusRenderStaticKit
 
-final class CustomAdContainerView: UIView {
-    
+final class CustomAdContainerView: UIView, AdControllerDelegate {
+
     private let ad: NimbusAd
     private let volume: Int
     private let companionAd: NimbusCompanionAd?
@@ -62,10 +62,20 @@ final class CustomAdContainerView: UIView {
         ])
 
         nimbusAdView.volume = volume
-        nimbusAdView.delegate = delegate
+        nimbusAdView.delegate = self
 
         nimbusAdView.render(ad: ad, companionAd: companionAd)
         nimbusAdView.start()
-        nimbusAdView.setUiTestIdentifiers(for: ad)
+    }
+    
+    func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {
+        if event == .loaded {
+            nimbusAdView.setUiTestIdentifiers(for: ad)
+        }
+        delegate?.didReceiveNimbusEvent(controller: controller, event: event)
+    }
+    
+    func didReceiveNimbusError(controller: AdController, error: NimbusError) {
+        delegate?.didReceiveNimbusError(controller: controller, error: error)
     }
 }
