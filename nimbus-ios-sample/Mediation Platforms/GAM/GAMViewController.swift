@@ -87,12 +87,21 @@ final class GAMViewController: DemoViewController {
             
             bannerView.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(bannerView)
-            NSLayoutConstraint.activate([
-                bannerView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
-                bannerView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor),
-                bannerView.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor),
-                bannerView.trailingAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor),
-                bannerView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            view.addConstraints(
+                [NSLayoutConstraint(item: bannerView,
+                                    attribute: .top,
+                                    relatedBy: .equal,
+                                    toItem: headerView,
+                                    attribute: .bottom,
+                                    multiplier: 1,
+                                    constant: 0),
+                 NSLayoutConstraint(item: bannerView,
+                                    attribute: .centerX,
+                                    relatedBy: .equal,
+                                    toItem: view,
+                                    attribute: .centerX,
+                                    multiplier: 1,
+                                    constant: 0)
             ])
             
             gamDynamicPrice = NimbusGAMDynamicPrice(request: gamRequest)
@@ -101,29 +110,33 @@ final class GAMViewController: DemoViewController {
             requestManager.delegate = gamDynamicPrice
             requestManager.performRequest(request: NimbusRequest.forBannerAd(position: adType.description))
         case .dynamicPriceBannerVideo:
-            bannerView = GAMBannerView(adSize: GADCurrentOrientationInlineAdaptiveBannerAdSizeWithWidth(400))
+            bannerView = GAMBannerView(adSize: GADAdSizeMediumRectangle)
             guard let bannerView else { return }
             bannerView.rootViewController = self
             bannerView.adUnitID = ConfigManager.shared.googlePlacementId
             bannerView.delegate = self
-            bannerView.validAdSizes = [
-                NSValueFromGADAdSize(GADAdSizeMediumRectangle),
-                NSValueFromGADAdSize(GADAdSizeFromCGSize(CGSize(width: 400, height: 300))),
-            ]
+            bannerView.validAdSizes = [NSValueFromGADAdSize(GADAdSizeFromCGSize(CGSize(width: 400, height: 300)))]
             bannerView.accessibilityIdentifier = "google_ad_view"
             
             bannerView.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(bannerView)
-            NSLayoutConstraint.activate([
-                bannerView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
-                bannerView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor),
-                bannerView.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor),
-                bannerView.trailingAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor),
-                bannerView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-                bannerView.widthAnchor.constraint(lessThanOrEqualToConstant: 400),
-                bannerView.heightAnchor.constraint(lessThanOrEqualToConstant: 300),
+            view.addConstraints(
+                [NSLayoutConstraint(item: bannerView,
+                                    attribute: .top,
+                                    relatedBy: .equal,
+                                    toItem: headerView,
+                                    attribute: .bottom,
+                                    multiplier: 1,
+                                    constant: 0),
+                 NSLayoutConstraint(item: bannerView,
+                                    attribute: .centerX,
+                                    relatedBy: .equal,
+                                    toItem: view,
+                                    attribute: .centerX,
+                                    multiplier: 1,
+                                    constant: 0)
             ])
-            
+          
             gamDynamicPrice = NimbusGAMDynamicPrice(request: gamRequest)
             gamDynamicPrice?.requestDelegate = self
             
@@ -150,7 +163,7 @@ extension GAMViewController: GADBannerViewDelegate {
     
     func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
         print("bannerViewDidReceiveAd")
-        bannerView.nimbusAdView?.setUiTestIdentifiers(for: "test_demand static ad")
+      //  bannerView.nimbusAdView?.setUiTestIdentifiers(for: "test_demand static ad")
     }
     
     func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
