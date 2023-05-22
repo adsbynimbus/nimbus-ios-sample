@@ -101,14 +101,14 @@ final class GAMViewController: DemoViewController {
             requestManager.delegate = gamDynamicPrice
             requestManager.performRequest(request: NimbusRequest.forBannerAd(position: adType.description))
         case .dynamicPriceBannerVideo:
-            bannerView = GAMBannerView(adSize: GADAdSizeMediumRectangle)
+            bannerView = GAMBannerView(adSize: GADCurrentOrientationInlineAdaptiveBannerAdSizeWithWidth(400))
             guard let bannerView else { return }
             bannerView.rootViewController = self
             bannerView.adUnitID = ConfigManager.shared.googlePlacementId
             bannerView.delegate = self
             bannerView.validAdSizes = [
+                NSValueFromGADAdSize(GADAdSizeMediumRectangle),
                 NSValueFromGADAdSize(GADAdSizeFromCGSize(CGSize(width: 400, height: 300))),
-                NSValueFromGADAdSize(GADAdSizeMediumRectangle)
             ]
             bannerView.accessibilityIdentifier = "google_ad_view"
             
@@ -120,6 +120,8 @@ final class GAMViewController: DemoViewController {
                 bannerView.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor),
                 bannerView.trailingAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor),
                 bannerView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+                bannerView.widthAnchor.constraint(lessThanOrEqualToConstant: 400),
+                bannerView.heightAnchor.constraint(lessThanOrEqualToConstant: 300),
             ])
             
             gamDynamicPrice = NimbusGAMDynamicPrice(request: gamRequest)
@@ -194,7 +196,7 @@ extension GAMViewController: GADFullScreenContentDelegate {
 extension GAMViewController: NimbusRequestManagerDelegate {
     
     func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
-        print("didCompleteNimbusRequest")
+        print("didCompleteNimbusRequest with \(ad.auctionType) ad type")
         
         if adType == .dynamicPriceBanner || adType == .dynamicPriceBannerVideo {
             bannerView?.load(gamRequest)
