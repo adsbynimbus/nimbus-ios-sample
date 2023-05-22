@@ -64,7 +64,19 @@ final class GAMViewController: DemoViewController {
                 bannerView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             ])
             bannerView.load(gamRequest)
-            
+        case .interstitial:
+            GAMInterstitialAd.load(
+                withAdManagerAdUnitID: ConfigManager.shared.googlePlacementId!,
+                request: gamRequest
+            ) { (ad, error) in
+                if let error {
+                    print("Failed to load interstitial ad with error: \(error.localizedDescription)")
+                    return
+                }
+                self.interstitial = ad
+                self.interstitial?.fullScreenContentDelegate = self
+                ad?.present(fromRootViewController: self)
+            }
         case .dynamicPriceBanner:
             bannerView = GAMBannerView(adSize: GADAdSizeBanner)
             guard let bannerView else { return }
@@ -87,50 +99,45 @@ final class GAMViewController: DemoViewController {
             gamDynamicPrice?.requestDelegate = self
             
             requestManager.delegate = gamDynamicPrice
-            requestManager.performRequest(request: NimbusRequest.forBannerAd(position: "banner_position"))
+            requestManager.performRequest(request: NimbusRequest.forBannerAd(position: adType.description))
+        case .dynamicPriceBannerVideo:
+            bannerView = GAMBannerView(adSize: GADAdSizeMediumRectangle)
+            guard let bannerView else { return }
+            bannerView.rootViewController = self
+            bannerView.adUnitID = ConfigManager.shared.googlePlacementId
+            bannerView.delegate = self
+            bannerView.validAdSizes = [
+                NSValueFromGADAdSize(GADAdSizeFromCGSize(CGSize(width: 400, height: 300))),
+                NSValueFromGADAdSize(GADAdSizeMediumRectangle)
+            ]
+            bannerView.accessibilityIdentifier = "google_ad_view"
             
-        case .interstitial:
-            GAMInterstitialAd.load(
-                withAdManagerAdUnitID: ConfigManager.shared.googlePlacementId!,
-                request: gamRequest
-            ) { (ad, error) in
-                if let error {
-                    print("Failed to load interstitial ad with error: \(error.localizedDescription)")
-                    return
-                }
-                self.interstitial = ad
-                self.interstitial?.fullScreenContentDelegate = self
-                ad?.present(fromRootViewController: self)
-            }
+            bannerView.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(bannerView)
+            NSLayoutConstraint.activate([
+                bannerView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
+                bannerView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor),
+                bannerView.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor),
+                bannerView.trailingAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor),
+                bannerView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            ])
             
+            gamDynamicPrice = NimbusGAMDynamicPrice(request: gamRequest)
+            gamDynamicPrice?.requestDelegate = self
+            
+            requestManager.delegate = gamDynamicPrice
+            
+            let nimbusRequest = NimbusRequest.forBannerAd(position: adType.description, format: NimbusAdFormat.letterbox)
+            var video = NimbusVideo.interstitial() /* This helper will return a populated video object */
+            video.position = NimbusPosition.unknown /* Remove the fullscreen position set from the interstitial helper */
+            nimbusRequest.impressions[0].video = video
+            requestManager.performRequest(request: nimbusRequest)
         case .dynamicPriceInterstitial:
             gamDynamicPrice = NimbusGAMDynamicPrice(request: gamRequest)
             gamDynamicPrice?.requestDelegate = self
             
             requestManager.delegate = gamDynamicPrice
             requestManager.performRequest(request: NimbusRequest.forInterstitialAd(position: adType.description))
-            
-        case .dynamicPriceInterstitialStatic:
-            gamDynamicPrice = NimbusGAMDynamicPrice(request: gamRequest)
-            gamDynamicPrice?.requestDelegate = self
-            
-            requestManager.delegate = gamDynamicPrice
-            
-            let request = NimbusRequest.forInterstitialAd(position: adType.description)
-            request.impressions[0].video = nil
-            
-            requestManager.performRequest(request: request)
-            
-        case .dynamicPriceInterstitialVideo:
-            gamDynamicPrice = NimbusGAMDynamicPrice(request: gamRequest)
-            gamDynamicPrice?.requestDelegate = self
-            
-            requestManager.delegate = gamDynamicPrice
-            
-            let request = NimbusRequest.forInterstitialAd(position: adType.description)
-            request.impressions[0].banner = nil
-            
-            requestManager.performRequest(request: request)
         }
     }
 }
@@ -189,7 +196,7 @@ extension GAMViewController: NimbusRequestManagerDelegate {
     func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
         print("didCompleteNimbusRequest")
         
-        if adType == .dynamicPriceBanner {
+        if adType == .dynamicPriceBanner || adType == .dynamicPriceBannerVideo {
             bannerView?.load(gamRequest)
         } else {
             GADInterstitialAd.load(

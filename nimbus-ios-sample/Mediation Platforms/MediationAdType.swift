@@ -8,6 +8,15 @@
 import Foundation
 
 enum MediationAdType: String, DemoItem {
-    case banner, interstitial, dynamicPriceBanner
-    case dynamicPriceInterstitial, dynamicPriceInterstitialStatic, dynamicPriceInterstitialVideo
+    case banner, interstitial
+    case dynamicPriceBanner, dynamicPriceBannerVideo, dynamicPriceInterstitial
+    
+    var description: String {
+        switch self {
+        case .dynamicPriceBannerVideo:
+            return "Dynamic Price Banner + Video"
+        default:
+            return rawValue.camelCaseToWords()
+        }
+    }
 }
