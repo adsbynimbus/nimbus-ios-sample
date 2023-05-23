@@ -220,7 +220,7 @@ extension AdManagerViewController: NimbusRequestManagerDelegate {
 extension AdManagerViewController: AdControllerDelegate {
     func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {
         if let ad = nimbusAd, event == .loaded {
-            controller.adView?.setUiTestIdentifiers(for: ad)
+            controller.adView?.setUiTestIdentifiers(for: ad, refreshing: adType == .bannerWithRefresh)
         }
     }
     

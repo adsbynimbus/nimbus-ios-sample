@@ -20,6 +20,7 @@ final class APSViewController: DemoViewController {
     private var callbacks: [DTBCallback] = []
     private var adLoaders: [DTBAdLoader] = []
     private var adSizes: [DTBAdSize]?
+    private var nimbusAd: NimbusAd?
     
     init(
         adType: ThirdPartyDemandAdType,
@@ -133,7 +134,7 @@ extension APSViewController: NimbusAdManagerDelegate {
     
     func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
         print("didRenderAd")
-        controller.adView?.setUiTestIdentifiers(for: ad)
+        nimbusAd = ad
     }
 }
 
@@ -148,6 +149,16 @@ extension APSViewController: NimbusRequestManagerDelegate {
     func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
         print("didFailNimbusRequest: \(error.localizedDescription)")
     }
+}
+
+extension APSViewController: AdControllerDelegate {
+    func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {
+        if let ad = nimbusAd, event == .loaded {
+            controller.adView?.setUiTestIdentifiers(for: ad, refreshing: adType == .apsBannerWithRefresh)
+        }
+    }
+    
+    func didReceiveNimbusError(controller: AdController, error: NimbusError) {    }
 }
 
 // MARK: DTBAdCallback

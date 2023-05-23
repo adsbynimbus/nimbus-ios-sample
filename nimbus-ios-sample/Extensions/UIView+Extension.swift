@@ -11,17 +11,20 @@ import WebKit
 
 extension UIView {
     
-    func setUiTestIdentifiers(for nimbusAd: NimbusAd) {
+    func setUiTestIdentifiers(for nimbusAd: NimbusAd, refreshing: Bool = false) {
         var dimens = ""
         if let width = nimbusAd.adDimensions?.width, let height = nimbusAd.adDimensions?.height {
             dimens = " \(width)x\(height)"
         }
-        setUiTestIdentifiers(for: "\(nimbusAd.network) \(nimbusAd.auctionType.rawValue)\(dimens)")
+        setUiTestIdentifiers(
+            for: "\(nimbusAd.network) \(nimbusAd.auctionType.rawValue)\(dimens)",
+            id: refreshing ? "nimbus_refreshing_controller" : "nimbus_ad_view"
+        )
     }
     
-    func setUiTestIdentifiers(for adString: String) {
+    func setUiTestIdentifiers(for adString: String, id: String) {
         accessibilityContainerType = .semanticGroup
-        accessibilityIdentifier = "nimbus_ad_view"
+        accessibilityIdentifier = id
         accessibilityLabel = adString
         accessibilityValue = adString
         subviews.forEach {
