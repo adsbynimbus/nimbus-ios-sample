@@ -25,6 +25,7 @@ final class GAMViewController: DemoViewController {
     private var interstitial: GADInterstitialAd?
     private var gamDynamicPrice: NimbusGAMDynamicPrice?
     private lazy var gamRequest = GAMRequest()
+    private var nimbusAd: NimbusAd?
     
     init(adType: MediationAdType, headerSubTitle: String) {
         self.adType = adType
@@ -195,9 +196,21 @@ final class GAMViewController: DemoViewController {
 
 extension GAMViewController: GADBannerViewDelegate {
     
+    
     func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
         print("bannerViewDidReceiveAd")
-      //  bannerView.nimbusAdView?.setUiTestIdentifiers(for: "test_demand static ad")
+        
+        /* Set identifiers for UI testing */
+        switch adType {
+        case .banner:
+            bannerView.nimbusAdView?.setUiTestIdentifiers(for: "test_demand static 320x50", id: "nimbus_ad_view")
+        case .dynamicPriceBanner, .dynamicPriceInlineVideo, .dynamicPriceBannerVideo:
+            if let ad = nimbusAd {
+                bannerView.setUiTestIdentifiers(for: ad.testIdentifier, id: "google_ad_view")
+            }
+        default:
+            return
+        }
     }
     
     func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
@@ -244,6 +257,7 @@ extension GAMViewController: NimbusRequestManagerDelegate {
     
     func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
         print("didCompleteNimbusRequest with \(ad.auctionType) ad type")
+        nimbusAd = ad
         if adType != .dynamicPriceInterstitial{
             bannerView?.load(gamRequest)
         } else {

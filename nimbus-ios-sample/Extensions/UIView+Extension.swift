@@ -9,15 +9,21 @@ import NimbusRenderKit
 import UIKit
 import WebKit
 
+extension NimbusAd {
+    var testIdentifier: String {
+        var dimens = ""
+        if let width = adDimensions?.width, let height = adDimensions?.height {
+            dimens = " \(width)x\(height)"
+        }
+        return "\(network) \(auctionType.rawValue)\(dimens)"
+    }
+}
+
 extension UIView {
     
     func setUiTestIdentifiers(for nimbusAd: NimbusAd, refreshing: Bool = false) {
-        var dimens = ""
-        if let width = nimbusAd.adDimensions?.width, let height = nimbusAd.adDimensions?.height {
-            dimens = " \(width)x\(height)"
-        }
         setUiTestIdentifiers(
-            for: "\(nimbusAd.network) \(nimbusAd.auctionType.rawValue)\(dimens)",
+            for: nimbusAd.testIdentifier,
             id: refreshing ? "nimbus_refreshing_controller" : "nimbus_ad_view"
         )
     }
