@@ -21,6 +21,7 @@ final class APSViewController: DemoViewController {
     private var adLoaders: [DTBAdLoader] = []
     private var adSizes: [DTBAdSize]?
     private var nimbusAd: NimbusAd?
+    private var adController: AdController?
     
     init(
         adType: ThirdPartyDemandAdType,
@@ -36,12 +37,16 @@ final class APSViewController: DemoViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        adController?.destroy()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupAdRendering()
     }
-    
+
     private func setupAdRendering() {
         DispatchQueue.global().async { [weak self] in
             guard let self else { return }
@@ -135,6 +140,8 @@ extension APSViewController: NimbusAdManagerDelegate {
     func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
         print("didRenderAd")
         nimbusAd = ad
+        controller.delegate = self
+        adController = controller
     }
 }
 

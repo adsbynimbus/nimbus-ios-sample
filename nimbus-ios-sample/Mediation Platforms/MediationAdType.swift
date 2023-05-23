@@ -9,7 +9,7 @@ import Foundation
 
 enum MediationAdType: String, DemoItem {
     case banner, interstitial
-    case dynamicPriceBanner, dynamicPriceBannerVideo, dynamicPriceInterstitial
+    case dynamicPriceBanner, dynamicPriceBannerVideo, dynamicPriceInlineVideo, dynamicPriceInterstitial
     
     var description: String {
         switch self {

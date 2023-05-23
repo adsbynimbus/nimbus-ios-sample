@@ -147,6 +147,40 @@ final class GAMViewController: DemoViewController {
             video.position = NimbusPosition.unknown /* Remove the fullscreen position set from the interstitial helper */
             nimbusRequest.impressions[0].video = video
             requestManager.performRequest(request: nimbusRequest)
+        case .dynamicPriceInlineVideo:
+            bannerView = GAMBannerView(adSize: GADAdSizeMediumRectangle)
+            guard let bannerView else { return }
+            bannerView.rootViewController = self
+            bannerView.adUnitID = ConfigManager.shared.googlePlacementId
+            bannerView.delegate = self
+            bannerView.validAdSizes = [NSValueFromGADAdSize(GADAdSizeFromCGSize(CGSize(width: 400, height: 300)))]
+            bannerView.accessibilityIdentifier = "google_ad_view"
+            
+            bannerView.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(bannerView)
+            view.addConstraints(
+                [NSLayoutConstraint(item: bannerView,
+                                    attribute: .top,
+                                    relatedBy: .equal,
+                                    toItem: headerView,
+                                    attribute: .bottom,
+                                    multiplier: 1,
+                                    constant: 0),
+                 NSLayoutConstraint(item: bannerView,
+                                    attribute: .centerX,
+                                    relatedBy: .equal,
+                                    toItem: view,
+                                    attribute: .centerX,
+                                    multiplier: 1,
+                                    constant: 0)
+            ])
+          
+            gamDynamicPrice = NimbusGAMDynamicPrice(request: gamRequest)
+            gamDynamicPrice?.requestDelegate = self
+            
+            requestManager.delegate = gamDynamicPrice
+            
+            requestManager.performRequest(request: NimbusRequest.forVideoAd(position: adType.description))
         case .dynamicPriceInterstitial:
             gamDynamicPrice = NimbusGAMDynamicPrice(request: gamRequest)
             gamDynamicPrice?.requestDelegate = self
@@ -210,8 +244,7 @@ extension GAMViewController: NimbusRequestManagerDelegate {
     
     func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
         print("didCompleteNimbusRequest with \(ad.auctionType) ad type")
-        
-        if adType == .dynamicPriceBanner || adType == .dynamicPriceBannerVideo {
+        if adType != .dynamicPriceInterstitial{
             bannerView?.load(gamRequest)
         } else {
             GADInterstitialAd.load(
