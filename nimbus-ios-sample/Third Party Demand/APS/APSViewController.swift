@@ -90,9 +90,8 @@ final class APSViewController: DemoViewController {
                         adPresentingViewController: self
                     )
                 } else {
-                    self.adManager?.showAd(
+                    self.adManager?.showBlockingAd(
                         request: request,
-                        container: self.view,
                         adPresentingViewController: self
                     )
                 }
