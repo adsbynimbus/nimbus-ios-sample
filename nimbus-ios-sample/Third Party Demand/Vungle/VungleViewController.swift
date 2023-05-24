@@ -25,6 +25,7 @@ class VungleViewController: DemoViewController {
     private let adType: ThirdPartyDemandAdType
     private var adManager: NimbusAdManager?
     private var adController: AdController?
+    private var nimbusAd: NimbusAd?
     
     init(adType: ThirdPartyDemandAdType, headerTitle: String, headerSubTitle: String) {
         self.adType = adType
@@ -159,9 +160,9 @@ class VungleViewController: DemoViewController {
 extension VungleViewController: NimbusAdManagerDelegate {
     func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
         print("didRenderAd")
-        controller.adView?.setUiTestIdentifiers(for: ad)
         adController = controller
         adController?.delegate = self
+        nimbusAd = ad
     }
 }
 
@@ -182,6 +183,9 @@ extension VungleViewController: AdControllerDelegate {
     
     func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {
         print("Nimbus didReceiveNimbusEvent: \(event)")
+        if let ad = nimbusAd, event == .loaded {
+            controller.adView?.setUiTestIdentifiers(for: ad)
+        }
     }
     
     func didReceiveNimbusError(controller: AdController, error: NimbusError) {

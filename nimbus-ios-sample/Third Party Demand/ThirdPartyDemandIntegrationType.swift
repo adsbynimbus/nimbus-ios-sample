@@ -15,6 +15,8 @@ enum ThirdPartyDemandIntegrationType: String, DemoItem {
         switch self {
         case .aps:
             return rawValue.uppercased()
+        case .meta:
+            return "Meta Audience Network"
         default:
             return rawValue.camelCaseToWords()
         }

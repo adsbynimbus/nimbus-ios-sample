@@ -173,6 +173,9 @@ extension FANViewController: AdControllerDelegate {
     
     func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {
         print("Nimbus didReceiveNimbusEvent: \(event)")
+        if let ad = ad, event == .loaded {
+            controller.adView?.setUiTestIdentifiers(for: ad, refreshing: adType == .apsBannerWithRefresh)
+        }
     }
     
     func didReceiveNimbusError(controller: AdController, error: NimbusError) {

@@ -20,6 +20,8 @@ final class APSViewController: DemoViewController {
     private var callbacks: [DTBCallback] = []
     private var adLoaders: [DTBAdLoader] = []
     private var adSizes: [DTBAdSize]?
+    private var nimbusAd: NimbusAd?
+    private var adController: AdController?
     
     init(
         adType: ThirdPartyDemandAdType,
@@ -35,12 +37,16 @@ final class APSViewController: DemoViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        adController?.destroy()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupAdRendering()
     }
-    
+
     private func setupAdRendering() {
         DispatchQueue.global().async { [weak self] in
             guard let self else { return }
@@ -84,9 +90,8 @@ final class APSViewController: DemoViewController {
                         adPresentingViewController: self
                     )
                 } else {
-                    self.adManager?.showAd(
+                    self.adManager?.showBlockingAd(
                         request: request,
-                        container: self.view,
                         adPresentingViewController: self
                     )
                 }
@@ -133,7 +138,9 @@ extension APSViewController: NimbusAdManagerDelegate {
     
     func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
         print("didRenderAd")
-        controller.adView?.setUiTestIdentifiers(for: ad)
+        nimbusAd = ad
+        controller.delegate = self
+        adController = controller
     }
 }
 
@@ -148,6 +155,16 @@ extension APSViewController: NimbusRequestManagerDelegate {
     func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
         print("didFailNimbusRequest: \(error.localizedDescription)")
     }
+}
+
+extension APSViewController: AdControllerDelegate {
+    func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {
+        if let ad = nimbusAd, event == .loaded {
+            controller.adView?.setUiTestIdentifiers(for: ad, refreshing: adType == .apsBannerWithRefresh)
+        }
+    }
+    
+    func didReceiveNimbusError(controller: AdController, error: NimbusError) {    }
 }
 
 // MARK: DTBAdCallback
