@@ -59,7 +59,6 @@
 		4DADE24627396E0700E7E766 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE24527396E0700E7E766 /* AppDelegate.swift */; };
 		4DADE24827396E0700E7E766 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE24727396E0700E7E766 /* SceneDelegate.swift */; };
 		4DADE24F27396E0900E7E766 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DADE24E27396E0900E7E766 /* Assets.xcassets */; };
-		4DADE25227396E0900E7E766 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DADE25027396E0900E7E766 /* LaunchScreen.storyboard */; };
 		4DADE25A273993D600E7E766 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE259273993D600E7E766 /* MainViewController.swift */; };
 		4DADE25C2739BF9F00E7E766 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE25B2739BF9F00E7E766 /* UIColor+Extension.swift */; };
 		4DB9A143273AE5240005D1D0 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A142273AE5240005D1D0 /* UIFont+Extension.swift */; };
@@ -116,7 +115,6 @@
 		96C4460E29414A9300DF35B2 /* GAMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D84B1B72743FFF300CA9CE2 /* GAMViewController.swift */; };
 		96C4460F29414A9300DF35B2 /* DemoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D563C442746FD6300294A7B /* DemoItem.swift */; };
 		96C4461029414A9300DF35B2 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5BAE7C273C3CA8009B7F95 /* SettingsCell.swift */; };
-		96C4461E29414A9300DF35B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DADE25027396E0900E7E766 /* LaunchScreen.storyboard */; };
 		96C4461F29414A9300DF35B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DADE24E27396E0900E7E766 /* Assets.xcassets */; };
 		96C4462329414A9300DF35B2 /* secrets.json in Resources */ = {isa = PBXBuildFile; fileRef = 4D901D88273DCC7100037C54 /* secrets.json */; };
 /* End PBXBuildFile section */
@@ -155,7 +153,6 @@
 		4DADE24527396E0700E7E766 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4DADE24727396E0700E7E766 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		4DADE24E27396E0900E7E766 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4DADE25127396E0900E7E766 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4DADE25327396E0900E7E766 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DADE259273993D600E7E766 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		4DADE25B2739BF9F00E7E766 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
@@ -369,7 +366,6 @@
 				4DADE24527396E0700E7E766 /* AppDelegate.swift */,
 				4DADE24727396E0700E7E766 /* SceneDelegate.swift */,
 				4DADE24E27396E0900E7E766 /* Assets.xcassets */,
-				4DADE25027396E0900E7E766 /* LaunchScreen.storyboard */,
 				4DADE25327396E0900E7E766 /* Info.plist */,
 			);
 			path = "nimbus-ios-sample";
@@ -520,7 +516,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4DADE25227396E0900E7E766 /* LaunchScreen.storyboard in Resources */,
 				4DADE24F27396E0900E7E766 /* Assets.xcassets in Resources */,
 				4DB9A146273AE8550005D1D0 /* ProximaNova-Semibold.otf in Resources */,
 				4D901D8A273DCC7100037C54 /* secrets.json in Resources */,
@@ -536,7 +531,6 @@
 				965B675E2A2114F8007FC135 /* ProximaNova-Bold.otf in Resources */,
 				965B675F2A2114F8007FC135 /* ProximaNova-Regular.otf in Resources */,
 				965B67602A2114F8007FC135 /* ProximaNova-Semibold.otf in Resources */,
-				96C4461E29414A9300DF35B2 /* LaunchScreen.storyboard in Resources */,
 				96C4461F29414A9300DF35B2 /* Assets.xcassets in Resources */,
 				96C4462329414A9300DF35B2 /* secrets.json in Resources */,
 			);
@@ -649,17 +643,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		4DADE25027396E0900E7E766 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4DADE25127396E0900E7E766 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		4DADE25427396E0900E7E766 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -712,6 +695,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -767,6 +751,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -791,7 +776,6 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Nimbus Sample";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This is required for FB and LiveRamp test ads to work";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -824,7 +808,6 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Nimbus Sample";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This is required for FB and LiveRamp test ads to work";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -857,7 +840,6 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Nimbus Sample";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This is required for FB and LiveRamp test ads to work";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -890,7 +872,6 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Nimbus Sample";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This is required for FB and LiveRamp test ads to work";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
