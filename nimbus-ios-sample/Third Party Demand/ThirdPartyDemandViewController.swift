@@ -72,75 +72,18 @@ final class ThirdPartyDemandViewController: DemoViewController {
         integrationType: ThirdPartyDemandIntegrationType,
         adType: ThirdPartyDemandAdType
     ) {
+        var controller: UIViewController
         switch integrationType {
         case .aps:
-            showAPSViewController(adType: adType)
+            controller = APSViewController(adType: adType, headerSubTitle: headerTitle)
         case .meta:
-            showFANViewController(adType: adType)
+            controller = FANViewController(adType: adType, headerSubTitle: headerTitle)
         case .unity:
-            showUnityViewController(adType: adType)
+            controller = UnityViewController(adType: adType, headerSubTitle: headerTitle)
         case .vungle:
-            showVungleViewController(adType: adType)
+            controller = VungleViewController(adType: adType, headerSubTitle: headerTitle)
         }
-    }
-    
-    private func showAPSViewController(adType: ThirdPartyDemandAdType) {
-        navigationController?.pushViewController(
-            APSViewController(
-                adType: adType,
-                headerTitle: adType.description,
-                headerSubTitle: headerTitle
-            ),
-            animated: true
-        )
-    }
-    
-    private func showFANViewController(adType: ThirdPartyDemandAdType) {
-        if adType == .metaBanner
-            && ConfigManager.shared.fbBannerPlacementId.isEmptyOrNil {
-            showCustomAlert("facebook_banner_placement_id")
-        } else if adType == .metaInterstitial
-                    && ConfigManager.shared.fbInterstitialPlacementId.isEmptyOrNil {
-            showCustomAlert("facebook_interstitial_placement_id")
-        } else if adType == .metaNative
-                    && ConfigManager.shared.fbNativePlacementId.isEmptyOrNil {
-            showCustomAlert("facebook_native_placement_id")
-        } else {
-            navigationController?.pushViewController(
-                FANViewController(
-                    adType: adType,
-                    headerTitle: adType.description,
-                    headerSubTitle: headerTitle
-                ),
-                animated: true
-            )
-        }
-    }
-    
-    private func showVungleViewController(adType: ThirdPartyDemandAdType) {
-        navigationController?.pushViewController(
-            VungleViewController(
-                adType: adType,
-                headerTitle: adType.description,
-                headerSubTitle: headerTitle
-            ),
-            animated: true
-        )
-    }
-    
-    private func showUnityViewController(adType: ThirdPartyDemandAdType) {
-        if adType == .unityRewardedVideo && ConfigManager.shared.unityGameId.isEmptyOrNil {
-            showCustomAlert("unity_game_id")
-        } else {
-            navigationController?.pushViewController(
-                UnityViewController(
-                    adType: adType,
-                    headerTitle: adType.description,
-                    headerSubTitle: headerTitle
-                ),
-                animated: true
-            )
-        }
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
 

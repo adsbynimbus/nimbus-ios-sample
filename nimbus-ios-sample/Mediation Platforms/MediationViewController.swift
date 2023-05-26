@@ -43,17 +43,13 @@ final class MediationViewController: DemoViewController {
         integrationType: MediationIntegrationType,
         adType: MediationAdType
     ) {
-        if ConfigManager.shared.googlePlacementId.isEmptyOrNil {
-            showCustomAlert("google_placement_id")
-        } else {
-            navigationController?.pushViewController(
-                GAMViewController(
-                    adType: adType,
-                    headerSubTitle: integrationType.description
-                ),
-                animated: true
-            )
-        }
+        navigationController?.pushViewController(
+            GAMViewController(
+                adType: adType,
+                headerSubTitle: integrationType.description
+            ),
+            animated: true
+        )
     }
 }
 

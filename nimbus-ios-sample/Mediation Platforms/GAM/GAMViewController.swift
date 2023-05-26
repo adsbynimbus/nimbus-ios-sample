@@ -5,17 +5,19 @@
 //  Created by Victor Takai on 16/11/21.
 //
 
-import UIKit
 import NimbusKit
 import GoogleMobileAds
+import UIKit
 
-#if canImport(NimbusSDK)
+#if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK
-#endif
-
-#if canImport(NimbusGAMKit)
+#else                    // Swift Package Manager
 import NimbusGAMKit
 #endif
+
+private extension Bundle {
+    static let gamPlacementId = Bundle.main.infoDictionary?["Google Placement ID"] as? String ?? ""
+}
 
 final class GAMViewController: DemoViewController {
     
@@ -39,6 +41,9 @@ final class GAMViewController: DemoViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if Bundle.gamPlacementId.isEmpty {
+            showCustomAlert("google_placement_id")
+        }
         setupAdRendering()
     }
     
@@ -49,7 +54,7 @@ final class GAMViewController: DemoViewController {
             bannerView = GAMBannerView(adSize: GADAdSizeBanner)
             guard let bannerView else { return }
             bannerView.rootViewController = self
-            bannerView.adUnitID = ConfigManager.shared.googlePlacementId
+            bannerView.adUnitID = Bundle.gamPlacementId
             bannerView.delegate = self
             bannerView.isAccessibilityElement = true
             bannerView.accessibilityIdentifier = "google_ad_view"
@@ -67,7 +72,7 @@ final class GAMViewController: DemoViewController {
             bannerView.load(gamRequest)
         case .interstitial:
             GAMInterstitialAd.load(
-                withAdManagerAdUnitID: ConfigManager.shared.googlePlacementId!,
+                withAdManagerAdUnitID: Bundle.gamPlacementId,
                 request: gamRequest
             ) { (ad, error) in
                 if let error {
@@ -82,7 +87,7 @@ final class GAMViewController: DemoViewController {
             bannerView = GAMBannerView(adSize: GADAdSizeBanner)
             guard let bannerView else { return }
             bannerView.rootViewController = self
-            bannerView.adUnitID = ConfigManager.shared.googlePlacementId
+            bannerView.adUnitID = Bundle.gamPlacementId
             bannerView.delegate = self
             bannerView.accessibilityIdentifier = "google_ad_view"
             
@@ -114,7 +119,7 @@ final class GAMViewController: DemoViewController {
             bannerView = GAMBannerView(adSize: GADAdSizeMediumRectangle)
             guard let bannerView else { return }
             bannerView.rootViewController = self
-            bannerView.adUnitID = ConfigManager.shared.googlePlacementId
+            bannerView.adUnitID = Bundle.gamPlacementId
             bannerView.delegate = self
             bannerView.validAdSizes = [NSValueFromGADAdSize(GADAdSizeFromCGSize(CGSize(width: 400, height: 300)))]
             bannerView.accessibilityIdentifier = "google_ad_view"
@@ -152,7 +157,7 @@ final class GAMViewController: DemoViewController {
             bannerView = GAMBannerView(adSize: GADAdSizeMediumRectangle)
             guard let bannerView else { return }
             bannerView.rootViewController = self
-            bannerView.adUnitID = ConfigManager.shared.googlePlacementId
+            bannerView.adUnitID = Bundle.gamPlacementId
             bannerView.delegate = self
             bannerView.validAdSizes = [NSValueFromGADAdSize(GADAdSizeFromCGSize(CGSize(width: 400, height: 300)))]
             bannerView.accessibilityIdentifier = "google_ad_view"
@@ -261,10 +266,7 @@ extension GAMViewController: NimbusRequestManagerDelegate {
         if adType != .dynamicPriceInterstitial{
             bannerView?.load(gamRequest)
         } else {
-            GADInterstitialAd.load(
-                withAdUnitID: ConfigManager.shared.googlePlacementId!,
-                request: gamRequest
-            ) { gadAd, error in
+            GADInterstitialAd.load(withAdUnitID: Bundle.gamPlacementId, request: gamRequest) { gadAd, error in
                 if let error {
                     print("Failed to load dynamic price interstitial ad with error: \(error.localizedDescription)")
                     return

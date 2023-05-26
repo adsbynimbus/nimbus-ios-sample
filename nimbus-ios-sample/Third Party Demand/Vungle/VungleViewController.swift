@@ -6,17 +6,23 @@
 //  Copyright © 2022 Timehop. All rights reserved.
 //
 
-import UIKit
-import NimbusKit
 import AdSupport
-
-#if canImport(NimbusSDK)
+import NimbusKit
+#if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK
-#endif
-
-#if canImport(NimbusVungleKit)
+#else                    // Swift Package Manager
 import NimbusVungleKit
 #endif
+import UIKit
+
+extension AppDelegate {
+    func setupVungleDemand() {
+        if let vungleAppId = Bundle.main.infoDictionary?["Vungle App ID"] as? String {
+            Nimbus.shared.renderers[.forNetwork("vungle")] = NimbusVungleAdRenderer()
+            NimbusRequestManager.requestInterceptors?.append(NimbusVungleRequestInterceptor(appId: vungleAppId, isLoggingEnabled: true))
+        }
+    }
+}
 
 class VungleViewController: DemoViewController {
     
@@ -27,10 +33,10 @@ class VungleViewController: DemoViewController {
     private var adController: AdController?
     private var nimbusAd: NimbusAd?
     
-    init(adType: ThirdPartyDemandAdType, headerTitle: String, headerSubTitle: String) {
+    init(adType: ThirdPartyDemandAdType, headerSubTitle: String) {
         self.adType = adType
         
-        super.init(headerTitle: headerTitle, headerSubTitle: headerSubTitle)
+        super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle)
     }
     
     required init?(coder: NSCoder) {
@@ -41,15 +47,7 @@ class VungleViewController: DemoViewController {
         super.viewDidLoad()
         
         setupContentView()
-        setupRequestInterceptor()
         setupAdRendering()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        // For testing purposes, this will clear all request interceptors
-        DemoRequestInterceptors.shared.removeRequestInterceptors()
     }
     
     private func setupContentView() {
@@ -62,11 +60,6 @@ class VungleViewController: DemoViewController {
             contentView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
-    }
-    
-    private func setupRequestInterceptor() {
-        // For testing purposes, this ensures only the required interceptors will be set
-        DemoRequestInterceptors.shared.setVungleRequestInterceptor()
     }
     
     private func setupAdRendering() {

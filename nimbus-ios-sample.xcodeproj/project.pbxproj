@@ -15,7 +15,6 @@
 		2013D50F279087F500CB5DCF /* MainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2013D50E279087F500CB5DCF /* MainItem.swift */; };
 		2013D5112790886600CB5DCF /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2013D5102790886600CB5DCF /* SettingsSection.swift */; };
 		20BE3FB329E47A9C00E1A662 /* NimbusFANKit in Frameworks */ = {isa = PBXBuildFile; productRef = 962B1C06299E917B001BF3B7 /* NimbusFANKit */; };
-		20BE3FB429E47B6200E1A662 /* APSAds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2052050629CD4D5E004D7024 /* APSAds.swift */; };
 		20BE3FBB29E47D8500E1A662 /* NimbusGAMKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FBA29E47D8500E1A662 /* NimbusGAMKit */; };
 		20BE3FBD29E47D8500E1A662 /* NimbusKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FBC29E47D8500E1A662 /* NimbusKit */; };
 		20BE3FBF29E47D8500E1A662 /* NimbusLiveRampKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FBE29E47D8500E1A662 /* NimbusLiveRampKit */; };
@@ -29,13 +28,11 @@
 		4D07F66E2A043B2500E2B094 /* ThirdPartyDemandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1541C30929F1CFDE007E8852 /* ThirdPartyDemandViewController.swift */; };
 		4D07F66F2A043B2800E2B094 /* ThirdPartyDemandIntegrationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1541C30B29F1D2D0007E8852 /* ThirdPartyDemandIntegrationType.swift */; };
 		4D07F6702A043B2B00E2B094 /* ThirdPartyDemandAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1541C30D29F1D369007E8852 /* ThirdPartyDemandAdType.swift */; };
-		4D07F6712A043B2E00E2B094 /* APSAds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2052050629CD4D5E004D7024 /* APSAds.swift */; };
 		4D07F6722A043B3100E2B094 /* APSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEA6B102A016F7F003E6A20 /* APSViewController.swift */; };
 		4D07F6732A043B3400E2B094 /* FANViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC70F7A2A002CEF0037E424 /* FANViewController.swift */; };
 		4D07F6742A043B4500E2B094 /* UnityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEA6B122A016F8F003E6A20 /* UnityViewController.swift */; };
 		4D07F6752A043B4800E2B094 /* VungleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1541C30429F1CFB4007E8852 /* VungleViewController.swift */; };
 		4D082DF029CCA1100083DF6F /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 4D082DEF29CCA1100083DF6F /* GoogleMobileAds */; };
-		4D0AA887279F3FE100CD2F7C /* DemoRequestInterceptors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0AA886279F3FE100CD2F7C /* DemoRequestInterceptors.swift */; };
 		4D563C412746FD3B00294A7B /* AdManagerAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D563C402746FD3B00294A7B /* AdManagerAdType.swift */; };
 		4D563C452746FD6300294A7B /* DemoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D563C442746FD6300294A7B /* DemoItem.swift */; };
 		4D5BAE7B273C362B009B7F95 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5BAE7A273C362B009B7F95 /* SettingsViewController.swift */; };
@@ -54,8 +51,6 @@
 		4D901D7F273D982500037C54 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D7E273D982500037C54 /* String+Extension.swift */; };
 		4D901D81273DAFD400037C54 /* AdManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D80273DAFD400037C54 /* AdManagerViewController.swift */; };
 		4D901D83273DC28500037C54 /* AdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D82273DC28500037C54 /* AdViewController.swift */; };
-		4D901D86273DC8CD00037C54 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D85273DC8CD00037C54 /* ConfigManager.swift */; };
-		4D901D8A273DCC7100037C54 /* secrets.json in Resources */ = {isa = PBXBuildFile; fileRef = 4D901D88273DCC7100037C54 /* secrets.json */; };
 		4DADE24627396E0700E7E766 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE24527396E0700E7E766 /* AppDelegate.swift */; };
 		4DADE24827396E0700E7E766 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE24727396E0700E7E766 /* SceneDelegate.swift */; };
 		4DADE24F27396E0900E7E766 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DADE24E27396E0900E7E766 /* Assets.xcassets */; };
@@ -88,13 +83,11 @@
 		96C445EE29414A9300DF35B2 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8A3FAA2742CAC700201485 /* UITableView+Extension.swift */; };
 		96C445EF29414A9300DF35B2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE259273993D600E7E766 /* MainViewController.swift */; };
 		96C445F129414A9300DF35B2 /* DemoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A147273AE95A0005D1D0 /* DemoCell.swift */; };
-		96C445F329414A9300DF35B2 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D85273DC8CD00037C54 /* ConfigManager.swift */; };
 		96C445F429414A9300DF35B2 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A142273AE5240005D1D0 /* UIFont+Extension.swift */; };
 		96C445F529414A9300DF35B2 /* AdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D82273DC28500037C54 /* AdViewController.swift */; };
 		96C445F629414A9300DF35B2 /* DemoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5BAE7E273C5E9F009B7F95 /* DemoHeader.swift */; };
 		96C445F829414A9300DF35B2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5BAE7A273C362B009B7F95 /* SettingsViewController.swift */; };
 		96C445F929414A9300DF35B2 /* DemoNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A149273AF8040005D1D0 /* DemoNavigationController.swift */; };
-		96C445FA29414A9300DF35B2 /* DemoRequestInterceptors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0AA886279F3FE100CD2F7C /* DemoRequestInterceptors.swift */; };
 		96C445FB29414A9300DF35B2 /* TestRenderAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C798C274C259A00033307 /* TestRenderAdViewController.swift */; };
 		96C445FC29414A9300DF35B2 /* MainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2013D50E279087F500CB5DCF /* MainItem.swift */; };
 		96C445FD29414A9300DF35B2 /* AdDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D7C273D936E00037C54 /* AdDemoViewController.swift */; };
@@ -116,7 +109,6 @@
 		96C4460F29414A9300DF35B2 /* DemoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D563C442746FD6300294A7B /* DemoItem.swift */; };
 		96C4461029414A9300DF35B2 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5BAE7C273C3CA8009B7F95 /* SettingsCell.swift */; };
 		96C4461F29414A9300DF35B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DADE24E27396E0900E7E766 /* Assets.xcassets */; };
-		96C4462329414A9300DF35B2 /* secrets.json in Resources */ = {isa = PBXBuildFile; fileRef = 4D901D88273DCC7100037C54 /* secrets.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -127,8 +119,6 @@
 		1541C30D29F1D369007E8852 /* ThirdPartyDemandAdType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdPartyDemandAdType.swift; sourceTree = "<group>"; };
 		2013D50E279087F500CB5DCF /* MainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainItem.swift; sourceTree = "<group>"; };
 		2013D5102790886600CB5DCF /* SettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSection.swift; sourceTree = "<group>"; };
-		2052050629CD4D5E004D7024 /* APSAds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APSAds.swift; sourceTree = "<group>"; };
-		4D0AA886279F3FE100CD2F7C /* DemoRequestInterceptors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoRequestInterceptors.swift; sourceTree = "<group>"; };
 		4D563C402746FD3B00294A7B /* AdManagerAdType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManagerAdType.swift; sourceTree = "<group>"; };
 		4D563C442746FD6300294A7B /* DemoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoItem.swift; sourceTree = "<group>"; };
 		4D5BAE7A273C362B009B7F95 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -147,8 +137,6 @@
 		4D901D7E273D982500037C54 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		4D901D80273DAFD400037C54 /* AdManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManagerViewController.swift; sourceTree = "<group>"; };
 		4D901D82273DC28500037C54 /* AdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdViewController.swift; sourceTree = "<group>"; };
-		4D901D85273DC8CD00037C54 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
-		4D901D88273DCC7100037C54 /* secrets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = secrets.json; sourceTree = "<group>"; };
 		4DADE24227396E0700E7E766 /* nimbus-ios-sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nimbus-ios-sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DADE24527396E0700E7E766 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4DADE24727396E0700E7E766 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -224,14 +212,6 @@
 				1541C30429F1CFB4007E8852 /* VungleViewController.swift */,
 			);
 			path = Vungle;
-			sourceTree = "<group>";
-		};
-		4D0AA885279F3FA700CD2F7C /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				4D0AA886279F3FE100CD2F7C /* DemoRequestInterceptors.swift */,
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		4D15A0D8274802CE00D4DBCB /* Ad */ = {
@@ -322,15 +302,6 @@
 			path = "Ad Manager";
 			sourceTree = "<group>";
 		};
-		4D901D84273DC8B700037C54 /* Config */ = {
-			isa = PBXGroup;
-			children = (
-				4D901D85273DC8CD00037C54 /* ConfigManager.swift */,
-				4D901D88273DCC7100037C54 /* secrets.json */,
-			);
-			path = Config;
-			sourceTree = "<group>";
-		};
 		4DADE23927396E0700E7E766 = {
 			isa = PBXGroup;
 			children = (
@@ -352,9 +323,7 @@
 		4DADE24427396E0700E7E766 /* nimbus-ios-sample */ = {
 			isa = PBXGroup;
 			children = (
-				4D0AA885279F3FA700CD2F7C /* Helpers */,
 				4D901D79273D931C00037C54 /* Ad Manager */,
-				4D901D84273DC8B700037C54 /* Config */,
 				4D5BAE78273C3584009B7F95 /* Main */,
 				4D15A0D8274802CE00D4DBCB /* Ad */,
 				4D8A3FA52742C74B00201485 /* Mediation Platforms */,
@@ -408,7 +377,6 @@
 		4DC70F792A00078E0037E424 /* APS */ = {
 			isa = PBXGroup;
 			children = (
-				2052050629CD4D5E004D7024 /* APSAds.swift */,
 				4DEA6B102A016F7F003E6A20 /* APSViewController.swift */,
 			);
 			path = APS;
@@ -518,7 +486,6 @@
 			files = (
 				4DADE24F27396E0900E7E766 /* Assets.xcassets in Resources */,
 				4DB9A146273AE8550005D1D0 /* ProximaNova-Semibold.otf in Resources */,
-				4D901D8A273DCC7100037C54 /* secrets.json in Resources */,
 				965B675A2A21147E007FC135 /* ProximaNova-Bold.otf in Resources */,
 				965B675C2A21147E007FC135 /* ProximaNova-Regular.otf in Resources */,
 			);
@@ -532,7 +499,6 @@
 				965B675F2A2114F8007FC135 /* ProximaNova-Regular.otf in Resources */,
 				965B67602A2114F8007FC135 /* ProximaNova-Semibold.otf in Resources */,
 				96C4461F29414A9300DF35B2 /* Assets.xcassets in Resources */,
-				96C4462329414A9300DF35B2 /* secrets.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -548,21 +514,18 @@
 				1541C30A29F1CFDE007E8852 /* ThirdPartyDemandViewController.swift in Sources */,
 				4DADE24827396E0700E7E766 /* SceneDelegate.swift in Sources */,
 				1541C30E29F1D369007E8852 /* ThirdPartyDemandAdType.swift in Sources */,
-				20BE3FB429E47B6200E1A662 /* APSAds.swift in Sources */,
 				4DEA6B112A016F7F003E6A20 /* APSViewController.swift in Sources */,
 				4D5C798B274C184000033307 /* TestRenderViewController.swift in Sources */,
 				4D8A3FAB2742CAC700201485 /* UITableView+Extension.swift in Sources */,
 				4DADE25A273993D600E7E766 /* MainViewController.swift in Sources */,
 				4DB9A148273AE95A0005D1D0 /* DemoCell.swift in Sources */,
 				4D5BAE81273C6A16009B7F95 /* Setting.swift in Sources */,
-				4D901D86273DC8CD00037C54 /* ConfigManager.swift in Sources */,
 				4DB9A143273AE5240005D1D0 /* UIFont+Extension.swift in Sources */,
 				4D901D83273DC28500037C54 /* AdViewController.swift in Sources */,
 				4D5BAE7F273C5E9F009B7F95 /* DemoHeader.swift in Sources */,
 				1541C30729F1CFB4007E8852 /* VungleViewController.swift in Sources */,
 				4D5BAE7B273C362B009B7F95 /* SettingsViewController.swift in Sources */,
 				4DB9A14A273AF8040005D1D0 /* DemoNavigationController.swift in Sources */,
-				4D0AA887279F3FE100CD2F7C /* DemoRequestInterceptors.swift in Sources */,
 				1541C30C29F1D2D0007E8852 /* ThirdPartyDemandIntegrationType.swift in Sources */,
 				4D5C798D274C259A00033307 /* TestRenderAdViewController.swift in Sources */,
 				96BFE1E12A0965600030964D /* UIView+Extension.swift in Sources */,
@@ -601,7 +564,6 @@
 				96C445EE29414A9300DF35B2 /* UITableView+Extension.swift in Sources */,
 				96C445EF29414A9300DF35B2 /* MainViewController.swift in Sources */,
 				96C445F129414A9300DF35B2 /* DemoCell.swift in Sources */,
-				96C445F329414A9300DF35B2 /* ConfigManager.swift in Sources */,
 				96C445F429414A9300DF35B2 /* UIFont+Extension.swift in Sources */,
 				96C445F529414A9300DF35B2 /* AdViewController.swift in Sources */,
 				4D07F6742A043B4500E2B094 /* UnityViewController.swift in Sources */,
@@ -609,11 +571,9 @@
 				96C445F629414A9300DF35B2 /* DemoHeader.swift in Sources */,
 				96C445F829414A9300DF35B2 /* SettingsViewController.swift in Sources */,
 				96C445F929414A9300DF35B2 /* DemoNavigationController.swift in Sources */,
-				96C445FA29414A9300DF35B2 /* DemoRequestInterceptors.swift in Sources */,
 				96C445FB29414A9300DF35B2 /* TestRenderAdViewController.swift in Sources */,
 				96C445FC29414A9300DF35B2 /* MainItem.swift in Sources */,
 				96C445FD29414A9300DF35B2 /* AdDemoViewController.swift in Sources */,
-				4D07F6712A043B2E00E2B094 /* APSAds.swift in Sources */,
 				96C445FE29414A9300DF35B2 /* AdManagerViewController.swift in Sources */,
 				96C445FF29414A9300DF35B2 /* SettingsSection.swift in Sources */,
 				96BFE1E22A0965600030964D /* UIView+Extension.swift in Sources */,

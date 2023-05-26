@@ -11,7 +11,35 @@ import NimbusRequestKit
 import NimbusRequestAPSKit
 import DTBiOSSDK
 
+extension AppDelegate {
+    func setupAmazonDemand() {
+        if let apsAppKey = Bundle.main.infoDictionary?["APS App ID"] as? String {
+            DTBAds.sharedInstance().setAppKey(apsAppKey)
+            DTBAds.sharedInstance().mraidPolicy = CUSTOM_MRAID
+            DTBAds.sharedInstance().mraidCustomVersions = ["1.0", "2.0", "3.0"]
+            DTBAds.sharedInstance().testMode = Nimbus.shared.testMode
+            #if DEBUG
+            DTBAds.sharedInstance().setLogLevel(DTBLogLevelDebug)
+            #endif
+        }
+    }
+}
+
 final class APSViewController: DemoViewController {
+    
+    let apsBannerSizes: [DTBAdSize] = [
+        .init(
+            bannerAdSizeWithWidth: 320,
+            height: 50,
+            andSlotUUID: "5ab6a4ae-4aa5-43f4-9da4-e30755f2b295"
+        )
+    ]
+
+    let apsInterstitialSizes: [DTBAdSize] = [
+        .init(interstitialAdSizeWithSlotUUID: "4e918ac0-5c68-4fe1-8d26-4e76e8f74831"),
+        .init(videoAdSizeWithSlotUUID: "4acc26e6-3ada-4ee8-bae0-753c1e0ad278")
+    ]
+
     
     private let adType: ThirdPartyDemandAdType
     private var adManager: NimbusAdManager?
@@ -23,14 +51,10 @@ final class APSViewController: DemoViewController {
     private var nimbusAd: NimbusAd?
     private var adController: AdController?
     
-    init(
-        adType: ThirdPartyDemandAdType,
-        headerTitle: String,
-        headerSubTitle: String
-    ) {
+    init(adType: ThirdPartyDemandAdType,headerSubTitle: String) {
         self.adType = adType
         
-        super.init(headerTitle: headerTitle, headerSubTitle: headerSubTitle)
+        super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle)
     }
     
     required init?(coder: NSCoder) {

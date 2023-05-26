@@ -9,40 +9,11 @@ import UIKit
 import SwiftUI
 import AppTrackingTransparency
 
-#if canImport(NimbusKit)
-import NimbusKit
-#endif
 import DTBiOSSDK
 
+import NimbusKit
 import NimbusRenderStaticKit
 import NimbusRenderVideoKit
-
-import FBAudienceNetwork
-import GoogleMobileAds
-
-#if canImport(NimbusSDK)
-import NimbusSDK
-#endif
-
-#if canImport(NimbusRequestAPSKit)
-import NimbusRequestAPSKit
-#endif
-
-#if canImport(NimbusRenderFANKit)
-import NimbusRenderFANKit
-#endif
-
-#if canImport(NimbusFANKit)
-import NimbusFANKit
-#endif
-
-#if canImport(NimbusUnityKit)
-import NimbusUnityKit
-#endif
-
-#if canImport(NimbusVungleKit)
-import NimbusVungleKit
-#endif
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -52,32 +23,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         setupNimbusSDK()
-        if let apsAppKey = ConfigManager.shared.apsAppKey, !apsAppKey.isEmpty {
-            setupAPS(with: apsAppKey)
+        setupAmazonDemand()
+        setupMetaDemand()
+        setupUnityDemand()
+        setupVungleDemand()
+        
+        // Meta and LiveRamp requires att permissions to run properly
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) { [weak self] in
+            self?.startTrackingATT()
+            self?.setupMetaDemand()
         }
-        setupGAM()
         
         return true
     }
 
     private func setupNimbusSDK() {
         Nimbus.shared.initialize(
-            publisher: ConfigManager.shared.publisherKey,
-            apiKey: ConfigManager.shared.apiKey
+            publisher: Bundle.main.infoDictionary?["Publisher Key"] as! String,
+            apiKey: Bundle.main.infoDictionary?["API Key"] as! String
         )
-        
-        // This is only for testing environment, do NOT add this on production environment
-        let url = URL(string: "https://\(ConfigManager.shared.publisherKey).adsbynimbus.com/rta/test")!
-        NimbusAdManager.requestUrl = url
-        NimbusAdManager.additionalRequestHeaders = [
-            "Nimbus-Test-No-Fill": String(UserDefaults.standard.forceNoFill)
-        ]
         
         #if DEBUG
         Nimbus.shared.logLevel = .info
         #endif
         Nimbus.shared.testMode = UserDefaults.standard.nimbusTestMode
         Nimbus.shared.coppa = UserDefaults.standard.coppaOn
+        
+        // This is only for testing environment, do NOT add this on production environment
+        if let publisherKey = Nimbus.shared.publisher, Nimbus.shared.testMode {
+            NimbusAdManager.requestUrl = URL(string: "https://\(publisherKey).adsbynimbus.com/rta/test")!
+            NimbusAdManager.additionalRequestHeaders = [
+                "Nimbus-Test-No-Fill": String(UserDefaults.standard.forceNoFill)
+            ]
+        }
         
         NimbusAdManager.requestInterceptors = []
 
@@ -88,20 +66,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Nimbus.shared.renderers = [
             .forAuctionType(.static): NimbusStaticAdRenderer(),
             .forAuctionType(.video): videoRenderer,
-            .forNetwork("facebook"): NimbusFANAdRenderer(),
-            .forNetwork("unity"): NimbusUnityAdRenderer(),
-            .forNetwork("vungle"): NimbusVungleAdRenderer()
         ]
 
         // User
-        var user = NimbusUser(age: 20, gender: .male)
-        NimbusAdManager.user = user
-        
-        // Facebook and LiveRamp requires att permissions to run properly
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) { [weak self] in
-            self?.startTrackingATT()
-            self?.setupFAN()
-        }
+        NimbusAdManager.user = NimbusUser(age: 20, gender: .male)
     }
     
     private func startTrackingATT() {
@@ -134,38 +102,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         }
-    }
-    
-    private func setupAPS(with appKey: String) {
-        DTBAds.sharedInstance().setAppKey(appKey)
-        DTBAds.sharedInstance().mraidPolicy = CUSTOM_MRAID
-        DTBAds.sharedInstance().mraidCustomVersions = ["1.0", "2.0", "3.0"]
-#if DEBUG
-        DTBAds.sharedInstance().setLogLevel(DTBLogLevelDebug)
-#endif
-        DTBAds.sharedInstance().testMode = UserDefaults.standard.nimbusTestMode
-    }
-    
-    private func setupFAN() {
-        FBAdSettings.addTestDevice(FBAdSettings.testDeviceHash())
-        // Required for test ads
-        FBAdSettings.setAdvertiserTrackingEnabled(true)
-    }
-
-    private func setupGAM() {
-        /*
-         In order to test GAM in real devices please follow the steps below.
-         For more info please refer to https://developers.google.com/ad-manager/mobile-ads-sdk/ios/test-ads#enable_test_devices
-         If you want to test ads in your app as you're developing, follow the steps below to programmatically register your test device.
-
-         Load your ads-integrated app and make an ad request.
-         Check the console for a message that looks like this:
-
-         <Google> To get test ads on this device, set:
-         GADMobileAds.sharedInstance.requestConfiguration.testDeviceIdentifiers =
-         @[ @"2077ef9a63d2b398840261c8221a0c9b" ];
-         */
-        GADMobileAds.sharedInstance().start(completionHandler: nil)
     }
 }
 

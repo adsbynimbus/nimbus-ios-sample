@@ -5,20 +5,33 @@
 //  Created by Victor Takai on 01/05/23.
 //
 
-import UIKit
+import FBAudienceNetwork
 import NimbusKit
-
-#if canImport(NimbusSDK)
+#if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK
-#endif
-
-#if canImport(NimbusRequestFANKit)
+#else                    // Swift Package Manager
+import NimbusRenderFANKit
 import NimbusRequestFANKit
 #endif
+import UIKit
 
-#if canImport(NimbusFANKit)
-import NimbusFANKit
-#endif
+fileprivate let metaBannerId = Bundle.main.infoDictionary?["Meta Banner Placement ID"] as? String ?? ""
+fileprivate let metaInterstitialId = Bundle.main.infoDictionary?["Meta Interstitial Placement ID"] as? String ?? ""
+fileprivate let metaNativeId = Bundle.main.infoDictionary?["Meta Native Placement ID"] as? String ?? ""
+fileprivate let metaAppId = metaNativeId.components(separatedBy: "_").first
+
+extension AppDelegate {
+    func setupMetaDemand() {
+        if let metaAppId = metaAppId {
+            NimbusRequestManager.requestInterceptors?.append(NimbusFANRequestInterceptor(appId: metaAppId))
+            Nimbus.shared.renderers[.forNetwork("facebook")] = NimbusFANAdRenderer()
+            
+            FBAdSettings.addTestDevice(FBAdSettings.testDeviceHash())
+            // Required for test ads
+            FBAdSettings.setAdvertiserTrackingEnabled(true)
+        }
+    }
+}
 
 final class FANViewController: DemoViewController {
     
@@ -27,14 +40,10 @@ final class FANViewController: DemoViewController {
     private var dimensions: NimbusAdDimensions?
     private var adContainerView: CustomAdContainerView?
     
-    init(
-        adType: ThirdPartyDemandAdType,
-        headerTitle: String,
-        headerSubTitle: String
-    ) {
+    init(adType: ThirdPartyDemandAdType,headerSubTitle: String) {
         self.adType = adType
         
-        super.init(headerTitle: headerTitle, headerSubTitle: headerSubTitle)
+        super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle)
        
         ad = createNimbusAd(adType: adType)
         dimensions = ad?.adDimensions
@@ -49,8 +58,15 @@ final class FANViewController: DemoViewController {
         
         view.backgroundColor = .black
         
-        setupRequestInterceptor()
-        setupAdView()
+        if adType == .metaBanner && metaBannerId.isEmpty {
+            showCustomAlert("facebook_banner_placement_id")
+        } else if adType == .metaInterstitial && metaInterstitialId.isEmpty {
+            showCustomAlert("facebook_interstitial_placement_id")
+        } else if adType == .metaNative && metaNativeId.isEmpty {
+            showCustomAlert("facebook_native_placement_id")
+        } else {
+            setupAdView()
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -61,14 +77,6 @@ final class FANViewController: DemoViewController {
         if let ad, !ad.isInterstitial {
             adContainerView?.destroy()
         }
-        
-        // For testing purposes, this will clear all request interceptors
-        DemoRequestInterceptors.shared.removeRequestInterceptors()
-    }
-    
-    private func setupRequestInterceptor() {
-        // For testing purposes, this ensures only the required interceptors will be set
-        DemoRequestInterceptors.shared.setFANRequestInterceptor()
     }
     
     private func setupAdView() {
@@ -111,7 +119,7 @@ final class FANViewController: DemoViewController {
         case .metaBanner:
             return createNimbusAd(
                 network: "facebook",
-                placementId: "IMG_16_9_LINK#\(ConfigManager.shared.fbBannerPlacementId!)",
+                placementId: "IMG_16_9_LINK#\(metaBannerId)",
                 auctionType: .static,
                 isInterstitial: false,
                 adDimensions: NimbusAdDimensions(width: 320, height: 50)
@@ -120,7 +128,7 @@ final class FANViewController: DemoViewController {
         case .metaInterstitial:
             return createNimbusAd(
                 network: "facebook",
-                placementId: "IMG_16_9_LINK#\(ConfigManager.shared.fbInterstitialPlacementId!)",
+                placementId: "IMG_16_9_LINK#\(metaInterstitialId)",
                 auctionType: .static,
                 isInterstitial: true,
                 adDimensions: NimbusAdDimensions(width: 320, height: 480)
@@ -129,7 +137,7 @@ final class FANViewController: DemoViewController {
         case .metaNative:
             return createNimbusAd(
                 network: "facebook",
-                placementId: "IMG_16_9_LINK#\(ConfigManager.shared.fbNativePlacementId!)",
+                placementId: "IMG_16_9_LINK#\(metaNativeId)",
                 auctionType: .native,
                 isInterstitial: false,
                 adDimensions: NimbusAdDimensions(width: 320, height: 480)

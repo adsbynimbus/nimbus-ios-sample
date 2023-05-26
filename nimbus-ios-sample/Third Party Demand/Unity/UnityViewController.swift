@@ -5,16 +5,24 @@
 //  Created by Victor Takai on 02/05/23.
 //
 
-import UIKit
 import NimbusKit
-
-#if canImport(NimbusSDK)
+#if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK
-#endif
-
-#if canImport(NimbusUnityKit)
+#else                    // Swift Package Manager
 import NimbusUnityKit
 #endif
+import UIKit
+
+fileprivate let unityGameId = Bundle.main.infoDictionary?["Unity Game ID"] as? String ?? ""
+
+extension AppDelegate {
+    func setupUnityDemand() {
+        if !unityGameId.isEmpty {
+            NimbusRequestManager.requestInterceptors?.append(NimbusUnityRequestInterceptor(gameId: unityGameId))
+            Nimbus.shared.renderers[.forNetwork("unity")] = NimbusUnityAdRenderer()
+        }
+    }
+}
 
 final class UnityViewController: DemoViewController {
 
@@ -23,14 +31,10 @@ final class UnityViewController: DemoViewController {
     private var adController: AdController?
     private var nimbusAd: NimbusAd?
 
-    init(
-        adType: ThirdPartyDemandAdType,
-        headerTitle: String,
-        headerSubTitle: String
-    ) {
+    init(adType: ThirdPartyDemandAdType, headerSubTitle: String) {
         self.adType = adType
         
-        super.init(headerTitle: headerTitle, headerSubTitle: headerSubTitle)
+        super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle)
     }
     
     required init?(coder: NSCoder) {
@@ -41,23 +45,14 @@ final class UnityViewController: DemoViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .black
-    
-        setupRequestInterceptor()
-        setupAdRendering()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
         
-        // For testing purposes, this will clear all request interceptors
-        DemoRequestInterceptors.shared.removeRequestInterceptors()
+        if !unityGameId.isEmpty {
+            showCustomAlert("unity_game_id")
+        } else {
+            setupAdRendering()
+        }
     }
 
-    private func setupRequestInterceptor() {
-        // For testing purposes, this ensures only the required interceptors will be set
-        DemoRequestInterceptors.shared.setUnityRequestInterceptor()
-    }
-    
     private func setupAdRendering() {
         guard adType == .unityRewardedVideo else {
             return
