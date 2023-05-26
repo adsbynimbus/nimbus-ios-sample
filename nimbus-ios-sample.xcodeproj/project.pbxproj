@@ -63,8 +63,6 @@
 		4DADE25A273993D600E7E766 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE259273993D600E7E766 /* MainViewController.swift */; };
 		4DADE25C2739BF9F00E7E766 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE25B2739BF9F00E7E766 /* UIColor+Extension.swift */; };
 		4DB9A143273AE5240005D1D0 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A142273AE5240005D1D0 /* UIFont+Extension.swift */; };
-		4DB9A144273AE8550005D1D0 /* ProximaNova-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB9A13F273AE4A70005D1D0 /* ProximaNova-Regular.ttf */; };
-		4DB9A145273AE8550005D1D0 /* ProximaNova-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB9A140273AE4A70005D1D0 /* ProximaNova-Bold.ttf */; };
 		4DB9A146273AE8550005D1D0 /* ProximaNova-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB9A13E273AE4A70005D1D0 /* ProximaNova-Semibold.otf */; };
 		4DB9A148273AE95A0005D1D0 /* DemoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A147273AE95A0005D1D0 /* DemoCell.swift */; };
 		4DB9A14A273AF8040005D1D0 /* DemoNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A149273AF8040005D1D0 /* DemoNavigationController.swift */; };
@@ -77,6 +75,11 @@
 		4DE1FE5027FF58C2002C41BC /* MediationAdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE1FE4D27FF58C2002C41BC /* MediationAdType.swift */; };
 		4DEA6B112A016F7F003E6A20 /* APSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEA6B102A016F7F003E6A20 /* APSViewController.swift */; };
 		4DEA6B132A016F8F003E6A20 /* UnityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEA6B122A016F8F003E6A20 /* UnityViewController.swift */; };
+		965B675A2A21147E007FC135 /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 965B67582A21147E007FC135 /* ProximaNova-Bold.otf */; };
+		965B675C2A21147E007FC135 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 965B67592A21147E007FC135 /* ProximaNova-Regular.otf */; };
+		965B675E2A2114F8007FC135 /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 965B67582A21147E007FC135 /* ProximaNova-Bold.otf */; };
+		965B675F2A2114F8007FC135 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 965B67592A21147E007FC135 /* ProximaNova-Regular.otf */; };
+		965B67602A2114F8007FC135 /* ProximaNova-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB9A13E273AE4A70005D1D0 /* ProximaNova-Semibold.otf */; };
 		96BFE1E12A0965600030964D /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BFE1E02A0965600030964D /* UIView+Extension.swift */; };
 		96BFE1E22A0965600030964D /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BFE1E02A0965600030964D /* UIView+Extension.swift */; };
 		96C445E829414A9300DF35B2 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C798E274C290E00033307 /* UIViewController+Extension.swift */; };
@@ -115,9 +118,6 @@
 		96C4461029414A9300DF35B2 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5BAE7C273C3CA8009B7F95 /* SettingsCell.swift */; };
 		96C4461E29414A9300DF35B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DADE25027396E0900E7E766 /* LaunchScreen.storyboard */; };
 		96C4461F29414A9300DF35B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DADE24E27396E0900E7E766 /* Assets.xcassets */; };
-		96C4462029414A9300DF35B2 /* ProximaNova-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB9A13E273AE4A70005D1D0 /* ProximaNova-Semibold.otf */; };
-		96C4462129414A9300DF35B2 /* ProximaNova-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB9A140273AE4A70005D1D0 /* ProximaNova-Bold.ttf */; };
-		96C4462229414A9300DF35B2 /* ProximaNova-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB9A13F273AE4A70005D1D0 /* ProximaNova-Regular.ttf */; };
 		96C4462329414A9300DF35B2 /* secrets.json in Resources */ = {isa = PBXBuildFile; fileRef = 4D901D88273DCC7100037C54 /* secrets.json */; };
 /* End PBXBuildFile section */
 
@@ -160,8 +160,6 @@
 		4DADE259273993D600E7E766 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		4DADE25B2739BF9F00E7E766 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		4DB9A13E273AE4A70005D1D0 /* ProximaNova-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Semibold.otf"; sourceTree = "<group>"; };
-		4DB9A13F273AE4A70005D1D0 /* ProximaNova-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.ttf"; sourceTree = "<group>"; };
-		4DB9A140273AE4A70005D1D0 /* ProximaNova-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.ttf"; sourceTree = "<group>"; };
 		4DB9A142273AE5240005D1D0 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		4DB9A147273AE95A0005D1D0 /* DemoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoCell.swift; sourceTree = "<group>"; };
 		4DB9A149273AF8040005D1D0 /* DemoNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoNavigationController.swift; sourceTree = "<group>"; };
@@ -173,6 +171,8 @@
 		4DE1FE4D27FF58C2002C41BC /* MediationAdType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediationAdType.swift; sourceTree = "<group>"; };
 		4DEA6B102A016F7F003E6A20 /* APSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APSViewController.swift; sourceTree = "<group>"; };
 		4DEA6B122A016F8F003E6A20 /* UnityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnityViewController.swift; sourceTree = "<group>"; };
+		965B67582A21147E007FC135 /* ProximaNova-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.otf"; sourceTree = "<group>"; };
+		965B67592A21147E007FC135 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.otf"; sourceTree = "<group>"; };
 		96BFE1E02A0965600030964D /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		96C4462729414A9300DF35B2 /* nimbus-ios-sample-pods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nimbus-ios-sample-pods.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -337,6 +337,7 @@
 		4DADE23927396E0700E7E766 = {
 			isa = PBXGroup;
 			children = (
+				4DB9A13D273AE46F0005D1D0 /* Resources */,
 				4DADE24427396E0700E7E766 /* nimbus-ios-sample */,
 				4DADE24327396E0700E7E766 /* Products */,
 			);
@@ -365,7 +366,6 @@
 				4D5BAE79273C3614009B7F95 /* Settings */,
 				4D5BAE83273C6C81009B7F95 /* Extensions */,
 				4D5BAE82273C6C64009B7F95 /* Common */,
-				4DB9A13D273AE46F0005D1D0 /* Resources */,
 				4DADE24527396E0700E7E766 /* AppDelegate.swift */,
 				4DADE24727396E0700E7E766 /* SceneDelegate.swift */,
 				4DADE24E27396E0900E7E766 /* Assets.xcassets */,
@@ -386,8 +386,8 @@
 		4DB9A141273AE4A90005D1D0 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				4DB9A140273AE4A70005D1D0 /* ProximaNova-Bold.ttf */,
-				4DB9A13F273AE4A70005D1D0 /* ProximaNova-Regular.ttf */,
+				965B67582A21147E007FC135 /* ProximaNova-Bold.otf */,
+				965B67592A21147E007FC135 /* ProximaNova-Regular.otf */,
 				4DB9A13E273AE4A70005D1D0 /* ProximaNova-Semibold.otf */,
 			);
 			path = Fonts;
@@ -523,9 +523,9 @@
 				4DADE25227396E0900E7E766 /* LaunchScreen.storyboard in Resources */,
 				4DADE24F27396E0900E7E766 /* Assets.xcassets in Resources */,
 				4DB9A146273AE8550005D1D0 /* ProximaNova-Semibold.otf in Resources */,
-				4DB9A145273AE8550005D1D0 /* ProximaNova-Bold.ttf in Resources */,
-				4DB9A144273AE8550005D1D0 /* ProximaNova-Regular.ttf in Resources */,
 				4D901D8A273DCC7100037C54 /* secrets.json in Resources */,
+				965B675A2A21147E007FC135 /* ProximaNova-Bold.otf in Resources */,
+				965B675C2A21147E007FC135 /* ProximaNova-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,11 +533,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				965B675E2A2114F8007FC135 /* ProximaNova-Bold.otf in Resources */,
+				965B675F2A2114F8007FC135 /* ProximaNova-Regular.otf in Resources */,
+				965B67602A2114F8007FC135 /* ProximaNova-Semibold.otf in Resources */,
 				96C4461E29414A9300DF35B2 /* LaunchScreen.storyboard in Resources */,
 				96C4461F29414A9300DF35B2 /* Assets.xcassets in Resources */,
-				96C4462029414A9300DF35B2 /* ProximaNova-Semibold.otf in Resources */,
-				96C4462129414A9300DF35B2 /* ProximaNova-Bold.ttf in Resources */,
-				96C4462229414A9300DF35B2 /* ProximaNova-Regular.ttf in Resources */,
 				96C4462329414A9300DF35B2 /* secrets.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -858,6 +858,7 @@
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This is required for FB and LiveRamp test ads to work";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -890,6 +891,7 @@
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This is required for FB and LiveRamp test ads to work";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

@@ -27,8 +27,8 @@
 	</array>
 	<key>UIAppFonts</key>
 	<array>
-		<string>ProximaNova-Bold.ttf</string>
-		<string>ProximaNova-Regular.ttf</string>
+		<string>ProximaNova-Bold.otf</string>
+		<string>ProximaNova-Regular.otf</string>
 		<string>ProximaNova-Semibold.otf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
@@ -48,8 +48,6 @@
 			</array>
 		</dict>
 	</dict>
-	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleLightContent</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 </dict>
