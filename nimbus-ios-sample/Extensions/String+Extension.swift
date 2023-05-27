@@ -17,17 +17,4 @@ extension String {
             }
         }
     }
-    
-    var firstUppercased: String {
-        prefix(1).uppercased() + dropFirst()
-    }
-}
-
-extension Optional where Wrapped == String {
-    var isEmptyOrNil: Bool {
-        guard let self else {
-            return true
-        }
-        return self.isEmpty
-    }
 }

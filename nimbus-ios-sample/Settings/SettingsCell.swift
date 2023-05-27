@@ -49,12 +49,9 @@ final class SettingsCell: UITableViewCell {
     }
     
     func updateWithSetting(_ setting: Setting) {
-        accessibilityIdentifier = setting.getIdentifier(prefix: "settings", .cell)
-        
         label.text = setting.description
         
         switchButton.setOn(setting.getPrefs(), animated: false)
-        switchButton.accessibilityIdentifier = setting.getIdentifier(prefix: "settings", .cellSwitch)
         switchAction = { isOn in
             setting.updatePrefs(isOn)
         }
