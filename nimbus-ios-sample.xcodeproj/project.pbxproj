@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		150B4B5828D3E6F7002F233D /* CustomAdContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150B4B5728D3E6F7002F233D /* CustomAdContainerView.swift */; };
 		1541C30729F1CFB4007E8852 /* VungleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1541C30429F1CFB4007E8852 /* VungleViewController.swift */; };
-		1541C30A29F1CFDE007E8852 /* ThirdPartyDemandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1541C30929F1CFDE007E8852 /* ThirdPartyDemandViewController.swift */; };
 		20BE3FB329E47A9C00E1A662 /* NimbusFANKit in Frameworks */ = {isa = PBXBuildFile; productRef = 962B1C06299E917B001BF3B7 /* NimbusFANKit */; };
 		20BE3FBB29E47D8500E1A662 /* NimbusGAMKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FBA29E47D8500E1A662 /* NimbusGAMKit */; };
 		20BE3FBD29E47D8500E1A662 /* NimbusKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FBC29E47D8500E1A662 /* NimbusKit */; };
@@ -21,7 +20,6 @@
 		20BE3FC929E47D8500E1A662 /* NimbusRequestKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FC829E47D8500E1A662 /* NimbusRequestKit */; };
 		20BE3FCB29E47D8500E1A662 /* NimbusUnityKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FCA29E47D8500E1A662 /* NimbusUnityKit */; };
 		4D07F6672A041F7000E2B094 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5BAE80273C6A16009B7F95 /* Setting.swift */; };
-		4D07F66E2A043B2500E2B094 /* ThirdPartyDemandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1541C30929F1CFDE007E8852 /* ThirdPartyDemandViewController.swift */; };
 		4D07F6722A043B3100E2B094 /* APSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEA6B102A016F7F003E6A20 /* APSViewController.swift */; };
 		4D07F6732A043B3400E2B094 /* FANViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC70F7A2A002CEF0037E424 /* FANViewController.swift */; };
 		4D07F6742A043B4500E2B094 /* UnityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEA6B122A016F8F003E6A20 /* UnityViewController.swift */; };
@@ -38,14 +36,11 @@
 		4D84B1B82743FFF300CA9CE2 /* GAMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D84B1B72743FFF300CA9CE2 /* GAMViewController.swift */; };
 		4D8A3FA92742CA1100201485 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8A3FA82742CA1100201485 /* NSObject+Extension.swift */; };
 		4D8A3FAB2742CAC700201485 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8A3FAA2742CAC700201485 /* UITableView+Extension.swift */; };
-		4D8A3FAF274306F100201485 /* DemoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8A3FAE274306F100201485 /* DemoDataSource.swift */; };
-		4D901D7D273D936E00037C54 /* AdDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D7C273D936E00037C54 /* AdDemoViewController.swift */; };
 		4D901D81273DAFD400037C54 /* AdManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D80273DAFD400037C54 /* AdManagerViewController.swift */; };
 		4D901D83273DC28500037C54 /* AdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D82273DC28500037C54 /* AdViewController.swift */; };
 		4DADE24627396E0700E7E766 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE24527396E0700E7E766 /* AppDelegate.swift */; };
 		4DADE24827396E0700E7E766 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE24727396E0700E7E766 /* SceneDelegate.swift */; };
 		4DADE24F27396E0900E7E766 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DADE24E27396E0900E7E766 /* Assets.xcassets */; };
-		4DADE25A273993D600E7E766 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE259273993D600E7E766 /* MainViewController.swift */; };
 		4DADE25C2739BF9F00E7E766 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE25B2739BF9F00E7E766 /* UIColor+Extension.swift */; };
 		4DB9A143273AE5240005D1D0 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A142273AE5240005D1D0 /* UIFont+Extension.swift */; };
 		4DB9A146273AE8550005D1D0 /* ProximaNova-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB9A13E273AE4A70005D1D0 /* ProximaNova-Semibold.otf */; };
@@ -55,7 +50,6 @@
 		4DB9A14E273B19C20005D1D0 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A14D273B19C20005D1D0 /* UILabel+Extension.swift */; };
 		4DC70F762A0003B80037E424 /* NimbusVungleKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4DC70F752A0003B80037E424 /* NimbusVungleKit */; };
 		4DC70F7B2A002CEF0037E424 /* FANViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC70F7A2A002CEF0037E424 /* FANViewController.swift */; };
-		4DE1FE4F27FF58C2002C41BC /* MediationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE1FE4C27FF58C2002C41BC /* MediationViewController.swift */; };
 		4DEA6B112A016F7F003E6A20 /* APSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEA6B102A016F7F003E6A20 /* APSViewController.swift */; };
 		4DEA6B132A016F8F003E6A20 /* UnityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEA6B122A016F8F003E6A20 /* UnityViewController.swift */; };
 		965B675A2A21147E007FC135 /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 965B67582A21147E007FC135 /* ProximaNova-Bold.otf */; };
@@ -70,7 +64,6 @@
 		96C445EB29414A9300DF35B2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE24727396E0700E7E766 /* SceneDelegate.swift */; };
 		96C445ED29414A9300DF35B2 /* TestRenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C798A274C184000033307 /* TestRenderViewController.swift */; };
 		96C445EE29414A9300DF35B2 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8A3FAA2742CAC700201485 /* UITableView+Extension.swift */; };
-		96C445EF29414A9300DF35B2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE259273993D600E7E766 /* MainViewController.swift */; };
 		96C445F129414A9300DF35B2 /* DemoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A147273AE95A0005D1D0 /* DemoCell.swift */; };
 		96C445F429414A9300DF35B2 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A142273AE5240005D1D0 /* UIFont+Extension.swift */; };
 		96C445F529414A9300DF35B2 /* AdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D82273DC28500037C54 /* AdViewController.swift */; };
@@ -78,14 +71,11 @@
 		96C445F829414A9300DF35B2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5BAE7A273C362B009B7F95 /* SettingsViewController.swift */; };
 		96C445F929414A9300DF35B2 /* DemoNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A149273AF8040005D1D0 /* DemoNavigationController.swift */; };
 		96C445FB29414A9300DF35B2 /* TestRenderAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C798C274C259A00033307 /* TestRenderAdViewController.swift */; };
-		96C445FD29414A9300DF35B2 /* AdDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D7C273D936E00037C54 /* AdDemoViewController.swift */; };
 		96C445FE29414A9300DF35B2 /* AdManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D80273DAFD400037C54 /* AdManagerViewController.swift */; };
 		96C4460229414A9300DF35B2 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A14B273AF81A0005D1D0 /* DemoViewController.swift */; };
 		96C4460329414A9300DF35B2 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE25B2739BF9F00E7E766 /* UIColor+Extension.swift */; };
 		96C4460429414A9300DF35B2 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8A3FA82742CA1100201485 /* NSObject+Extension.swift */; };
-		96C4460529414A9300DF35B2 /* MediationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE1FE4C27FF58C2002C41BC /* MediationViewController.swift */; };
 		96C4460629414A9300DF35B2 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A14D273B19C20005D1D0 /* UILabel+Extension.swift */; };
-		96C4460929414A9300DF35B2 /* DemoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8A3FAE274306F100201485 /* DemoDataSource.swift */; };
 		96C4460A29414A9300DF35B2 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C7990274C60BE00033307 /* UIImage+Extension.swift */; };
 		96C4460D29414A9300DF35B2 /* CustomAdContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150B4B5728D3E6F7002F233D /* CustomAdContainerView.swift */; };
 		96C4460E29414A9300DF35B2 /* GAMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D84B1B72743FFF300CA9CE2 /* GAMViewController.swift */; };
@@ -93,12 +83,13 @@
 		96C4461F29414A9300DF35B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DADE24E27396E0900E7E766 /* Assets.xcassets */; };
 		96C706342A227E4500A47A84 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C706332A227E4500A47A84 /* Navigation.swift */; };
 		96C706352A227E4500A47A84 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C706332A227E4500A47A84 /* Navigation.swift */; };
+		96C706382A22B84700A47A84 /* Google.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C706372A22B84700A47A84 /* Google.swift */; };
+		96C706392A22B84700A47A84 /* Google.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C706372A22B84700A47A84 /* Google.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		150B4B5728D3E6F7002F233D /* CustomAdContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAdContainerView.swift; sourceTree = "<group>"; };
 		1541C30429F1CFB4007E8852 /* VungleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VungleViewController.swift; sourceTree = "<group>"; };
-		1541C30929F1CFDE007E8852 /* ThirdPartyDemandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdPartyDemandViewController.swift; sourceTree = "<group>"; };
 		4D5BAE7A273C362B009B7F95 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4D5BAE7C273C3CA8009B7F95 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		4D5BAE7E273C5E9F009B7F95 /* DemoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoHeader.swift; sourceTree = "<group>"; };
@@ -110,8 +101,6 @@
 		4D84B1B72743FFF300CA9CE2 /* GAMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GAMViewController.swift; sourceTree = "<group>"; };
 		4D8A3FA82742CA1100201485 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 		4D8A3FAA2742CAC700201485 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
-		4D8A3FAE274306F100201485 /* DemoDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoDataSource.swift; sourceTree = "<group>"; };
-		4D901D7C273D936E00037C54 /* AdDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdDemoViewController.swift; sourceTree = "<group>"; };
 		4D901D80273DAFD400037C54 /* AdManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManagerViewController.swift; sourceTree = "<group>"; };
 		4D901D82273DC28500037C54 /* AdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdViewController.swift; sourceTree = "<group>"; };
 		4DADE24227396E0700E7E766 /* nimbus-ios-sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nimbus-ios-sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -119,7 +108,6 @@
 		4DADE24727396E0700E7E766 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		4DADE24E27396E0900E7E766 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4DADE25327396E0900E7E766 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4DADE259273993D600E7E766 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		4DADE25B2739BF9F00E7E766 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		4DB9A13E273AE4A70005D1D0 /* ProximaNova-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Semibold.otf"; sourceTree = "<group>"; };
 		4DB9A142273AE5240005D1D0 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
@@ -128,7 +116,6 @@
 		4DB9A14B273AF81A0005D1D0 /* DemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
 		4DB9A14D273B19C20005D1D0 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		4DC70F7A2A002CEF0037E424 /* FANViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FANViewController.swift; sourceTree = "<group>"; };
-		4DE1FE4C27FF58C2002C41BC /* MediationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediationViewController.swift; sourceTree = "<group>"; };
 		4DEA6B102A016F7F003E6A20 /* APSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APSViewController.swift; sourceTree = "<group>"; };
 		4DEA6B122A016F8F003E6A20 /* UnityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnityViewController.swift; sourceTree = "<group>"; };
 		965B67582A21147E007FC135 /* ProximaNova-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.otf"; sourceTree = "<group>"; };
@@ -136,6 +123,7 @@
 		96BFE1E02A0965600030964D /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		96C4462729414A9300DF35B2 /* nimbus-ios-sample-pods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nimbus-ios-sample-pods.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96C706332A227E4500A47A84 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
+		96C706372A22B84700A47A84 /* Google.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Google.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,7 +159,6 @@
 		1541C30129F1CFB4007E8852 /* Third Party Demand */ = {
 			isa = PBXGroup;
 			children = (
-				1541C30929F1CFDE007E8852 /* ThirdPartyDemandViewController.swift */,
 				4DC70F792A00078E0037E424 /* APS */,
 				4DC70F782A0007880037E424 /* FAN */,
 				4DC70F772A0007800037E424 /* Unity */,
@@ -197,14 +184,6 @@
 			path = Ad;
 			sourceTree = "<group>";
 		};
-		4D5BAE78273C3584009B7F95 /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				4DADE259273993D600E7E766 /* MainViewController.swift */,
-			);
-			path = Main;
-			sourceTree = "<group>";
-		};
 		4D5BAE79273C3614009B7F95 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,7 +201,6 @@
 				4D5BAE7E273C5E9F009B7F95 /* DemoHeader.swift */,
 				4DB9A149273AF8040005D1D0 /* DemoNavigationController.swift */,
 				4DB9A14B273AF81A0005D1D0 /* DemoViewController.swift */,
-				4D8A3FAE274306F100201485 /* DemoDataSource.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -245,7 +223,6 @@
 		4D8A3FA52742C74B00201485 /* Mediation Platforms */ = {
 			isa = PBXGroup;
 			children = (
-				4DE1FE4C27FF58C2002C41BC /* MediationViewController.swift */,
 				4DDD7A54274470760075FDAE /* GAM */,
 			);
 			path = "Mediation Platforms";
@@ -263,7 +240,6 @@
 		4D901D79273D931C00037C54 /* Ad Manager */ = {
 			isa = PBXGroup;
 			children = (
-				4D901D7C273D936E00037C54 /* AdDemoViewController.swift */,
 				4D901D80273DAFD400037C54 /* AdManagerViewController.swift */,
 			);
 			path = "Ad Manager";
@@ -291,8 +267,8 @@
 			isa = PBXGroup;
 			children = (
 				4D901D79273D931C00037C54 /* Ad Manager */,
-				4D5BAE78273C3584009B7F95 /* Main */,
 				4D15A0D8274802CE00D4DBCB /* Ad */,
+				96C706362A22B83B00A47A84 /* Dynamic Price */,
 				4D8A3FA52742C74B00201485 /* Mediation Platforms */,
 				1541C30129F1CFB4007E8852 /* Third Party Demand */,
 				4D8A3FB027430AAE00201485 /* Test Render */,
@@ -356,6 +332,14 @@
 				4D84B1B72743FFF300CA9CE2 /* GAMViewController.swift */,
 			);
 			path = GAM;
+			sourceTree = "<group>";
+		};
+		96C706362A22B83B00A47A84 /* Dynamic Price */ = {
+			isa = PBXGroup;
+			children = (
+				96C706372A22B84700A47A84 /* Google.swift */,
+			);
+			path = "Dynamic Price";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -479,12 +463,11 @@
 			files = (
 				4D5C798F274C290E00033307 /* UIViewController+Extension.swift in Sources */,
 				4DADE24627396E0700E7E766 /* AppDelegate.swift in Sources */,
-				1541C30A29F1CFDE007E8852 /* ThirdPartyDemandViewController.swift in Sources */,
 				4DADE24827396E0700E7E766 /* SceneDelegate.swift in Sources */,
+				96C706382A22B84700A47A84 /* Google.swift in Sources */,
 				4DEA6B112A016F7F003E6A20 /* APSViewController.swift in Sources */,
 				4D5C798B274C184000033307 /* TestRenderViewController.swift in Sources */,
 				4D8A3FAB2742CAC700201485 /* UITableView+Extension.swift in Sources */,
-				4DADE25A273993D600E7E766 /* MainViewController.swift in Sources */,
 				96C706342A227E4500A47A84 /* Navigation.swift in Sources */,
 				4DB9A148273AE95A0005D1D0 /* DemoCell.swift in Sources */,
 				4D5BAE81273C6A16009B7F95 /* Setting.swift in Sources */,
@@ -498,14 +481,11 @@
 				96BFE1E12A0965600030964D /* UIView+Extension.swift in Sources */,
 				4DC70F7B2A002CEF0037E424 /* FANViewController.swift in Sources */,
 				4DEA6B132A016F8F003E6A20 /* UnityViewController.swift in Sources */,
-				4D901D7D273D936E00037C54 /* AdDemoViewController.swift in Sources */,
 				4D901D81273DAFD400037C54 /* AdManagerViewController.swift in Sources */,
 				4DB9A14C273AF81A0005D1D0 /* DemoViewController.swift in Sources */,
 				4DADE25C2739BF9F00E7E766 /* UIColor+Extension.swift in Sources */,
 				4D8A3FA92742CA1100201485 /* NSObject+Extension.swift in Sources */,
-				4DE1FE4F27FF58C2002C41BC /* MediationViewController.swift in Sources */,
 				4DB9A14E273B19C20005D1D0 /* UILabel+Extension.swift in Sources */,
-				4D8A3FAF274306F100201485 /* DemoDataSource.swift in Sources */,
 				4D5C7991274C60BE00033307 /* UIImage+Extension.swift in Sources */,
 				150B4B5828D3E6F7002F233D /* CustomAdContainerView.swift in Sources */,
 				4D84B1B82743FFF300CA9CE2 /* GAMViewController.swift in Sources */,
@@ -520,9 +500,9 @@
 				96C445E829414A9300DF35B2 /* UIViewController+Extension.swift in Sources */,
 				96C445E929414A9300DF35B2 /* AppDelegate.swift in Sources */,
 				96C445EB29414A9300DF35B2 /* SceneDelegate.swift in Sources */,
+				96C706392A22B84700A47A84 /* Google.swift in Sources */,
 				96C445ED29414A9300DF35B2 /* TestRenderViewController.swift in Sources */,
 				96C445EE29414A9300DF35B2 /* UITableView+Extension.swift in Sources */,
-				96C445EF29414A9300DF35B2 /* MainViewController.swift in Sources */,
 				96C445F129414A9300DF35B2 /* DemoCell.swift in Sources */,
 				96C445F429414A9300DF35B2 /* UIFont+Extension.swift in Sources */,
 				96C445F529414A9300DF35B2 /* AdViewController.swift in Sources */,
@@ -533,22 +513,18 @@
 				96C445F829414A9300DF35B2 /* SettingsViewController.swift in Sources */,
 				96C445F929414A9300DF35B2 /* DemoNavigationController.swift in Sources */,
 				96C445FB29414A9300DF35B2 /* TestRenderAdViewController.swift in Sources */,
-				96C445FD29414A9300DF35B2 /* AdDemoViewController.swift in Sources */,
 				96C445FE29414A9300DF35B2 /* AdManagerViewController.swift in Sources */,
 				96BFE1E22A0965600030964D /* UIView+Extension.swift in Sources */,
 				4D07F6722A043B3100E2B094 /* APSViewController.swift in Sources */,
 				96C4460229414A9300DF35B2 /* DemoViewController.swift in Sources */,
 				96C4460329414A9300DF35B2 /* UIColor+Extension.swift in Sources */,
 				96C4460429414A9300DF35B2 /* NSObject+Extension.swift in Sources */,
-				96C4460529414A9300DF35B2 /* MediationViewController.swift in Sources */,
 				96C4460629414A9300DF35B2 /* UILabel+Extension.swift in Sources */,
 				4D07F6732A043B3400E2B094 /* FANViewController.swift in Sources */,
 				4D07F6672A041F7000E2B094 /* Setting.swift in Sources */,
-				96C4460929414A9300DF35B2 /* DemoDataSource.swift in Sources */,
 				96C4460A29414A9300DF35B2 /* UIImage+Extension.swift in Sources */,
 				96C4460D29414A9300DF35B2 /* CustomAdContainerView.swift in Sources */,
 				96C4460E29414A9300DF35B2 /* GAMViewController.swift in Sources */,
-				4D07F66E2A043B2500E2B094 /* ThirdPartyDemandViewController.swift in Sources */,
 				96C4461029414A9300DF35B2 /* SettingsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

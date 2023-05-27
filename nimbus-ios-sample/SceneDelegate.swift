@@ -15,7 +15,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = DemoNavigationController(rootViewController: MainViewController())
+        window?.rootViewController = DemoNavigationController(
+            rootViewController: NavigationListViewController(
+                title: "Integration Assist".uppercased(),
+                subtitle: "Ad Call Demos and Render Testing",
+                items: [Section(header: nil, items: MainItem.allCases)]
+        ))
         window?.makeKeyAndVisible()
     }
 }

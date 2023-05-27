@@ -26,12 +26,12 @@ extension AppDelegate {
 
 final class UnityViewController: DemoViewController {
 
-    private let adType: ThirdPartyDemandAdType
+    private let adType: UnitySample
     private var adManager: NimbusAdManager?
     private var adController: AdController?
     private var nimbusAd: NimbusAd?
 
-    init(adType: ThirdPartyDemandAdType, headerSubTitle: String) {
+    init(adType: UnitySample, headerSubTitle: String) {
         self.adType = adType
         
         super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle)

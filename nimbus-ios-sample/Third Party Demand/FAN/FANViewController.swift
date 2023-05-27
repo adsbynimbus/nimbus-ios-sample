@@ -35,12 +35,12 @@ extension AppDelegate {
 
 final class FANViewController: DemoViewController {
     
-    private let adType: ThirdPartyDemandAdType
+    private let adType: MetaSample
     private var ad: NimbusAd?
     private var dimensions: NimbusAdDimensions?
     private var adContainerView: CustomAdContainerView?
     
-    init(adType: ThirdPartyDemandAdType,headerSubTitle: String) {
+    init(adType: MetaSample, headerSubTitle: String) {
         self.adType = adType
         
         super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle)
@@ -113,7 +113,7 @@ final class FANViewController: DemoViewController {
         }
     }
         
-    private func createNimbusAd(adType: ThirdPartyDemandAdType) -> NimbusAd? {
+    private func createNimbusAd(adType: MetaSample) -> NimbusAd? {
         switch adType {
             
         case .metaBanner:
@@ -182,7 +182,7 @@ extension FANViewController: AdControllerDelegate {
     func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {
         print("Nimbus didReceiveNimbusEvent: \(event)")
         if let ad = ad, event == .loaded {
-            controller.adView?.setUiTestIdentifiers(for: ad, refreshing: adType == .apsBannerWithRefresh)
+            controller.adView?.setUiTestIdentifiers(for: ad)
         }
     }
     

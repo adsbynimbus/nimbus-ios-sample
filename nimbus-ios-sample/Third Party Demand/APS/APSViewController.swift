@@ -41,7 +41,7 @@ final class APSViewController: DemoViewController {
     ]
 
     
-    private let adType: ThirdPartyDemandAdType
+    private let adType: APSSample
     private var adManager: NimbusAdManager?
     private lazy var requestDispatchGroup = DispatchGroup()
     
@@ -51,7 +51,7 @@ final class APSViewController: DemoViewController {
     private var nimbusAd: NimbusAd?
     private var adController: AdController?
     
-    init(adType: ThirdPartyDemandAdType,headerSubTitle: String) {
+    init(adType: APSSample, headerSubTitle: String) {
         self.adType = adType
         
         super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle)

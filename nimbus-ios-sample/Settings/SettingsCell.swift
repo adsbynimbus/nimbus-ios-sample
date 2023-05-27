@@ -48,15 +48,6 @@ final class SettingsCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateWithSetting(_ setting: Setting) {
-        label.text = setting.description
-        
-        switchButton.setOn(setting.getPrefs(), animated: false)
-        switchAction = { isOn in
-            setting.updatePrefs(isOn)
-        }
-    }
-    
     @objc private func didChangeSwitch(_ switchButton: UISwitch) {
         switchAction?(switchButton.isOn)
     }

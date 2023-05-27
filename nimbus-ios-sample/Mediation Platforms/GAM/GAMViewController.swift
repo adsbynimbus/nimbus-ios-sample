@@ -83,116 +83,6 @@ final class GAMViewController: DemoViewController {
                 self.interstitial?.fullScreenContentDelegate = self
                 ad?.present(fromRootViewController: self)
             }
-        case .dynamicPriceBanner:
-            bannerView = GAMBannerView(adSize: GADAdSizeBanner)
-            guard let bannerView else { return }
-            bannerView.rootViewController = self
-            bannerView.adUnitID = Bundle.gamPlacementId
-            bannerView.delegate = self
-            bannerView.accessibilityIdentifier = "google_ad_view"
-            
-            bannerView.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(bannerView)
-            view.addConstraints(
-                [NSLayoutConstraint(item: bannerView,
-                                    attribute: .top,
-                                    relatedBy: .equal,
-                                    toItem: headerView,
-                                    attribute: .bottom,
-                                    multiplier: 1,
-                                    constant: 0),
-                 NSLayoutConstraint(item: bannerView,
-                                    attribute: .centerX,
-                                    relatedBy: .equal,
-                                    toItem: view,
-                                    attribute: .centerX,
-                                    multiplier: 1,
-                                    constant: 0)
-            ])
-            
-            gamDynamicPrice = NimbusGAMDynamicPrice(request: gamRequest)
-            gamDynamicPrice?.requestDelegate = self
-            
-            requestManager.delegate = gamDynamicPrice
-            requestManager.performRequest(request: NimbusRequest.forBannerAd(position: adType.description))
-        case .dynamicPriceBannerVideo:
-            bannerView = GAMBannerView(adSize: GADAdSizeMediumRectangle)
-            guard let bannerView else { return }
-            bannerView.rootViewController = self
-            bannerView.adUnitID = Bundle.gamPlacementId
-            bannerView.delegate = self
-            bannerView.validAdSizes = [NSValueFromGADAdSize(GADAdSizeFromCGSize(CGSize(width: 400, height: 300)))]
-            bannerView.accessibilityIdentifier = "google_ad_view"
-            
-            bannerView.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(bannerView)
-            view.addConstraints(
-                [NSLayoutConstraint(item: bannerView,
-                                    attribute: .top,
-                                    relatedBy: .equal,
-                                    toItem: headerView,
-                                    attribute: .bottom,
-                                    multiplier: 1,
-                                    constant: 0),
-                 NSLayoutConstraint(item: bannerView,
-                                    attribute: .centerX,
-                                    relatedBy: .equal,
-                                    toItem: view,
-                                    attribute: .centerX,
-                                    multiplier: 1,
-                                    constant: 0)
-            ])
-          
-            gamDynamicPrice = NimbusGAMDynamicPrice(request: gamRequest)
-            gamDynamicPrice?.requestDelegate = self
-            
-            requestManager.delegate = gamDynamicPrice
-            
-            let nimbusRequest = NimbusRequest.forBannerAd(position: adType.description, format: NimbusAdFormat.letterbox)
-            var video = NimbusVideo.interstitial() /* This helper will return a populated video object */
-            video.position = NimbusPosition.unknown /* Remove the fullscreen position set from the interstitial helper */
-            nimbusRequest.impressions[0].video = video
-            requestManager.performRequest(request: nimbusRequest)
-        case .dynamicPriceInlineVideo:
-            bannerView = GAMBannerView(adSize: GADAdSizeMediumRectangle)
-            guard let bannerView else { return }
-            bannerView.rootViewController = self
-            bannerView.adUnitID = Bundle.gamPlacementId
-            bannerView.delegate = self
-            bannerView.validAdSizes = [NSValueFromGADAdSize(GADAdSizeFromCGSize(CGSize(width: 400, height: 300)))]
-            bannerView.accessibilityIdentifier = "google_ad_view"
-            
-            bannerView.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(bannerView)
-            view.addConstraints(
-                [NSLayoutConstraint(item: bannerView,
-                                    attribute: .top,
-                                    relatedBy: .equal,
-                                    toItem: headerView,
-                                    attribute: .bottom,
-                                    multiplier: 1,
-                                    constant: 0),
-                 NSLayoutConstraint(item: bannerView,
-                                    attribute: .centerX,
-                                    relatedBy: .equal,
-                                    toItem: view,
-                                    attribute: .centerX,
-                                    multiplier: 1,
-                                    constant: 0)
-            ])
-          
-            gamDynamicPrice = NimbusGAMDynamicPrice(request: gamRequest)
-            gamDynamicPrice?.requestDelegate = self
-            
-            requestManager.delegate = gamDynamicPrice
-            
-            requestManager.performRequest(request: NimbusRequest.forVideoAd(position: adType.description))
-        case .dynamicPriceInterstitial:
-            gamDynamicPrice = NimbusGAMDynamicPrice(request: gamRequest)
-            gamDynamicPrice?.requestDelegate = self
-            
-            requestManager.delegate = gamDynamicPrice
-            requestManager.performRequest(request: NimbusRequest.forInterstitialAd(position: adType.description))
         }
     }
 }
@@ -206,16 +96,7 @@ extension GAMViewController: GADBannerViewDelegate {
         print("bannerViewDidReceiveAd")
         
         /* Set identifiers for UI testing */
-        switch adType {
-        case .banner:
-            bannerView.nimbusAdView?.setUiTestIdentifiers(for: "test_demand static 320x50", id: "nimbus_ad_view")
-        case .dynamicPriceBanner, .dynamicPriceInlineVideo, .dynamicPriceBannerVideo:
-            if let ad = nimbusAd {
-                bannerView.setUiTestIdentifiers(for: ad.testIdentifier, id: "google_ad_view")
-            }
-        default:
-            return
-        }
+        bannerView.nimbusAdView?.setUiTestIdentifiers(for: "test_demand static 320x50", id: "nimbus_ad_view")
     }
     
     func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
@@ -263,7 +144,7 @@ extension GAMViewController: NimbusRequestManagerDelegate {
     func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
         print("didCompleteNimbusRequest with \(ad.auctionType) ad type")
         nimbusAd = ad
-        if adType != .dynamicPriceInterstitial{
+        if adType == .banner {
             bannerView?.load(gamRequest)
         } else {
             GADInterstitialAd.load(withAdUnitID: Bundle.gamPlacementId, request: gamRequest) { gadAd, error in

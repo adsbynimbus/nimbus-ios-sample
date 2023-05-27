@@ -39,22 +39,6 @@ class DemoCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func updateWithMainItem(_ item: MainItem) {
-        label.text = item.description
-    }
-    
-    func updateWithAdManagerAdType(_ adType: AdManagerAdType) {
-        label.text = adType.description
-    }
-    
-    func updateWithMediationAdType(_ adType: MediationAdType) {
-        label.text = adType.description
-    }
-    
-    func updateWithThirdPartyDemandAdType(_ adType: ThirdPartyDemandAdType) {
-        label.text = adType.description
-    }
         
     private func setupAccessoryType() {
         let image = UIImage(named: "right-arrow")?.withRenderingMode(.alwaysTemplate)

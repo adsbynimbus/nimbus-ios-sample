@@ -8,7 +8,15 @@
 import DTBiOSSDK
 import NimbusKit
 
-extension Setting {
+enum Setting: String, CaseIterable {
+    case nimbusTestMode          = "Nimbus Test Mode"
+    case coppaOn                 = "Set COPPA On"
+    case forceNoFill             = "Force No Fill"
+    case omThirdPartyViewability = "Send OMID Viewability Flag"
+    case tradeDesk               = "Send Trade Desk Identity"
+    case gdprConsent             = "GDPR Consent"
+    case ccpaConsent             = "CCPA Consent"
+    case gppConsent              = "GPP Consent"
     
     func getPrefs() -> Bool {
         switch self {
@@ -22,7 +30,6 @@ extension Setting {
             return UserDefaults.standard.omThirdPartyViewability
         case .tradeDesk:
             return UserDefaults.standard.tradeDesk
-            
         case .gdprConsent:
             return UserDefaults.standard.gdprConsent
         case .ccpaConsent:

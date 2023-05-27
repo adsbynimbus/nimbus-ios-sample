@@ -6,22 +6,65 @@
 //
 
 import Foundation
+import UIKit
 
-protocol DemoItem: CaseIterable, CustomStringConvertible { }
+protocol NavigationItem: CaseIterable, CustomStringConvertible {
+    func destinationController(parent: String) -> UIViewController
+}
 
-extension RawRepresentable where RawValue == String, Self: DemoItem {
+extension RawRepresentable where RawValue == String, Self: NavigationItem {
     var description: String { rawValue }
 }
 
-enum MainItem: String, DemoItem {
+struct Section {
+    let header: String?
+    let items: [any NavigationItem]
+}
+
+enum MainItem: String, NavigationItem {
     case showAdDemo         = "Show Ad Demo"
     case mediationPlatforms = "Mediation Platforms"
     case thirdPartyDemand   = "Third Party Demand"
     case testRender         = "Test Render"
     case settings           = "Settings"
+    
+    func destinationController(parent: String) -> UIViewController {
+        switch self {
+        case .showAdDemo:
+            return NavigationListViewController(
+                 title: self.description,
+                subtitle: "Select to see Nimbus' request and render flow",
+                items: [Section(header: nil, items: AdManagerAdType.allCases)])
+        case .mediationPlatforms:
+            return  NavigationListViewController(
+                title: self.description,
+                subtitle: "For non-standalone Nimbus integrations",
+                items: [
+                    Section(header: "Google Ad Manager", items: MediationAdType.allCases),
+                    Section(header: nil, items: DynamicPriceSample.allCases)
+                ])
+        case .thirdPartyDemand:
+            return NavigationListViewController(
+                title: self.description,
+                subtitle: "Select to see Nimbus' integration with third party demand",
+                items: [
+                    Section(header: "APS", items: APSSample.allCases),
+                    Section(header: "Meta Audience Network", items: MetaSample.allCases),
+                    Section(header: "Unity", items: UnitySample.allCases),
+                    Section(header: "Vungle", items: VungleSample.allCases)
+                ])
+        case .testRender:
+            return TestRenderViewController(
+                headerTitle: self.description,
+                headerSubTitle: "Paste in a VAST or HTML Nimbus response"
+            )
+        case .settings:
+            return SettingsViewController(headerTitle: self.description, headerSubTitle: "Configure your test app experience")
+        }
+    }
 }
 
-enum AdManagerAdType: String, DemoItem {
+enum AdManagerAdType: String, NavigationItem {
     case manuallyRenderedAd         = "Manually Rendered Ad"
     case banner                     = "Banner"
     case bannerWithRefresh          = "Banner With Refresh"
@@ -31,60 +74,142 @@ enum AdManagerAdType: String, DemoItem {
     case interstitialVideo          = "Interstitial Video"
     case interstitialVideoWithoutUI = "Interstitial Video Without UI"
     case rewardedVideo              = "Rewarded Video"
+    
+    func destinationController(parent: String) -> UIViewController {
+        AdManagerViewController(adType: self, headerSubTitle: parent)
+    }
 }
 
-
-enum MediationIntegrationType: String, DemoItem {
-    case googleAdManager = "Google Ad Manager"
-}
-
-enum MediationAdType: String, DemoItem {
+enum MediationAdType: String, NavigationItem {
     case banner                   = "Banner"
     case interstitial             = "Interstitial"
+    
+    func destinationController(parent: String) -> UIViewController {
+        GAMViewController(adType: self, headerSubTitle: parent)
+    }
+}
+
+enum DynamicPriceSample: String, NavigationItem {
     case dynamicPriceBanner       = "Dynamic Price Banner"
     case dynamicPriceBannerVideo  = "Dynamic Price Banner + Video"
     case dynamicPriceInlineVideo  = "Dynamic Price Inline Video"
     case dynamicPriceInterstitial = "Dynamic Price Interstitial"
+    func destinationController(parent: String) -> UIViewController {
+        GoogleDynamicPriceViewController(adType: self, headerSubTitle: parent)
+    }
 }
 
-enum ThirdPartyDemandIntegrationType: String, DemoItem {
-    case aps    = "APS"
-    case meta   = "Meta Audience Network"
-    case unity  = "Unity"
-    case vungle = "Vungle"
-}
-
-
-enum ThirdPartyDemandAdType: String, DemoItem {
+enum APSSample: String, NavigationItem {
     case apsBannerWithRefresh   = "APS Banner With Refresh"
     case apsInterstitialHybrid  = "APS Interstitial Hybrid"
+    func destinationController(parent: String) -> UIViewController {
+        APSViewController(adType: self, headerSubTitle: parent)
+    }
+}
+
+enum MetaSample: String, NavigationItem {
     case metaBanner             = "Meta Banner"
     case metaInterstitial       = "Meta Interstitial"
     case metaNative             = "Meta Native"
+    func destinationController(parent: String) -> UIViewController {
+        FANViewController(adType: self, headerSubTitle: parent)
+    }
+}
+
+enum UnitySample: String, NavigationItem {
     case unityRewardedVideo     = "Unity Rewarded Video"
+    func destinationController(parent: String) -> UIViewController {
+        UnityViewController(adType: self, headerSubTitle: parent)
+    }
+}
+
+enum VungleSample: String, NavigationItem {
     case vungleBanner           = "Vungle Banner"
     case vungleMREC             = "Vungle MREC"
     case vungleInterstitial     = "Vungle Interstitial"
     case vungleRewarded         = "Vungle Rewarded"
+    
+    func destinationController(parent: String) -> UIViewController {
+        VungleViewController(adType: self, headerSubTitle: parent)
+    }
+}
+                                                
+final class NavigationListViewController: DemoViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.sectionHeaderTopPadding = 0
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 75
+        tableView.separatorInset = .zero
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.registerCell(DemoCell.self)
+        tableView.registerHeaderFooter(DemoHeader.self)
+        return tableView
+    }()
+    
+    let dataSource: [Section]
+    
+    init(title: String, subtitle: String, items: [Section]) {
+        dataSource = items
+        super.init(headerTitle: title, headerSubTitle: subtitle)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-    public static var apsAdTypes = [apsBannerWithRefresh, apsInterstitialHybrid]
-    public static var metaAdTypes = [metaBanner, metaInterstitial, metaNative]
-    public static var unityAdTypes = [unityRewardedVideo]
-    public static var vungleAdTypes = [vungleBanner, vungleMREC, vungleInterstitial, vungleRewarded]
+        if headerTitle == "Integration Assist".uppercased() {
+            setupTitleLabel()
+            setupSubTitleLabel()
+        }
+        setupScrollView(tableView)
+    }
+    
+    private func setupTitleLabel() {
+        titleLabel.font = .proximaNova(size: 23, weight: .semibold)
+        titleLabel.setTextSpacingBy(value: 1.92)
+        titleLabel.textAlignment = .center
+    }
+    
+    private func setupSubTitleLabel() {
+        subTitleLabel.textAlignment = .center
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        dataSource.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        dataSource[section].items.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: DemoCell = tableView.dequeueReusableCell(for: indexPath)
+        cell.label.text = dataSource[indexPath.section].items[indexPath.row].description
+        return cell
+    }
+
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header: DemoHeader = tableView.dequeueReusableHeaderFooterView()
+        header.label.text = dataSource[section].header
+        return header
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        navigationController?.pushViewController(
+            dataSource[indexPath.section].items[indexPath.row].destinationController(parent: headerTitle),
+            animated: true
+        )
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        dataSource[section].header != nil ? DemoHeader.height : 0
+    }
 }
 
-enum SettingsSection: String, DemoItem {
-    case main
-    case userDetails = "User Details"
-}
-
-enum Setting: String, DemoItem {
-    case nimbusTestMode          = "Nimbus Test Mode"
-    case coppaOn                 = "Set COPPA On"
-    case forceNoFill             = "Force No Fill"
-    case omThirdPartyViewability = "Send OMID Viewability Flag"
-    case tradeDesk               = "Send Trade Desk Identity"
-    case gdprConsent             = "GDPR Consent"
-    case ccpaConsent             = "CCPA Consent"
-    case gppConsent              = "GPP Consent"
-}

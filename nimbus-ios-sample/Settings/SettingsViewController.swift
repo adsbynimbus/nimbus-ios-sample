@@ -8,37 +8,19 @@
 import UIKit
 
 final class SettingsViewController: DemoViewController {
-    override var headerTitle: String { "Settings" }
     
-    override var headerSubTitle: String {
-        "Configure your test app experience"
-    }
-    
-    private lazy var tableView: UITableView = {
+    lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.sectionHeaderTopPadding = 0
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 75
         tableView.separatorInset = .zero
-        tableView.registerCell(SettingsCell.self)
-        tableView.registerHeaderFooter(DemoHeader.self)
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.registerCell(SettingsCell.self)
+        tableView.registerHeaderFooter(DemoHeader.self)
         return tableView
     }()
-    
-    private var dataSource: [DemoDataSource<SettingsSection, Setting>] {
-        [
-            DemoDataSource(
-                type: .main,
-                values: Setting.allCases.filter { !$0.isUserPrivacySetting }
-            ),
-            DemoDataSource(
-                type: .userDetails,
-                values: [Setting.gdprConsent, Setting.ccpaConsent, Setting.gppConsent]
-            )
-        ]
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,27 +31,31 @@ final class SettingsViewController: DemoViewController {
 
 extension SettingsViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        dataSource.count
+        2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        dataSource[section].values.count
+        section > 0 ? 3 : 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: SettingsCell = tableView.dequeueReusableCell(for: indexPath)
-        let setting = dataSource[indexPath.section].values[indexPath.row]
-        cell.updateWithSetting(setting)
+        let setting = Setting.allCases[indexPath.row + (indexPath.section * 5)]
+        cell.label.text = setting.rawValue
+        cell.switchButton.setOn(setting.getPrefs(), animated: false)
+        cell.switchAction = { isOn in
+            setting.updatePrefs(isOn)
+        }
+
         return cell
     }
 }
 
 extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let settingsSection = dataSource[section].type
-        if settingsSection == .userDetails {
+        if section > 0 {
             let header: DemoHeader = tableView.dequeueReusableHeaderFooterView()
-            header.updateWithSection(settingsSection)
+            header.label.text = "User Details"
             return header
         } else {
             return nil
@@ -77,6 +63,6 @@ extension SettingsViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        dataSource[section].type == .userDetails ? DemoHeader.height : 0
+        section > 0 ? DemoHeader.height : 0
     }
 }

@@ -28,12 +28,12 @@ class VungleViewController: DemoViewController {
     
     private let contentView = UIView()
     
-    private let adType: ThirdPartyDemandAdType
+    private let adType: VungleSample
     private var adManager: NimbusAdManager?
     private var adController: AdController?
     private var nimbusAd: NimbusAd?
     
-    init(adType: ThirdPartyDemandAdType, headerSubTitle: String) {
+    init(adType: VungleSample, headerSubTitle: String) {
         self.adType = adType
         
         super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle)
@@ -102,7 +102,7 @@ class VungleViewController: DemoViewController {
         }
     }
     
-    private func createNimbusRequest(adType: ThirdPartyDemandAdType) -> NimbusRequest? {
+    private func createNimbusRequest(adType: VungleSample) -> NimbusRequest? {
         switch adType {
             
         case .vungleBanner:

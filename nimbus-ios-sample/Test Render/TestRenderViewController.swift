@@ -8,13 +8,6 @@
 import UIKit
 
 class TestRenderViewController: DemoViewController {
-    override var headerTitle: String {
-        "Test Render"
-    }
-    
-    override var headerSubTitle: String {
-        "Paste in a VAST or HTML Nimbus response"
-    }
     
     private lazy var markupTexField: UITextField = {
         let textField = UITextField()

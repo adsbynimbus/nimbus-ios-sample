@@ -20,7 +20,7 @@ final class DemoHeader: UITableViewHeaderFooterView {
         return view
     }()
     
-    private let label: UILabel = {
+    let label: UILabel = {
         let label = UILabel()
         label.font = .proximaNova(size: 18, weight: .bold)
         label.textColor = UIColor(named: "labelText")
@@ -64,17 +64,5 @@ final class DemoHeader: UITableViewHeaderFooterView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func updateWithSection(_ settingsSection: SettingsSection) {
-        label.text = settingsSection.description
-    }
-    
-    func updateWithMediationIntegrationType(_ type: MediationIntegrationType) {
-        label.text = type.description
-    }
-    
-    func updateWithThirdPartyIntegrationType(_ type: ThirdPartyDemandIntegrationType) {
-        label.text = type.description
     }
 }
