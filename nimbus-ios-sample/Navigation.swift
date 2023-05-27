@@ -10,130 +10,81 @@ import Foundation
 protocol DemoItem: CaseIterable, CustomStringConvertible { }
 
 extension RawRepresentable where RawValue == String, Self: DemoItem {
-    var description: String {
-        rawValue.camelCaseToWords()
-    }
+    var description: String { rawValue }
 }
 
 enum MainItem: String, DemoItem {
-    case showAdDemo
-    case mediationPlatforms
-    case thirdPartyDemand
-    case testRender
-    case settings
+    case showAdDemo         = "Show Ad Demo"
+    case mediationPlatforms = "Mediation Platforms"
+    case thirdPartyDemand   = "Third Party Demand"
+    case testRender         = "Test Render"
+    case settings           = "Settings"
 }
 
 enum AdManagerAdType: String, DemoItem {
-    case manuallyRenderedAd
-    case banner, bannerWithRefresh
-    case inlineVideo
-    case interstitialHybrid
-    case interstitialStatic
-    case interstitialVideo, interstitialVideoWithoutUI
-    case rewardedVideo
-    
-    var description: String {
-        switch self {
-        case .interstitialVideoWithoutUI:
-            return "Interstitial Video Without UI"
-        default:
-            return rawValue.camelCaseToWords()
-        }
-    }
+    case manuallyRenderedAd         = "Manually Rendered Ad"
+    case banner                     = "Banner"
+    case bannerWithRefresh          = "Banner With Refresh"
+    case inlineVideo                = "Inline Video"
+    case interstitialHybrid         = "Interstitial Hybrid"
+    case interstitialStatic         = "Interstitial Static"
+    case interstitialVideo          = "Interstitial Video"
+    case interstitialVideoWithoutUI = "Interstitial Video Without UI"
+    case rewardedVideo              = "Rewarded Video"
 }
 
 
 enum MediationIntegrationType: String, DemoItem {
-    case googleAdManager
-    
-    var description: String {
-        rawValue.camelCaseToWords()
-    }
+    case googleAdManager = "Google Ad Manager"
 }
 
 enum MediationAdType: String, DemoItem {
-    case banner, interstitial
-    case dynamicPriceBanner, dynamicPriceBannerVideo, dynamicPriceInlineVideo, dynamicPriceInterstitial
-    
-    var description: String {
-        switch self {
-        case .dynamicPriceBannerVideo:
-            return "Dynamic Price Banner + Video"
-        default:
-            return rawValue.camelCaseToWords()
-        }
-    }
+    case banner                   = "Banner"
+    case interstitial             = "Interstitial"
+    case dynamicPriceBanner       = "Dynamic Price Banner"
+    case dynamicPriceBannerVideo  = "Dynamic Price Banner + Video"
+    case dynamicPriceInlineVideo  = "Dynamic Price Inline Video"
+    case dynamicPriceInterstitial = "Dynamic Price Interstitial"
 }
 
 enum ThirdPartyDemandIntegrationType: String, DemoItem {
-    case aps
-    case meta
-    case unity
-    case vungle
-    
-    var description: String {
-        switch self {
-        case .aps:
-            return rawValue.uppercased()
-        case .meta:
-            return "Meta Audience Network"
-        default:
-            return rawValue.camelCaseToWords()
-        }
-    }
+    case aps    = "APS"
+    case meta   = "Meta Audience Network"
+    case unity  = "Unity"
+    case vungle = "Vungle"
 }
 
 
 enum ThirdPartyDemandAdType: String, DemoItem {
-    case apsBannerWithRefresh, apsInterstitialHybrid
-    case metaBanner, metaInterstitial, metaNative
-    case unityRewardedVideo
-    case vungleBanner, vungleMREC, vungleInterstitial, vungleRewarded
-    
-    var description: String {
-        switch self {
-        case .apsBannerWithRefresh:
-            return "APS Banner With Refresh"
-        case .apsInterstitialHybrid:
-            return "APS Interstitial Hybrid"
-        case .vungleMREC:
-            return "Vungle MREC"
-        default:
-            return rawValue.camelCaseToWords()
-        }
-    }
-    
+    case apsBannerWithRefresh   = "APS Banner With Refresh"
+    case apsInterstitialHybrid  = "APS Interstitial Hybrid"
+    case metaBanner             = "Meta Banner"
+    case metaInterstitial       = "Meta Interstitial"
+    case metaNative             = "Meta Native"
+    case unityRewardedVideo     = "Unity Rewarded Video"
+    case vungleBanner           = "Vungle Banner"
+    case vungleMREC             = "Vungle MREC"
+    case vungleInterstitial     = "Vungle Interstitial"
+    case vungleRewarded         = "Vungle Rewarded"
+        
     public static var apsAdTypes = [apsBannerWithRefresh, apsInterstitialHybrid]
     public static var metaAdTypes = [metaBanner, metaInterstitial, metaNative]
     public static var unityAdTypes = [unityRewardedVideo]
     public static var vungleAdTypes = [vungleBanner, vungleMREC, vungleInterstitial, vungleRewarded]
 }
 
+enum SettingsSection: String, DemoItem {
+    case main
+    case userDetails = "User Details"
+}
+
 enum Setting: String, DemoItem {
-    case nimbusTestMode
-    case coppaOn
-    case forceNoFill
-    case omThirdPartyViewability
-    case tradeDesk
-    
-    case gdprConsent, ccpaConsent, gppConsent
-    
-    var description: String {
-        switch self {
-        case .coppaOn:
-            return "Set COPPA On"
-        case .omThirdPartyViewability:
-            return "Send OMID Viewability Flag"
-        case .tradeDesk:
-            return "Send Trade Desk Identity"
-        case .gdprConsent:
-            return "GDPR Consent"
-        case .ccpaConsent:
-            return "CCPA Consent"
-        case .gppConsent:
-            return "GPP Consent"
-        default:
-            return rawValue.camelCaseToWords()
-        }
-    }
+    case nimbusTestMode          = "Nimbus Test Mode"
+    case coppaOn                 = "Set COPPA On"
+    case forceNoFill             = "Force No Fill"
+    case omThirdPartyViewability = "Send OMID Viewability Flag"
+    case tradeDesk               = "Send Trade Desk Identity"
+    case gdprConsent             = "GDPR Consent"
+    case ccpaConsent             = "CCPA Consent"
+    case gppConsent              = "GPP Consent"
 }
