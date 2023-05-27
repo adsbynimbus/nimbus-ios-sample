@@ -8,33 +8,7 @@
 import DTBiOSSDK
 import NimbusKit
 
-enum Setting: String, DemoItem {
-    case nimbusTestMode
-    case coppaOn
-    case forceNoFill
-    case omThirdPartyViewability
-    case tradeDesk
-    
-    case gdprConsent, ccpaConsent, gppConsent
-    
-    var description: String {
-        switch self {
-        case .coppaOn:
-            return "Set COPPA On"
-        case .omThirdPartyViewability:
-            return "Send OMID Viewability Flag"
-        case .tradeDesk:
-            return "Send Trade Desk Identity"
-        case .gdprConsent:
-            return "GDPR Consent"
-        case .ccpaConsent:
-            return "CCPA Consent"
-        case .gppConsent:
-            return "GPP Consent"
-        default:
-            return rawValue.camelCaseToWords()
-        }
-    }
+extension Setting {
     
     func getPrefs() -> Bool {
         switch self {
