@@ -29,7 +29,7 @@ final class SettingsViewController: DemoViewController {
     }
 }
 
-extension SettingsViewController: UITableViewDataSource {
+extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         2
     }
@@ -49,9 +49,7 @@ extension SettingsViewController: UITableViewDataSource {
 
         return cell
     }
-}
-
-extension SettingsViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section > 0 {
             let header: DemoHeader = tableView.dequeueReusableHeaderFooterView()
