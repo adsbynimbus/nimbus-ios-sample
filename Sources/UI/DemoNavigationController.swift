@@ -9,15 +9,12 @@ import UIKit
 
 final class DemoNavigationController: UINavigationController {
     
+    let backArrow = UIImage(named: "left-arrow")?.imageWithInset(inset: 2)
+    let appearance = UINavigationBarAppearance()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupNavigationBar()
-    }
-    
-    private func setupNavigationBar() {
-        let image = UIImage(named: "left-arrow")?.imageWithInset(inset: 2)
-        let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = .raisingBlack
         appearance.shadowColor = .clear
@@ -25,7 +22,7 @@ final class DemoNavigationController: UINavigationController {
             .font: UIFont.proximaNova(size: 18, weight: .regular),
             .foregroundColor: UIColor.white
         ]
-        appearance.setBackIndicatorImage(image, transitionMaskImage: image)
+        appearance.setBackIndicatorImage(backArrow, transitionMaskImage: backArrow)
 
         navigationBar.standardAppearance = appearance
         navigationBar.compactAppearance = appearance

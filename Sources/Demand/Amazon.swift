@@ -5,11 +5,10 @@
 //  Created by Victor Takai on 02/05/23.
 //
 
-import UIKit
-import NimbusKit
-import NimbusRequestKit
-import NimbusRequestAPSKit
 import DTBiOSSDK
+import NimbusKit
+import NimbusRequestAPSKit
+import UIKit
 
 extension AppDelegate {
     func setupAmazonDemand() {
@@ -156,8 +155,6 @@ final class APSViewController: DemoViewController {
     }
 }
 
-// MARK: NimbusAdManagerDelegate
-
 extension APSViewController: NimbusAdManagerDelegate {
     
     func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
@@ -166,11 +163,6 @@ extension APSViewController: NimbusAdManagerDelegate {
         controller.delegate = self
         adController = controller
     }
-}
-
-// MARK: NimbusRequestManagerDelegate
-
-extension APSViewController: NimbusRequestManagerDelegate {
     
     func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
         print("didCompleteNimbusRequest")
@@ -190,8 +182,6 @@ extension APSViewController: AdControllerDelegate {
     
     func didReceiveNimbusError(controller: AdController, error: NimbusError) {    }
 }
-
-// MARK: DTBAdCallback
 
 /// :nodoc:
 final class DTBCallback: DTBAdCallback {

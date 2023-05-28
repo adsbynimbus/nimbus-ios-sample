@@ -10,7 +10,7 @@ import UIKit
 final class SettingsCell: UITableViewCell {
     let label: UILabel = {
         let label = UILabel()
-        label.font = UIFont.proximaNova(size: 18, weight: .bold)
+        label.font = .proximaNova(size: 18, weight: .bold)
         label.textColor = .turquoise
         return label
     }()

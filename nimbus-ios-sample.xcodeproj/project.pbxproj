@@ -31,23 +31,15 @@
 		4D5BAE81273C6A16009B7F95 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5BAE80273C6A16009B7F95 /* Setting.swift */; };
 		4D5C798B274C184000033307 /* TestRenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C798A274C184000033307 /* TestRenderViewController.swift */; };
 		4D5C798D274C259A00033307 /* TestRenderAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C798C274C259A00033307 /* TestRenderAdViewController.swift */; };
-		4D5C798F274C290E00033307 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C798E274C290E00033307 /* UIViewController+Extension.swift */; };
-		4D5C7991274C60BE00033307 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C7990274C60BE00033307 /* UIImage+Extension.swift */; };
 		4D84B1B82743FFF300CA9CE2 /* Google.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D84B1B72743FFF300CA9CE2 /* Google.swift */; };
-		4D8A3FA92742CA1100201485 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8A3FA82742CA1100201485 /* NSObject+Extension.swift */; };
-		4D8A3FAB2742CAC700201485 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8A3FAA2742CAC700201485 /* UITableView+Extension.swift */; };
-		4D901D81273DAFD400037C54 /* AdManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D80273DAFD400037C54 /* AdManagerViewController.swift */; };
-		4D901D83273DC28500037C54 /* AdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D82273DC28500037C54 /* AdViewController.swift */; };
+		4D901D81273DAFD400037C54 /* NimbusAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D80273DAFD400037C54 /* NimbusAdManager.swift */; };
 		4DADE24627396E0700E7E766 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE24527396E0700E7E766 /* AppDelegate.swift */; };
 		4DADE24827396E0700E7E766 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE24727396E0700E7E766 /* SceneDelegate.swift */; };
 		4DADE24F27396E0900E7E766 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DADE24E27396E0900E7E766 /* Assets.xcassets */; };
-		4DADE25C2739BF9F00E7E766 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE25B2739BF9F00E7E766 /* UIColor+Extension.swift */; };
-		4DB9A143273AE5240005D1D0 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A142273AE5240005D1D0 /* UIFont+Extension.swift */; };
 		4DB9A146273AE8550005D1D0 /* ProximaNova-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB9A13E273AE4A70005D1D0 /* ProximaNova-Semibold.otf */; };
 		4DB9A148273AE95A0005D1D0 /* DemoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A147273AE95A0005D1D0 /* DemoCell.swift */; };
 		4DB9A14A273AF8040005D1D0 /* DemoNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A149273AF8040005D1D0 /* DemoNavigationController.swift */; };
 		4DB9A14C273AF81A0005D1D0 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A14B273AF81A0005D1D0 /* DemoViewController.swift */; };
-		4DB9A14E273B19C20005D1D0 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A14D273B19C20005D1D0 /* UILabel+Extension.swift */; };
 		4DC70F762A0003B80037E424 /* NimbusVungleKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4DC70F752A0003B80037E424 /* NimbusVungleKit */; };
 		4DC70F7B2A002CEF0037E424 /* Meta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC70F7A2A002CEF0037E424 /* Meta.swift */; };
 		4DEA6B112A016F7F003E6A20 /* Amazon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEA6B102A016F7F003E6A20 /* Amazon.swift */; };
@@ -57,34 +49,28 @@
 		965B675E2A2114F8007FC135 /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 965B67582A21147E007FC135 /* ProximaNova-Bold.otf */; };
 		965B675F2A2114F8007FC135 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 965B67592A21147E007FC135 /* ProximaNova-Regular.otf */; };
 		965B67602A2114F8007FC135 /* ProximaNova-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB9A13E273AE4A70005D1D0 /* ProximaNova-Semibold.otf */; };
-		96BFE1E12A0965600030964D /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BFE1E02A0965600030964D /* UIView+Extension.swift */; };
-		96BFE1E22A0965600030964D /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BFE1E02A0965600030964D /* UIView+Extension.swift */; };
-		96C445E829414A9300DF35B2 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C798E274C290E00033307 /* UIViewController+Extension.swift */; };
+		96BFE1E12A0965600030964D /* UITest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BFE1E02A0965600030964D /* UITest+Extension.swift */; };
+		96BFE1E22A0965600030964D /* UITest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BFE1E02A0965600030964D /* UITest+Extension.swift */; };
 		96C445E929414A9300DF35B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE24527396E0700E7E766 /* AppDelegate.swift */; };
 		96C445EB29414A9300DF35B2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE24727396E0700E7E766 /* SceneDelegate.swift */; };
 		96C445ED29414A9300DF35B2 /* TestRenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C798A274C184000033307 /* TestRenderViewController.swift */; };
-		96C445EE29414A9300DF35B2 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8A3FAA2742CAC700201485 /* UITableView+Extension.swift */; };
 		96C445F129414A9300DF35B2 /* DemoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A147273AE95A0005D1D0 /* DemoCell.swift */; };
-		96C445F429414A9300DF35B2 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A142273AE5240005D1D0 /* UIFont+Extension.swift */; };
-		96C445F529414A9300DF35B2 /* AdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D82273DC28500037C54 /* AdViewController.swift */; };
 		96C445F629414A9300DF35B2 /* DemoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5BAE7E273C5E9F009B7F95 /* DemoHeader.swift */; };
 		96C445F829414A9300DF35B2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5BAE7A273C362B009B7F95 /* SettingsViewController.swift */; };
 		96C445F929414A9300DF35B2 /* DemoNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A149273AF8040005D1D0 /* DemoNavigationController.swift */; };
 		96C445FB29414A9300DF35B2 /* TestRenderAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C798C274C259A00033307 /* TestRenderAdViewController.swift */; };
-		96C445FE29414A9300DF35B2 /* AdManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D80273DAFD400037C54 /* AdManagerViewController.swift */; };
+		96C445FE29414A9300DF35B2 /* NimbusAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D80273DAFD400037C54 /* NimbusAdManager.swift */; };
 		96C4460229414A9300DF35B2 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A14B273AF81A0005D1D0 /* DemoViewController.swift */; };
-		96C4460329414A9300DF35B2 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE25B2739BF9F00E7E766 /* UIColor+Extension.swift */; };
-		96C4460429414A9300DF35B2 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8A3FA82742CA1100201485 /* NSObject+Extension.swift */; };
-		96C4460629414A9300DF35B2 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A14D273B19C20005D1D0 /* UILabel+Extension.swift */; };
-		96C4460A29414A9300DF35B2 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C7990274C60BE00033307 /* UIImage+Extension.swift */; };
 		96C4460D29414A9300DF35B2 /* CustomAdContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150B4B5728D3E6F7002F233D /* CustomAdContainerView.swift */; };
 		96C4460E29414A9300DF35B2 /* Google.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D84B1B72743FFF300CA9CE2 /* Google.swift */; };
 		96C4461029414A9300DF35B2 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5BAE7C273C3CA8009B7F95 /* SettingsCell.swift */; };
 		96C4461F29414A9300DF35B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DADE24E27396E0900E7E766 /* Assets.xcassets */; };
 		96C706342A227E4500A47A84 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C706332A227E4500A47A84 /* Navigation.swift */; };
 		96C706352A227E4500A47A84 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C706332A227E4500A47A84 /* Navigation.swift */; };
-		96C706382A22B84700A47A84 /* Google.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C706372A22B84700A47A84 /* Google.swift */; };
-		96C706392A22B84700A47A84 /* Google.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C706372A22B84700A47A84 /* Google.swift */; };
+		96C706382A22B84700A47A84 /* GoogleAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C706372A22B84700A47A84 /* GoogleAdManager.swift */; };
+		96C706392A22B84700A47A84 /* GoogleAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C706372A22B84700A47A84 /* GoogleAdManager.swift */; };
+		96DCAE1D2A23D3EF003D2D92 /* UI+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DCAE1C2A23D3EF003D2D92 /* UI+Extension.swift */; };
+		96DCAE1E2A23D3EF003D2D92 /* UI+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DCAE1C2A23D3EF003D2D92 /* UI+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,34 +82,27 @@
 		4D5BAE80273C6A16009B7F95 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		4D5C798A274C184000033307 /* TestRenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRenderViewController.swift; sourceTree = "<group>"; };
 		4D5C798C274C259A00033307 /* TestRenderAdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRenderAdViewController.swift; sourceTree = "<group>"; };
-		4D5C798E274C290E00033307 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
-		4D5C7990274C60BE00033307 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		4D84B1B72743FFF300CA9CE2 /* Google.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Google.swift; sourceTree = "<group>"; };
-		4D8A3FA82742CA1100201485 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
-		4D8A3FAA2742CAC700201485 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
-		4D901D80273DAFD400037C54 /* AdManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManagerViewController.swift; sourceTree = "<group>"; };
-		4D901D82273DC28500037C54 /* AdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdViewController.swift; sourceTree = "<group>"; };
+		4D901D80273DAFD400037C54 /* NimbusAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NimbusAdManager.swift; sourceTree = "<group>"; };
 		4DADE24227396E0700E7E766 /* nimbus-ios-sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nimbus-ios-sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DADE24527396E0700E7E766 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4DADE24727396E0700E7E766 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		4DADE24E27396E0900E7E766 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4DADE25327396E0900E7E766 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4DADE25B2739BF9F00E7E766 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		4DB9A13E273AE4A70005D1D0 /* ProximaNova-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Semibold.otf"; sourceTree = "<group>"; };
-		4DB9A142273AE5240005D1D0 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		4DB9A147273AE95A0005D1D0 /* DemoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoCell.swift; sourceTree = "<group>"; };
 		4DB9A149273AF8040005D1D0 /* DemoNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoNavigationController.swift; sourceTree = "<group>"; };
 		4DB9A14B273AF81A0005D1D0 /* DemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
-		4DB9A14D273B19C20005D1D0 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		4DC70F7A2A002CEF0037E424 /* Meta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meta.swift; sourceTree = "<group>"; };
 		4DEA6B102A016F7F003E6A20 /* Amazon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Amazon.swift; sourceTree = "<group>"; };
 		4DEA6B122A016F8F003E6A20 /* Unity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unity.swift; sourceTree = "<group>"; };
 		965B67582A21147E007FC135 /* ProximaNova-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.otf"; sourceTree = "<group>"; };
 		965B67592A21147E007FC135 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.otf"; sourceTree = "<group>"; };
-		96BFE1E02A0965600030964D /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		96BFE1E02A0965600030964D /* UITest+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITest+Extension.swift"; sourceTree = "<group>"; };
 		96C4462729414A9300DF35B2 /* nimbus-ios-sample-pods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nimbus-ios-sample-pods.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96C706332A227E4500A47A84 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
-		96C706372A22B84700A47A84 /* Google.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Google.swift; sourceTree = "<group>"; };
+		96C706372A22B84700A47A84 /* GoogleAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAdManager.swift; sourceTree = "<group>"; };
+		96DCAE1C2A23D3EF003D2D92 /* UI+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,20 +149,14 @@
 		4D5BAE82273C6C64009B7F95 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				4DADE25B2739BF9F00E7E766 /* UIColor+Extension.swift */,
-				4DB9A14D273B19C20005D1D0 /* UILabel+Extension.swift */,
-				4DB9A142273AE5240005D1D0 /* UIFont+Extension.swift */,
-				4D8A3FA82742CA1100201485 /* NSObject+Extension.swift */,
-				4D8A3FAA2742CAC700201485 /* UITableView+Extension.swift */,
-				4D5C798E274C290E00033307 /* UIViewController+Extension.swift */,
-				4D5C7990274C60BE00033307 /* UIImage+Extension.swift */,
-				96BFE1E02A0965600030964D /* UIView+Extension.swift */,
 				4DB9A147273AE95A0005D1D0 /* DemoCell.swift */,
 				4D5BAE7E273C5E9F009B7F95 /* DemoHeader.swift */,
 				4DB9A149273AF8040005D1D0 /* DemoNavigationController.swift */,
 				4DB9A14B273AF81A0005D1D0 /* DemoViewController.swift */,
 				4D5BAE7C273C3CA8009B7F95 /* SettingsCell.swift */,
 				4D5BAE7A273C362B009B7F95 /* SettingsViewController.swift */,
+				96DCAE1C2A23D3EF003D2D92 /* UI+Extension.swift */,
+				96BFE1E02A0965600030964D /* UITest+Extension.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -208,9 +181,8 @@
 		4D901D79273D931C00037C54 /* Rendering */ = {
 			isa = PBXGroup;
 			children = (
-				4D901D82273DC28500037C54 /* AdViewController.swift */,
-				4D901D80273DAFD400037C54 /* AdManagerViewController.swift */,
 				150B4B5728D3E6F7002F233D /* CustomAdContainerView.swift */,
+				4D901D80273DAFD400037C54 /* NimbusAdManager.swift */,
 			);
 			path = Rendering;
 			sourceTree = "<group>";
@@ -273,7 +245,7 @@
 		96C706362A22B83B00A47A84 /* Dynamic Price */ = {
 			isa = PBXGroup;
 			children = (
-				96C706372A22B84700A47A84 /* Google.swift */,
+				96C706372A22B84700A47A84 /* GoogleAdManager.swift */,
 			);
 			path = "Dynamic Price";
 			sourceTree = "<group>";
@@ -397,32 +369,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D5C798F274C290E00033307 /* UIViewController+Extension.swift in Sources */,
 				4DADE24627396E0700E7E766 /* AppDelegate.swift in Sources */,
 				4DADE24827396E0700E7E766 /* SceneDelegate.swift in Sources */,
-				96C706382A22B84700A47A84 /* Google.swift in Sources */,
+				96C706382A22B84700A47A84 /* GoogleAdManager.swift in Sources */,
 				4DEA6B112A016F7F003E6A20 /* Amazon.swift in Sources */,
 				4D5C798B274C184000033307 /* TestRenderViewController.swift in Sources */,
-				4D8A3FAB2742CAC700201485 /* UITableView+Extension.swift in Sources */,
 				96C706342A227E4500A47A84 /* Navigation.swift in Sources */,
 				4DB9A148273AE95A0005D1D0 /* DemoCell.swift in Sources */,
 				4D5BAE81273C6A16009B7F95 /* Setting.swift in Sources */,
-				4DB9A143273AE5240005D1D0 /* UIFont+Extension.swift in Sources */,
-				4D901D83273DC28500037C54 /* AdViewController.swift in Sources */,
 				4D5BAE7F273C5E9F009B7F95 /* DemoHeader.swift in Sources */,
+				96DCAE1D2A23D3EF003D2D92 /* UI+Extension.swift in Sources */,
 				1541C30729F1CFB4007E8852 /* Vungle.swift in Sources */,
 				4D5BAE7B273C362B009B7F95 /* SettingsViewController.swift in Sources */,
 				4DB9A14A273AF8040005D1D0 /* DemoNavigationController.swift in Sources */,
 				4D5C798D274C259A00033307 /* TestRenderAdViewController.swift in Sources */,
-				96BFE1E12A0965600030964D /* UIView+Extension.swift in Sources */,
+				96BFE1E12A0965600030964D /* UITest+Extension.swift in Sources */,
 				4DC70F7B2A002CEF0037E424 /* Meta.swift in Sources */,
 				4DEA6B132A016F8F003E6A20 /* Unity.swift in Sources */,
-				4D901D81273DAFD400037C54 /* AdManagerViewController.swift in Sources */,
+				4D901D81273DAFD400037C54 /* NimbusAdManager.swift in Sources */,
 				4DB9A14C273AF81A0005D1D0 /* DemoViewController.swift in Sources */,
-				4DADE25C2739BF9F00E7E766 /* UIColor+Extension.swift in Sources */,
-				4D8A3FA92742CA1100201485 /* NSObject+Extension.swift in Sources */,
-				4DB9A14E273B19C20005D1D0 /* UILabel+Extension.swift in Sources */,
-				4D5C7991274C60BE00033307 /* UIImage+Extension.swift in Sources */,
 				150B4B5828D3E6F7002F233D /* CustomAdContainerView.swift in Sources */,
 				4D84B1B82743FFF300CA9CE2 /* Google.swift in Sources */,
 				4D5BAE7D273C3CA8009B7F95 /* SettingsCell.swift in Sources */,
@@ -433,32 +398,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96C445E829414A9300DF35B2 /* UIViewController+Extension.swift in Sources */,
 				96C445E929414A9300DF35B2 /* AppDelegate.swift in Sources */,
 				96C445EB29414A9300DF35B2 /* SceneDelegate.swift in Sources */,
-				96C706392A22B84700A47A84 /* Google.swift in Sources */,
+				96C706392A22B84700A47A84 /* GoogleAdManager.swift in Sources */,
 				96C445ED29414A9300DF35B2 /* TestRenderViewController.swift in Sources */,
-				96C445EE29414A9300DF35B2 /* UITableView+Extension.swift in Sources */,
 				96C445F129414A9300DF35B2 /* DemoCell.swift in Sources */,
-				96C445F429414A9300DF35B2 /* UIFont+Extension.swift in Sources */,
-				96C445F529414A9300DF35B2 /* AdViewController.swift in Sources */,
 				96C706352A227E4500A47A84 /* Navigation.swift in Sources */,
 				4D07F6742A043B4500E2B094 /* Unity.swift in Sources */,
 				4D07F6752A043B4800E2B094 /* Vungle.swift in Sources */,
 				96C445F629414A9300DF35B2 /* DemoHeader.swift in Sources */,
+				96DCAE1E2A23D3EF003D2D92 /* UI+Extension.swift in Sources */,
 				96C445F829414A9300DF35B2 /* SettingsViewController.swift in Sources */,
 				96C445F929414A9300DF35B2 /* DemoNavigationController.swift in Sources */,
 				96C445FB29414A9300DF35B2 /* TestRenderAdViewController.swift in Sources */,
-				96C445FE29414A9300DF35B2 /* AdManagerViewController.swift in Sources */,
-				96BFE1E22A0965600030964D /* UIView+Extension.swift in Sources */,
+				96C445FE29414A9300DF35B2 /* NimbusAdManager.swift in Sources */,
+				96BFE1E22A0965600030964D /* UITest+Extension.swift in Sources */,
 				4D07F6722A043B3100E2B094 /* Amazon.swift in Sources */,
 				96C4460229414A9300DF35B2 /* DemoViewController.swift in Sources */,
-				96C4460329414A9300DF35B2 /* UIColor+Extension.swift in Sources */,
-				96C4460429414A9300DF35B2 /* NSObject+Extension.swift in Sources */,
-				96C4460629414A9300DF35B2 /* UILabel+Extension.swift in Sources */,
 				4D07F6732A043B3400E2B094 /* Meta.swift in Sources */,
 				4D07F6672A041F7000E2B094 /* Setting.swift in Sources */,
-				96C4460A29414A9300DF35B2 /* UIImage+Extension.swift in Sources */,
 				96C4460D29414A9300DF35B2 /* CustomAdContainerView.swift in Sources */,
 				96C4460E29414A9300DF35B2 /* Google.swift in Sources */,
 				96C4461029414A9300DF35B2 /* SettingsCell.swift in Sources */,

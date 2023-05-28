@@ -67,7 +67,6 @@ final class TestRenderAdViewController: UIViewController {
     }
     
     private func createNimbusAd(
-        network: String = "",
         placementId: String? = nil,
         auctionType: NimbusAuctionType,
         markup: String,
@@ -84,10 +83,10 @@ final class TestRenderAdViewController: UIViewController {
             bidInCents: 0,
             contentType: "",
             auctionId: "",
-            network: network,
+            network: "test_render",
             markup: markup,
             isInterstitial: isInterstitial,
-            placementId: placementId ?? "",
+            placementId: nil,
             duration: nil,
             adDimensions: adDimensions,
             trackers: nil,

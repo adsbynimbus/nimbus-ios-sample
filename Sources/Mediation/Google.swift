@@ -5,19 +5,16 @@
 //  Created by Victor Takai on 16/11/21.
 //
 
-import NimbusKit
 import GoogleMobileAds
-import UIKit
-
+import NimbusKit
 #if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK
 #else                    // Swift Package Manager
 import NimbusGAMKit
 #endif
+import UIKit
 
-private extension Bundle {
-    static let gamPlacementId = Bundle.main.infoDictionary?["Google Placement ID"] as? String ?? ""
-}
+fileprivate let gamPlacementId = Bundle.main.infoDictionary?["Google Placement ID"] as? String ?? ""
 
 final class GAMViewController: DemoViewController {
     
@@ -41,9 +38,8 @@ final class GAMViewController: DemoViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if Bundle.gamPlacementId.isEmpty {
-            showCustomAlert("google_placement_id")
-        }
+        if gamPlacementId.isEmpty { showCustomAlert("google_placement_id") }
+        
         setupAdRendering()
     }
     
@@ -54,7 +50,7 @@ final class GAMViewController: DemoViewController {
             bannerView = GAMBannerView(adSize: GADAdSizeBanner)
             guard let bannerView else { return }
             bannerView.rootViewController = self
-            bannerView.adUnitID = Bundle.gamPlacementId
+            bannerView.adUnitID = gamPlacementId
             bannerView.delegate = self
             bannerView.isAccessibilityElement = true
             bannerView.accessibilityIdentifier = "google_ad_view"
@@ -72,7 +68,7 @@ final class GAMViewController: DemoViewController {
             bannerView.load(gamRequest)
         case .interstitial:
             GAMInterstitialAd.load(
-                withAdManagerAdUnitID: Bundle.gamPlacementId,
+                withAdManagerAdUnitID: gamPlacementId,
                 request: gamRequest
             ) { (ad, error) in
                 if let error {
@@ -147,7 +143,7 @@ extension GAMViewController: NimbusRequestManagerDelegate {
         if adType == .banner {
             bannerView?.load(gamRequest)
         } else {
-            GADInterstitialAd.load(withAdUnitID: Bundle.gamPlacementId, request: gamRequest) { gadAd, error in
+            GADInterstitialAd.load(withAdUnitID: gamPlacementId, request: gamRequest) { gadAd, error in
                 if let error {
                     print("Failed to load dynamic price interstitial ad with error: \(error.localizedDescription)")
                     return

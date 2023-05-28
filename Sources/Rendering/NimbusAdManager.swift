@@ -10,14 +10,6 @@ import NimbusKit
 import NimbusRenderVideoKit
 import GoogleInteractiveMediaAds
 
-#if canImport(NimbusSDK)
-import NimbusSDK
-#endif
-
-#if canImport(NimbusRenderStaticKit)
-import NimbusRenderStaticKit
-#endif
-
 final class AdManagerViewController: DemoViewController {
     
     private let contentView = UIView()

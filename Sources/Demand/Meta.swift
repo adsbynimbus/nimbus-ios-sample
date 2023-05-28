@@ -113,12 +113,11 @@ final class FANViewController: DemoViewController {
         }
     }
         
-    private func createNimbusAd(adType: MetaSample) -> NimbusAd? {
+    private func createNimbusAd(adType: MetaSample) -> NimbusAd {
         switch adType {
             
         case .metaBanner:
             return createNimbusAd(
-                network: "facebook",
                 placementId: "IMG_16_9_LINK#\(metaBannerId)",
                 auctionType: .static,
                 isInterstitial: false,
@@ -127,7 +126,6 @@ final class FANViewController: DemoViewController {
             
         case .metaInterstitial:
             return createNimbusAd(
-                network: "facebook",
                 placementId: "IMG_16_9_LINK#\(metaInterstitialId)",
                 auctionType: .static,
                 isInterstitial: true,
@@ -136,15 +134,11 @@ final class FANViewController: DemoViewController {
             
         case .metaNative:
             return createNimbusAd(
-                network: "facebook",
                 placementId: "IMG_16_9_LINK#\(metaNativeId)",
                 auctionType: .native,
                 isInterstitial: false,
                 adDimensions: NimbusAdDimensions(width: 320, height: 480)
             )
-            
-        default:
-            return nil
         }
     }
     
@@ -164,7 +158,7 @@ final class FANViewController: DemoViewController {
             bidInCents: 0,
             contentType: "",
             auctionId: "",
-            network: network,
+            network: "facebook",
             markup: markup,
             isInterstitial: isInterstitial,
             placementId: placementId ?? "",

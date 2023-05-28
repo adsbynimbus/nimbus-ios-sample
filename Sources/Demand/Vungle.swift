@@ -63,10 +63,6 @@ class VungleViewController: DemoViewController {
     }
     
     private func setupAdRendering() {
-        guard let request = createNimbusRequest(adType: adType) else {
-            return
-        }
-        
         adManager = NimbusAdManager()
         adManager?.delegate = self
         
@@ -74,81 +70,29 @@ class VungleViewController: DemoViewController {
             
         case .vungleBanner:
             adManager?.showAd(
-                request: request,
+                request: NimbusRequest.forBannerAd(position: adType.description, format: .banner320x50),
                 container: contentView,
                 adPresentingViewController: self
             )
         case .vungleMREC:
             adManager?.showAd(
-                request: request,
+                request: NimbusRequest.forBannerAd(position: adType.description, format: .letterbox),
                 container: contentView,
                 adPresentingViewController: self
             )
         case .vungleInterstitial:
             adManager?.showBlockingAd(
-                request: request,
-                closeButtonDelay: 0,
+                request: NimbusRequest.forInterstitialAd(position: adType.description),
                 adPresentingViewController: self
             )
         case .vungleRewarded:
-            request.impressions[0].banner = nil
             adManager?.showRewardedAd(
-                request: request,
+                request: NimbusRequest.forRewardedVideo(position: adType.description),
                 adPresentingViewController: self
             )
-            
-        default:
-            break
         }
-    }
-    
-    private func createNimbusRequest(adType: VungleSample) -> NimbusRequest? {
-        switch adType {
-            
-        case .vungleBanner:
-            let request = NimbusRequest.forBannerAd(
-                position: adType.description,
-                format: .banner320x50
-            )
-            request.impressions[0].banner?.position = NimbusPosition.unknown
-            return request
-            
-        case .vungleMREC:
-            return NimbusRequest.forBannerAd(
-                position: adType.description,
-                format: .letterbox
-            )
-            
-        case .vungleInterstitial:
-            return NimbusRequest.forInterstitialAd(position: adType.description)
-            
-        case .vungleRewarded:
-            return customNimbusRequestForRewardedVideo(position: adType.description)
-            
-        default:
-            return nil
-        }
-    }
-    
-    // Used to force the backend to return a Rewarded Ad.
-    private func customNimbusRequestForRewardedVideo(position: String) -> NimbusRequest {
-        let request = NimbusRequest.forRewardedVideo(position: position)
-        
-        let adFormat = NimbusAdFormat.halfScreen
-        request.format = adFormat
-        
-        let banner = NimbusBanner(
-            width: adFormat.width,
-            height: adFormat.height,
-            companionAdRenderMode: .endCard
-        )
-        request.impressions[0].video?.companionAds = [banner]
-        
-        return request
     }
 }
-
-// MARK: NimbusAdManagerDelegate
 
 extension VungleViewController: NimbusAdManagerDelegate {
     func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
@@ -157,11 +101,6 @@ extension VungleViewController: NimbusAdManagerDelegate {
         adController?.delegate = self
         nimbusAd = ad
     }
-}
-
-// MARK: NimbusRequestManagerDelegate
-
-extension VungleViewController: NimbusRequestManagerDelegate {
     
     func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
         print("didCompleteNimbusRequest")

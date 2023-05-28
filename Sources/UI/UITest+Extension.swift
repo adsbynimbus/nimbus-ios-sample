@@ -1,5 +1,5 @@
 //
-//  UIView+Extension.swift
+//  UITest+Extension.swift
 //  nimbus-ios-sample
 //
 //  Created by Jason Sznol on 5/8/23.

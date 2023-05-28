@@ -10,7 +10,7 @@ import UIKit
 class DemoCell: UITableViewCell {
     let label: UILabel = {
         let label = UILabel()
-        label.font = UIFont.proximaNova(size: 18, weight: .bold)
+        label.font = .proximaNova(size: 18, weight: .bold)
         label.textColor = .pink
         return label
     }()
@@ -41,8 +41,7 @@ class DemoCell: UITableViewCell {
     }
         
     private func setupAccessoryType() {
-        let image = UIImage(named: "right-arrow")?.withRenderingMode(.alwaysTemplate)
-        let imageView = UIImageView(image: image)
+        let imageView = UIImageView(image: UIImage(named: "right-arrow")?.withRenderingMode(.alwaysTemplate))
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = .pink
         imageView.frame = CGRect(x: 0, y: 0, width: 16, height: 16)

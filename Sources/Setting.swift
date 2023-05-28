@@ -18,7 +18,7 @@ enum Setting: String, CaseIterable {
     case ccpaConsent             = "CCPA Consent"
     case gppConsent              = "GPP Consent"
     
-    func getPrefs() -> Bool {
+    var isEnabled: Bool {
         switch self {
         case .nimbusTestMode:
             return UserDefaults.standard.nimbusTestMode
@@ -39,38 +39,29 @@ enum Setting: String, CaseIterable {
         }
     }
     
-    func updatePrefs(_ isOn: Bool) {
+    func update(isEnabled: Bool) {
         switch self {
         case .nimbusTestMode:
-            UserDefaults.standard.nimbusTestMode = isOn
-            DTBAds.sharedInstance().testMode = isOn
+            UserDefaults.standard.nimbusTestMode = isEnabled
+            DTBAds.sharedInstance().testMode = isEnabled
         case .coppaOn:
-            UserDefaults.standard.coppaOn = isOn
+            UserDefaults.standard.coppaOn = isEnabled
         case .forceNoFill:
-            UserDefaults.standard.forceNoFill = isOn
+            UserDefaults.standard.forceNoFill = isEnabled
         case .omThirdPartyViewability:
-            UserDefaults.standard.omThirdPartyViewability = isOn
+            UserDefaults.standard.omThirdPartyViewability = isEnabled
         case .tradeDesk:
-            UserDefaults.standard.tradeDesk = isOn
-            
+            UserDefaults.standard.tradeDesk = isEnabled
         case .gdprConsent:
-            UserDefaults.standard.gdprConsent = isOn
+            UserDefaults.standard.gdprConsent = isEnabled
         case .ccpaConsent:
-            UserDefaults.standard.ccpaConsent = isOn
+            UserDefaults.standard.ccpaConsent = isEnabled
         case .gppConsent:
-            UserDefaults.standard.gppConsent = isOn
-        }
-    }
-    
-    var isUserPrivacySetting: Bool {
-        switch self {
-        case .gdprConsent, .ccpaConsent, .gppConsent:
-            return true
-        default:
-            return false
+            UserDefaults.standard.gppConsent = isEnabled
         }
     }
 }
+
 
 // Nimbus Test Mode
 extension UserDefaults {
@@ -84,105 +75,7 @@ extension UserDefaults {
             Nimbus.shared.testMode = newValue
         }
     }
-}
-
-// Set COOPA On
-extension UserDefaults {
-    var coppaOn: Bool {
-        get {
-            register(defaults: [#function: false])
-            return bool(forKey: #function)
-        }
-        set {
-            set(newValue, forKey: #function)
-            Nimbus.shared.coppa = newValue
-        }
-    }
-}
-
-// GDPR Consent
-extension UserDefaults {
-    var gdprConsent: Bool {
-        get {
-            register(defaults: [#function: false])
-            return bool(forKey: #function)
-        }
-        set {
-            set(newValue, forKey: #function)
-            if newValue, var user = NimbusAdManager.user {
-                // Same string as Android sample app
-                user.configureGdprConsent(consentString: "CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEgAA.argAC0gAAAAAAAAAAAA")
-                NimbusAdManager.user = user
-            } else {
-                NimbusAdManager.user?.extensions?.removeValue(forKey: "consent")
-            }
-        }
-    }
-}
-
-// CCPA Consent
-let usPrivacyStringKey = "IABUSPrivacy_String"
-extension UserDefaults {
-    var ccpaConsent: Bool {
-        get {
-            register(defaults: [#function: false])
-            return bool(forKey: #function)
-        }
-        set {
-            set(newValue, forKey: #function)
-            if newValue {
-                UserDefaults.standard.set("1NYN", forKey: usPrivacyStringKey)
-            } else {
-                UserDefaults.standard.removeObject(forKey: usPrivacyStringKey)
-            }
-        }
-    }
-}
-
-// GPP Consent
-private let gppConsentStringKey = "IABGPP_HDR_GppString"
-private let gppSectionIdKey = "IABGPP_GppSID"
-private let testGppConsentString = "DBABMA~CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEgAA.argAC0gAAAAAAAAAAAA"
-private let testGppSectionId = "2"
-
-extension UserDefaults {
-    var gppConsent: Bool {
-        get {
-            register(defaults: [#function: false])
-            return bool(forKey: #function)
-        }
-        set {
-            set(newValue, forKey: #function)
-            if newValue {
-                UserDefaults.standard.set(testGppConsentString, forKey: gppConsentStringKey)
-                UserDefaults.standard.set(testGppSectionId, forKey: gppSectionIdKey)
-            } else {
-                UserDefaults.standard.removeObject(forKey: gppConsentStringKey)
-                UserDefaults.standard.removeObject(forKey: gppSectionIdKey)
-            }
-        }
-    }
-}
-
-
-// Force Ad Request Error
-extension UserDefaults {
-    var forceNoFill: Bool {
-        get {
-            register(defaults: [#function: false])
-            return bool(forKey: #function)
-        }
-        set {
-            set(newValue, forKey: #function)
-            var headers = NimbusAdManager.additionalRequestHeaders ?? [:]
-            headers["Nimbus-Test-No-Fill"] = String(newValue)
-            NimbusAdManager.additionalRequestHeaders = headers
-        }
-    }
-}
-
-// Send OMID Viewability Flag
-extension UserDefaults {
+    
     var omThirdPartyViewability: Bool {
         get {
             register(defaults: [#function: true])
@@ -193,10 +86,67 @@ extension UserDefaults {
             Nimbus.shared.isThirdPartyViewabilityEnabled = newValue
         }
     }
-}
-
-// Trade Desk
-extension UserDefaults {
+    
+    var coppaOn: Bool {
+        get {
+            register(defaults: [#function: false])
+            return bool(forKey: #function)
+        }
+        set {
+            set(newValue, forKey: #function)
+            Nimbus.shared.coppa = newValue
+        }
+    }
+    
+    var gdprConsent: Bool {
+        get {
+            register(defaults: [#function: false])
+            return bool(forKey: #function)
+        }
+        set {
+            set(newValue, forKey: #function)
+            if newValue, var user = NimbusAdManager.user {
+                // Same string as Android sample app
+                user.configureGdprConsent(consentString: testGDPRConsentString)
+                NimbusAdManager.user = user
+            } else {
+                NimbusAdManager.user?.extensions?.removeValue(forKey: "consent")
+            }
+        }
+    }
+    
+    var ccpaConsent: Bool {
+        get {
+            register(defaults: [#function: false])
+            return bool(forKey: #function)
+        }
+        set {
+            set(newValue, forKey: #function)
+            if newValue {
+                UserDefaults.standard.set("1NYN", forKey: "IABUSPrivacy_String")
+            } else {
+                UserDefaults.standard.removeObject(forKey: "IABUSPrivacy_String")
+            }
+        }
+    }
+    
+    var gppConsent: Bool {
+        get {
+            register(defaults: [#function: false])
+            return bool(forKey: #function)
+        }
+        set {
+            set(newValue, forKey: #function)
+            if newValue {
+                UserDefaults.standard.set(testGppConsentString, forKey: "IABGPP_HDR_GppString")
+                UserDefaults.standard.set(testGppSectionId, forKey: "IABGPP_GppSID")
+            } else {
+                UserDefaults.standard.removeObject(forKey: "IABGPP_HDR_GppString")
+                UserDefaults.standard.removeObject(forKey: "IABGPP_GppSID")
+            }
+        }
+    }
+    
     var tradeDesk: Bool {
         get {
             register(defaults: [#function: false])
@@ -215,4 +165,23 @@ extension UserDefaults {
             }
         }
     }
+    
+    var forceNoFill: Bool {
+        get {
+            register(defaults: [#function: false])
+            return bool(forKey: #function)
+        }
+        set {
+            set(newValue, forKey: #function)
+            var headers = NimbusAdManager.additionalRequestHeaders ?? [:]
+            headers["Nimbus-Test-No-Fill"] = String(newValue)
+            NimbusAdManager.additionalRequestHeaders = headers
+        }
+    }
 }
+
+// MARK: Test Data
+
+fileprivate let testGDPRConsentString = "CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEgAA.argAC0gAAAAAAAAAAAA"
+fileprivate let testGppConsentString = "DBABMA~CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEgAA.argAC0gAAAAAAAAAAAA"
+fileprivate let testGppSectionId = "2"

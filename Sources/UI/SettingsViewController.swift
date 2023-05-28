@@ -42,10 +42,8 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         let cell: SettingsCell = tableView.dequeueReusableCell(for: indexPath)
         let setting = Setting.allCases[indexPath.row + (indexPath.section * 5)]
         cell.label.text = setting.rawValue
-        cell.switchButton.setOn(setting.getPrefs(), animated: false)
-        cell.switchAction = { isOn in
-            setting.updatePrefs(isOn)
-        }
+        cell.switchButton.setOn(setting.isEnabled, animated: false)
+        cell.switchAction = { isOn in setting.update(isEnabled: isOn) }
 
         return cell
     }

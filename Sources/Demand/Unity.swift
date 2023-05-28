@@ -46,28 +46,27 @@ final class UnityViewController: DemoViewController {
         
         view.backgroundColor = .black
         
-        if !unityGameId.isEmpty {
+        guard !unityGameId.isEmpty else {
             showCustomAlert("unity_game_id")
-        } else {
-            setupAdRendering()
+            return
         }
+
+        setupAdRendering()
     }
 
     private func setupAdRendering() {
-        guard adType == .unityRewardedVideo else {
-            return
-        }
-        
         adManager = NimbusAdManager()
         adManager?.delegate = self
-        adManager?.showRewardedAd(
-            request: NimbusRequest.forVideoAd(position: adType.description),
-            adPresentingViewController: self
-        )
+        
+        switch adType {
+        case .unityRewardedVideo:
+            adManager?.showRewardedAd(
+                request: NimbusRequest.forRewardedVideo(position: adType.description),
+                adPresentingViewController: self
+            )
+        }
     }
 }
-
-// MARK: NimbusAdManagerDelegate
 
 extension UnityViewController: NimbusAdManagerDelegate {
   
@@ -78,11 +77,6 @@ extension UnityViewController: NimbusAdManagerDelegate {
         adController?.delegate = self
         nimbusAd = ad
     }
-}
-
-// MARK: NimbusRequestManagerDelegate
-
-extension UnityViewController: NimbusRequestManagerDelegate {
     
     func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
         print("didCompleteNimbusRequest")
