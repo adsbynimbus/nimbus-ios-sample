@@ -5,11 +5,35 @@
 //  Created by Jason Sznol on 5/28/23.
 //
 
+import SwiftUI
 import UIKit
 
 extension NSObject {
     class var nameOfClass: String {
         NSStringFromClass(self).components(separatedBy: ".").last!
+    }
+}
+
+extension Alert {
+    public static func showAlert(title: String, message: String) {
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(
+                title: title,
+                message: message,
+                preferredStyle: .alert
+            )
+            let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+                NSLog("OK was selected")
+            }
+            alertController.addAction(okAction)
+            
+            guard let firstScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let firstWindow = firstScene.windows.first,
+                  let viewController = firstWindow.rootViewController else {
+                return
+            }
+            viewController.present(alertController, animated: true, completion: nil)
+        }
     }
 }
 

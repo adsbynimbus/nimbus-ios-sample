@@ -2,35 +2,24 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIAppFonts</key>
-	<array>
-		<string>ProximaNova-Bold.otf</string>
-		<string>ProximaNova-Regular.otf</string>
-		<string>ProximaNova-Semibold.otf</string>
-	</array>
-	<key>UIApplicationSceneManifest</key>
-	<dict>
-		<key>UIApplicationSupportsMultipleScenes</key>
-		<false/>
-		<key>UISceneConfigurations</key>
-		<dict>
-			<key>UIWindowSceneSessionRoleApplication</key>
-			<array>
-				<dict>
-					<key>UISceneConfigurationName</key>
-					<string>Default Configuration</string>
-					<key>UISceneDelegateClassName</key>
-					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
-				</dict>
-			</array>
-		</dict>
-	</dict>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
-	<key>Publisher Key</key>
-	<string>dev-sdk</string>
 	<key>API Key</key>
 	<string>d352cac1-cae2-4774-97ba-4e15c6276be0</string>
+	<key>APS App ID</key>
+	<string>a9_onboarding_app_id</string>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-3940256099942544~1458002511</string>
+	<key>GADIsAdManagerApp</key>
+	<true/>
+	<key>Google Placement ID</key>
+	<string>$(GOOGLE_PLACEMENT_ID)</string>
+	<key>Meta Banner Placement ID</key>
+	<string>$(META_BANNER_PLACEMENT_ID)</string>
+	<key>Meta Interstitial Placement ID</key>
+	<string>$(META_INTERSTITIAL_PLACEMENT_ID)</string>
+	<key>Meta Native Placement ID</key>
+	<string>$(META_NATIVE_PLACEMENT_ID)</string>
+	<key>Publisher Key</key>
+	<string>dev-sdk</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
@@ -50,20 +39,31 @@
 			<string>cstr6suwn9.skadnetwork</string>
 		</dict>
 	</array>
-	<key>APS App ID</key>
-	<string>a9_onboarding_app_id</string>
-	<key>Meta Banner Placement ID</key>
-	<string>$(META_BANNER_PLACEMENT_ID)</string>
-	<key>Meta Interstitial Placement ID</key>
-	<string>$(META_INTERSTITIAL_PLACEMENT_ID)</string>
-	<key>Meta Native Placement ID</key>
-	<string>$(META_NATIVE_PLACEMENT_ID)</string>
-	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-3940256099942544~1458002511</string>
-	<key>GADIsAdManagerApp</key>
-	<true/>
-	<key>Google Placement ID</key>
-	<string>$(GOOGLE_PLACEMENT_ID)</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>ProximaNova-Bold.otf</string>
+		<string>ProximaNova-Regular.otf</string>
+		<string>ProximaNova-Semibold.otf</string>
+	</array>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+		<key>UISceneConfigurations</key>
+		<dict>
+			<key>UIWindowSceneSessionRoleApplication</key>
+			<array>
+				<dict>
+					<key>UISceneConfigurationName</key>
+					<string>Default Configuration</string>
+					<key>UISceneDelegateClassName</key>
+					<string>Application.SceneDelegate</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 	<key>Unity Game ID</key>
 	<string>$(UNITY_GAME_ID)</string>
 	<key>Vungle App ID</key>

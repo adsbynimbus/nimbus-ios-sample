@@ -15,7 +15,7 @@ import NimbusVungleKit
 #endif
 import UIKit
 
-extension AppDelegate {
+extension UIApplicationDelegate {
     func setupVungleDemand() {
         if let vungleAppId = Bundle.main.infoDictionary?["Vungle App ID"] as? String {
             Nimbus.shared.renderers[.forNetwork("vungle")] = NimbusVungleAdRenderer()

@@ -15,7 +15,7 @@ import UIKit
 
 fileprivate let unityGameId = Bundle.main.infoDictionary?["Unity Game ID"] as? String ?? ""
 
-extension AppDelegate {
+extension UIApplicationDelegate {
     func setupUnityDemand() {
         if !unityGameId.isEmpty {
             NimbusRequestManager.requestInterceptors?.append(NimbusUnityRequestInterceptor(gameId: unityGameId))

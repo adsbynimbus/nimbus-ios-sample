@@ -7,96 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		150B4B5828D3E6F7002F233D /* CustomAdContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150B4B5728D3E6F7002F233D /* CustomAdContainerView.swift */; };
-		1541C30729F1CFB4007E8852 /* Vungle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1541C30429F1CFB4007E8852 /* Vungle.swift */; };
-		20BE3FB329E47A9C00E1A662 /* NimbusFANKit in Frameworks */ = {isa = PBXBuildFile; productRef = 962B1C06299E917B001BF3B7 /* NimbusFANKit */; };
-		20BE3FBB29E47D8500E1A662 /* NimbusGAMKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FBA29E47D8500E1A662 /* NimbusGAMKit */; };
-		20BE3FBD29E47D8500E1A662 /* NimbusKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FBC29E47D8500E1A662 /* NimbusKit */; };
-		20BE3FBF29E47D8500E1A662 /* NimbusLiveRampKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FBE29E47D8500E1A662 /* NimbusLiveRampKit */; };
-		20BE3FC129E47D8500E1A662 /* NimbusRenderKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FC029E47D8500E1A662 /* NimbusRenderKit */; };
-		20BE3FC329E47D8500E1A662 /* NimbusRenderStaticKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FC229E47D8500E1A662 /* NimbusRenderStaticKit */; };
-		20BE3FC529E47D8500E1A662 /* NimbusRenderVideoKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FC429E47D8500E1A662 /* NimbusRenderVideoKit */; };
-		20BE3FC729E47D8500E1A662 /* NimbusRequestAPSKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FC629E47D8500E1A662 /* NimbusRequestAPSKit */; };
-		20BE3FC929E47D8500E1A662 /* NimbusRequestKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FC829E47D8500E1A662 /* NimbusRequestKit */; };
-		20BE3FCB29E47D8500E1A662 /* NimbusUnityKit in Frameworks */ = {isa = PBXBuildFile; productRef = 20BE3FCA29E47D8500E1A662 /* NimbusUnityKit */; };
-		4D07F6672A041F7000E2B094 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5BAE80273C6A16009B7F95 /* Setting.swift */; };
-		4D07F6722A043B3100E2B094 /* Amazon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEA6B102A016F7F003E6A20 /* Amazon.swift */; };
-		4D07F6732A043B3400E2B094 /* Meta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC70F7A2A002CEF0037E424 /* Meta.swift */; };
-		4D07F6742A043B4500E2B094 /* Unity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEA6B122A016F8F003E6A20 /* Unity.swift */; };
-		4D07F6752A043B4800E2B094 /* Vungle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1541C30429F1CFB4007E8852 /* Vungle.swift */; };
-		4D082DF029CCA1100083DF6F /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 4D082DEF29CCA1100083DF6F /* GoogleMobileAds */; };
-		4D5BAE7B273C362B009B7F95 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5BAE7A273C362B009B7F95 /* SettingsViewController.swift */; };
-		4D5BAE81273C6A16009B7F95 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5BAE80273C6A16009B7F95 /* Setting.swift */; };
-		4D5C798B274C184000033307 /* TestRenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C798A274C184000033307 /* TestRenderViewController.swift */; };
-		4D5C798D274C259A00033307 /* TestRenderAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C798C274C259A00033307 /* TestRenderAdViewController.swift */; };
-		4D84B1B82743FFF300CA9CE2 /* Google.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D84B1B72743FFF300CA9CE2 /* Google.swift */; };
-		4D901D81273DAFD400037C54 /* NimbusAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D80273DAFD400037C54 /* NimbusAdManager.swift */; };
-		4DADE24627396E0700E7E766 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE24527396E0700E7E766 /* AppDelegate.swift */; };
-		4DADE24827396E0700E7E766 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE24727396E0700E7E766 /* SceneDelegate.swift */; };
 		4DADE24F27396E0900E7E766 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DADE24E27396E0900E7E766 /* Assets.xcassets */; };
 		4DB9A146273AE8550005D1D0 /* ProximaNova-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB9A13E273AE4A70005D1D0 /* ProximaNova-Semibold.otf */; };
-		4DB9A14A273AF8040005D1D0 /* DemoNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A149273AF8040005D1D0 /* DemoNavigationController.swift */; };
-		4DB9A14C273AF81A0005D1D0 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A14B273AF81A0005D1D0 /* DemoViewController.swift */; };
-		4DC70F762A0003B80037E424 /* NimbusVungleKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4DC70F752A0003B80037E424 /* NimbusVungleKit */; };
-		4DC70F7B2A002CEF0037E424 /* Meta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC70F7A2A002CEF0037E424 /* Meta.swift */; };
-		4DEA6B112A016F7F003E6A20 /* Amazon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEA6B102A016F7F003E6A20 /* Amazon.swift */; };
-		4DEA6B132A016F8F003E6A20 /* Unity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEA6B122A016F8F003E6A20 /* Unity.swift */; };
 		965B675A2A21147E007FC135 /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 965B67582A21147E007FC135 /* ProximaNova-Bold.otf */; };
 		965B675C2A21147E007FC135 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 965B67592A21147E007FC135 /* ProximaNova-Regular.otf */; };
 		965B675E2A2114F8007FC135 /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 965B67582A21147E007FC135 /* ProximaNova-Bold.otf */; };
 		965B675F2A2114F8007FC135 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 965B67592A21147E007FC135 /* ProximaNova-Regular.otf */; };
 		965B67602A2114F8007FC135 /* ProximaNova-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB9A13E273AE4A70005D1D0 /* ProximaNova-Semibold.otf */; };
-		96BFE1E12A0965600030964D /* UITest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BFE1E02A0965600030964D /* UITest+Extension.swift */; };
-		96BFE1E22A0965600030964D /* UITest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BFE1E02A0965600030964D /* UITest+Extension.swift */; };
-		96C445E929414A9300DF35B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE24527396E0700E7E766 /* AppDelegate.swift */; };
-		96C445EB29414A9300DF35B2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DADE24727396E0700E7E766 /* SceneDelegate.swift */; };
-		96C445ED29414A9300DF35B2 /* TestRenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C798A274C184000033307 /* TestRenderViewController.swift */; };
-		96C445F829414A9300DF35B2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5BAE7A273C362B009B7F95 /* SettingsViewController.swift */; };
-		96C445F929414A9300DF35B2 /* DemoNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A149273AF8040005D1D0 /* DemoNavigationController.swift */; };
-		96C445FB29414A9300DF35B2 /* TestRenderAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C798C274C259A00033307 /* TestRenderAdViewController.swift */; };
-		96C445FE29414A9300DF35B2 /* NimbusAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D901D80273DAFD400037C54 /* NimbusAdManager.swift */; };
-		96C4460229414A9300DF35B2 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB9A14B273AF81A0005D1D0 /* DemoViewController.swift */; };
-		96C4460D29414A9300DF35B2 /* CustomAdContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150B4B5728D3E6F7002F233D /* CustomAdContainerView.swift */; };
-		96C4460E29414A9300DF35B2 /* Google.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D84B1B72743FFF300CA9CE2 /* Google.swift */; };
+		96742BF82A24F54A00A312B3 /* Application in Frameworks */ = {isa = PBXBuildFile; productRef = 96742BF72A24F54A00A312B3 /* Application */; };
 		96C4461F29414A9300DF35B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DADE24E27396E0900E7E766 /* Assets.xcassets */; };
-		96C706342A227E4500A47A84 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C706332A227E4500A47A84 /* Navigation.swift */; };
-		96C706352A227E4500A47A84 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C706332A227E4500A47A84 /* Navigation.swift */; };
-		96C706382A22B84700A47A84 /* GoogleAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C706372A22B84700A47A84 /* GoogleAdManager.swift */; };
-		96C706392A22B84700A47A84 /* GoogleAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C706372A22B84700A47A84 /* GoogleAdManager.swift */; };
-		96DCAE1D2A23D3EF003D2D92 /* UI+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DCAE1C2A23D3EF003D2D92 /* UI+Extension.swift */; };
-		96DCAE1E2A23D3EF003D2D92 /* UI+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DCAE1C2A23D3EF003D2D92 /* UI+Extension.swift */; };
-		96DCAE202A23E88D003D2D92 /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DCAE1F2A23E88D003D2D92 /* Views.swift */; };
-		96DCAE212A23E88D003D2D92 /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DCAE1F2A23E88D003D2D92 /* Views.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		150B4B5728D3E6F7002F233D /* CustomAdContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAdContainerView.swift; sourceTree = "<group>"; };
-		1541C30429F1CFB4007E8852 /* Vungle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vungle.swift; sourceTree = "<group>"; };
-		4D5BAE7A273C362B009B7F95 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		4D5BAE80273C6A16009B7F95 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
-		4D5C798A274C184000033307 /* TestRenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRenderViewController.swift; sourceTree = "<group>"; };
-		4D5C798C274C259A00033307 /* TestRenderAdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRenderAdViewController.swift; sourceTree = "<group>"; };
-		4D84B1B72743FFF300CA9CE2 /* Google.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Google.swift; sourceTree = "<group>"; };
-		4D901D80273DAFD400037C54 /* NimbusAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NimbusAdManager.swift; sourceTree = "<group>"; };
 		4DADE24227396E0700E7E766 /* nimbus-ios-sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nimbus-ios-sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4DADE24527396E0700E7E766 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4DADE24727396E0700E7E766 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		4DADE24E27396E0900E7E766 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4DADE25327396E0900E7E766 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DB9A13E273AE4A70005D1D0 /* ProximaNova-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Semibold.otf"; sourceTree = "<group>"; };
-		4DB9A149273AF8040005D1D0 /* DemoNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoNavigationController.swift; sourceTree = "<group>"; };
-		4DB9A14B273AF81A0005D1D0 /* DemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
-		4DC70F7A2A002CEF0037E424 /* Meta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meta.swift; sourceTree = "<group>"; };
-		4DEA6B102A016F7F003E6A20 /* Amazon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Amazon.swift; sourceTree = "<group>"; };
-		4DEA6B122A016F8F003E6A20 /* Unity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unity.swift; sourceTree = "<group>"; };
 		965B67582A21147E007FC135 /* ProximaNova-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.otf"; sourceTree = "<group>"; };
 		965B67592A21147E007FC135 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.otf"; sourceTree = "<group>"; };
-		96BFE1E02A0965600030964D /* UITest+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITest+Extension.swift"; sourceTree = "<group>"; };
+		96742BF52A24F43D00A312B3 /* Application */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Application; sourceTree = "<group>"; };
 		96C4462729414A9300DF35B2 /* nimbus-ios-sample-pods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nimbus-ios-sample-pods.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		96C706332A227E4500A47A84 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
-		96C706372A22B84700A47A84 /* GoogleAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAdManager.swift; sourceTree = "<group>"; };
-		96DCAE1C2A23D3EF003D2D92 /* UI+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Extension.swift"; sourceTree = "<group>"; };
-		96DCAE1F2A23E88D003D2D92 /* Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,18 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20BE3FB329E47A9C00E1A662 /* NimbusFANKit in Frameworks */,
-				20BE3FC929E47D8500E1A662 /* NimbusRequestKit in Frameworks */,
-				4DC70F762A0003B80037E424 /* NimbusVungleKit in Frameworks */,
-				20BE3FC529E47D8500E1A662 /* NimbusRenderVideoKit in Frameworks */,
-				20BE3FCB29E47D8500E1A662 /* NimbusUnityKit in Frameworks */,
-				20BE3FC729E47D8500E1A662 /* NimbusRequestAPSKit in Frameworks */,
-				4D082DF029CCA1100083DF6F /* GoogleMobileAds in Frameworks */,
-				20BE3FBB29E47D8500E1A662 /* NimbusGAMKit in Frameworks */,
-				20BE3FC129E47D8500E1A662 /* NimbusRenderKit in Frameworks */,
-				20BE3FBD29E47D8500E1A662 /* NimbusKit in Frameworks */,
-				20BE3FBF29E47D8500E1A662 /* NimbusLiveRampKit in Frameworks */,
-				20BE3FC329E47D8500E1A662 /* NimbusRenderStaticKit in Frameworks */,
+				96742BF82A24F54A00A312B3 /* Application in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,61 +48,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1541C30129F1CFB4007E8852 /* Demand */ = {
-			isa = PBXGroup;
-			children = (
-				4DEA6B102A016F7F003E6A20 /* Amazon.swift */,
-				4DC70F7A2A002CEF0037E424 /* Meta.swift */,
-				4DEA6B122A016F8F003E6A20 /* Unity.swift */,
-				1541C30429F1CFB4007E8852 /* Vungle.swift */,
-			);
-			path = Demand;
-			sourceTree = "<group>";
-		};
-		4D5BAE82273C6C64009B7F95 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				4DB9A149273AF8040005D1D0 /* DemoNavigationController.swift */,
-				4DB9A14B273AF81A0005D1D0 /* DemoViewController.swift */,
-				4D5BAE7A273C362B009B7F95 /* SettingsViewController.swift */,
-				96DCAE1C2A23D3EF003D2D92 /* UI+Extension.swift */,
-				96BFE1E02A0965600030964D /* UITest+Extension.swift */,
-				96DCAE1F2A23E88D003D2D92 /* Views.swift */,
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
-		4D8A3FA52742C74B00201485 /* Mediation */ = {
-			isa = PBXGroup;
-			children = (
-				4D84B1B72743FFF300CA9CE2 /* Google.swift */,
-			);
-			path = Mediation;
-			sourceTree = "<group>";
-		};
-		4D8A3FB027430AAE00201485 /* Test */ = {
-			isa = PBXGroup;
-			children = (
-				4D5C798A274C184000033307 /* TestRenderViewController.swift */,
-				4D5C798C274C259A00033307 /* TestRenderAdViewController.swift */,
-			);
-			path = Test;
-			sourceTree = "<group>";
-		};
-		4D901D79273D931C00037C54 /* Rendering */ = {
-			isa = PBXGroup;
-			children = (
-				150B4B5728D3E6F7002F233D /* CustomAdContainerView.swift */,
-				4D901D80273DAFD400037C54 /* NimbusAdManager.swift */,
-			);
-			path = Rendering;
-			sourceTree = "<group>";
-		};
 		4DADE23927396E0700E7E766 = {
 			isa = PBXGroup;
 			children = (
+				96742BF52A24F43D00A312B3 /* Application */,
 				4DB9A13D273AE46F0005D1D0 /* Resources */,
-				4DADE24427396E0700E7E766 /* Sources */,
 				4DADE24327396E0700E7E766 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -195,23 +64,6 @@
 				96C4462729414A9300DF35B2 /* nimbus-ios-sample-pods.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		4DADE24427396E0700E7E766 /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				1541C30129F1CFB4007E8852 /* Demand */,
-				96C706362A22B83B00A47A84 /* Dynamic Price */,
-				4D8A3FA52742C74B00201485 /* Mediation */,
-				4D901D79273D931C00037C54 /* Rendering */,
-				4D8A3FB027430AAE00201485 /* Test */,
-				4D5BAE82273C6C64009B7F95 /* UI */,
-				4DADE24527396E0700E7E766 /* AppDelegate.swift */,
-				4DADE24727396E0700E7E766 /* SceneDelegate.swift */,
-				96C706332A227E4500A47A84 /* Navigation.swift */,
-				4D5BAE80273C6A16009B7F95 /* Setting.swift */,
-			);
-			path = Sources;
 			sourceTree = "<group>";
 		};
 		4DB9A13D273AE46F0005D1D0 /* Resources */ = {
@@ -234,14 +86,6 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		96C706362A22B83B00A47A84 /* Dynamic Price */ = {
-			isa = PBXGroup;
-			children = (
-				96C706372A22B84700A47A84 /* GoogleAdManager.swift */,
-			);
-			path = "Dynamic Price";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -259,18 +103,7 @@
 			);
 			name = "nimbus-ios-sample";
 			packageProductDependencies = (
-				962B1C06299E917B001BF3B7 /* NimbusFANKit */,
-				4D082DEF29CCA1100083DF6F /* GoogleMobileAds */,
-				20BE3FBA29E47D8500E1A662 /* NimbusGAMKit */,
-				20BE3FBC29E47D8500E1A662 /* NimbusKit */,
-				20BE3FBE29E47D8500E1A662 /* NimbusLiveRampKit */,
-				20BE3FC029E47D8500E1A662 /* NimbusRenderKit */,
-				20BE3FC229E47D8500E1A662 /* NimbusRenderStaticKit */,
-				20BE3FC429E47D8500E1A662 /* NimbusRenderVideoKit */,
-				20BE3FC629E47D8500E1A662 /* NimbusRequestAPSKit */,
-				20BE3FC829E47D8500E1A662 /* NimbusRequestKit */,
-				20BE3FCA29E47D8500E1A662 /* NimbusUnityKit */,
-				4DC70F752A0003B80037E424 /* NimbusVungleKit */,
+				96742BF72A24F54A00A312B3 /* Application */,
 			);
 			productName = NimbusDemoApp;
 			productReference = 4DADE24227396E0700E7E766 /* nimbus-ios-sample.app */;
@@ -317,10 +150,6 @@
 				Base,
 			);
 			mainGroup = 4DADE23927396E0700E7E766;
-			packageReferences = (
-				962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */,
-				4D082DEE29CCA1100083DF6F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
-			);
 			productRefGroup = 4DADE24327396E0700E7E766 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -361,26 +190,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4DADE24627396E0700E7E766 /* AppDelegate.swift in Sources */,
-				4DADE24827396E0700E7E766 /* SceneDelegate.swift in Sources */,
-				96C706382A22B84700A47A84 /* GoogleAdManager.swift in Sources */,
-				4DEA6B112A016F7F003E6A20 /* Amazon.swift in Sources */,
-				96DCAE202A23E88D003D2D92 /* Views.swift in Sources */,
-				4D5C798B274C184000033307 /* TestRenderViewController.swift in Sources */,
-				96C706342A227E4500A47A84 /* Navigation.swift in Sources */,
-				4D5BAE81273C6A16009B7F95 /* Setting.swift in Sources */,
-				96DCAE1D2A23D3EF003D2D92 /* UI+Extension.swift in Sources */,
-				1541C30729F1CFB4007E8852 /* Vungle.swift in Sources */,
-				4D5BAE7B273C362B009B7F95 /* SettingsViewController.swift in Sources */,
-				4DB9A14A273AF8040005D1D0 /* DemoNavigationController.swift in Sources */,
-				4D5C798D274C259A00033307 /* TestRenderAdViewController.swift in Sources */,
-				96BFE1E12A0965600030964D /* UITest+Extension.swift in Sources */,
-				4DC70F7B2A002CEF0037E424 /* Meta.swift in Sources */,
-				4DEA6B132A016F8F003E6A20 /* Unity.swift in Sources */,
-				4D901D81273DAFD400037C54 /* NimbusAdManager.swift in Sources */,
-				4DB9A14C273AF81A0005D1D0 /* DemoViewController.swift in Sources */,
-				150B4B5828D3E6F7002F233D /* CustomAdContainerView.swift in Sources */,
-				4D84B1B82743FFF300CA9CE2 /* Google.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,26 +197,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96C445E929414A9300DF35B2 /* AppDelegate.swift in Sources */,
-				96C445EB29414A9300DF35B2 /* SceneDelegate.swift in Sources */,
-				96C706392A22B84700A47A84 /* GoogleAdManager.swift in Sources */,
-				96C445ED29414A9300DF35B2 /* TestRenderViewController.swift in Sources */,
-				96DCAE212A23E88D003D2D92 /* Views.swift in Sources */,
-				96C706352A227E4500A47A84 /* Navigation.swift in Sources */,
-				4D07F6742A043B4500E2B094 /* Unity.swift in Sources */,
-				4D07F6752A043B4800E2B094 /* Vungle.swift in Sources */,
-				96DCAE1E2A23D3EF003D2D92 /* UI+Extension.swift in Sources */,
-				96C445F829414A9300DF35B2 /* SettingsViewController.swift in Sources */,
-				96C445F929414A9300DF35B2 /* DemoNavigationController.swift in Sources */,
-				96C445FB29414A9300DF35B2 /* TestRenderAdViewController.swift in Sources */,
-				96C445FE29414A9300DF35B2 /* NimbusAdManager.swift in Sources */,
-				96BFE1E22A0965600030964D /* UITest+Extension.swift in Sources */,
-				4D07F6722A043B3100E2B094 /* Amazon.swift in Sources */,
-				96C4460229414A9300DF35B2 /* DemoViewController.swift in Sources */,
-				4D07F6732A043B3400E2B094 /* Meta.swift in Sources */,
-				4D07F6672A041F7000E2B094 /* Setting.swift in Sources */,
-				96C4460D29414A9300DF35B2 /* CustomAdContainerView.swift in Sources */,
-				96C4460E29414A9300DF35B2 /* Google.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,7 +339,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Nimbus Sample";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This is required for FB and LiveRamp test ads to work";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -579,7 +368,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Nimbus Sample";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This is required for FB and LiveRamp test ads to work";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -608,7 +397,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Nimbus Sample";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This is required for FB and LiveRamp test ads to work";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -636,7 +425,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Nimbus Sample";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This is required for FB and LiveRamp test ads to work";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -684,84 +473,10 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		4D082DEE29CCA1100083DF6F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.0.0;
-			};
-		};
-		962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/timehop/nimbus-ios-sdk";
-			requirement = {
-				kind = exactVersion;
-				version = 2.8.1;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		20BE3FBA29E47D8500E1A662 /* NimbusGAMKit */ = {
+		96742BF72A24F54A00A312B3 /* Application */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
-			productName = NimbusGAMKit;
-		};
-		20BE3FBC29E47D8500E1A662 /* NimbusKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
-			productName = NimbusKit;
-		};
-		20BE3FBE29E47D8500E1A662 /* NimbusLiveRampKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
-			productName = NimbusLiveRampKit;
-		};
-		20BE3FC029E47D8500E1A662 /* NimbusRenderKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
-			productName = NimbusRenderKit;
-		};
-		20BE3FC229E47D8500E1A662 /* NimbusRenderStaticKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
-			productName = NimbusRenderStaticKit;
-		};
-		20BE3FC429E47D8500E1A662 /* NimbusRenderVideoKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
-			productName = NimbusRenderVideoKit;
-		};
-		20BE3FC629E47D8500E1A662 /* NimbusRequestAPSKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
-			productName = NimbusRequestAPSKit;
-		};
-		20BE3FC829E47D8500E1A662 /* NimbusRequestKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
-			productName = NimbusRequestKit;
-		};
-		20BE3FCA29E47D8500E1A662 /* NimbusUnityKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
-			productName = NimbusUnityKit;
-		};
-		4D082DEF29CCA1100083DF6F /* GoogleMobileAds */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4D082DEE29CCA1100083DF6F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
-			productName = GoogleMobileAds;
-		};
-		4DC70F752A0003B80037E424 /* NimbusVungleKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 962B1C05299E917B001BF3B7 /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
-			productName = NimbusVungleKit;
-		};
-		962B1C06299E917B001BF3B7 /* NimbusFANKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = NimbusFANKit;
+			productName = Application;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

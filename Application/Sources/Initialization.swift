@@ -1,16 +1,16 @@
 //
-//  AppDelegate.swift
-//  nimbus-ios-sample
+//  Initialization.swift
+//  Sources
 //
-//  Created by Victor Takai on 08/11/21.
+//  Created by Jason Sznol on 5/28/23.
 //
 
-import UIKit
-import SwiftUI
 import AppTrackingTransparency
 import NimbusKit
 import NimbusRenderStaticKit
 import NimbusRenderVideoKit
+import SwiftUI
+import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,9 +19,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        initializeNimbusSDK()
+        return true
+    }
+}
+
+
+
+public extension UIApplicationDelegate {
+    
+    func initializeNimbusSDK() {
         setupNimbusSDK()
         setupAmazonDemand()
-        setupMetaDemand()
         setupUnityDemand()
         setupVungleDemand()
         
@@ -30,10 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self?.startTrackingATT()
             self?.setupMetaDemand()
         }
-        
-        return true
     }
-
+    
     private func setupNimbusSDK() {
         Nimbus.shared.initialize(
             publisher: Bundle.main.infoDictionary?["Publisher Key"] as! String,
@@ -98,29 +105,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     )
                 }
             }
-        }
-    }
-}
-
-extension Alert {
-    public static func showAlert(title: String, message: String) {
-        DispatchQueue.main.async {
-            let alertController = UIAlertController(
-                title: title,
-                message: message,
-                preferredStyle: .alert
-            )
-            let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-                NSLog("OK was selected")
-            }
-            alertController.addAction(okAction)
-            
-            guard let firstScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                  let firstWindow = firstScene.windows.first,
-                  let viewController = firstWindow.rootViewController else {
-                return
-            }
-            viewController.present(alertController, animated: true, completion: nil)
         }
     }
 }

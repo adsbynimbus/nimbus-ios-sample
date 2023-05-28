@@ -21,6 +21,15 @@ struct Section {
     let items: [any NavigationItem]
 }
 
+public var mainScreen: () -> UIViewController = {
+    DemoNavigationController(
+        rootViewController: NavigationListViewController(
+            title: "Integration Assist".uppercased(),
+            subtitle: "Ad Call Demos and Render Testing",
+            items: [Section(header: nil, items: MainItem.allCases)]
+    ))
+}
+
 enum MainItem: String, NavigationItem {
     case showAdDemo         = "Show Ad Demo"
     case mediationPlatforms = "Mediation Platforms"
@@ -164,20 +173,13 @@ final class NavigationListViewController: DemoViewController, UITableViewDelegat
         super.viewDidLoad()
         
         if headerTitle == "Integration Assist".uppercased() {
-            setupTitleLabel()
-            setupSubTitleLabel()
+            titleLabel.font = .proximaNova(size: 23, weight: .semibold)
+            titleLabel.setTextSpacingBy(value: 1.92)
+            titleLabel.textAlignment = .center
+            
+            subTitleLabel.textAlignment = .center
         }
         setupScrollView(tableView)
-    }
-    
-    private func setupTitleLabel() {
-        titleLabel.font = .proximaNova(size: 23, weight: .semibold)
-        titleLabel.setTextSpacingBy(value: 1.92)
-        titleLabel.textAlignment = .center
-    }
-    
-    private func setupSubTitleLabel() {
-        subTitleLabel.textAlignment = .center
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -213,3 +215,15 @@ final class NavigationListViewController: DemoViewController, UITableViewDelegat
     }
 }
 
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+    var window: UIWindow?
+
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        window?.windowScene = windowScene
+        window?.rootViewController = mainScreen()
+        window?.makeKeyAndVisible()
+    }
+}

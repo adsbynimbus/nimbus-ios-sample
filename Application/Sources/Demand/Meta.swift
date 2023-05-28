@@ -20,7 +20,7 @@ fileprivate let metaInterstitialId = Bundle.main.infoDictionary?["Meta Interstit
 fileprivate let metaNativeId = Bundle.main.infoDictionary?["Meta Native Placement ID"] as? String ?? ""
 fileprivate let metaAppId = metaNativeId.components(separatedBy: "_").first
 
-extension AppDelegate {
+extension UIApplicationDelegate {
     func setupMetaDemand() {
         if let metaAppId = metaAppId {
             NimbusRequestManager.requestInterceptors?.append(NimbusFANRequestInterceptor(appId: metaAppId))

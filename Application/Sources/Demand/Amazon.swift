@@ -10,7 +10,7 @@ import NimbusKit
 import NimbusRequestAPSKit
 import UIKit
 
-extension AppDelegate {
+extension UIApplicationDelegate {
     func setupAmazonDemand() {
         if let apsAppKey = Bundle.main.infoDictionary?["APS App ID"] as? String {
             DTBAds.sharedInstance().setAppKey(apsAppKey)
