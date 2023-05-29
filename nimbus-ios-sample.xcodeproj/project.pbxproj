@@ -15,6 +15,8 @@
 		965B675F2A2114F8007FC135 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 965B67592A21147E007FC135 /* ProximaNova-Regular.otf */; };
 		965B67602A2114F8007FC135 /* ProximaNova-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB9A13E273AE4A70005D1D0 /* ProximaNova-Semibold.otf */; };
 		96742BF82A24F54A00A312B3 /* Application in Frameworks */ = {isa = PBXBuildFile; productRef = 96742BF72A24F54A00A312B3 /* Application */; };
+		96742C032A25133600A312B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96742C022A25133600A312B3 /* AppDelegate.swift */; };
+		96742C042A25133600A312B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96742C022A25133600A312B3 /* AppDelegate.swift */; };
 		96C4461F29414A9300DF35B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DADE24E27396E0900E7E766 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +28,7 @@
 		965B67582A21147E007FC135 /* ProximaNova-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.otf"; sourceTree = "<group>"; };
 		965B67592A21147E007FC135 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.otf"; sourceTree = "<group>"; };
 		96742BF52A24F43D00A312B3 /* Application */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Application; sourceTree = "<group>"; };
+		96742C022A25133600A312B3 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96C4462729414A9300DF35B2 /* nimbus-ios-sample-pods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nimbus-ios-sample-pods.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -51,6 +54,7 @@
 		4DADE23927396E0700E7E766 = {
 			isa = PBXGroup;
 			children = (
+				96742C022A25133600A312B3 /* AppDelegate.swift */,
 				96742BF52A24F43D00A312B3 /* Application */,
 				4DB9A13D273AE46F0005D1D0 /* Resources */,
 				4DADE24327396E0700E7E766 /* Products */,
@@ -138,6 +142,10 @@
 				TargetAttributes = {
 					4DADE24127396E0700E7E766 = {
 						CreatedOnToolsVersion = 13.0;
+						LastSwiftMigration = 1430;
+					};
+					96C445DA29414A9300DF35B2 = {
+						LastSwiftMigration = 1430;
 					};
 				};
 			};
@@ -190,6 +198,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96742C032A25133600A312B3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96742C042A25133600A312B3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +342,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 79;
 				DEVELOPMENT_TEAM = SYMQPHZ6U8;
@@ -350,6 +361,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -360,6 +372,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 79;
@@ -390,6 +403,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 79;
 				DEVELOPMENT_TEAM = SYMQPHZ6U8;
@@ -407,6 +421,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -417,6 +432,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 79;
