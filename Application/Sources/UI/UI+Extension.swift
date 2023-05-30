@@ -131,7 +131,7 @@ extension UIViewController {
     func showCustomAlert(_ missingKey: String) {
         let alert = UIAlertController(
             title: "Attention",
-            message: "\(missingKey) is missing or not set in secrets.json",
+            message: "\(missingKey) is missing or not set in Keys.xcconfig",
             preferredStyle: .alert
         )
         alert.addAction(UIAlertAction(title: "OK", style: .default))

@@ -7,7 +7,7 @@
 	<key>APS App ID</key>
 	<string>a9_onboarding_app_id</string>
 	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-3940256099942544~1458002511</string>
+	<string>$(GOOGLE_APP_ID)</string>
 	<key>GADIsAdManagerApp</key>
 	<true/>
 	<key>Google Placement ID</key>
