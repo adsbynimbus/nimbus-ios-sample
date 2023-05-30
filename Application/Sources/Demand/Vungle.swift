@@ -15,11 +15,19 @@ import NimbusVungleKit
 #endif
 import UIKit
 
+fileprivate var shared: NimbusVungleRequestInterceptor?
+fileprivate var vungleAppId = Bundle.main.infoDictionary?["Vungle App ID"] as? String
+
 extension UIApplicationDelegate {
     func setupVungleDemand() {
-        if let vungleAppId = Bundle.main.infoDictionary?["Vungle App ID"] as? String {
+        if let appId = vungleAppId {
             Nimbus.shared.renderers[.forNetwork("vungle")] = NimbusVungleAdRenderer()
-            NimbusRequestManager.requestInterceptors?.append(NimbusVungleRequestInterceptor(appId: vungleAppId, isLoggingEnabled: true))
+            let vungleRequestInterceptor = NimbusVungleRequestInterceptor(appId: appId, isLoggingEnabled: true)
+            NimbusRequestManager.requestInterceptors?.append(vungleRequestInterceptor)
+            
+            // Disable Vungle Ads until we are are on the VungleViewController
+            shared = vungleRequestInterceptor
+            NimbusVungleRequestInterceptor.enabled = false
         }
     }
 }
@@ -46,8 +54,15 @@ class VungleViewController: DemoViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Enable Vungle Demand for this screen only
+        NimbusVungleRequestInterceptor.enabled = true
+        
         setupContentView()
         setupAdRendering()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        NimbusVungleRequestInterceptor.enabled = false
     }
     
     private func setupContentView() {
@@ -122,5 +137,20 @@ extension VungleViewController: AdControllerDelegate {
     
     func didReceiveNimbusError(controller: AdController, error: NimbusError) {
         print("Nimbus didReceiveNimbusError: \(error)")
+    }
+}
+
+extension NimbusVungleRequestInterceptor {
+    static var enabled: Bool {
+        get {
+            NimbusRequestManager.requestInterceptors?.contains(where: { $0 is NimbusVungleRequestInterceptor }) ?? false
+        }
+        set {
+            if newValue, let interceptor = shared {
+                NimbusRequestManager.requestInterceptors?.append(interceptor)
+            } else if !newValue {
+                NimbusRequestManager.requestInterceptors?.removeAll(where: { $0 is NimbusVungleRequestInterceptor })
+            }
+        }
     }
 }

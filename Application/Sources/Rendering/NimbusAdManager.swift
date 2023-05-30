@@ -11,7 +11,6 @@ import NimbusRenderVideoKit
 import GoogleInteractiveMediaAds
 
 final class AdManagerViewController: DemoViewController {
-    
     private let contentView = UIView()
     private var adManager = NimbusAdManager()
     
@@ -48,6 +47,9 @@ final class AdManagerViewController: DemoViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Add self as an interceptor to remove all Demand information to ensure only Nimbus renders
+        NimbusRequestManager.requestInterceptors?.append(self)
+        
         if shouldHideVideoUI {
             CustomVideoAdSettingsProvider.shared.disableUi = true
         }
@@ -56,7 +58,10 @@ final class AdManagerViewController: DemoViewController {
         setupAdRendering()
     }
     
-    deinit {
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        NimbusRequestManager.requestInterceptors?.removeAll(where: { $0 === self })
         CustomVideoAdSettingsProvider.shared.disableUi = false
         let nimbusAdView = contentView.subviews.first(where: { $0 is NimbusAdView }) as? NimbusAdView
         nimbusAdView?.destroy()
@@ -64,7 +69,7 @@ final class AdManagerViewController: DemoViewController {
         
         adController?.destroy()
     }
-    
+
     private func setupContentView() {
         view.addSubview(contentView)
         
@@ -207,6 +212,19 @@ extension AdManagerViewController: AdControllerDelegate {
     }
     
     func didReceiveNimbusError(controller: AdController, error: NimbusError) {    }
+}
+
+extension AdManagerViewController : NimbusRequestInterceptor {
+    
+    func modifyRequest(request: NimbusRequestKit.NimbusRequest) {
+        request.user?.extensions?.removeValue(forKey: "vungle_buyeruid")
+        request.user?.extensions?.removeValue(forKey: "unity_buyeruid")
+        request.user?.extensions?.removeValue(forKey: "facebook_buyeruid")
+        request.impressions[0].extensions?.removeValue(forKey: "facebook_app_id")
+    }
+    
+    func didCompleteNimbusRequest(with ad: NimbusCoreKit.NimbusAd) { }
+    func didFailNimbusRequest(with error: NimbusCoreKit.NimbusError) { }
 }
 
 final class CustomVideoAdSettingsProvider: NimbusVideoSettingsProvider {

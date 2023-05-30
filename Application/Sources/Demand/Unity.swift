@@ -18,8 +18,8 @@ fileprivate let unityGameId = Bundle.main.infoDictionary?["Unity Game ID"] as? S
 extension UIApplicationDelegate {
     func setupUnityDemand() {
         if !unityGameId.isEmpty {
-            NimbusRequestManager.requestInterceptors?.append(NimbusUnityRequestInterceptor(gameId: unityGameId))
             Nimbus.shared.renderers[.forNetwork("unity")] = NimbusUnityAdRenderer()
+            NimbusRequestManager.requestInterceptors?.append(NimbusUnityRequestInterceptor(gameId: unityGameId))
         }
     }
 }
