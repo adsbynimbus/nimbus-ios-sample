@@ -12,6 +12,10 @@
 	<true/>
 	<key>Google Placement ID</key>
 	<string>$(GOOGLE_PLACEMENT_ID)</string>
+	<key>Google Nimbus Rendering Placement ID</key>
+	<string>$(GOOGLE_NIMBUS_RENDERING_PLACEMENT_ID)</string>
+	<key>LiveRamp Config ID</key>
+	<string>$(LIVERAMP_CONFIG_ID)</string>
 	<key>Meta Banner Placement ID</key>
 	<string>$(META_BANNER_PLACEMENT_ID)</string>
 	<key>Meta Interstitial Placement ID</key>
