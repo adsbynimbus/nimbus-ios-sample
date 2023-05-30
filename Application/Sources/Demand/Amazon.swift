@@ -12,8 +12,8 @@ import UIKit
 
 extension UIApplicationDelegate {
     func setupAmazonDemand() {
-        if let apsAppKey = Bundle.main.infoDictionary?["APS App ID"] as? String {
-            DTBAds.sharedInstance().setAppKey(apsAppKey)
+        if let appKey = apsAppKey {
+            DTBAds.sharedInstance().setAppKey(appKey)
             DTBAds.sharedInstance().mraidPolicy = CUSTOM_MRAID
             DTBAds.sharedInstance().mraidCustomVersions = ["1.0", "2.0", "3.0"]
             DTBAds.sharedInstance().testMode = Nimbus.shared.testMode
@@ -24,12 +24,10 @@ extension UIApplicationDelegate {
     }
 }
 
+let apsAppKey = Bundle.main.infoDictionary?["APS App ID"] as? String
+
 let apsBannerSizes: [DTBAdSize] = [
-    .init(
-        bannerAdSizeWithWidth: 320,
-        height: 50,
-        andSlotUUID: "5ab6a4ae-4aa5-43f4-9da4-e30755f2b295"
-    )
+    .init(bannerAdSizeWithWidth: 320, height: 50, andSlotUUID: "5ab6a4ae-4aa5-43f4-9da4-e30755f2b295")
 ]
 
 let apsInterstitialSizes: [DTBAdSize] = [

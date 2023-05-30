@@ -21,14 +21,7 @@ struct Section {
     let items: [any NavigationItem]
 }
 
-public var mainScreen: () -> UIViewController = {
-    DemoNavigationController(
-        rootViewController: NavigationListViewController(
-            title: "Integration Assist".uppercased(),
-            subtitle: "Ad Call Demos and Render Testing",
-            items: [Section(header: nil, items: MainItem.allCases)]
-    ))
-}
+public var mainScreen: () -> UIViewController = MainItem.viewController
 
 enum MainItem: String, NavigationItem {
     case showAdDemo         = "Show Ad Demo"
@@ -37,11 +30,21 @@ enum MainItem: String, NavigationItem {
     case testRender         = "Test Render"
     case settings           = "Settings"
     
+    static let title = "Integration Assist".uppercased()
+    static let subtitle = "Ad Call Demos and Render Testing"
+    static let viewController = {
+        NavigationListViewController(
+            title: MainItem.title,
+            subtitle: MainItem.subtitle,
+            items: [Section(header: nil, items: MainItem.allCases)]
+        )
+    }
+   
     func destinationController(parent: String) -> UIViewController {
         switch self {
         case .showAdDemo:
             return NavigationListViewController(
-                 title: self.description,
+                title: self.description,
                 subtitle: "Select to see Nimbus' request and render flow",
                 items: [Section(header: nil, items: AdManagerAdType.allCases)])
         case .mediationPlatforms:
@@ -212,18 +215,5 @@ final class NavigationListViewController: DemoViewController, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         dataSource[section].header != nil ? DemoHeader.height : 0
-    }
-}
-
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    var window: UIWindow?
-
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        
-        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
-        window?.windowScene = windowScene
-        window?.rootViewController = mainScreen()
-        window?.makeKeyAndVisible()
     }
 }

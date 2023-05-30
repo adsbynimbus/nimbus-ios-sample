@@ -12,9 +12,13 @@ import NimbusRenderVideoKit
 import SwiftUI
 import UIKit
 
-public extension UIApplicationDelegate {
-    
-    func initializeNimbusSDK() {
+@main
+class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
         setupNimbusSDK()
         setupAmazonDemand()
         setupUnityDemand()
@@ -25,6 +29,8 @@ public extension UIApplicationDelegate {
             self?.startTrackingATT()
             self?.setupMetaDemand()
         }
+        
+        return true
     }
     
     private func setupNimbusSDK() {

@@ -7,12 +7,12 @@
 
 import UIKit
 
-final class DemoNavigationController: UINavigationController {
+public final class DemoNavigationController: UINavigationController {
     
     let backArrow = UIImage(named: "left-arrow")?.imageWithInset(inset: 2)
     let appearance = UINavigationBarAppearance()
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         appearance.configureWithOpaqueBackground()

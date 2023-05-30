@@ -15,10 +15,10 @@ import NimbusRequestFANKit
 #endif
 import UIKit
 
-fileprivate let metaBannerId = Bundle.main.infoDictionary?["Meta Banner Placement ID"] as? String ?? ""
-fileprivate let metaInterstitialId = Bundle.main.infoDictionary?["Meta Interstitial Placement ID"] as? String ?? ""
-fileprivate let metaNativeId = Bundle.main.infoDictionary?["Meta Native Placement ID"] as? String ?? ""
-fileprivate let metaAppId = metaNativeId.components(separatedBy: "_").first
+let metaBannerId = Bundle.main.infoDictionary?["Meta Banner Placement ID"] as? String ?? ""
+let metaInterstitialId = Bundle.main.infoDictionary?["Meta Interstitial Placement ID"] as? String ?? ""
+let metaNativeId = Bundle.main.infoDictionary?["Meta Native Placement ID"] as? String ?? ""
+let metaAppId = metaNativeId.components(separatedBy: "_").first
 
 extension UIApplicationDelegate {
     func setupMetaDemand() {
