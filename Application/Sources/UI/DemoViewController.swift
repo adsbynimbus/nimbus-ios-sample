@@ -78,31 +78,72 @@ class DemoViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         
+        view.layout(headerView) { child in
+            child.alignTop()
+            child.fill(.width)
+            child.height(80)
+        }
         setupLogo()
-        setupHeaderView()
-    }
-    
-    private func setupHeaderView() {
-        view.addSubview(headerView)
-        
-        headerView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            headerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            headerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            headerView.heightAnchor.constraint(equalToConstant: 80)
-        ])
     }
     
     func setupScrollView(_ tableView: UIScrollView) {
-        view.addSubview(tableView)
+        view.layout(tableView) { child in
+            child.below(headerView)
+            child.fill()
+        }
+    }
+}
+
+
+extension UIView {
+    @resultBuilder
+    struct LayoutBuilder {
+        static func buildBlock(_ components: [NSLayoutConstraint]...) -> [NSLayoutConstraint] {
+            return components.flatMap { $0 }
+        }
+    }
+    
+    enum Fill {
+        case width, height, both
+    }
+    
+    struct ConstraintBuilder {
+        let parent: UIView
+        let child: UIView
         
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-        ])
+        func alignTop() -> [NSLayoutConstraint] {
+            [child.topAnchor.constraint(equalTo: parent.safeAreaLayoutGuide.topAnchor)]
+        }
+        
+        func below(_ view: UIView) -> [NSLayoutConstraint] {
+            [child.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)]
+        }
+        
+        func fill(_ fill: Fill = .both) -> [NSLayoutConstraint] {
+            switch(fill) {
+            case .width:
+                return [child.leadingAnchor.constraint(equalTo: parent.safeAreaLayoutGuide.leadingAnchor),
+                 child.trailingAnchor.constraint(equalTo: parent.safeAreaLayoutGuide.trailingAnchor)]
+            case .height:
+                return [child.bottomAnchor.constraint(equalTo: parent.safeAreaLayoutGuide.bottomAnchor)]
+            case .both:
+                return [
+                    child.leadingAnchor.constraint(equalTo: parent.safeAreaLayoutGuide.leadingAnchor),
+                    child.trailingAnchor.constraint(equalTo: parent.safeAreaLayoutGuide.trailingAnchor),
+                    child.bottomAnchor.constraint(equalTo: parent.safeAreaLayoutGuide.bottomAnchor)
+                ]
+            }
+        }
+        
+        func height(_ height: CGFloat) -> [NSLayoutConstraint] {
+            [child.heightAnchor.constraint(equalToConstant: height)]
+        }
+    }
+    
+    func layout(_ view: UIView, @LayoutBuilder constraints: (ConstraintBuilder) -> [NSLayoutConstraint]) {
+        addSubview(view)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        let constraints = constraints(ConstraintBuilder(parent: self, child: view))
+        NSLayoutConstraint.activate(constraints)
     }
 }

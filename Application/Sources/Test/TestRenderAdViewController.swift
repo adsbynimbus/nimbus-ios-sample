@@ -44,15 +44,10 @@ final class TestRenderAdViewController: UIViewController {
     
     private func setupAdView() {
         guard let adContainerView else { return }
-        view.addSubview(adContainerView)
-        
-        adContainerView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            adContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            adContainerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            adContainerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            adContainerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
-        ])
+        view.layout(adContainerView) { child in
+            child.alignTop()
+            child.fill()
+        }
     }
     
     private func getAdFromMarkup(adMarkup: String) -> NimbusAd? {
