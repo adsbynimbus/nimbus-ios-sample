@@ -33,10 +33,9 @@ extension UIApplicationDelegate {
     }
 }
 
-final class FANViewController: DemoViewController {
+final class FANViewController: SampleAdViewController {
     
     private let adType: MetaSample
-    private var ad: NimbusAd?
     private var dimensions: NimbusAdDimensions?
     private var adContainerView: CustomAdContainerView?
     
@@ -45,8 +44,8 @@ final class FANViewController: DemoViewController {
         
         super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle)
        
-        ad = createNimbusAd(adType: adType)
-        dimensions = ad?.adDimensions
+        nimbusAd = createNimbusAd(adType: adType)
+        dimensions = nimbusAd?.adDimensions
     }
     
     required init?(coder: NSCoder) {
@@ -74,10 +73,10 @@ final class FANViewController: DemoViewController {
     }
     
     private func setupAdView() {
-        guard let ad else { return }
+        guard let nimbusAd else { return }
         
         adContainerView = CustomAdContainerView(
-            ad: ad,
+            ad: nimbusAd,
             companionAd: nil,
             viewController: self,
             creativeScalingEnabledForStaticAds: true,
@@ -162,19 +161,5 @@ final class FANViewController: DemoViewController {
             isMraid: isMraid,
             extensions: nil
         )
-    }
-}
-
-extension FANViewController: AdControllerDelegate {
-    
-    func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {
-        print("Nimbus didReceiveNimbusEvent: \(event)")
-        if let ad = ad, event == .loaded {
-            controller.adView?.setUiTestIdentifiers(for: ad)
-        }
-    }
-    
-    func didReceiveNimbusError(controller: AdController, error: NimbusError) {
-        print("Nimbus didReceiveNimbusError: \(error)")
     }
 }

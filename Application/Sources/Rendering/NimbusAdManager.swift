@@ -11,34 +11,19 @@ import NimbusRenderVideoKit
 import UIKit
 import SwiftUI
 
-final class AdManagerViewController: DemoViewController {
+final class AdManagerViewController: SampleAdViewController {
     private let contentView = UIView()
     private var adManager = NimbusAdManager()
-    private let screenLogger = Logger()
-    private weak var loggerView: UIView?
     
     private let adType: AdManagerAdType
-    private let shouldHideVideoUI: Bool
     private var customAdContainerView: CustomAdContainerView?
     private var adController: AdController?
     private var manualRequest: NimbusRequest?
     private var requestManager: NimbusRequestManager?
-    private var nimbusAd: NimbusAd?
 
-    init(
-        adType: AdManagerAdType,
-        headerTitle: String,
-        headerSubTitle: String,
-        shouldShowVideoUI: Bool = false
-    ) {
-        self.adType = adType
-        self.shouldHideVideoUI = shouldShowVideoUI
-        super.init(headerTitle: headerTitle, headerSubTitle: headerSubTitle)
-    }
     
-    init(adType: AdManagerAdType, headerSubTitle: String, shouldShowVideoUI: Bool = false) {
+    init(adType: AdManagerAdType, headerSubTitle: String) {
         self.adType = adType
-        self.shouldHideVideoUI = shouldShowVideoUI
 
         super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle)
     }
@@ -53,20 +38,8 @@ final class AdManagerViewController: DemoViewController {
         // Add self as an interceptor to remove all Demand information to ensure only Nimbus renders
         NimbusRequestManager.requestInterceptors?.append(self)
         
-        if shouldHideVideoUI {
-            CustomVideoAdSettingsProvider.shared.disableUi = true
-        }
-        
         setupContentView()
         setupAdRendering()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        if let logView = loggerView {
-            view.sendSubviewToBack(logView)
-        }
     }
     
     deinit {
@@ -80,20 +53,6 @@ final class AdManagerViewController: DemoViewController {
     }
     
     private func setupContentView() {
-        let childView = UIHostingController(rootView: ScreenLogger().environmentObject(screenLogger))
-        childView.view.translatesAutoresizingMaskIntoConstraints = false
-        addChild(childView)
-        view.addSubview(childView.view)
-    
-        NSLayoutConstraint.activate([
-            childView.view.topAnchor.constraint(equalTo: headerView.bottomAnchor),
-            childView.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            childView.view.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            childView.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-        ])
-        childView.didMove(toParent: self)
-        loggerView = childView.view
-        
         view.addSubview(contentView)
         contentView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -143,14 +102,20 @@ final class AdManagerViewController: DemoViewController {
                 request: NimbusRequest.forInterstitialAd(position: adType.description),
                 adPresentingViewController: self
             )
-        case .interstitialStatic, .interstitialVideo, .interstitialVideoWithoutUI:
+        case .interstitialStatic:
             let request = NimbusRequest.forInterstitialAd(position: adType.description)
-            if adType == .interstitialStatic {
-                request.impressions[0].video = nil
-            } else if adType == .interstitialVideo || adType == .interstitialVideoWithoutUI {
-                request.impressions[0].banner = nil
-            }
-
+            request.impressions[0].video = nil
+            adManager.showBlockingAd(
+                request: request,
+                closeButtonDelay: 0,
+                adPresentingViewController: self
+            )
+        case .interstitialVideoWithoutUI:
+            CustomVideoAdSettingsProvider.shared.disableUi = true
+            fallthrough
+        case .interstitialVideo:
+            let request = NimbusRequest.forInterstitialAd(position: adType.description)
+            request.impressions[0].banner = nil
             adManager.showBlockingAd(
                 request: request,
                 closeButtonDelay: 0,
@@ -161,6 +126,14 @@ final class AdManagerViewController: DemoViewController {
                 request: NimbusRequest.forRewardedVideo(position: adType.description),
                 adPresentingViewController: self
             )
+        }
+    }
+    
+    override func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {
+        super.didReceiveNimbusEvent(controller: controller, event: event)
+        
+        if let ad = nimbusAd, event == .loaded {
+            controller.adView?.setUiTestIdentifiers(for: ad, refreshing: adType == .bannerWithRefresh)
         }
     }
     
@@ -220,20 +193,6 @@ extension AdManagerViewController: NimbusRequestManagerDelegate {
 
     func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
         print("didFailNimbusRequest: \(error.localizedDescription)")
-    }
-}
-
-extension AdManagerViewController: AdControllerDelegate {
-    func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {
-        if let ad = nimbusAd, event == .loaded {
-            screenLogger.logRender(ad)
-            controller.adView?.setUiTestIdentifiers(for: ad, refreshing: adType == .bannerWithRefresh)
-        }
-        screenLogger.logEvent(event)
-    }
-    
-    func didReceiveNimbusError(controller: AdController, error: NimbusError) {
-        screenLogger.logError(error)
     }
 }
 

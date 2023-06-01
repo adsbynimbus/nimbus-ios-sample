@@ -35,7 +35,7 @@ let apsInterstitialSizes: [DTBAdSize] = [
     .init(videoAdSizeWithSlotUUID: "4acc26e6-3ada-4ee8-bae0-753c1e0ad278")
 ]
 
-final class APSViewController: DemoViewController {
+final class APSViewController: SampleAdViewController {
     
     private let adType: APSSample
     private var adManager: NimbusAdManager?
@@ -44,7 +44,6 @@ final class APSViewController: DemoViewController {
     private var callbacks: [DTBCallback] = []
     private var adLoaders: [DTBAdLoader] = []
     private var adSizes: [DTBAdSize]?
-    private var nimbusAd: NimbusAd?
     private var adController: AdController?
     
     init(adType: APSSample, headerSubTitle: String) {
@@ -168,16 +167,6 @@ extension APSViewController: NimbusAdManagerDelegate {
     func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
         print("didFailNimbusRequest: \(error.localizedDescription)")
     }
-}
-
-extension APSViewController: AdControllerDelegate {
-    func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {
-        if let ad = nimbusAd, event == .loaded {
-            controller.adView?.setUiTestIdentifiers(for: ad, refreshing: adType == .apsBannerWithRefresh)
-        }
-    }
-    
-    func didReceiveNimbusError(controller: AdController, error: NimbusError) {    }
 }
 
 /// :nodoc:

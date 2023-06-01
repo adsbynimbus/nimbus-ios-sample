@@ -32,14 +32,13 @@ extension UIApplicationDelegate {
     }
 }
 
-class VungleViewController: DemoViewController {
+class VungleViewController: SampleAdViewController {
     
     private let contentView = UIView()
     
     private let adType: VungleSample
     private var adManager: NimbusAdManager?
     private var adController: AdController?
-    private var nimbusAd: NimbusAd?
     
     init(adType: VungleSample, headerSubTitle: String) {
         self.adType = adType
@@ -125,20 +124,6 @@ extension VungleViewController: NimbusAdManagerDelegate {
     
     func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
         print("didFailNimbusRequest: \(error.localizedDescription)")
-    }
-}
-
-extension VungleViewController: AdControllerDelegate {
-    
-    func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {
-        print("Nimbus didReceiveNimbusEvent: \(event)")
-        if let ad = nimbusAd, event == .loaded {
-            controller.adView?.setUiTestIdentifiers(for: ad)
-        }
-    }
-    
-    func didReceiveNimbusError(controller: AdController, error: NimbusError) {
-        print("Nimbus didReceiveNimbusError: \(error)")
     }
 }
 

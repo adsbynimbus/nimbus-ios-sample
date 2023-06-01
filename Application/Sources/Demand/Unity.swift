@@ -24,12 +24,11 @@ extension UIApplicationDelegate {
     }
 }
 
-final class UnityViewController: DemoViewController {
+final class UnityViewController: SampleAdViewController {
 
     private let adType: UnitySample
     private var adManager: NimbusAdManager?
     private var adController: AdController?
-    private var nimbusAd: NimbusAd?
 
     init(adType: UnitySample, headerSubTitle: String) {
         self.adType = adType
@@ -88,19 +87,5 @@ extension UnityViewController: NimbusAdManagerDelegate {
     
     func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
         print("didFailNimbusRequest: \(error.localizedDescription)")
-    }
-}
-
-extension UnityViewController: AdControllerDelegate {
-    
-    func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {
-        print("Nimbus didReceiveNimbusEvent: \(event)")
-        if let ad = nimbusAd, event == .loaded {
-            controller.adView?.setUiTestIdentifiers(for: ad)
-        }
-    }
-    
-    func didReceiveNimbusError(controller: AdController, error: NimbusError) {
-        print("Nimbus didReceiveNimbusError: \(error)")
     }
 }
