@@ -69,14 +69,8 @@ final class FANViewController: DemoViewController {
         }
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        // If ad is interstitial, this controller will be the one presenting it,
-        // so destroying the adView is required otherwise
-        if let ad, !ad.isInterstitial {
-            adContainerView?.destroy()
-        }
+    deinit {
+        adContainerView?.destroy()
     }
     
     private func setupAdView() {

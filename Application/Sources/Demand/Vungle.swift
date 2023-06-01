@@ -56,6 +56,7 @@ class VungleViewController: DemoViewController {
         
         // Enable Vungle Demand for this screen only
         NimbusVungleRequestInterceptor.enabled = true
+        NimbusRequestManager.requestInterceptors?.append(self)
         
         setupContentView()
         setupAdRendering()
@@ -63,6 +64,7 @@ class VungleViewController: DemoViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         NimbusVungleRequestInterceptor.enabled = false
+        NimbusRequestManager.requestInterceptors?.removeAll { $0 === self }
     }
     
     private func setupContentView() {
@@ -139,6 +141,19 @@ extension VungleViewController: AdControllerDelegate {
         print("Nimbus didReceiveNimbusError: \(error)")
     }
 }
+
+extension VungleViewController: NimbusRequestInterceptor {
+    
+    func modifyRequest(request: NimbusRequestKit.NimbusRequest) {
+        request.user?.extensions?.removeValue(forKey: "unity_buyeruid")
+        request.user?.extensions?.removeValue(forKey: "facebook_buyeruid")
+        request.impressions[0].extensions?.removeValue(forKey: "facebook_app_id")
+    }
+    
+    func didCompleteNimbusRequest(with ad: NimbusAd) { }
+    func didFailNimbusRequest(with error: NimbusError) { }
+}
+
 
 extension NimbusVungleRequestInterceptor {
     static var enabled: Bool {

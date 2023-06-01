@@ -69,9 +69,7 @@ final class AdManagerViewController: DemoViewController {
         }
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
+    deinit {
         NimbusRequestManager.requestInterceptors?.removeAll(where: { $0 === self })
         CustomVideoAdSettingsProvider.shared.disableUi = false
         let nimbusAdView = contentView.subviews.first(where: { $0 is NimbusAdView }) as? NimbusAdView
@@ -80,7 +78,7 @@ final class AdManagerViewController: DemoViewController {
         
         adController?.destroy()
     }
-
+    
     private func setupContentView() {
         let childView = UIHostingController(rootView: ScreenLogger().environmentObject(screenLogger))
         childView.view.translatesAutoresizingMaskIntoConstraints = false
@@ -215,7 +213,7 @@ extension AdManagerViewController: NimbusRequestManagerDelegate {
         print("didCompleteNimbusRequest")
         nimbusAd = ad
         if manualRequest == request {
-            customAdContainerView = CustomAdContainerView(ad: ad, viewController: self)
+            customAdContainerView = CustomAdContainerView(ad: ad, viewController: self, delegate: self)
             setupAdView(adView: customAdContainerView)
         }
     }
@@ -248,8 +246,8 @@ extension AdManagerViewController : NimbusRequestInterceptor {
         request.impressions[0].extensions?.removeValue(forKey: "facebook_app_id")
     }
     
-    func didCompleteNimbusRequest(with ad: NimbusCoreKit.NimbusAd) { }
-    func didFailNimbusRequest(with error: NimbusCoreKit.NimbusError) { }
+    func didCompleteNimbusRequest(with ad: NimbusAd) { }
+    func didFailNimbusRequest(with error: NimbusError) { }
 }
 
 final class CustomVideoAdSettingsProvider: NimbusVideoSettingsProvider {

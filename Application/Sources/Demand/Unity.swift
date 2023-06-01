@@ -41,6 +41,10 @@ final class UnityViewController: DemoViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        adController?.destroy()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

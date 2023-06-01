@@ -62,7 +62,7 @@ struct ScreenLogger: View {
                     
                 }
             }.onAppear {
-                logs.append(contentsOf: logger.pending)
+                logs = logger.pending
             }.onChange(of: logger.pending) { array in
                 logs = logger.pending
             }.frame(maxWidth: .infinity, alignment: .bottomLeading)
