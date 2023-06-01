@@ -5,14 +5,17 @@
 //  Created by Victor Takai on 11/11/21.
 //
 
-import UIKit
+import GoogleInteractiveMediaAds
 import NimbusKit
 import NimbusRenderVideoKit
-import GoogleInteractiveMediaAds
+import UIKit
+import SwiftUI
 
 final class AdManagerViewController: DemoViewController {
     private let contentView = UIView()
     private var adManager = NimbusAdManager()
+    private let screenLogger = Logger()
+    private weak var loggerView: UIView?
     
     private let adType: AdManagerAdType
     private let shouldHideVideoUI: Bool
@@ -58,6 +61,14 @@ final class AdManagerViewController: DemoViewController {
         setupAdRendering()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if let logView = loggerView {
+            view.sendSubviewToBack(logView)
+        }
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
@@ -71,14 +82,24 @@ final class AdManagerViewController: DemoViewController {
     }
 
     private func setupContentView() {
-        view.addSubview(contentView)
+        let childView = UIHostingController(rootView: ScreenLogger().environmentObject(screenLogger))
+        childView.view.translatesAutoresizingMaskIntoConstraints = false
+        addChild(childView)
+        view.addSubview(childView.view)
+    
+        NSLayoutConstraint.activate([
+            childView.view.topAnchor.constraint(equalTo: headerView.bottomAnchor),
+            childView.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            childView.view.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            childView.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+        ])
+        childView.didMove(toParent: self)
+        loggerView = childView.view
         
+        view.addSubview(contentView)
         contentView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
-            contentView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor),
-            contentView.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor),
-            contentView.trailingAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor),
             contentView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
         ])
     }
@@ -207,11 +228,15 @@ extension AdManagerViewController: NimbusRequestManagerDelegate {
 extension AdManagerViewController: AdControllerDelegate {
     func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {
         if let ad = nimbusAd, event == .loaded {
+            screenLogger.logRender(ad)
             controller.adView?.setUiTestIdentifiers(for: ad, refreshing: adType == .bannerWithRefresh)
         }
+        screenLogger.logEvent(event)
     }
     
-    func didReceiveNimbusError(controller: AdController, error: NimbusError) {    }
+    func didReceiveNimbusError(controller: AdController, error: NimbusError) {
+        screenLogger.logError(error)
+    }
 }
 
 extension AdManagerViewController : NimbusRequestInterceptor {

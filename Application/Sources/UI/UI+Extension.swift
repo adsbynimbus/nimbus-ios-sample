@@ -43,11 +43,11 @@ extension UIColor {
     static var turquoise = UIColor(named: "turquoise")!
 }
 
+enum ProximaNovaWeight: String {
+    case bold, regular, semibold
+}
 
 extension UIFont {
-    enum ProximaNovaWeight: String {
-        case bold, regular, semibold
-    }
 
     static func proximaNova(size: CGFloat, weight: ProximaNovaWeight = .regular) -> UIFont {
         let name = "ProximaNova-\(weight.rawValue.capitalized)"
@@ -55,6 +55,12 @@ extension UIFont {
             fatalError("Font '\(name)' not found")
         }
         return font
+    }
+}
+
+extension Font {
+    static func proximaNova(size: CGFloat, weight: ProximaNovaWeight = .regular) -> Font {
+        Font.custom("ProximaNova-\(weight.rawValue.capitalized)", size: size)
     }
 }
 
