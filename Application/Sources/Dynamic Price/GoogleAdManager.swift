@@ -114,6 +114,10 @@ final class GoogleDynamicPriceViewController: DemoViewController {
             var video = NimbusVideo.interstitial() /* This helper will return a populated video object */
             video.position = NimbusPosition.unknown /* Remove the fullscreen position set from the interstitial helper */
             nimbusRequest.impressions[0].video = video
+            nimbusRequest.configureViewability(
+                partnerName: "Google",
+                partnerVersion: GADMobileAds.sharedInstance().sdkVersion
+            )
             requestManager.performRequest(request: nimbusRequest)
         case .dynamicPriceInlineVideo:
             bannerView = GAMBannerView(adSize: GADAdSizeMediumRectangle)

@@ -22,7 +22,7 @@ extension UIApplicationDelegate {
     func setupVungleDemand() {
         if let appId = vungleAppId {
             Nimbus.shared.renderers[.forNetwork("vungle")] = NimbusVungleAdRenderer()
-            let vungleRequestInterceptor = NimbusVungleRequestInterceptor(appId: appId, isLoggingEnabled: true)
+            let vungleRequestInterceptor = NimbusVungleRequestInterceptor(appId: appId)
             NimbusRequestManager.requestInterceptors?.append(vungleRequestInterceptor)
             
             // Disable Vungle Ads until we are are on the VungleViewController
