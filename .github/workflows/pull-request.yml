@@ -37,6 +37,6 @@ jobs:
         uses: mobile-dev-inc/action-maestro-cloud@v1
         with:
           api-key: ${{ secrets.MAESTRO_CLOUD }}
-          app-file: nimbus-ios-sample.app
+          app-file: nimbus-ios-sample
           env: |
             APP_ID=com.adsbynimbus.ios.NimbusDemo
