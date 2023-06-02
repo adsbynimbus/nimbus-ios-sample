@@ -63,15 +63,13 @@ final class CustomAdContainerView: UIView, AdControllerDelegate {
 
         nimbusAdView.volume = volume
         nimbusAdView.delegate = self
-
+        
         nimbusAdView.render(ad: ad, companionAd: companionAd)
+        nimbusAdView.setUiTestIdentifiers(for: ad)
         nimbusAdView.start()
     }
     
     func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {
-        if event == .loaded {
-            nimbusAdView.setUiTestIdentifiers(for: ad)
-        }
         delegate?.didReceiveNimbusEvent(controller: controller, event: event)
     }
     
