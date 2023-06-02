@@ -18,9 +18,7 @@ final class AdManagerViewController: SampleAdViewController {
     private let adType: AdManagerAdType
     private var customAdContainerView: CustomAdContainerView?
     private var adController: AdController?
-    private var manualRequest: NimbusRequest?
-    private var requestManager: NimbusRequestManager?
-
+    private lazy var requestManager = NimbusRequestManager()
     
     init(adType: AdManagerAdType, headerSubTitle: String) {
         self.adType = adType
@@ -66,14 +64,8 @@ final class AdManagerViewController: SampleAdViewController {
         switch adType {
                      
         case .manuallyRenderedAd:
-            // Manual Request Ad
-            manualRequest = NimbusRequest.forBannerAd(position: adType.description)
-            
-            // Manual Render Ad
-            requestManager = NimbusRequestManager()
-            requestManager?.delegate = self
-            requestManager?.performRequest(request: manualRequest!)
-            
+            requestManager.delegate = self
+            requestManager.performRequest(request: NimbusRequest.forBannerAd(position: adType.description))
         case .banner:
             adManager.showAd(
                 request: NimbusRequest.forBannerAd(position: adType.description),
@@ -171,21 +163,10 @@ final class AdManagerViewController: SampleAdViewController {
 // MARK: NimbusAdManagerDelegate
 
 extension AdManagerViewController: NimbusAdManagerDelegate {
-    func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
-        print("didRenderAd")
-        controller.delegate = self
-        adController = controller
-    }
-}
-
-// MARK: NimbusRequestManagerDelegate
-
-extension AdManagerViewController: NimbusRequestManagerDelegate {
-    
     func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
         print("didCompleteNimbusRequest")
         nimbusAd = ad
-        if manualRequest == request {
+        if ad.position == AdManagerAdType.manuallyRenderedAd.rawValue {
             customAdContainerView = CustomAdContainerView(ad: ad, viewController: self, delegate: self)
             setupAdView(adView: customAdContainerView)
         }
@@ -193,6 +174,12 @@ extension AdManagerViewController: NimbusRequestManagerDelegate {
 
     func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
         print("didFailNimbusRequest: \(error.localizedDescription)")
+    }
+    
+    func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
+        print("didRenderAd")
+        controller.delegate = self
+        adController = controller
     }
 }
 
