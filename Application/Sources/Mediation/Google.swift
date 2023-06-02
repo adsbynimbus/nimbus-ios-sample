@@ -87,7 +87,6 @@ final class GAMViewController: DemoViewController {
 
 extension GAMViewController: GADBannerViewDelegate {
     
-    
     func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
         print("bannerViewDidReceiveAd")
         
