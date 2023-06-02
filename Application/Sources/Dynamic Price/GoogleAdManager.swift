@@ -1,5 +1,5 @@
 //
-//  Google.swift
+//  GoogleAdManager.swift
 //  nimbus-ios-sample
 //
 //  Created by Jason Sznol on 5/27/23.

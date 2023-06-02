@@ -1,5 +1,5 @@
 //
-//  GAMViewController.swift
+//  Google.swift
 //  nimbus-ios-sample
 //
 //  Created by Victor Takai on 16/11/21.
