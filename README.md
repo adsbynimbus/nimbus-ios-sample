@@ -25,18 +25,18 @@ Welcome to Nimbus Sample App - ads by publishers, for publishers.
 
 #####  If you run into `ambiguous for type lookup` errors, remove all package dependencies from `nimbus-ios-sample` project.
 
-## Build Configuration: [Config/secrets.json](nimbus-ios-sample/Config/secrets.json)
+## Build Configuration: [Keys.xcconfig](Keys.xcconfig)
 
-The Nimbus Sample App uses the [secrets.json](nimbus-ios-sample/Config/secrets.json) file to configure the keys and ids 
-necessary to initialize the different components of the Nimbus SDK.
+The Nimbus Sample App uses the [Keys.xcconfig](Keys.xcconfig) file to inject the keys and ids 
+necessary to initialize the different components of the Nimbus SDK into the application's Info.plist file.
 
 ### Required Keys 
 - Nimbus Sample App has already configured a publisher and API keys for testing purposes. 
 - Get your `Publisher Key` and Nimbus SDK `API Key` by contacting Nimbus Support
 
 ### Optional IDs
-In order to see APS/FAN/GAM/Unity examples you must also supply it's IDs
-- Locate `secrets.json` file at `Config` folder
+In order to see APS/Meta/GAM/Unity examples you must also supply it's IDs
+- Locate `Keys.xcconfig` file in the root project directory
 - Replace the empty fields with the IDs you have
 
 #### GAM Extra Configs
