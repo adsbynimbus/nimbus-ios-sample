@@ -24,6 +24,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: nimbus-ios-sample
+          path: nimbus-ios-sample.app
 
       - name: Checkout Nimbus Mobile QA
         uses: actions/checkout@v3
@@ -37,6 +38,6 @@ jobs:
         uses: mobile-dev-inc/action-maestro-cloud@v1
         with:
           api-key: ${{ secrets.MAESTRO_CLOUD }}
-          app-file: nimbus-ios-sample
+          app-file: nimbus-ios-sample.app
           env: |
             APP_ID=com.adsbynimbus.ios.NimbusDemo
