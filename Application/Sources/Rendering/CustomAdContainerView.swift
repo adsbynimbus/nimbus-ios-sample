@@ -36,8 +36,8 @@ final class CustomAdContainerView: UIView, AdControllerDelegate {
         self.creativeScalingEnabledForStaticAds = creativeScalingEnabledForStaticAds
         self.delegate = delegate
         
-        super.init(frame: CGRect.zero)
-        
+        super.init(frame: .zero)
+
         staticAdRenderer?.creativeScalingEnabled = creativeScalingEnabledForStaticAds
         setupAdView()
     }
@@ -65,7 +65,6 @@ final class CustomAdContainerView: UIView, AdControllerDelegate {
         nimbusAdView.delegate = self
         
         nimbusAdView.render(ad: ad, companionAd: companionAd)
-        nimbusAdView.setUiTestIdentifiers(for: ad)
         nimbusAdView.start()
     }
     
