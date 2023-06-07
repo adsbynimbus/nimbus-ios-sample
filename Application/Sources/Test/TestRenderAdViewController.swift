@@ -8,19 +8,16 @@
 import UIKit
 import NimbusKit
 
-final class TestRenderAdViewController: UIViewController {
-    private let adMarkup: String
+final class TestRenderAdViewController: UIViewController, AdControllerDelegate {
     
+    private let nimbusAd: NimbusAd?
     private lazy var adContainerView: CustomAdContainerView? = {
-        guard let ad = getAdFromMarkup(adMarkup: adMarkup) else {
-            return nil
-        }
-        return CustomAdContainerView(ad: ad, viewController: self)
+        guard let ad = nimbusAd else { return nil }
+        return CustomAdContainerView(ad: ad, viewController: self, delegate: self)
     }()
     
     init(adMarkup: String) {
-        self.adMarkup = adMarkup
-        
+        self.nimbusAd = TestRenderAdViewController.getAdFromMarkup(adMarkup: adMarkup)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -50,7 +47,7 @@ final class TestRenderAdViewController: UIViewController {
         }
     }
     
-    private func getAdFromMarkup(adMarkup: String) -> NimbusAd? {
+    private static func getAdFromMarkup(adMarkup: String) -> NimbusAd? {
         let isVideo = adMarkup.components(separatedBy: " ").first?.contains("xml") == true ||
             adMarkup.components(separatedBy: " ").first?.lowercased().contains("vast") == true
         if isVideo {
@@ -61,7 +58,7 @@ final class TestRenderAdViewController: UIViewController {
         return nil
     }
     
-    private func createNimbusAd(
+    private static func createNimbusAd(
         placementId: String? = nil,
         auctionType: NimbusAuctionType,
         markup: String,
@@ -89,4 +86,12 @@ final class TestRenderAdViewController: UIViewController {
             extensions: nil
         )
     }
+    
+    func didReceiveNimbusEvent(controller: NimbusCoreKit.AdController, event: NimbusCoreKit.NimbusEvent) {
+        if let ad = nimbusAd, event == .loaded {
+            controller.adView?.setUiTestIdentifiers(for: ad)
+        }
+    }
+    
+    func didReceiveNimbusError(controller: NimbusCoreKit.AdController, error: NimbusCoreKit.NimbusError) {}
 }
