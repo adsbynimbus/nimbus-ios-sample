@@ -37,9 +37,10 @@ final class CustomAdContainerView: UIView, AdControllerDelegate {
         self.delegate = delegate
         
         super.init(frame: .zero)
-
         staticAdRenderer?.creativeScalingEnabled = creativeScalingEnabledForStaticAds
         setupAdView()
+        accessibilityContainerType = .semanticGroup
+        accessibilityElements = [nimbusAdView]
     }
     
     required init?(coder: NSCoder) {
