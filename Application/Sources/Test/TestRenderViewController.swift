@@ -9,7 +9,7 @@ import UIKit
 
 class TestRenderViewController: DemoViewController {
     
-    private lazy var markupTexField: UITextField = {
+    private lazy var markupTextField: UITextField = {
         let textField = UITextField()
         textField.textColor = .turquoise
         textField.tintColor = .turquoise
@@ -19,6 +19,7 @@ class TestRenderViewController: DemoViewController {
         textField.clearButtonMode = .always
         textField.layer.borderWidth = 0.5
         textField.layer.borderColor = UIColor.lightGray.cgColor
+        textField.accessibilityIdentifier = "markup_text"
         
         textField.delegate = self
         textField.returnKeyType = .done
@@ -44,13 +45,13 @@ class TestRenderViewController: DemoViewController {
     }
     
     private func setupTextField() {
-        view.addSubview(markupTexField)
+        view.addSubview(markupTextField)
         
-        markupTexField.translatesAutoresizingMaskIntoConstraints = false
+        markupTextField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            markupTexField.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 16),
-            markupTexField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            markupTexField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+            markupTextField.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 16),
+            markupTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            markupTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
         ])
     }
     
@@ -60,7 +61,7 @@ class TestRenderViewController: DemoViewController {
         testButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             testButton.heightAnchor.constraint(equalToConstant: 50),
-            testButton.topAnchor.constraint(equalTo: markupTexField.bottomAnchor, constant: 30),
+            testButton.topAnchor.constraint(equalTo: markupTextField.bottomAnchor, constant: 30),
             testButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -45),
             testButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 40),
             testButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -40)
@@ -68,7 +69,7 @@ class TestRenderViewController: DemoViewController {
     }
     
     @objc private func testButtonTapped() {
-        guard let adMarkup = markupTexField.text, !adMarkup.isEmpty else { return }
+        guard let adMarkup = markupTextField.text, !adMarkup.isEmpty else { return }
         
         navigationController?.pushViewController(
             TestRenderAdViewController(adMarkup: adMarkup),
