@@ -118,7 +118,24 @@ final class AdManagerViewController: SampleAdViewController {
                 request: NimbusRequest.forRewardedVideo(position: adType.description),
                 adPresentingViewController: self
             )
+        case .interstitialStaticWithSKOverlay:
+            let request = NimbusRequest.forInterstitialAd(position: adType.description)
+            if NimbusAdManager.additionalRequestHeaders == nil {
+                NimbusAdManager.additionalRequestHeaders = [:]
+            }
+            NimbusAdManager.additionalRequestHeaders?["Nimbus-Test-SKOverlay"] = "1"
+            request.impressions[0].video = nil
+            adManager.showBlockingAd(
+                request: request,
+                closeButtonDelay: 0,
+                adPresentingViewController: self
+            )
         }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NimbusAdManager.additionalRequestHeaders?.removeValue(forKey: "Nimbus-Test-SKOverlay")
     }
     
     override func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {

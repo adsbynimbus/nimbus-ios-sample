@@ -77,15 +77,16 @@ enum MainItem: String, NavigationItem {
 }
 
 enum AdManagerAdType: String, NavigationItem {
-    case manuallyRenderedAd         = "Manually Rendered Ad"
-    case banner                     = "Banner"
-    case bannerWithRefresh          = "Banner With Refresh"
-    case inlineVideo                = "Inline Video"
-    case interstitialHybrid         = "Interstitial Hybrid"
-    case interstitialStatic         = "Interstitial Static"
-    case interstitialVideo          = "Interstitial Video"
-    case interstitialVideoWithoutUI = "Interstitial Video Without UI"
-    case rewardedVideo              = "Rewarded Video"
+    case manuallyRenderedAd                 = "Manually Rendered Ad"
+    case banner                             = "Banner"
+    case bannerWithRefresh                  = "Banner With Refresh"
+    case inlineVideo                        = "Inline Video"
+    case interstitialHybrid                 = "Interstitial Hybrid"
+    case interstitialStatic                 = "Interstitial Static"
+    case interstitialVideo                  = "Interstitial Video"
+    case interstitialVideoWithoutUI         = "Interstitial Video Without UI"
+    case rewardedVideo                      = "Rewarded Video"
+    case interstitialStaticWithSKOverlay    = "Interstitial Static - SKOverlay"
     
     func destinationController(parent: String) -> UIViewController {
         AdManagerViewController(adType: self, headerSubTitle: parent)
