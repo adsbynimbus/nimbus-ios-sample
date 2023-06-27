@@ -2,6 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AdMob Rewarded Interstitial ID</key>
+	<string>$(ADMOB_REWARDED_INTERSTITIAL_ID)</string>
+	<key>AdMob Rewarded ID</key>
+	<string>$(ADMOB_REWARDED_ID)</string>
+	<key>AdMob Interstitial ID</key>
+	<string>$(ADMOB_INTERSTITIAL_ID)</string>
+	<key>AdMob Banner ID</key>
+	<string>$(ADMOB_BANNER_ID)</string>
 	<key>API Key</key>
 	<string>d352cac1-cae2-4774-97ba-4e15c6276be0</string>
 	<key>APS App ID</key>
