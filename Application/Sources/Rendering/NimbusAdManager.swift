@@ -203,7 +203,7 @@ final class CustomVideoAdSettingsProvider: NimbusVideoSettingsProvider {
     public var disableUi = false
     
     override func adsRenderingSettings() -> IMAAdsRenderingSettings {
-        let settings = IMAAdsRenderingSettings()
+        let settings = super.adsRenderingSettings()
         settings.disableUi = disableUi
         if disableUi {
             settings.uiElements = []
