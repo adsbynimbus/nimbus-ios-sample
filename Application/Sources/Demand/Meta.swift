@@ -18,6 +18,7 @@ import UIKit
 let metaBannerId = Bundle.main.infoDictionary?["Meta Banner Placement ID"] as? String ?? ""
 let metaInterstitialId = Bundle.main.infoDictionary?["Meta Interstitial Placement ID"] as? String ?? ""
 let metaNativeId = Bundle.main.infoDictionary?["Meta Native Placement ID"] as? String ?? ""
+let metaRewardedVideoId = Bundle.main.infoDictionary?["Meta Rewarded Video Placement ID"] as? String ?? ""
 let metaAppId = metaNativeId.components(separatedBy: "_").first
 
 extension UIApplicationDelegate {
@@ -58,11 +59,13 @@ final class FANViewController: SampleAdViewController {
         view.backgroundColor = .black
         
         if adType == .metaBanner && metaBannerId.isEmpty {
-            showCustomAlert("facebook_banner_placement_id")
+            showCustomAlert("META_BANNER_PLACEMENT_ID")
         } else if adType == .metaInterstitial && metaInterstitialId.isEmpty {
-            showCustomAlert("facebook_interstitial_placement_id")
+            showCustomAlert("META_INTERSTITIAL_PLACEMENT_ID")
         } else if adType == .metaNative && metaNativeId.isEmpty {
-            showCustomAlert("facebook_native_placement_id")
+            showCustomAlert("META_NATIVE_PLACEMENT_ID")
+        } else if adType == .metaRewardedVideo && metaRewardedVideoId.isEmpty {
+            showCustomAlert("META_REWARDED_VIDEO_PLACEMENT_ID")
         } else {
             setupAdView()
         }
@@ -130,6 +133,13 @@ final class FANViewController: SampleAdViewController {
                 placementId: "IMG_16_9_LINK#\(metaNativeId)",
                 auctionType: .native,
                 isInterstitial: false,
+                adDimensions: NimbusAdDimensions(width: 320, height: 480)
+            )
+        case .metaRewardedVideo:
+            return createNimbusAd(
+                placementId: "VID_HD_16_9_15S_LINK#\(metaRewardedVideoId)",
+                auctionType: .video,
+                isInterstitial: true,
                 adDimensions: NimbusAdDimensions(width: 320, height: 480)
             )
         }
