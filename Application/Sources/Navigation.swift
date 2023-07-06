@@ -135,6 +135,7 @@ enum MetaSample: String, NavigationItem {
     case metaBanner             = "Meta Banner"
     case metaInterstitial       = "Meta Interstitial"
     case metaNative             = "Meta Native"
+    case metaRewardedVideo      = "Meta Rewarded Video"
     func destinationController(parent: String) -> UIViewController {
         FANViewController(adType: self, headerSubTitle: parent)
     }
