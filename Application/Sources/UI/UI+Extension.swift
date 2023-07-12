@@ -7,6 +7,12 @@
 
 import SwiftUI
 import UIKit
+import NimbusCoreKit
+
+extension NimbusAdDimensions {
+    static let portraitInlineAd = NimbusAdDimensions(width: 320, height: 480)
+    static let landscapeInlineAd = NimbusAdDimensions(width: 220, height: 180)
+}
 
 extension NSObject {
     class var nameOfClass: String {

@@ -42,9 +42,9 @@ class SampleAdViewController : DemoViewController, AdControllerDelegate {
     
         NSLayoutConstraint.activate([
             childView.view.topAnchor.constraint(equalTo: headerView.bottomAnchor),
-            childView.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            childView.view.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            childView.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            childView.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            childView.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            childView.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
         childView.didMove(toParent: self)
         loggerView = childView.view

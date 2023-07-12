@@ -80,10 +80,18 @@ final class AdManagerViewController: SampleAdViewController {
                 adPresentingViewController: self
             )
         case .inlineVideo:
-            NSLayoutConstraint.activate([
-                contentView.heightAnchor.constraint(equalToConstant: 480),
-                contentView.widthAnchor.constraint(equalToConstant: 320),
-            ])
+            if UIDevice.isLandscape {
+                NSLayoutConstraint.activate([
+                    contentView.widthAnchor.constraint(equalToConstant: CGFloat(NimbusAdDimensions.landscapeInlineAd.width)),
+                    contentView.heightAnchor.constraint(equalToConstant: CGFloat(NimbusAdDimensions.landscapeInlineAd.height)),
+                ])
+            } else {
+                NSLayoutConstraint.activate([
+                    contentView.widthAnchor.constraint(equalToConstant: CGFloat(NimbusAdDimensions.portraitInlineAd.width)),
+                    contentView.heightAnchor.constraint(equalToConstant: CGFloat(NimbusAdDimensions.portraitInlineAd.height)),
+                ])
+            }
+
             adManager.showAd(
                 request: NimbusRequest.forVideoAd(position: adType.description),
                 container: contentView,

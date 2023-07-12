@@ -80,7 +80,7 @@ class DemoViewController: UIViewController {
         
         view.layout(headerView) { child in
             child.alignTop()
-            child.fill(.width)
+            child.fill(.width, safeLayoutGuide: false)
             child.height(80)
         }
         setupLogo()
@@ -94,6 +94,15 @@ class DemoViewController: UIViewController {
     }
 }
 
+protocol HasAnchors {
+    var leadingAnchor: NSLayoutXAxisAnchor { get }
+    var trailingAnchor: NSLayoutXAxisAnchor { get }
+    var topAnchor: NSLayoutYAxisAnchor { get }
+    var bottomAnchor: NSLayoutYAxisAnchor { get }
+}
+
+extension UIView: HasAnchors {}
+extension UILayoutGuide: HasAnchors {}
 
 extension UIView {
     @resultBuilder
@@ -119,18 +128,20 @@ extension UIView {
             [child.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)]
         }
         
-        func fill(_ fill: Fill = .both) -> [NSLayoutConstraint] {
+        func fill(_ fill: Fill = .both, safeLayoutGuide: Bool = true) -> [NSLayoutConstraint] {
+            let attached: HasAnchors = safeLayoutGuide ? self.parent.safeAreaLayoutGuide : self.parent
+            
             switch(fill) {
             case .width:
-                return [child.leadingAnchor.constraint(equalTo: parent.safeAreaLayoutGuide.leadingAnchor),
-                 child.trailingAnchor.constraint(equalTo: parent.safeAreaLayoutGuide.trailingAnchor)]
+                return [child.leadingAnchor.constraint(equalTo: attached.leadingAnchor),
+                 child.trailingAnchor.constraint(equalTo: attached.trailingAnchor)]
             case .height:
-                return [child.bottomAnchor.constraint(equalTo: parent.safeAreaLayoutGuide.bottomAnchor)]
+                return [child.bottomAnchor.constraint(equalTo: attached.bottomAnchor)]
             case .both:
                 return [
-                    child.leadingAnchor.constraint(equalTo: parent.safeAreaLayoutGuide.leadingAnchor),
-                    child.trailingAnchor.constraint(equalTo: parent.safeAreaLayoutGuide.trailingAnchor),
-                    child.bottomAnchor.constraint(equalTo: parent.safeAreaLayoutGuide.bottomAnchor)
+                    child.leadingAnchor.constraint(equalTo: attached.leadingAnchor),
+                    child.trailingAnchor.constraint(equalTo: attached.trailingAnchor),
+                    child.bottomAnchor.constraint(equalTo: attached.bottomAnchor)
                 ]
             }
         }
