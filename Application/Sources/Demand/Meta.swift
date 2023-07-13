@@ -130,7 +130,7 @@ final class FANViewController: SampleAdViewController {
                 placementId: "IMG_16_9_LINK#\(metaNativeId)",
                 auctionType: .native,
                 isInterstitial: false,
-                adDimensions: UIDevice.isLandscape ? NimbusAdDimensions.landscapeInlineAd : NimbusAdDimensions.portraitInlineAd
+                adDimensions: UIDevice.nimbusIsLandscape ? NimbusAdDimensions.landscapeInlineAd : NimbusAdDimensions.portraitInlineAd
             )
         }
     }
