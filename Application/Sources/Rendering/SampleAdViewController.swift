@@ -70,8 +70,6 @@ class SampleAdViewController : DemoViewController, AdControllerDelegate {
     }
     
     @objc private func didTapOnLogger() {
-        if let loggerView {
-            loggerView.isHidden = !loggerView.isHidden
-        }
+        loggerView?.isHidden.toggle()
     }
 }
