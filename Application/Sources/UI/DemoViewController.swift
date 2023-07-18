@@ -9,6 +9,8 @@ import NimbusKit
 import UIKit
 
 class DemoViewController: UIViewController {
+    static let headerOffset: CGFloat = 16
+    
     private(set) var headerTitle: String = ""
     private(set) var headerSubTitle: String = ""
     
@@ -18,7 +20,6 @@ class DemoViewController: UIViewController {
         label.text = headerTitle
         label.textAlignment = .left
         label.textColor = .white
-        label.backgroundColor = .raisingBlack
         
         return label
     }()
@@ -29,34 +30,34 @@ class DemoViewController: UIViewController {
         label.text = headerSubTitle
         label.textAlignment = .left
         label.textColor = .white
-        label.backgroundColor = .raisingBlack
         
         return label
     }()
     
     lazy var headerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .raisingBlack
-        view.addSubview(titleLabel)
-        view.addSubview(subTitleLabel)
+        let header = UIView()
+        header.translatesAutoresizingMaskIntoConstraints = false
+        header.backgroundColor = .raisingBlack
         
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        let contentView = UIStackView()
+        contentView.axis = .vertical
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        header.addSubview(contentView)
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
+            contentView.topAnchor.constraint(equalTo: header.topAnchor, constant: 20),
+            contentView.leadingAnchor.constraint(equalTo: header.leadingAnchor, constant: 15),
+            contentView.trailingAnchor.constraint(equalTo: header.trailingAnchor, constant: -15),
+            contentView.bottomAnchor.constraint(equalTo: header.bottomAnchor, constant: -20),
         ])
         
-        subTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
-            subTitleLabel.bottomAnchor.constraint(greaterThanOrEqualTo: view.bottomAnchor, constant: -20),
-            subTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-            subTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15)
-        ])
+        contentView.addArrangedSubview(titleLabel)
+        contentView.addArrangedSubview(subTitleLabel)
         
-        return view
+        return header
     }()
+    
+    private var headerHeightConstraint: NSLayoutConstraint!
         
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -76,13 +77,18 @@ class DemoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage(systemName: "info.circle"), style: .plain, target: self, action: #selector(didTapOnInfo))]
+        
         view.backgroundColor = .systemBackground
         
         view.layout(headerView) { child in
             child.alignTop()
             child.fill(.width, safeLayoutGuide: false)
-            child.height(80)
         }
+        
+        headerHeightConstraint = NSLayoutConstraint(item: headerView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 0)
+        view.addConstraint(headerHeightConstraint)
+        
         setupLogo()
     }
     
@@ -90,6 +96,13 @@ class DemoViewController: UIViewController {
         view.layout(tableView) { child in
             child.below(headerView)
             child.fill()
+        }
+    }
+    
+    @objc private func didTapOnInfo() {
+        UIView.animate(withDuration: 0.2) {
+            self.headerHeightConstraint.constant = self.headerHeightConstraint.constant == 0 ? 80 : 0
+            self.view.layoutIfNeeded()
         }
     }
 }
