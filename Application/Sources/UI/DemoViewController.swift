@@ -9,7 +9,7 @@ import NimbusKit
 import UIKit
 
 class DemoViewController: UIViewController {
-    static let headerOffset: CGFloat = 16
+    private static let headerHeight: CGFloat = 80
     
     private(set) var headerTitle: String = ""
     private(set) var headerSubTitle: String = ""
@@ -57,7 +57,7 @@ class DemoViewController: UIViewController {
         return header
     }()
     
-    private var headerHeightConstraint: NSLayoutConstraint!
+    private var headerTopConstraint: NSLayoutConstraint!
         
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -82,14 +82,24 @@ class DemoViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
         view.layout(headerView) { child in
-            child.alignTop()
             child.fill(.width, safeLayoutGuide: false)
+            child.height(Self.headerHeight)
         }
         
-        headerHeightConstraint = NSLayoutConstraint(item: headerView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 0)
-        view.addConstraint(headerHeightConstraint)
+        headerTopConstraint = headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: UIDevice.nimbusIsLandscape ? -Self.headerHeight : 0)
+        view.addConstraint(headerTopConstraint)
         
         setupLogo()
+    }
+    
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
+        
+        // Hide header view only when rotating to a vertical compact size class.
+        // Leave it as is otherwise as the user can toggle it.
+        if newCollection.verticalSizeClass == .compact {
+            headerTopConstraint.constant = -Self.headerHeight
+        }
     }
     
     func setupScrollView(_ tableView: UIScrollView) {
@@ -100,8 +110,8 @@ class DemoViewController: UIViewController {
     }
     
     @objc private func didTapOnInfo() {
-        UIView.animate(withDuration: 0.2) {
-            self.headerHeightConstraint.constant = self.headerHeightConstraint.constant == 0 ? 80 : 0
+        UIView.animate(withDuration: 0.3) {
+            self.headerTopConstraint.constant = self.headerTopConstraint.constant == 0 ? -Self.headerHeight : 0
             self.view.layoutIfNeeded()
         }
     }

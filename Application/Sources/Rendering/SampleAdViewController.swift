@@ -35,6 +35,8 @@ class SampleAdViewController : DemoViewController, AdControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .white
+        
         let childView = UIHostingController(rootView: ScreenLogger().environmentObject(screenLogger))
         childView.view.translatesAutoresizingMaskIntoConstraints = false
         addChild(childView)

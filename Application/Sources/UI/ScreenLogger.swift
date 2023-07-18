@@ -66,7 +66,7 @@ struct ScreenLogger: View {
             }.onChange(of: logger.pending) { array in
                 logs = logger.pending
             }.frame(maxWidth: .infinity, alignment: .bottomLeading)
-        }.frame(maxWidth: .infinity, maxHeight: .infinity,  alignment: .bottomLeading)
+        }.padding(8).frame(maxWidth: .infinity, maxHeight: .infinity,  alignment: .bottomLeading)
     }
 }
 
