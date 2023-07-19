@@ -33,4 +33,4 @@ jobs:
           ${{ runner.os }}-spm-
 
     - name: Build Sample App
-      run: set -o pipefail && xcodebuild -scheme "nimbus-ios-sample" -configuration "Debug" -sdk "iphonesimulator16.4" -derivedDataPath .build/DerivedData | xcbeautify
+      run: set -o pipefail && xcodebuild -scheme "nimbus-ios-sample" -configuration "Debug" -sdk "iphonesimulator15.2" -derivedDataPath .build/DerivedData | xcbeautify
