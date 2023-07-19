@@ -11,7 +11,7 @@ struct Log: Identifiable, Equatable {
 }
 
 
-class Logger: ObservableObject {
+class NimbusSampleAppLogger: ObservableObject {
     @Published var pending: [Log] = []
     
     convenience init(_ preview: [Log]) {
@@ -49,7 +49,7 @@ class Logger: ObservableObject {
 struct ScreenLogger: View {
     @Environment(\.colorScheme) var colorScheme
     
-    @EnvironmentObject var logger: Logger
+    @EnvironmentObject var logger: NimbusSampleAppLogger
     @State private var logs: [Log] = []
     
     var body: some View {
@@ -71,7 +71,7 @@ struct ScreenLogger: View {
 }
 
 struct ScreenLogger_Previews: PreviewProvider {
-    static let previewLogger = Logger([Log("Hello"), Log("Goodbye")])
+    static let previewLogger = NimbusSampleAppLogger([Log("Hello"), Log("Goodbye")])
     static var previews: some View {
         ScreenLogger().environmentObject(previewLogger)
     }

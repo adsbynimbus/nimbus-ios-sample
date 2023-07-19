@@ -6,6 +6,7 @@
 //
 
 import AppTrackingTransparency
+import GoogleMobileAds
 import NimbusKit
 import NimbusRenderStaticKit
 import NimbusRenderVideoKit
@@ -21,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         setupNimbusSDK()
         setupAmazonDemand()
+        setupGoogleSDK()
         setupUnityDemand()
         setupVungleDemand()
         
@@ -66,6 +68,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // User
         NimbusAdManager.user = NimbusUser(age: 20, gender: .male)
+    }
+    
+    private func setupGoogleSDK() {
+        GADMobileAds.sharedInstance().start()
     }
     
     private func startTrackingATT() {
