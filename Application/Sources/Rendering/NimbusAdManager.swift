@@ -55,7 +55,9 @@ final class AdManagerViewController: SampleAdViewController {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: Constants.headerOffset),
-            contentView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
+            contentView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            contentView.widthAnchor.constraint(greaterThanOrEqualToConstant: 320),
+            contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 50),
         ])
     }
     
