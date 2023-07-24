@@ -54,7 +54,7 @@ final class AdManagerViewController: SampleAdViewController {
         view.addSubview(contentView)
         contentView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            contentView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
+            contentView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: Constants.headerOffset),
             contentView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             contentView.widthAnchor.constraint(greaterThanOrEqualToConstant: 320),
             contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 50),
@@ -82,10 +82,18 @@ final class AdManagerViewController: SampleAdViewController {
                 adPresentingViewController: self
             )
         case .inlineVideo:
-            NSLayoutConstraint.activate([
-                contentView.heightAnchor.constraint(equalToConstant: 480),
-                contentView.widthAnchor.constraint(equalToConstant: 320),
-            ])
+            if UIDevice.nimbusIsLandscape {
+                NSLayoutConstraint.activate([
+                    contentView.widthAnchor.constraint(equalToConstant: CGFloat(NimbusAdDimensions.landscapeInlineAd.width)),
+                    contentView.heightAnchor.constraint(equalToConstant: CGFloat(NimbusAdDimensions.landscapeInlineAd.height)),
+                ])
+            } else {
+                NSLayoutConstraint.activate([
+                    contentView.widthAnchor.constraint(equalToConstant: CGFloat(NimbusAdDimensions.portraitInlineAd.width)),
+                    contentView.heightAnchor.constraint(equalToConstant: CGFloat(NimbusAdDimensions.portraitInlineAd.height)),
+                ])
+            }
+
             adManager.showAd(
                 request: NimbusRequest.forVideoAd(position: adType.description),
                 container: contentView,

@@ -22,6 +22,8 @@ final class SettingsViewController: DemoViewController {
         return tableView
     }()
     
+    private let sections: [SettingsEnum.Type] = [GeneralSettings.self, UserDetailsSettings.self]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,12 +37,13 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        section > 0 ? 3 : 5
+        sections[section].allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: SettingsCell = tableView.dequeueReusableCell(for: indexPath)
-        let setting = Setting.allCases[indexPath.row + (indexPath.section * 5)]
+        
+        let setting = sections[indexPath.section].allCases[indexPath.row]
         cell.label.text = setting.rawValue
         cell.switchButton.setOn(setting.isEnabled, animated: false)
         cell.switchAction = { isOn in setting.update(isEnabled: isOn) }
@@ -49,7 +52,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section > 0 {
+        if section == 1 {
             let header: DemoHeader = tableView.dequeueReusableHeaderFooterView()
             header.label.text = "User Details"
             return header
@@ -57,8 +60,8 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             return nil
         }
     }
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        section > 0 ? DemoHeader.height : 0
+        section == 1 ? DemoHeader.height : 0
     }
 }

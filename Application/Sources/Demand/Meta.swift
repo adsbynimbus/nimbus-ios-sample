@@ -56,8 +56,6 @@ final class FANViewController: SampleAdViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .black
-        
         if adType == .metaBanner && metaBannerId.isEmpty {
             showCustomAlert("META_BANNER_PLACEMENT_ID")
         } else if adType == .metaInterstitial && metaInterstitialId.isEmpty {
@@ -133,7 +131,7 @@ final class FANViewController: SampleAdViewController {
                 placementId: "IMG_16_9_LINK#\(metaNativeId)",
                 auctionType: .native,
                 isInterstitial: false,
-                adDimensions: NimbusAdDimensions(width: 320, height: 480)
+                adDimensions: UIDevice.nimbusIsLandscape ? NimbusAdDimensions.landscapeInlineAd : NimbusAdDimensions.portraitInlineAd
             )
         case .metaRewardedVideo:
             return createNimbusAd(
