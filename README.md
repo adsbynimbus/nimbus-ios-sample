@@ -4,6 +4,21 @@
 
 Welcome to Nimbus Sample App - ads by publishers, for publishers.
 
+## How to clone the repository
+
+### Install Git LFS (Large File Storage)
+
+This repository uses git LFS. Please follow the steps below to install it:
+
+- Open your terminal
+- Run: `brew install git-lfs`
+- Run: `git lfs install`
+
+### Clone the repository
+
+- Open your terminal
+- Run: `git clone https://github.com/timehop/nimbus-ios-sample`
+
 ## How to run
 
 - `Xcode` version must be at least 13 (min. macOS Big Sur 11.3)
