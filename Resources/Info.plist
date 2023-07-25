@@ -16,6 +16,8 @@
 	<string>$(GOOGLE_PLACEMENT_ID)</string>
 	<key>Google Nimbus Rendering Placement ID</key>
 	<string>$(GOOGLE_NIMBUS_RENDERING_PLACEMENT_ID)</string>
+	<key>Google Nimbus Rendering Rewarded Placement ID</key>
+	<string>$(GOOGLE_NIMBUS_RENDERING_REWARDED_PLACEMENT_ID)</string>
 	<key>LiveRamp Config ID</key>
 	<string>$(LIVERAMP_CONFIG_ID)</string>
 	<key>Meta Banner Placement ID</key>
