@@ -35,6 +35,8 @@ class SampleAdViewController : DemoViewController, AdControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .white
+        
         let childView = UIHostingController(rootView: ScreenLogger().environmentObject(screenLogger))
         childView.view.translatesAutoresizingMaskIntoConstraints = false
         addChild(childView)
@@ -48,6 +50,12 @@ class SampleAdViewController : DemoViewController, AdControllerDelegate {
         ])
         childView.didMove(toParent: self)
         loggerView = childView.view
+        loggerView?.isHidden = UserDefaults.standard.eventLogHiddenByDefault
+        
+        var rightItems = navigationItem.rightBarButtonItems ?? []
+        rightItems.append(UIBarButtonItem(image: UIImage(systemName: "t.bubble"), style: .plain, target: self, action: #selector(didTapOnLogger)))
+        
+        navigationItem.rightBarButtonItems = rightItems
     }
     
     func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {
@@ -59,5 +67,9 @@ class SampleAdViewController : DemoViewController, AdControllerDelegate {
     
     func didReceiveNimbusError(controller: AdController, error: NimbusError) {
         screenLogger.logError(error)
+    }
+    
+    @objc private func didTapOnLogger() {
+        loggerView?.isHidden.toggle()
     }
 }

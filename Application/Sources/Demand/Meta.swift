@@ -56,8 +56,6 @@ final class FANViewController: SampleAdViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .black
-        
         if adType == .metaBanner && metaBannerId.isEmpty {
             showCustomAlert("META_BANNER_PLACEMENT_ID")
         } else if adType == .metaInterstitial && metaInterstitialId.isEmpty {

@@ -59,7 +59,7 @@ final class GAMViewController: DemoViewController {
             view.addSubview(bannerView)
             
             NSLayoutConstraint.activate([
-                bannerView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
+                bannerView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: Constants.headerOffset),
                 bannerView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor),
                 bannerView.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor),
                 bannerView.trailingAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor),
