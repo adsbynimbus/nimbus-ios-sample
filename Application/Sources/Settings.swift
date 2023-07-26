@@ -1,5 +1,5 @@
 //
-//  Setting.swift
+//  Settings.swift
 //  nimbus-ios-sample
 //
 //  Created by Victor Takai on 10/11/21.
@@ -8,15 +8,50 @@
 import DTBiOSSDK
 import NimbusKit
 
-enum Setting: String, CaseIterable {
+protocol SettingsEnum {
+    static var allCases: [Self] { get }
+    
+    var rawValue: String { get }
+    var isEnabled: Bool { get }
+    
+    func update(isEnabled: Bool)
+}
+
+enum UserDetailsSettings: String, SettingsEnum, CaseIterable {
+    case gdprConsent             = "GDPR Consent"
+    case ccpaConsent             = "CCPA Consent"
+    case gppConsent              = "GPP Consent"
+    
+    var isEnabled: Bool {
+        switch self {
+        case .gdprConsent:
+            return UserDefaults.standard.gdprConsent
+        case .ccpaConsent:
+            return UserDefaults.standard.ccpaConsent
+        case .gppConsent:
+            return UserDefaults.standard.gppConsent
+        }
+    }
+    
+    func update(isEnabled: Bool) {
+        switch self {
+        case .gdprConsent:
+            UserDefaults.standard.gdprConsent = isEnabled
+        case .ccpaConsent:
+            UserDefaults.standard.ccpaConsent = isEnabled
+        case .gppConsent:
+            UserDefaults.standard.gppConsent = isEnabled
+        }
+    }
+}
+
+enum GeneralSettings: String, SettingsEnum, CaseIterable {
     case nimbusTestMode          = "Nimbus Test Mode"
     case coppaOn                 = "Set COPPA On"
     case forceNoFill             = "Force No Fill"
     case omThirdPartyViewability = "Send OMID Viewability Flag"
     case tradeDesk               = "Send Trade Desk Identity"
-    case gdprConsent             = "GDPR Consent"
-    case ccpaConsent             = "CCPA Consent"
-    case gppConsent              = "GPP Consent"
+    case eventLogHidden          = "Hide Event Log By Default"
     
     var isEnabled: Bool {
         switch self {
@@ -30,12 +65,8 @@ enum Setting: String, CaseIterable {
             return UserDefaults.standard.omThirdPartyViewability
         case .tradeDesk:
             return UserDefaults.standard.tradeDesk
-        case .gdprConsent:
-            return UserDefaults.standard.gdprConsent
-        case .ccpaConsent:
-            return UserDefaults.standard.ccpaConsent
-        case .gppConsent:
-            return UserDefaults.standard.gppConsent
+        case .eventLogHidden:
+            return UserDefaults.standard.eventLogHiddenByDefault
         }
     }
     
@@ -52,12 +83,8 @@ enum Setting: String, CaseIterable {
             UserDefaults.standard.omThirdPartyViewability = isEnabled
         case .tradeDesk:
             UserDefaults.standard.tradeDesk = isEnabled
-        case .gdprConsent:
-            UserDefaults.standard.gdprConsent = isEnabled
-        case .ccpaConsent:
-            UserDefaults.standard.ccpaConsent = isEnabled
-        case .gppConsent:
-            UserDefaults.standard.gppConsent = isEnabled
+        case .eventLogHidden:
+            UserDefaults.standard.eventLogHiddenByDefault = isEnabled
         }
     }
 }
@@ -176,6 +203,16 @@ extension UserDefaults {
             var headers = NimbusAdManager.additionalRequestHeaders ?? [:]
             headers["Nimbus-Test-No-Fill"] = String(newValue)
             NimbusAdManager.additionalRequestHeaders = headers
+        }
+    }
+    
+    var eventLogHiddenByDefault: Bool {
+        get {
+            register(defaults: [#function: true])
+            return bool(forKey: #function)
+        }
+        set {
+            set(newValue, forKey: #function)
         }
     }
 }

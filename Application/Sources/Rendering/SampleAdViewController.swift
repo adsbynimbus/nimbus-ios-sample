@@ -35,6 +35,8 @@ class SampleAdViewController : DemoViewController, AdControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .white
+        
         let childView = UIHostingController(rootView: ScreenLogger().environmentObject(screenLogger))
         childView.view.translatesAutoresizingMaskIntoConstraints = false
         addChild(childView)
@@ -42,12 +44,18 @@ class SampleAdViewController : DemoViewController, AdControllerDelegate {
     
         NSLayoutConstraint.activate([
             childView.view.topAnchor.constraint(equalTo: headerView.bottomAnchor),
-            childView.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            childView.view.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            childView.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            childView.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            childView.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            childView.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
         childView.didMove(toParent: self)
         loggerView = childView.view
+        loggerView?.isHidden = UserDefaults.standard.eventLogHiddenByDefault
+        
+        var rightItems = navigationItem.rightBarButtonItems ?? []
+        rightItems.append(UIBarButtonItem(image: UIImage(systemName: "t.bubble"), style: .plain, target: self, action: #selector(didTapOnLogger)))
+        
+        navigationItem.rightBarButtonItems = rightItems
     }
     
     func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {
@@ -59,5 +67,9 @@ class SampleAdViewController : DemoViewController, AdControllerDelegate {
     
     func didReceiveNimbusError(controller: AdController, error: NimbusError) {
         screenLogger.logError(error)
+    }
+    
+    @objc private func didTapOnLogger() {
+        loggerView?.isHidden.toggle()
     }
 }
