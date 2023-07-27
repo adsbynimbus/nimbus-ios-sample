@@ -36,10 +36,11 @@ final class CustomAdContainerView: UIView, AdControllerDelegate {
         self.creativeScalingEnabledForStaticAds = creativeScalingEnabledForStaticAds
         self.delegate = delegate
         
-        super.init(frame: CGRect.zero)
-        
+        super.init(frame: .zero)
         staticAdRenderer?.creativeScalingEnabled = creativeScalingEnabledForStaticAds
         setupAdView()
+        accessibilityContainerType = .semanticGroup
+        accessibilityElements = [nimbusAdView]
     }
     
     required init?(coder: NSCoder) {
@@ -63,15 +64,12 @@ final class CustomAdContainerView: UIView, AdControllerDelegate {
 
         nimbusAdView.volume = volume
         nimbusAdView.delegate = self
-
+        
         nimbusAdView.render(ad: ad, companionAd: companionAd)
         nimbusAdView.start()
     }
     
     func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {
-        if event == .loaded {
-            nimbusAdView.setUiTestIdentifiers(for: ad)
-        }
         delegate?.didReceiveNimbusEvent(controller: controller, event: event)
     }
     

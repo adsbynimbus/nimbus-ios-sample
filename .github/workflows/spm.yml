@@ -3,8 +3,7 @@ name: Swift Package Manager
 on:
   push:
     branches: main
-  pull_request:
-    branches: main
+  workflow_call:
 
 jobs:
   build:
@@ -34,3 +33,10 @@ jobs:
 
     - name: Build Sample App
       run: set -o pipefail && xcodebuild -scheme "nimbus-ios-sample" -configuration "Debug" -sdk "iphonesimulator16.4" -derivedDataPath .build/DerivedData | xcbeautify
+    
+    - name: Upload Nimbus Sample App
+      uses: actions/upload-artifact@v3
+      with:
+        name: nimbus-ios-sample
+        path: .build/DerivedData/Build/Products/Debug-iphonesimulator/nimbus-ios-sample.app
+        retention-days: 5
