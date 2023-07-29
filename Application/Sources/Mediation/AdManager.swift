@@ -9,8 +9,6 @@ import GoogleMobileAds
 import NimbusKit
 #if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK
-#else                    // Swift Package Manager
-import NimbusGAMKit
 #endif
 import UIKit
 

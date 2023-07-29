@@ -62,9 +62,13 @@ final class AdMobViewController: DemoViewController {
             bannerView.accessibilityIdentifier = "google_ad_view"
             
             let gadRequest = GADRequest()
-            gadRequest.register(NimbusGoogleAdNetworkExtras(position: "nimbus_admob_banner"))
-            bannerView.load(gadRequest)
-            
+            do {
+                gadRequest.register(try NimbusGoogleAdNetworkExtras(position: "nimbus_admob_banner"))
+                bannerView.load(gadRequest)
+            } catch {
+                print("Error creating extras for Google banner ad")
+            }
+        
         case .interstitial:
             if interstitialPlacementId.isEmpty {
                 showCustomAlert("admob_interstitial_placement_id")
@@ -72,20 +76,24 @@ final class AdMobViewController: DemoViewController {
             }
             
             let gadRequest = GADRequest()
-            gadRequest.register(NimbusGoogleAdNetworkExtras(position: "nimbus_admob_interstitial"))
-            GADInterstitialAd.load(
-                withAdUnitID: interstitialPlacementId,
-                request: gadRequest
-            ) { [weak self] ad, error in
-                if let error {
-                    print("Failed to load interstitial ad with error: \(error.localizedDescription)")
-                    return
+            do {
+                gadRequest.register(try NimbusGoogleAdNetworkExtras(position: "nimbus_admob_interstitial"))
+                GADInterstitialAd.load(
+                    withAdUnitID: interstitialPlacementId,
+                    request: gadRequest
+                ) { [weak self] ad, error in
+                    if let error {
+                        print("Failed to load interstitial ad with error: \(error.localizedDescription)")
+                        return
+                    }
+                    
+                    guard let self else { return }
+                    self.interstitial = ad
+                    self.interstitial?.fullScreenContentDelegate = self
+                    ad?.present(fromRootViewController: self)
                 }
-                
-                guard let self else { return }
-                self.interstitial = ad
-                self.interstitial?.fullScreenContentDelegate = self
-                ad?.present(fromRootViewController: self)
+            } catch {
+                print("Error creating extras for Google interstitial ad")
             }
             
         case .rewarded:
@@ -95,30 +103,35 @@ final class AdMobViewController: DemoViewController {
             }
             
             let gadRequest = GADRequest()
-            gadRequest.register(NimbusGoogleAdNetworkExtras(position: "nimbus_admob_rewarded"))
-            GADRewardedAd.load(
-                withAdUnitID: rewardedPlacementId,
-                request: gadRequest,
-                completionHandler: { [weak self] ad, error in
-                    if let error = error {
-                        print("Failed to load rewarded ad with error: \(error.localizedDescription)")
-                        return
-                    }
-                    
-                    guard let self else { return }
-                    print("Rewarded ad loaded.")
-                    
-                    self.rewardedAd = ad
-                    rewardedAd?.fullScreenContentDelegate = self
-                    
-                    if let ad = rewardedAd {
-                        ad.present(fromRootViewController: self) {
-                            let reward = ad.adReward
-                            print("Reward received with currency \(reward.amount), amount \(reward.amount.doubleValue)")
+            do {
+                gadRequest.register(try NimbusGoogleAdNetworkExtras(position: "nimbus_admob_rewarded"))
+                GADRewardedAd.load(
+                    withAdUnitID: rewardedPlacementId,
+                    request: gadRequest,
+                    completionHandler: { [weak self] ad, error in
+                        if let error = error {
+                            // TODO: Nimbus loss notification?
+                            print("Failed to load rewarded ad with error: \(error.localizedDescription)")
+                            return
+                        }
+                        
+                        guard let self else { return }
+                        print("Rewarded ad loaded.")
+                        
+                        self.rewardedAd = ad
+                        rewardedAd?.fullScreenContentDelegate = self
+                        
+                        if let ad = rewardedAd {
+                            ad.present(fromRootViewController: self) {
+                                let reward = ad.adReward
+                                print("Reward received with currency \(reward.amount), amount \(reward.amount.doubleValue)")
+                            }
                         }
                     }
-                }
-            )
+                )
+            } catch {
+                print("Error creating extras for Google rewarded ad")
+            }
             
         case .rewardedInterstitial:
             if rewardedInterstitialPlacementId.isEmpty {
@@ -127,23 +140,27 @@ final class AdMobViewController: DemoViewController {
             }
             
             let gadRequest = GADRequest()
-            gadRequest.register(NimbusGoogleAdNetworkExtras(position: "nimbus_admob_rewarded_interstitial"))
-            GADRewardedInterstitialAd.load(
-                withAdUnitID: rewardedInterstitialPlacementId,
-                request: gadRequest
-            ) { ad, error in
-                if let error {
-                    return print("Failed to load rewarded interstitial ad with error: \(error.localizedDescription)")
-                }
-                
-                self.rewardedInterstitialAd = ad
-                self.rewardedInterstitialAd?.fullScreenContentDelegate = self
-                
-                if let ad {
-                    ad.present(fromRootViewController: self) {
-                        let reward = ad.adReward
+            do {
+                gadRequest.register(try NimbusGoogleAdNetworkExtras(position: "nimbus_admob_rewarded_interstitial"))
+                GADRewardedInterstitialAd.load(
+                    withAdUnitID: rewardedInterstitialPlacementId,
+                    request: gadRequest
+                ) { ad, error in
+                    if let error {
+                        return print("Failed to load rewarded interstitial ad with error: \(error.localizedDescription)")
+                    }
+                    
+                    self.rewardedInterstitialAd = ad
+                    self.rewardedInterstitialAd?.fullScreenContentDelegate = self
+                    
+                    if let ad {
+                        ad.present(fromRootViewController: self) {
+                            let _ = ad.adReward
+                        }
                     }
                 }
+            } catch {
+                print("Error creating extras for Google rewarded interstitial ad")
             }
         }
     }
