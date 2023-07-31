@@ -53,8 +53,8 @@ enum MainItem: String, NavigationItem {
                 subtitle: "For non-standalone Nimbus integrations",
                 items: [
                     Section(header: "Google Ad Manager", items: GAMMediationAdType.allCases),
-                    Section(header: "GAM Dynamic Price", items: DynamicPriceSample.allCases),
-                    Section(header: "AdMob", items: AdMobAdType.allCases)
+                    Section(header: nil, items: DynamicPriceSample.allCases),
+                    Section(header: "AdMob", items: DynamicPriceAdMob.allCases)
                 ])
         case .thirdPartyDemand:
             return NavigationListViewController(
@@ -102,17 +102,6 @@ enum GAMMediationAdType: String, NavigationItem {
     }
 }
 
-enum AdMobAdType: String, NavigationItem {
-    case banner                 = "Banner"
-    case interstitial           = "Interstitial"
-    case rewarded               = "Rewarded"
-    case rewardedInterstitial   = "Rewarded Interstitial"
-    
-    func destinationController(parent: String) -> UIViewController {
-        AdMobViewController(adType: self, headerSubTitle: parent)
-    }
-}
-
 enum DynamicPriceSample: String, NavigationItem {
     case dynamicPriceBanner       = "Dynamic Price Banner"
     case dynamicPriceBannerVideo  = "Dynamic Price Banner + Video"
@@ -120,6 +109,16 @@ enum DynamicPriceSample: String, NavigationItem {
     case dynamicPriceInterstitial = "Dynamic Price Interstitial"
     func destinationController(parent: String) -> UIViewController {
         GoogleDynamicPriceViewController(adType: self, headerSubTitle: parent)
+    }
+}
+
+enum DynamicPriceAdMob: String, NavigationItem {
+    case dynamicPriceBanner                 = "Dynamic Price Banner"
+    case dynamicPriceInterstitial           = "Dynamic Price Interstitial"
+    case dynamicPriceRewarded               = "Dynamic Price Rewarded"
+    case dynamicPriceRewardedInterstitial   = "Dynamic Price Rewarded Interstitial"
+    func destinationController(parent: String) -> UIViewController {
+        AdMobViewController(adType: self, headerSubTitle: parent)
     }
 }
 
