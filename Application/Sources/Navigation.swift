@@ -52,8 +52,9 @@ enum MainItem: String, NavigationItem {
                 title: self.description,
                 subtitle: "For non-standalone Nimbus integrations",
                 items: [
-                    Section(header: "Google Ad Manager", items: MediationAdType.allCases),
-                    Section(header: nil, items: DynamicPriceSample.allCases)
+                    Section(header: "Google Ad Manager", items: GAMMediationAdType.allCases),
+                    Section(header: nil, items: DynamicPriceSample.allCases),
+                    Section(header: "AdMob", items: DynamicPriceAdMob.allCases)
                 ])
         case .thirdPartyDemand:
             return NavigationListViewController(
@@ -108,6 +109,16 @@ enum DynamicPriceSample: String, NavigationItem {
     case dynamicPriceInterstitial = "Dynamic Price Interstitial"
     func destinationController(parent: String) -> UIViewController {
         GoogleDynamicPriceViewController(adType: self, headerSubTitle: parent)
+    }
+}
+
+enum DynamicPriceAdMob: String, NavigationItem {
+    case dynamicPriceBanner                 = "Dynamic Price Banner"
+    case dynamicPriceInterstitial           = "Dynamic Price Interstitial"
+    case dynamicPriceRewarded               = "Dynamic Price Rewarded"
+    case dynamicPriceRewardedInterstitial   = "Dynamic Price Rewarded Interstitial"
+    func destinationController(parent: String) -> UIViewController {
+        AdMobViewController(adType: self, headerSubTitle: parent)
     }
 }
 
