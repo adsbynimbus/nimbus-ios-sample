@@ -50,11 +50,16 @@ enum ProximaNovaWeight: String {
 extension UIFont {
 
     static func proximaNova(size: CGFloat, weight: ProximaNovaWeight = .regular) -> UIFont {
-        let name = "ProximaNova-\(weight.rawValue.capitalized)"
-        guard let font = UIFont(name: name, size: size) else {
-            fatalError("Font '\(name)' not found")
-        }
-        return font
+        
+        // Adding fonts via Bazel for some reason doesn't set any target membership,
+        // thus disabling the custom fonts for now.
+        
+//         let name = "ProximaNova-\(weight.rawValue.capitalized)"
+//         guard let font = UIFont(name: name, size: size) else {
+//             fatalError("Font '\(name)' not found")
+//         }
+//         return font
+        return UIFont.systemFont(ofSize: size, weight: .regular)
     }
 }
 

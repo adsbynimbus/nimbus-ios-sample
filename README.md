@@ -1,3 +1,50 @@
+# Bazel setup
+
+This branch demonstrates how the Nimbus SDK can be set up using Bazel.
+
+## Bazel Installation
+
+- Go to the Bazel iOS Tutorial: https://github.com/bazelbuild/rules_apple/blob/master/doc/tutorials/ios-app.md
+- Follow the tutorial instructions to get a little familiar with Bazel
+- Clone this repository to the **tutorials** directory
+- Download the following dependencies and place them under `External` directory
+   - `APS_iOS_SDK-4.5.6`
+   - `FBAudienceNetwork` (version 6.12.0)
+   - `GAM` (version 10.8.0)
+      - FBLPromises.xcframework
+      - GoogleAppMeasurement.xcframework
+      - GoogleAppMeasurementIdentitySupport.xcframework
+      - GoogleMobileAds.xcframework
+      - GoogleUtilities.xcframework
+      - nanopb.xcframework
+      - UserMessagingPlatform.xcframework
+   - `GoogleInteractiveMediaAds` (version 3.16.3)
+   - `UnityAds` (version 4.4.1)
+   - `VungleAdsSDK.xcframework` (version 7.0.0)
+- Download [Nimbus SDK 2.12.0](https://github.com/timehop/nimbus-ios-sdk/releases/tag/2.12.0) and place it to the project root as `Nimbus-2.12.0`
+
+## Bazel Build
+
+To build the sample app, do the following:
+- `$ cd $WORKSPACE`
+- `$ bazel build //nimbus-ios-sample:nimbus_ios_sample`
+
+## Bazel Run
+
+Run the sample app using:
+
+- `$ bazel run //nimbus-ios-sample:nimbus_ios_sample`
+
+## Generate Xcode project
+
+To generate the xcode project, run:
+- `$ bazel run //nimbus-ios-sample:xcodeproj`
+
+## IMPORTANT
+
+- Custom fonts are disabled in the sample app due to issues linking them with Bazel
+- `Keys.xcconfig` won't work, you have to place your keys directly into `Info.plist` as Bazel doesn't seem to support custom variables inside `Info.plist`
+
 # Nimbus iOS Sample 
 [![CocoaPods](https://github.com/timehop/nimbus-ios-sample/actions/workflows/cocoapods.yml/badge.svg)](https://github.com/timehop/nimbus-ios-sample/actions/workflows/cocoapods.yml)
 [![Swift Package Manager](https://github.com/timehop/nimbus-ios-sample/actions/workflows/spm.yml/badge.svg)](https://github.com/timehop/nimbus-ios-sample/actions/workflows/spm.yml)
