@@ -10,7 +10,7 @@ import GoogleMobileAds
 import NimbusKit
 #if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK
-#else                    // Swift Package Manager
+#elseif canImport(NimbusGoogleKit) // Swift Package Manager
 import NimbusGoogleKit
 #endif
 import UIKit
