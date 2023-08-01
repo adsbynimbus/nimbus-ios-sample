@@ -48,14 +48,22 @@ enum MainItem: String, NavigationItem {
                 subtitle: "Select to see Nimbus' request and render flow",
                 items: [Section(header: nil, items: AdManagerAdType.allCases)])
         case .mediationPlatforms:
+            let items: [Section]
+            let isAdMob = Bundle.main.infoDictionary?["GADIsAdManagerApp"] as? Int == 0
+            if isAdMob {
+                items = [Section(header: "AdMob", items: DynamicPriceAdMob.allCases)]
+            } else {
+                items = [
+                    Section(header: "Google Ad Manager", items: GAMMediationAdType.allCases),
+                    Section(header: nil, items: DynamicPriceSample.allCases)
+                ]
+            }
+            
             return  NavigationListViewController(
                 title: self.description,
                 subtitle: "For non-standalone Nimbus integrations",
-                items: [
-                    Section(header: "Google Ad Manager", items: GAMMediationAdType.allCases),
-                    Section(header: nil, items: DynamicPriceSample.allCases),
-                    Section(header: "AdMob", items: DynamicPriceAdMob.allCases)
-                ])
+                items: items
+            )
         case .thirdPartyDemand:
             return NavigationListViewController(
                 title: self.description,
