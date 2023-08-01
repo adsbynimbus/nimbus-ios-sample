@@ -24,6 +24,7 @@ let package = Package(
                 .product(name: "NimbusRenderVideoKit", package: "nimbus-ios-sdk"),
                 .product(name: "NimbusRequestAPSKit", package: "nimbus-ios-sdk"),
                 .product(name: "NimbusGAMKit", package: "nimbus-ios-sdk"),
+                .product(name: "NimbusGoogleKit", package: "nimbus-ios-sdk"),
                 .product(name: "NimbusFANKit", package: "nimbus-ios-sdk"),
                 .product(name: "NimbusVungleKit", package: "nimbus-ios-sdk"),
                 .product(name: "NimbusUnityKit", package: "nimbus-ios-sdk"),

@@ -28,7 +28,6 @@
 		4DADE24E27396E0900E7E766 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4DADE25327396E0900E7E766 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DB9A13E273AE4A70005D1D0 /* ProximaNova-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Semibold.otf"; sourceTree = "<group>"; };
-		4E6B95FD4C23B21AADB0F0B4 /* Pods-nimbus-ios-sample-pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nimbus-ios-sample-pods.release.xcconfig"; path = "Target Support Files/Pods-nimbus-ios-sample-pods/Pods-nimbus-ios-sample-pods.release.xcconfig"; sourceTree = "<group>"; };
 		77AFB214C50E570D089B0115 /* Pods_nimbus_ios_sample_pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_nimbus_ios_sample_pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		960088302A2664820008B0DC /* Keys.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Keys.xcconfig; sourceTree = "<group>"; };
 		965B67582A21147E007FC135 /* ProximaNova-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.otf"; sourceTree = "<group>"; };
@@ -36,7 +35,6 @@
 		96742BF52A24F43D00A312B3 /* Application */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Application; sourceTree = "<group>"; };
 		96742C022A25133600A312B3 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		96C4462729414A9300DF35B2 /* nimbus-ios-sample-pods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nimbus-ios-sample-pods.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DEFD0F680446626CDB359226 /* Pods-nimbus-ios-sample-pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nimbus-ios-sample-pods.debug.xcconfig"; path = "Target Support Files/Pods-nimbus-ios-sample-pods/Pods-nimbus-ios-sample-pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,7 +65,6 @@
 				960088302A2664820008B0DC /* Keys.xcconfig */,
 				96742C022A25133600A312B3 /* SceneDelegate.swift */,
 				4DADE24327396E0700E7E766 /* Products */,
-				53F4FB6082AF70CF37E56751 /* Pods */,
 				D9FDE97E83690CB341BE0656 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -99,16 +96,6 @@
 				4DB9A13E273AE4A70005D1D0 /* ProximaNova-Semibold.otf */,
 			);
 			path = Fonts;
-			sourceTree = "<group>";
-		};
-		53F4FB6082AF70CF37E56751 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				DEFD0F680446626CDB359226 /* Pods-nimbus-ios-sample-pods.debug.xcconfig */,
-				4E6B95FD4C23B21AADB0F0B4 /* Pods-nimbus-ios-sample-pods.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		D9FDE97E83690CB341BE0656 /* Frameworks */ = {
@@ -477,7 +464,6 @@
 		};
 		96C4462529414A9300DF35B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DEFD0F680446626CDB359226 /* Pods-nimbus-ios-sample-pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -507,7 +493,6 @@
 		};
 		96C4462629414A9300DF35B2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4E6B95FD4C23B21AADB0F0B4 /* Pods-nimbus-ios-sample-pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
