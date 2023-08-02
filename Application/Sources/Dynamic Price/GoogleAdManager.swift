@@ -9,7 +9,7 @@ import GoogleMobileAds
 import NimbusKit
 #if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK
-#else                    // Swift Package Manager
+#elseif canImport(NimbusGAMKit) // Swift Package Manager
 import NimbusGAMKit
 #endif
 import UIKit
@@ -18,7 +18,7 @@ fileprivate let gamPlacementId = Bundle.main.infoDictionary?["Google Placement I
 
 final class GoogleDynamicPriceViewController: DemoViewController {
     
-    private let adType: DynamicPriceSample
+    private let adType: DynamicPriceGAM
     private let requestManager = NimbusRequestManager()
     private var bannerView: GAMBannerView?
     private var interstitial: GADInterstitialAd?
@@ -26,7 +26,7 @@ final class GoogleDynamicPriceViewController: DemoViewController {
     private lazy var gamRequest = GAMRequest()
     private var nimbusAd: NimbusAd?
     
-    init(adType: DynamicPriceSample, headerSubTitle: String) {
+    init(adType: DynamicPriceGAM, headerSubTitle: String) {
         self.adType = adType
         super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle)
     }
