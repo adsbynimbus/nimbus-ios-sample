@@ -68,7 +68,16 @@ class TestRenderViewController: DemoViewController {
     }
     
     @objc private func testButtonTapped() {
-        guard let adMarkup = markupTexField.text, !adMarkup.isEmpty else { return }
+        guard let adMarkup = markupTexField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+                !adMarkup.isEmpty else {
+            let alertVC = UIAlertController(
+                title: "Invalid Ad",
+                message: "Please enter a valid HTML or VAST ad.",
+                preferredStyle: .alert)
+            alertVC.addAction(UIAlertAction(title: "Ok", style: .default))
+            present(alertVC, animated: true)
+            return
+        }
         
         navigationController?.pushViewController(
             TestRenderAdViewController(adMarkup: adMarkup),
