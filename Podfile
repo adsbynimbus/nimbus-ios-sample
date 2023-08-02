@@ -14,7 +14,8 @@ target 'nimbus-ios-sample-pods' do
      'NimbusRequestAPSKit',     # Amazon Publisher Services Request Support
      'NimbusRequestFANKit',     # Meta Audience Network Request Support
      'NimbusRenderFANKit',      # Meta Audience Network Ad Renderer
-     'NimbusGAMKit',            # Google Dynamic Price and Mediation Adapters
+     'NimbusGAMKit',            # Google Ad Manager Dynamic Price and Mediation Adapters
+     'NimbusGoogleKit'          # Google AdMob Dynamic Price and Mediation Adapters
      'NimbusUnityKit',          # Unity Ads Request Support and Renderer
      'NimbusVungleKit',         # Vungle Ads Request Support and Renderer
      'NimbusLiveRampKit'        # LiveRamp Request Support

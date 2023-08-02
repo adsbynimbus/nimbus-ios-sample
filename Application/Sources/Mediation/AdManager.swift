@@ -18,7 +18,7 @@ fileprivate let gamPlacementId = Bundle.main.infoDictionary?["Google Placement I
 
 final class GAMViewController: DemoViewController {
     
-    private let adType: MediationAdType
+    private let adType: GAMMediationAdType
     private let requestManager = NimbusRequestManager()
     private var bannerView: GAMBannerView?
     private var interstitial: GADInterstitialAd?
@@ -26,7 +26,7 @@ final class GAMViewController: DemoViewController {
     private lazy var gamRequest = GAMRequest()
     private var nimbusAd: NimbusAd?
     
-    init(adType: MediationAdType, headerSubTitle: String) {
+    init(adType: GAMMediationAdType, headerSubTitle: String) {
         self.adType = adType
         super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle)
     }

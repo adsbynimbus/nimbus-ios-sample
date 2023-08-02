@@ -55,7 +55,7 @@ enum MainItem: String, NavigationItem {
             } else {
                 items = [
                     Section(header: "Google Ad Manager", items: GAMMediationAdType.allCases),
-                    Section(header: nil, items: DynamicPriceSample.allCases)
+                    Section(header: nil, items: DynamicPriceGAM.allCases)
                 ]
             }
             
@@ -101,7 +101,7 @@ enum AdManagerAdType: String, NavigationItem {
     }
 }
 
-enum MediationAdType: String, NavigationItem {
+enum GAMMediationAdType: String, NavigationItem {
     case banner                   = "Banner"
     case interstitial             = "Interstitial"
     
@@ -110,7 +110,7 @@ enum MediationAdType: String, NavigationItem {
     }
 }
 
-enum DynamicPriceSample: String, NavigationItem {
+enum DynamicPriceGAM: String, NavigationItem {
     case dynamicPriceBanner       = "Dynamic Price Banner"
     case dynamicPriceBannerVideo  = "Dynamic Price Banner + Video"
     case dynamicPriceInlineVideo  = "Dynamic Price Inline Video"

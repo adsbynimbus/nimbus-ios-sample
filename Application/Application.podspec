@@ -22,7 +22,8 @@ Pod::Spec.new do |spec|
     spec.dependency 'NimbusSDK/NimbusRequestAPSKit'   # Amazon Publisher Services Request Support
     spec.dependency 'NimbusSDK/NimbusRequestFANKit'   # Meta Audience Network Request Support
     spec.dependency 'NimbusSDK/NimbusRenderFANKit'    # Meta Audience Network Ad Renderer
-    spec.dependency 'NimbusSDK/NimbusGAMKit'          # Google Dynamic Price and Mediation Adapters
+    spec.dependency 'NimbusSDK/NimbusGAMKit'          # Google Ad MAnager Dynamic Price and Mediation Adapters
+    spec.dependency 'NimbusSDK/NimbusGoogleKit'       # Google AdMob Dynamic Price and Mediation Adapters
     spec.dependency 'NimbusSDK/NimbusUnityKit'        # Unity Ads Request Support and Renderer
     spec.dependency 'NimbusSDK/NimbusVungleKit'       # Vungle Ads Request Support and Renderer
   end

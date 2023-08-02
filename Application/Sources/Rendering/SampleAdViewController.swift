@@ -12,7 +12,7 @@ import UIKit
 
 class SampleAdViewController : DemoViewController, AdControllerDelegate {
     
-    let screenLogger = Logger()
+    let screenLogger = SampleAppLogger()
     weak var loggerView: UIView?
     var nimbusAd: NimbusAd? = nil
     
