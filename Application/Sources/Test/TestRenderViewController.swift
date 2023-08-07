@@ -68,8 +68,15 @@ class TestRenderViewController: DemoViewController {
         return button
     }()
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         setupTextView()
         setupTestButton()
@@ -122,4 +129,24 @@ class TestRenderViewController: DemoViewController {
             animated: true
         )
     }
+                                       
+    @objc private func adjustForKeyboard(notification: Notification) {
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+
+        let keyboardScreenEndFrame = keyboardValue.cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+
+        if notification.name == UIResponder.keyboardWillHideNotification {
+            markupTextView.contentInset = .zero
+        } else {
+            // Calculating the difference between the textView's bottom and view bottom as the keyboard size covers just a part of the textView
+            let bottomOffset = view.bounds.height - (markupTextView.frame.origin.y + markupTextView.frame.size.height)
+            markupTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height - bottomOffset, right: 0)
+        }
+
+        markupTextView.scrollIndicatorInsets = markupTextView.contentInset
+
+        let selectedRange = markupTextView.selectedRange
+        markupTextView.scrollRangeToVisible(selectedRange)
+   }
 }
