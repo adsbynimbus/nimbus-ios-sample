@@ -114,8 +114,15 @@ final class AdManagerViewController: SampleAdViewController {
             )
         case .interstitialVideoWithoutUI:
             CustomVideoAdSettingsProvider.shared.disableUi = true
-            fallthrough
+            let request = NimbusRequest.forInterstitialAd(position: adType.description)
+            request.impressions[0].banner = nil
+            adManager.showBlockingAd(
+                request: request,
+                closeButtonDelay: 0,
+                adPresentingViewController: self
+            )
         case .interstitialVideo:
+            CustomVideoAdSettingsProvider.shared.disableUi = false
             let request = NimbusRequest.forInterstitialAd(position: adType.description)
             request.impressions[0].banner = nil
             adManager.showBlockingAd(
@@ -215,9 +222,7 @@ final class CustomVideoAdSettingsProvider: NimbusVideoSettingsProvider {
     override func adsRenderingSettings() -> IMAAdsRenderingSettings {
         let settings = super.adsRenderingSettings()
         settings.disableUi = disableUi
-        if disableUi {
-            settings.uiElements = []
-        }
+        settings.uiElements = disableUi ? [] : nil
         return settings
     }
 }
