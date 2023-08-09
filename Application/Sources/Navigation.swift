@@ -51,7 +51,7 @@ enum MainItem: String, NavigationItem {
             let items: [Section]
             let isAdMob = Bundle.main.infoDictionary?["GADIsAdManagerApp"] as? Int == 0
             if isAdMob {
-                items = [Section(header: "AdMob", items: DynamicPriceAdMob.allCases)]
+                items = [Section(header: "AdMob", items: DynamicAdMob.allCases)]
             } else {
                 items = [
                     Section(header: "Google Ad Manager", items: GAMMediationAdType.allCases),
@@ -120,11 +120,11 @@ enum DynamicPriceGAM: String, NavigationItem {
     }
 }
 
-enum DynamicPriceAdMob: String, NavigationItem {
-    case dynamicPriceBanner                 = "Dynamic Price Banner"
-    case dynamicPriceInterstitial           = "Dynamic Price Interstitial"
-    case dynamicPriceRewarded               = "Dynamic Price Rewarded"
-    case dynamicPriceRewardedInterstitial   = "Dynamic Price Rewarded Interstitial"
+enum DynamicAdMob: String, NavigationItem {
+    case dynamicBanner                 = "Dynamic Banner"
+    case dynamicInterstitial           = "Dynamic Interstitial"
+    case dynamicRewarded               = "Dynamic Rewarded"
+    case dynamicRewardedInterstitial   = "Dynamic Rewarded Interstitial"
     func destinationController(parent: String) -> UIViewController {
         AdMobViewController(adType: self, headerSubTitle: parent)
     }

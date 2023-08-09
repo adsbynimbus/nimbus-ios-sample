@@ -22,7 +22,7 @@ fileprivate let rewardedInterstitialPlacementId = Bundle.main.infoDictionary?["A
 
 final class AdMobViewController: DemoViewController {
     
-    private let adType: DynamicPriceAdMob
+    private let adType: DynamicAdMob
     private let requestManager = NimbusRequestManager()
     private var bannerView: GADBannerView?
     private var interstitial: GADInterstitialAd?
@@ -31,7 +31,7 @@ final class AdMobViewController: DemoViewController {
     private var nimbusAd: NimbusAd?
     private var nimbusGoogleExtras: NimbusGoogleAdNetworkExtras?
     
-    init(adType: DynamicPriceAdMob, headerSubTitle: String) {
+    init(adType: DynamicAdMob, headerSubTitle: String) {
         self.adType = adType
         super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle)
     }
@@ -49,16 +49,16 @@ final class AdMobViewController: DemoViewController {
     private func setupAdRendering() {
         switch adType {
             
-        case .dynamicPriceBanner:
+        case .dynamicBanner:
             setupBannerAd()
             
-        case .dynamicPriceInterstitial:
+        case .dynamicInterstitial:
             setupInterstitialAd()
             
-        case .dynamicPriceRewarded:
+        case .dynamicRewarded:
             setupRewardedAd()
             
-        case .dynamicPriceRewardedInterstitial:
+        case .dynamicRewardedInterstitial:
             setupRewardedInterstitialAd()
         }
     }
