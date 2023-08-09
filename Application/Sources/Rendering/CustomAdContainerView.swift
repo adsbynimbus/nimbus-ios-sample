@@ -19,7 +19,7 @@ final class CustomAdContainerView: UIView, AdControllerDelegate {
     private let staticAdRenderer = Nimbus.shared.renderers.first(where: { $0.key == .forAuctionType(.static) })?.value
            as? NimbusStaticAdRenderer
     private lazy var nimbusAdView = NimbusAdView(adPresentingViewController: viewController)
-    private weak var delegate: AdControllerDelegate?
+    weak var delegate: AdControllerDelegate?
     
     init(
         ad: NimbusAd,

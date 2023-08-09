@@ -9,7 +9,7 @@ import UIKit
 
 class TestRenderViewController: DemoViewController {
     
-    private lazy var markupTextView: UITextView = {
+    private(set) lazy var markupTextView: UITextView = {
         let textView = UITextView()
         textView.textColor = .turquoise
         textView.tintColor = .turquoise
@@ -57,7 +57,7 @@ class TestRenderViewController: DemoViewController {
         return textView
     }()
     
-    private lazy var testButton: UIButton = {
+    private(set) lazy var testButton: UIButton = {
         let button = UIButton()
         button.setTitle("Test".uppercased(), for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -110,7 +110,7 @@ class TestRenderViewController: DemoViewController {
         markupTextView.text = nil
     }
     
-    @objc private func testButtonTapped() {
+    @objc func testButtonTapped() {
         guard let adMarkup = markupTextView.text?.trimmingCharacters(in: .whitespacesAndNewlines),
                 !adMarkup.isEmpty else {
             let alertVC = UIAlertController(

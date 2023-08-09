@@ -8,10 +8,10 @@
 import UIKit
 import NimbusKit
 
-final class TestRenderAdViewController: UIViewController {
+class TestRenderAdViewController: UIViewController {
     private let adMarkup: String
     
-    private lazy var adContainerView: CustomAdContainerView = {
+    private(set) lazy var adContainerView: CustomAdContainerView = {
         return CustomAdContainerView(ad: getAdFromMarkup(adMarkup: adMarkup), viewController: self)
     }()
     
