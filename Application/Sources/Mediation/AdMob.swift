@@ -284,6 +284,8 @@ extension AdMobViewController: GADFullScreenContentDelegate {
             adNetworkResponseInfo = interstitialAd.responseInfo.loadedAdNetworkResponseInfo
         } else if let rewardedAd = ad as? GADRewardedAd {
             adNetworkResponseInfo = rewardedAd.responseInfo.loadedAdNetworkResponseInfo
+        } else if let rewardedInterstitialAd = ad as? GADRewardedInterstitialAd {
+            adNetworkResponseInfo = rewardedInterstitialAd.responseInfo.loadedAdNetworkResponseInfo
         } else {
             adNetworkResponseInfo = nil
         }
