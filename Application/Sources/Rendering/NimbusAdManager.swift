@@ -20,9 +20,16 @@ final class AdManagerViewController: SampleAdViewController {
     private var adController: AdController?
     private lazy var requestManager = NimbusRequestManager()
     
+    // To backup existing interceptors to re-inject them at deinit
+    private let requestInterceptors: [NimbusRequestInterceptor]?
+    
     init(adType: AdManagerAdType, headerSubTitle: String) {
         self.adType = adType
-
+        
+        // Unsetting interceptors to remove all Demand information to ensure only Nimbus renders
+        requestInterceptors = NimbusRequestManager.requestInterceptors
+        NimbusRequestManager.requestInterceptors = nil
+        
         super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle)
     }
     
@@ -33,21 +40,18 @@ final class AdManagerViewController: SampleAdViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Add self as an interceptor to remove all Demand information to ensure only Nimbus renders
-        NimbusRequestManager.requestInterceptors?.append(self)
-        
         setupContentView()
         setupAdRendering()
+        setupCustomVideoSettings()
     }
     
     deinit {
-        NimbusRequestManager.requestInterceptors?.removeAll(where: { $0 === self })
-        CustomVideoAdSettingsProvider.shared.disableUi = false
+        NimbusRequestManager.requestInterceptors = requestInterceptors
         let nimbusAdView = contentView.subviews.first(where: { $0 is NimbusAdView }) as? NimbusAdView
         nimbusAdView?.destroy()
         customAdContainerView?.destroy()
-        
         adController?.destroy()
+        resetVideoSettings()
     }
     
     private func setupContentView() {
@@ -112,17 +116,8 @@ final class AdManagerViewController: SampleAdViewController {
                 closeButtonDelay: 0,
                 adPresentingViewController: self
             )
-        case .interstitialVideoWithoutUI:
-            CustomVideoAdSettingsProvider.shared.disableUi = true
-            let request = NimbusRequest.forInterstitialAd(position: adType.description)
-            request.impressions[0].banner = nil
-            adManager.showBlockingAd(
-                request: request,
-                closeButtonDelay: 0,
-                adPresentingViewController: self
-            )
-        case .interstitialVideo:
-            CustomVideoAdSettingsProvider.shared.disableUi = false
+        case .interstitialVideo, .interstitialVideoWithoutUI:
+            // See setupCustomVideoSettings() where custom video settings is passed
             let request = NimbusRequest.forInterstitialAd(position: adType.description)
             request.impressions[0].banner = nil
             adManager.showBlockingAd(
@@ -164,7 +159,7 @@ final class AdManagerViewController: SampleAdViewController {
         if let videoRenderer = Nimbus.shared.renderers.first(
             where: { $0.key.type == .video }
         )?.value as? NimbusVideoAdRenderer {
-            videoRenderer.videoAdSettingsProvider = CustomVideoAdSettingsProvider()
+            videoRenderer.videoAdSettingsProvider = CustomVideoAdSettingsProvider(disableUi: adType == .interstitialVideoWithoutUI)
         }
     }
     
@@ -215,14 +210,16 @@ extension AdManagerViewController : NimbusRequestInterceptor {
 
 final class CustomVideoAdSettingsProvider: NimbusVideoSettingsProvider {
     
-    static let shared = CustomVideoAdSettingsProvider()
+    public var disableUi: Bool
     
-    public var disableUi = false
+    init(disableUi: Bool = false) {
+        self.disableUi = disableUi
+    }
     
     override func adsRenderingSettings() -> IMAAdsRenderingSettings {
         let settings = super.adsRenderingSettings()
         settings.disableUi = disableUi
-        settings.uiElements = disableUi ? [] : nil
+        settings.uiElements = disableUi ? [] : nil // Passing nil shows all of the default UI elements
         return settings
     }
 }
