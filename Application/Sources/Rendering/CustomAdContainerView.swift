@@ -14,7 +14,7 @@ final class CustomAdContainerView: UIView, AdControllerDelegate {
     private let ad: NimbusAd
     private let volume: Int
     private let companionAd: NimbusCompanionAd?
-    private let viewController: UIViewController
+    private weak var viewController: UIViewController?
     private let creativeScalingEnabledForStaticAds: Bool
     private let staticAdRenderer = Nimbus.shared.renderers.first(where: { $0.key == .forAuctionType(.static) })?.value
            as? NimbusStaticAdRenderer
