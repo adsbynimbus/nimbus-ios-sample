@@ -11,11 +11,8 @@ import NimbusKit
 final class TestRenderAdViewController: UIViewController {
     private let adMarkup: String
     
-    private lazy var adContainerView: CustomAdContainerView? = {
-        guard let ad = getAdFromMarkup(adMarkup: adMarkup) else {
-            return nil
-        }
-        return CustomAdContainerView(ad: ad, viewController: self)
+    private lazy var adContainerView: CustomAdContainerView = {
+        return CustomAdContainerView(ad: getAdFromMarkup(adMarkup: adMarkup), viewController: self)
     }()
     
     init(adMarkup: String) {
@@ -39,26 +36,24 @@ final class TestRenderAdViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        adContainerView?.destroy()
+        adContainerView.destroy()
     }
     
     private func setupAdView() {
-        guard let adContainerView else { return }
         view.layout(adContainerView) { child in
             child.alignTop()
             child.fill()
         }
     }
     
-    private func getAdFromMarkup(adMarkup: String) -> NimbusAd? {
-        let isVideo = adMarkup.components(separatedBy: " ").first?.contains("xml") == true ||
-            adMarkup.components(separatedBy: " ").first?.lowercased().contains("vast") == true
-        if isVideo {
-            return createNimbusAd(auctionType: .video, markup: adMarkup)
-        } else if adMarkup.components(separatedBy: " ").first?.contains("html") == true {
-            return createNimbusAd(auctionType: .static, markup: adMarkup)
-        }
-        return nil
+    private func getAdFromMarkup(adMarkup: String) -> NimbusAd {
+        let type: NimbusAuctionType = isVideoMarkup(adMarkup: adMarkup) ? .video : .static
+        return createNimbusAd(auctionType: type, markup: adMarkup)
+    }
+    
+    private func isVideoMarkup(adMarkup: String) -> Bool {
+        let prefix = adMarkup.prefix(5).lowercased()
+        return prefix == "<vast" || prefix == "<?xml"
     }
     
     private func createNimbusAd(

@@ -58,7 +58,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Renderers
         let videoRenderer = NimbusVideoAdRenderer()
         videoRenderer.showMuteButton = true
-        videoRenderer.videoAdSettingsProvider = CustomVideoAdSettingsProvider.shared
         Nimbus.shared.renderers = [
             .forAuctionType(.static): NimbusStaticAdRenderer(),
             .forAuctionType(.video): videoRenderer,

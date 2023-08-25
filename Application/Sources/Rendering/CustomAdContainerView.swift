@@ -14,7 +14,7 @@ final class CustomAdContainerView: UIView, AdControllerDelegate {
     private let ad: NimbusAd
     private let volume: Int
     private let companionAd: NimbusCompanionAd?
-    private let viewController: UIViewController
+    private weak var viewController: UIViewController?
     private let creativeScalingEnabledForStaticAds: Bool
     private let staticAdRenderer = Nimbus.shared.renderers.first(where: { $0.key == .forAuctionType(.static) })?.value
            as? NimbusStaticAdRenderer
@@ -27,7 +27,8 @@ final class CustomAdContainerView: UIView, AdControllerDelegate {
         companionAd: NimbusCompanionAd? = nil,
         viewController: UIViewController,
         creativeScalingEnabledForStaticAds: Bool = true,
-        delegate: AdControllerDelegate? = nil
+        delegate: AdControllerDelegate? = nil,
+        topOffset: CGFloat = 0
     ) {
         self.ad = ad
         self.volume = volume
@@ -39,7 +40,7 @@ final class CustomAdContainerView: UIView, AdControllerDelegate {
         super.init(frame: CGRect.zero)
         
         staticAdRenderer?.creativeScalingEnabled = creativeScalingEnabledForStaticAds
-        setupAdView()
+        setupAdView(topOffset)
     }
     
     required init?(coder: NSCoder) {
@@ -51,11 +52,11 @@ final class CustomAdContainerView: UIView, AdControllerDelegate {
         staticAdRenderer?.creativeScalingEnabled = true
     }
     
-    private func setupAdView() {
+    private func setupAdView(_ topOffset: CGFloat) {
         addSubview(nimbusAdView)
         nimbusAdView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            nimbusAdView.topAnchor.constraint(equalTo: topAnchor, constant: Constants.headerOffset),
+            nimbusAdView.topAnchor.constraint(equalTo: topAnchor, constant: topOffset),
             nimbusAdView.bottomAnchor.constraint(equalTo: bottomAnchor),
             nimbusAdView.leadingAnchor.constraint(equalTo: leadingAnchor),
             nimbusAdView.trailingAnchor.constraint(equalTo: trailingAnchor)

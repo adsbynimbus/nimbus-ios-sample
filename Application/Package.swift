@@ -11,7 +11,7 @@ let package = Package(
             targets: ["Application"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/timehop/nimbus-ios-sdk.git", exact: "2.14.0"),
+        .package(url: "https://github.com/timehop/nimbus-ios-sdk.git", exact: "2.15.1"),
     ],
     targets: [
         .target(
@@ -24,6 +24,7 @@ let package = Package(
                 .product(name: "NimbusRenderVideoKit", package: "nimbus-ios-sdk"),
                 .product(name: "NimbusRequestAPSKit", package: "nimbus-ios-sdk"),
                 .product(name: "NimbusGAMKit", package: "nimbus-ios-sdk"),
+                .product(name: "NimbusGoogleKit", package: "nimbus-ios-sdk"),
                 .product(name: "NimbusFANKit", package: "nimbus-ios-sdk"),
                 .product(name: "NimbusVungleKit", package: "nimbus-ios-sdk"),
                 .product(name: "NimbusUnityKit", package: "nimbus-ios-sdk"),

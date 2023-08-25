@@ -48,13 +48,22 @@ enum MainItem: String, NavigationItem {
                 subtitle: "Select to see Nimbus' request and render flow",
                 items: [Section(header: nil, items: AdManagerAdType.allCases)])
         case .mediationPlatforms:
+            let items: [Section]
+            let isAdMob = Bundle.main.infoDictionary?["GADIsAdManagerApp"] as? Int == 0
+            if isAdMob {
+                items = [Section(header: "AdMob", items: DynamicAdMob.allCases)]
+            } else {
+                items = [
+                    Section(header: "Google Ad Manager", items: GAMMediationAdType.allCases),
+                    Section(header: nil, items: DynamicPriceGAM.allCases)
+                ]
+            }
+            
             return  NavigationListViewController(
                 title: self.description,
                 subtitle: "For non-standalone Nimbus integrations",
-                items: [
-                    Section(header: "Google Ad Manager", items: MediationAdType.allCases),
-                    Section(header: nil, items: DynamicPriceSample.allCases)
-                ])
+                items: items
+            )
         case .thirdPartyDemand:
             return NavigationListViewController(
                 title: self.description,
@@ -92,7 +101,7 @@ enum AdManagerAdType: String, NavigationItem {
     }
 }
 
-enum MediationAdType: String, NavigationItem {
+enum GAMMediationAdType: String, NavigationItem {
     case banner                   = "Banner"
     case interstitial             = "Interstitial"
     
@@ -101,13 +110,23 @@ enum MediationAdType: String, NavigationItem {
     }
 }
 
-enum DynamicPriceSample: String, NavigationItem {
+enum DynamicPriceGAM: String, NavigationItem {
     case dynamicPriceBanner       = "Dynamic Price Banner"
     case dynamicPriceBannerVideo  = "Dynamic Price Banner + Video"
     case dynamicPriceInlineVideo  = "Dynamic Price Inline Video"
     case dynamicPriceInterstitial = "Dynamic Price Interstitial"
     func destinationController(parent: String) -> UIViewController {
         GoogleDynamicPriceViewController(adType: self, headerSubTitle: parent)
+    }
+}
+
+enum DynamicAdMob: String, NavigationItem {
+    case dynamicBanner                 = "Dynamic Banner"
+    case dynamicInterstitial           = "Dynamic Interstitial"
+    case dynamicRewarded               = "Dynamic Rewarded"
+    case dynamicRewardedInterstitial   = "Dynamic Rewarded Interstitial"
+    func destinationController(parent: String) -> UIViewController {
+        AdMobViewController(adType: self, headerSubTitle: parent)
     }
 }
 
