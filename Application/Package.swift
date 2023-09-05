@@ -11,7 +11,7 @@ let package = Package(
             targets: ["Application"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/timehop/nimbus-ios-sdk.git", exact: "2.15.1"),
+        .package(url: "https://github.com/timehop/nimbus-ios-sdk.git", exact: "2.15.2"),
     ],
     targets: [
         .target(

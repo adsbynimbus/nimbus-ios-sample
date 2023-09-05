@@ -7,7 +7,7 @@ target 'nimbus-ios-sample-pods' do
 
   pod 'Application', :path => 'Application'
 
-  pod 'NimbusSDK', '2.15.1', subspecs: [
+  pod 'NimbusSDK', '2.15.2', subspecs: [
      'NimbusKit',               # Nimbus SDK
      'NimbusRenderStaticKit',   # Static Ad Renderer
      'NimbusRenderVideoKit',    # Video Ad Renderer
