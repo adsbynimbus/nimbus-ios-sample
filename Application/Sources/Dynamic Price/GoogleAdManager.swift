@@ -83,7 +83,10 @@ final class GoogleDynamicPriceViewController: DemoViewController {
             bannerView.rootViewController = self
             bannerView.adUnitID = gamPlacementId
             bannerView.delegate = self
-            bannerView.validAdSizes = [NSValueFromGADAdSize(GADAdSizeFromCGSize(CGSize(width: 400, height: 300)))]
+            bannerView.validAdSizes = [
+                NSValueFromGADAdSize(GADAdSizeMediumRectangle),
+                NSValueFromGADAdSize(GADAdSizeFromCGSize(CGSize(width: 400, height: 300)))
+            ]
             bannerView.accessibilityIdentifier = "google_ad_view"
             
             bannerView.translatesAutoresizingMaskIntoConstraints = false
