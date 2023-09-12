@@ -1,6 +1,6 @@
 # Nimbus iOS Sample 
-[![CocoaPods](https://github.com/timehop/nimbus-ios-sample/actions/workflows/cocoapods.yml/badge.svg)](https://github.com/timehop/nimbus-ios-sample/actions/workflows/cocoapods.yml)
-[![Swift Package Manager](https://github.com/timehop/nimbus-ios-sample/actions/workflows/spm.yml/badge.svg)](https://github.com/timehop/nimbus-ios-sample/actions/workflows/spm.yml)
+[![CocoaPods](https://github.com/adsbynimbus/nimbus-ios-sample/actions/workflows/cocoapods.yml/badge.svg)](https://github.com/adsbynimbus/nimbus-ios-sample/actions/workflows/cocoapods.yml)
+[![Swift Package Manager](https://github.com/adsbynimbus/nimbus-ios-sample/actions/workflows/spm.yml/badge.svg)](https://github.com/adsbynimbus/nimbus-ios-sample/actions/workflows/spm.yml)
 
 Welcome to Nimbus Sample App - ads by publishers, for publishers.
 
@@ -17,7 +17,7 @@ This repository uses git LFS. Please follow the steps below to install it:
 ### Clone the repository
 
 - Open your terminal
-- Run: `git clone https://github.com/timehop/nimbus-ios-sample`
+- Run: `git clone https://github.com/adsbynimbus/nimbus-ios-sample`
 
 ## How to run
 
