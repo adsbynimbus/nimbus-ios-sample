@@ -17,6 +17,7 @@ class TestRenderViewController: DemoViewController {
         textView.autocorrectionType = .no
         textView.layer.borderWidth = 0.5
         textView.layer.borderColor = UIColor.lightGray.cgColor
+        textView.accessibilityIdentifier = "markup_text"
         
         let accessoryView = UIStackView(frame: CGRect(x: 0, y: 0, width: 0, height: 60))
         accessoryView.axis = .vertical
