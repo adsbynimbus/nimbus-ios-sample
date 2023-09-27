@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 
 protocol NavigationItem: CaseIterable, CustomStringConvertible {
+    var rawValue: String { get }
+    
     func destinationController(parent: String) -> UIViewController
 }
 
