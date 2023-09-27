@@ -22,6 +22,7 @@ final class AdManagerViewController: SampleAdViewController {
     
     // To backup existing interceptors to re-inject them at deinit
     private let requestInterceptors: [NimbusRequestInterceptor]?
+    private var hasCompanionAd = false
     
     init(adType: AdManagerAdType, headerSubTitle: String) {
         self.adType = adType
@@ -136,8 +137,24 @@ final class AdManagerViewController: SampleAdViewController {
     override func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {
         super.didReceiveNimbusEvent(controller: controller, event: event)
         
-        if let ad = nimbusAd, event == .loaded {
+        guard let ad = nimbusAd else { return }
+        
+        switch event {
+        case .loaded:
             controller.adView?.setUiTestIdentifiers(for: ad, refreshing: adType == .bannerWithRefresh)
+        case .loadedCompanionAd:
+            hasCompanionAd = true
+        case .completed:
+            if hasCompanionAd {
+                // Ensures companion ad view is present
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    if let companionAdView = controller.adView?.subviews.last {
+                        companionAdView.setCompanionAdUiTestIdentifiers(for: ad)
+                    }
+                }
+            }
+        default:
+            break
         }
     }
     
