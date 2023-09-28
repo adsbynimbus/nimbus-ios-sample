@@ -13,7 +13,7 @@ import NimbusUnityKit
 #endif
 import UIKit
 
-fileprivate let unityGameId = Bundle.main.infoDictionary?["Unity Game ID"] as? String ?? ""
+let unityGameId = Bundle.main.infoDictionary?["Unity Game ID"] as? String ?? ""
 
 extension UIApplicationDelegate {
     func setupUnityDemand() {
