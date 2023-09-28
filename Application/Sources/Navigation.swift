@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 
 protocol NavigationItem: CaseIterable, CustomStringConvertible {
+    var rawValue: String { get }
+    
     func destinationController(parent: String) -> UIViewController
 }
 
@@ -77,7 +79,7 @@ enum MainItem: String, NavigationItem {
         case .testRender:
             return TestRenderViewController(
                 headerTitle: self.description,
-                headerSubTitle: "Paste in a VAST or HTML Nimbus response"
+                headerSubTitle: "Paste a VAST or HTML Nimbus response"
             )
         case .settings:
             return SettingsViewController(headerTitle: self.description, headerSubTitle: "Configure your test app experience")

@@ -39,4 +39,11 @@ extension UIView {
             }
         }
     }
+    
+    func setCompanionAdUiTestIdentifiers(for nimbusAd: NimbusAd) {
+        setUiTestIdentifiers(
+            for: nimbusAd.testIdentifier,
+            id: "nimbus_ad_view_companion"
+        )
+    }
 }
