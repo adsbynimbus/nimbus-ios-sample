@@ -11,18 +11,17 @@ let package = Package(
             targets: ["Application"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/timehop/nimbus-ios-sdk.git", exact: "2.15.4"),
+        .package(name: "nimbus-ios-sdk", path: "../.."),
+        //.package(url: "https://github.com/timehop/nimbus-ios-sdk.git", exact: "2.15.3"),
+        .package(url: "https://github.com/LiveRamp/ats-sdk-ios.git", from: "2.0.0")
     ],
     targets: [
         .target(
             name: "Application",
             dependencies: [
-                .product(name: "NimbusKit", package: "nimbus-ios-sdk"),
-                .product(name: "NimbusRenderKit", package: "nimbus-ios-sdk"),
-                .product(name: "NimbusRequestKit", package: "nimbus-ios-sdk"),
-                .product(name: "NimbusRenderStaticKit", package: "nimbus-ios-sdk"),
-                .product(name: "NimbusRenderVideoKit", package: "nimbus-ios-sdk"),
+                .product(name: "Nimbus", package: "nimbus-ios-sdk"),
                 .product(name: "NimbusRequestAPSKit", package: "nimbus-ios-sdk"),
+                .product(name: "NimbusLiveRampKit", package: "nimbus-ios-sdk"),
                 .product(name: "NimbusGAMKit", package: "nimbus-ios-sdk"),
                 .product(name: "NimbusGoogleKit", package: "nimbus-ios-sdk"),
                 .product(name: "NimbusFANKit", package: "nimbus-ios-sdk"),

@@ -6,9 +6,8 @@
 //
 
 import AppTrackingTransparency
+import Nimbus
 import NimbusKit
-import NimbusRenderStaticKit
-import NimbusRenderVideoKit
 import SwiftUI
 import UIKit
 
@@ -34,8 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func setupNimbusSDK() {
-        Nimbus.shared.initialize(
-            publisher: Bundle.main.infoDictionary?["Publisher Key"] as! String,
+        Nimbus.initer(
+            pubKey: Bundle.main.infoDictionary?["Publisher Key"] as! String,
             apiKey: Bundle.main.infoDictionary?["API Key"] as! String
         )
         
@@ -46,25 +45,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Nimbus.shared.coppa = UserDefaults.standard.coppaOn
         
         // This is only for testing environment, do NOT add this on production environment
-        if let publisherKey = Nimbus.shared.publisher, Nimbus.shared.testMode {
+      /*  if let publisherKey = Nimbus.shared.publisher, Nimbus.shared.testMode {
             NimbusAdManager.requestUrl = URL(string: "https://\(publisherKey).adsbynimbus.com/rta/test")!
             NimbusAdManager.additionalRequestHeaders = [
                 "Nimbus-Test-No-Fill": String(UserDefaults.standard.forceNoFill)
             ]
         }
-        
-        NimbusAdManager.requestInterceptors = []
-
-        // Renderers
-        let videoRenderer = NimbusVideoAdRenderer()
-        videoRenderer.showMuteButton = true
-        Nimbus.shared.renderers = [
-            .forAuctionType(.static): NimbusStaticAdRenderer(),
-            .forAuctionType(.video): videoRenderer,
-        ]
 
         // User
-        NimbusAdManager.user = NimbusUser(age: 20, gender: .male)
+        NimbusAdManager.user = NimbusUser(age: 20, gender: .male) */
     }
     
     private func startTrackingATT() {

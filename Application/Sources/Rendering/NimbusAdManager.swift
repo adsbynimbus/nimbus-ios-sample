@@ -11,6 +11,13 @@ import NimbusRenderVideoKit
 import UIKit
 import SwiftUI
 
+extension NimbusAd {
+    /** Converts the bid in cents from CPM to a revenue value in $ without precision loss */
+    var revenue: Double {
+        Double(bidInCents) / 100000.0
+    }
+}
+
 final class AdManagerViewController: SampleAdViewController {
     private let contentView = UIView()
     private var adManager = NimbusAdManager()
@@ -63,6 +70,16 @@ final class AdManagerViewController: SampleAdViewController {
             contentView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             contentView.widthAnchor.constraint(greaterThanOrEqualToConstant: 320),
             contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 50),
+        ])
+        
+        let obs = UIView(frame: view.frame)
+        view.addSubview(obs)
+        obs.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            obs.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: Constants.headerOffset),
+            obs.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            obs.widthAnchor.constraint(equalTo: view.widthAnchor),
+            obs.heightAnchor.constraint(equalTo: view.heightAnchor),
         ])
     }
     
