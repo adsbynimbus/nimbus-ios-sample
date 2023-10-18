@@ -114,6 +114,49 @@ The `Test Render` tool is set up with a 320 by 480 end card Companion Ad by defa
 defined in the VAST it will not render without rebuilding the Sample app with an additional Companion Ad definition
 that matches the size defined in the VAST markup.
 
+## Troubleshooting
+
+### Unable to boot device because it cannot be located on disk
+
+If you ever see this pop-up error in Xcode, quit all your running simulators, open your terminal and erase all contents and settings of all simulators using: `xcrun simctl erase all`
+
+### Build failed because Application.swiftmodule is missing a required architecture
+
+It's possible you experience this error when trying to run the sample app via cocoapods and the `nimbus-ios-sample-pods` scheme. It's likely caused by a corrupted CocoaPods installation. 
+You can check whether it's the case by navigating to the project file and selecting the `nimbus-ios-sample-pods` target. Once you're there:
+
+- Click on Build Settings
+- Make sure **All** in the secondary top bar is checked
+- Type **excluded architectures** in the search bar in the top right corner
+- If there's more than one architecture, especially the one your computer runs on, it's likely the problem. E.g. you run on ARM64 (Apple Silicon) and you see `arm64`
+
+#### How to fix it
+
+##### Uninstall CocoaPods
+
+- List the coocapods packages: `gem list --local | grep cocoapods`
+- Uninstall every single one of them, e.g. `sudo gem uninstall cocoapods`
+- Once you uninstalled everything, delete the local cocoapods directory: `rm -rf ~/.cocoapods`
+
+##### Install CocoaPods
+
+- Run `sudo gem install cocoapods`
+
+##### Clean the nimbus-ios-sample changes
+
+- Navigate to nimbus-ios-sample directory
+- Run `git checkout -f` to purge any project changes cocoapods previously did
+- Delete the xcworkspace `rm -rf nimbus-ios-sample.xcworkspace`
+- Delete the `Podfile.lock` using `rm Podfile.lock`
+- Delete the Pods directory: `rm -rf Pods`
+
+##### Re-initialize nimbus-ios-sample using cocoapods
+
+- Run `pod install --repo-update`
+- Open the `nimbus-ios-sample.xcworkspace`
+- Clean the build using `CMD + Shift + K`
+- Try to run the `nimbus-ios-sample-pods` scheme. Everything should work.
+
 ## Need help?
 You can check out [Nimbus iOS Quick Start Guide](https://adsbynimbus-public.s3.amazonaws.com/iOS/docs/1.11.1/docs/index.html)
 
