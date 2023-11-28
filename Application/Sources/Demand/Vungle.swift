@@ -14,6 +14,7 @@ import NimbusSDK
 import NimbusVungleKit
 #endif
 import UIKit
+import VungleAdsSDK
 
 fileprivate var shared: NimbusVungleRequestInterceptor?
 fileprivate var vungleAppId = Bundle.main.infoDictionary?["Vungle App ID"] as? String
@@ -53,18 +54,31 @@ class VungleViewController: SampleAdViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        let renderer = NimbusVungleAdRenderer()
+//        renderer.adRendererDelegate = self
+//        
+//        Nimbus.shared.renderers[.forNetwork("vungle")] = renderer
+        
         // Enable Vungle Demand for this screen only
-        NimbusVungleRequestInterceptor.enabled = true
-        NimbusRequestManager.requestInterceptors?.append(self)
+//        NimbusVungleRequestInterceptor.enabled = true
+//        NimbusRequestManager.requestInterceptors?.append(self)
+        
+        NimbusAdManager.requestInterceptors = nil
+        
+        NimbusRequestManager.requestInterceptors = [
+            NimbusVungleRequestInterceptor(appId: vungleAppId!)
+        ]
+        
+        
         
         setupContentView()
         setupAdRendering()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        NimbusVungleRequestInterceptor.enabled = false
-        NimbusRequestManager.requestInterceptors?.removeAll { $0 === self }
-    }
+//    override func viewDidDisappear(_ animated: Bool) {
+//        NimbusVungleRequestInterceptor.enabled = false
+//        NimbusRequestManager.requestInterceptors?.removeAll { $0 === self }
+//    }
     
     private func setupContentView() {
         view.addSubview(contentView)
@@ -106,6 +120,48 @@ class VungleViewController: SampleAdViewController {
                 request: NimbusRequest.forRewardedVideo(position: adType.description),
                 adPresentingViewController: self
             )
+        case .vungleNative:
+//            let dimensions = NimbusAdDimensions(width: 300, height: 250)
+//            let ad = NimbusAd(
+//                position: "",
+//                auctionType: .native,
+//                bidRaw: 0,
+//                bidInCents: 0,
+//                contentType: "",
+//                auctionId: "",
+//                network: "vungle",
+//                markup: "",
+//                isInterstitial: false,
+//                placementId: "NIMBUS_IOS_NATIVE-7709644",
+//                duration: nil,
+//                adDimensions: dimensions,
+//                trackers: nil,
+//                isMraid: false,
+//                extensions: nil
+//            )
+//            
+//            let adContainerView = CustomAdContainerView(
+//                ad: ad,
+//                companionAd: nil,
+//                viewController: self,
+//                creativeScalingEnabledForStaticAds: false,
+//                delegate: self
+//            )
+//            
+//            view.addSubview(adContainerView)
+//            
+//            NSLayoutConstraint.activate([
+//                adContainerView.safeAreaLayoutGuide.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+//                adContainerView.safeAreaLayoutGuide.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+//                adContainerView.safeAreaLayoutGuide.widthAnchor.constraint(equalToConstant: CGFloat(dimensions.width)),
+//                adContainerView.safeAreaLayoutGuide.heightAnchor.constraint(equalToConstant: CGFloat(dimensions.height)),
+//            ])
+            
+            adManager?.showAd(
+                request: NimbusRequest.forNativeBannerAd(position: "NIMBUS_IOS_NATIVE-7709644", format: .letterbox),
+                container: contentView,
+                adPresentingViewController: self
+            )
         }
     }
 }
@@ -127,6 +183,12 @@ extension VungleViewController: NimbusAdManagerDelegate {
     }
 }
 
+//extension VungleViewController: NimbusVungleAdRendererDelegate {
+//    func customViewForRendering(container: UIView, nativeAd: VungleNative) -> NimbusVungleNativeAdViewType {
+//        return NimbusVungleNative
+//    }
+//}
+
 extension VungleViewController: NimbusRequestInterceptor {
     
     func modifyRequest(request: NimbusRequestKit.NimbusRequest) {
@@ -138,7 +200,6 @@ extension VungleViewController: NimbusRequestInterceptor {
     func didCompleteNimbusRequest(with ad: NimbusAd) { }
     func didFailNimbusRequest(with error: NimbusError) { }
 }
-
 
 extension NimbusVungleRequestInterceptor {
     static var enabled: Bool {
