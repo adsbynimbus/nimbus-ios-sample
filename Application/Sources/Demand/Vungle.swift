@@ -54,31 +54,18 @@ class VungleViewController: SampleAdViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let renderer = NimbusVungleAdRenderer()
-//        renderer.adRendererDelegate = self
-//        
-//        Nimbus.shared.renderers[.forNetwork("vungle")] = renderer
-        
         // Enable Vungle Demand for this screen only
-//        NimbusVungleRequestInterceptor.enabled = true
-//        NimbusRequestManager.requestInterceptors?.append(self)
-        
-        NimbusAdManager.requestInterceptors = nil
-        
-        NimbusRequestManager.requestInterceptors = [
-            NimbusVungleRequestInterceptor(appId: vungleAppId!)
-        ]
-        
-        
+        NimbusVungleRequestInterceptor.enabled = true
+        NimbusRequestManager.requestInterceptors?.append(self)
         
         setupContentView()
         setupAdRendering()
     }
     
-//    override func viewDidDisappear(_ animated: Bool) {
-//        NimbusVungleRequestInterceptor.enabled = false
-//        NimbusRequestManager.requestInterceptors?.removeAll { $0 === self }
-//    }
+    override func viewDidDisappear(_ animated: Bool) {
+        NimbusVungleRequestInterceptor.enabled = false
+        NimbusRequestManager.requestInterceptors?.removeAll { $0 === self }
+    }
     
     private func setupContentView() {
         view.addSubview(contentView)
