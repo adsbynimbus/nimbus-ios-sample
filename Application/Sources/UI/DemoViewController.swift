@@ -42,6 +42,7 @@ class DemoViewController: UIViewController {
         let contentView = UIStackView()
         contentView.axis = .vertical
         contentView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.distribution = .fillProportionally
         
         header.addSubview(contentView)
         NSLayoutConstraint.activate([

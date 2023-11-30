@@ -83,10 +83,18 @@ final class NimbusVungleNativeAdView: UIView, NimbusVungleNativeAdViewType {
     }()
 
     /// All clickable views
-    var clickableViews: [UIView]? { nil }
+    var clickableViews: [UIView]? { [mediaView, callToActionButton] }
 
     /// Spacing between components
     private let spacing: CGFloat = 5
+    
+    private let labelStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.distribution = .fillProportionally
+        return stackView
+    }()
 
     /**
      Initializes a NimbusVungleNativeAdView instance
@@ -124,7 +132,13 @@ final class NimbusVungleNativeAdView: UIView, NimbusVungleNativeAdViewType {
         addSubview(mediaView)
         addSubview(callToActionButton)
         addSubview(bodyTextLabel)
-
+        
+        addSubview(labelStackView)
+        
+        labelStackView.addArrangedSubview(titleLabel)
+        labelStackView.addArrangedSubview(adStarRatingLabel)
+        labelStackView.addArrangedSubview(sponsoredLabel)
+        
         mediaView.backgroundColor = .white
 
         NSLayoutConstraint.activate([
@@ -134,19 +148,12 @@ final class NimbusVungleNativeAdView: UIView, NimbusVungleNativeAdViewType {
             iconImageView!.widthAnchor.constraint(equalToConstant: 48),
             iconImageView!.bottomAnchor.constraint(lessThanOrEqualTo: mediaView.topAnchor, constant: -spacing),
 
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: spacing),
-            titleLabel.leftAnchor.constraint(equalTo: iconImageView!.rightAnchor, constant: spacing),
-            titleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -spacing),
+            labelStackView.topAnchor.constraint(equalTo: topAnchor, constant: spacing),
+            labelStackView.rightAnchor.constraint(equalTo: rightAnchor, constant: -spacing),
+            labelStackView.leftAnchor.constraint(equalTo: iconImageView!.rightAnchor, constant: spacing),
+            labelStackView.heightAnchor.constraint(equalTo: iconImageView!.heightAnchor),
 
-            adStarRatingLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
-            adStarRatingLabel.leftAnchor.constraint(equalTo: iconImageView!.rightAnchor, constant: spacing),
-            adStarRatingLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -spacing),
-
-            sponsoredLabel.topAnchor.constraint(equalTo: adStarRatingLabel.bottomAnchor),
-            sponsoredLabel.leftAnchor.constraint(equalTo: iconImageView!.rightAnchor, constant: spacing),
-            sponsoredLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -spacing),
-
-            mediaView.topAnchor.constraint(equalTo: sponsoredLabel.bottomAnchor, constant: spacing),
+            mediaView.topAnchor.constraint(equalTo: labelStackView.bottomAnchor, constant: spacing),
             mediaView.leftAnchor.constraint(equalTo: leftAnchor),
             mediaView.rightAnchor.constraint(equalTo: rightAnchor),
 
