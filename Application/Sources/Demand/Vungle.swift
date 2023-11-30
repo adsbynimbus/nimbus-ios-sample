@@ -35,6 +35,7 @@ extension UIApplicationDelegate {
 class VungleViewController: SampleAdViewController {
     
     private let contentView = UIView()
+    private let nativeAdContentView = UIView()
     
     private let adType: VungleSample
     private var adManager: NimbusAdManager?
@@ -54,7 +55,7 @@ class VungleViewController: SampleAdViewController {
         super.viewDidLoad()
         
         let renderer = NimbusVungleAdRenderer()
-        renderer.nativeAdDelegate = self
+        renderer.adRendererDelegate = self
         Nimbus.shared.renderers[.forNetwork("vungle")] = renderer
         
         // Enable Vungle Demand for this screen only
@@ -114,9 +115,21 @@ class VungleViewController: SampleAdViewController {
                 adPresentingViewController: self
             )
         case .vungleNative:
+            nativeAdContentView.translatesAutoresizingMaskIntoConstraints = false
+            
+            contentView.addSubview(nativeAdContentView)
+            
+            NSLayoutConstraint.activate([
+                nativeAdContentView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+                nativeAdContentView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+                nativeAdContentView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+                nativeAdContentView.widthAnchor.constraint(equalToConstant: 300),
+                nativeAdContentView.heightAnchor.constraint(equalToConstant: 300)
+            ])
+            
             adManager?.showAd(
                 request: NimbusRequest.forNativeBannerAd(position: "NIMBUS_IOS_NATIVE-7709644", format: .letterbox),
-                container: contentView,
+                container: nativeAdContentView,
                 adPresentingViewController: self
             )
         }
@@ -140,21 +153,9 @@ extension VungleViewController: NimbusAdManagerDelegate {
     }
 }
 
-extension VungleViewController: NimbusVungleNativeAdDelegate {
+extension VungleViewController: NimbusVungleAdRendererDelegate {
     func customViewForRendering(container: UIView, nativeAd: VungleNative) -> NimbusVungleNativeAdViewType {
-        let adView = NimbusVungleNativeAdView(nativeAd)
-        
-        container.addSubview(adView)
-        
-        NSLayoutConstraint.activate([
-            adView.centerYAnchor.constraint(equalTo: container.centerYAnchor),
-            adView.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 8),
-            adView.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -8),
-            adView.widthAnchor.constraint(equalToConstant: 300),
-            adView.heightAnchor.constraint(equalToConstant: 300),
-        ])
-        
-        return adView
+        NimbusVungleNativeAdView(nativeAd)
     }
 }
 

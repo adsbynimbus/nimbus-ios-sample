@@ -125,7 +125,7 @@ final class NimbusVungleNativeAdView: UIView, NimbusVungleNativeAdViewType {
         addSubview(callToActionButton)
         addSubview(bodyTextLabel)
 
-        mediaView.backgroundColor = .green
+        mediaView.backgroundColor = .white
 
         NSLayoutConstraint.activate([
             iconImageView!.topAnchor.constraint(equalTo: topAnchor, constant: spacing),
