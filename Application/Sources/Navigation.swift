@@ -162,6 +162,7 @@ enum VungleSample: String, NavigationItem {
     case vungleMREC             = "Vungle MREC"
     case vungleInterstitial     = "Vungle Interstitial"
     case vungleRewarded         = "Vungle Rewarded"
+    case vungleNative           = "Vungle Native"
     
     func destinationController(parent: String) -> UIViewController {
         VungleViewController(adType: self, headerSubTitle: parent)
