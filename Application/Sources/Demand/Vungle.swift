@@ -128,7 +128,7 @@ class VungleViewController: SampleAdViewController {
             ])
             
             adManager?.showAd(
-                request: NimbusRequest.forNativeBannerAd(position: "NIMBUS_IOS_NATIVE-7709644", format: .letterbox),
+                request: NimbusRequest.forNativeAd(position: "NIMBUS_IOS_NATIVE-7709644"),
                 container: nativeAdContentView,
                 adPresentingViewController: self
             )
