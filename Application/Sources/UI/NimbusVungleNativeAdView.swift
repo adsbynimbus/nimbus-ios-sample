@@ -3,7 +3,7 @@
 //  nimbus-ios-sample
 //
 //  Created by Victor Takai on 26/09/22.
-//  Copyright © 2022 Timehop. All rights reserved.
+//  Copyright © 2022 Nimbus Advertising Solutions Inc. All rights reserved.
 //
 import UIKit
 import VungleAdsSDK

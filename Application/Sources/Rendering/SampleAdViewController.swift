@@ -3,7 +3,7 @@
 //  NimbusInternalSampleApp
 //
 //  Created by Jason Sznol on 6/1/23.
-//  Copyright © 2023 Timehop. All rights reserved.
+//  Copyright © 2023 Nimbus Advertising Solutions Inc. All rights reserved.
 //
 
 import NimbusRenderKit
