@@ -2,7 +2,7 @@
 //  TestRenderAdViewController.swift
 //  nimbus-ios-sample
 //
-//  Created by Victor Takai on 22/11/21.
+//  Created on 22/11/21.
 //
 
 import UIKit

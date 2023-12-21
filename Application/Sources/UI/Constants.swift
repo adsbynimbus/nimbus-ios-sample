@@ -2,7 +2,7 @@
 //  Constants.swift
 //  nimbus-ios-sample
 //
-//  Created by Standa Musil on 7/18/23.
+//  Created on 7/18/23.
 //  Copyright © 2023 Nimbus Advertising Solutions Inc. All rights reserved.
 //
 

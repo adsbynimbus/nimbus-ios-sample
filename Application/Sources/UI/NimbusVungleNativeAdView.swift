@@ -2,7 +2,7 @@
 //  NimbusVungleNativeAdView.swift
 //  nimbus-ios-sample
 //
-//  Created by Victor Takai on 26/09/22.
+//  Created on 26/09/22.
 //  Copyright © 2022 Nimbus Advertising Solutions Inc. All rights reserved.
 //
 import UIKit

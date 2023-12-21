@@ -2,7 +2,7 @@
 //  Views.swift
 //  nimbus-ios-sample
 //
-//  Created by Jason Sznol on 5/28/23.
+//  Created on 5/28/23.
 //
 
 import UIKit

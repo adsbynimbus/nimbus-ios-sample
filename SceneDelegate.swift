@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  nimbus-ios-sample
 //
-//  Created by Jason Sznol on 5/29/23.
+//  Created on 5/29/23.
 //
 
 import Application

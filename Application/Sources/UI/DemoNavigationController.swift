@@ -2,7 +2,7 @@
 //  DemoNavigationController.swift
 //  nimbus-ios-sample
 //
-//  Created by Victor Takai on 09/11/21.
+//  Created on 09/11/21.
 //
 
 import UIKit
