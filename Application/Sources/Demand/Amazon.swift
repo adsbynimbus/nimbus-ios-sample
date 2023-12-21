@@ -2,7 +2,7 @@
 //  APSViewController.swift
 //  nimbus-ios-sample
 //
-//  Created by Victor Takai on 02/05/23.
+//  Created on 02/05/23.
 //
 
 import DTBiOSSDK

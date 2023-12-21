@@ -2,7 +2,7 @@
 //  AdManagerViewController.swift
 //  nimbus-ios-sample
 //
-//  Created by Victor Takai on 11/11/21.
+//  Created on 11/11/21.
 //
 
 import GoogleInteractiveMediaAds

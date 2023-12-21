@@ -2,7 +2,7 @@
 //  FANViewController.swift
 //  nimbus-ios-sample
 //
-//  Created by Victor Takai on 01/05/23.
+//  Created on 01/05/23.
 //
 
 import FBAudienceNetwork

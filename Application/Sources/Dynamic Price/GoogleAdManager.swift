@@ -2,7 +2,7 @@
 //  GoogleAdManager.swift
 //  nimbus-ios-sample
 //
-//  Created by Jason Sznol on 5/27/23.
+//  Created on 5/27/23.
 //
 
 import GoogleMobileAds
