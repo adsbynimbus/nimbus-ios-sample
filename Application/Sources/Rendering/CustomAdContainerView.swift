@@ -2,7 +2,7 @@
 //  AdView.swift
 //  nimbus-ios-sample
 //
-//  Created by Victor Takai on 19/11/21.
+//  Created on 19/11/21.
 //
 
 import UIKit

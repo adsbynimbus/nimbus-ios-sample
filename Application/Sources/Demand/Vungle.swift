@@ -2,8 +2,8 @@
 //  VungleViewController.swift
 //  nimbus-ios-sample
 //
-//  Created by Bruno Bruggemann on 10/25/22.
-//  Copyright © 2022 Timehop. All rights reserved.
+//  Created on 10/25/22.
+//  Copyright © 2022 Nimbus Advertising Solutions Inc. All rights reserved.
 //
 
 import AdSupport

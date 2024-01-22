@@ -2,8 +2,8 @@
 //  SampleAdViewController.swift
 //  NimbusInternalSampleApp
 //
-//  Created by Jason Sznol on 6/1/23.
-//  Copyright © 2023 Timehop. All rights reserved.
+//  Created on 6/1/23.
+//  Copyright © 2023 Nimbus Advertising Solutions Inc. All rights reserved.
 //
 
 import NimbusRenderKit

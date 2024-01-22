@@ -2,7 +2,7 @@
 //  SettingsViewController.swift
 //  nimbus-ios-sample
 //
-//  Created by Victor Takai on 10/11/21.
+//  Created on 10/11/21.
 //
 
 import UIKit

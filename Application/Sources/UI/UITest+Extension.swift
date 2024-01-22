@@ -2,7 +2,7 @@
 //  UITest+Extension.swift
 //  nimbus-ios-sample
 //
-//  Created by Jason Sznol on 5/8/23.
+//  Created on 5/8/23.
 //
 
 import NimbusRenderKit
