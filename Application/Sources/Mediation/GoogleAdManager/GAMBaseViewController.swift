@@ -12,6 +12,11 @@
 
 import UIKit
 import NimbusKit
+#if canImport(NimbusGAMKit)                    // Swift Package Manager
+import NimbusGAMKit
+#elseif canImport(NimbusSDK)                   // CocoaPods
+import NimbusSDK
+#endif
 
 class GAMBaseViewController: DemoViewController {
     private var requestInterceptors: [NimbusRequestInterceptor]?
