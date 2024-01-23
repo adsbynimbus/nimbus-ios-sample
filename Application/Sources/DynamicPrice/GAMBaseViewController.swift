@@ -4,10 +4,6 @@
 //  Created on 1/23/24
 //  Copyright © 2024 Nimbus Advertising Solutions Inc. All rights reserved.
 //
-//  Please ignore this controller when integrating dynamic price with Nimbus.
-//  This controller merely makes sure there are no active request interceptors
-//  for these use cases. This sample app sets multiple interceptors as it showcases a wide
-//  range of ads and integrations.
 //
 
 import UIKit
@@ -17,6 +13,9 @@ import NimbusGAMKit
 #elseif canImport(NimbusSDK)                   // CocoaPods
 import NimbusSDK
 #endif
+
+let googleDynamicPricePlacementId = Bundle.main.infoDictionary?["Google Nimbus Rendering Placement ID"] as? String ?? ""
+let googleDynamicPriceRewardedPlacementId = Bundle.main.infoDictionary?["Google Nimbus Rendering Rewarded Placement ID"] as? String ?? ""
 
 class GAMBaseViewController: DemoViewController {
     private var requestInterceptors: [NimbusRequestInterceptor]?
@@ -31,6 +30,10 @@ class GAMBaseViewController: DemoViewController {
         NimbusAdManager.requestInterceptors = requestInterceptors
     }
     
+    // Please ignore this interceptor logic when integrating Dynamic Price.
+    // The sample app sets multiple interceptors as it showcases a wide
+    // range of ads and integrations, so this code merely makes sure no
+    // interceptors are active.
     override func viewDidLoad() {
         super.viewDidLoad()
         
