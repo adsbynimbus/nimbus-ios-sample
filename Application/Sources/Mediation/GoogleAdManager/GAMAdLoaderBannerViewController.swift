@@ -27,7 +27,7 @@ class GAMAdLoaderBannerViewController: GAMBaseViewController {
         super.viewDidLoad()
         
         requestManager.delegate = self
-        requestManager.performRequest(request: NimbusRequest.forBannerAd(position: "test_dp_rendering"))
+        requestManager.performRequest(request: NimbusRequest.forBannerAd(position: headerSubTitle))
     }
 }
 

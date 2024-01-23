@@ -28,7 +28,7 @@ class GAMInlineVideoViewController: GAMBaseViewController {
         setupBannerView()
         
         requestManager.delegate = self
-        requestManager.performRequest(request: NimbusRequest.forVideoAd(position: "test_dp_rendering"))
+        requestManager.performRequest(request: NimbusRequest.forVideoAd(position: headerSubTitle))
     }
     
     func setupBannerView() {

@@ -25,7 +25,7 @@ class GAMInterstitialViewController: GAMBaseViewController {
         super.viewDidLoad()
         
         requestManager.delegate = self
-        requestManager.performRequest(request: NimbusRequest.forInterstitialAd(position: "test_dp_rendering"))
+        requestManager.performRequest(request: NimbusRequest.forInterstitialAd(position: headerSubTitle))
     }
     
     override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
