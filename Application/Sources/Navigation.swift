@@ -57,8 +57,6 @@ enum MainItem: String, NavigationItem {
             } else {
                 items = [
                     Section(header: "Google Ad Manager (GAM)", items: DynamicPriceNimbusRendering.allCases)
-//                    Section(header: "Google Ad Manager", items: GAMMediationAdType.allCases),
-//                    Section(header: nil, items: DynamicPriceGAM.allCases)
                 ]
             }
             
@@ -104,37 +102,25 @@ enum AdManagerAdType: String, NavigationItem {
     }
 }
 
-enum GAMMediationAdType: String, NavigationItem {
-    case banner                   = "Banner"
-    case interstitial             = "Interstitial"
-    
-    func destinationController(parent: String) -> UIViewController {
-        GAMViewController(adType: self, headerSubTitle: parent)
-    }
-}
-
 enum DynamicPriceNimbusRendering: String, NavigationItem {
     case banner = "Banner"
+    case adLoaderBanner = "AdLoader Banner"
     case inlineVideo = "Inline Video"
     case interstitial = "Interstitial"
     case rewarded = "Rewarded"
+    case rewardedInterstitial = "Rewarded Interstitial"
     
     func destinationController(parent: String) -> UIViewController {
+        let title = "Dynamic Price Nimbus Rendering"
+        
         switch self {
-        case .banner: return GAMBannerViewController(headerTitle: "Dynamic Price Nimbus Rendering", headerSubTitle: "Banner")
-        default:
-            return GAMBannerViewController(headerTitle: "Dynamic Price Nimbus Rendering", headerSubTitle: "Banner")
+        case .banner: return GAMBannerViewController(headerTitle: title, headerSubTitle: "Banner")
+        case .adLoaderBanner: return GAMAdLoaderBannerViewController(headerTitle: title, headerSubTitle: "AdLoader Banner")
+        case .inlineVideo: return GAMInlineVideoViewController(headerTitle: title, headerSubTitle: "Inline Video")
+        case .interstitial: return GAMInterstitialViewController(headerTitle: title, headerSubTitle: "Interstitial")
+        case .rewarded: return GAMRewardedViewController(headerTitle: title, headerSubTitle: "Rewarded")
+        case .rewardedInterstitial: return GAMRewardedInterstitialViewController(headerTitle: title, headerSubTitle: "Rewarded Interstitial")
         }
-    }
-}
-
-enum DynamicPriceGAM: String, NavigationItem {
-    case dynamicPriceBanner       = "Dynamic Price Banner"
-    case dynamicPriceBannerVideo  = "Dynamic Price Banner + Video"
-    case dynamicPriceInlineVideo  = "Dynamic Price Inline Video"
-    case dynamicPriceInterstitial = "Dynamic Price Interstitial"
-    func destinationController(parent: String) -> UIViewController {
-        GoogleDynamicPriceViewController(adType: self, headerSubTitle: parent)
     }
 }
 

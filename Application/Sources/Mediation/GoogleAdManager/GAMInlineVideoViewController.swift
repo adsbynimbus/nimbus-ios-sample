@@ -1,7 +1,7 @@
 //
-//  GAMBannerViewController.swift
+//  GAMInlineVideoViewController.swift
 //  NimbusInternalSampleApp
-//  Created on 1/19/24
+//  Created on 1/23/24
 //  Copyright © 2024 Nimbus Advertising Solutions Inc. All rights reserved.
 //
 
@@ -11,14 +11,14 @@ import NimbusGAMKit
 #endif
 import GoogleMobileAds
 
-class GAMBannerViewController: GAMBaseViewController {
+class GAMInlineVideoViewController: GAMBaseViewController {
     private let requestManager = NimbusRequestManager()
     private lazy var dynamicPriceRenderer: NimbusDynamicPriceRenderer = {
         return NimbusDynamicPriceRenderer(requestManager: requestManager)
     }()
     
     private let gamRequest = GAMRequest()
-    private let bannerView = GAMBannerView(adSize: GADAdSizeBanner)
+    private let bannerView = GAMBannerView(adSize: GADAdSizeMediumRectangle)
     private var gamDynamicPrice: NimbusGAMDynamicPrice?
     
     override func viewDidLoad() {
@@ -30,7 +30,7 @@ class GAMBannerViewController: GAMBaseViewController {
         gamDynamicPrice?.requestDelegate = self
         
         requestManager.delegate = gamDynamicPrice
-        requestManager.performRequest(request: NimbusRequest.forBannerAd(position: "test_dp_rendering"))
+        requestManager.performRequest(request: NimbusRequest.forVideoAd(position: "test_dp_rendering"))
     }
     
     func setupBannerView() {
@@ -55,7 +55,7 @@ class GAMBannerViewController: GAMBaseViewController {
 
 // MARK: - GADAppEventDelegate
 
-extension GAMBannerViewController: GADAppEventDelegate {
+extension GAMInlineVideoViewController: GADAppEventDelegate {
     func adView(_ banner: GADBannerView, didReceiveAppEvent name: String, withInfo info: String?) {
         print("adView:didReceiveAppEvent")
         dynamicPriceRenderer.handleBannerEventForNimbus(bannerView: banner, name: name, info: info)
@@ -64,7 +64,7 @@ extension GAMBannerViewController: GADAppEventDelegate {
 
 // MARK: - GADBannerViewDelegate
 
-extension GAMBannerViewController: GADBannerViewDelegate {
+extension GAMInlineVideoViewController: GADBannerViewDelegate {
     func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
         print("bannerViewDidReceiveAd")
     }
@@ -98,7 +98,7 @@ extension GAMBannerViewController: GADBannerViewDelegate {
 
 // MARK: - NimbusRequestManagerDelegate
 
-extension GAMBannerViewController: NimbusRequestManagerDelegate {
+extension GAMInlineVideoViewController: NimbusRequestManagerDelegate {
     func didCompleteNimbusRequest(request: NimbusRequestKit.NimbusRequest, ad: NimbusCoreKit.NimbusAd) {
         print("didCompleteNimbusRequest")
         
@@ -109,5 +109,4 @@ extension GAMBannerViewController: NimbusRequestManagerDelegate {
     func didFailNimbusRequest(request: NimbusRequestKit.NimbusRequest, error: NimbusCoreKit.NimbusError) {
         print("didFailNimbusRequest: \(error.localizedDescription)")
     }
-    
 }
