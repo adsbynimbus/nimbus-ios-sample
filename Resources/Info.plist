@@ -19,7 +19,7 @@
 	<key>GADApplicationIdentifier</key>
 	<string>$(GOOGLE_APP_ID)</string>
 	<key>GADIsAdManagerApp</key>
-	<false/>
+	<true/>
 	<key>Google Placement ID</key>
 	<string>$(GOOGLE_PLACEMENT_ID)</string>
 	<key>Google Nimbus Rendering Placement ID</key>
