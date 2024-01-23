@@ -56,8 +56,9 @@ enum MainItem: String, NavigationItem {
                 items = [Section(header: "AdMob", items: DynamicAdMob.allCases)]
             } else {
                 items = [
-                    Section(header: "Google Ad Manager", items: GAMMediationAdType.allCases),
-                    Section(header: nil, items: DynamicPriceGAM.allCases)
+                    Section(header: "Google Ad Manager (GAM)", items: DynamicPriceNimbusRendering.allCases)
+//                    Section(header: "Google Ad Manager", items: GAMMediationAdType.allCases),
+//                    Section(header: nil, items: DynamicPriceGAM.allCases)
                 ]
             }
             
@@ -109,6 +110,21 @@ enum GAMMediationAdType: String, NavigationItem {
     
     func destinationController(parent: String) -> UIViewController {
         GAMViewController(adType: self, headerSubTitle: parent)
+    }
+}
+
+enum DynamicPriceNimbusRendering: String, NavigationItem {
+    case banner = "Banner"
+    case inlineVideo = "Inline Video"
+    case interstitial = "Interstitial"
+    case rewarded = "Rewarded"
+    
+    func destinationController(parent: String) -> UIViewController {
+        switch self {
+        case .banner: return GAMBannerViewController(headerTitle: "Dynamic Price Nimbus Rendering", headerSubTitle: "Banner")
+        default:
+            return GAMBannerViewController(headerTitle: "Dynamic Price Nimbus Rendering", headerSubTitle: "Banner")
+        }
     }
 }
 
