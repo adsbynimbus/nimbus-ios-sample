@@ -21,17 +21,13 @@ class GAMBannerViewController: GAMBaseViewController {
     
     private let gamRequest = GAMRequest()
     private let bannerView = GAMBannerView(adSize: GADAdSizeBanner)
-    private var gamDynamicPrice: NimbusGAMDynamicPrice?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupBannerView()
         
-        gamDynamicPrice = NimbusGAMDynamicPrice(request: gamRequest)
-        gamDynamicPrice?.requestDelegate = self
-        
-        requestManager.delegate = gamDynamicPrice
+        requestManager.delegate = self
         requestManager.performRequest(request: NimbusRequest.forBannerAd(position: "test_dp_rendering"))
     }
     
@@ -105,6 +101,8 @@ extension GAMBannerViewController: NimbusRequestManagerDelegate {
         print("didCompleteNimbusRequest")
         
         dynamicPriceRenderer.willRender(ad: ad, bannerView: bannerView)
+        
+        ad.applyDynamicPrice(into: gamRequest, mapping: mapping)
         bannerView.load(gamRequest)
     }
     

@@ -21,17 +21,13 @@ class GAMInlineVideoViewController: GAMBaseViewController {
     
     private let gamRequest = GAMRequest()
     private let bannerView = GAMBannerView(adSize: GADAdSizeMediumRectangle)
-    private var gamDynamicPrice: NimbusGAMDynamicPrice?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupBannerView()
         
-        gamDynamicPrice = NimbusGAMDynamicPrice(request: gamRequest)
-        gamDynamicPrice?.requestDelegate = self
-        
-        requestManager.delegate = gamDynamicPrice
+        requestManager.delegate = self
         requestManager.performRequest(request: NimbusRequest.forVideoAd(position: "test_dp_rendering"))
     }
     
@@ -105,6 +101,7 @@ extension GAMInlineVideoViewController: NimbusRequestManagerDelegate {
         print("didCompleteNimbusRequest")
         
         dynamicPriceRenderer.willRender(ad: ad, bannerView: bannerView)
+        ad.applyDynamicPrice(into: gamRequest, mapping: mapping)
         bannerView.load(gamRequest)
     }
     

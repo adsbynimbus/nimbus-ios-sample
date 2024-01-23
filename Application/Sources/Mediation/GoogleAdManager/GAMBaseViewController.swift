@@ -16,6 +16,12 @@ import NimbusKit
 class GAMBaseViewController: DemoViewController {
     private var requestInterceptors: [NimbusRequestInterceptor]?
     
+    // Sample Price Mapping configured for testing only.
+    // Contact your Nimbus account manager for the values setup with your account.
+    let mapping = NimbusGAMLinearPriceMapping(granularities: [
+         NimbusGAMLinearPriceGranularity(min: 0, max: 0, step: 1),
+    ])
+    
     deinit {
         NimbusAdManager.requestInterceptors = requestInterceptors
     }

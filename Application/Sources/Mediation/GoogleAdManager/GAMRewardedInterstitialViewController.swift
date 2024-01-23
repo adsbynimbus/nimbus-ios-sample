@@ -21,16 +21,12 @@ class GAMRewardedInterstitialViewController: GAMBaseViewController {
     
     private let gamRequest = GAMRequest()
     private var rewardedInterstitialAd: GADRewardedInterstitialAd?
-    private var gamDynamicPrice: NimbusGAMDynamicPrice?
     private var rewardedAdPresenter: NimbusRewardedAdPresenter?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        gamDynamicPrice = NimbusGAMDynamicPrice(request: gamRequest)
-        gamDynamicPrice?.requestDelegate = self
-        
-        requestManager.delegate = gamDynamicPrice
+        requestManager.delegate = self
         requestManager.performRequest(request: NimbusRequest.forRewardedVideo(position: "test_dp_rendering"))
     }
 }
@@ -126,6 +122,8 @@ extension GAMRewardedInterstitialViewController: NimbusRewardedAdPresenterDelega
 extension GAMRewardedInterstitialViewController: NimbusRequestManagerDelegate {
     func didCompleteNimbusRequest(request: NimbusRequestKit.NimbusRequest, ad: NimbusCoreKit.NimbusAd) {
         print("didCompleteNimbusRequest")
+        
+        ad.applyDynamicPrice(into: gamRequest, mapping: mapping)
         
         GADRewardedInterstitialAd.load(
             withAdUnitID: googleDynamicPriceRewardedPlacementId,

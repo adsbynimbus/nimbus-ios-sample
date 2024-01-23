@@ -20,17 +20,13 @@ class GAMAdLoaderBannerViewController: GAMBaseViewController {
     }()
     
     private let gamRequest = GAMRequest()
-    private var gamDynamicPrice: NimbusGAMDynamicPrice?
     private var adLoader: GADAdLoader?
     private var ad: NimbusAd?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        gamDynamicPrice = NimbusGAMDynamicPrice(request: gamRequest)
-        gamDynamicPrice?.requestDelegate = self
-        
-        requestManager.delegate = gamDynamicPrice
+        requestManager.delegate = self
         requestManager.performRequest(request: NimbusRequest.forBannerAd(position: "test_dp_rendering"))
     }
 }
@@ -124,6 +120,7 @@ extension GAMAdLoaderBannerViewController: NimbusRequestManagerDelegate {
     func didCompleteNimbusRequest(request: NimbusRequestKit.NimbusRequest, ad: NimbusCoreKit.NimbusAd) {
         print("didCompleteNimbusRequest")
         
+        ad.applyDynamicPrice(into: gamRequest, mapping: mapping)
         self.ad = ad
         
         adLoader = GADAdLoader(

@@ -20,15 +20,11 @@ class GAMInterstitialViewController: GAMBaseViewController {
     }()
     
     private let gamRequest = GAMRequest()
-    private var gamDynamicPrice: NimbusGAMDynamicPrice?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        gamDynamicPrice = NimbusGAMDynamicPrice(request: gamRequest)
-        gamDynamicPrice?.requestDelegate = self
-        
-        requestManager.delegate = gamDynamicPrice
+        requestManager.delegate = self
         requestManager.performRequest(request: NimbusRequest.forInterstitialAd(position: "test_dp_rendering"))
     }
     
@@ -89,6 +85,8 @@ extension GAMInterstitialViewController: GADFullScreenContentDelegate {
 extension GAMInterstitialViewController: NimbusRequestManagerDelegate {
     func didCompleteNimbusRequest(request: NimbusRequestKit.NimbusRequest, ad: NimbusCoreKit.NimbusAd) {
         print("didCompleteNimbusRequest")
+        
+        ad.applyDynamicPrice(into: gamRequest, mapping: mapping)
         
         GAMInterstitialAd.load(
             withAdManagerAdUnitID: googleDynamicPricePlacementId,
