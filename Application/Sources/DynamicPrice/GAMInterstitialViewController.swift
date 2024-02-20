@@ -57,7 +57,7 @@ class GAMInterstitialViewController: GAMBaseViewController {
             }
             
             DispatchQueue.main.async {
-                interstitialAd.presentDynamicPrice(fromRootViewController: self)
+                interstitialAd.presentDynamicPrice(fromRootViewController: self, isDismissAnimated: false)
             }
         }
     }
