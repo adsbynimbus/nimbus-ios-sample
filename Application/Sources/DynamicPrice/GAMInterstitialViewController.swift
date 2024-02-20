@@ -24,6 +24,43 @@ class GAMInterstitialViewController: GAMBaseViewController {
         requestManager.delegate = self
         requestManager.performRequest(request: NimbusRequest.forInterstitialAd(position: headerSubTitle))
     }
+    
+    func loadInterstitial(nimbusAd: NimbusAd? = nil) {
+        nimbusAd?.applyDynamicPrice(into: gamRequest, mapping: mapping)
+        
+        GAMInterstitialAd.load(
+            withAdManagerAdUnitID: googleDynamicPricePlacementId,
+            request: gamRequest
+        ) { [weak self] interstitialAd, error in
+            if let error {
+                print("Failed to load dynamic price interstitial ad with error: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let self, let interstitialAd else { return }
+            
+            self.interstitialAd = interstitialAd
+            
+            if let ad = nimbusAd {
+                interstitialAd.applyDynamicPrice(
+                    ad: ad,
+                    requestManager: requestManager,
+                    delegate: self
+                )
+            } else {
+                interstitialAd.fullScreenContentDelegate = self
+            }
+            
+            interstitialAd.appEventDelegate = self
+            interstitialAd.paidEventHandler = { [weak interstitialAd] adValue in
+                interstitialAd?.updatePrice(adValue)
+            }
+            
+            DispatchQueue.main.async {
+                interstitialAd.presentDynamicPrice(fromRootViewController: self)
+            }
+        }
+    }
 }
 
 // MARK: - GADAppEventDelegate
@@ -68,39 +105,13 @@ extension GAMInterstitialViewController: NimbusRequestManagerDelegate {
     func didCompleteNimbusRequest(request: NimbusRequestKit.NimbusRequest, ad: NimbusCoreKit.NimbusAd) {
         print("didCompleteNimbusRequest")
         
-        ad.applyDynamicPrice(into: gamRequest, mapping: mapping)
-        
-        GAMInterstitialAd.load(
-            withAdManagerAdUnitID: googleDynamicPricePlacementId,
-            request: gamRequest
-        ) { [weak self] interstitialAd, error in
-            if let error {
-                print("Failed to load dynamic price interstitial ad with error: \(error.localizedDescription)")
-                return
-            }
-            
-            guard let self, let interstitialAd else { return }
-            
-            self.interstitialAd = interstitialAd
-            interstitialAd.initDynamicPrice(
-                ad: ad,
-                requestManager: requestManager,
-                delegate: self,
-                rootViewController: self
-            )
-            interstitialAd.appEventDelegate = self
-            interstitialAd.paidEventHandler = { [weak interstitialAd] adValue in
-                interstitialAd?.updatePrice(adValue)
-            }
-            
-            DispatchQueue.main.async {
-                interstitialAd.present(fromRootViewController: self)
-            }
-        }
+        loadInterstitial(nimbusAd: ad)
     }
     
     func didFailNimbusRequest(request: NimbusRequestKit.NimbusRequest, error: NimbusCoreKit.NimbusError) {
         print("didFailNimbusRequest: \(error.localizedDescription)")
+        
+        loadInterstitial()
     }
     
 }
