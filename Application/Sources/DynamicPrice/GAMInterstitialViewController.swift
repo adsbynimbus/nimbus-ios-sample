@@ -33,6 +33,10 @@ class GAMInterstitialViewController: GAMBaseViewController {
             request: gamRequest
         ) { [weak self] interstitialAd, error in
             if let error {
+                if let nimbusAd {
+                    self?.requestManager.notifyNoFill(ad: nimbusAd)
+                }
+                
                 print("Failed to load dynamic price interstitial ad with error: \(error.localizedDescription)")
                 return
             }
@@ -47,17 +51,19 @@ class GAMInterstitialViewController: GAMBaseViewController {
                     requestManager: requestManager,
                     delegate: self
                 )
+                interstitialAd.appEventDelegate = self
+                interstitialAd.paidEventHandler = { [weak interstitialAd] adValue in
+                    interstitialAd?.updatePrice(adValue)
+                }
+                
+                DispatchQueue.main.async {
+                    interstitialAd.presentDynamicPrice(fromRootViewController: self)
+                }
             } else {
                 interstitialAd.fullScreenContentDelegate = self
-            }
-            
-            interstitialAd.appEventDelegate = self
-            interstitialAd.paidEventHandler = { [weak interstitialAd] adValue in
-                interstitialAd?.updatePrice(adValue)
-            }
-            
-            DispatchQueue.main.async {
-                interstitialAd.presentDynamicPrice(fromRootViewController: self)
+                DispatchQueue.main.async {
+                    interstitialAd.present(fromRootViewController: self)
+                }
             }
         }
     }
@@ -67,6 +73,7 @@ class GAMInterstitialViewController: GAMBaseViewController {
 
 extension GAMInterstitialViewController: GADAppEventDelegate {
     func interstitialAd(_ interstitialAd: GADInterstitialAd, didReceiveAppEvent name: String, withInfo info: String?) {
+        
         interstitialAd.handleEventForNimbus(name: name, info: info)
     }
 }
