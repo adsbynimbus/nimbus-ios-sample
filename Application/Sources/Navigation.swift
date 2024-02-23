@@ -104,7 +104,9 @@ enum AdManagerAdType: String, NavigationItem {
 
 enum DynamicPriceNimbusRendering: String, NavigationItem {
     case banner = "Banner"
+    case refreshingBanner = "Refreshing Banner"
     case adLoaderBanner = "AdLoader Banner"
+    case refreshingAdLoaderBanner = "Refreshing AdLoader Banner"
     case inlineVideo = "Inline Video"
     case interstitial = "Interstitial"
     case rewarded = "Rewarded"
@@ -115,7 +117,9 @@ enum DynamicPriceNimbusRendering: String, NavigationItem {
         
         switch self {
         case .banner: return GAMBannerViewController(headerTitle: title, headerSubTitle: "Banner")
+        case .refreshingBanner: return GAMRefreshingBannerViewController(headerTitle: title, headerSubTitle: "Refreshing Banner")
         case .adLoaderBanner: return GAMAdLoaderBannerViewController(headerTitle: title, headerSubTitle: "AdLoader Banner")
+        case .refreshingAdLoaderBanner: return GAMRefreshingAdLoaderBannerViewController(headerTitle: title, headerSubTitle: "Refreshing AdLoader Banner")
         case .inlineVideo: return GAMInlineVideoViewController(headerTitle: title, headerSubTitle: "Inline Video")
         case .interstitial: return GAMInterstitialViewController(headerTitle: title, headerSubTitle: "Interstitial")
         case .rewarded: return GAMRewardedViewController(headerTitle: title, headerSubTitle: "Rewarded")
