@@ -14,6 +14,8 @@ import NimbusSDK
 import GoogleMobileAds
 
 class GAMBannerViewController: GAMBaseViewController {
+    private static let refreshInterval: TimeInterval = 30
+    
     private let requestManager = NimbusRequestManager()
     private lazy var dynamicPriceRenderer: NimbusDynamicPriceRenderer = {
         return NimbusDynamicPriceRenderer(requestManager: requestManager)
@@ -21,13 +23,46 @@ class GAMBannerViewController: GAMBaseViewController {
     
     private let gamRequest = GAMRequest()
     private let bannerView = GAMBannerView(adSize: GADAdSizeBanner)
+    private var refreshTimer: Timer?
+    
+    /// Set this to false if you don't want a refreshing banner
+    private var isRefreshingBanner = true
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupBannerView()
         
+        if isRefreshingBanner {
+            setupNotifications()
+            setupRefreshTimer()
+        }
+        
         requestManager.delegate = self
+        
+        load()
+    }
+    
+    func setupNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(appDidBecomeActive),
+            name: UIApplication.didBecomeActiveNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(appWillResignActive),
+            name: UIApplication.willResignActiveNotification,
+            object: nil
+        )
+    }
+    
+    func load() {
         requestManager.performRequest(request: NimbusRequest.forBannerAd(position: headerSubTitle))
     }
     
@@ -48,6 +83,25 @@ class GAMBannerViewController: GAMBaseViewController {
             bannerView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             bannerView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
         ])
+    }
+    
+    // MARK: - Refreshing Banner Logic
+    
+    func setupRefreshTimer() {
+        refreshTimer?.invalidate() // just to make sure there's no outstanding timer
+        refreshTimer = Timer.scheduledTimer(withTimeInterval: Self.refreshInterval, repeats: true) { [weak self] _ in
+            self?.load()
+        }
+        print("\(Self.self) created refresh timer")
+    }
+    
+    @objc private func appDidBecomeActive() {
+        setupRefreshTimer()
+    }
+    
+    @objc private func appWillResignActive() {
+        refreshTimer?.invalidate()
+        print("\(Self.self) removed refresh timer")
     }
 }
 
