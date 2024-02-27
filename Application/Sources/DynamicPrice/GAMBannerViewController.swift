@@ -40,7 +40,7 @@ class GAMBannerViewController: GAMBaseViewController {
         
         requestManager.delegate = self
         
-        load()
+        fetchNimbusBid()
     }
     
     func setupNotifications() {
@@ -58,7 +58,7 @@ class GAMBannerViewController: GAMBaseViewController {
         )
     }
     
-    func load() {
+    func fetchNimbusBid() {
         requestManager.performRequest(request: NimbusRequest.forBannerAd(position: headerSubTitle))
     }
     
@@ -85,7 +85,7 @@ class GAMBannerViewController: GAMBaseViewController {
     func setupRefreshTimer() {
         refreshTimer?.invalidate() // just to make sure there's no outstanding timer
         refreshTimer = Timer.scheduledTimer(withTimeInterval: Self.refreshInterval, repeats: true) { [weak self] _ in
-            self?.load()
+            self?.fetchNimbusBid()
         }
         print("\(Self.self) created refresh timer")
     }
@@ -147,11 +147,11 @@ extension GAMBannerViewController: NimbusRequestManagerDelegate {
     func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
         print("didCompleteNimbusRequest")
         
-        bannerView.loadDynamicPrice(ad: ad, gamRequest: GAMRequest())
+        bannerView.loadDynamicPrice(gamRequest: GAMRequest(), ad: ad)
     }
     
     func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
         print("didFailNimbusRequest: \(error.localizedDescription)")
+        bannerView.loadDynamicPrice(gamRequest: GAMRequest())
     }
-    
 }
