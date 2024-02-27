@@ -15,13 +15,7 @@ import GoogleMobileAds
 
 class GAMAdLoaderBannerViewController: GAMBaseViewController {
     private let requestManager = NimbusRequestManager()
-    private lazy var dynamicPriceRenderer: NimbusDynamicPriceRenderer = {
-        return NimbusDynamicPriceRenderer(requestManager: requestManager)
-    }()
-    
-    private let gamRequest = GAMRequest()
     private var adLoader: GADAdLoader?
-    private var ad: NimbusAd?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,16 +39,12 @@ extension GAMAdLoaderBannerViewController: GADAdLoaderDelegate, GAMBannerAdLoade
     func adLoader(_ adLoader: GADAdLoader, didReceive bannerView: GAMBannerView) {
         print("adLoader got bannerView")
         
-        if let ad {
-            dynamicPriceRenderer.willRender(ad: ad, bannerView: bannerView)
-        }
-        
         bannerView.rootViewController = self
         bannerView.adUnitID = googleDynamicPricePlacementId
-        bannerView.delegate = self
         bannerView.appEventDelegate = self
-        bannerView.paidEventHandler = { [weak self] adValue in
-            self?.dynamicPriceRenderer.notifyBannerPrice(adValue: adValue, bannerView: bannerView)
+        bannerView.applyDynamicPrice(requestManager: requestManager, delegate: self, ad: adLoader.nimbusAd)
+        bannerView.paidEventHandler = { [weak bannerView] adValue in
+            bannerView?.updatePrice(adValue)
         }
         
         view.addSubview(bannerView)
@@ -76,7 +66,7 @@ extension GAMAdLoaderBannerViewController: GADAdLoaderDelegate, GAMBannerAdLoade
 extension GAMAdLoaderBannerViewController: GADAppEventDelegate {
     func adView(_ banner: GADBannerView, didReceiveAppEvent name: String, withInfo info: String?) {
         print("adView:didReceiveAppEvent")
-        dynamicPriceRenderer.handleBannerEventForNimbus(bannerView: banner, name: name, info: info)
+        (banner as? GAMBannerView)?.handleEventForNimbus(name: name, info: info)
     }
 }
 
@@ -89,12 +79,10 @@ extension GAMAdLoaderBannerViewController: GADBannerViewDelegate {
     
     func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
         print("bannerView:didFailToReceiveAdWithError: \(error.localizedDescription)")
-        dynamicPriceRenderer.notifyBannerLoss(bannerView: bannerView, error: error)
     }
     
     func bannerViewDidRecordImpression(_ bannerView: GADBannerView) {
         print("bannerViewDidRecordImpression")
-        dynamicPriceRenderer.notifyBannerImpression(bannerView: bannerView)
     }
     
     func bannerViewDidRecordClick(_ bannerView: GADBannerView) {
@@ -120,9 +108,6 @@ extension GAMAdLoaderBannerViewController: NimbusRequestManagerDelegate {
     func didCompleteNimbusRequest(request: NimbusRequestKit.NimbusRequest, ad: NimbusCoreKit.NimbusAd) {
         print("didCompleteNimbusRequest")
         
-        ad.applyDynamicPrice(into: gamRequest, mapping: mapping)
-        self.ad = ad
-        
         adLoader = GADAdLoader(
             adUnitID: googleDynamicPricePlacementId,
             rootViewController: self,
@@ -130,7 +115,7 @@ extension GAMAdLoaderBannerViewController: NimbusRequestManagerDelegate {
             options: nil
         )
         adLoader?.delegate = self
-        adLoader?.load(gamRequest)
+        adLoader?.loadDynamicPrice(ad: ad, gamRequest: GAMRequest())
     }
     
     func didFailNimbusRequest(request: NimbusRequestKit.NimbusRequest, error: NimbusCoreKit.NimbusError) {

@@ -18,7 +18,6 @@ class GAMBannerViewController: GAMBaseViewController {
     
     private let requestManager = NimbusRequestManager()
     
-    private let gamRequest = GAMRequest()
     private let bannerView = GAMBannerView(adSize: GADAdSizeBanner)
     private var refreshTimer: Timer?
     
@@ -68,6 +67,7 @@ class GAMBannerViewController: GAMBaseViewController {
         bannerView.adUnitID = googleDynamicPricePlacementId
         bannerView.rootViewController = self
         bannerView.appEventDelegate = self
+        bannerView.applyDynamicPrice(requestManager: requestManager, delegate: self)
         bannerView.paidEventHandler = { [weak bannerView] adValue in
             bannerView?.updatePrice(adValue)
         }
@@ -144,15 +144,13 @@ extension GAMBannerViewController: GADBannerViewDelegate {
 // MARK: - NimbusRequestManagerDelegate
 
 extension GAMBannerViewController: NimbusRequestManagerDelegate {
-    func didCompleteNimbusRequest(request: NimbusRequestKit.NimbusRequest, ad: NimbusCoreKit.NimbusAd) {
+    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
         print("didCompleteNimbusRequest")
         
-        ad.applyDynamicPrice(into: gamRequest, mapping: mapping)
-        bannerView.applyDynamicPrice(ad: ad, requestManager: requestManager, delegate: self)
-        bannerView.load(gamRequest)
+        bannerView.loadDynamicPrice(ad: ad, gamRequest: GAMRequest())
     }
     
-    func didFailNimbusRequest(request: NimbusRequestKit.NimbusRequest, error: NimbusCoreKit.NimbusError) {
+    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
         print("didFailNimbusRequest: \(error.localizedDescription)")
     }
     
