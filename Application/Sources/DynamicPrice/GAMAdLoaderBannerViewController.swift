@@ -65,7 +65,7 @@ class GAMAdLoaderBannerViewController: GAMBaseViewController {
             options: nil
         )
         adLoader?.delegate = self
-        adLoader?.loadDynamicPrice(gamRequest: GAMRequest(), ad: ad)
+        adLoader?.loadDynamicPrice(gamRequest: GAMRequest(), ad: ad, mapping: mapping)
     }
     
     // MARK: - Refreshing Banner Logic

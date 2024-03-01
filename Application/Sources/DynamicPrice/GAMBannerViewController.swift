@@ -147,11 +147,11 @@ extension GAMBannerViewController: NimbusRequestManagerDelegate {
     func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
         print("didCompleteNimbusRequest")
         
-        bannerView.loadDynamicPrice(gamRequest: GAMRequest(), ad: ad)
+        bannerView.loadDynamicPrice(gamRequest: GAMRequest(), ad: ad, mapping: mapping)
     }
     
     func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
         print("didFailNimbusRequest: \(error.localizedDescription)")
-        bannerView.loadDynamicPrice(gamRequest: GAMRequest())
+        bannerView.loadDynamicPrice(gamRequest: GAMRequest(), mapping: mapping)
     }
 }
