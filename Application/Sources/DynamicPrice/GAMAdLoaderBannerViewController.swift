@@ -14,20 +14,77 @@ import NimbusSDK
 import GoogleMobileAds
 
 class GAMAdLoaderBannerViewController: GAMBaseViewController {
-    private let requestManager = NimbusRequestManager()
-    private lazy var dynamicPriceRenderer: NimbusDynamicPriceRenderer = {
-        return NimbusDynamicPriceRenderer(requestManager: requestManager)
-    }()
+    private static let refreshInterval: TimeInterval = 30
     
-    private let gamRequest = GAMRequest()
+    private let requestManager = NimbusRequestManager()
     private var adLoader: GADAdLoader?
-    private var ad: NimbusAd?
+    private weak var bannerView: GAMBannerView?
+    
+    private var refreshTimer: Timer?
+    
+    /// Set this to false if you don't want a refreshing banner
+    private var isRefreshingBanner = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if isRefreshingBanner {
+            setupNotifications()
+            setupRefreshTimer()
+        }
+        
         requestManager.delegate = self
+        
+        fetchNimbusBid()
+    }
+    
+    func setupNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(appDidBecomeActive),
+            name: UIApplication.didBecomeActiveNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(appWillResignActive),
+            name: UIApplication.willResignActiveNotification,
+            object: nil
+        )
+    }
+    
+    func fetchNimbusBid() {
         requestManager.performRequest(request: NimbusRequest.forBannerAd(position: headerSubTitle))
+    }
+    
+    func load(ad: NimbusAd? = nil) {
+        adLoader = GADAdLoader(
+            adUnitID: googleDynamicPricePlacementId,
+            rootViewController: self,
+            adTypes: [.gamBanner],
+            options: nil
+        )
+        adLoader?.delegate = self
+        adLoader?.loadDynamicPrice(gamRequest: GAMRequest(), ad: ad, mapping: mapping)
+    }
+    
+    // MARK: - Refreshing Banner Logic
+    
+    func setupRefreshTimer() {
+        refreshTimer?.invalidate() // just to make sure there's no outstanding timer
+        refreshTimer = Timer.scheduledTimer(withTimeInterval: Self.refreshInterval, repeats: true) { [weak self] _ in
+            self?.fetchNimbusBid()
+        }
+        print("\(Self.self) created refresh timer")
+    }
+    
+    @objc private func appDidBecomeActive() {
+        setupRefreshTimer()
+    }
+    
+    @objc private func appWillResignActive() {
+        refreshTimer?.invalidate()
+        print("\(Self.self) removed refresh timer")
     }
 }
 
@@ -45,16 +102,16 @@ extension GAMAdLoaderBannerViewController: GADAdLoaderDelegate, GAMBannerAdLoade
     func adLoader(_ adLoader: GADAdLoader, didReceive bannerView: GAMBannerView) {
         print("adLoader got bannerView")
         
-        if let ad {
-            dynamicPriceRenderer.willRender(ad: ad, bannerView: bannerView)
-        }
-        
         bannerView.rootViewController = self
         bannerView.adUnitID = googleDynamicPricePlacementId
-        bannerView.delegate = self
         bannerView.appEventDelegate = self
-        bannerView.paidEventHandler = { [weak self] adValue in
-            self?.dynamicPriceRenderer.notifyBannerPrice(adValue: adValue, bannerView: bannerView)
+        bannerView.applyDynamicPrice(
+            requestManager: requestManager,
+            delegate: self,
+            ad: adLoader.nimbusAd
+        )
+        bannerView.paidEventHandler = { [weak bannerView] adValue in
+            bannerView?.updatePrice(adValue)
         }
         
         view.addSubview(bannerView)
@@ -64,6 +121,7 @@ extension GAMAdLoaderBannerViewController: GADAdLoaderDelegate, GAMBannerAdLoade
             bannerView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             bannerView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
         ])
+        self.bannerView = bannerView
     }
     
     func adLoader(_ adLoader: GADAdLoader, didFailToReceiveAdWithError error: Error) {
@@ -76,7 +134,7 @@ extension GAMAdLoaderBannerViewController: GADAdLoaderDelegate, GAMBannerAdLoade
 extension GAMAdLoaderBannerViewController: GADAppEventDelegate {
     func adView(_ banner: GADBannerView, didReceiveAppEvent name: String, withInfo info: String?) {
         print("adView:didReceiveAppEvent")
-        dynamicPriceRenderer.handleBannerEventForNimbus(bannerView: banner, name: name, info: info)
+        bannerView?.handleEventForNimbus(name: name, info: info)
     }
 }
 
@@ -89,12 +147,10 @@ extension GAMAdLoaderBannerViewController: GADBannerViewDelegate {
     
     func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
         print("bannerView:didFailToReceiveAdWithError: \(error.localizedDescription)")
-        dynamicPriceRenderer.notifyBannerLoss(bannerView: bannerView, error: error)
     }
     
     func bannerViewDidRecordImpression(_ bannerView: GADBannerView) {
         print("bannerViewDidRecordImpression")
-        dynamicPriceRenderer.notifyBannerImpression(bannerView: bannerView)
     }
     
     func bannerViewDidRecordClick(_ bannerView: GADBannerView) {
@@ -117,23 +173,17 @@ extension GAMAdLoaderBannerViewController: GADBannerViewDelegate {
 // MARK: - NimbusRequestManagerDelegate
 
 extension GAMAdLoaderBannerViewController: NimbusRequestManagerDelegate {
-    func didCompleteNimbusRequest(request: NimbusRequestKit.NimbusRequest, ad: NimbusCoreKit.NimbusAd) {
+    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
         print("didCompleteNimbusRequest")
         
-        ad.applyDynamicPrice(into: gamRequest, mapping: mapping)
-        self.ad = ad
+        // Remove old bannerView if exists
+        bannerView?.removeFromSuperview()
         
-        adLoader = GADAdLoader(
-            adUnitID: googleDynamicPricePlacementId,
-            rootViewController: self,
-            adTypes: [.gamBanner],
-            options: nil
-        )
-        adLoader?.delegate = self
-        adLoader?.load(gamRequest)
+        load(ad: ad)
     }
     
-    func didFailNimbusRequest(request: NimbusRequestKit.NimbusRequest, error: NimbusCoreKit.NimbusError) {
+    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
         print("didFailNimbusRequest: \(error.localizedDescription)")
+        load()
     }
 }
