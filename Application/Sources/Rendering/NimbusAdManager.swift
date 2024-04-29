@@ -19,19 +19,12 @@ final class AdManagerViewController: SampleAdViewController {
     private var customAdContainerView: CustomAdContainerView?
     private var adController: AdController?
     private lazy var requestManager = NimbusRequestManager()
-    
-    // To backup existing interceptors to re-inject them at deinit
-    private let requestInterceptors: [NimbusRequestInterceptor]?
     private var hasCompanionAd = false
     
     init(adType: AdManagerAdType, headerSubTitle: String) {
         self.adType = adType
-        
-        // Unsetting interceptors to remove all Demand information to ensure only Nimbus renders
-        requestInterceptors = NimbusRequestManager.requestInterceptors
-        NimbusRequestManager.requestInterceptors = nil
-        
         super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle)
+        NimbusRequestManager.requestInterceptors?.append(self)
     }
     
     required init?(coder: NSCoder) {
@@ -46,8 +39,12 @@ final class AdManagerViewController: SampleAdViewController {
         setupCustomVideoSettings()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NimbusRequestManager.requestInterceptors?.removeAll { $0 === self }
+    }
+    
     deinit {
-        NimbusRequestManager.requestInterceptors = requestInterceptors
         let nimbusAdView = contentView.subviews.first(where: { $0 is NimbusAdView }) as? NimbusAdView
         nimbusAdView?.destroy()
         customAdContainerView?.destroy()
