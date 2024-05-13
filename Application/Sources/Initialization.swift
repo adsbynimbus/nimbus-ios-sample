@@ -46,7 +46,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Nimbus.shared.coppa = UserDefaults.standard.coppaOn
         
         // This is only for testing environment, do NOT add this on production environment
-        if let publisherKey = Nimbus.shared.publisher, Nimbus.shared.testMode {
+        if let mockServerUrl = ProcessInfo.processInfo.environment["MOCK_SERVER_URL"] {
+            NimbusAdManager.requestUrl = URL(string: mockServerUrl)!
+        } else if let publisherKey = Nimbus.shared.publisher, Nimbus.shared.testMode {
             NimbusAdManager.requestUrl = URL(string: "https://\(publisherKey).adsbynimbus.com/rta/test")!
             NimbusAdManager.additionalRequestHeaders = [
                 "Nimbus-Test-No-Fill": String(UserDefaults.standard.forceNoFill)
