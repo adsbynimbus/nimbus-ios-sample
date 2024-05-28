@@ -9,6 +9,8 @@ import UIKit
 
 class TestRenderViewController: DemoViewController {
     
+    var isBlocking = false
+    
     private lazy var markupTextView: UITextView = {
         let textView = UITextView()
         textView.textColor = .turquoise
@@ -125,10 +127,14 @@ class TestRenderViewController: DemoViewController {
         
         markupTextView.resignFirstResponder()
         
-        navigationController?.pushViewController(
-            TestRenderAdViewController(adMarkup: adMarkup),
-            animated: true
-        )
+        if isBlocking {
+            TestRenderAdViewController.showBlocking(from: self, adMarkup: adMarkup)
+        } else {
+            navigationController?.pushViewController(
+                TestRenderAdViewController(adMarkup: adMarkup),
+                animated: true
+            )
+        }
     }
                                        
     @objc private func adjustForKeyboard(notification: Notification) {

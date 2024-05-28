@@ -12,7 +12,7 @@ final class TestRenderAdViewController: UIViewController {
     private let adMarkup: String
     
     private lazy var adContainerView: CustomAdContainerView = {
-        return CustomAdContainerView(ad: getAdFromMarkup(adMarkup: adMarkup), viewController: self)
+        return CustomAdContainerView(ad: Self.getAdFromMarkup(adMarkup: adMarkup), viewController: self)
     }()
     
     init(adMarkup: String) {
@@ -25,10 +25,20 @@ final class TestRenderAdViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    static func showBlocking(from: UIViewController, adMarkup: String) {
+        let adView = NimbusAdView(adPresentingViewController: from)
+        let controller = NimbusAdViewController(adView: adView, ad: getAdFromMarkup(adMarkup: adMarkup), companionAd: nil)
+        controller.modalPresentationStyle = .fullScreen
+        from.present(controller, animated: true) {
+            controller.renderAndStart()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
+        
         setupLogo()
         setupAdView()
     }
@@ -46,17 +56,17 @@ final class TestRenderAdViewController: UIViewController {
         }
     }
     
-    private func getAdFromMarkup(adMarkup: String) -> NimbusAd {
+    static private func getAdFromMarkup(adMarkup: String) -> NimbusAd {
         let type: NimbusAuctionType = isVideoMarkup(adMarkup: adMarkup) ? .video : .static
         return createNimbusAd(auctionType: type, markup: adMarkup)
     }
     
-    private func isVideoMarkup(adMarkup: String) -> Bool {
+    static private func isVideoMarkup(adMarkup: String) -> Bool {
         let prefix = adMarkup.prefix(5).lowercased()
         return prefix == "<vast" || prefix == "<?xml"
     }
     
-    private func createNimbusAd(
+    static private func createNimbusAd(
         placementId: String? = nil,
         auctionType: NimbusAuctionType,
         markup: String,
