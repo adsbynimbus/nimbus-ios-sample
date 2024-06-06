@@ -14,7 +14,7 @@ jobs:
     - name: Select Xcode Version
       run: sudo xcode-select --switch /Applications/Xcode_15.3.app
 
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         lfs: true
 
@@ -23,7 +23,7 @@ jobs:
         ! grep -q Pods nimbus-ios-sample.xcodeproj/project.pbxproj
 
     - name: Restore Build Cache
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: |
           Pods
