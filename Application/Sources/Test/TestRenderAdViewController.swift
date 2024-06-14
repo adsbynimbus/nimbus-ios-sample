@@ -26,9 +26,13 @@ final class TestRenderAdViewController: UIViewController {
     }
     
     static func showBlocking(from: UIViewController, adMarkup: String) {
-        let adView = NimbusAdView(adPresentingViewController: from)
+        let adView = NimbusAdView(adPresentingViewController: nil)
         let controller = NimbusAdViewController(adView: adView, ad: getAdFromMarkup(adMarkup: adMarkup), companionAd: nil)
         controller.modalPresentationStyle = .fullScreen
+        
+        adView.adPresentingViewController = controller
+        adView.isBlocking = true
+        
         from.present(controller, animated: true) {
             controller.renderAndStart()
         }
