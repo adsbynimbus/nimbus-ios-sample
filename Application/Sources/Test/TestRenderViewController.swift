@@ -11,6 +11,36 @@ class TestRenderViewController: DemoViewController {
     
     var isBlocking = false
     
+    private var iTunesAppId: String?
+    
+    private lazy var skoverlayMenuButton: UIButton = {
+        let closure: (UIAction) -> () = { [weak self] (action: UIAction) in
+            self?.iTunesAppId = switch action.identifier.rawValue {
+            case "timehop": "569077959"
+            case "yelp": "284910350"
+            case "ig": "389801252"
+            case "tinder": "547702041"
+            case "imgur": "639881495"
+            default: nil
+            }
+        }
+        
+        let button = UIButton(type: .system)
+        button.menu = UIMenu(title: "", children: [
+            UIAction(title: "SKOverlay: None", identifier: .init("none"), handler: closure),
+            UIAction(title: "SKOverlay: Timehop", identifier: .init("timehop"), handler: closure),
+            UIAction(title: "SKOverlay: Yelp", identifier: .init("yelp"), handler: closure),
+            UIAction(title: "SKOverlay: Instagram", identifier: .init("ig"), handler: closure),
+            UIAction(title: "SKOverlay: Tinder", identifier: .init("tinder"), handler: closure),
+            UIAction(title: "SKOverlay: Imgur", identifier: .init("imgur"), handler: closure),
+        ])
+        
+        button.showsMenuAsPrimaryAction = true
+        button.changesSelectionAsPrimaryAction = true
+        
+        return button
+    }()
+    
     private lazy var markupTextView: UITextView = {
         let textView = UITextView()
         textView.textColor = .turquoise
@@ -81,8 +111,21 @@ class TestRenderViewController: DemoViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
         
+        setupSKOverlayPopup()
         setupTextView()
         setupTestButton()
+    }
+    
+    private func setupSKOverlayPopup() {
+        view.addSubview(skoverlayMenuButton)
+        
+        skoverlayMenuButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            skoverlayMenuButton.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 16),
+            skoverlayMenuButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            skoverlayMenuButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            skoverlayMenuButton.heightAnchor.constraint(equalToConstant: 40)
+        ])
     }
     
     private func setupTextView() {
@@ -90,7 +133,7 @@ class TestRenderViewController: DemoViewController {
         
         markupTextView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            markupTextView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 16),
+            markupTextView.topAnchor.constraint(equalTo: skoverlayMenuButton.bottomAnchor, constant: 16),
             markupTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             markupTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
         ])
@@ -128,10 +171,10 @@ class TestRenderViewController: DemoViewController {
         markupTextView.resignFirstResponder()
         
         if isBlocking {
-            TestRenderAdViewController.showBlocking(from: self, adMarkup: adMarkup)
+            TestRenderAdViewController.showBlocking(from: self, adMarkup: adMarkup, iTunesAppId: iTunesAppId)
         } else {
             navigationController?.pushViewController(
-                TestRenderAdViewController(adMarkup: adMarkup),
+                TestRenderAdViewController(adMarkup: adMarkup, iTunesAppId: iTunesAppId),
                 animated: true
             )
         }
