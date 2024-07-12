@@ -10,13 +10,15 @@ import NimbusKit
 
 final class TestRenderAdViewController: UIViewController {
     private let adMarkup: String
+    private let iTunesAppId: String?
     
     private lazy var adContainerView: CustomAdContainerView = {
         return CustomAdContainerView(ad: Self.getAdFromMarkup(adMarkup: adMarkup), viewController: self)
     }()
     
-    init(adMarkup: String) {
+    init(adMarkup: String, iTunesAppId: String?) {
         self.adMarkup = adMarkup
+        self.iTunesAppId = iTunesAppId
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -25,9 +27,10 @@ final class TestRenderAdViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    static func showBlocking(from: UIViewController, adMarkup: String) {
-        let adView = NimbusAdView(adPresentingViewController: nil)
-        let controller = NimbusAdViewController(adView: adView, ad: getAdFromMarkup(adMarkup: adMarkup), companionAd: nil)
+    static func showBlocking(from: UIViewController, adMarkup: String, iTunesAppId: String? = nil) {
+        let adView = NimbusAdView(adPresentingViewController: from)
+        adView.showsSKOverlay = iTunesAppId != nil
+        let controller = NimbusAdViewController(adView: adView, ad: getAdFromMarkup(adMarkup: adMarkup, iTunesAppId: iTunesAppId), companionAd: nil)
         controller.modalPresentationStyle = .fullScreen
         
         adView.adPresentingViewController = controller
@@ -60,9 +63,9 @@ final class TestRenderAdViewController: UIViewController {
         }
     }
     
-    static private func getAdFromMarkup(adMarkup: String) -> NimbusAd {
+    static private func getAdFromMarkup(adMarkup: String, iTunesAppId: String? = nil) -> NimbusAd {
         let type: NimbusAuctionType = isVideoMarkup(adMarkup: adMarkup) ? .video : .static
-        return createNimbusAd(auctionType: type, markup: adMarkup)
+        return createNimbusAd(auctionType: type, markup: adMarkup, iTunesAppId: iTunesAppId)
     }
     
     static private func isVideoMarkup(adMarkup: String) -> Bool {
@@ -75,11 +78,15 @@ final class TestRenderAdViewController: UIViewController {
         auctionType: NimbusAuctionType,
         markup: String,
         isMraid: Bool = true,
-        isInterstitial: Bool = true
+        isInterstitial: Bool = true,
+        iTunesAppId: String? = nil
     ) -> NimbusAd {
         let adDimensions = isInterstitial ?
         NimbusAdDimensions(width: 320, height: 480) :
         NimbusAdDimensions(width: 300, height: 50)
+        
+        let ext = NimbusAdExtensions(skAdNetwork: NimbusAdSkAdNetwork(advertisedAppStoreItemID: iTunesAppId))
+        
         return NimbusAd(
             position: "",
             auctionType: auctionType,
@@ -95,7 +102,7 @@ final class TestRenderAdViewController: UIViewController {
             adDimensions: adDimensions,
             trackers: nil,
             isMraid: isMraid,
-            extensions: nil
+            extensions: iTunesAppId != nil ? ext : nil
         )
     }
 }
