@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import NimbusKit
 
 class TestRenderViewController: DemoViewController {
     
     var isBlocking = false
+    var useNimbusRenderer = false
     
     private var iTunesAppId: String?
     
@@ -170,11 +172,13 @@ class TestRenderViewController: DemoViewController {
         
         markupTextView.resignFirstResponder()
         
+        let ad = getAdFromMarkup(adMarkup: adMarkup)
+        
         if isBlocking {
-            TestRenderAdViewController.showBlocking(from: self, adMarkup: adMarkup, iTunesAppId: iTunesAppId)
+            TestRenderAdViewController.showBlocking(from: self, ad: ad)
         } else {
             navigationController?.pushViewController(
-                TestRenderAdViewController(adMarkup: adMarkup, iTunesAppId: iTunesAppId),
+                TestRenderAdViewController(ad: ad),
                 animated: true
             )
         }
@@ -198,5 +202,52 @@ class TestRenderViewController: DemoViewController {
 
         let selectedRange = markupTextView.selectedRange
         markupTextView.scrollRangeToVisible(selectedRange)
-   }
+    }
+    
+    // MARK: - Create NimbusAd
+    
+    private func getAdFromMarkup(adMarkup: String) -> NimbusAd {
+        let type: NimbusAuctionType = isVideoMarkup(adMarkup: adMarkup) ? .video : .static
+        return createNimbusAd(auctionType: type, markup: adMarkup)
+    }
+    
+    private func isVideoMarkup(adMarkup: String) -> Bool {
+        let prefix = adMarkup.prefix(5).lowercased()
+        return prefix == "<vast" || prefix == "<?xml"
+    }
+    
+    private func createNimbusAd(
+        placementId: String? = nil,
+        auctionType: NimbusAuctionType,
+        markup: String,
+        isMraid: Bool = true,
+        isInterstitial: Bool = true
+    ) -> NimbusAd {
+        let adDimensions = isInterstitial ?
+        NimbusAdDimensions(width: 320, height: 480) :
+        NimbusAdDimensions(width: 300, height: 50)
+        
+        let ext = NimbusAdExtensions(
+            skAdNetwork: iTunesAppId != nil ? NimbusAdSkAdNetwork(advertisedAppStoreItemID: iTunesAppId) : nil,
+            useNimbusVideoRenderer: useNimbusRenderer
+        )
+        
+        return NimbusAd(
+            position: "",
+            auctionType: auctionType,
+            bidRaw: 0,
+            bidInCents: 0,
+            contentType: "",
+            auctionId: "",
+            network: "test_render",
+            markup: markup,
+            isInterstitial: isInterstitial,
+            placementId: nil,
+            duration: nil,
+            adDimensions: adDimensions,
+            trackers: nil,
+            isMraid: isMraid,
+            extensions: ext
+        )
+    }
 }
