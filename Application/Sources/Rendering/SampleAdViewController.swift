@@ -53,7 +53,15 @@ class SampleAdViewController : DemoViewController, AdControllerDelegate {
         loggerView?.isHidden = UserDefaults.standard.eventLogHiddenByDefault
         
         var rightItems = navigationItem.rightBarButtonItems ?? []
-        rightItems.append(UIBarButtonItem(image: UIImage(systemName: "t.bubble"), style: .plain, target: self, action: #selector(didTapOnLogger)))
+        
+        let loggerButton = UIBarButtonItem(
+            image: UIImage(systemName: "t.bubble"),
+            style: .plain,
+            target: self,
+            action: #selector(didTapOnLogger)
+        )
+        loggerButton.accessibilityIdentifier = "nimbus_event_log_button"
+        rightItems.append(loggerButton)
         
         navigationItem.rightBarButtonItems = rightItems
     }
