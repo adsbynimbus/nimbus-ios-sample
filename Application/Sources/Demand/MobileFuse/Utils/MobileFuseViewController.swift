@@ -8,7 +8,11 @@
 
 import UIKit
 import NimbusKit
+#if canImport(NimbusSDK) // CocoaPods
+import NimbusSDK
+#else                    // Swift Package Manager
 import NimbusMobileFuseKit
+#endif
 
 extension UIApplicationDelegate {
     func setupMobileFuseDemand() {
