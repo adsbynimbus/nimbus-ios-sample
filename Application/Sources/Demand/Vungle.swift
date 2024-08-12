@@ -94,24 +94,25 @@ class VungleViewController: SampleAdViewController {
             
         case .vungleBanner:
             adManager?.showAd(
-                request: NimbusRequest.forBannerAd(position: adType.description, format: .banner320x50),
+                request: NimbusRequest.forBannerAd(position: "TEST_BANNER", format: .banner320x50),
                 container: contentView,
+                refreshInterval: 30,
                 adPresentingViewController: self
             )
         case .vungleMREC:
             adManager?.showAd(
-                request: NimbusRequest.forBannerAd(position: adType.description, format: .letterbox),
+                request: NimbusRequest.forBannerAd(position: "TEST_MREC", format: .letterbox),
                 container: contentView,
                 adPresentingViewController: self
             )
         case .vungleInterstitial:
             adManager?.showBlockingAd(
-                request: NimbusRequest.forInterstitialAd(position: adType.description),
+                request: NimbusRequest.forInterstitialAd(position: "TEST_INTERSTITIAL_NOT_SKIPPABLE"),
                 adPresentingViewController: self
             )
         case .vungleRewarded:
             adManager?.showRewardedAd(
-                request: NimbusRequest.forRewardedVideo(position: adType.description),
+                request: NimbusRequest.forRewardedVideo(position: "TEST_REWARDED"),
                 adPresentingViewController: self
             )
         case .vungleNative:
@@ -128,7 +129,7 @@ class VungleViewController: SampleAdViewController {
             ])
             
             adManager?.showAd(
-                request: NimbusRequest.forNativeAd(position: "NIMBUS_IOS_NATIVE-7709644"),
+                request: NimbusRequest.forNativeAd(position: "TEST_NATIVE"),
                 container: nativeAdContentView,
                 adPresentingViewController: self
             )
