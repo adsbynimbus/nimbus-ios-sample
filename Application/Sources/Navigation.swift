@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import NimbusRequestKit
 
 protocol NavigationItem: CaseIterable, CustomStringConvertible {
     var rawValue: String { get }
@@ -70,6 +71,7 @@ enum MainItem: String, NavigationItem {
                 title: self.description,
                 subtitle: "Select to see Nimbus' integration with third party demand",
                 items: [
+                    Section(header: "MobileFuse", items: MobileFuseSample.allCases),
                     Section(header: "APS", items: APSSample.allCases),
                     Section(header: "Meta Audience Network", items: MetaSample.allCases),
                     Section(header: "Unity", items: UnitySample.allCases),
@@ -131,6 +133,38 @@ enum DynamicAdMob: String, NavigationItem {
     case dynamicRewardedInterstitial   = "Dynamic Rewarded Interstitial"
     func destinationController(parent: String) -> UIViewController {
         AdMobViewController(adType: self, headerSubTitle: parent)
+    }
+}
+
+enum MobileFuseSample: String, NavigationItem {
+    case mobileFuseBanner = "MobileFuse - Banner"
+    case mobileFuseMREC = "MobileFuse - MREC"
+    case mobileFuseManualMREC = "MobileFuse - Manually rendered MREC"
+    case mobileFuseInterstitial = "MobileFuse - Interstitial"
+    case mobileFuseRewarded = "MobileFuse - Rewarded"
+    
+    func destinationController(parent: String) -> UIViewController {
+        switch self {
+        case .mobileFuseBanner: 
+            MobileFuseBannerViewController(
+                headerTitle: rawValue,
+                position: "MobileFuse_Testing_Display_iOS_Nimbus",
+                format: .banner320x50
+            )
+        case .mobileFuseMREC:
+            MobileFuseBannerViewController(
+                headerTitle: rawValue,
+                position: "MobileFuse_Testing_MREC_iOS_Nimbus",
+                format: .letterbox
+            )
+        case .mobileFuseManualMREC:
+            MobileFuseManualBannerViewController(
+                headerTitle: rawValue,
+                headerSubTitle: ""
+            )
+        case .mobileFuseInterstitial: MobileFuseInterstitialViewController(headerTitle: rawValue)
+        case .mobileFuseRewarded: MobileFuseRewardedViewController(headerTitle: rawValue)
+        }
     }
 }
 

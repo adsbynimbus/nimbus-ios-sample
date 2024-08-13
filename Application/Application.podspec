@@ -26,4 +26,5 @@ Pod::Spec.new do |spec|
     spec.dependency 'NimbusSDK/NimbusGoogleKit'       # Google AdMob Dynamic Price and Mediation Adapters
     spec.dependency 'NimbusSDK/NimbusUnityKit'        # Unity Ads Request Support and Renderer
     spec.dependency 'NimbusSDK/NimbusVungleKit'       # Vungle Ads Request Support and Renderer
+    spec.dependency 'NimbusSDK/NimbusMobileFuseKit'   # MobileFuse Ads Request Support and Renderer (Available from 2.21.0)
   end
