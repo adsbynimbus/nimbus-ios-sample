@@ -7,7 +7,7 @@ target 'nimbus-ios-sample-pods' do
 
   pod 'Application', :path => 'Application'
 
-  pod 'NimbusSDK', '~> 2.21', subspecs: [
+  pod 'NimbusSDK', '~> 2', subspecs: [
      'NimbusKit',               # Nimbus SDK
      'NimbusRenderStaticKit',   # Static Ad Renderer
      'NimbusRenderVideoKit',    # Video Ad Renderer
@@ -19,6 +19,6 @@ target 'nimbus-ios-sample-pods' do
      'NimbusUnityKit',          # Unity Ads Request Support and Renderer
      'NimbusVungleKit',         # Vungle Ads Request Support and Renderer
      'NimbusLiveRampKit',       # LiveRamp Request Support
-     'NimbusMobileFuseKit'      # MobileFuse Ads Request Support and Renderer
+     'NimbusMobileFuseKit'      # MobileFuse Ads Request Support and Renderer (Available from 2.21.0)
    ]
 end
