@@ -132,7 +132,8 @@ enum DynamicAdMob: String, NavigationItem {
     case dynamicRewarded               = "Dynamic Rewarded"
     case dynamicRewardedInterstitial   = "Dynamic Rewarded Interstitial"
     func destinationController(parent: String) -> UIViewController {
-        AdMobViewController(adType: self, headerSubTitle: parent)
+//        AdMobViewController(adType: self, headerSubTitle: parent)
+        AdMobBanerViewController(headerTitle: "AdMob Banner", headerSubTitle: "")
     }
 }
 
