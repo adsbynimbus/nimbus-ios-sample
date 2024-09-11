@@ -2,30 +2,28 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
+	<key>API Key</key>
+	<string>d352cac1-cae2-4774-97ba-4e15c6276be0</string>
+	<key>APS App ID</key>
+	<string>a9_onboarding_app_id</string>
 	<key>AdMob Banner ID</key>
 	<string>$(ADMOB_BANNER_ID)</string>
 	<key>AdMob Interstitial ID</key>
 	<string>$(ADMOB_INTERSTITIAL_ID)</string>
 	<key>AdMob Rewarded ID</key>
 	<string>$(ADMOB_REWARDED_ID)</string>
-	<key>AdMob Rewarded Interstitial ID</key>
-	<string>$(ADMOB_REWARDED_INTERSTITIAL_ID)</string>
-	<key>API Key</key>
-	<string>d352cac1-cae2-4774-97ba-4e15c6276be0</string>
-	<key>APS App ID</key>
-	<string>a9_onboarding_app_id</string>
 	<key>GADApplicationIdentifier</key>
 	<string>$(GOOGLE_APP_ID)</string>
 	<key>GADIsAdManagerApp</key>
 	<false/>
-	<key>Google Placement ID</key>
-	<string>$(GOOGLE_PLACEMENT_ID)</string>
 	<key>Google Nimbus Rendering Placement ID</key>
 	<string>$(GOOGLE_NIMBUS_RENDERING_PLACEMENT_ID)</string>
 	<key>Google Nimbus Rendering Rewarded Placement ID</key>
 	<string>$(GOOGLE_NIMBUS_RENDERING_REWARDED_PLACEMENT_ID)</string>
+	<key>Google Placement ID</key>
+	<string>$(GOOGLE_PLACEMENT_ID)</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LiveRamp Config ID</key>
 	<string>$(LIVERAMP_CONFIG_ID)</string>
 	<key>Meta Banner Placement ID</key>
