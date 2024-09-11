@@ -1,7 +1,7 @@
 //
-//  AdMobBannerViewController.swift
+//  AdMobRewardedViewController.swift
 //  NimbusInternalSampleApp
-//  Created on 9/3/24
+//  Created on 9/11/24
 //  Copyright © 2024 Nimbus Advertising Solutions Inc. All rights reserved.
 //
 
@@ -13,9 +13,9 @@ import NimbusSDK
 import NimbusAdMobKit
 #endif
 
-private let bannerPlacementId = Bundle.main.infoDictionary?["AdMob Banner ID"] as? String ?? ""
+private let rewardedPlacementId = Bundle.main.infoDictionary?["AdMob Rewarded ID"] as? String ?? ""
 
-class AdMobBannerViewController: AdMobViewController {
+class AdMobRewardedViewController: AdMobViewController {
     var adController: AdController?
     let adManager = NimbusAdManager()
     
@@ -23,15 +23,15 @@ class AdMobBannerViewController: AdMobViewController {
         super.viewDidLoad()
         
         adManager.delegate = self
-        adManager.showAd(
-            request: .forBannerAd(position: "banner").withAdMob(adUnitId: bannerPlacementId, isBlocking: false),
-            container: view,
+        adManager.showRewardedAd(
+            request: .forRewardedVideo(position: "rewarded")
+                .withAdMob(adUnitId: rewardedPlacementId, isBlocking: true),
             adPresentingViewController: self
         )
     }
 }
 
-extension AdMobBannerViewController: NimbusAdManagerDelegate {
+extension AdMobRewardedViewController: NimbusAdManagerDelegate {
     func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
         print("didRenderAd")
         adController = controller

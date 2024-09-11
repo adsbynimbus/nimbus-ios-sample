@@ -8,6 +8,8 @@
 	<string>a9_onboarding_app_id</string>
 	<key>AdMob Banner ID</key>
 	<string>$(ADMOB_BANNER_ID)</string>
+	<key>AdMob Native ID</key>
+	<string>$(ADMOB_NATIVE_ID)</string>
 	<key>AdMob Interstitial ID</key>
 	<string>$(ADMOB_INTERSTITIAL_ID)</string>
 	<key>AdMob Rewarded ID</key>
