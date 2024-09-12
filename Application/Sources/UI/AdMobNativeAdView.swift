@@ -32,6 +32,8 @@ final class AdMobNativeAdView: GADNativeAdView {
         
         let headline = UILabel()
         headline.translatesAutoresizingMaskIntoConstraints = false
+        headline.lineBreakMode = .byWordWrapping
+        headline.numberOfLines = 0
         addSubview(headline)
         self.headlineView = headline
         
@@ -78,23 +80,6 @@ final class AdMobNativeAdView: GADNativeAdView {
         infoView.distribution = .equalSpacing
         addSubview(infoView)
         
-        let stars = UIStackView()
-        stars.translatesAutoresizingMaskIntoConstraints = false
-        stars.axis = .horizontal
-        stars.spacing = 8
-        stars.distribution = .equalCentering
-        addSubview(stars)
-        self.starRatingView = stars
-        
-        if let rating = self.nativeAd?.starRating?.intValue {
-            for i in 0..<5 {
-                let style = i < rating ? "star.fill" : "star"
-                let starImageView = UIImageView(image: UIImage(systemName: style))
-                starImageView.tintColor = .systemYellow
-                stars.addArrangedSubview(starImageView)
-            }
-        }
-        
         NSLayoutConstraint.activate([
             icon.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             icon.topAnchor.constraint(equalTo: topAnchor, constant: 16),
@@ -102,6 +87,7 @@ final class AdMobNativeAdView: GADNativeAdView {
             icon.heightAnchor.constraint(equalToConstant: 50),
             
             headline.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: 8),
+            headline.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             headline.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             
             advertiser.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: 8),
@@ -119,7 +105,31 @@ final class AdMobNativeAdView: GADNativeAdView {
             infoView.topAnchor.constraint(equalTo: media.bottomAnchor, constant: 16),
             infoView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             infoView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            
+        ])
+        
+        setupRatingViewIfNeeded(infoView: infoView)
+    }
+    
+    func setupRatingViewIfNeeded(infoView: UIStackView) {
+        guard let rating = self.nativeAd?.starRating?.intValue else { return }
+        
+        let stars = UIStackView()
+        stars.translatesAutoresizingMaskIntoConstraints = false
+        stars.axis = .horizontal
+        stars.spacing = 8
+        stars.distribution = .equalCentering
+        
+        for i in 0..<5 {
+            let style = i < rating ? "star.fill" : "star"
+            let starImageView = UIImageView(image: UIImage(systemName: style))
+            starImageView.tintColor = .systemYellow
+            stars.addArrangedSubview(starImageView)
+        }
+        
+        self.starRatingView = stars
+        addSubview(stars)
+        
+        NSLayoutConstraint.activate([
             stars.topAnchor.constraint(equalTo: infoView.bottomAnchor, constant: 8),
             stars.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
         ])
