@@ -15,11 +15,12 @@ final class AdMobNativeAdView: GADNativeAdView {
         
         translatesAutoresizingMaskIntoConstraints = false
         
+        setupViews()
+        
         /// Set self.adChoicesView before setting nativeAd if you want to use a custom view. For the purpose of this
         /// sample, we defer to the default adChoicesView.
         self.nativeAd = nativeAd
         
-        setupViews()
         configure()
     }
     
