@@ -39,6 +39,10 @@ final class AdMobNativeAdView: GADNativeAdView {
         
         let advertiser = UILabel()
         advertiser.translatesAutoresizingMaskIntoConstraints = false
+        advertiser.lineBreakMode = .byWordWrapping
+        advertiser.numberOfLines = 0
+        advertiser.textColor = .darkGray
+        advertiser.font = .systemFont(ofSize: 15)
         addSubview(advertiser)
         self.advertiserView = advertiser
         
@@ -98,9 +102,10 @@ final class AdMobNativeAdView: GADNativeAdView {
             body.topAnchor.constraint(equalTo: icon.bottomAnchor, constant: 16),
             body.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             
-            media.centerXAnchor.constraint(equalTo: centerXAnchor),
-            media.heightAnchor.constraint(equalToConstant: 200),
+            media.leadingAnchor.constraint(equalTo: leadingAnchor),
+            media.trailingAnchor.constraint(equalTo: trailingAnchor),
             media.topAnchor.constraint(equalTo: body.bottomAnchor, constant: 8),
+            media.heightAnchor.constraint(equalToConstant: 200),
             
             infoView.topAnchor.constraint(equalTo: media.bottomAnchor, constant: 16),
             infoView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
