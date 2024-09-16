@@ -24,9 +24,9 @@ class AdMobRewardedViewController: AdMobViewController {
         
         adManager.delegate = self
         adManager.showRewardedAd(
-            request: .forRewardedVideo(position: "rewarded")
-                .withAdMob(adUnitId: rewardedPlacementId, isBlocking: true),
-            adPresentingViewController: self
+            request: .forRewardedVideo(position: "rewarded"),
+            adPresentingViewController: self,
+            adMobAdUnitId: rewardedPlacementId
         )
     }
 }

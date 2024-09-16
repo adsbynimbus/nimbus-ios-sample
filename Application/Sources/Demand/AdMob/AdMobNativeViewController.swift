@@ -45,10 +45,11 @@ class AdMobNativeViewController: AdMobViewController {
         
         adManager.delegate = self
         adManager.showAd(
-            request: .forNativeAd(position: "position")
-                .withAdMob(adUnitId: nativePlacementId, isBlocking: false, nativeAdOptions: nativeOptions),
+            request: .forNativeAd(position: "position"),
             container: contentView,
-            adPresentingViewController: self
+            adPresentingViewController: self,
+            adMobAdUnitId: nativePlacementId,
+            adMobNativeAdOptions: nativeOptions
         )
     }
 }

@@ -24,10 +24,11 @@ class AdMobBannerViewController: AdMobViewController {
         
         adManager.delegate = self
         adManager.showAd(
-            request: .forBannerAd(position: "banner").withAdMob(adUnitId: bannerPlacementId, isBlocking: false),
+            request: .forBannerAd(position: "banner"),
             container: view,
             refreshInterval: 30,
-            adPresentingViewController: self
+            adPresentingViewController: self,
+            adMobAdUnitId: bannerPlacementId
         )
     }
 }

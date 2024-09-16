@@ -23,11 +23,10 @@ class AdMobInterstitialViewController: AdMobViewController {
         super.viewDidLoad()
         
         let request = NimbusRequest.forInterstitialAd(position: "interstitial")
-            .withAdMob(adUnitId: interstitialPlacementId, isBlocking: true)
         request.impressions[0].video = nil
         
         adManager.delegate = self
-        adManager.showBlockingAd(request: request, adPresentingViewController: self)
+        adManager.showBlockingAd(request: request, adPresentingViewController: self, adMobAdUnitId: interstitialPlacementId)
     }
 }
 
