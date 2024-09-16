@@ -26,6 +26,7 @@ class AdMobBannerViewController: AdMobViewController {
         adManager.showAd(
             request: .forBannerAd(position: "banner").withAdMob(adUnitId: bannerPlacementId, isBlocking: false),
             container: view,
+            refreshInterval: 30,
             adPresentingViewController: self
         )
     }

@@ -17,8 +17,5 @@ import NimbusAdMobKit
 extension UIApplicationDelegate {
     func setupAdMobDemand() {
         Nimbus.shared.renderers[.forNetwork("admob")] = NimbusAdMobAdRenderer()
-        
-        GADMobileAds.sharedInstance().start()
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = []
     }
 }
