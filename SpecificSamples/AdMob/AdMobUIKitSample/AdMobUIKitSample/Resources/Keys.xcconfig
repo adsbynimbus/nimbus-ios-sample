@@ -1,0 +1,17 @@
+//
+//  Keys.xcconfig
+//  AdMobUIKitSample
+//  Created on 9/19/24
+//  Copyright © 2024 Nimbus Advertising Solutions Inc. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+// This is a testing AdMob app id to prevent crashing when none provided, please enter your own app id.
+ADMOB_APP_ID=ca-app-pub-3940256099942544~1458002511
+
+ADMOB_BANNER_ID=<Enter your AdMob banner unit id>
+ADMOB_NATIVE_ID=<Enter your AdMob native unit id>
+ADMOB_INTERSTITIAL_ID=<Enter your AdMob interstitial unit id>
+ADMOB_REWARDED_ID=<Enter your AdMob rewarded unit id>
