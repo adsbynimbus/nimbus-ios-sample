@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         setupNimbusSDK()
+        setupAdMobDemand()
         setupMobileFuseDemand()
         setupAmazonDemand()
         setupUnityDemand()

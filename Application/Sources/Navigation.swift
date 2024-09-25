@@ -52,12 +52,14 @@ enum MainItem: String, NavigationItem {
                 items: [Section(header: nil, items: AdManagerAdType.allCases)])
         case .mediationPlatforms:
             let items: [Section]
-            let isAdMob = Bundle.main.infoDictionary?["GADIsAdManagerApp"] as? Int == 0
-            if isAdMob {
-                items = [Section(header: "AdMob", items: DynamicAdMob.allCases)]
-            } else {
+            let isGAM = Bundle.main.infoDictionary?["GADIsAdManagerApp"] as? Bool == true
+            if isGAM {
                 items = [
                     Section(header: "Google Ad Manager (GAM)", items: DynamicPriceNimbusRendering.allCases)
+                ]
+            } else {
+                items = [
+                    Section(header: "Set GADIsAdManagerApp to true in your Info.plist to see dynamic price samples", items: [])
                 ]
             }
             
@@ -71,6 +73,7 @@ enum MainItem: String, NavigationItem {
                 title: self.description,
                 subtitle: "Select to see Nimbus' integration with third party demand",
                 items: [
+                    Section(header: "AdMob", items: AdMob.allCases),
                     Section(header: "MobileFuse", items: MobileFuseSample.allCases),
                     Section(header: "APS", items: APSSample.allCases),
                     Section(header: "Meta Audience Network", items: MetaSample.allCases),
@@ -126,13 +129,19 @@ enum DynamicPriceNimbusRendering: String, NavigationItem {
     }
 }
 
-enum DynamicAdMob: String, NavigationItem {
-    case dynamicBanner                 = "Dynamic Banner"
-    case dynamicInterstitial           = "Dynamic Interstitial"
-    case dynamicRewarded               = "Dynamic Rewarded"
-    case dynamicRewardedInterstitial   = "Dynamic Rewarded Interstitial"
+enum AdMob: String, NavigationItem {
+    case banner                 = "Banner"
+    case native                 = "Native Ad"
+    case interstitial           = "Interstitial"
+    case rewarded               = "Rewarded Video"
+    
     func destinationController(parent: String) -> UIViewController {
-        AdMobViewController(adType: self, headerSubTitle: parent)
+        return switch self {
+        case .banner: AdMobBannerViewController(headerTitle: "AdMob Banner", headerSubTitle: "")
+        case .native: AdMobNativeViewController(headerTitle: "AdMob Native Ad", headerSubTitle: "")
+        case .interstitial: AdMobInterstitialViewController(headerTitle: "AdMob Interstitial", headerSubTitle: "")
+        case .rewarded: AdMobRewardedViewController(headerTitle: "AdMob Rewarded", headerSubTitle: "")
+        }
     }
 }
 
@@ -258,10 +267,11 @@ final class NavigationListViewController: DemoViewController, UITableViewDelegat
         return cell
     }
 
-
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header: DemoHeader = tableView.dequeueReusableHeaderFooterView()
         header.label.text = dataSource[section].header
+        header.label.lineBreakMode = .byWordWrapping
+        header.label.numberOfLines = 0
         return header
     }
     

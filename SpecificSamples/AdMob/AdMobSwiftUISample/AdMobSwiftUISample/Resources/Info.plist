@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>GADApplicationIdentifier</key>
+	<string>$(ADMOB_APP_ID)</string>
+	<key>AdMob Banner ID</key>
+	<string>$(ADMOB_BANNER_ID)</string>
+	<key>AdMob Native ID</key>
+	<string>$(ADMOB_NATIVE_ID)</string>
+	<key>AdMob Interstitial ID</key>
+	<string>$(ADMOB_INTERSTITIAL_ID)</string>
+	<key>AdMob Rewarded ID</key>
+	<string>$(ADMOB_REWARDED_ID)</string>
+</dict>
+</plist>
