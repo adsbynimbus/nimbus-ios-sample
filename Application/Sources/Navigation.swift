@@ -52,12 +52,14 @@ enum MainItem: String, NavigationItem {
                 items: [Section(header: nil, items: AdManagerAdType.allCases)])
         case .mediationPlatforms:
             let items: [Section]
-            let isAdMob = Bundle.main.infoDictionary?["GADIsAdManagerApp"] as? Int == 0
-            if isAdMob {
-                items = [Section(header: "AdMob", items: AdMob.allCases)]
-            } else {
+            let isGAM = Bundle.main.infoDictionary?["GADIsAdManagerApp"] as? Bool == true
+            if isGAM {
                 items = [
                     Section(header: "Google Ad Manager (GAM)", items: DynamicPriceNimbusRendering.allCases)
+                ]
+            } else {
+                items = [
+                    Section(header: "Set GADIsAdManagerApp to true in your Info.plist to see dynamic price samples", items: [])
                 ]
             }
             
@@ -71,6 +73,7 @@ enum MainItem: String, NavigationItem {
                 title: self.description,
                 subtitle: "Select to see Nimbus' integration with third party demand",
                 items: [
+                    Section(header: "AdMob", items: AdMob.allCases),
                     Section(header: "MobileFuse", items: MobileFuseSample.allCases),
                     Section(header: "APS", items: APSSample.allCases),
                     Section(header: "Meta Audience Network", items: MetaSample.allCases),
@@ -264,10 +267,11 @@ final class NavigationListViewController: DemoViewController, UITableViewDelegat
         return cell
     }
 
-
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header: DemoHeader = tableView.dequeueReusableHeaderFooterView()
         header.label.text = dataSource[section].header
+        header.label.lineBreakMode = .byWordWrapping
+        header.label.numberOfLines = 0
         return header
     }
     
