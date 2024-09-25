@@ -363,8 +363,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/adsbynimbus/internal-nimbus-ios-sdk";
 			requirement = {
-				kind = exactVersion;
-				version = "2.1.1-internal1";
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.22.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

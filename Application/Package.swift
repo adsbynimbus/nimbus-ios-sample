@@ -11,7 +11,7 @@ let package = Package(
             targets: ["Application"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/adsbynimbus/nimbus-ios-sdk.git", from: "2.21.0"),
+        .package(url: "https://github.com/adsbynimbus/nimbus-ios-sdk.git", from: "2.22.0"),
     ],
     targets: [
         .target(
@@ -29,6 +29,7 @@ let package = Package(
                 .product(name: "NimbusVungleKit", package: "nimbus-ios-sdk"),
                 .product(name: "NimbusUnityKit", package: "nimbus-ios-sdk"),
                 .product(name: "NimbusMobileFuseKit", package: "nimbus-ios-sdk"),
+                .product(name: "NimbusAdMobKit", package: "nimbus-ios-sdk")
             ],
             path: "Sources")
     ]

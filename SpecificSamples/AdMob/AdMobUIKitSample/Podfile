@@ -1,14 +1,13 @@
 source 'https://cdn.cocoapods.org/'
-source 'git@github.com:adsbynimbus/Specs.git'
 
 platform :ios, '15.0'
 
 target 'AdMobUIKitSample' do
   use_frameworks!
 
-  pod 'NimbusSDK', '2.1.1-internal1', subspecs: [
-     'NimbusKit',
-     'NimbusAdMobKit'
-   ]
+  pod 'NimbusSDK', '~> 2', subspecs: [
+     'NimbusKit',          # Nimbus SDK
+     'NimbusAdMobKit'      # AdMob Bidding Support (Available from 2.22.0)
+  ]
 end
 
