@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5AD1122D2C9C65D6006112E6 /* NimbusAdMobKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5AD1122C2C9C65D6006112E6 /* NimbusAdMobKit */; };
-		5AD1122F2C9C65D6006112E6 /* NimbusKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5AD1122E2C9C65D6006112E6 /* NimbusKit */; };
+		5A48B7D32CA706060065752D /* NimbusAdMobKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5A48B7D22CA706060065752D /* NimbusAdMobKit */; };
+		5A48B7D52CA706060065752D /* NimbusKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5A48B7D42CA706060065752D /* NimbusKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,8 +41,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5AD1122D2C9C65D6006112E6 /* NimbusAdMobKit in Frameworks */,
-				5AD1122F2C9C65D6006112E6 /* NimbusKit in Frameworks */,
+				5A48B7D32CA706060065752D /* NimbusAdMobKit in Frameworks */,
+				5A48B7D52CA706060065752D /* NimbusKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,8 +85,8 @@
 			);
 			name = AdMobSwiftUISample;
 			packageProductDependencies = (
-				5AD1122C2C9C65D6006112E6 /* NimbusAdMobKit */,
-				5AD1122E2C9C65D6006112E6 /* NimbusKit */,
+				5A48B7D22CA706060065752D /* NimbusAdMobKit */,
+				5A48B7D42CA706060065752D /* NimbusKit */,
 			);
 			productName = AdMobSwiftUISample;
 			productReference = 5AD111C32C9B894B006112E6 /* AdMobSwiftUISample.app */;
@@ -117,7 +117,7 @@
 			mainGroup = 5AD111BA2C9B894B006112E6;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				5AD1122B2C9C65D6006112E6 /* XCRemoteSwiftPackageReference "internal-nimbus-ios-sdk" */,
+				5A48B7D12CA706060065752D /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5AD111C42C9B894B006112E6 /* Products */;
@@ -359,9 +359,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		5AD1122B2C9C65D6006112E6 /* XCRemoteSwiftPackageReference "internal-nimbus-ios-sdk" */ = {
+		5A48B7D12CA706060065752D /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/adsbynimbus/internal-nimbus-ios-sdk";
+			repositoryURL = "https://github.com/adsbynimbus/nimbus-ios-sdk";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 2.22.0;
@@ -370,14 +370,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5AD1122C2C9C65D6006112E6 /* NimbusAdMobKit */ = {
+		5A48B7D22CA706060065752D /* NimbusAdMobKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5AD1122B2C9C65D6006112E6 /* XCRemoteSwiftPackageReference "internal-nimbus-ios-sdk" */;
+			package = 5A48B7D12CA706060065752D /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
 			productName = NimbusAdMobKit;
 		};
-		5AD1122E2C9C65D6006112E6 /* NimbusKit */ = {
+		5A48B7D42CA706060065752D /* NimbusKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5AD1122B2C9C65D6006112E6 /* XCRemoteSwiftPackageReference "internal-nimbus-ios-sdk" */;
+			package = 5A48B7D12CA706060065752D /* XCRemoteSwiftPackageReference "nimbus-ios-sdk" */;
 			productName = NimbusKit;
 		};
 /* End XCSwiftPackageProductDependency section */
