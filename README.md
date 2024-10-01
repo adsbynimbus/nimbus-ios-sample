@@ -4,6 +4,25 @@
 
 Welcome to Nimbus Sample App - ads by publishers, for publishers.
 
+## Repository Structure
+
+This repository contains multiple sample apps.
+
+### Main Sample App
+
+Located in the **root** of the repository. The main sample app consumes all Nimbus SDK packages and shows how to work with each one. It also allows you to test [ad markup](#testing-ad-markup).
+
+To run the main sample app, follow the [steps below](#install-git-lfs-large-file-storage).
+
+### Specific Sample Apps
+
+Located in **SpecificSamples** directory. Specific sample apps are designed to illustrate how to work with a single Nimbus package (e.g. NimbusAdMobKit).
+
+Sample apps by use case:
+
+- [Integrate AdMob bidding using UIKit](https://github.com/adsbynimbus/nimbus-ios-sample/tree/main/SpecificSamples/AdMob/AdMobUIKitSample)
+- [Integrate AdMob bidding using SwiftUI](https://github.com/adsbynimbus/nimbus-ios-sample/tree/main/SpecificSamples/AdMob/AdMobSwiftUISample)
+
 ## How to clone the repository
 
 ### Install Git LFS (Large File Storage)
