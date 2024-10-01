@@ -54,7 +54,7 @@ In order to see APS/Meta/GAM/Unity examples you must also supply it's IDs
 - Locate `Keys.xcconfig` file in the root project directory
 - Replace the empty fields with the IDs you have
 
-#### GAM/AdMob Extra Configs
+#### Google Ad Manager (GAM) Extra Configs
 - For GAM Ads it is also required to inform the string value of your Ad Manager app ID for the key `GADApplicationIdentifier` in the Sample App plist. [GAM Update your Info.plist](https://developers.google.com/ad-manager/mobile-ads-sdk/ios/quick-start#update_your_infoplist)
 - The sample app is configured with a test `GADApplicationIdentifier` to ensure the app does not throw an exception during startup due to changes in v10 of the GoogleMobileAds SDK.
 - For testing in real devices please refer to [GAM Enable test devices](https://developers.google.com/ad-manager/mobile-ads-sdk/ios/test-ads#enable_test_devices)
@@ -74,6 +74,12 @@ You will be able to see several examples categorized by specific sections, such 
 - Ads by mediation platforms (Google)
 - Ads with OM SDK viewability integration
 - Ad Markup Renderer
+
+## SwiftUI
+
+Are you looking to integrate Nimbus using SwiftUI? We have created a dedicated sample app specifically for SwiftUI developers. This example demonstrates best practices for integrating Nimbus in a SwiftUI environment.
+
+Explore our [SwiftUI Sample App](https://github.com/adsbynimbus/nimbus-ios-sample/tree/main/SpecificSamples/AdMob/AdMobSwiftUISample) to learn more.
 
 ## Testing Ad Markup
 
