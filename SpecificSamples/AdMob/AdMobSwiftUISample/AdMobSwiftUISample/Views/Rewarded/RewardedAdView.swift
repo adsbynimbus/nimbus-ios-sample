@@ -12,8 +12,8 @@ import NimbusAdMobKit
 struct RewardedAdView: View {
     var body: some View {
         NimbusRewardedAdView(request:
-                .forInterstitialAd(position: "rewarded")
-                .withAdMobInterstitial(adUnitId: rewardedAdUnitId)
+                .forRewardedVideo(position: "rewarded")
+                .withAdMobRewarded(adUnitId: rewardedAdUnitId)
         )
         .onRender { request, ad, controller in
             print("Rendered Nimbus ad: \(ad)")
