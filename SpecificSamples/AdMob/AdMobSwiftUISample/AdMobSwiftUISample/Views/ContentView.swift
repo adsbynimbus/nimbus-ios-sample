@@ -18,7 +18,7 @@ struct ContentView: View {
                 
                 Section("Ad Types") {
                     NavigationLink("Banner Ad") {
-                        BannerView()
+                        BannerAdView()
                     }
                     NavigationLink("Native Ad") {
                         NativeAdView()

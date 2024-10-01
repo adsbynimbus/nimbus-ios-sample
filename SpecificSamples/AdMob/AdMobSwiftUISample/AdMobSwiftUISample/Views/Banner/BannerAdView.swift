@@ -1,7 +1,7 @@
 //
-//  RewardedAdView.swift
+//  BannerAdView.swift
 //  AdMobSwiftUISample
-//  Created on 9/19/24
+//  Created on 9/30/24
 //  Copyright © 2024 Nimbus Advertising Solutions Inc. All rights reserved.
 //
 
@@ -9,11 +9,11 @@ import SwiftUI
 import NimbusKit
 import NimbusAdMobKit
 
-struct RewardedAdView: View {
+struct BannerAdView: View {
     var body: some View {
-        NimbusRewardedAdView(request:
-                .forRewardedVideo(position: "rewarded")
-                .withAdMobRewarded(adUnitId: rewardedAdUnitId)
+        NimbusInlineAdView(request:
+                .forBannerAd(position: "banner")
+                .withAdMobBanner(adUnitId: bannerAdUnitId)
         )
         .onRender { request, ad, controller in
             print("Rendered Nimbus ad: \(ad)")
@@ -24,9 +24,11 @@ struct RewardedAdView: View {
         .onError { error in
             print("Received Nimbus error: \(error.localizedDescription)")
         }
+        .frame(height: 50)
+        .background(.gray)
     }
 }
 
 #Preview {
-    RewardedAdView()
+    BannerAdView()
 }

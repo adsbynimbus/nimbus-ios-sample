@@ -1,24 +1,28 @@
 //
 //  InterstitialAdView.swift
 //  AdMobSwiftUISample
-//  Created on 9/19/24
+//  Created on 9/30/24
 //  Copyright © 2024 Nimbus Advertising Solutions Inc. All rights reserved.
 //
 
 import SwiftUI
+import NimbusKit
+import NimbusAdMobKit
 
 struct InterstitialAdView: View {
-    @StateObject var adManager = AdManagerViewModel()
-    
     var body: some View {
-        if let error = adManager.error {
-            Text("Ad request failed: \(error.localizedDescription)")
-        } else {
-            AdMobInterstitialAdView(
-                viewModel: adManager,
-                position: "interstitial",
-                adUnitId: interstitialAdUnitId
-            )
+        NimbusInterstitialAdView(request:
+                .forInterstitialAd(position: "interstitial")
+                .withAdMobInterstitial(adUnitId: interstitialAdUnitId)
+        )
+        .onRender { request, ad, controller in
+            print("Rendered Nimbus ad: \(ad)")
+        }
+        .onEvent { event in
+            print("Received Nimbus event: \(event)")
+        }
+        .onError { error in
+            print("Received Nimbus error: \(error.localizedDescription)")
         }
     }
 }

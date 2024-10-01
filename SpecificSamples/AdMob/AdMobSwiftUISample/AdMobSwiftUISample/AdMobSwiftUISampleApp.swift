@@ -11,6 +11,8 @@ import NimbusAdMobKit
 
 @main
 struct AdMobSwiftUISampleApp: App {
+    let adMobRendererDelegate = AdMobRendererDelegate()
+    
     init () {
         Nimbus.shared.initialize(publisher: "dev-sdk", apiKey: "d352cac1-cae2-4774-97ba-4e15c6276be0")
 
@@ -21,7 +23,9 @@ struct AdMobSwiftUISampleApp: App {
             NimbusAdManager.requestUrl = URL(string: "https://\(publisherKey).adsbynimbus.com/rta/test")!
         }
         
-        Nimbus.shared.renderers[.forNetwork("admob")] = NimbusAdMobAdRenderer()
+        let adMobRenderer = NimbusAdMobAdRenderer()
+        adMobRenderer.adRendererDelegate = adMobRendererDelegate
+        Nimbus.shared.renderers[.forNetwork("admob")] = adMobRenderer
     }
     
     var body: some Scene {

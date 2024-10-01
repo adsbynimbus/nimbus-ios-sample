@@ -8,29 +8,29 @@
 import SwiftUI
 import GoogleMobileAds
 import NimbusAdMobKit
+import NimbusKit
 
 struct NativeAdView: View {
-    @StateObject var adManager = AdManagerViewModel()
-    
     var body: some View {
-        if let error = adManager.error {
-            Text("Ad request failed: \(error.localizedDescription)")
-        } else {
-            AdMobNativeAdView(
-                viewModel: adManager,
-                position: "native",
-                adUnitId: nativeAdUnitId,
-                options: .init(preferredAdChoicesPosition: .topLeftCorner)
-            )
+        NimbusInlineAdView(request:
+                .forNativeAd(position: "native")
+                .withAdMobNative(
+                    adUnitId: nativeAdUnitId,
+                    nativeAdOptions: NimbusAdMobNativeAdOptions(preferredAdChoicesPosition: .topLeftCorner)
+                )
+        )
+        .onRender { request, ad, controller in
+            print("Rendered Nimbus ad: \(ad)")
+        }
+        .onEvent { event in
+            print("Received Nimbus event: \(event)")
+        }
+        .onError { error in
+            print("Received Nimbus error: \(error.localizedDescription)")
         }
     }
 }
 
 #Preview {
-    AdMobNativeAdView(
-        viewModel: AdManagerViewModel(),
-        position: "",
-        adUnitId: nativeAdUnitId,
-        options: nil
-    )
+    NativeAdView()
 }
