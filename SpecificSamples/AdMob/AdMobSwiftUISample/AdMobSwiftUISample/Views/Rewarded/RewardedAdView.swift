@@ -6,19 +6,27 @@
 //
 
 import SwiftUI
+import NimbusKit
+import NimbusAdMobKit
 
 struct RewardedAdView: View {
-    @StateObject var adManager = AdManagerViewModel()
-    
     var body: some View {
-        if let error = adManager.error {
-            Text("Ad request failed: \(error.localizedDescription)")
-        } else {
-            AdMobRewardedAdView(viewModel: adManager, position: "rewarded", adUnitId: rewardedAdUnitId)
+        NimbusRewardedAdView(request:
+                .forInterstitialAd(position: "rewarded")
+                .withAdMobInterstitial(adUnitId: rewardedAdUnitId)
+        )
+        .onRender { request, ad, controller in
+            print("Rendered Nimbus ad: \(ad)")
+        }
+        .onEvent { event in
+            print("Received Nimbus event: \(event)")
+        }
+        .onError { error in
+            print("Received Nimbus error: \(error.localizedDescription)")
         }
     }
 }
 
 #Preview {
-    RewardedAdView(adManager: AdManagerViewModel())
+    RewardedAdView()
 }

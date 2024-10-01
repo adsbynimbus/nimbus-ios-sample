@@ -1,23 +1,19 @@
 //
-//  NativeAdView.swift
+//  BannerAdView.swift
 //  AdMobSwiftUISample
-//  Created on 9/19/24
+//  Created on 9/30/24
 //  Copyright © 2024 Nimbus Advertising Solutions Inc. All rights reserved.
 //
 
 import SwiftUI
-import GoogleMobileAds
-import NimbusAdMobKit
 import NimbusKit
+import NimbusAdMobKit
 
-struct NativeAdView: View {
+struct BannerAdView: View {
     var body: some View {
         NimbusInlineAdView(request:
-                .forNativeAd(position: "native")
-                .withAdMobNative(
-                    adUnitId: nativeAdUnitId,
-                    nativeAdOptions: NimbusAdMobNativeAdOptions(preferredAdChoicesPosition: .topLeftCorner)
-                )
+                .forBannerAd(position: "banner")
+                .withAdMobBanner(adUnitId: bannerAdUnitId)
         )
         .onRender { request, ad, controller in
             print("Rendered Nimbus ad: \(ad)")
@@ -28,9 +24,11 @@ struct NativeAdView: View {
         .onError { error in
             print("Received Nimbus error: \(error.localizedDescription)")
         }
+        .frame(height: 50)
+        .background(.gray)
     }
 }
 
 #Preview {
-    NativeAdView()
+    BannerAdView()
 }
