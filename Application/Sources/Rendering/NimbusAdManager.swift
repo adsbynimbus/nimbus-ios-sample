@@ -131,30 +131,6 @@ final class AdManagerViewController: SampleAdViewController {
         }
     }
     
-    override func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {
-        super.didReceiveNimbusEvent(controller: controller, event: event)
-        
-        guard let ad = nimbusAd else { return }
-        
-        switch event {
-        case .loaded:
-            controller.adView?.setUiTestIdentifiers(for: ad, refreshing: adType == .bannerWithRefresh)
-        case .loadedCompanionAd:
-            hasCompanionAd = true
-        case .completed:
-            if hasCompanionAd {
-                // Ensures companion ad view is present
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    if let companionAdView = controller.adView?.subviews.last {
-                        companionAdView.setCompanionAdUiTestIdentifiers(for: ad)
-                    }
-                }
-            }
-        default:
-            break
-        }
-    }
-    
     private func setupAdView(adView: CustomAdContainerView?) {
         guard let adView else { return }
         contentView.addSubview(adView)
