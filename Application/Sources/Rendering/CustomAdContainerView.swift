@@ -71,7 +71,7 @@ final class CustomAdContainerView: UIView, AdControllerDelegate {
     
     func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {
         if event == .loaded {
-            nimbusAdView.setUiTestIdentifiers(for: ad)
+            nimbusAdView.makeWebViewInspectable()
         }
         delegate?.didReceiveNimbusEvent(controller: controller, event: event)
     }
