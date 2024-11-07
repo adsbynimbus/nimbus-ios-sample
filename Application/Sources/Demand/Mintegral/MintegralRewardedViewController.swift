@@ -21,7 +21,10 @@ class MintegralRewardedViewController: MintegralViewController {
         super.viewDidLoad()
         
         adManager.delegate = self
-        adManager.showRewardedAd(request: .forRewardedVideo(position: "rewarded"), adPresentingViewController: self)
+        adManager.showRewardedAd(
+            request: .forRewardedVideo(position: "rewarded").withMintegral(adUnitId: "1541935"),
+            adPresentingViewController: self
+        )
     }
 }
 

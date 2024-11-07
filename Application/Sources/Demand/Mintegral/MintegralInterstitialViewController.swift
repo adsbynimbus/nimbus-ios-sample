@@ -22,7 +22,7 @@ class MintegralInterstitialViewController: MintegralViewController {
         
         adManager.delegate = self
         adManager.showBlockingAd(
-            request: .forInterstitialAd(position: "interstitial"),
+            request: .forInterstitialAd(position: "interstitial").withMintegral(adUnitId: "1541952", placementId: nil),
             closeButtonDelay: 0,
             adPresentingViewController: self
         )
