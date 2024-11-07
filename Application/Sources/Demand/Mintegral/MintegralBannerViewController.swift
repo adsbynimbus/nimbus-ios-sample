@@ -22,7 +22,7 @@ class MintegralBannerViewController: MintegralViewController {
         
         adManager.delegate = self
         adManager.showAd(
-            request: .forBannerAd(position: "banner"),
+            request: .forBannerAd(position: "banner").withMintegral(adUnitId: "1541918", placementId: nil),
             container: view,
             refreshInterval: 30,
             adPresentingViewController: self
