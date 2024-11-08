@@ -132,12 +132,14 @@ enum DynamicPriceNimbusRendering: String, NavigationItem {
 
 enum Mintegral: String, NavigationItem {
     case banner                 = "Banner"
+    case native           = "Native"
     case interstitial           = "Interstitial"
     case rewarded               = "Rewarded Video"
     
     func destinationController(parent: String) -> UIViewController {
         return switch self {
         case .banner: MintegralBannerViewController(headerTitle: "Mintegral Banner", headerSubTitle: "")
+        case .native: MintegralNativeViewController(headerTitle: "Mintegral Native", headerSubTitle: "")
         case .interstitial: MintegralInterstitialViewController(headerTitle: "Mintegral Interstitial", headerSubTitle: "")
         case .rewarded: MintegralRewardedViewController(headerTitle: "Mintegral Rewarded", headerSubTitle: "")
         }
