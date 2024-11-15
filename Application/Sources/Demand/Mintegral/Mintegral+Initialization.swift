@@ -21,6 +21,6 @@ extension UIApplicationDelegate {
     func setupMintegralDemand() {
         /// It's important to call initialize as soon as the app launches
         MTGSDK.sharedInstance().setAppID(mintegralAppId, apiKey: mintegralAppKey)
-        Nimbus.shared.renderers[.forNetwork(.mintegral)] = NimbusMintegralAdRenderer()
+        Nimbus.shared.renderers[.mintegral] = NimbusMintegralAdRenderer()
     }
 }

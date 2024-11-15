@@ -23,7 +23,7 @@ class MintegralNativeViewController: MintegralViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let renderer = Nimbus.shared.renderers[.forNetwork(ThirdPartyDemandNetwork.mintegral)] as? NimbusMintegralAdRenderer {
+        if let renderer = Nimbus.shared.renderers[.mintegral] as? NimbusMintegralAdRenderer {
             renderer.adRendererDelegate = self
         }
         
