@@ -270,5 +270,9 @@
 	<string>$(UNITY_GAME_ID)</string>
 	<key>Vungle App ID</key>
 	<string>$(VUNGLE_APP_ID)</string>
+	<key>Mintegral App ID</key>
+	<string>$(MINTEGRAL_APP_ID)</string>
+	<key>Mintegral App Key</key>
+	<string>$(MINTEGRAL_APP_KEY)</string>
 </dict>
 </plist>
