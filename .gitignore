@@ -18,6 +18,7 @@ Pods/
 # Swift Package Manager
 .build/
 Packages/
+Package.resolved
 
 # Secrets
 secrets.json

@@ -29,7 +29,8 @@ let package = Package(
                 .product(name: "NimbusVungleKit", package: "nimbus-ios-sdk"),
                 .product(name: "NimbusUnityKit", package: "nimbus-ios-sdk"),
                 .product(name: "NimbusMobileFuseKit", package: "nimbus-ios-sdk"),
-                .product(name: "NimbusAdMobKit", package: "nimbus-ios-sdk")
+                .product(name: "NimbusAdMobKit", package: "nimbus-ios-sdk"),
+                .product(name: "NimbusMintegralKit", package: "nimbus-ios-sdk"),
             ],
             path: "Sources")
     ]
