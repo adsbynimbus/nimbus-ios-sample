@@ -20,6 +20,7 @@ target 'nimbus-ios-sample-pods' do
      'NimbusVungleKit',         # Vungle Ads Request Support and Renderer
      'NimbusLiveRampKit',       # LiveRamp Request Support
      'NimbusMobileFuseKit',     # MobileFuse Ads Request Support and Renderer (Available from 2.21.0)
-     'NimbusAdMobKit' 		      # AdMob Bidding Support (Available from 2.22.0)
+     'NimbusAdMobKit',          # AdMob Bidding Support (Available from 2.22.0)
+     'NimbusMintegralKit'       # Mintegral Support (Available from 2.24.0)
    ]
 end

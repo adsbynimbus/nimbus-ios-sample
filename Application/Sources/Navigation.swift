@@ -78,7 +78,8 @@ enum MainItem: String, NavigationItem {
                     Section(header: "APS", items: APSSample.allCases),
                     Section(header: "Meta Audience Network", items: MetaSample.allCases),
                     Section(header: "Unity", items: UnitySample.allCases),
-                    Section(header: "Vungle", items: VungleSample.allCases)
+                    Section(header: "Vungle", items: VungleSample.allCases),
+                    Section(header: "Mintegral", items: Mintegral.allCases)
                 ])
         case .testRender:
             return TestRenderViewController(
@@ -125,6 +126,22 @@ enum DynamicPriceNimbusRendering: String, NavigationItem {
         case .interstitial: return GAMInterstitialViewController(headerTitle: title, headerSubTitle: "Interstitial")
         case .rewarded: return GAMRewardedViewController(headerTitle: title, headerSubTitle: "Rewarded")
         case .rewardedInterstitial: return GAMRewardedInterstitialViewController(headerTitle: title, headerSubTitle: "Rewarded Interstitial")
+        }
+    }
+}
+
+enum Mintegral: String, NavigationItem {
+    case banner                 = "Banner"
+    case native           = "Native"
+    case interstitial           = "Interstitial"
+    case rewarded               = "Rewarded Video"
+    
+    func destinationController(parent: String) -> UIViewController {
+        return switch self {
+        case .banner: MintegralBannerViewController(headerTitle: "Mintegral Banner", headerSubTitle: "")
+        case .native: MintegralNativeViewController(headerTitle: "Mintegral Native", headerSubTitle: "")
+        case .interstitial: MintegralInterstitialViewController(headerTitle: "Mintegral Interstitial", headerSubTitle: "")
+        case .rewarded: MintegralRewardedViewController(headerTitle: "Mintegral Rewarded", headerSubTitle: "")
         }
     }
 }
