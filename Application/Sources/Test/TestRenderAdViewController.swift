@@ -24,18 +24,19 @@ final class TestRenderAdViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    static func showBlocking(from: UIViewController, ad: NimbusAd) {
-        let adView = NimbusAdView(adPresentingViewController: from)
-        adView.showsSKOverlay = ad.extensions?.skAdNetwork != nil
-        let controller = NimbusAdViewController(adView: adView, ad: ad, companionAd: nil)
-        controller.modalPresentationStyle = .fullScreen
-        
-        adView.adPresentingViewController = controller
-        adView.isBlocking = true
-        
-        from.present(controller, animated: true) {
-            controller.renderAndStart()
+    static func showBlocking(from: UIViewController, ad: NimbusAd) -> AdController? {
+        do {
+            return try Nimbus.renderBlocking(
+                ad: ad,
+                presentingViewController: from,
+                delegate: nil,
+                isRewardedAd: false
+            )
+        } catch {
+            Nimbus.shared.logger.log("\(#file) failed to render blocking ad, error: \(error)", level: .error)
         }
+        
+        return nil
     }
     
     override func viewDidLoad() {
