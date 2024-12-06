@@ -30,7 +30,7 @@ final class TestRenderAdViewController: UIViewController {
                 ad: ad,
                 presentingViewController: from,
                 delegate: nil,
-                isRewardedAd: false
+                isRewarded: false
             )
         } catch {
             Nimbus.shared.logger.log("\(#file) failed to render blocking ad, error: \(error)", level: .error)
