@@ -26,7 +26,7 @@ final class TestRenderAdViewController: UIViewController {
     
     static func showBlocking(from: UIViewController, ad: NimbusAd) -> AdController? {
         do {
-            return try Nimbus.renderBlocking(
+            return try Nimbus.loadBlocking(
                 ad: ad,
                 presentingViewController: from,
                 delegate: nil,
