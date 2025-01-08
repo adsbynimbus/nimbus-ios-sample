@@ -175,7 +175,7 @@ class TestRenderViewController: DemoViewController {
         let ad = getAdFromMarkup(adMarkup: adMarkup)
         
         if isBlocking {
-            TestRenderAdViewController.showBlocking(from: self, ad: ad)
+            TestRenderAdViewController.showBlocking(from: self, ad: ad)?.presentBlocking()
         } else {
             navigationController?.pushViewController(
                 TestRenderAdViewController(ad: ad),
