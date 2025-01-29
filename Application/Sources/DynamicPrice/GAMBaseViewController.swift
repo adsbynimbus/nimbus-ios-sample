@@ -27,7 +27,7 @@ class GAMBaseViewController: DemoViewController {
     ])
     
     deinit {
-        NimbusAdManager.requestInterceptors = requestInterceptors
+        Task.detached { @MainActor [requestInterceptors] in NimbusAdManager.requestInterceptors = requestInterceptors }
     }
     
     // Please ignore this interceptor logic when integrating Dynamic Price.

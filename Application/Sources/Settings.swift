@@ -121,7 +121,7 @@ extension UserDefaults {
         }
         set {
             set(newValue, forKey: #function)
-            Nimbus.shared.coppa = newValue
+            Task { @NimbusActor in Nimbus.shared.coppa = newValue }
         }
     }
     
@@ -132,12 +132,15 @@ extension UserDefaults {
         }
         set {
             set(newValue, forKey: #function)
-            if newValue, var user = NimbusAdManager.user {
-                // Same string as Android sample app
-                user.configureGdprConsent(consentString: testGDPRConsentString)
-                NimbusAdManager.user = user
-            } else {
-                NimbusAdManager.user?.extensions?.removeValue(forKey: "consent")
+            
+            Task { @MainActor in
+                if newValue, var user = NimbusAdManager.user {
+                    // Same string as Android sample app
+                    user.configureGdprConsent(consentString: testGDPRConsentString)
+                    NimbusAdManager.user = user
+                } else {
+                    NimbusAdManager.user?.extensions?.removeValue(forKey: "consent")
+                }
             }
         }
     }
@@ -181,13 +184,16 @@ extension UserDefaults {
         }
         set {
             set(newValue, forKey: #function)
-            if newValue && nimbusTestMode && NimbusAdManager.extendedIds?.first(where: { $0.source == "tradedesk.com" }) == nil {
-                var extendedIds = NimbusAdManager.extendedIds ?? []
-                extendedIds.insert(NimbusExtendedId(source: "tradedesk.com", uids: [.init(id: "TestUID2Token")]))
-                NimbusAdManager.extendedIds = extendedIds
-            } else {
-                if let extendedId = NimbusAdManager.extendedIds?.first(where: { $0.source == "tradedesk.com" }) {
-                    NimbusAdManager.extendedIds?.remove(extendedId)
+            
+            Task { @MainActor in
+                if newValue && nimbusTestMode && NimbusAdManager.extendedIds?.first(where: { $0.source == "tradedesk.com" }) == nil {
+                    var extendedIds = NimbusAdManager.extendedIds ?? []
+                    extendedIds.insert(NimbusExtendedId(source: "tradedesk.com", uids: [.init(id: "TestUID2Token")]))
+                    NimbusAdManager.extendedIds = extendedIds
+                } else {
+                    if let extendedId = NimbusAdManager.extendedIds?.first(where: { $0.source == "tradedesk.com" }) {
+                        NimbusAdManager.extendedIds?.remove(extendedId)
+                    }
                 }
             }
         }
@@ -200,9 +206,12 @@ extension UserDefaults {
         }
         set {
             set(newValue, forKey: #function)
-            var headers = NimbusAdManager.additionalRequestHeaders ?? [:]
-            headers["Nimbus-Test-No-Fill"] = String(newValue)
-            NimbusAdManager.additionalRequestHeaders = headers
+            
+            Task { @MainActor in
+                var headers = NimbusAdManager.additionalRequestHeaders ?? [:]
+                headers["Nimbus-Test-No-Fill"] = String(newValue)
+                NimbusAdManager.additionalRequestHeaders = headers
+            }
         }
     }
     

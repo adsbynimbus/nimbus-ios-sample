@@ -14,7 +14,9 @@ class DemandViewController: SampleAdViewController {
     weak var sweepingInterceptor: SweepingInterceptor?
     
     deinit {
-        NimbusAdManager.requestInterceptors?.removeAll(where: { $0 === sweepingInterceptor })
+        Task.detached { @MainActor [sweepingInterceptor] in
+            NimbusAdManager.requestInterceptors?.removeAll(where: { $0 === sweepingInterceptor })
+        }
     }
     
     init(network: ThirdPartyDemandNetwork, headerTitle: String, headerSubTitle: String) {

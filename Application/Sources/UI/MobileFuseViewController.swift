@@ -14,7 +14,9 @@ import NimbusKit
 class MobileFuseViewController: SampleAdViewController {
     
     deinit {
-        NimbusAdManager.removeMobileFuseHeader()
+        Task.detached { @MainActor in
+            NimbusAdManager.removeMobileFuseHeader()
+        }
     }
     
     override func viewDidLoad() {
