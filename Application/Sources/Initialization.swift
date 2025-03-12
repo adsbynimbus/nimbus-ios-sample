@@ -8,7 +8,7 @@
 import AppTrackingTransparency
 import NimbusKit
 import NimbusRenderStaticKit
-import NimbusRenderVideoKit
+import NimbusRenderVASTKit
 import SwiftUI
 import UIKit
 
@@ -61,11 +61,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NimbusAdManager.requestInterceptors = []
 
         // Renderers
-        let videoRenderer = NimbusVideoAdRenderer()
-        videoRenderer.showMuteButton = true
         Nimbus.shared.renderers = [
             .forAuctionType(.static): NimbusStaticAdRenderer(),
-            .forAuctionType(.video): videoRenderer,
+            .forAuctionType(.video): NimbusVideoAdRenderer(),
         ]
 
         // User

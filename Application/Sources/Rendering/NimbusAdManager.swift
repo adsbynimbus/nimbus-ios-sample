@@ -7,7 +7,7 @@
 
 import GoogleInteractiveMediaAds
 import NimbusKit
-import NimbusRenderVideoKit
+import NimbusRenderVASTKit
 import UIKit
 import SwiftUI
 
@@ -36,7 +36,6 @@ final class AdManagerViewController: SampleAdViewController {
         
         setupContentView()
         setupAdRendering()
-        setupCustomVideoSettings()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -49,7 +48,6 @@ final class AdManagerViewController: SampleAdViewController {
         nimbusAdView?.destroy()
         customAdContainerView?.destroy()
         adController?.destroy()
-        resetVideoSettings()
     }
     
     private func setupContentView() {
@@ -166,22 +164,6 @@ final class AdManagerViewController: SampleAdViewController {
             adView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
         ])
     }
-    
-    private func setupCustomVideoSettings() {
-        if let videoRenderer = Nimbus.shared.renderers.first(
-            where: { $0.key.type == .video }
-        )?.value as? NimbusVideoAdRenderer {
-            videoRenderer.videoAdSettingsProvider = CustomVideoAdSettingsProvider(disableUi: adType == .interstitialVideoWithoutUI)
-        }
-    }
-    
-    private func resetVideoSettings() {
-        if let videoRenderer = Nimbus.shared.renderers.first(
-            where: { $0.key.type == .video }
-        )?.value as? NimbusVideoAdRenderer {
-            videoRenderer.videoAdSettingsProvider = NimbusVideoSettingsProvider()
-        }
-    }
 }
 
 // MARK: NimbusAdManagerDelegate
@@ -218,20 +200,4 @@ extension AdManagerViewController : NimbusRequestInterceptor {
     
     func didCompleteNimbusRequest(with ad: NimbusAd) { }
     func didFailNimbusRequest(with error: NimbusError) { }
-}
-
-final class CustomVideoAdSettingsProvider: NimbusVideoSettingsProvider {
-    
-    public var disableUi: Bool
-    
-    init(disableUi: Bool = false) {
-        self.disableUi = disableUi
-    }
-    
-    override func adsRenderingSettings() -> IMAAdsRenderingSettings {
-        let settings = super.adsRenderingSettings()
-        settings.disableUi = disableUi
-        settings.uiElements = disableUi ? [] : nil // Passing nil shows all of the default UI elements
-        return settings
-    }
 }
