@@ -228,8 +228,7 @@ class TestRenderViewController: DemoViewController {
         NimbusAdDimensions(width: 300, height: 50)
         
         let ext = NimbusAdExtensions(
-            skAdNetwork: iTunesAppId != nil ? NimbusAdSkAdNetwork(advertisedAppStoreItemID: iTunesAppId) : nil,
-            useNimbusVideoRenderer: useNimbusRenderer
+            skAdNetwork: iTunesAppId != nil ? NimbusAdSkAdNetwork(advertisedAppStoreItemID: iTunesAppId) : nil
         )
         
         return NimbusAd(
