@@ -49,7 +49,6 @@ enum GeneralSettings: String, SettingsEnum, CaseIterable {
     case nimbusTestMode          = "Nimbus Test Mode"
     case coppaOn                 = "Set COPPA On"
     case forceNoFill             = "Force No Fill"
-    case omThirdPartyViewability = "Send OMID Viewability Flag"
     case tradeDesk               = "Send Trade Desk Identity"
     case eventLogHidden          = "Hide Event Log By Default"
     
@@ -61,8 +60,6 @@ enum GeneralSettings: String, SettingsEnum, CaseIterable {
             return UserDefaults.standard.coppaOn
         case .forceNoFill:
             return UserDefaults.standard.forceNoFill
-        case .omThirdPartyViewability:
-            return UserDefaults.standard.omThirdPartyViewability
         case .tradeDesk:
             return UserDefaults.standard.tradeDesk
         case .eventLogHidden:
@@ -79,8 +76,6 @@ enum GeneralSettings: String, SettingsEnum, CaseIterable {
             UserDefaults.standard.coppaOn = isEnabled
         case .forceNoFill:
             UserDefaults.standard.forceNoFill = isEnabled
-        case .omThirdPartyViewability:
-            UserDefaults.standard.omThirdPartyViewability = isEnabled
         case .tradeDesk:
             UserDefaults.standard.tradeDesk = isEnabled
         case .eventLogHidden:
@@ -100,17 +95,6 @@ extension UserDefaults {
         set {
             set(newValue, forKey: #function)
             Nimbus.shared.testMode = newValue
-        }
-    }
-    
-    var omThirdPartyViewability: Bool {
-        get {
-            register(defaults: [#function: true])
-            return bool(forKey: #function)
-        }
-        set {
-            set(newValue, forKey: #function)
-            Nimbus.shared.isThirdPartyViewabilityEnabled = newValue
         }
     }
     
