@@ -13,18 +13,16 @@ final class CustomAdContainerView: UIView, AdControllerDelegate {
 
     private let ad: NimbusAd
     private let volume: Int
-    private let companionAd: NimbusCompanionAd?
     private weak var viewController: UIViewController?
     private let creativeScalingEnabledForStaticAds: Bool
     private let staticAdRenderer = Nimbus.shared.renderers.first(where: { $0.key == .forAuctionType(.static) })?.value
            as? NimbusStaticAdRenderer
-    private lazy var nimbusAdView = NimbusAdView(adPresentingViewController: viewController)
+    private lazy var nimbusAdView = NimbusAdView(isBlocking: false)
     private weak var delegate: AdControllerDelegate?
     
     init(
         ad: NimbusAd,
         volume: Int = 0,
-        companionAd: NimbusCompanionAd? = nil,
         viewController: UIViewController,
         creativeScalingEnabledForStaticAds: Bool = true,
         delegate: AdControllerDelegate? = nil,
@@ -32,7 +30,6 @@ final class CustomAdContainerView: UIView, AdControllerDelegate {
     ) {
         self.ad = ad
         self.volume = volume
-        self.companionAd = companionAd
         self.viewController = viewController
         self.creativeScalingEnabledForStaticAds = creativeScalingEnabledForStaticAds
         self.delegate = delegate
@@ -48,7 +45,7 @@ final class CustomAdContainerView: UIView, AdControllerDelegate {
     }
     
     func destroy() {
-        nimbusAdView.destroy()
+//        nimbusAdView.destroy()
         staticAdRenderer?.creativeScalingEnabled = true
     }
     
@@ -61,12 +58,15 @@ final class CustomAdContainerView: UIView, AdControllerDelegate {
             nimbusAdView.leadingAnchor.constraint(equalTo: leadingAnchor),
             nimbusAdView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
+        
+        // TODO: Remove this class
+        
 
-        nimbusAdView.volume = volume
-        nimbusAdView.delegate = self
-
-        nimbusAdView.render(ad: ad, companionAd: companionAd)
-        nimbusAdView.start()
+//        nimbusAdView.volume = volume
+//        nimbusAdView.delegate = self
+//
+//        nimbusAdView.render(ad: ad, companionAd: companionAd)
+//        nimbusAdView.start()
     }
     
     func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {

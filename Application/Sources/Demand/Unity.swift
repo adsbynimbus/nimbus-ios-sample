@@ -77,7 +77,7 @@ extension UnityViewController: NimbusAdManagerDelegate {
         print("didRenderAd")
         
         adController = controller
-        adController?.delegate = self
+        adController?.register(delegate: self)
         nimbusAd = ad
     }
     

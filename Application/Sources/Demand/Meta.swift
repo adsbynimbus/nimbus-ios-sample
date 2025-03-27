@@ -78,7 +78,6 @@ final class FANViewController: SampleAdViewController {
         
         adContainerView = CustomAdContainerView(
             ad: nimbusAd,
-            companionAd: nil,
             viewController: self,
             creativeScalingEnabledForStaticAds: true,
             delegate: self

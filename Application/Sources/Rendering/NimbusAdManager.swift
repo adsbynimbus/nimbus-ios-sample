@@ -45,7 +45,7 @@ final class AdManagerViewController: SampleAdViewController {
     
     deinit {
         let nimbusAdView = contentView.subviews.first(where: { $0 is NimbusAdView }) as? NimbusAdView
-        nimbusAdView?.destroy()
+//        nimbusAdView?.destroy()
         customAdContainerView?.destroy()
         adController?.destroy()
     }
@@ -184,7 +184,7 @@ extension AdManagerViewController: NimbusAdManagerDelegate {
     
     func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
         print("didRenderAd")
-        controller.delegate = self
+        controller.register(delegate: self)
         adController = controller
     }
 }
