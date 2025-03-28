@@ -21,10 +21,18 @@ final class AdManagerViewController: SampleAdViewController {
     private lazy var requestManager = NimbusRequestManager()
     private var hasCompanionAd = false
     
+    private let tmpExtensions = Nimbus.shared.extensions
+    
+    deinit {
+        Nimbus.shared.extensions = tmpExtensions
+        customAdContainerView?.destroy()
+        adController?.destroy()
+    }
+    
     init(adType: AdManagerAdType, headerSubTitle: String) {
         self.adType = adType
         super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle)
-        NimbusRequestManager.requestInterceptors?.append(self)
+        Nimbus.shared.extensions = []
     }
     
     required init?(coder: NSCoder) {
@@ -36,18 +44,6 @@ final class AdManagerViewController: SampleAdViewController {
         
         setupContentView()
         setupAdRendering()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NimbusRequestManager.requestInterceptors?.removeAll { $0 === self }
-    }
-    
-    deinit {
-        let nimbusAdView = contentView.subviews.first(where: { $0 is NimbusAdView }) as? NimbusAdView
-//        nimbusAdView?.destroy()
-        customAdContainerView?.destroy()
-        adController?.destroy()
     }
     
     private func setupContentView() {
@@ -187,17 +183,4 @@ extension AdManagerViewController: NimbusAdManagerDelegate {
         controller.register(delegate: self)
         adController = controller
     }
-}
-
-extension AdManagerViewController : NimbusRequestInterceptor {
-    
-    func modifyRequest(request: NimbusRequestKit.NimbusRequest) {
-        request.user?.extensions?.removeValue(forKey: "vungle_buyeruid")
-        request.user?.extensions?.removeValue(forKey: "unity_buyeruid")
-        request.user?.extensions?.removeValue(forKey: "facebook_buyeruid")
-        request.impressions[0].extensions?.removeValue(forKey: "facebook_app_id")
-    }
-    
-    func didCompleteNimbusRequest(with ad: NimbusAd) { }
-    func didFailNimbusRequest(with error: NimbusError) { }
 }

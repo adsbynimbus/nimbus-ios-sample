@@ -11,6 +11,7 @@ import NimbusRenderStaticKit
 import NimbusRenderVASTKit
 import SwiftUI
 import UIKit
+import NimbusVungleKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupMobileFuseDemand()
         setupAmazonDemand()
         setupUnityDemand()
-        setupVungleDemand()
         setupMintegralDemand()
         
         // Meta and LiveRamp requires att permissions to run properly
@@ -37,10 +37,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func setupNimbusSDK() {
-        Nimbus.shared.initialize(
-            publisher: Bundle.main.infoDictionary?["Publisher Key"] as! String,
-            apiKey: Bundle.main.infoDictionary?["API Key"] as! String
-        )
+        Nimbus.shared.initialize {
+            if let publisher = Bundle.main.infoDictionary?["Publisher Key"] as? String,
+               let apiKey = Bundle.main.infoDictionary?["API Key"] as? String {
+                credentials(publisher: publisher, apiKey: apiKey)
+            }
+            
+            if let appId = Bundle.main.infoDictionary?["Vungle App ID"] as? String {
+                include(VungleExtension(appId: appId))
+            }
+        }
         
         #if DEBUG
         Nimbus.shared.logLevel = .info

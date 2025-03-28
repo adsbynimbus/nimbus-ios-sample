@@ -19,6 +19,5 @@ extension UIApplicationDelegate {
     func setupMobileFuseDemand() {
         NimbusRequestManager.requestInterceptors?.append(NimbusMobileFuseRequestInterceptor())
         Nimbus.shared.renderers[.forNetwork("mobilefusesdk")] = NimbusMobileFuseAdRenderer()
-        Nimbus.shared.controllers[.forNetwork("mobilefusesdk")] = NimbusMobileFuseAdController.self
     }
 }

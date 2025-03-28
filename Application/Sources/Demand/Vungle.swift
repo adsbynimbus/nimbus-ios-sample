@@ -32,7 +32,7 @@ extension UIApplicationDelegate {
     }
 }
 
-class VungleViewController: SampleAdViewController {
+class VungleViewController: DemandViewController {
     
     private let contentView = UIView()
     private let nativeAdContentView = UIView()
@@ -44,7 +44,7 @@ class VungleViewController: SampleAdViewController {
     init(adType: VungleSample, headerSubTitle: String) {
         self.adType = adType
         
-        super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle)
+        super.init(network: .vungle, headerTitle: adType.description, headerSubTitle: headerSubTitle)
     }
     
     required init?(coder: NSCoder) {
