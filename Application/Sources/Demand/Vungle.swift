@@ -54,9 +54,9 @@ class VungleViewController: DemandViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let renderer = NimbusVungleAdRenderer()
-        renderer.adRendererDelegate = self
-        Nimbus.shared.renderers[.forNetwork("vungle")] = renderer
+        VungleExtension.nativeViewForRendering = { (container, nativeAd) in
+            NimbusVungleNativeAdView(nativeAd)
+        }
         
         // Enable Vungle Demand for this screen only
         NimbusVungleRequestInterceptor.enabled = true
@@ -151,12 +151,6 @@ extension VungleViewController: NimbusAdManagerDelegate {
     
     func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
         print("didFailNimbusRequest: \(error.localizedDescription)")
-    }
-}
-
-extension VungleViewController: NimbusVungleAdRendererDelegate {
-    func customViewForRendering(container: UIView, nativeAd: VungleNative) -> NimbusVungleNativeAdViewType {
-        NimbusVungleNativeAdView(nativeAd)
     }
 }
 
