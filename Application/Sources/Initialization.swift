@@ -12,6 +12,7 @@ import NimbusRenderVASTKit
 import SwiftUI
 import UIKit
 import NimbusVungleKit
+import NimbusMobileFuseKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         setupNimbusSDK()
         setupAdMobDemand()
-        setupMobileFuseDemand()
         setupAmazonDemand()
         setupUnityDemand()
         setupMintegralDemand()
@@ -42,6 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                let apiKey = Bundle.main.infoDictionary?["API Key"] as? String {
                 credentials(publisher: publisher, apiKey: apiKey)
             }
+            
+            include(MobileFuseExtension())
             
             if let appId = Bundle.main.infoDictionary?["Vungle App ID"] as? String {
                 include(VungleExtension(appId: appId))
