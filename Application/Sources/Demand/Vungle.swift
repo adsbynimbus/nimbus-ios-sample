@@ -54,7 +54,7 @@ class VungleViewController: DemandViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        VungleExtension.nativeViewForRendering = { (container, nativeAd) in
+        VungleExtension.nativeViewProvider = { (container, nativeAd) in
             NimbusVungleNativeAdView(nativeAd)
         }
         
