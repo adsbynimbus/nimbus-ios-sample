@@ -38,7 +38,6 @@ final class FANViewController: SampleAdViewController {
     
     private let adType: MetaSample
     private var dimensions: NimbusAdDimensions?
-    private var adContainerView: CustomAdContainerView?
     
     init(adType: MetaSample, headerSubTitle: String) {
         self.adType = adType
@@ -69,41 +68,10 @@ final class FANViewController: SampleAdViewController {
         }
     }
     
-    deinit {
-        adContainerView?.destroy()
-    }
-    
     private func setupAdView() {
         guard let nimbusAd else { return }
         
-        adContainerView = CustomAdContainerView(
-            ad: nimbusAd,
-            viewController: self,
-            creativeScalingEnabledForStaticAds: true,
-            delegate: self
-        )
-        
-        guard let adContainerView else { return }
-        
-        view.addSubview(adContainerView)
-        
-        adContainerView.translatesAutoresizingMaskIntoConstraints = false
-        
-        if let dimensions {
-            NSLayoutConstraint.activate([
-                adContainerView.safeAreaLayoutGuide.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-                adContainerView.safeAreaLayoutGuide.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
-                adContainerView.safeAreaLayoutGuide.widthAnchor.constraint(equalToConstant: CGFloat(dimensions.width)),
-                adContainerView.safeAreaLayoutGuide.heightAnchor.constraint(equalToConstant: CGFloat(dimensions.height)),
-            ])
-        } else {
-            NSLayoutConstraint.activate([
-                adContainerView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
-                adContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                adContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                adContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            ])
-        }
+        try! Nimbus.load(ad: nimbusAd, container: view, adPresentingViewController: self, delegate: self)
     }
         
     private func createNimbusAd(adType: MetaSample) -> NimbusAd {

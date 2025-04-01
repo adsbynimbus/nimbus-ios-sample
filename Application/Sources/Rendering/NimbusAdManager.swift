@@ -16,7 +16,6 @@ final class AdManagerViewController: SampleAdViewController {
     private var adManager = NimbusAdManager()
     
     private let adType: AdManagerAdType
-    private var customAdContainerView: CustomAdContainerView?
     private var adController: AdController?
     private lazy var requestManager = NimbusRequestManager()
     private var hasCompanionAd = false
@@ -25,7 +24,6 @@ final class AdManagerViewController: SampleAdViewController {
     
     deinit {
         Nimbus.shared.extensions = tmpExtensions
-        customAdContainerView?.destroy()
         adController?.destroy()
     }
     
@@ -146,20 +144,6 @@ final class AdManagerViewController: SampleAdViewController {
             break
         }
     }
-    
-    private func setupAdView(adView: CustomAdContainerView?) {
-        guard let adView else { return }
-        contentView.addSubview(adView)
-
-        adView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            adView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            adView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor),
-            adView.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor),
-            adView.trailingAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor),
-            adView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-        ])
-    }
 }
 
 // MARK: NimbusAdManagerDelegate
@@ -169,8 +153,7 @@ extension AdManagerViewController: NimbusAdManagerDelegate {
         print("didCompleteNimbusRequest")
         nimbusAd = ad
         if ad.position == AdManagerAdType.manuallyRenderedAd.rawValue {
-            customAdContainerView = CustomAdContainerView(ad: ad, viewController: self, delegate: self)
-            setupAdView(adView: customAdContainerView)
+            try! Nimbus.load(ad: ad, container: contentView, adPresentingViewController: self, delegate: self)
         }
     }
 
