@@ -11,10 +11,6 @@ import NimbusKit
 final class TestRenderAdViewController: UIViewController {
     private let ad: NimbusAd
     
-    private lazy var adContainerView: CustomAdContainerView = {
-        return CustomAdContainerView(ad: ad, viewController: self)
-    }()
-    
     init(ad: NimbusAd) {
         self.ad = ad
         super.init(nibName: nil, bundle: nil)
@@ -44,18 +40,15 @@ final class TestRenderAdViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         
-        setupLogo()
-        setupAdView()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+        let adController = try! Nimbus.load(ad: ad, container: view, adPresentingViewController: self, delegate: nil)
         
-        adContainerView.destroy()
+        setupLogo()
+        setup(adView: adController.adView)
     }
     
-    private func setupAdView() {
-        view.layout(adContainerView) { child in
+    private func setup(adView: UIView?) {
+        guard let adView else { return }
+        view.layout(adView) { child in
             child.alignTop()
             child.fill()
         }
