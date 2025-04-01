@@ -13,6 +13,7 @@ import SwiftUI
 import UIKit
 import NimbusVungleKit
 import NimbusMobileFuseKit
+import NimbusMintegralKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -44,6 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             
             include(MobileFuseExtension())
+            include(MintegralExtension())
             
             if let appId = Bundle.main.infoDictionary?["Vungle App ID"] as? String {
                 include(VungleExtension(appId: appId))

@@ -13,7 +13,7 @@ import NimbusSDK
 import NimbusMintegralKit
 #endif
 
-final class MintegralNativeAdView: UIView, NimbusMintegralNativeAdViewType {
+final class MintegralNativeAdView: UIView, MintegralNativeAdViewType {
     let mediaView: MTGMediaView = {
         let media = MTGMediaView(frame: .zero)
         media.translatesAutoresizingMaskIntoConstraints = false

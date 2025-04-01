@@ -11,10 +11,8 @@ import NimbusKit
 class DemandViewController: SampleAdViewController {
     private let network: ThirdPartyDemandNetwork
     
-    weak var sweepingInterceptor: SweepingInterceptor?
-    
     deinit {
-        NimbusAdManager.requestInterceptors?.removeAll(where: { $0 === sweepingInterceptor })
+        Nimbus.shared.extensions.removeAll(where: { $0 is SweepingExtension })
     }
     
     init(network: ThirdPartyDemandNetwork, headerTitle: String, headerSubTitle: String) {
@@ -29,8 +27,6 @@ class DemandViewController: SampleAdViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let sweepingInterceptor = SweepingInterceptor(keep: network)
-        NimbusAdManager.requestInterceptors?.append(sweepingInterceptor)
-        self.sweepingInterceptor = sweepingInterceptor
+        Nimbus.shared.extensions.append(SweepingExtension(keep: network))
     }
 }
