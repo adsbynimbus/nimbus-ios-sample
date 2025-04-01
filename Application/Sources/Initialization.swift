@@ -14,6 +14,7 @@ import UIKit
 import NimbusVungleKit
 import NimbusMobileFuseKit
 import NimbusMintegralKit
+import NimbusAdMobKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,7 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         setupNimbusSDK()
-        setupAdMobDemand()
         setupAmazonDemand()
         setupUnityDemand()
         setupMintegralDemand()
@@ -46,6 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             include(MobileFuseExtension())
             include(MintegralExtension())
+            include(AdMobExtension())
             
             if let appId = Bundle.main.infoDictionary?["Vungle App ID"] as? String {
                 include(VungleExtension(appId: appId))

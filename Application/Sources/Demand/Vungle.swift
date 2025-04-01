@@ -16,22 +16,6 @@ import NimbusVungleKit
 import UIKit
 import VungleAdsSDK
 
-fileprivate var shared: NimbusVungleRequestInterceptor?
-fileprivate var vungleAppId = Bundle.main.infoDictionary?["Vungle App ID"] as? String
-
-extension UIApplicationDelegate {
-    func setupVungleDemand() {
-        if let appId = vungleAppId {
-            let vungleRequestInterceptor = NimbusVungleRequestInterceptor(appId: appId)
-            NimbusRequestManager.requestInterceptors?.append(vungleRequestInterceptor)
-            
-            // Disable Vungle Ads until we are are on the VungleViewController
-            shared = vungleRequestInterceptor
-            NimbusVungleRequestInterceptor.enabled = false
-        }
-    }
-}
-
 class VungleViewController: DemandViewController {
     
     private let contentView = UIView()
@@ -58,20 +42,8 @@ class VungleViewController: DemandViewController {
             NimbusVungleNativeAdView(nativeAd)
         }
         
-        // Enable Vungle Demand for this screen only
-        NimbusVungleRequestInterceptor.enabled = true
-        NimbusRequestManager.requestInterceptors?.append(self)
-        
         setupContentView()
         setupAdRendering()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        NimbusVungleRequestInterceptor.enabled = false
-        NimbusRequestManager.requestInterceptors?.removeAll { $0 === self }
-        Nimbus.shared.renderers[.forNetwork("vungle")] = nil
-        
-        super.viewDidDisappear(animated)
     }
     
     private func setupContentView() {
@@ -151,32 +123,5 @@ extension VungleViewController: NimbusAdManagerDelegate {
     
     func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
         print("didFailNimbusRequest: \(error.localizedDescription)")
-    }
-}
-
-extension VungleViewController: NimbusRequestInterceptor {
-    
-    func modifyRequest(request: NimbusRequestKit.NimbusRequest) {
-        request.user?.extensions?.removeValue(forKey: "unity_buyeruid")
-        request.user?.extensions?.removeValue(forKey: "facebook_buyeruid")
-        request.impressions[0].extensions?.removeValue(forKey: "facebook_app_id")
-    }
-    
-    func didCompleteNimbusRequest(with ad: NimbusAd) { }
-    func didFailNimbusRequest(with error: NimbusError) { }
-}
-
-extension NimbusVungleRequestInterceptor {
-    static var enabled: Bool {
-        get {
-            NimbusRequestManager.requestInterceptors?.contains(where: { $0 is NimbusVungleRequestInterceptor }) ?? false
-        }
-        set {
-            if newValue, let interceptor = shared {
-                NimbusRequestManager.requestInterceptors?.append(interceptor)
-            } else if !newValue {
-                NimbusRequestManager.requestInterceptors?.removeAll(where: { $0 is NimbusVungleRequestInterceptor })
-            }
-        }
     }
 }
