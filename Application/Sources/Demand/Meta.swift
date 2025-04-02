@@ -10,8 +10,7 @@ import NimbusKit
 #if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK
 #else                    // Swift Package Manager
-import NimbusRenderFANKit
-import NimbusRequestFANKit
+import NimbusMetaKit
 #endif
 import UIKit
 
@@ -24,8 +23,8 @@ let metaAppId = metaNativeId.components(separatedBy: "_").first
 extension UIApplicationDelegate {
     func setupMetaDemand() {
         if let metaAppId = metaAppId {
-            NimbusRequestManager.requestInterceptors?.append(NimbusFANRequestInterceptor(appId: metaAppId))
-            Nimbus.shared.renderers[.forNetwork("facebook")] = NimbusFANAdRenderer()
+            NimbusRequestManager.requestInterceptors?.append(NimbusMetaRequestInterceptor(appId: metaAppId))
+            Nimbus.shared.renderers[.forNetwork("facebook")] = NimbusMetaAdRenderer()
             
             FBAdSettings.addTestDevice(FBAdSettings.testDeviceHash())
             // Required for test ads
