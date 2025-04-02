@@ -10,8 +10,7 @@ import NimbusKit
 #if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK
 #else                    // Swift Package Manager
-import NimbusRenderFANKit
-import NimbusRequestFANKit
+import NimbusMetaKit
 #endif
 import UIKit
 
