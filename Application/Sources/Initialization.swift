@@ -16,6 +16,7 @@ import NimbusMobileFuseKit
 import NimbusMintegralKit
 import NimbusAdMobKit
 import NimbusMetaKit
+import NimbusUnityKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,7 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         setupNimbusSDK()
         setupAmazonDemand()
-        setupUnityDemand()
         setupMintegralDemand()
         
         // Meta and LiveRamp requires att permissions to run properly
@@ -56,6 +56,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let metaNativeId = Bundle.main.infoDictionary?["Meta Native Placement ID"] as? String,
                let metaAppId = metaNativeId.components(separatedBy: "_").first {
                 include(MetaExtension(appId: metaAppId))
+            }
+            
+            if let gameId = Bundle.main.infoDictionary?["Unity Game ID"] as? String {
+                include(UnityExtension(gameId: gameId))
             }
         }
         
