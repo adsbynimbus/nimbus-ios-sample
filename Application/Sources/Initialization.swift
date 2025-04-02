@@ -78,14 +78,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 "Nimbus-Test-No-Fill": String(UserDefaults.standard.forceNoFill)
             ]
         }
-        
-        NimbusAdManager.requestInterceptors = []
-
-        // Renderers
-        Nimbus.shared.renderers = [
-            .forAuctionType(.static): NimbusStaticAdRenderer(),
-            .forAuctionType(.video): NimbusVideoAdRenderer(),
-        ]
 
         // User
         NimbusAdManager.user = NimbusUser(age: 20, gender: .male)

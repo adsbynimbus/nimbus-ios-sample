@@ -18,7 +18,7 @@ let googleDynamicPricePlacementId = Bundle.main.infoDictionary?["Google Nimbus R
 let googleDynamicPriceRewardedPlacementId = Bundle.main.infoDictionary?["Google Nimbus Rendering Rewarded Placement ID"] as? String ?? ""
 
 class GAMBaseViewController: DemoViewController {
-    private var requestInterceptors: [NimbusRequestInterceptor]?
+    private var extensions: [NimbusExtension] = Nimbus.shared.extensions
     
     // Sample Price Mapping configured for testing only.
     // Contact your Nimbus account manager for the values setup with your account.
@@ -27,7 +27,7 @@ class GAMBaseViewController: DemoViewController {
     ])
     
     deinit {
-        NimbusAdManager.requestInterceptors = requestInterceptors
+        Nimbus.shared.extensions = extensions
     }
     
     // Please ignore this interceptor logic when integrating Dynamic Price.
@@ -37,7 +37,6 @@ class GAMBaseViewController: DemoViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        requestInterceptors = NimbusAdManager.requestInterceptors
-        NimbusAdManager.requestInterceptors = nil
+        Nimbus.shared.extensions = []
     }
 }
