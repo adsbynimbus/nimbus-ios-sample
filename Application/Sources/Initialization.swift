@@ -15,6 +15,7 @@ import NimbusVungleKit
 import NimbusMobileFuseKit
 import NimbusMintegralKit
 import NimbusAdMobKit
+import NimbusMetaKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -50,6 +51,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             if let appId = Bundle.main.infoDictionary?["Vungle App ID"] as? String {
                 include(VungleExtension(appId: appId))
+            }
+            
+            if let metaNativeId = Bundle.main.infoDictionary?["Meta Native Placement ID"] as? String,
+               let metaAppId = metaNativeId.components(separatedBy: "_").first {
+                include(MetaExtension(appId: metaAppId))
             }
         }
         

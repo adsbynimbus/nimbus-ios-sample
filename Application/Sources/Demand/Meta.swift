@@ -18,18 +18,12 @@ let metaBannerId = Bundle.main.infoDictionary?["Meta Banner Placement ID"] as? S
 let metaInterstitialId = Bundle.main.infoDictionary?["Meta Interstitial Placement ID"] as? String ?? ""
 let metaNativeId = Bundle.main.infoDictionary?["Meta Native Placement ID"] as? String ?? ""
 let metaRewardedVideoId = Bundle.main.infoDictionary?["Meta Rewarded Video Placement ID"] as? String ?? ""
-let metaAppId = metaNativeId.components(separatedBy: "_").first
 
 extension UIApplicationDelegate {
     func setupMetaDemand() {
-        if let metaAppId = metaAppId {
-            NimbusRequestManager.requestInterceptors?.append(NimbusMetaRequestInterceptor(appId: metaAppId))
-            Nimbus.shared.renderers[.forNetwork("facebook")] = NimbusMetaAdRenderer()
-            
-            FBAdSettings.addTestDevice(FBAdSettings.testDeviceHash())
-            // Required for test ads
-            FBAdSettings.setAdvertiserTrackingEnabled(true)
-        }
+        FBAdSettings.addTestDevice(FBAdSettings.testDeviceHash())
+        // Required for test ads
+        FBAdSettings.setAdvertiserTrackingEnabled(true)
     }
 }
 
