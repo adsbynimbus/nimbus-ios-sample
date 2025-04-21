@@ -40,7 +40,13 @@ final class TestRenderAdViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         
-        let adController = try! Nimbus.load(ad: ad, container: view, adPresentingViewController: self, delegate: nil)
+        let adController = try! Nimbus.load(
+            ad: ad,
+            container: view,
+            adPresentingViewController: self,
+            delegate: nil,
+            showsSKOverlay: true
+        )
         
         setupLogo()
         setup(adView: adController.adView)
