@@ -16,16 +16,16 @@ class SampleAdViewController : DemoViewController, AdControllerDelegate {
     weak var loggerView: UIView?
     var nimbusAd: NimbusAd? = nil
     
-    private let enabledState = Nimbus.shared.extensions.mapValues { $0.enabled }
+    private let enabledState = ExtensionHelper.enabledState
     
     deinit {
-        restoreExtensionsState(from: enabledState)
+        ExtensionHelper.restoreExtensionsState(from: enabledState)
     }
     
     init(headerTitle: String, headerSubTitle: String, enabledExtension: NimbusExtension.Type?) {
         super.init(headerTitle: headerTitle, headerSubTitle: headerSubTitle)
         
-        disableAllExtensions(except: enabledExtension)
+        ExtensionHelper.disableAllExtensions(except: enabledExtension)
     }
     
     required init?(coder: NSCoder) {
@@ -87,24 +87,5 @@ class SampleAdViewController : DemoViewController, AdControllerDelegate {
     
     @objc private func didTapOnLogger() {
         loggerView?.isHidden.toggle()
-    }
-    
-    func disableAllExtensions(except: NimbusExtension.Type? = nil) {
-        for (key, ext) in Nimbus.shared.extensions {
-            if except == nil || key != ObjectIdentifier(except!) {
-                ext.disable()
-            }
-        }
-    }
-    
-    func restoreExtensionsState(from: [ObjectIdentifier: Bool]) {
-        for (extType, enabled) in from {
-            guard let ext = Nimbus.shared.extensions[extType] else {
-                continue
-            }
-            
-            if enabled && !ext.enabled { ext.enable() }
-            else if !enabled && ext.enabled { ext.disable() }
-        }
     }
 }
