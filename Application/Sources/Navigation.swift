@@ -209,7 +209,7 @@ enum MetaSample: String, NavigationItem {
 enum UnitySample: String, NavigationItem {
     case unityRewardedVideo     = "Unity Rewarded Video"
     func destinationController(parent: String) -> UIViewController {
-        UnityViewController(network: .unity, adType: self, headerSubTitle: parent)
+        UnityViewController(adType: self, headerSubTitle: parent)
     }
 }
 

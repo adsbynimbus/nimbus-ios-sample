@@ -49,7 +49,7 @@ final class APSViewController: SampleAdViewController {
     init(adType: APSSample, headerSubTitle: String) {
         self.adType = adType
         
-        super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle)
+        super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle, enabledExtension: nil)
     }
     
     required init?(coder: NSCoder) {

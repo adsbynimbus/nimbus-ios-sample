@@ -20,17 +20,13 @@ final class AdManagerViewController: SampleAdViewController {
     private lazy var requestManager = NimbusRequestManager()
     private var hasCompanionAd = false
     
-    private let tmpExtensions = Nimbus.shared.extensions
-    
     deinit {
-        Nimbus.shared.extensions = tmpExtensions
         adController?.destroy()
     }
     
     init(adType: AdManagerAdType, headerSubTitle: String) {
         self.adType = adType
-        super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle)
-        Nimbus.shared.extensions = []
+        super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle, enabledExtension: nil)
     }
     
     required init?(coder: NSCoder) {

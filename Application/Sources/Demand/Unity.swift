@@ -13,14 +13,14 @@ import NimbusUnityKit
 #endif
 import UIKit
 
-final class UnityViewController: DemandViewController {
+final class UnityViewController: SampleAdViewController {
 
     private let adType: UnitySample
     private var adManager: NimbusAdManager?
     
-    init(network: ThirdPartyDemandNetwork, adType: UnitySample, headerSubTitle: String) {
+    init(adType: UnitySample, headerSubTitle: String) {
         self.adType = adType
-        super.init(network: network, headerTitle: adType.rawValue, headerSubTitle: headerSubTitle)
+        super.init(headerTitle: adType.rawValue, headerSubTitle: headerSubTitle, enabledExtension: UnityExtension.self)
     }
     
     @MainActor required init?(coder: NSCoder) {

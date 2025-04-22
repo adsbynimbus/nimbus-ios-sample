@@ -16,7 +16,7 @@ import NimbusVungleKit
 import UIKit
 import VungleAdsSDK
 
-class VungleViewController: DemandViewController {
+class VungleViewController: SampleAdViewController {
     
     private let contentView = UIView()
     private let nativeAdContentView = UIView()
@@ -28,7 +28,7 @@ class VungleViewController: DemandViewController {
     init(adType: VungleSample, headerSubTitle: String) {
         self.adType = adType
         
-        super.init(network: .vungle, headerTitle: adType.description, headerSubTitle: headerSubTitle)
+        super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle, enabledExtension: VungleExtension.self)
     }
     
     required init?(coder: NSCoder) {

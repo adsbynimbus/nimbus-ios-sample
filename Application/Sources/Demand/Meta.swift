@@ -35,7 +35,7 @@ final class FANViewController: SampleAdViewController {
     init(adType: MetaSample, headerSubTitle: String) {
         self.adType = adType
         
-        super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle)
+        super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle, enabledExtension: MetaExtension.self)
        
         nimbusAd = createNimbusAd(adType: adType)
         dimensions = nimbusAd?.adDimensions
