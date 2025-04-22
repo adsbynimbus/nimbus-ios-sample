@@ -39,28 +39,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func setupNimbusSDK() {
-        Nimbus.shared.initialize {
-            if let publisher = Bundle.main.infoDictionary?["Publisher Key"] as? String,
-               let apiKey = Bundle.main.infoDictionary?["API Key"] as? String {
-                credentials(publisher: publisher, apiKey: apiKey)
-            }
+        guard let publisher = Bundle.main.infoDictionary?["Publisher Key"] as? String,
+           let apiKey = Bundle.main.infoDictionary?["API Key"] as? String else {
+            fatalError("Publisher or API Key were not set in Info.plist")
+        }
+        
+        Nimbus.shared.initialize(publisher: publisher, apiKey: apiKey)
+        
+        MobileFuseExtension().enable()
+        MintegralExtension().enable()
+        AdMobExtension().enable()
             
-            include(MobileFuseExtension())
-            include(MintegralExtension())
-            include(AdMobExtension())
-            
-            if let appId = Bundle.main.infoDictionary?["Vungle App ID"] as? String {
-                include(VungleExtension(appId: appId))
-            }
-            
-            if let metaNativeId = Bundle.main.infoDictionary?["Meta Native Placement ID"] as? String,
-               let metaAppId = metaNativeId.components(separatedBy: "_").first {
-                include(MetaExtension(appId: metaAppId))
-            }
-            
-            if let gameId = Bundle.main.infoDictionary?["Unity Game ID"] as? String {
-                include(UnityExtension(gameId: gameId))
-            }
+        if let appId = Bundle.main.infoDictionary?["Vungle App ID"] as? String {
+            VungleExtension(appId: appId).enable()
+        }
+        
+        if let metaNativeId = Bundle.main.infoDictionary?["Meta Native Placement ID"] as? String,
+           let metaAppId = metaNativeId.components(separatedBy: "_").first {
+            MetaExtension(appId: metaAppId).enable()
+        }
+        
+        if let gameId = Bundle.main.infoDictionary?["Unity Game ID"] as? String {
+            UnityExtension(gameId: gameId).enable()
         }
         
         #if DEBUG
