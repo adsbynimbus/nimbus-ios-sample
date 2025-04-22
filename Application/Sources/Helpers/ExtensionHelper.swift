@@ -19,7 +19,7 @@ struct ExtensionHelper {
     static func disableAllExtensions(except: NimbusExtension.Type? = nil) {
         for (key, ext) in Nimbus.shared.extensions {
             if except == nil || key != ObjectIdentifier(except!) {
-                ext.disable()
+                type(of: ext).disable()
             }
         }
     }
@@ -31,7 +31,7 @@ struct ExtensionHelper {
             }
             
             if enabled && !ext.enabled { ext.enable() }
-            else if !enabled && ext.enabled { ext.disable() }
+            else if !enabled && ext.enabled { type(of: ext).disable() }
         }
     }
 }
