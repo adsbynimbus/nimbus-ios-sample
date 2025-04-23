@@ -44,23 +44,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError("Publisher or API Key were not set in Info.plist")
         }
         
-        Nimbus.shared.initialize(publisher: publisher, apiKey: apiKey)
-        
-        MobileFuseExtension().enable()
-        MintegralExtension().enable()
-        AdMobExtension().enable()
+        Nimbus.shared.initialize(publisher: publisher, apiKey: apiKey) {
+            MobileFuseExtension()
+            MintegralExtension()
+            AdMobExtension()
+
+            if let appId = Bundle.main.infoDictionary?["Vungle App ID"] as? String {
+                VungleExtension(appId: appId)
+            }
             
-        if let appId = Bundle.main.infoDictionary?["Vungle App ID"] as? String {
-            VungleExtension(appId: appId).enable()
-        }
-        
-        if let metaNativeId = Bundle.main.infoDictionary?["Meta Native Placement ID"] as? String,
-           let metaAppId = metaNativeId.components(separatedBy: "_").first {
-            MetaExtension(appId: metaAppId).enable()
-        }
-        
-        if let gameId = Bundle.main.infoDictionary?["Unity Game ID"] as? String {
-            UnityExtension(gameId: gameId).enable()
+            if let metaNativeId = Bundle.main.infoDictionary?["Meta Native Placement ID"] as? String,
+               let metaAppId = metaNativeId.components(separatedBy: "_").first {
+                MetaExtension(appId: metaAppId)
+            }
+            
+            if let gameId = Bundle.main.infoDictionary?["Unity Game ID"] as? String {
+                UnityExtension(gameId: gameId)
+            }
         }
         
         #if DEBUG

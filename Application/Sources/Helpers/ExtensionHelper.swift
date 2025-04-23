@@ -30,7 +30,7 @@ struct ExtensionHelper {
                 continue
             }
             
-            if enabled && !ext.enabled { ext.enable() }
+            if enabled && !ext.enabled { type(of: ext).enable() }
             else if !enabled && ext.enabled { type(of: ext).disable() }
         }
     }
