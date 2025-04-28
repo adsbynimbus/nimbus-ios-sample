@@ -49,7 +49,7 @@ final class APSViewController: SampleAdViewController {
     init(adType: APSSample, headerSubTitle: String) {
         self.adType = adType
         
-        super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle)
+        super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle, enabledExtension: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -156,7 +156,7 @@ extension APSViewController: NimbusAdManagerDelegate {
     func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
         print("didRenderAd")
         nimbusAd = ad
-        controller.delegate = self
+        controller.register(delegate: self)
         adController = controller
     }
     

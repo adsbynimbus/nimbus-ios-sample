@@ -16,8 +16,16 @@ class SampleAdViewController : DemoViewController, AdControllerDelegate {
     weak var loggerView: UIView?
     var nimbusAd: NimbusAd? = nil
     
-    override init(headerTitle: String, headerSubTitle: String) {
+    private let enabledState = ExtensionHelper.enabledState
+    
+    deinit {
+        ExtensionHelper.restoreExtensionsState(from: enabledState)
+    }
+    
+    init(headerTitle: String, headerSubTitle: String, enabledExtension: NimbusExtension.Type?) {
         super.init(headerTitle: headerTitle, headerSubTitle: headerSubTitle)
+        
+        ExtensionHelper.disableAllExtensions(except: enabledExtension)
     }
     
     required init?(coder: NSCoder) {

@@ -8,10 +8,16 @@
 import UIKit
 import NimbusKit
 
+#if canImport(NimbusSDK) // CocoaPods
+import NimbusSDK
+#elseif canImport(NimbusAdMobKit) // Swift Package Manager
+import NimbusAdMobKit
+#endif
+
 ///  When integrating AdMob, consider examples like AdMobBannerViewController inherit from UIViewController.
 ///  Both DemandViewController and AdMobViewController just facilitate the needs of the sample app.
-class AdMobViewController: DemandViewController {
+class AdMobViewController: SampleAdViewController {
     convenience init(headerTitle: String, headerSubTitle: String) {
-        self.init(network: .admob, headerTitle: headerTitle, headerSubTitle: headerSubTitle)
+        self.init(headerTitle: headerTitle, headerSubTitle: headerSubTitle, enabledExtension: AdMobExtension.self)
     }
 }

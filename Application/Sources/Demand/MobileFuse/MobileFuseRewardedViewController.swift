@@ -9,6 +9,12 @@
 import UIKit
 import NimbusKit
 
+#if canImport(NimbusSDK) // CocoaPods
+import NimbusSDK
+#elseif canImport(NimbusMobileFuseKit) // Swift Package Manager
+import NimbusMobileFuseKit
+#endif
+
 final class MobileFuseRewardedViewController: MobileFuseViewController {
     
     private let adManager = NimbusAdManager()
@@ -37,7 +43,7 @@ extension MobileFuseRewardedViewController: NimbusAdManagerDelegate {
     func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
         print("didRenderAd")
         adController = controller
-        adController?.delegate = self
+        adController?.register(delegate: self)
         nimbusAd = ad
     }
     

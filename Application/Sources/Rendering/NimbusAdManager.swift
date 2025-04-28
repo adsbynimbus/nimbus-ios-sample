@@ -16,15 +16,17 @@ final class AdManagerViewController: SampleAdViewController {
     private var adManager = NimbusAdManager()
     
     private let adType: AdManagerAdType
-    private var customAdContainerView: CustomAdContainerView?
     private var adController: AdController?
     private lazy var requestManager = NimbusRequestManager()
     private var hasCompanionAd = false
     
+    deinit {
+        adController?.destroy()
+    }
+    
     init(adType: AdManagerAdType, headerSubTitle: String) {
         self.adType = adType
-        super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle)
-        NimbusRequestManager.requestInterceptors?.append(self)
+        super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle, enabledExtension: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -36,18 +38,6 @@ final class AdManagerViewController: SampleAdViewController {
         
         setupContentView()
         setupAdRendering()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NimbusRequestManager.requestInterceptors?.removeAll { $0 === self }
-    }
-    
-    deinit {
-        let nimbusAdView = contentView.subviews.first(where: { $0 is NimbusAdView }) as? NimbusAdView
-        nimbusAdView?.destroy()
-        customAdContainerView?.destroy()
-        adController?.destroy()
     }
     
     private func setupContentView() {
@@ -150,20 +140,6 @@ final class AdManagerViewController: SampleAdViewController {
             break
         }
     }
-    
-    private func setupAdView(adView: CustomAdContainerView?) {
-        guard let adView else { return }
-        contentView.addSubview(adView)
-
-        adView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            adView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            adView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor),
-            adView.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor),
-            adView.trailingAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor),
-            adView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-        ])
-    }
 }
 
 // MARK: NimbusAdManagerDelegate
@@ -173,8 +149,7 @@ extension AdManagerViewController: NimbusAdManagerDelegate {
         print("didCompleteNimbusRequest")
         nimbusAd = ad
         if ad.position == AdManagerAdType.manuallyRenderedAd.rawValue {
-            customAdContainerView = CustomAdContainerView(ad: ad, viewController: self, delegate: self)
-            setupAdView(adView: customAdContainerView)
+            try! Nimbus.load(ad: ad, container: contentView, adPresentingViewController: self, delegate: self)
         }
     }
 
@@ -184,20 +159,7 @@ extension AdManagerViewController: NimbusAdManagerDelegate {
     
     func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
         print("didRenderAd")
-        controller.delegate = self
+        controller.register(delegate: self)
         adController = controller
     }
-}
-
-extension AdManagerViewController : NimbusRequestInterceptor {
-    
-    func modifyRequest(request: NimbusRequestKit.NimbusRequest) {
-        request.user?.extensions?.removeValue(forKey: "vungle_buyeruid")
-        request.user?.extensions?.removeValue(forKey: "unity_buyeruid")
-        request.user?.extensions?.removeValue(forKey: "facebook_buyeruid")
-        request.impressions[0].extensions?.removeValue(forKey: "facebook_app_id")
-    }
-    
-    func didCompleteNimbusRequest(with ad: NimbusAd) { }
-    func didFailNimbusRequest(with error: NimbusError) { }
 }

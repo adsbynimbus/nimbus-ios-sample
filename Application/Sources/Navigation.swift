@@ -165,7 +165,6 @@ enum AdMob: String, NavigationItem {
 enum MobileFuseSample: String, NavigationItem {
     case mobileFuseBanner = "MobileFuse - Banner"
     case mobileFuseMREC = "MobileFuse - MREC"
-    case mobileFuseManualMREC = "MobileFuse - Manually rendered MREC"
     case mobileFuseInterstitial = "MobileFuse - Interstitial"
     case mobileFuseRewarded = "MobileFuse - Rewarded"
     
@@ -182,11 +181,6 @@ enum MobileFuseSample: String, NavigationItem {
                 headerTitle: rawValue,
                 position: "MobileFuse_Testing_MREC_iOS_Nimbus",
                 format: .letterbox
-            )
-        case .mobileFuseManualMREC:
-            MobileFuseManualBannerViewController(
-                headerTitle: rawValue,
-                headerSubTitle: ""
             )
         case .mobileFuseInterstitial: MobileFuseInterstitialViewController(headerTitle: rawValue)
         case .mobileFuseRewarded: MobileFuseRewardedViewController(headerTitle: rawValue)

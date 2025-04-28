@@ -18,18 +18,12 @@ let metaBannerId = Bundle.main.infoDictionary?["Meta Banner Placement ID"] as? S
 let metaInterstitialId = Bundle.main.infoDictionary?["Meta Interstitial Placement ID"] as? String ?? ""
 let metaNativeId = Bundle.main.infoDictionary?["Meta Native Placement ID"] as? String ?? ""
 let metaRewardedVideoId = Bundle.main.infoDictionary?["Meta Rewarded Video Placement ID"] as? String ?? ""
-let metaAppId = metaNativeId.components(separatedBy: "_").first
 
 extension UIApplicationDelegate {
     func setupMetaDemand() {
-        if let metaAppId = metaAppId {
-            NimbusRequestManager.requestInterceptors?.append(NimbusMetaRequestInterceptor(appId: metaAppId))
-            Nimbus.shared.renderers[.forNetwork("facebook")] = NimbusMetaAdRenderer()
-            
-            FBAdSettings.addTestDevice(FBAdSettings.testDeviceHash())
-            // Required for test ads
-            FBAdSettings.setAdvertiserTrackingEnabled(true)
-        }
+        FBAdSettings.addTestDevice(FBAdSettings.testDeviceHash())
+        // Required for test ads
+        FBAdSettings.setAdvertiserTrackingEnabled(true)
     }
 }
 
@@ -37,12 +31,11 @@ final class FANViewController: SampleAdViewController {
     
     private let adType: MetaSample
     private var dimensions: NimbusAdDimensions?
-    private var adContainerView: CustomAdContainerView?
     
     init(adType: MetaSample, headerSubTitle: String) {
         self.adType = adType
         
-        super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle)
+        super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle, enabledExtension: MetaExtension.self)
        
         nimbusAd = createNimbusAd(adType: adType)
         dimensions = nimbusAd?.adDimensions
@@ -68,42 +61,10 @@ final class FANViewController: SampleAdViewController {
         }
     }
     
-    deinit {
-        adContainerView?.destroy()
-    }
-    
     private func setupAdView() {
         guard let nimbusAd else { return }
         
-        adContainerView = CustomAdContainerView(
-            ad: nimbusAd,
-            companionAd: nil,
-            viewController: self,
-            creativeScalingEnabledForStaticAds: true,
-            delegate: self
-        )
-        
-        guard let adContainerView else { return }
-        
-        view.addSubview(adContainerView)
-        
-        adContainerView.translatesAutoresizingMaskIntoConstraints = false
-        
-        if let dimensions {
-            NSLayoutConstraint.activate([
-                adContainerView.safeAreaLayoutGuide.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-                adContainerView.safeAreaLayoutGuide.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
-                adContainerView.safeAreaLayoutGuide.widthAnchor.constraint(equalToConstant: CGFloat(dimensions.width)),
-                adContainerView.safeAreaLayoutGuide.heightAnchor.constraint(equalToConstant: CGFloat(dimensions.height)),
-            ])
-        } else {
-            NSLayoutConstraint.activate([
-                adContainerView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
-                adContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                adContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                adContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            ])
-        }
+        try! Nimbus.load(ad: nimbusAd, container: view, adPresentingViewController: self, delegate: self)
     }
         
     private func createNimbusAd(adType: MetaSample) -> NimbusAd {

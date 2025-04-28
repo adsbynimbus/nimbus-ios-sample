@@ -25,8 +25,8 @@ class AdMobNativeViewController: AdMobViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
                 
-        if let renderer = Nimbus.shared.renderers[.forNetwork("admob")] as? NimbusAdMobAdRenderer {
-            renderer.adRendererDelegate = self
+        AdMobExtension.nativeAdViewProvider = { _, nativeAd in
+            AdMobNativeAdView(nativeAd: nativeAd)
         }
         
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -53,17 +53,11 @@ class AdMobNativeViewController: AdMobViewController {
     }
 }
 
-extension AdMobNativeViewController: NimbusAdMobAdRendererDelegate {    
-    func nativeAdViewForRendering(container: UIView, nativeAd: GADNativeAd) -> GADNativeAdView {
-        AdMobNativeAdView(nativeAd: nativeAd)
-    }
-}
-
 extension AdMobNativeViewController: NimbusAdManagerDelegate {
     func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
         print("didRenderAd")
         adController = controller
-        adController?.delegate = self
+        adController?.register(delegate: self)
         nimbusAd = ad
     }
     

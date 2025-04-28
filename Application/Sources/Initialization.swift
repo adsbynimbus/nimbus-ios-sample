@@ -11,6 +11,12 @@ import NimbusRenderStaticKit
 import NimbusRenderVASTKit
 import SwiftUI
 import UIKit
+import NimbusVungleKit
+import NimbusMobileFuseKit
+import NimbusMintegralKit
+import NimbusAdMobKit
+import NimbusMetaKit
+import NimbusUnityKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,11 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         setupNimbusSDK()
-        setupAdMobDemand()
-        setupMobileFuseDemand()
         setupAmazonDemand()
-        setupUnityDemand()
-        setupVungleDemand()
         setupMintegralDemand()
         
         // Meta and LiveRamp requires att permissions to run properly
@@ -37,10 +39,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func setupNimbusSDK() {
-        Nimbus.shared.initialize(
-            publisher: Bundle.main.infoDictionary?["Publisher Key"] as! String,
-            apiKey: Bundle.main.infoDictionary?["API Key"] as! String
-        )
+        guard let publisher = Bundle.main.infoDictionary?["Publisher Key"] as? String,
+           let apiKey = Bundle.main.infoDictionary?["API Key"] as? String else {
+            fatalError("Publisher or API Key were not set in Info.plist")
+        }
+        
+        Nimbus.shared.initialize(publisher: publisher, apiKey: apiKey) {
+            MobileFuseExtension()
+            MintegralExtension()
+            AdMobExtension()
+
+            if let appId = Bundle.main.infoDictionary?["Vungle App ID"] as? String {
+                VungleExtension(appId: appId)
+            }
+            
+            if let metaNativeId = Bundle.main.infoDictionary?["Meta Native Placement ID"] as? String,
+               let metaAppId = metaNativeId.components(separatedBy: "_").first {
+                MetaExtension(appId: metaAppId)
+            }
+            
+            if let gameId = Bundle.main.infoDictionary?["Unity Game ID"] as? String {
+                UnityExtension(gameId: gameId)
+            }
+        }
         
         #if DEBUG
         Nimbus.shared.logLevel = .info
@@ -57,14 +78,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 "Nimbus-Test-No-Fill": String(UserDefaults.standard.forceNoFill)
             ]
         }
-        
-        NimbusAdManager.requestInterceptors = []
-
-        // Renderers
-        Nimbus.shared.renderers = [
-            .forAuctionType(.static): NimbusStaticAdRenderer(),
-            .forAuctionType(.video): NimbusVideoAdRenderer(),
-        ]
 
         // User
         NimbusAdManager.user = NimbusUser(age: 20, gender: .male)

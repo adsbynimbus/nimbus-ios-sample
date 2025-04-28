@@ -23,8 +23,8 @@ class MintegralNativeViewController: MintegralViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let renderer = Nimbus.shared.renderers[.mintegral] as? NimbusMintegralAdRenderer {
-            renderer.adRendererDelegate = self
+        MintegralExtension.nativeAdViewProvider = { _, campaign in
+            MintegralNativeAdView(campaign: campaign)
         }
         
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -50,7 +50,7 @@ extension MintegralNativeViewController: NimbusAdManagerDelegate {
     func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
         print("didRenderAd")
         adController = controller
-        adController?.delegate = self
+        adController?.register(delegate: self)
         nimbusAd = ad
     }
     
@@ -60,11 +60,5 @@ extension MintegralNativeViewController: NimbusAdManagerDelegate {
     
     func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
         print("didFailNimbusRequest: \(error.localizedDescription)")
-    }
-}
-
-extension MintegralNativeViewController: NimbusMintegralAdRendererDelegate {
-    func nativeAdViewForRendering(container: UIView, campaign: MTGCampaign) -> any NimbusMintegralNativeAdViewType {
-        MintegralNativeAdView(campaign: campaign)
     }
 }
