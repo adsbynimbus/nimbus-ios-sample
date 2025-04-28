@@ -16,10 +16,15 @@ final class AdManagerViewController: SampleAdViewController {
     private var adManager = NimbusAdManager()
     
     private let adType: AdManagerAdType
-    private var customAdContainerView: CustomAdContainerView?
     private var adController: AdController?
     private lazy var requestManager = NimbusRequestManager()
     private var hasCompanionAd = false
+    
+    
+    deinit {
+        adController?.destroy()
+        resetVideoSettings()
+    }
     
     init(adType: AdManagerAdType, headerSubTitle: String) {
         self.adType = adType
@@ -42,14 +47,6 @@ final class AdManagerViewController: SampleAdViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NimbusRequestManager.requestInterceptors?.removeAll { $0 === self }
-    }
-    
-    deinit {
-        let nimbusAdView = contentView.subviews.first(where: { $0 is NimbusAdView }) as? NimbusAdView
-        nimbusAdView?.destroy()
-        customAdContainerView?.destroy()
-        adController?.destroy()
-        resetVideoSettings()
     }
     
     private func setupContentView() {
@@ -153,20 +150,6 @@ final class AdManagerViewController: SampleAdViewController {
         }
     }
     
-    private func setupAdView(adView: CustomAdContainerView?) {
-        guard let adView else { return }
-        contentView.addSubview(adView)
-
-        adView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            adView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            adView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor),
-            adView.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor),
-            adView.trailingAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor),
-            adView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-        ])
-    }
-    
     private func setupCustomVideoSettings() {
         if let videoRenderer = Nimbus.shared.renderers.first(
             where: { $0.key.type == .video }
@@ -191,8 +174,7 @@ extension AdManagerViewController: NimbusAdManagerDelegate {
         print("didCompleteNimbusRequest")
         nimbusAd = ad
         if ad.position == AdManagerAdType.manuallyRenderedAd.rawValue {
-            customAdContainerView = CustomAdContainerView(ad: ad, viewController: self, delegate: self)
-            setupAdView(adView: customAdContainerView)
+            try! Nimbus.load(ad: ad, container: contentView, adPresentingViewController: self, delegate: self)
         }
     }
 
