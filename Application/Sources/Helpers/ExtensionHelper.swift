@@ -17,21 +17,25 @@ struct ExtensionHelper {
     }
     
     static func disableAllExtensions(except: NimbusExtension.Type? = nil) {
-        for (key, ext) in Nimbus.shared.extensions {
-            if except == nil || key != ObjectIdentifier(except!) {
-                type(of: ext).disable()
+        Task { @MainActor in
+            for (key, ext) in Nimbus.shared.extensions {
+                if except == nil || key != ObjectIdentifier(except!) {
+                    type(of: ext).disable()
+                }
             }
         }
     }
     
     static func restoreExtensionsState(from: [ObjectIdentifier: Bool]) {
-        for (extType, enabled) in from {
-            guard let ext = Nimbus.shared.extensions[extType] else {
-                continue
+        Task { @MainActor in
+            for (extType, enabled) in from {
+                guard let ext = Nimbus.shared.extensions[extType] else {
+                    continue
+                }
+                
+                if enabled && !ext.enabled { type(of: ext).enable() }
+                else if !enabled && ext.enabled { type(of: ext).disable() }
             }
-            
-            if enabled && !ext.enabled { type(of: ext).enable() }
-            else if !enabled && ext.enabled { type(of: ext).disable() }
         }
     }
 }
