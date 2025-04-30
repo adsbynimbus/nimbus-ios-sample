@@ -5,7 +5,6 @@
 //  Created on 11/11/21.
 //
 
-import GoogleInteractiveMediaAds
 import NimbusKit
 import UIKit
 import SwiftUI
