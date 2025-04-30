@@ -7,7 +7,6 @@
 
 import GoogleInteractiveMediaAds
 import NimbusKit
-import NimbusRenderVideoKit
 import UIKit
 import SwiftUI
 
@@ -23,7 +22,6 @@ final class AdManagerViewController: SampleAdViewController {
     
     deinit {
         adController?.destroy()
-        resetVideoSettings()
     }
     
     init(adType: AdManagerAdType, headerSubTitle: String) {
@@ -41,7 +39,6 @@ final class AdManagerViewController: SampleAdViewController {
         
         setupContentView()
         setupAdRendering()
-        setupCustomVideoSettings()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -149,22 +146,6 @@ final class AdManagerViewController: SampleAdViewController {
             break
         }
     }
-    
-    private func setupCustomVideoSettings() {
-        if let videoRenderer = Nimbus.shared.renderers.first(
-            where: { $0.key.type == .video }
-        )?.value as? NimbusVideoAdRenderer {
-            videoRenderer.videoAdSettingsProvider = CustomVideoAdSettingsProvider(disableUi: adType == .interstitialVideoWithoutUI)
-        }
-    }
-    
-    private func resetVideoSettings() {
-        if let videoRenderer = Nimbus.shared.renderers.first(
-            where: { $0.key.type == .video }
-        )?.value as? NimbusVideoAdRenderer {
-            videoRenderer.videoAdSettingsProvider = NimbusVideoSettingsProvider()
-        }
-    }
 }
 
 // MARK: NimbusAdManagerDelegate
@@ -174,7 +155,7 @@ extension AdManagerViewController: NimbusAdManagerDelegate {
         print("didCompleteNimbusRequest")
         nimbusAd = ad
         if ad.position == AdManagerAdType.manuallyRenderedAd.rawValue {
-            try! Nimbus.load(ad: ad, container: contentView, adPresentingViewController: self, delegate: self)
+            _ = Nimbus.load(ad: ad, container: contentView, adPresentingViewController: self, delegate: self)
         }
     }
 
@@ -200,20 +181,4 @@ extension AdManagerViewController : NimbusRequestInterceptor {
     
     func didCompleteNimbusRequest(with ad: NimbusAd) { }
     func didFailNimbusRequest(with error: NimbusError) { }
-}
-
-final class CustomVideoAdSettingsProvider: NimbusVideoSettingsProvider {
-    
-    public var disableUi: Bool
-    
-    init(disableUi: Bool = false) {
-        self.disableUi = disableUi
-    }
-    
-    override func adsRenderingSettings() -> IMAAdsRenderingSettings {
-        let settings = super.adsRenderingSettings()
-        settings.disableUi = disableUi
-        settings.uiElements = disableUi ? [] : nil // Passing nil shows all of the default UI elements
-        return settings
-    }
 }
