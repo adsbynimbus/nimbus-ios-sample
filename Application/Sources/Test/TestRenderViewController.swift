@@ -11,7 +11,6 @@ import NimbusKit
 class TestRenderViewController: DemoViewController {
     
     var isBlocking = false
-    var useNimbusRenderer = false
     
     private var iTunesAppId: String?
     
@@ -229,7 +228,6 @@ class TestRenderViewController: DemoViewController {
         
         let ext = NimbusAdExtensions(
             skAdNetwork: iTunesAppId != nil ? NimbusAdSkAdNetwork(advertisedAppStoreItemID: iTunesAppId) : nil,
-            useNimbusVideoRenderer: useNimbusRenderer
         )
         
         return NimbusAd(
