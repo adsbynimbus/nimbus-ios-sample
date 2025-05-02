@@ -19,8 +19,8 @@ class GAMRewardedInterstitialViewController: GAMBaseViewController {
         return NimbusDynamicPriceRenderer(requestManager: requestManager)
     }()
     
-    private let gamRequest = GAMRequest()
-    private var rewardedInterstitialAd: GADRewardedInterstitialAd?
+    private let gamRequest = AdManagerRequest()
+    private var rewardedInterstitialAd: RewardedInterstitialAd?
     private var rewardedAdPresenter: NimbusRewardedAdPresenter?
     
     override func viewDidLoad() {
@@ -33,44 +33,44 @@ class GAMRewardedInterstitialViewController: GAMBaseViewController {
 
 // MARK: - GADFullScreenContentDelegate
 
-extension GAMRewardedInterstitialViewController: GADFullScreenContentDelegate {
-    func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+extension GAMRewardedInterstitialViewController: FullScreenContentDelegate {
+    func ad(_ ad: FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
         print("ad:didFailToPresentFullScreenContentWithError: \(error.localizedDescription)")
         
-        if let interstitialAd = ad as? GADInterstitialAd {
+        if let interstitialAd = ad as? InterstitialAd {
             dynamicPriceRenderer.notifyInterstitialLoss(fullScreenPresentingAd: interstitialAd, error: error)
         }
     }
     
-    func adDidRecordImpression(_ ad: GADFullScreenPresentingAd) {
+    func adDidRecordImpression(_ ad: FullScreenPresentingAd) {
         print("adDidRecordImpression")
         
-        if let interstitialAd = ad as? GADInterstitialAd {
+        if let interstitialAd = ad as? InterstitialAd {
             dynamicPriceRenderer.notifyInterstitialImpression(interstitialAd: interstitialAd)
         }
     }
     
-    func adDidRecordClick(_ ad: GADFullScreenPresentingAd) {
+    func adDidRecordClick(_ ad: FullScreenPresentingAd) {
         print("adDidRecordClick")
     }
     
-    func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+    func adWillPresentFullScreenContent(_ ad: FullScreenPresentingAd) {
         print("ad:adWillPresentFullScreenContent")
     }
     
-    func adWillDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+    func adWillDismissFullScreenContent(_ ad: FullScreenPresentingAd) {
         print("adWillDismissFullScreenContent")
     }
     
-    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+    func adDidDismissFullScreenContent(_ ad: FullScreenPresentingAd) {
         print("adDidDismissFullScreenContent")
     }
 }
 
 // MARK: - GADAdMetadataDelegate
 
-extension GAMRewardedInterstitialViewController: GADAdMetadataDelegate {
-    func adMetadataDidChange(_ ad: GADAdMetadataProvider) {
+extension GAMRewardedInterstitialViewController: AdMetadataDelegate {
+    func adMetadataDidChange(_ ad: AdMetadataProvider) {
         let isNimbusWin: Bool
         if let rewardedInterstitialAd {
             isNimbusWin = dynamicPriceRenderer.handleRewardedInterstitialEventForNimbus(
@@ -108,7 +108,7 @@ extension GAMRewardedInterstitialViewController: NimbusRewardedAdPresenterDelega
         print("Rewarded ad closed")
     }
    
-    func didEarnReward(reward: GADAdReward) {
+    func didEarnReward(reward: AdReward) {
         print("Rewarded ad earned reward")
     }
     
@@ -125,8 +125,8 @@ extension GAMRewardedInterstitialViewController: NimbusRequestManagerDelegate {
         
         ad.applyDynamicPrice(into: gamRequest, mapping: mapping)
         
-        GADRewardedInterstitialAd.load(
-            withAdUnitID: googleDynamicPriceRewardedPlacementId,
+        RewardedInterstitialAd.load(
+            with: googleDynamicPriceRewardedPlacementId,
             request: gamRequest
         ) { [weak self] rewardedInterstitialAd, error in
             if let error {

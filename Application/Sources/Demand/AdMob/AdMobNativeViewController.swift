@@ -54,7 +54,7 @@ class AdMobNativeViewController: AdMobViewController {
 }
 
 extension AdMobNativeViewController: NimbusAdMobAdRendererDelegate {    
-    func nativeAdViewForRendering(container: UIView, nativeAd: GADNativeAd) -> GADNativeAdView {
+    func nativeAdViewForRendering(container: UIView, nativeAd: NativeAd) -> NativeAdView {
         AdMobNativeAdView(nativeAd: nativeAd)
     }
 }
