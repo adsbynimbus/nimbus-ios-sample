@@ -19,8 +19,8 @@ class GAMInlineVideoViewController: GAMBaseViewController {
         return NimbusDynamicPriceRenderer(requestManager: requestManager)
     }()
     
-    private let gamRequest = GAMRequest()
-    private let bannerView = GAMBannerView(adSize: GADAdSizeMediumRectangle)
+    private let gamRequest = AdManagerRequest()
+    private let bannerView = AdManagerBannerView(adSize: AdSizeMediumRectangle)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,8 +53,8 @@ class GAMInlineVideoViewController: GAMBaseViewController {
 
 // MARK: - GADAppEventDelegate
 
-extension GAMInlineVideoViewController: GADAppEventDelegate {
-    func adView(_ banner: GADBannerView, didReceiveAppEvent name: String, withInfo info: String?) {
+extension GAMInlineVideoViewController: AppEventDelegate {
+    func adView(_ banner: BannerView, didReceiveAppEvent name: String, with info: String?) {
         print("adView:didReceiveAppEvent")
         dynamicPriceRenderer.handleBannerEventForNimbus(bannerView: banner, name: name, info: info)
     }
@@ -62,34 +62,34 @@ extension GAMInlineVideoViewController: GADAppEventDelegate {
 
 // MARK: - GADBannerViewDelegate
 
-extension GAMInlineVideoViewController: GADBannerViewDelegate {
-    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+extension GAMInlineVideoViewController: BannerViewDelegate {
+    func bannerViewDidReceiveAd(_ bannerView: BannerView) {
         print("bannerViewDidReceiveAd")
     }
     
-    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
+    func bannerView(_ bannerView: BannerView, didFailToReceiveAdWithError error: Error) {
         print("bannerView:didFailToReceiveAdWithError: \(error.localizedDescription)")
         dynamicPriceRenderer.notifyBannerLoss(bannerView: bannerView, error: error)
     }
     
-    func bannerViewDidRecordImpression(_ bannerView: GADBannerView) {
+    func bannerViewDidRecordImpression(_ bannerView: BannerView) {
         print("bannerViewDidRecordImpression")
         dynamicPriceRenderer.notifyBannerImpression(bannerView: bannerView)
     }
     
-    func bannerViewDidRecordClick(_ bannerView: GADBannerView) {
+    func bannerViewDidRecordClick(_ bannerView: BannerView) {
         print("bannerViewDidRecordClick")
     }
     
-    func bannerViewWillPresentScreen(_ bannerView: GADBannerView) {
+    func bannerViewWillPresentScreen(_ bannerView: BannerView) {
         print("bannerViewWillPresentScreen")
     }
     
-    func bannerViewWillDismissScreen(_ bannerView: GADBannerView) {
+    func bannerViewWillDismissScreen(_ bannerView: BannerView) {
         print("bannerViewWillDismissScreen")
     }
     
-    func bannerViewDidDismissScreen(_ bannerView: GADBannerView) {
+    func bannerViewDidDismissScreen(_ bannerView: BannerView) {
         print("bannerViewDidDismissScreen")
     }
 }

@@ -8,9 +8,9 @@
 import UIKit
 import GoogleMobileAds
 
-final class AdMobNativeAdView: GADNativeAdView {
+final class AdMobNativeAdView: NativeAdView {
     
-    convenience init(nativeAd: GADNativeAd) {
+    convenience init(nativeAd: NativeAd) {
         self.init(frame: .zero)
         
         translatesAutoresizingMaskIntoConstraints = false
@@ -55,7 +55,7 @@ final class AdMobNativeAdView: GADNativeAdView {
         addSubview(body)
         self.bodyView = body
         
-        let media = GADMediaView()
+        let media = MediaView()
         media.translatesAutoresizingMaskIntoConstraints = false
         addSubview(media)
         self.mediaView = media

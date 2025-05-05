@@ -19,8 +19,8 @@ class GAMRewardedViewController: GAMBaseViewController {
         return NimbusDynamicPriceRenderer(requestManager: requestManager)
     }()
     
-    private let gamRequest = GAMRequest()
-    private var rewardedAd: GADRewardedAd?
+    private let gamRequest = AdManagerRequest()
+    private var rewardedAd: RewardedAd?
     private var rewardedAdPresenter: NimbusRewardedAdPresenter?
     
     override func viewDidLoad() {
@@ -33,44 +33,44 @@ class GAMRewardedViewController: GAMBaseViewController {
 
 // MARK: - GADFullScreenContentDelegate
 
-extension GAMRewardedViewController: GADFullScreenContentDelegate {
-    func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+extension GAMRewardedViewController: FullScreenContentDelegate {
+    func ad(_ ad: FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
         print("ad:didFailToPresentFullScreenContentWithError: \(error.localizedDescription)")
         
-        if let interstitialAd = ad as? GADInterstitialAd {
+        if let interstitialAd = ad as? InterstitialAd {
             dynamicPriceRenderer.notifyInterstitialLoss(fullScreenPresentingAd: interstitialAd, error: error)
         }
     }
     
-    func adDidRecordImpression(_ ad: GADFullScreenPresentingAd) {
+    func adDidRecordImpression(_ ad: FullScreenPresentingAd) {
         print("adDidRecordImpression")
         
-        if let interstitialAd = ad as? GADInterstitialAd {
+        if let interstitialAd = ad as? InterstitialAd {
             dynamicPriceRenderer.notifyInterstitialImpression(interstitialAd: interstitialAd)
         }
     }
     
-    func adDidRecordClick(_ ad: GADFullScreenPresentingAd) {
+    func adDidRecordClick(_ ad: FullScreenPresentingAd) {
         print("adDidRecordClick")
     }
     
-    func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+    func adWillPresentFullScreenContent(_ ad: FullScreenPresentingAd) {
         print("ad:adWillPresentFullScreenContent")
     }
     
-    func adWillDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+    func adWillDismissFullScreenContent(_ ad: FullScreenPresentingAd) {
         print("adWillDismissFullScreenContent")
     }
     
-    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+    func adDidDismissFullScreenContent(_ ad: FullScreenPresentingAd) {
         print("adDidDismissFullScreenContent")
     }
 }
 
 // MARK: - GADAdMetadataDelegate
 
-extension GAMRewardedViewController: GADAdMetadataDelegate {
-    func adMetadataDidChange(_ ad: GADAdMetadataProvider) {
+extension GAMRewardedViewController: AdMetadataDelegate {
+    func adMetadataDidChange(_ ad: AdMetadataProvider) {
         let isNimbusWin: Bool
         if let rewardedAd {
             isNimbusWin = dynamicPriceRenderer.handleRewardedEventForNimbus(
@@ -108,7 +108,7 @@ extension GAMRewardedViewController: NimbusRewardedAdPresenterDelegate {
         print("Rewarded ad closed")
     }
    
-    func didEarnReward(reward: GADAdReward) {
+    func didEarnReward(reward: AdReward) {
         print("Rewarded ad earned reward")
     }
     
@@ -125,8 +125,8 @@ extension GAMRewardedViewController: NimbusRequestManagerDelegate {
         
         ad.applyDynamicPrice(into: gamRequest, mapping: mapping)
         
-        GADRewardedAd.load(
-            withAdUnitID: googleDynamicPriceRewardedPlacementId,
+        RewardedAd.load(
+            with: googleDynamicPriceRewardedPlacementId,
             request: gamRequest,
             completionHandler: { [weak self] rewardedAd, error in
                 if let error {
