@@ -7,8 +7,6 @@ target 'nimbus-ios-sample-pods' do
 
   pod 'Application', :path => 'Application'
 
-  pod 'AmazonPublisherServicesSDK', '~> 4.9'
-
   pod 'NimbusSDK', '~> 2', subspecs: [
      'NimbusKit',               # Nimbus SDK
      'NimbusRenderStaticKit',   # Static Ad Renderer
