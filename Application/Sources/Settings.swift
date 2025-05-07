@@ -134,9 +134,9 @@ extension UserDefaults {
         set {
             set(newValue, forKey: #function)
             if newValue {
-                UserDefaults.standard.set("1NYN", forKey: "IABUSPrivacy_String")
+                UserDefaults.IAB.usPrivacyString = "1NYN"
             } else {
-                UserDefaults.standard.removeObject(forKey: "IABUSPrivacy_String")
+                UserDefaults.IAB.usPrivacyString = nil
             }
         }
     }
@@ -149,11 +149,11 @@ extension UserDefaults {
         set {
             set(newValue, forKey: #function)
             if newValue {
-                UserDefaults.standard.set(testGppConsentString, forKey: "IABGPP_HDR_GppString")
-                UserDefaults.standard.set(testGppSectionId, forKey: "IABGPP_GppSID")
+                UserDefaults.IAB.gppConsentString = testGppConsentString
+                UserDefaults.IAB.gppSectionId = testGppSectionId
             } else {
-                UserDefaults.standard.removeObject(forKey: "IABGPP_HDR_GppString")
-                UserDefaults.standard.removeObject(forKey: "IABGPP_GppSID")
+                UserDefaults.IAB.gppConsentString = nil
+                UserDefaults.IAB.gppSectionId = nil
             }
         }
     }

@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError("Publisher or API Key were not set in Info.plist")
         }
         
-        Nimbus.shared.initialize(publisher: publisher, apiKey: apiKey) {
+        Nimbus.initialize(publisher: publisher, apiKey: apiKey) {
             MobileFuseExtension()
             MintegralExtension()
             AdMobExtension()
@@ -62,16 +62,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         #if DEBUG
-        Nimbus.shared.logLevel = .info
+        Nimbus.shared.logger = NimbusLogger(minLogLevel: .info)
         #endif
+        
         Nimbus.shared.testMode = UserDefaults.standard.nimbusTestMode
         Nimbus.shared.coppa = UserDefaults.standard.coppaOn
         
         // This is only for testing environment, do NOT add this on production environment
         if let mockServerUrl = ProcessInfo.processInfo.environment["MOCK_SERVER_URL"] {
             NimbusAdManager.requestUrl = URL(string: mockServerUrl)!
-        } else if let publisherKey = Nimbus.shared.publisher, Nimbus.shared.testMode {
-            NimbusAdManager.requestUrl = URL(string: "https://\(publisherKey).adsbynimbus.com/rta/test")!
+        } else if Nimbus.shared.testMode {
+            NimbusAdManager.requestUrl = URL(string: "https://\(Nimbus.shared.publisher).adsbynimbus.com/rta/test")!
             NimbusAdManager.additionalRequestHeaders = [
                 "Nimbus-Test-No-Fill": String(UserDefaults.standard.forceNoFill)
             ]
