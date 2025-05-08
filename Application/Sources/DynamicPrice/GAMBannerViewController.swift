@@ -18,7 +18,7 @@ class GAMBannerViewController: GAMBaseViewController {
     
     private let requestManager = NimbusRequestManager()
     
-    private let bannerView = GAMBannerView(adSize: GADAdSizeBanner)
+    private let bannerView = AdManagerBannerView(adSize: AdSizeBanner)
     private var refreshTimer: Timer?
     
     /// Set this to false if you don't want a refreshing banner
@@ -102,8 +102,8 @@ class GAMBannerViewController: GAMBaseViewController {
 
 // MARK: - GADAppEventDelegate
 
-extension GAMBannerViewController: GADAppEventDelegate {
-    func adView(_ banner: GADBannerView, didReceiveAppEvent name: String, withInfo info: String?) {
+extension GAMBannerViewController: AppEventDelegate {
+    func adView(_ banner: BannerView, didReceiveAppEvent name: String, with info: String?) {
         print("adView:didReceiveAppEvent")
         bannerView.handleEventForNimbus(name: name, info: info)
     }
@@ -111,32 +111,32 @@ extension GAMBannerViewController: GADAppEventDelegate {
 
 // MARK: - GADBannerViewDelegate
 
-extension GAMBannerViewController: GADBannerViewDelegate {
-    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+extension GAMBannerViewController: BannerViewDelegate {
+    func bannerViewDidReceiveAd(_ bannerView: BannerView) {
         print("bannerViewDidReceiveAd")
     }
     
-    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
+    func bannerView(_ bannerView: BannerView, didFailToReceiveAdWithError error: Error) {
         print("bannerView:didFailToReceiveAdWithError: \(error.localizedDescription)")
     }
     
-    func bannerViewDidRecordImpression(_ bannerView: GADBannerView) {
+    func bannerViewDidRecordImpression(_ bannerView: BannerView) {
         print("bannerViewDidRecordImpression")
     }
     
-    func bannerViewDidRecordClick(_ bannerView: GADBannerView) {
+    func bannerViewDidRecordClick(_ bannerView: BannerView) {
         print("bannerViewDidRecordClick")
     }
     
-    func bannerViewWillPresentScreen(_ bannerView: GADBannerView) {
+    func bannerViewWillPresentScreen(_ bannerView: BannerView) {
         print("bannerViewWillPresentScreen")
     }
     
-    func bannerViewWillDismissScreen(_ bannerView: GADBannerView) {
+    func bannerViewWillDismissScreen(_ bannerView: BannerView) {
         print("bannerViewWillDismissScreen")
     }
     
-    func bannerViewDidDismissScreen(_ bannerView: GADBannerView) {
+    func bannerViewDidDismissScreen(_ bannerView: BannerView) {
         print("bannerViewDidDismissScreen")
     }
 }
@@ -147,11 +147,11 @@ extension GAMBannerViewController: NimbusRequestManagerDelegate {
     func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
         print("didCompleteNimbusRequest")
         
-        bannerView.loadDynamicPrice(gamRequest: GAMRequest(), ad: ad, mapping: mapping)
+        bannerView.loadDynamicPrice(gamRequest: AdManagerRequest(), ad: ad, mapping: mapping)
     }
     
     func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
         print("didFailNimbusRequest: \(error.localizedDescription)")
-        bannerView.loadDynamicPrice(gamRequest: GAMRequest(), mapping: mapping)
+        bannerView.loadDynamicPrice(gamRequest: AdManagerRequest(), mapping: mapping)
     }
 }

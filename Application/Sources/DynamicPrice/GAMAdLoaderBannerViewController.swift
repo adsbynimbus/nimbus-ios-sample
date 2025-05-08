@@ -17,8 +17,8 @@ class GAMAdLoaderBannerViewController: GAMBaseViewController {
     private static let refreshInterval: TimeInterval = 30
     
     private let requestManager = NimbusRequestManager()
-    private var adLoader: GADAdLoader?
-    private weak var bannerView: GAMBannerView?
+    private var adLoader: AdLoader?
+    private weak var bannerView: AdManagerBannerView?
     
     private var refreshTimer: Timer?
     
@@ -58,14 +58,14 @@ class GAMAdLoaderBannerViewController: GAMBaseViewController {
     }
     
     func load(ad: NimbusAd? = nil) {
-        adLoader = GADAdLoader(
+        adLoader = AdLoader(
             adUnitID: googleDynamicPricePlacementId,
             rootViewController: self,
-            adTypes: [.gamBanner],
+            adTypes: [.adManagerBanner],
             options: nil
         )
         adLoader?.delegate = self
-        adLoader?.loadDynamicPrice(gamRequest: GAMRequest(), ad: ad, mapping: mapping)
+        adLoader?.loadDynamicPrice(gamRequest: AdManagerRequest(), ad: ad, mapping: mapping)
     }
     
     // MARK: - Refreshing Banner Logic
@@ -90,16 +90,16 @@ class GAMAdLoaderBannerViewController: GAMBaseViewController {
 
 // MARK: - GADAdLoaderDelegate
 
-extension GAMAdLoaderBannerViewController: GADAdLoaderDelegate, GAMBannerAdLoaderDelegate {
-    func validBannerSizes(for adLoader: GADAdLoader) -> [NSValue] {
-        [NSValueFromGADAdSize(GADAdSizeBanner)]
+extension GAMAdLoaderBannerViewController: AdLoaderDelegate, AdManagerBannerAdLoaderDelegate {
+    func validBannerSizes(for adLoader: AdLoader) -> [NSValue] {
+        [nsValue(for: AdSizeBanner)]
     }
     
-    func adLoaderDidFinishLoading(_ adLoader: GADAdLoader) {
+    func adLoaderDidFinishLoading(_ adLoader: AdLoader) {
         print("adLoader finished loading")
     }
     
-    func adLoader(_ adLoader: GADAdLoader, didReceive bannerView: GAMBannerView) {
+    func adLoader(_ adLoader: AdLoader, didReceive bannerView: AdManagerBannerView) {
         print("adLoader got bannerView")
         
         bannerView.rootViewController = self
@@ -124,15 +124,15 @@ extension GAMAdLoaderBannerViewController: GADAdLoaderDelegate, GAMBannerAdLoade
         self.bannerView = bannerView
     }
     
-    func adLoader(_ adLoader: GADAdLoader, didFailToReceiveAdWithError error: Error) {
+    func adLoader(_ adLoader: AdLoader, didFailToReceiveAdWithError error: Error) {
         print("adLoader failedWithError \(error)")
     }
 }
 
 // MARK: - GADAppEventDelegate
 
-extension GAMAdLoaderBannerViewController: GADAppEventDelegate {
-    func adView(_ banner: GADBannerView, didReceiveAppEvent name: String, withInfo info: String?) {
+extension GAMAdLoaderBannerViewController: AppEventDelegate {
+    func adView(_ banner: BannerView, didReceiveAppEvent name: String, with info: String?) {
         print("adView:didReceiveAppEvent")
         bannerView?.handleEventForNimbus(name: name, info: info)
     }
@@ -140,32 +140,32 @@ extension GAMAdLoaderBannerViewController: GADAppEventDelegate {
 
 // MARK: - GADBannerViewDelegate
 
-extension GAMAdLoaderBannerViewController: GADBannerViewDelegate {
-    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+extension GAMAdLoaderBannerViewController: BannerViewDelegate {
+    func bannerViewDidReceiveAd(_ bannerView: BannerView) {
         print("bannerViewDidReceiveAd")
     }
     
-    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
+    func bannerView(_ bannerView: BannerView, didFailToReceiveAdWithError error: Error) {
         print("bannerView:didFailToReceiveAdWithError: \(error.localizedDescription)")
     }
     
-    func bannerViewDidRecordImpression(_ bannerView: GADBannerView) {
+    func bannerViewDidRecordImpression(_ bannerView: BannerView) {
         print("bannerViewDidRecordImpression")
     }
     
-    func bannerViewDidRecordClick(_ bannerView: GADBannerView) {
+    func bannerViewDidRecordClick(_ bannerView: BannerView) {
         print("bannerViewDidRecordClick")
     }
     
-    func bannerViewWillPresentScreen(_ bannerView: GADBannerView) {
+    func bannerViewWillPresentScreen(_ bannerView: BannerView) {
         print("bannerViewWillPresentScreen")
     }
     
-    func bannerViewWillDismissScreen(_ bannerView: GADBannerView) {
+    func bannerViewWillDismissScreen(_ bannerView: BannerView) {
         print("bannerViewWillDismissScreen")
     }
     
-    func bannerViewDidDismissScreen(_ bannerView: GADBannerView) {
+    func bannerViewDidDismissScreen(_ bannerView: BannerView) {
         print("bannerViewDidDismissScreen")
     }
 }

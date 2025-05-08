@@ -15,8 +15,8 @@ import GoogleMobileAds
 
 class GAMInterstitialViewController: GAMBaseViewController {
     private let requestManager = NimbusRequestManager()
-    private var interstitialAd: GAMInterstitialAd?
-    private let gamRequest = GAMRequest()
+    private var interstitialAd: AdManagerInterstitialAd?
+    private let gamRequest = AdManagerRequest()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +28,8 @@ class GAMInterstitialViewController: GAMBaseViewController {
     func loadInterstitial(nimbusAd: NimbusAd? = nil) {
         nimbusAd?.applyDynamicPrice(into: gamRequest, mapping: mapping)
         
-        GAMInterstitialAd.load(
-            withAdManagerAdUnitID: googleDynamicPricePlacementId,
+        AdManagerInterstitialAd.load(
+            with: googleDynamicPricePlacementId,
             request: gamRequest
         ) { [weak self] interstitialAd, error in
             if let error {
@@ -70,8 +70,8 @@ class GAMInterstitialViewController: GAMBaseViewController {
 
 // MARK: - GADAppEventDelegate
 
-extension GAMInterstitialViewController: GADAppEventDelegate {
-    func interstitialAd(_ interstitialAd: GADInterstitialAd, didReceiveAppEvent name: String, withInfo info: String?) {
+extension GAMInterstitialViewController: AppEventDelegate {
+    func adView(_ interstitialAd: InterstitialAd, didReceiveAppEvent name: String, with info: String?) {
         
         interstitialAd.handleEventForNimbus(name: name, info: info)
     }
@@ -79,28 +79,28 @@ extension GAMInterstitialViewController: GADAppEventDelegate {
 
 // MARK: - GADFullScreenContentDelegate
 
-extension GAMInterstitialViewController: GADFullScreenContentDelegate {
-    func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+extension GAMInterstitialViewController: FullScreenContentDelegate {
+    func ad(_ ad: FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
         print("ad:didFailToPresentFullScreenContentWithError: \(error.localizedDescription)")
     }
     
-    func adDidRecordImpression(_ ad: GADFullScreenPresentingAd) {
+    func adDidRecordImpression(_ ad: FullScreenPresentingAd) {
         print("adDidRecordImpression")
     }
     
-    func adDidRecordClick(_ ad: GADFullScreenPresentingAd) {
+    func adDidRecordClick(_ ad: FullScreenPresentingAd) {
         print("adDidRecordClick")
     }
     
-    func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+    func adWillPresentFullScreenContent(_ ad: FullScreenPresentingAd) {
         print("ad:adWillPresentFullScreenContent")
     }
     
-    func adWillDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+    func adWillDismissFullScreenContent(_ ad: FullScreenPresentingAd) {
         print("adWillDismissFullScreenContent")
     }
     
-    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+    func adDidDismissFullScreenContent(_ ad: FullScreenPresentingAd) {
         print("adDidDismissFullScreenContent")
     }
 }

@@ -47,7 +47,7 @@ final class TestRenderAdViewController: UIViewController {
             delegate: nil,
             showsSKOverlay: true
         )
-        
+
         setupLogo()
         setup(adView: adController.adView)
     }

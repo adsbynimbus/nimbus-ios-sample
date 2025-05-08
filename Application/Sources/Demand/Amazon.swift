@@ -124,7 +124,7 @@ final class APSViewController: SampleAdViewController {
             
             self.requestDispatchGroup.enter()
             
-            let adLoader = DTBAdLoader()
+            let adLoader = DTBAdLoader(adNetworkInfo: .init(networkName: DTBADNETWORK_NIMBUS))
             adLoader.setAdSizes([size as Any])
             self.adLoaders.append(adLoader)
             
@@ -140,7 +140,7 @@ final class APSViewController: SampleAdViewController {
             
             self.requestDispatchGroup.enter()
             
-            let adLoader = DTBAdLoader()
+            let adLoader = DTBAdLoader(adNetworkInfo: .init(networkName: DTBADNETWORK_NIMBUS))
             adLoader.setAdSizes([size as Any])
             self.adLoaders.append(adLoader)
             
