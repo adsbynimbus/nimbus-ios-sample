@@ -8,6 +8,7 @@
 import DTBiOSSDK
 import NimbusKit
 
+@MainActor
 protocol SettingsEnum {
     static var allCases: [Self] { get }
     
@@ -109,6 +110,7 @@ extension UserDefaults {
         }
     }
     
+    @MainActor
     var gdprConsent: Bool {
         get {
             register(defaults: [#function: false])
@@ -158,6 +160,7 @@ extension UserDefaults {
         }
     }
     
+    @MainActor
     var tradeDesk: Bool {
         get {
             register(defaults: [#function: false])
@@ -177,6 +180,7 @@ extension UserDefaults {
         }
     }
     
+    @MainActor
     var forceNoFill: Bool {
         get {
             register(defaults: [#function: false])
