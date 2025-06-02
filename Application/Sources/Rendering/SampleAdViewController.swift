@@ -81,3 +81,21 @@ class SampleAdViewController : DemoViewController, AdControllerDelegate {
         loggerView?.isHidden.toggle()
     }
 }
+
+extension SampleAdViewController : NimbusAdViewControllerDelegate {
+    func viewWillAppear(animated: Bool) {
+    }
+
+    func viewDidAppear(animated: Bool) {
+    }
+
+    func viewWillDisappear(animated: Bool) {
+    }
+
+    func viewDidDisappear(animated: Bool) {
+    }
+
+    func didCloseAd(adView: NimbusRenderKit.NimbusAdView) {
+        print("Closed Ad")
+    }
+}

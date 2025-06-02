@@ -40,7 +40,8 @@ class VungleViewController: SampleAdViewController {
     private let adType: VungleSample
     private var adManager: NimbusAdManager?
     private var adController: AdController?
-    
+    private var requestManager: NimbusRequestManager?
+
     init(adType: VungleSample, headerSubTitle: String) {
         self.adType = adType
         
@@ -89,7 +90,10 @@ class VungleViewController: SampleAdViewController {
     private func setupAdRendering() {
         adManager = NimbusAdManager()
         adManager?.delegate = self
-        
+
+        requestManager = NimbusRequestManager()
+        requestManager?.delegate = self
+
         switch adType {
             
         case .vungleBanner:
@@ -106,14 +110,12 @@ class VungleViewController: SampleAdViewController {
                 adPresentingViewController: self
             )
         case .vungleInterstitial:
-            adManager?.showBlockingAd(
-                request: NimbusRequest.forInterstitialAd(position: "TEST_INTERSTITIAL_NOT_SKIPPABLE"),
-                adPresentingViewController: self
+            requestManager?.performRequest(
+                request: NimbusRequest.forInterstitialAd(position: "TEST_INTERSTITIAL_NOT_SKIPPABLE")
             )
         case .vungleRewarded:
-            adManager?.showRewardedAd(
-                request: NimbusRequest.forRewardedVideo(position: "TEST_REWARDED"),
-                adPresentingViewController: self
+            requestManager?.performRequest(
+                request: NimbusRequest.forRewardedVideo(position: "TEST_REWARDED")
             )
         case .vungleNative:
             nativeAdContentView.translatesAutoresizingMaskIntoConstraints = false
@@ -147,6 +149,20 @@ extension VungleViewController: NimbusAdManagerDelegate {
     
     func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
         print("didCompleteNimbusRequest")
+        if ad.isInterstitial {
+            let nimbusAdView = NimbusAdView(adPresentingViewController: self)
+
+            let rewardedViewController = NimbusAdViewController(adView: nimbusAdView, ad: ad, companionAd: nil, closeButtonDelay: 5)
+            rewardedViewController.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+            rewardedViewController.delegate = self
+
+            nimbusAdView.adPresentingViewController = rewardedViewController
+            nimbusAdView.delegate = self
+            nimbusAdView.volume = 100
+
+            present(rewardedViewController, animated: true, completion: nil)
+            rewardedViewController.renderAndStart()
+        }
     }
     
     func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {

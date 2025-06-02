@@ -27,8 +27,10 @@ extension UIApplicationDelegate {
 final class UnityViewController: SampleAdViewController {
 
     private let adType: UnitySample
-    private var adManager: NimbusAdManager?
+    private var adManager: NimbusRequestManager?
     private var adController: AdController?
+    private var nimbusAdView: NimbusAdView!
+    private var rewardedViewController: NimbusAdViewController!
 
     init(adType: UnitySample, headerSubTitle: String) {
         self.adType = adType
@@ -47,8 +49,6 @@ final class UnityViewController: SampleAdViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .black
-        
         guard !unityGameId.isEmpty else {
             showCustomAlert("unity_game_id")
             return
@@ -58,31 +58,38 @@ final class UnityViewController: SampleAdViewController {
     }
 
     private func setupAdRendering() {
-        adManager = NimbusAdManager()
+        adManager = NimbusRequestManager()
         adManager?.delegate = self
         
         switch adType {
         case .unityRewardedVideo:
-            adManager?.showRewardedAd(
-                request: NimbusRequest.forRewardedVideo(position: adType.description),
-                adPresentingViewController: self
+            adManager?.performRequest(
+                request: NimbusRequest.forRewardedVideo(position: adType.description)
             )
         }
     }
 }
 
 extension UnityViewController: NimbusAdManagerDelegate {
-  
+
     func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
         print("didRenderAd")
-        
-        adController = controller
-        adController?.delegate = self
-        nimbusAd = ad
     }
     
     func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
         print("didCompleteNimbusRequest")
+        nimbusAdView = NimbusAdView(adPresentingViewController: self)
+
+        rewardedViewController = NimbusAdViewController(adView: nimbusAdView, ad: ad, companionAd: nil, closeButtonDelay: 5)
+        rewardedViewController.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+        rewardedViewController.delegate = self
+
+        nimbusAdView.adPresentingViewController = rewardedViewController
+        nimbusAdView.delegate = self
+        nimbusAdView.volume = 100
+
+        present(rewardedViewController, animated: true, completion: nil)
+        rewardedViewController.renderAndStart()
     }
     
     func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
