@@ -61,10 +61,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        #if DEBUG
-        Nimbus.shared.logger = NimbusLogger(minLogLevel: .info)
-        #endif
-        
         Nimbus.shared.testMode = UserDefaults.standard.nimbusTestMode
         Nimbus.shared.coppa = UserDefaults.standard.coppaOn
         

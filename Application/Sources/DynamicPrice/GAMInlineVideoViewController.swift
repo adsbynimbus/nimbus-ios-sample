@@ -69,12 +69,10 @@ extension GAMInlineVideoViewController: BannerViewDelegate {
     
     func bannerView(_ bannerView: BannerView, didFailToReceiveAdWithError error: Error) {
         print("bannerView:didFailToReceiveAdWithError: \(error.localizedDescription)")
-        dynamicPriceRenderer.notifyBannerLoss(bannerView: bannerView, error: error)
     }
     
     func bannerViewDidRecordImpression(_ bannerView: BannerView) {
         print("bannerViewDidRecordImpression")
-        dynamicPriceRenderer.notifyBannerImpression(bannerView: bannerView)
     }
     
     func bannerViewDidRecordClick(_ bannerView: BannerView) {

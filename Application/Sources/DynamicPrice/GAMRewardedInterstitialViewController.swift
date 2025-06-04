@@ -36,18 +36,10 @@ class GAMRewardedInterstitialViewController: GAMBaseViewController {
 extension GAMRewardedInterstitialViewController: FullScreenContentDelegate {
     func ad(_ ad: FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
         print("ad:didFailToPresentFullScreenContentWithError: \(error.localizedDescription)")
-        
-        if let interstitialAd = ad as? InterstitialAd {
-            dynamicPriceRenderer.notifyInterstitialLoss(fullScreenPresentingAd: interstitialAd, error: error)
-        }
     }
     
     func adDidRecordImpression(_ ad: FullScreenPresentingAd) {
         print("adDidRecordImpression")
-        
-        if let interstitialAd = ad as? InterstitialAd {
-            dynamicPriceRenderer.notifyInterstitialImpression(interstitialAd: interstitialAd)
-        }
     }
     
     func adDidRecordClick(_ ad: FullScreenPresentingAd) {
