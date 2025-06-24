@@ -168,14 +168,10 @@ extension UserDefaults {
         }
         set {
             set(newValue, forKey: #function)
-            if newValue && nimbusTestMode && NimbusAdManager.extendedIds?.first(where: { $0.source == "tradedesk.com" }) == nil {
-                var extendedIds = NimbusAdManager.extendedIds ?? []
-                extendedIds.insert(NimbusExtendedId(source: "tradedesk.com", uids: [.init(id: "TestUID2Token")]))
-                NimbusAdManager.extendedIds = extendedIds
+            if newValue && nimbusTestMode {
+                NimbusAdManager.extendedIds["tradedesk.com"] = NimbusExtendedId(source: "tradedesk.com", uids: [.init(id: "TestUID2Token")])
             } else {
-                if let extendedId = NimbusAdManager.extendedIds?.first(where: { $0.source == "tradedesk.com" }) {
-                    NimbusAdManager.extendedIds?.remove(extendedId)
-                }
+                NimbusAdManager.extendedIds["tradedesk.com"] = nil
             }
         }
     }
