@@ -169,9 +169,9 @@ extension UserDefaults {
         set {
             set(newValue, forKey: #function)
             if newValue && nimbusTestMode {
-                NimbusAdManager.extendedIds["tradedesk.com"] = NimbusExtendedId(source: "tradedesk.com", uids: [.init(id: "TestUID2Token")])
+                Nimbus.Identifier.uid2.add(ids: ["TestUID2Token"])
             } else {
-                NimbusAdManager.extendedIds["tradedesk.com"] = nil
+                Nimbus.Identifier.uid2.remove()
             }
         }
     }
