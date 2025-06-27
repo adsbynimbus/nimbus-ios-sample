@@ -8,6 +8,7 @@
 import DTBiOSSDK
 import NimbusKit
 
+@MainActor
 protocol SettingsEnum {
     static var allCases: [Self] { get }
     
@@ -109,6 +110,7 @@ extension UserDefaults {
         }
     }
     
+    @MainActor
     var gdprConsent: Bool {
         get {
             register(defaults: [#function: false])
@@ -158,6 +160,7 @@ extension UserDefaults {
         }
     }
     
+    @MainActor
     var tradeDesk: Bool {
         get {
             register(defaults: [#function: false])
@@ -165,18 +168,15 @@ extension UserDefaults {
         }
         set {
             set(newValue, forKey: #function)
-            if newValue && nimbusTestMode && NimbusAdManager.extendedIds?.first(where: { $0.source == "tradedesk.com" }) == nil {
-                var extendedIds = NimbusAdManager.extendedIds ?? []
-                extendedIds.insert(NimbusExtendedId(source: "tradedesk.com", uids: [.init(id: "TestUID2Token")]))
-                NimbusAdManager.extendedIds = extendedIds
+            if newValue && nimbusTestMode {
+                Nimbus.Identifier.uid2.add(ids: ["TestUID2Token"])
             } else {
-                if let extendedId = NimbusAdManager.extendedIds?.first(where: { $0.source == "tradedesk.com" }) {
-                    NimbusAdManager.extendedIds?.remove(extendedId)
-                }
+                Nimbus.Identifier.uid2.remove()
             }
         }
     }
     
+    @MainActor
     var forceNoFill: Bool {
         get {
             register(defaults: [#function: false])

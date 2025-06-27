@@ -20,7 +20,7 @@ import NimbusMobileFuseKit
 class MobileFuseViewController: SampleAdViewController {
     
     deinit {
-        NimbusAdManager.removeMobileFuseHeader()
+        Task { @MainActor in NimbusAdManager.removeMobileFuseHeader() }
     }
     
     init(headerTitle: String, headerSubTitle: String) {
