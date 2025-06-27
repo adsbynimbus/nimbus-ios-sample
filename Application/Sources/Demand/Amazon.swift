@@ -7,7 +7,7 @@
 
 import DTBiOSSDK
 import NimbusKit
-import NimbusRequestAPSKit
+import NimbusAPSKit
 import UIKit
 
 extension UIApplicationDelegate {
