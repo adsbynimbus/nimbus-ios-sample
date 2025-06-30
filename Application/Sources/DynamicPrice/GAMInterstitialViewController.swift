@@ -32,11 +32,7 @@ class GAMInterstitialViewController: GAMBaseViewController {
             with: googleDynamicPricePlacementId,
             request: gamRequest
         ) { [weak self] interstitialAd, error in
-            if let error {
-                if let nimbusAd {
-                    self?.requestManager.notifyError(ad: nimbusAd, error: error)
-                }
-                
+            if let error {                
                 print("Failed to load dynamic price interstitial ad with error: \(error.localizedDescription)")
                 return
             }
