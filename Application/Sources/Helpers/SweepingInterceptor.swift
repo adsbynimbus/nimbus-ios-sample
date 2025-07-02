@@ -24,6 +24,7 @@ class SweepingInterceptor: NimbusRequestInterceptor {
         if keep != .unity { request.user?.extensions?.removeValue(forKey: "unity_buyeruid") }
         if keep != .mobileFuse { request.user?.extensions?.removeValue(forKey: "mfx_buyerdata") }
         if keep != .vungle { request.user?.extensions?.removeValue(forKey: "vungle_buyeruid") }
+        if keep != .moloco { request.user?.extensions?.removeValue(forKey: "moloco_buyeruid") }
         if keep != .facebook {
             request.user?.extensions?.removeValue(forKey: "facebook_buyeruid")
             request.impressions[0].extensions?.removeValue(forKey: "facebook_app_id")

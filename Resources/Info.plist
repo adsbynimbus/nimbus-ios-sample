@@ -274,5 +274,15 @@
 	<string>$(MINTEGRAL_APP_ID)</string>
 	<key>Mintegral App Key</key>
 	<string>$(MINTEGRAL_APP_KEY)</string>
+	<key>Moloco App Key</key>
+	<string>$(MOLOCO_APP_KEY)</string>
+	<key>Moloco Banner ID</key>
+	<string>$(MOLOCO_BANNER_ID)</string>
+	<key>Moloco Native ID</key>
+	<string>$(MOLOCO_NATIVE_ID)</string>
+	<key>Moloco Interstitial ID</key>
+	<string>$(MOLOCO_INTERSTITIAL_ID)</string>
+	<key>Moloco Rewarded ID</key>
+	<string>$(MOLOCO_REWARDED_ID)</string>
 </dict>
 </plist>
