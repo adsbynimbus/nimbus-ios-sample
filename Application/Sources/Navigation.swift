@@ -79,7 +79,8 @@ enum MainItem: String, NavigationItem {
                     Section(header: "Meta Audience Network", items: MetaSample.allCases),
                     Section(header: "Unity", items: UnitySample.allCases),
                     Section(header: "Vungle", items: VungleSample.allCases),
-                    Section(header: "Mintegral", items: Mintegral.allCases)
+                    Section(header: "Mintegral", items: Mintegral.allCases),
+                    Section(header: "Moloco", items: Moloco.allCases),
                 ])
         case .testRender:
             return TestRenderViewController(
@@ -132,7 +133,7 @@ enum DynamicPriceNimbusRendering: String, NavigationItem {
 
 enum Mintegral: String, NavigationItem {
     case banner                 = "Banner"
-    case native           = "Native"
+    case native                 = "Native"
     case interstitial           = "Interstitial"
     case rewarded               = "Rewarded Video"
     
@@ -142,6 +143,22 @@ enum Mintegral: String, NavigationItem {
         case .native: MintegralNativeViewController(headerTitle: "Mintegral Native", headerSubTitle: "")
         case .interstitial: MintegralInterstitialViewController(headerTitle: "Mintegral Interstitial", headerSubTitle: "")
         case .rewarded: MintegralRewardedViewController(headerTitle: "Mintegral Rewarded", headerSubTitle: "")
+        }
+    }
+}
+
+enum Moloco: String, NavigationItem {
+    case banner                 = "Banner"
+    case native                 = "Native"
+    case interstitial           = "Interstitial"
+    case rewarded               = "Rewarded Video"
+    
+    func destinationController(parent: String) -> UIViewController {
+        return switch self {
+        case .banner: MolocoBannerViewController(headerTitle: "Moloco Banner", headerSubTitle: "")
+        case .native: MolocoNativeViewController(headerTitle: "Moloco Native", headerSubTitle: "")
+        case .interstitial: MolocoInterstitialViewController(headerTitle: "Moloco Interstitial", headerSubTitle: "")
+        case .rewarded: MolocoRewardedViewController(headerTitle: "Moloco Rewarded", headerSubTitle: "")
         }
     }
 }

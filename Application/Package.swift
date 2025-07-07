@@ -31,6 +31,7 @@ let package = Package(
                 .product(name: "NimbusMobileFuseKit", package: "nimbus-ios-sdk"),
                 .product(name: "NimbusAdMobKit", package: "nimbus-ios-sdk"),
                 .product(name: "NimbusMintegralKit", package: "nimbus-ios-sdk"),
+                .product(name: "NimbusMolocoKit", package: "nimbus-ios-sdk")
             ],
             path: "Sources")
     ]

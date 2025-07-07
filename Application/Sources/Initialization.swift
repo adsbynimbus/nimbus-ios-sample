@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupNimbusSDK()
         setupAmazonDemand()
         setupMintegralDemand()
+        setupMolocoDemand()
         
         // Meta and LiveRamp requires att permissions to run properly
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) { [weak self] in
