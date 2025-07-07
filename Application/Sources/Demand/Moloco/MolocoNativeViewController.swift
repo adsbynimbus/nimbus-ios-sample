@@ -26,8 +26,8 @@ final class MolocoNativeViewController: MolocoViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let renderer = Nimbus.shared.renderers[.moloco] as? NimbusMolocoAdRenderer {
-            renderer.adRendererDelegate = self
+        MolocoExtension.nativeAdViewProvider = { _, assets in
+            MolocoNativeAdView(assets: assets)
         }
         
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -54,7 +54,7 @@ extension MolocoNativeViewController: NimbusAdManagerDelegate {
     func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
         print("didRenderAd")
         adController = controller
-        adController?.delegate = self
+        adController?.register(delegate: self)
         nimbusAd = ad
     }
     
@@ -64,11 +64,5 @@ extension MolocoNativeViewController: NimbusAdManagerDelegate {
     
     func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
         print("didFailNimbusRequest: \(error.localizedDescription)")
-    }
-}
-
-extension MolocoNativeViewController: NimbusMolocoAdRendererDelegate {
-    func nativeAdViewForRendering(container: UIView, assets: any MolocoNativeAdAssests) -> NimbusMolocoNativeAdViewType {
-        MolocoNativeAdView(assets: assets)
     }
 }

@@ -7,11 +7,16 @@
 
 import UIKit
 import NimbusKit
+#if canImport(NimbusSDK) // CocoaPods
+import NimbusSDK
+#elseif canImport(NimbusMolocoKit) // Swift Package Manager
+import NimbusMolocoKit
+#endif
 
 ///  When integrating Moloco, consider examples like MolocoBannerViewController inherit from UIViewController.
-///  Both DemandViewController and MolocoViewController just facilitate the needs of the sample app.
-class MolocoViewController: DemandViewController {
+///  Both SampleAdViewController and MolocoViewController just facilitate the needs of the sample app.
+class MolocoViewController: SampleAdViewController {
     convenience init(headerTitle: String, headerSubTitle: String) {
-        self.init(network: .moloco, headerTitle: headerTitle, headerSubTitle: headerSubTitle)
+        self.init(headerTitle: headerTitle, headerSubTitle: headerSubTitle, enabledExtension: MolocoExtension.self)
     }
 }

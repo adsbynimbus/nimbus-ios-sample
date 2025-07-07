@@ -27,6 +27,5 @@ extension UIApplicationDelegate {
                 print("Moloco initialization was successful")
             }
         }
-        Nimbus.shared.renderers[.moloco] = NimbusMolocoAdRenderer()
     }
 }

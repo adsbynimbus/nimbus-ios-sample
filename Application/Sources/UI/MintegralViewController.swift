@@ -12,7 +12,7 @@ import NimbusMintegralKit
 #endif
 
 ///  When integrating Mintegral, consider examples like MintegralBannerViewController inherit from UIViewController.
-///  Both DemandViewController and MintegralViewController just facilitate the needs of the sample app.
+///  Both SampleAdViewController and MintegralViewController just facilitate the needs of the sample app.
 class MintegralViewController: SampleAdViewController {
     convenience init(headerTitle: String, headerSubTitle: String) {
         self.init(headerTitle: headerTitle, headerSubTitle: headerSubTitle, enabledExtension: MintegralExtension.self)

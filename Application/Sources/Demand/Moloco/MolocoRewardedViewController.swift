@@ -30,7 +30,7 @@ extension MolocoRewardedViewController: NimbusAdManagerDelegate {
     func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
         print("didRenderAd")
         adController = controller
-        adController?.delegate = self
+        adController?.register(delegate: self)
         nimbusAd = ad
     }
     
