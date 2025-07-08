@@ -38,6 +38,7 @@ final class FANViewController: SampleAdViewController {
     
     private let adType: MetaSample
     private var dimensions: NimbusAdDimensions?
+    private var adController: AdController?
     
     init(adType: MetaSample, headerSubTitle: String) {
         self.adType = adType
@@ -71,9 +72,20 @@ final class FANViewController: SampleAdViewController {
     private func setupAdView() {
         guard let nimbusAd else { return }
         
-        try! Nimbus.load(ad: nimbusAd, container: view, adPresentingViewController: self, delegate: self)
+        switch adType {
+        case .metaBanner, .metaNative:
+            adController = Nimbus.load(ad: nimbusAd, container: view, adPresentingViewController: self, delegate: self)
+        case .metaInterstitial, .metaRewardedVideo:
+            adController = try! Nimbus.loadBlocking(
+                ad: nimbusAd,
+                presentingViewController: self,
+                delegate: self,
+                isRewarded: adType == .metaRewardedVideo
+            )
+            adController?.start()
+        }
     }
-        
+
     private func createNimbusAd(adType: MetaSample) -> NimbusAd {
         switch adType {
             
