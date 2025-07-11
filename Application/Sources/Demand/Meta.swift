@@ -67,7 +67,7 @@ final class FANViewController: SampleAdViewController {
         
         switch adType {
         case .metaBanner, .metaNative:
-            adController = Nimbus.load(ad: nimbusAd, container: view, adPresentingViewController: self, delegate: self)
+            adController = try! Nimbus.load(ad: nimbusAd, container: view, adPresentingViewController: self, delegate: self)
         case .metaInterstitial, .metaRewardedVideo:
             adController = try! Nimbus.loadBlocking(
                 ad: nimbusAd,
