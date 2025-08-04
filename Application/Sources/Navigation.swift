@@ -81,6 +81,7 @@ enum MainItem: String, NavigationItem {
                     Section(header: "Vungle", items: VungleSample.allCases),
                     Section(header: "Mintegral", items: Mintegral.allCases),
                     Section(header: "Moloco", items: Moloco.allCases),
+                    Section(header: "InMobi", items: InMobi.allCases),
                 ])
         case .testRender:
             return TestRenderViewController(
@@ -159,6 +160,22 @@ enum Moloco: String, NavigationItem {
         case .native: MolocoNativeViewController(headerTitle: "Moloco Native", headerSubTitle: "")
         case .interstitial: MolocoInterstitialViewController(headerTitle: "Moloco Interstitial", headerSubTitle: "")
         case .rewarded: MolocoRewardedViewController(headerTitle: "Moloco Rewarded", headerSubTitle: "")
+        }
+    }
+}
+
+enum InMobi: String, NavigationItem {
+    case banner                 = "Banner"
+    case native                 = "Native"
+    case interstitial           = "Interstitial"
+    case rewarded               = "Rewarded Video"
+    
+    func destinationController(parent: String) -> UIViewController {
+        return switch self {
+        case .banner: InMobiBannerViewController(headerTitle: "InMobi Banner", headerSubTitle: "")
+        case .native: InMobiNativeViewController(headerTitle: "InMobi Native", headerSubTitle: "")
+        case .interstitial: InMobiInterstitialViewController(headerTitle: "InMobi Interstitial", headerSubTitle: "")
+        case .rewarded: InMobiRewardedViewController(headerTitle: "InMobi Rewarded", headerSubTitle: "")
         }
     }
 }
