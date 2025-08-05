@@ -14,7 +14,6 @@ final class InMobiNativeAdView: UIView {
     
     weak var iconView: UIImageView?
     weak var headlineView: UILabel?
-    weak var advertiserView: UILabel?
     weak var descriptionView: UILabel?
     weak var starRatingView: UIView?
     weak var callToActionView: UIButton?
@@ -52,15 +51,6 @@ final class InMobiNativeAdView: UIView {
         addSubview(headline)
         self.headlineView = headline
         
-        let advertiser = UILabel()
-        advertiser.translatesAutoresizingMaskIntoConstraints = false
-        advertiser.lineBreakMode = .byWordWrapping
-        advertiser.numberOfLines = 0
-        advertiser.textColor = .darkGray
-        advertiser.font = .systemFont(ofSize: 15)
-        addSubview(advertiser)
-        self.advertiserView = advertiser
-        
         let body = UILabel()
         body.translatesAutoresizingMaskIntoConstraints = false
         body.font = .systemFont(ofSize: 14)
@@ -90,10 +80,6 @@ final class InMobiNativeAdView: UIView {
             headline.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: 8),
             headline.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             headline.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            
-            advertiser.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: 8),
-            advertiser.topAnchor.constraint(equalTo: headline.bottomAnchor, constant: 4),
-            advertiser.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             
             body.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             body.topAnchor.constraint(equalTo: icon.bottomAnchor, constant: 16),
@@ -141,8 +127,7 @@ final class InMobiNativeAdView: UIView {
     func configure() {
         iconView?.image = nativeAd.adIcon
         headlineView?.text = nativeAd.adTitle
-        descriptionView?.text = nativeAd.description
-        advertiserView?.text = "TBD" // TODO: Fix
+        descriptionView?.text = nativeAd.adDescription
         callToActionView?.setTitle(nativeAd.adCtaText, for: .normal)
         
         if let primaryView = nativeAd.primaryView(ofWidth: bounds.width) {
