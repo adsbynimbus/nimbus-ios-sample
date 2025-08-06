@@ -14,7 +14,7 @@ import NimbusSDK
 import NimbusInMobiKit
 #endif
 
-fileprivate var placementId = Int64(Bundle.main.infoDictionary?["InMobi Native ID"] as! String)!
+fileprivate var placementId = Int(Bundle.main.infoDictionary?["InMobi Native ID"] as! String)!
 
 final class InMobiNativeViewController: InMobiViewController, NimbusInMobiAdRendererDelegate {
 

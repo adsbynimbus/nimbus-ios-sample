@@ -13,7 +13,7 @@ import NimbusSDK
 import NimbusInMobiKit
 #endif
 
-fileprivate var placementId = Int64(Bundle.main.infoDictionary?["InMobi Interstitial ID"] as! String)!
+fileprivate var placementId = Int(Bundle.main.infoDictionary?["InMobi Interstitial ID"] as! String)!
 
 final class InMobiInterstitialViewController: InMobiViewController {
 
