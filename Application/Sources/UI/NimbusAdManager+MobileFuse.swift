@@ -13,14 +13,10 @@ private let enableMobileFuseHeaderKey = "Nimbus-Test-EnableMobileFuseSDK"
 ///  Nimbus test endpoint header manipulation. This is NOT something to do in production environment.
 extension NimbusAdManager {
     static func insertMobileFuseHeader() {
-        if NimbusAdManager.additionalRequestHeaders == nil {
-            NimbusAdManager.additionalRequestHeaders = [:]
-        }
-        
-        NimbusAdManager.additionalRequestHeaders?[enableMobileFuseHeaderKey] = "true"
+        NimbusAdManager.additionalRequestHeaders[enableMobileFuseHeaderKey] = "true"
     }
     
     static func removeMobileFuseHeader() {
-        NimbusAdManager.additionalRequestHeaders?.removeValue(forKey: enableMobileFuseHeaderKey)
+        NimbusAdManager.additionalRequestHeaders.removeValue(forKey: enableMobileFuseHeaderKey)
     }
 }
