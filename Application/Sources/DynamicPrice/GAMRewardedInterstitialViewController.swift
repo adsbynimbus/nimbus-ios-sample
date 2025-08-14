@@ -15,13 +15,9 @@ import GoogleMobileAds
 
 class GAMRewardedInterstitialViewController: GAMBaseViewController {
     private let requestManager = NimbusRequestManager()
-    private lazy var dynamicPriceRenderer: NimbusDynamicPriceRenderer = {
-        return NimbusDynamicPriceRenderer(requestManager: requestManager)
-    }()
     
     private let gamRequest = AdManagerRequest()
     private var rewardedInterstitialAd: RewardedInterstitialAd?
-    private var rewardedAdPresenter: NimbusRewardedAdPresenter?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,49 +59,9 @@ extension GAMRewardedInterstitialViewController: FullScreenContentDelegate {
 
 extension GAMRewardedInterstitialViewController: AdMetadataDelegate {
     func adMetadataDidChange(_ ad: AdMetadataProvider) {
-        let isNimbusWin: Bool
-        if let rewardedInterstitialAd {
-            isNimbusWin = dynamicPriceRenderer.handleRewardedInterstitialEventForNimbus(
-                adMetadata: ad.adMetadata,
-                ad: rewardedInterstitialAd
-            )
-        } else {
-            isNimbusWin = false
+        rewardedInterstitialAd?.presentDynamicPrice(from: self, metadataProvider: ad) { adReward in
+            print("Received reward")
         }
-        
-        // Show an ad whenever ready
-        rewardedAdPresenter?.showAd(
-            isNimbusWin: isNimbusWin,
-            presentingViewController: self
-        )
-    }
-}
-
-// MARK: - NimbusRewardedAdPresenter
-
-extension GAMRewardedInterstitialViewController: NimbusRewardedAdPresenterDelegate {
-    func didTriggerImpression() {
-        print("Rewarded ad impression")
-    }
-    
-    func didTriggerClick() {
-        print("Rewarded ad click")
-    }
-    
-    func didPresentAd() {
-        print("Rewarded ad presented")
-    }
-    
-    func didCloseAd() {
-        print("Rewarded ad closed")
-    }
-   
-    func didEarnReward(reward: AdReward) {
-        print("Rewarded ad earned reward")
-    }
-    
-    func didReceiveError(error: NimbusError) {
-        print("Rewarded ad error")
     }
 }
 
@@ -131,23 +87,7 @@ extension GAMRewardedInterstitialViewController: NimbusRequestManagerDelegate {
             
             rewardedInterstitialAd.fullScreenContentDelegate = self
             rewardedInterstitialAd.adMetadataDelegate = self
-            rewardedInterstitialAd.paidEventHandler = { [weak self] adValue in
-                guard let self else { return }
-                
-                self.dynamicPriceRenderer.notifyRewardedInterstitialPrice(
-                    adValue: adValue,
-                    fullScreenPresentingAd: rewardedInterstitialAd
-                )
-            }
-            
-            dynamicPriceRenderer.willRender(ad: ad, fullScreenPresentingAd: rewardedInterstitialAd)
-            
-            rewardedAdPresenter = NimbusRewardedAdPresenter(
-                request: request,
-                ad: ad,
-                rewardedInterstitialAd: rewardedInterstitialAd
-            )
-            rewardedAdPresenter?.delegate = self
+            rewardedInterstitialAd.applyDynamicPrice(ad: ad)
         }
     }
     

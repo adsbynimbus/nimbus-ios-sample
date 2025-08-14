@@ -15,10 +15,6 @@ import GoogleMobileAds
 
 class GAMInlineVideoViewController: GAMBaseViewController {
     private let requestManager = NimbusRequestManager()
-    private lazy var dynamicPriceRenderer: NimbusDynamicPriceRenderer = {
-        return NimbusDynamicPriceRenderer(requestManager: requestManager)
-    }()
-    
     private let gamRequest = AdManagerRequest()
     private let bannerView = AdManagerBannerView(adSize: AdSizeMediumRectangle)
     
@@ -37,10 +33,6 @@ class GAMInlineVideoViewController: GAMBaseViewController {
         bannerView.delegate = self
         bannerView.rootViewController = self
         bannerView.appEventDelegate = self
-        bannerView.paidEventHandler = { [weak self] adValue in
-            guard let bannerView = self?.bannerView else { return }
-            self?.dynamicPriceRenderer.notifyBannerPrice(adValue: adValue, bannerView: bannerView)
-        }
         
         view.addSubview(bannerView)
         
@@ -56,7 +48,7 @@ class GAMInlineVideoViewController: GAMBaseViewController {
 extension GAMInlineVideoViewController: AppEventDelegate {
     func adView(_ banner: BannerView, didReceiveAppEvent name: String, with info: String?) {
         print("adView:didReceiveAppEvent")
-        dynamicPriceRenderer.handleBannerEventForNimbus(bannerView: banner, name: name, info: info)
+        bannerView.handleEventForNimbus(name: name, info: info)
     }
 }
 
@@ -98,12 +90,11 @@ extension GAMInlineVideoViewController: NimbusRequestManagerDelegate {
     func didCompleteNimbusRequest(request: NimbusRequestKit.NimbusRequest, ad: NimbusCoreKit.NimbusAd) {
         print("didCompleteNimbusRequest")
         
-        dynamicPriceRenderer.willRender(ad: ad, bannerView: bannerView)
-        ad.applyDynamicPrice(into: gamRequest, mapping: mapping)
-        bannerView.load(gamRequest)
+        bannerView.loadDynamicPrice(gamRequest: AdManagerRequest(), ad: ad, mapping: mapping)
     }
     
     func didFailNimbusRequest(request: NimbusRequestKit.NimbusRequest, error: NimbusCoreKit.NimbusError) {
         print("didFailNimbusRequest: \(error.localizedDescription)")
+        bannerView.loadDynamicPrice(gamRequest: AdManagerRequest(), mapping: mapping)
     }
 }
