@@ -105,14 +105,8 @@ extension GAMAdLoaderBannerViewController: AdLoaderDelegate, AdManagerBannerAdLo
         bannerView.rootViewController = self
         bannerView.adUnitID = googleDynamicPricePlacementId
         bannerView.appEventDelegate = self
-        bannerView.applyDynamicPrice(
-            requestManager: requestManager,
-            delegate: self,
-            ad: adLoader.nimbusAd
-        )
-        bannerView.paidEventHandler = { [weak bannerView] adValue in
-            bannerView?.updatePrice(adValue)
-        }
+        bannerView.delegate = self
+        bannerView.applyDynamicPrice(ad: adLoader.nimbusAd)
         
         view.addSubview(bannerView)
         
