@@ -102,7 +102,7 @@ class GAMBannerViewController: GAMBaseViewController {
 extension GAMBannerViewController: AppEventDelegate {
     func adView(_ banner: BannerView, didReceiveAppEvent name: String, with info: String?) {
         print("adView:didReceiveAppEvent")
-        bannerView.handleEventForNimbus(name: name, info: info)
+        banner.handleEventForNimbus(name: name, info: info)
     }
 }
 
