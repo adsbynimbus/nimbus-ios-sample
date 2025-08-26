@@ -67,10 +67,7 @@ class GAMBannerViewController: GAMBaseViewController {
         bannerView.adUnitID = googleDynamicPricePlacementId
         bannerView.rootViewController = self
         bannerView.appEventDelegate = self
-        bannerView.applyDynamicPrice(requestManager: requestManager, delegate: self)
-        bannerView.paidEventHandler = { [weak bannerView] adValue in
-            bannerView?.updatePrice(adValue)
-        }
+        bannerView.delegate = self
         
         view.addSubview(bannerView)
         
@@ -105,7 +102,7 @@ class GAMBannerViewController: GAMBaseViewController {
 extension GAMBannerViewController: AppEventDelegate {
     func adView(_ banner: BannerView, didReceiveAppEvent name: String, with info: String?) {
         print("adView:didReceiveAppEvent")
-        bannerView.handleEventForNimbus(name: name, info: info)
+        banner.handleEventForNimbus(name: name, info: info)
     }
 }
 

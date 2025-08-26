@@ -15,13 +15,9 @@ import GoogleMobileAds
 
 class GAMRewardedViewController: GAMBaseViewController {
     private let requestManager = NimbusRequestManager()
-    private lazy var dynamicPriceRenderer: NimbusDynamicPriceRenderer = {
-        return NimbusDynamicPriceRenderer(requestManager: requestManager)
-    }()
     
     private let gamRequest = AdManagerRequest()
     private var rewardedAd: RewardedAd?
-    private var rewardedAdPresenter: NimbusRewardedAdPresenter?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,49 +59,9 @@ extension GAMRewardedViewController: FullScreenContentDelegate {
 
 extension GAMRewardedViewController: AdMetadataDelegate {
     func adMetadataDidChange(_ ad: AdMetadataProvider) {
-        let isNimbusWin: Bool
-        if let rewardedAd {
-            isNimbusWin = dynamicPriceRenderer.handleRewardedEventForNimbus(
-                adMetadata: ad.adMetadata,
-                ad: rewardedAd
-            )
-        } else {
-            isNimbusWin = false
+        rewardedAd?.presentDynamicPrice(from: self, metadataProvider: ad) { adReward in
+            print("received reward")
         }
-        
-        // Show an ad whenever ready
-        rewardedAdPresenter?.showAd(
-            isNimbusWin: isNimbusWin,
-            presentingViewController: self
-        )
-    }
-}
-
-// MARK: - NimbusRewardedAdPresenter
-
-extension GAMRewardedViewController: NimbusRewardedAdPresenterDelegate {
-    func didTriggerImpression() {
-        print("Rewarded ad impression")
-    }
-    
-    func didTriggerClick() {
-        print("Rewarded ad click")
-    }
-    
-    func didPresentAd() {
-        print("Rewarded ad presented")
-    }
-    
-    func didCloseAd() {
-        print("Rewarded ad closed")
-    }
-   
-    func didEarnReward(reward: AdReward) {
-        print("Rewarded ad earned reward")
-    }
-    
-    func didReceiveError(error: NimbusError) {
-        print("Rewarded ad error")
     }
 }
 
@@ -131,21 +87,7 @@ extension GAMRewardedViewController: NimbusRequestManagerDelegate {
                 
                 rewardedAd.fullScreenContentDelegate = self
                 rewardedAd.adMetadataDelegate = self
-                rewardedAd.paidEventHandler = { [weak self] adValue in
-                    self?.dynamicPriceRenderer.notifyRewardedPrice(
-                        adValue: adValue,
-                        fullScreenPresentingAd: rewardedAd
-                    )
-                }
-                
-                dynamicPriceRenderer.willRender(ad: ad, fullScreenPresentingAd: rewardedAd)
-                
-                rewardedAdPresenter = NimbusRewardedAdPresenter(
-                    request: request,
-                    ad: ad,
-                    rewardedAd: rewardedAd
-                )
-                rewardedAdPresenter?.delegate = self
+                rewardedAd.applyDynamicPrice(ad: ad)
             }
         )
     }

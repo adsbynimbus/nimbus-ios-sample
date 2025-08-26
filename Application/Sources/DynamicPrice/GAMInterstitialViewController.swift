@@ -40,26 +40,11 @@ class GAMInterstitialViewController: GAMBaseViewController {
             guard let self, let interstitialAd else { return }
             
             self.interstitialAd = interstitialAd
+            interstitialAd.fullScreenContentDelegate = self
+            interstitialAd.appEventDelegate = self
             
-            if let ad = nimbusAd {
-                interstitialAd.applyDynamicPrice(
-                    ad: ad,
-                    requestManager: requestManager,
-                    delegate: self
-                )
-                interstitialAd.appEventDelegate = self
-                interstitialAd.paidEventHandler = { [weak interstitialAd] adValue in
-                    interstitialAd?.updatePrice(adValue)
-                }
-            } else {
-                interstitialAd.fullScreenContentDelegate = self
-            }
-            
-            DispatchQueue.main.async {
-                // Notice presentDynamicPrice() is safe to call regardless of whether NimbusAd
-                // is present. If NimbusAd is not present, only the google's present() will be called
-                interstitialAd.presentDynamicPrice(fromRootViewController: self)
-            }
+            interstitialAd.applyDynamicPrice(ad: nimbusAd)
+            interstitialAd.present(from: self)
         }
     }
 }
