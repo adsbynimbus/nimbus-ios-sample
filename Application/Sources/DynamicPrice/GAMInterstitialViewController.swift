@@ -43,10 +43,7 @@ class GAMInterstitialViewController: GAMBaseViewController {
             interstitialAd.fullScreenContentDelegate = self
             interstitialAd.appEventDelegate = self
             
-            if let ad = nimbusAd {
-                interstitialAd.applyDynamicPrice(ad: ad)
-            }
-
+            interstitialAd.applyDynamicPrice(ad: nimbusAd)
             interstitialAd.present(from: self)
         }
     }
