@@ -22,7 +22,7 @@ class AdMobInterstitialViewController: AdMobViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let request = NimbusRequest
+        var request = NimbusRequest
             .forInterstitialAd(position: "interstitial")
             .withAdMobInterstitial(adUnitId: interstitialPlacementId)
         request.impressions[0].video = nil

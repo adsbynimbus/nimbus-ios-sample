@@ -93,7 +93,7 @@ final class AdManagerViewController: SampleAdViewController {
                 adPresentingViewController: self
             )
         case .interstitialStatic:
-            let request = NimbusRequest.forInterstitialAd(position: adType.description)
+            var request = NimbusRequest.forInterstitialAd(position: adType.description)
             request.impressions[0].video = nil
             adManager.showBlockingAd(
                 request: request,
@@ -102,7 +102,7 @@ final class AdManagerViewController: SampleAdViewController {
             )
         case .interstitialVideo, .interstitialVideoWithoutUI:
             // See setupCustomVideoSettings() where custom video settings is passed
-            let request = NimbusRequest.forInterstitialAd(position: adType.description)
+            var request = NimbusRequest.forInterstitialAd(position: adType.description)
             request.impressions[0].banner = nil
             adManager.showBlockingAd(
                 request: request,

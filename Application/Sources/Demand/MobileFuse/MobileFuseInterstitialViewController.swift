@@ -31,7 +31,7 @@ final class MobileFuseInterstitialViewController: MobileFuseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let request = NimbusRequest.forInterstitialAd(position: "MobileFuse_Testing_INSTL_iOS_Nimbus")
+        var request = NimbusRequest.forInterstitialAd(position: "MobileFuse_Testing_INSTL_iOS_Nimbus")
         request.impressions[0].video = nil
         
         adManager.delegate = self

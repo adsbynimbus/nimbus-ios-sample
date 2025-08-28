@@ -87,7 +87,7 @@ final class APSViewController: SampleAdViewController {
                 print("APS refreshing banner requests timed out")
             }
             
-            let request: NimbusRequest
+            var request: NimbusRequest
             if self.adType == .apsBannerWithRefresh {
                 request = NimbusRequest.forBannerAd(position: self.adType.description)
             } else {
