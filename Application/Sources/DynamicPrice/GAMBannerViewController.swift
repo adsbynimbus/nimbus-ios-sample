@@ -73,9 +73,9 @@ class GAMBannerViewController: GAMBaseViewController {
         ])
     }
     
-    func fetchNimbusBid() async -> NimbusAd? {
+    func fetchNimbusBid() async -> Ad? {
         do {
-            return try await Nimbus.bannerAd(position: headerSubTitle).fetchResponse()
+            return try await Nimbus.bannerAd(position: headerSubTitle).fetch()
         } catch {
             print("Failed fetching Nimbus bid: \(error)")
             return nil

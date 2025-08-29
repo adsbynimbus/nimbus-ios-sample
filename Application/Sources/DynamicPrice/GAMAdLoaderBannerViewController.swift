@@ -52,16 +52,16 @@ class GAMAdLoaderBannerViewController: GAMBaseViewController {
         )
     }
     
-    func fetchNimbusBid() async -> NimbusAd? {
+    func fetchNimbusBid() async -> Ad? {
         do {
-            return try await Nimbus.bannerAd(position: headerSubTitle).fetchResponse()
+            return try await Nimbus.bannerAd(position: headerSubTitle).fetch()
         } catch {
             print("Failed fetching Nimbus bid: \(error)")
             return nil
         }
     }
     
-    func load(ad: NimbusAd? = nil) {
+    func load(ad: Ad? = nil) {
         adLoader = AdLoader(
             adUnitID: googleDynamicPricePlacementId,
             rootViewController: self,
@@ -169,23 +169,5 @@ extension GAMAdLoaderBannerViewController: BannerViewDelegate {
     
     func bannerViewDidDismissScreen(_ bannerView: BannerView) {
         print("bannerViewDidDismissScreen")
-    }
-}
-
-// MARK: - NimbusRequestManagerDelegate
-
-extension GAMAdLoaderBannerViewController: NimbusRequestManagerDelegate {
-    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
-        print("didCompleteNimbusRequest")
-        
-        // Remove old bannerView if exists
-        bannerView?.removeFromSuperview()
-        
-        load(ad: ad)
-    }
-    
-    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
-        print("didFailNimbusRequest: \(error.localizedDescription)")
-        load()
     }
 }

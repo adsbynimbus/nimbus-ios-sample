@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import NimbusKit
 #if canImport(NimbusGAMKit)                    // Swift Package Manager
 import NimbusGAMKit
 #elseif canImport(NimbusSDK)                   // CocoaPods
@@ -21,20 +22,20 @@ class GAMRewardedInterstitialViewController: GAMBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Task { loadRewarded(nimbusBid: await fetchNimbusBid()) }
+        Task { loadRewarded(ad: await fetchNimbusBid()) }
     }
     
-    func fetchNimbusBid() async -> NimbusAd? {
+    func fetchNimbusBid() async -> Ad? {
         do {
-            return try await Nimbus.rewardedAd(position: headerSubTitle).fetchResponse()
+            return try await Nimbus.rewardedAd(position: headerSubTitle).fetch()
         } catch {
             print("Failed fetching Nimbus bid: \(error)")
             return nil
         }
     }
     
-    func loadRewarded(nimbusBid: NimbusAd? = nil) {
-        nimbusBid?.applyDynamicPrice(into: gamRequest, mapping: mapping)
+    func loadRewarded(ad: Ad? = nil) {
+        ad?.applyDynamicPrice(into: gamRequest, mapping: mapping)
         
         RewardedInterstitialAd.load(
             with: googleDynamicPriceRewardedPlacementId,
@@ -50,7 +51,7 @@ class GAMRewardedInterstitialViewController: GAMBaseViewController {
             
             rewardedInterstitialAd.fullScreenContentDelegate = self
             rewardedInterstitialAd.adMetadataDelegate = self
-            rewardedInterstitialAd.applyDynamicPrice(ad: nimbusBid)
+            rewardedInterstitialAd.applyDynamicPrice(ad: ad)
         }
     }
 }

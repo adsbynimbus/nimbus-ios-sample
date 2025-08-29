@@ -22,23 +22,23 @@ class GAMInlineVideoViewController: GAMBaseViewController {
         
         Task {
             let bid = await fetchNimbusBid()
-            setupBannerView(nimbusBid: bid)
+            setupBannerView(ad: bid)
         }
     }
     
-    func fetchNimbusBid() async -> NimbusAd? {
+    func fetchNimbusBid() async -> Ad? {
         do {
             return try await Nimbus.inlineAd(position: headerSubTitle) {
                 video()
             }
-            .fetchResponse()
+            .fetch()
         } catch {
             print("Failed fetching Nimbus bid: \(error)")
             return nil
         }
     }
     
-    func setupBannerView(nimbusBid: NimbusAd?) {
+    func setupBannerView(ad: Ad?) {
         let bannerView = AdManagerBannerView(adSize: AdSizeMediumRectangle)
         bannerView.translatesAutoresizingMaskIntoConstraints = false
         bannerView.adUnitID = googleDynamicPricePlacementId
@@ -53,7 +53,7 @@ class GAMInlineVideoViewController: GAMBaseViewController {
             bannerView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
         ])
         
-        bannerView.loadDynamicPrice(gamRequest: AdManagerRequest(), ad: nimbusBid, mapping: mapping)
+        bannerView.loadDynamicPrice(gamRequest: AdManagerRequest(), ad: ad, mapping: mapping)
     }
 }
 
