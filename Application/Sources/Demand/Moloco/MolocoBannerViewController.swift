@@ -7,40 +7,35 @@
 
 import UIKit
 import NimbusKit
+import NimbusCoreKit
+#if canImport(NimbusSDK) // CocoaPods
+import NimbusSDK
+#elseif canImport(NimbusMolocoKit) // Swift Package Manager
+import NimbusMolocoKit
+#endif
 
 fileprivate var adUnitId = Bundle.main.infoDictionary?["Moloco Banner ID"] as! String
 
 final class MolocoBannerViewController: MolocoViewController {
 
-    private let adManager = NimbusAdManager()
-    private var adController: AdController?
+    private var bannerAd: InlineAd?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        adManager.delegate = self
-        adManager.showAd(
-            request: NimbusRequest.forBannerAd(position: "banner").withMoloco(adUnitId: adUnitId),
-            container: view,
-            refreshInterval: 30,
-            adPresentingViewController: self
-        )
-    }
-}
-
-extension MolocoBannerViewController: NimbusAdManagerDelegate {
-    func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
-        print("didRenderAd")
-        adController = controller
-        adController?.register(delegate: self)
-        nimbusAd = ad
+        Task { await showAd() }
     }
     
-    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
-        print("didCompleteNimbusRequest")
-    }
-    
-    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
-        print("didFailNimbusRequest: \(error.localizedDescription)")
+    func showAd() async {
+        do {
+            bannerAd = try await Nimbus.bannerAd(position: "banner", refreshInterval: 30) {
+                demand {
+                    moloco(adUnitId: adUnitId)
+                }
+            }
+            .show(in: view)
+        } catch {
+            print("Failed to show ad: \(error)")
+        }
     }
 }

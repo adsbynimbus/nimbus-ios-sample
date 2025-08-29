@@ -22,8 +22,10 @@ class VungleViewController: SampleAdViewController {
     private let nativeAdContentView = UIView()
     
     private let adType: VungleSample
-    private var adManager: NimbusAdManager?
-    private var adController: AdController?
+    
+    private var inlineAd: InlineAd?
+    private var rewardedAd: RewardedAd?
+    private var interstitialAd: InterstitialAd?
     
     init(adType: VungleSample, headerSubTitle: String) {
         self.adType = adType
@@ -43,7 +45,14 @@ class VungleViewController: SampleAdViewController {
         }
         
         setupContentView()
-        setupAdRendering()
+        
+        Task {
+            do {
+                try await setupAdRendering()
+            } catch {
+                Nimbus.Log.ad.error("Failed to show Vungle ad: \(error.localizedDescription)")
+            }
+        }
     }
     
     private func setupContentView() {
@@ -58,35 +67,18 @@ class VungleViewController: SampleAdViewController {
         ])
     }
     
-    private func setupAdRendering() {
-        adManager = NimbusAdManager()
-        adManager?.delegate = self
-        
+    private func setupAdRendering() async throws {
         switch adType {
             
         case .vungleBanner:
-            adManager?.showAd(
-                request: NimbusRequest.forBannerAd(position: "TEST_BANNER", format: .banner320x50),
-                container: contentView,
-                refreshInterval: 30,
-                adPresentingViewController: self
-            )
+            inlineAd = try await Nimbus.bannerAd(position: "TEST_BANNER", refreshInterval: 30).show(in: contentView)
         case .vungleMREC:
-            adManager?.showAd(
-                request: NimbusRequest.forBannerAd(position: "TEST_MREC", format: .letterbox),
-                container: contentView,
-                adPresentingViewController: self
-            )
+            inlineAd = try await Nimbus.bannerAd(position: "TEST_MREC", size: .mrec, refreshInterval: 30)
+                .show(in: contentView)
         case .vungleInterstitial:
-            adManager?.showBlockingAd(
-                request: NimbusRequest.forInterstitialAd(position: "TEST_INTERSTITIAL_NOT_SKIPPABLE"),
-                adPresentingViewController: self
-            )
+            interstitialAd = try await Nimbus.interstitialAd(position: "TEST_INTERSTITIAL_NOT_SKIPPABLE").show(in: self)
         case .vungleRewarded:
-            adManager?.showRewardedAd(
-                request: NimbusRequest.forRewardedVideo(position: "TEST_REWARDED"),
-                adPresentingViewController: self
-            )
+            rewardedAd = try await Nimbus.rewardedAd(position: "TEST_REWARDED").show(in: self)
         case .vungleNative:
             nativeAdContentView.translatesAutoresizingMaskIntoConstraints = false
             
@@ -100,28 +92,7 @@ class VungleViewController: SampleAdViewController {
                 nativeAdContentView.heightAnchor.constraint(equalToConstant: 300)
             ])
             
-            adManager?.showAd(
-                request: NimbusRequest.forNativeAd(position: "TEST_NATIVE"),
-                container: nativeAdContentView,
-                adPresentingViewController: self
-            )
+            inlineAd = try await Nimbus.nativeAd(position: "TEST_NATIVE").show(in: nativeAdContentView)
         }
-    }
-}
-
-extension VungleViewController: NimbusAdManagerDelegate {
-    func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
-        print("didRenderAd")
-        adController = controller
-        adController?.register(delegate: self)
-        nimbusAd = ad
-    }
-    
-    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
-        print("didCompleteNimbusRequest")
-    }
-    
-    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
-        print("didFailNimbusRequest: \(error.localizedDescription)")
     }
 }

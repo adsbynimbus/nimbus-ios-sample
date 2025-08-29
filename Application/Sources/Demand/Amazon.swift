@@ -38,7 +38,8 @@ let apsInterstitialSizes: [DTBAdSize] = [
 final class APSViewController: SampleAdViewController {
     
     private let adType: APSSample
-    private var adManager: NimbusAdManager?
+    private var bannerAd: InlineAd?
+    private var interstitialAd: InterstitialAd?
     private lazy var requestDispatchGroup = DispatchGroup()
     
     private var callbacks: [DTBCallback] = []
@@ -56,10 +57,6 @@ final class APSViewController: SampleAdViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    deinit {
-        adController?.destroy()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -67,55 +64,57 @@ final class APSViewController: SampleAdViewController {
     }
 
     private func setupAdRendering() {
-        DispatchQueue.global().async { [weak self] in
-            guard let self else { return }
-            
-            self.adManager = NimbusAdManager()
-            self.adManager?.delegate = self
-            
-            if self.adType == .apsBannerWithRefresh {
-                self.loadAPSBannerAds()
-            } else if self.adType == .apsInterstitialHybrid {
-                self.loadAPSInterstitialAds()
-            }
-            
-            let result = self.requestDispatchGroup.wait(timeout: .now() + 0.5)
-            switch result {
-            case .success:
-                print("APS refreshing banner requests completed successfully")
-            case .timedOut:
-                print("APS refreshing banner requests timed out")
-            }
-            
-            var request: NimbusRequest
-            if self.adType == .apsBannerWithRefresh {
-                request = NimbusRequest.forBannerAd(position: self.adType.description)
-            } else {
-                request = NimbusRequest.forInterstitialAd(position: self.adType.description)
-            }
-            
-            self.callbacks.compactMap { $0.response }.forEach { request.addAPSResponse($0) }
-            
-            if self.adType == .apsBannerWithRefresh {
-                self.adLoaders.forEach { request.addAPSLoader($0) }
-            }
-            
-            DispatchQueue.main.async {
-                if self.adType == .apsBannerWithRefresh {
-                    self.adManager?.showAd(
-                        request: request,
-                        container: self.view,
-                        refreshInterval: 30,
-                        adPresentingViewController: self
-                    )
-                } else {
-                    self.adManager?.showBlockingAd(
-                        request: request,
-                        adPresentingViewController: self
-                    )
-                }
-            }
-        }
+        // TODO: Rework APS for new ad types
+        
+//        DispatchQueue.global().async { [weak self] in
+//            guard let self else { return }
+//            
+//            self.adManager = NimbusAdManager()
+//            self.adManager?.delegate = self
+//            
+//            if self.adType == .apsBannerWithRefresh {
+//                self.loadAPSBannerAds()
+//            } else if self.adType == .apsInterstitialHybrid {
+//                self.loadAPSInterstitialAds()
+//            }
+//            
+//            let result = self.requestDispatchGroup.wait(timeout: .now() + 0.5)
+//            switch result {
+//            case .success:
+//                print("APS refreshing banner requests completed successfully")
+//            case .timedOut:
+//                print("APS refreshing banner requests timed out")
+//            }
+//            
+//            var request: NimbusRequest
+//            if self.adType == .apsBannerWithRefresh {
+//                request = NimbusRequest.forBannerAd(position: self.adType.description)
+//            } else {
+//                request = NimbusRequest.forInterstitialAd(position: self.adType.description)
+//            }
+//            
+//            self.callbacks.compactMap { $0.response }.forEach { request.addAPSResponse($0) }
+//            
+//            if self.adType == .apsBannerWithRefresh {
+//                self.adLoaders.forEach { request.addAPSLoader($0) }
+//            }
+//            
+//            DispatchQueue.main.async {
+//                if self.adType == .apsBannerWithRefresh {
+//                    self.adManager?.showAd(
+//                        request: request,
+//                        container: self.view,
+//                        refreshInterval: 30,
+//                        adPresentingViewController: self
+//                    )
+//                } else {
+//                    self.adManager?.showBlockingAd(
+//                        request: request,
+//                        adPresentingViewController: self
+//                    )
+//                }
+//            }
+//        }
     }
     
     private func loadAPSBannerAds() {
@@ -148,24 +147,6 @@ final class APSViewController: SampleAdViewController {
             self.callbacks.append(callback)
             adLoader.loadAd(callback)
         }
-    }
-}
-
-extension APSViewController: NimbusAdManagerDelegate {
-    
-    func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
-        print("didRenderAd")
-        nimbusAd = ad
-        controller.register(delegate: self)
-        adController = controller
-    }
-    
-    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
-        print("didCompleteNimbusRequest")
-    }
-    
-    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
-        print("didFailNimbusRequest: \(error.localizedDescription)")
     }
 }
 

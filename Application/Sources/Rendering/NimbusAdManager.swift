@@ -5,22 +5,20 @@
 //  Created on 11/11/21.
 //
 
+import NimbusCoreKit
 import NimbusKit
 import UIKit
 import SwiftUI
 
+// TODO: Split out by ad type like Moloco for instance
 final class AdManagerViewController: SampleAdViewController {
     private let contentView = UIView()
-    private var adManager = NimbusAdManager()
+    private var inlineAd: InlineAd?
+    private var interstitialAd: InterstitialAd?
+    private var rewardedAd: RewardedAd?
     
     private let adType: AdManagerAdType
-    private var adController: AdController?
-    private lazy var requestManager = NimbusRequestManager()
     private var hasCompanionAd = false
-    
-    deinit {
-        adController?.destroy()
-    }
     
     init(adType: AdManagerAdType, headerSubTitle: String) {
         self.adType = adType
@@ -35,7 +33,14 @@ final class AdManagerViewController: SampleAdViewController {
         super.viewDidLoad()
         
         setupContentView()
-        setupAdRendering()
+        
+        Task {
+            do {
+                try await setupAdRendering()
+            } catch {
+                print("Couldn't show ad: \(error)")
+            }
+        }
     }
     
     private func setupContentView() {
@@ -49,26 +54,15 @@ final class AdManagerViewController: SampleAdViewController {
         ])
     }
     
-    private func setupAdRendering() {
-        adManager.delegate = self
+    private func setupAdRendering() async throws {
+        
         switch adType {
-                     
         case .manuallyRenderedAd:
-            requestManager.delegate = self
-            requestManager.performRequest(request: NimbusRequest.forBannerAd(position: adType.description))
+            inlineAd = try await Nimbus.bannerAd(position: adType.description).fetch().show(in: contentView)
         case .banner:
-            adManager.showAd(
-                request: NimbusRequest.forBannerAd(position: adType.description),
-                container: contentView,
-                adPresentingViewController: self
-            )
+            inlineAd = try await Nimbus.bannerAd(position: adType.description).show(in: contentView)
         case .bannerWithRefresh:
-            adManager.showAd(
-                request: NimbusRequest.forBannerAd(position: adType.description),
-                container: contentView,
-                refreshInterval: 30,
-                adPresentingViewController: self
-            )
+            inlineAd = try await Nimbus.bannerAd(position: adType.description, refreshInterval: 30).show(in: contentView)
         case .inlineVideo:
             if UIDevice.nimbusIsLandscape {
                 NSLayoutConstraint.activate([
@@ -82,38 +76,24 @@ final class AdManagerViewController: SampleAdViewController {
                 ])
             }
 
-            adManager.showAd(
-                request: NimbusRequest.forVideoAd(position: adType.description),
-                container: contentView,
-                adPresentingViewController: self
-            )
+            inlineAd = try await Nimbus.inlineAd(position: adType.description) {
+                video()
+            }
+            .show(in: contentView)
         case .interstitialHybrid:
-            adManager.showBlockingAd(
-                request: NimbusRequest.forInterstitialAd(position: adType.description),
-                adPresentingViewController: self
-            )
+            interstitialAd = try await Nimbus.interstitialAd(position: adType.description).show(in: self)
         case .interstitialStatic:
-            var request = NimbusRequest.forInterstitialAd(position: adType.description)
-            request.impressions[0].video = nil
-            adManager.showBlockingAd(
-                request: request,
-                closeButtonDelay: 0,
-                adPresentingViewController: self
-            )
+            interstitialAd = try await Nimbus.fullscreenAd(position: adType.description) {
+                banner(size: .interstitial)
+            }
+            .show(in: self, closeButtonDelay: 0)
         case .interstitialVideo, .interstitialVideoWithoutUI:
-            // See setupCustomVideoSettings() where custom video settings is passed
-            var request = NimbusRequest.forInterstitialAd(position: adType.description)
-            request.impressions[0].banner = nil
-            adManager.showBlockingAd(
-                request: request,
-                closeButtonDelay: 0,
-                adPresentingViewController: self
-            )
+            interstitialAd = try await Nimbus.fullscreenAd(position: adType.description) {
+                video()
+            }
+            .show(in: self, closeButtonDelay: 0)
         case .rewardedVideo:
-            adManager.showRewardedAd(
-                request: NimbusRequest.forRewardedVideo(position: adType.description),
-                adPresentingViewController: self
-            )
+            rewardedAd = try await Nimbus.rewardedAd(position: adType.description).show(in: self)
         }
     }
     
@@ -137,27 +117,5 @@ final class AdManagerViewController: SampleAdViewController {
         default:
             break
         }
-    }
-}
-
-// MARK: NimbusAdManagerDelegate
-
-extension AdManagerViewController: NimbusAdManagerDelegate {
-    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
-        print("didCompleteNimbusRequest")
-        nimbusAd = ad
-        if ad.position == AdManagerAdType.manuallyRenderedAd.rawValue {
-            try! Nimbus.load(ad: ad, container: contentView, adPresentingViewController: self, delegate: self)
-        }
-    }
-
-    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
-        print("didFailNimbusRequest: \(error.localizedDescription)")
-    }
-    
-    func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
-        print("didRenderAd")
-        controller.register(delegate: self)
-        adController = controller
     }
 }

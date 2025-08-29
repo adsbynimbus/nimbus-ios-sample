@@ -191,13 +191,13 @@ enum MobileFuseSample: String, NavigationItem {
             MobileFuseBannerViewController(
                 headerTitle: rawValue,
                 position: "MobileFuse_Testing_Display_iOS_Nimbus",
-                format: .banner320x50
+                size: .banner
             )
         case .mobileFuseMREC:
             MobileFuseBannerViewController(
                 headerTitle: rawValue,
                 position: "MobileFuse_Testing_MREC_iOS_Nimbus",
-                format: .letterbox
+                size: .mrec
             )
         case .mobileFuseInterstitial: MobileFuseInterstitialViewController(headerTitle: rawValue)
         case .mobileFuseRewarded: MobileFuseRewardedViewController(headerTitle: rawValue)

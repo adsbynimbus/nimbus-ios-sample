@@ -7,6 +7,8 @@
 
 import DTBiOSSDK
 import NimbusKit
+import NimbusCoreKit
+import NimbusRequestKit
 
 @MainActor
 protocol SettingsEnum {
@@ -118,12 +120,12 @@ extension UserDefaults {
         }
         set {
             set(newValue, forKey: #function)
-            if newValue, var user = NimbusAdManager.user {
+            if newValue, var user = NimbusRequestManager.user {
                 // Same string as Android sample app
                 user.configureGdprConsent(consentString: testGDPRConsentString)
-                NimbusAdManager.user = user
+                NimbusRequestManager.user = user
             } else {
-                NimbusAdManager.user?.extensions?.removeValue(forKey: "consent")
+                NimbusRequestManager.user?.extensions?.removeValue(forKey: "consent")
             }
         }
     }
@@ -184,9 +186,7 @@ extension UserDefaults {
         }
         set {
             set(newValue, forKey: #function)
-            var headers = NimbusAdManager.additionalRequestHeaders ?? [:]
-            headers["Nimbus-Test-No-Fill"] = String(newValue)
-            NimbusAdManager.additionalRequestHeaders = headers
+            NimbusRequestManager.additionalRequestHeaders["Nimbus-Test-No-Fill"] = String(newValue)
         }
     }
     

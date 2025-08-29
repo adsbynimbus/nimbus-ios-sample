@@ -7,6 +7,7 @@
 
 import UIKit
 import NimbusKit
+import NimbusCoreKit
 import MTGSDK
 #if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK
@@ -15,8 +16,7 @@ import NimbusMintegralKit
 #endif
 
 class MintegralNativeViewController: MintegralViewController {
-    var adController: AdController?
-    let adManager = NimbusAdManager()
+    var nativeAd: InlineAd?
     
     let contentView = UIView()
     
@@ -37,28 +37,19 @@ class MintegralNativeViewController: MintegralViewController {
             contentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
         
-        adManager.delegate = self
-        adManager.showAd(
-            request: NimbusRequest.forNativeAd(position: "native").withMintegral(adUnitId: "1541926"),
-            container: contentView,
-            adPresentingViewController: self
-        )
-    }
-}
-
-extension MintegralNativeViewController: NimbusAdManagerDelegate {
-    func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
-        print("didRenderAd")
-        adController = controller
-        adController?.register(delegate: self)
-        nimbusAd = ad
+        Task { await showAd() }
     }
     
-    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
-        print("didCompleteNimbusRequest")
-    }
-    
-    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
-        print("didFailNimbusRequest: \(error.localizedDescription)")
+    func showAd() async {
+        do {
+            nativeAd = try await Nimbus.nativeAd(position: "native") {
+                demand {
+                    mintegral(adUnitId: "1541926")
+                }
+            }
+            .show(in: contentView)
+        } catch {
+            Nimbus.Log.ad.debug("Failed to show ad: \(error)")
+        }
     }
 }

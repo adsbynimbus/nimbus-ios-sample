@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import NimbusCoreKit
 import NimbusKit
 #if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK
@@ -14,34 +15,24 @@ import NimbusMintegralKit
 #endif
 
 class MintegralInterstitialViewController: MintegralViewController {
-    var adController: AdController?
-    let adManager = NimbusAdManager()
+    var interstitialAd: InterstitialAd?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        adManager.delegate = self
-        adManager.showBlockingAd(
-            request: .forInterstitialAd(position: "interstitial").withMintegral(adUnitId: "1541952", placementId: nil),
-            closeButtonDelay: 0,
-            adPresentingViewController: self
-        )
-    }
-}
-
-extension MintegralInterstitialViewController: NimbusAdManagerDelegate {
-    func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
-        print("didRenderAd")
-        adController = controller
-        adController?.register(delegate: self)
-        nimbusAd = ad
+        Task { await showAd() }
     }
     
-    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
-        print("didCompleteNimbusRequest")
-    }
-    
-    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
-        print("didFailNimbusRequest: \(error.localizedDescription)")
+    func showAd() async {
+        do {
+            self.interstitialAd = try await Nimbus.interstitialAd(position: "interstitial") {
+                demand {
+                    mintegral(adUnitId: "1541952")
+                }
+            }
+            .show(in: self, closeButtonDelay: 0)
+        } catch {
+            Nimbus.Log.ad.error("Failed to show interstitial ad: \(error.localizedDescription)")
+        }
     }
 }

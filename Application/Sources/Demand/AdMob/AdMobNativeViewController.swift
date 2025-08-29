@@ -7,6 +7,7 @@
 
 import UIKit
 import NimbusKit
+import NimbusCoreKit
 import GoogleMobileAds
 #if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK
@@ -17,8 +18,9 @@ import NimbusAdMobKit
 let nativePlacementId = Bundle.main.infoDictionary?["AdMob Native ID"] as? String ?? ""
 
 class AdMobNativeViewController: AdMobViewController {
-    var adController: AdController?
-    let adManager = NimbusAdManager()
+    
+    var nativeAd: InlineAd?
+    
     var adView: AdMobNativeAdView!
     let contentView = UIView()
     
@@ -43,29 +45,13 @@ class AdMobNativeViewController: AdMobViewController {
         /// Shows how to pass AdMob native ad options, like changing the adChoices position.
         let nativeOptions = NimbusAdMobNativeAdOptions(preferredAdChoicesPosition: .topLeftCorner)
         
-        adManager.delegate = self
-        adManager.showAd(
-            request: .forNativeAd(position: "position")
-                .withAdMobNative(adUnitId: nativePlacementId, nativeAdOptions: nativeOptions),
-            container: contentView,
-            adPresentingViewController: self
-        )
-    }
-}
-
-extension AdMobNativeViewController: NimbusAdManagerDelegate {
-    func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
-        print("didRenderAd")
-        adController = controller
-        adController?.register(delegate: self)
-        nimbusAd = ad
-    }
-    
-    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
-        print("didCompleteNimbusRequest")
-    }
-    
-    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
-        print("didFailNimbusRequest: \(error.localizedDescription)")
+        Task {
+            self.nativeAd = try await Nimbus.nativeAd(position: "native") {
+                demand {
+                    admob(nativeAdUnitId: nativePlacementId, options: nativeOptions)
+                }
+            }
+            .show(in: contentView)
+        }
     }
 }

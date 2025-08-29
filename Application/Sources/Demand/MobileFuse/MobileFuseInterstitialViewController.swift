@@ -8,7 +8,7 @@
 
 import UIKit
 import NimbusKit
-
+import NimbusCoreKit
 #if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK
 #elseif canImport(NimbusMobileFuseKit) // Swift Package Manager
@@ -16,9 +16,7 @@ import NimbusMobileFuseKit
 #endif
 
 final class MobileFuseInterstitialViewController: MobileFuseViewController {
-    
-    private let adManager = NimbusAdManager()
-    private var adController: AdController?
+    private var interstitialAd: InterstitialAd?
     
     init(headerTitle: String) {
         super.init(headerTitle: headerTitle, headerSubTitle: "")
@@ -31,31 +29,16 @@ final class MobileFuseInterstitialViewController: MobileFuseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var request = NimbusRequest.forInterstitialAd(position: "MobileFuse_Testing_INSTL_iOS_Nimbus")
-        request.impressions[0].video = nil
-        
-        adManager.delegate = self
-        adManager.showBlockingAd(
-            request: request,
-            adPresentingViewController: self
-        )
+        Task { await showAd() }
     }
     
-}
-
-extension MobileFuseInterstitialViewController: NimbusAdManagerDelegate {
-    func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
-        print("didRenderAd")
-        adController = controller
-        adController?.register(delegate: self)
-        nimbusAd = ad
+    func showAd() async {
+        do {
+            self.interstitialAd = try await Nimbus.interstitialAd(position: "MobileFuse_Testing_INSTL_iOS_Nimbus")
+                .show(in: self, closeButtonDelay: 0)
+        } catch {
+            Nimbus.Log.ad.error("Failed to show interstitial ad: \(error.localizedDescription)")
+        }
     }
     
-    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
-        print("didCompleteNimbusRequest")
-    }
-    
-    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
-        print("didFailNimbusRequest: \(error.localizedDescription)")
-    }
 }

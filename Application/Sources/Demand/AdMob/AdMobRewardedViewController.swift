@@ -7,6 +7,7 @@
 
 import UIKit
 import NimbusKit
+import NimbusCoreKit
 #if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK
 #elseif canImport(NimbusAdMobKit) // Swift Package Manager
@@ -17,33 +18,17 @@ private let rewardedPlacementId = Bundle.main.infoDictionary?["AdMob Rewarded ID
 
 class AdMobRewardedViewController: AdMobViewController {
     var adController: AdController?
-    let adManager = NimbusAdManager()
+    var rewardedAd: RewardedAd?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        adManager.delegate = self
-        adManager.showRewardedAd(
-            request: .forRewardedVideo(position: "rewarded")
-                .withAdMobRewarded(adUnitId: rewardedPlacementId),
-            adPresentingViewController: self
-        )
-    }
-}
-
-extension AdMobRewardedViewController: NimbusAdManagerDelegate {
-    func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
-        print("didRenderAd")
-        adController = controller
-        adController?.register(delegate: self)
-        nimbusAd = ad
-    }
-    
-    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
-        print("didCompleteNimbusRequest")
-    }
-    
-    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
-        print("didFailNimbusRequest: \(error.localizedDescription)")
+        Task {
+            self.rewardedAd = try await Nimbus.rewardedAd(position: "rewarded") {
+                demand {
+                    admob(rewardedAdUnitId: rewardedPlacementId)
+                }
+            }.show(in: self)
+        }
     }
 }
