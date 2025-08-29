@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import NimbusCoreKit
+import NimbusKit
 #if canImport(NimbusGAMKit)                    // Swift Package Manager
 import NimbusGAMKit
 #elseif canImport(NimbusSDK)                   // CocoaPods
@@ -14,19 +16,28 @@ import NimbusSDK
 import GoogleMobileAds
 
 class GAMInterstitialViewController: GAMBaseViewController {
-    private let requestManager = NimbusRequestManager()
     private var interstitialAd: AdManagerInterstitialAd?
     private let gamRequest = AdManagerRequest()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        requestManager.delegate = self
-        requestManager.performRequest(request: NimbusRequest.forInterstitialAd(position: headerSubTitle))
+        Task {
+            loadInterstitial(nimbusBid: await fetchNimbusBid())
+        }
     }
     
-    func loadInterstitial(nimbusAd: NimbusAd? = nil) {
-        nimbusAd?.applyDynamicPrice(into: gamRequest, mapping: mapping)
+    func fetchNimbusBid() async -> NimbusAd? {
+        do {
+            return try await Nimbus.interstitialAd(position: headerSubTitle).fetchResponse()
+        } catch {
+            print("Failed fetching Nimbus bid: \(error)")
+            return nil
+        }
+    }
+    
+    func loadInterstitial(nimbusBid: NimbusAd? = nil) {
+        nimbusBid?.applyDynamicPrice(into: gamRequest, mapping: mapping)
         
         AdManagerInterstitialAd.load(
             with: googleDynamicPricePlacementId,
@@ -43,7 +54,7 @@ class GAMInterstitialViewController: GAMBaseViewController {
             interstitialAd.fullScreenContentDelegate = self
             interstitialAd.appEventDelegate = self
             
-            interstitialAd.applyDynamicPrice(ad: nimbusAd)
+            interstitialAd.applyDynamicPrice(ad: nimbusBid)
             interstitialAd.present(from: self)
         }
     }
@@ -51,9 +62,8 @@ class GAMInterstitialViewController: GAMBaseViewController {
 
 // MARK: - GADAppEventDelegate
 
-extension GAMInterstitialViewController: AppEventDelegate {
-    func adView(_ interstitialAd: InterstitialAd, didReceiveAppEvent name: String, with info: String?) {
-        
+extension GAMInterstitialViewController: @preconcurrency AppEventDelegate {
+    func adView(_ interstitialAd: GoogleMobileAds.InterstitialAd, didReceiveAppEvent name: String, with info: String?) {
         interstitialAd.handleEventForNimbus(name: name, info: info)
     }
 }
@@ -84,21 +94,4 @@ extension GAMInterstitialViewController: FullScreenContentDelegate {
     func adDidDismissFullScreenContent(_ ad: FullScreenPresentingAd) {
         print("adDidDismissFullScreenContent")
     }
-}
-
-// MARK: - NimbusRequestManagerDelegate
-
-extension GAMInterstitialViewController: NimbusRequestManagerDelegate {
-    func didCompleteNimbusRequest(request: NimbusRequestKit.NimbusRequest, ad: NimbusCoreKit.NimbusAd) {
-        print("didCompleteNimbusRequest")
-        
-        loadInterstitial(nimbusAd: ad)
-    }
-    
-    func didFailNimbusRequest(request: NimbusRequestKit.NimbusRequest, error: NimbusCoreKit.NimbusError) {
-        print("didFailNimbusRequest: \(error.localizedDescription)")
-        
-        loadInterstitial()
-    }
-    
 }

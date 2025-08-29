@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import NimbusCoreKit
+import NimbusKit
 #if canImport(NimbusGAMKit)                    // Swift Package Manager
 import NimbusGAMKit
 #elseif canImport(NimbusSDK)                   // CocoaPods
@@ -16,7 +18,6 @@ import GoogleMobileAds
 class GAMAdLoaderBannerViewController: GAMBaseViewController {
     private static let refreshInterval: TimeInterval = 30
     
-    private let requestManager = NimbusRequestManager()
     private var adLoader: AdLoader?
     private weak var bannerView: AdManagerBannerView?
     
@@ -33,9 +34,7 @@ class GAMAdLoaderBannerViewController: GAMBaseViewController {
             setupRefreshTimer()
         }
         
-        requestManager.delegate = self
-        
-        fetchNimbusBid()
+        fetchAndLoad()
     }
     
     func setupNotifications() {
@@ -53,8 +52,13 @@ class GAMAdLoaderBannerViewController: GAMBaseViewController {
         )
     }
     
-    func fetchNimbusBid() {
-        requestManager.performRequest(request: NimbusRequest.forBannerAd(position: headerSubTitle))
+    func fetchNimbusBid() async -> NimbusAd? {
+        do {
+            return try await Nimbus.bannerAd(position: headerSubTitle).fetchResponse()
+        } catch {
+            print("Failed fetching Nimbus bid: \(error)")
+            return nil
+        }
     }
     
     func load(ad: NimbusAd? = nil) {
@@ -68,12 +72,16 @@ class GAMAdLoaderBannerViewController: GAMBaseViewController {
         adLoader?.loadDynamicPrice(gamRequest: AdManagerRequest(), ad: ad, mapping: mapping)
     }
     
+    func fetchAndLoad() {
+        Task { load(ad: await fetchNimbusBid()) }
+    }
+    
     // MARK: - Refreshing Banner Logic
     
     func setupRefreshTimer() {
         refreshTimer?.invalidate() // just to make sure there's no outstanding timer
         refreshTimer = Timer.scheduledTimer(withTimeInterval: Self.refreshInterval, repeats: true) { [weak self] _ in
-            self?.fetchNimbusBid()
+            self?.fetchAndLoad()
         }
         print("\(Self.self) created refresh timer")
     }

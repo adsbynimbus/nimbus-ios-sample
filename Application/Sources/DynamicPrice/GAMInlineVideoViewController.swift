@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import NimbusCoreKit
+import NimbusKit
 #if canImport(NimbusGAMKit)                    // Swift Package Manager
 import NimbusGAMKit
 #elseif canImport(NimbusSDK)                   // CocoaPods
@@ -14,20 +16,30 @@ import NimbusSDK
 import GoogleMobileAds
 
 class GAMInlineVideoViewController: GAMBaseViewController {
-    private let requestManager = NimbusRequestManager()
-    private let gamRequest = AdManagerRequest()
-    private let bannerView = AdManagerBannerView(adSize: AdSizeMediumRectangle)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupBannerView()
-        
-        requestManager.delegate = self
-        requestManager.performRequest(request: NimbusRequest.forVideoAd(position: headerSubTitle))
+        Task {
+            let bid = await fetchNimbusBid()
+            setupBannerView(nimbusBid: bid)
+        }
     }
     
-    func setupBannerView() {
+    func fetchNimbusBid() async -> NimbusAd? {
+        do {
+            return try await Nimbus.inlineAd(position: headerSubTitle) {
+                video()
+            }
+            .fetchResponse()
+        } catch {
+            print("Failed fetching Nimbus bid: \(error)")
+            return nil
+        }
+    }
+    
+    func setupBannerView(nimbusBid: NimbusAd?) {
+        let bannerView = AdManagerBannerView(adSize: AdSizeMediumRectangle)
         bannerView.translatesAutoresizingMaskIntoConstraints = false
         bannerView.adUnitID = googleDynamicPricePlacementId
         bannerView.delegate = self
@@ -40,15 +52,17 @@ class GAMInlineVideoViewController: GAMBaseViewController {
             bannerView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             bannerView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
         ])
+        
+        bannerView.loadDynamicPrice(gamRequest: AdManagerRequest(), ad: nimbusBid, mapping: mapping)
     }
 }
 
 // MARK: - GADAppEventDelegate
 
-extension GAMInlineVideoViewController: AppEventDelegate {
+extension GAMInlineVideoViewController: @preconcurrency AppEventDelegate {
     func adView(_ banner: BannerView, didReceiveAppEvent name: String, with info: String?) {
         print("adView:didReceiveAppEvent")
-        bannerView.handleEventForNimbus(name: name, info: info)
+        banner.handleEventForNimbus(name: name, info: info)
     }
 }
 
@@ -81,20 +95,5 @@ extension GAMInlineVideoViewController: BannerViewDelegate {
     
     func bannerViewDidDismissScreen(_ bannerView: BannerView) {
         print("bannerViewDidDismissScreen")
-    }
-}
-
-// MARK: - NimbusRequestManagerDelegate
-
-extension GAMInlineVideoViewController: NimbusRequestManagerDelegate {
-    func didCompleteNimbusRequest(request: NimbusRequestKit.NimbusRequest, ad: NimbusCoreKit.NimbusAd) {
-        print("didCompleteNimbusRequest")
-        
-        bannerView.loadDynamicPrice(gamRequest: AdManagerRequest(), ad: ad, mapping: mapping)
-    }
-    
-    func didFailNimbusRequest(request: NimbusRequestKit.NimbusRequest, error: NimbusCoreKit.NimbusError) {
-        print("didFailNimbusRequest: \(error.localizedDescription)")
-        bannerView.loadDynamicPrice(gamRequest: AdManagerRequest(), mapping: mapping)
     }
 }
