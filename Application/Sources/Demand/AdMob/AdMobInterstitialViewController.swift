@@ -22,7 +22,11 @@ class AdMobInterstitialViewController: AdMobViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Task {
+        Task { await showAd() }
+    }
+    
+    func showAd() async {
+        do {
             self.interstitialAd = try await Nimbus.fullscreenAd(position: "interstitial") {
                 banner(size: .interstitial)
                 
@@ -31,6 +35,8 @@ class AdMobInterstitialViewController: AdMobViewController {
                 }
             }
             .show(in: self)
+        } catch {
+            print("Failed to show ad: \(error)")
         }
     }
 }

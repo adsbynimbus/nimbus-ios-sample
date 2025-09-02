@@ -58,7 +58,13 @@ final class AdManagerViewController: SampleAdViewController {
         
         switch adType {
         case .manuallyRenderedAd:
-            inlineAd = try await Nimbus.bannerAd(position: adType.description).fetch().show(in: contentView)
+            inlineAd = Nimbus.bannerAd(position: adType.description)
+            
+            // Retrieve a bid
+            try await inlineAd?.fetch()
+            
+            // Show the ad
+            try await inlineAd?.show(in: contentView)
         case .banner:
             inlineAd = try await Nimbus.bannerAd(position: adType.description).show(in: contentView)
         case .bannerWithRefresh:
@@ -76,10 +82,7 @@ final class AdManagerViewController: SampleAdViewController {
                 ])
             }
 
-            inlineAd = try await Nimbus.inlineAd(position: adType.description) {
-                video()
-            }
-            .show(in: contentView)
+            inlineAd = try await Nimbus.videoAd(position: adType.description).show(in: contentView)
         case .interstitialHybrid:
             interstitialAd = try await Nimbus.interstitialAd(position: adType.description).show(in: self)
         case .interstitialStatic:

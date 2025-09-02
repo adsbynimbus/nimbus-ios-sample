@@ -22,13 +22,19 @@ class AdMobBannerViewController: AdMobViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Task {
+        Task { await showAd() }
+    }
+    
+    func showAd() async {
+        do {
             self.bannerAd = try await Nimbus.bannerAd(position: "banner", refreshInterval: 30) {
                 demand {
                     admob(bannerAdUnitId: bannerPlacementId)
                 }
             }
             .show(in: view)
+        } catch {
+            print("Failed to show ad: \(error)")
         }
     }
 }

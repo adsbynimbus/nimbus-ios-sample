@@ -98,7 +98,7 @@ class GAMAdLoaderBannerViewController: GAMBaseViewController {
 
 // MARK: - GADAdLoaderDelegate
 
-extension GAMAdLoaderBannerViewController: AdLoaderDelegate, AdManagerBannerAdLoaderDelegate {
+extension GAMAdLoaderBannerViewController: @preconcurrency AdLoaderDelegate, @preconcurrency AdManagerBannerAdLoaderDelegate {
     func validBannerSizes(for adLoader: AdLoader) -> [NSValue] {
         [nsValue(for: AdSizeBanner)]
     }
@@ -133,7 +133,7 @@ extension GAMAdLoaderBannerViewController: AdLoaderDelegate, AdManagerBannerAdLo
 
 // MARK: - GADAppEventDelegate
 
-extension GAMAdLoaderBannerViewController: AppEventDelegate {
+extension GAMAdLoaderBannerViewController: @preconcurrency AppEventDelegate {
     func adView(_ banner: BannerView, didReceiveAppEvent name: String, with info: String?) {
         print("adView:didReceiveAppEvent")
         bannerView?.handleEventForNimbus(name: name, info: info)

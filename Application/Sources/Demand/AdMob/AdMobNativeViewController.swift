@@ -42,16 +42,22 @@ class AdMobNativeViewController: AdMobViewController {
             contentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
         
-        /// Shows how to pass AdMob native ad options, like changing the adChoices position.
-        let nativeOptions = NimbusAdMobNativeAdOptions(preferredAdChoicesPosition: .topLeftCorner)
-        
-        Task {
+        Task { await showAd() }
+    }
+    
+    func showAd() async {
+        do {
+            /// Shows how to pass AdMob native ad options, like changing the adChoices position.
+            let nativeOptions = NimbusAdMobNativeAdOptions(preferredAdChoicesPosition: .topLeftCorner)
+            
             self.nativeAd = try await Nimbus.nativeAd(position: "native") {
                 demand {
                     admob(nativeAdUnitId: nativePlacementId, options: nativeOptions)
                 }
             }
             .show(in: contentView)
+        } catch {
+            print("Failed to show ad: \(error)")
         }
     }
 }

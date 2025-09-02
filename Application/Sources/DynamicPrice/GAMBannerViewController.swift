@@ -83,7 +83,9 @@ class GAMBannerViewController: GAMBaseViewController {
     }
     
     func load() async {
-        bannerView.loadDynamicPrice(gamRequest: AdManagerRequest(), ad: await fetchNimbusBid(), mapping: mapping)
+        let request = AdManagerRequest()
+        let nimbusAd = await fetchNimbusBid()
+        bannerView.loadDynamicPrice(gamRequest: request, ad: nimbusAd, mapping: mapping)
     }
     
     // MARK: - Refreshing Banner Logic

@@ -23,12 +23,18 @@ class AdMobRewardedViewController: AdMobViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Task {
+        Task { await showAd() }
+    }
+    
+    func showAd() async {
+        do {
             self.rewardedAd = try await Nimbus.rewardedAd(position: "rewarded") {
                 demand {
                     admob(rewardedAdUnitId: rewardedPlacementId)
                 }
             }.show(in: self)
+        } catch {
+            print("Failed to show ad: \(error)")
         }
     }
 }

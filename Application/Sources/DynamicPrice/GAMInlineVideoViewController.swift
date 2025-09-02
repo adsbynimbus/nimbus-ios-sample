@@ -28,10 +28,7 @@ class GAMInlineVideoViewController: GAMBaseViewController {
     
     func fetchNimbusBid() async -> Ad? {
         do {
-            return try await Nimbus.inlineAd(position: headerSubTitle) {
-                video()
-            }
-            .fetch()
+            return try await Nimbus.videoAd(position: headerSubTitle).fetch()
         } catch {
             print("Failed fetching Nimbus bid: \(error)")
             return nil
