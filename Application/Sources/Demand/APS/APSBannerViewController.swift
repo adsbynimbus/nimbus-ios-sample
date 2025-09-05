@@ -32,11 +32,11 @@ class APSBannerViewController: SampleAdViewController {
     
     func showAd() async {
         do {
-            let tokenData = await loadAPSBannerAds()
+            let customTargeting = await loadAPSBannerAds()
             
             self.bannerAd = try await Nimbus.bannerAd(position: "banner", refreshInterval: 30) {
                 demand {
-                    aps(tokenData: tokenData, refreshWith: adLoaders)
+                    aps(customTargeting: customTargeting, refreshWith: adLoaders)
                 }
             }
             .show(in: view)

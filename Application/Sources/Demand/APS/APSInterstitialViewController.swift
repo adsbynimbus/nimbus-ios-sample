@@ -33,11 +33,11 @@ class APSInterstitialViewController: SampleAdViewController {
     
     func showAd() async {
         do {
-            let tokenData = await loadAPSInterstitialAds()
+            let customTargeting = await loadAPSInterstitialAds()
             
             self.interstitialAd = try await Nimbus.interstitialAd(position: "interstitial") {
                 demand {
-                    aps(tokenData: tokenData)
+                    aps(customTargeting: customTargeting)
                 }
             }
             .show(in: self)
