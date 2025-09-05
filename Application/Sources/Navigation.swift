@@ -225,10 +225,15 @@ enum MobileFuseSample: String, NavigationItem {
 }
 
 enum APSSample: String, NavigationItem {
-    case apsBannerWithRefresh   = "APS Banner With Refresh"
-    case apsInterstitialHybrid  = "APS Interstitial Hybrid"
+    case apsBannerWithRefresh   = "Refreshing Banner"
+    case apsInterstitialHybrid  = "Interstitial Hybrid"
     func destinationController(parent: String) -> UIViewController {
-        APSViewController(adType: self, headerSubTitle: parent)
+        return switch self {
+        case .apsBannerWithRefresh:
+            APSBannerViewController(headerTitle: "APS", headerSubTitle: rawValue, enabledExtension: nil)
+        case .apsInterstitialHybrid:
+            APSInterstitialViewController(headerTitle: "APS", headerSubTitle: rawValue, enabledExtension: nil)
+        }
     }
 }
 
