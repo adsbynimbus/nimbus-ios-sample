@@ -36,7 +36,7 @@ class APSBannerViewController: SampleAdViewController {
             
             self.bannerAd = try await Nimbus.bannerAd(position: "banner", refreshInterval: 30) {
                 demand {
-                    aps(tokenData: tokenData, adLoaders: adLoaders)
+                    aps(tokenData: tokenData, refreshWith: adLoaders)
                 }
             }
             .show(in: view)

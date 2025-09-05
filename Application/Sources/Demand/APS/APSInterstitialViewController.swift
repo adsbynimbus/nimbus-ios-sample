@@ -37,7 +37,7 @@ class APSInterstitialViewController: SampleAdViewController {
             
             self.interstitialAd = try await Nimbus.interstitialAd(position: "interstitial") {
                 demand {
-                    aps(tokenData: tokenData, adLoaders: adLoaders)
+                    aps(tokenData: tokenData)
                 }
             }
             .show(in: self)
