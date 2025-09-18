@@ -9,12 +9,12 @@
 import NimbusRenderKit
 import SwiftUI
 import UIKit
+import NimbusKit
 
 class SampleAdViewController : DemoViewController {
     
     let screenLogger = SampleAppLogger()
     weak var loggerView: UIView?
-    var nimbusAd: NimbusAd? = nil
     
     private let enabledState = ExtensionHelper.enabledState
     
@@ -74,9 +74,9 @@ class SampleAdViewController : DemoViewController {
         navigationItem.rightBarButtonItems = rightItems
     }
     
-    func didReceiveNimbusEvent(event: NimbusEvent) {
-        if let ad = nimbusAd, event == .loaded {
-            screenLogger.logRender(ad)
+    func didReceiveNimbusEvent(event: NimbusEvent, ad: Ad? = nil) {
+        if let response = ad?.response, event == .loaded {
+            screenLogger.logRender(response)
         }
         screenLogger.logEvent(event)
     }

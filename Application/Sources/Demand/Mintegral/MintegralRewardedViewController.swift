@@ -30,7 +30,7 @@ class MintegralRewardedViewController: MintegralViewController {
                 }
             }
             .onEvent { [weak self] event in
-                self?.didReceiveNimbusEvent(event: event)
+                self?.didReceiveNimbusEvent(event: event, ad: self?.rewardedAd)
             }
             .onError { [weak self] error in
                 self?.didReceiveNimbusError(error: error)

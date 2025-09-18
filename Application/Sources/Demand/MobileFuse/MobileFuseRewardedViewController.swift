@@ -36,7 +36,7 @@ final class MobileFuseRewardedViewController: MobileFuseViewController {
         do {
             rewardedAd = try await Nimbus.rewardedAd(position: "MobileFuse_Testing_Rewarded_iOS_Nimbus")
                 .onEvent { [weak self] event in
-                    self?.didReceiveNimbusEvent(event: event)
+                    self?.didReceiveNimbusEvent(event: event, ad: self?.rewardedAd)
                 }
                 .onError { [weak self] error in
                     self?.didReceiveNimbusError(error: error)

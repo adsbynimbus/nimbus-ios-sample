@@ -32,7 +32,7 @@ final class InlineVideoViewController: SampleAdViewController {
         do {
             videoAd = try await Nimbus.videoAd(position: "video")
                 .onEvent { [weak self] event in
-                    self?.didReceiveNimbusEvent(event: event)
+                    self?.didReceiveNimbusEvent(event: event, ad: self?.videoAd)
                 }
                 .onError { [weak self] error in
                     self?.didReceiveNimbusError(error: error)

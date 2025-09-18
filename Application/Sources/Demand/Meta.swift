@@ -32,6 +32,7 @@ final class FANViewController: SampleAdViewController, AdControllerDelegate {
     private let adType: MetaSample
     private var dimensions: NimbusAdDimensions?
     private var adController: AdController?
+    var nimbusAd: NimbusAd?
     
     init(adType: MetaSample, headerSubTitle: String) {
         self.adType = adType

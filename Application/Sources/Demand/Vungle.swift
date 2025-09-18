@@ -94,7 +94,7 @@ class VungleViewController: SampleAdViewController {
             
             inlineAd = try await Nimbus.nativeAd(position: "TEST_NATIVE")
                 .onEvent { [weak self] event in
-                    self?.didReceiveNimbusEvent(event: event)
+                    self?.didReceiveNimbusEvent(event: event, ad: self?.inlineAd)
                 }
                 .onError { [weak self] error in
                     self?.didReceiveNimbusError(error: error)

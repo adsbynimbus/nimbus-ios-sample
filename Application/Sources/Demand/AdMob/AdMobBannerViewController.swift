@@ -33,7 +33,7 @@ class AdMobBannerViewController: AdMobViewController {
                 }
             }
             .onEvent { [weak self] event in
-                self?.didReceiveNimbusEvent(event: event)
+                self?.didReceiveNimbusEvent(event: event, ad: self?.bannerAd)
             }
             .onError { [weak self] error in
                 self?.didReceiveNimbusError(error: error)

@@ -56,7 +56,7 @@ class AdMobNativeViewController: AdMobViewController {
                 }
             }
             .onEvent { [weak self] event in
-                self?.didReceiveNimbusEvent(event: event)
+                self?.didReceiveNimbusEvent(event: event, ad: self?.nativeAd)
             }
             .onError { [weak self] error in
                 self?.didReceiveNimbusError(error: error)

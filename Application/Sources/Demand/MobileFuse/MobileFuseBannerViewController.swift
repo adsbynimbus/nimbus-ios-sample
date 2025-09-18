@@ -38,7 +38,7 @@ final class MobileFuseBannerViewController: MobileFuseViewController {
         Task {
             self.bannerAd = try await Nimbus.bannerAd(position: position, size: size, refreshInterval: 30)
                 .onEvent { [weak self] event in
-                    self?.didReceiveNimbusEvent(event: event)
+                    self?.didReceiveNimbusEvent(event: event, ad: self?.bannerAd)
                 }
                 .onError { [weak self] error in
                     self?.didReceiveNimbusError(error: error)

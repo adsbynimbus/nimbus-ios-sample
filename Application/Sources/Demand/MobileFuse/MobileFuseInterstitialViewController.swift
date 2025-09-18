@@ -36,7 +36,7 @@ final class MobileFuseInterstitialViewController: MobileFuseViewController {
         do {
             self.interstitialAd = try await Nimbus.interstitialAd(position: "MobileFuse_Testing_INSTL_iOS_Nimbus")
                 .onEvent { [weak self] event in
-                    self?.didReceiveNimbusEvent(event: event)
+                    self?.didReceiveNimbusEvent(event: event, ad: self?.interstitialAd)
                 }
                 .onError { [weak self] error in
                     self?.didReceiveNimbusError(error: error)

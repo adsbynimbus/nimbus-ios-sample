@@ -32,7 +32,7 @@ final class BannerViewController: SampleAdViewController {
         do {
             bannerAd = try await Nimbus.bannerAd(position: "banner", refreshInterval: 30)
                 .onEvent { [weak self] event in
-                    self?.didReceiveNimbusEvent(event: event)
+                    self?.didReceiveNimbusEvent(event: event, ad: self?.bannerAd)
                 }
                 .onError { [weak self] error in
                     self?.didReceiveNimbusError(error: error)
