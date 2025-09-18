@@ -47,6 +47,12 @@ class MintegralNativeViewController: MintegralViewController {
                     mintegral(adUnitId: "1541926")
                 }
             }
+            .onEvent { [weak self] event in
+                self?.didReceiveNimbusEvent(event: event)
+            }
+            .onError { [weak self] error in
+                self?.didReceiveNimbusError(error: error)
+            }
             .show(in: contentView)
         } catch {
             Nimbus.Log.ad.debug("Failed to show ad: \(error)")

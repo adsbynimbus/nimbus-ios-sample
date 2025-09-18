@@ -39,7 +39,14 @@ final class UnityViewController: SampleAdViewController {
     
     func showAd() async {
         do {
-            rewardedAd = try await Nimbus.rewardedAd(position: adType.description).show(in: self)
+            rewardedAd = try await Nimbus.rewardedAd(position: adType.description)
+                .onEvent { [weak self] event in
+                    self?.didReceiveNimbusEvent(event: event)
+                }
+                .onError { [weak self] error in
+                    self?.didReceiveNimbusError(error: error)
+                }
+                .show(in: self)
         } catch {
             print("Failed to show ad: \(error)")
         }

@@ -30,6 +30,12 @@ class MintegralInterstitialViewController: MintegralViewController {
                     mintegral(adUnitId: "1541952")
                 }
             }
+            .onEvent { [weak self] event in
+                self?.didReceiveNimbusEvent(event: event)
+            }
+            .onError { [weak self] error in
+                self?.didReceiveNimbusError(error: error)
+            }
             .show(in: self, closeButtonDelay: 0)
         } catch {
             Nimbus.Log.ad.error("Failed to show interstitial ad: \(error.localizedDescription)")

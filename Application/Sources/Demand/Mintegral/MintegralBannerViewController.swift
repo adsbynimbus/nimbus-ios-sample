@@ -29,7 +29,14 @@ class MintegralBannerViewController: MintegralViewController {
                 demand {
                     mintegral(adUnitId: "1541918")
                 }
-            }.show(in: view)
+            }
+            .onEvent { [weak self] event in
+                self?.didReceiveNimbusEvent(event: event)
+            }
+            .onError { [weak self] error in
+                self?.didReceiveNimbusError(error: error)
+            }
+            .show(in: view)
         } catch {
             print("Couldn't show ad: \(error)")
         }

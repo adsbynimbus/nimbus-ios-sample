@@ -51,6 +51,12 @@ final class MolocoNativeViewController: MolocoViewController {
                     moloco(adUnitId: adUnitId)
                 }
             }
+            .onEvent { [weak self] event in
+                self?.didReceiveNimbusEvent(event: event)
+            }
+            .onError { [weak self] error in
+                self?.didReceiveNimbusError(error: error)
+            }
             .show(in: contentView)
         } catch {
             print("Failed to show ad: \(error)")

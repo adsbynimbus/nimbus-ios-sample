@@ -34,6 +34,12 @@ class AdMobInterstitialViewController: AdMobViewController {
                     admob(interstitialAdUnitId: interstitialPlacementId)
                 }
             }
+            .onEvent { [weak self] event in
+                self?.didReceiveNimbusEvent(event: event)
+            }
+            .onError { [weak self] error in
+                self?.didReceiveNimbusError(error: error)
+            }
             .show(in: self)
         } catch {
             print("Failed to show ad: \(error)")

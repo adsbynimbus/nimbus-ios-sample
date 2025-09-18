@@ -35,6 +35,12 @@ final class MobileFuseRewardedViewController: MobileFuseViewController {
     func showAd() async {
         do {
             rewardedAd = try await Nimbus.rewardedAd(position: "MobileFuse_Testing_Rewarded_iOS_Nimbus")
+                .onEvent { [weak self] event in
+                    self?.didReceiveNimbusEvent(event: event)
+                }
+                .onError { [weak self] error in
+                    self?.didReceiveNimbusError(error: error)
+                }
                 .show(in: self)
         } catch {
             Nimbus.Log.ad.error("Failed to show rewarded ad: \(error.localizedDescription)")

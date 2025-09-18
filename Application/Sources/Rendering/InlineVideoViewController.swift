@@ -31,11 +31,11 @@ final class InlineVideoViewController: SampleAdViewController {
     func showAd() async {
         do {
             videoAd = try await Nimbus.videoAd(position: "video")
-                .onEvent { event in
-                    print("Received Nimbus event: \(event)")
+                .onEvent { [weak self] event in
+                    self?.didReceiveNimbusEvent(event: event)
                 }
-                .onError { error in
-                    print("Received Nimbus error: \(error)")
+                .onError { [weak self] error in
+                    self?.didReceiveNimbusError(error: error)
                 }
                 .show(in: contentView)
         } catch {
