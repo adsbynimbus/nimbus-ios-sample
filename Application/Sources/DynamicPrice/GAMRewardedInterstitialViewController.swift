@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import NimbusKit
 #if canImport(NimbusGAMKit)                    // Swift Package Manager
 import NimbusGAMKit
 #elseif canImport(NimbusSDK)                   // CocoaPods
@@ -14,7 +15,6 @@ import NimbusSDK
 import GoogleMobileAds
 
 class GAMRewardedInterstitialViewController: GAMBaseViewController {
-    private let requestManager = NimbusRequestManager()
     
     private let gamRequest = AdManagerRequest()
     private var rewardedInterstitialAd: RewardedInterstitialAd?
@@ -22,8 +22,37 @@ class GAMRewardedInterstitialViewController: GAMBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        requestManager.delegate = self
-        requestManager.performRequest(request: NimbusRequest.forRewardedVideo(position: headerSubTitle))
+        Task { loadRewarded(adResponse: await fetchNimbusBid()) }
+    }
+    
+    func fetchNimbusBid() async -> NimbusAd? {
+        do {
+            return try await Nimbus.rewardedAd(position: headerSubTitle).fetch().response
+        } catch {
+            print("Failed fetching Nimbus bid: \(error)")
+            return nil
+        }
+    }
+    
+    func loadRewarded(adResponse: NimbusAd? = nil) {
+        adResponse?.applyDynamicPrice(into: gamRequest, mapping: mapping)
+        
+        RewardedInterstitialAd.load(
+            with: googleDynamicPriceRewardedPlacementId,
+            request: gamRequest
+        ) { [weak self] rewardedInterstitialAd, error in
+            if let error {
+                print("Failed to load rewarded interstitial ad with error: \(error.localizedDescription)")
+                return
+            }
+            
+            self?.rewardedInterstitialAd = rewardedInterstitialAd
+            guard let self, let rewardedInterstitialAd else { return }
+            
+            rewardedInterstitialAd.fullScreenContentDelegate = self
+            rewardedInterstitialAd.adMetadataDelegate = self
+            rewardedInterstitialAd.applyDynamicPrice(adResponse: adResponse)
+        }
     }
 }
 
@@ -71,24 +100,7 @@ extension GAMRewardedInterstitialViewController: NimbusRequestManagerDelegate {
     func didCompleteNimbusRequest(request: NimbusRequestKit.NimbusRequest, ad: NimbusCoreKit.NimbusAd) {
         print("didCompleteNimbusRequest")
         
-        ad.applyDynamicPrice(into: gamRequest, mapping: mapping)
         
-        RewardedInterstitialAd.load(
-            with: googleDynamicPriceRewardedPlacementId,
-            request: gamRequest
-        ) { [weak self] rewardedInterstitialAd, error in
-            if let error {
-                print("Failed to load rewarded interstitial ad with error: \(error.localizedDescription)")
-                return
-            }
-            
-            self?.rewardedInterstitialAd = rewardedInterstitialAd
-            guard let self, let rewardedInterstitialAd else { return }
-            
-            rewardedInterstitialAd.fullScreenContentDelegate = self
-            rewardedInterstitialAd.adMetadataDelegate = self
-            rewardedInterstitialAd.applyDynamicPrice(ad: ad)
-        }
     }
     
     func didFailNimbusRequest(request: NimbusRequestKit.NimbusRequest, error: NimbusCoreKit.NimbusError) {

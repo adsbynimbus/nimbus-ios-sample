@@ -96,16 +96,35 @@ enum MainItem: String, NavigationItem {
 enum AdManagerAdType: String, NavigationItem {
     case manuallyRenderedAd         = "Manually Rendered Ad"
     case banner                     = "Banner"
-    case bannerWithRefresh          = "Banner With Refresh"
     case inlineVideo                = "Inline Video"
     case interstitialHybrid         = "Interstitial Hybrid"
     case interstitialStatic         = "Interstitial Static"
     case interstitialVideo          = "Interstitial Video"
-    case interstitialVideoWithoutUI = "Interstitial Video Without UI"
     case rewardedVideo              = "Rewarded Video"
     
     func destinationController(parent: String) -> UIViewController {
-        AdManagerViewController(adType: self, headerSubTitle: parent)
+        let title = "Nimbus Rendering"
+        
+        return switch self {
+        case .banner:
+            BannerViewController(headerTitle: title, headerSubTitle: rawValue, enabledExtension: nil)
+        case .inlineVideo:
+            InlineVideoViewController(headerTitle: title, headerSubTitle: rawValue, enabledExtension: nil)
+        case .manuallyRenderedAd:
+            ManuallyRenderedViewController(headerTitle: title, headerSubTitle: rawValue, enabledExtension: nil)
+        case .interstitialHybrid:
+            InterstitialViewController(headerTitle: title, headerSubTitle: rawValue, enabledExtension: nil)
+        case .interstitialStatic:
+            CustomInterstitialViewController(headerTitle: title, kind: .staticOnly)
+        case .interstitialVideo:
+            CustomInterstitialViewController(headerTitle: title, kind: .videoOnly)
+        case .rewardedVideo:
+            RewardedViewController(
+                headerTitle: "Nimbus Rendering",
+                headerSubTitle: rawValue,
+                enabledExtension: nil
+            )
+        }
     }
 }
 
@@ -191,13 +210,13 @@ enum MobileFuseSample: String, NavigationItem {
             MobileFuseBannerViewController(
                 headerTitle: rawValue,
                 position: "MobileFuse_Testing_Display_iOS_Nimbus",
-                format: .banner320x50
+                size: .banner
             )
         case .mobileFuseMREC:
             MobileFuseBannerViewController(
                 headerTitle: rawValue,
                 position: "MobileFuse_Testing_MREC_iOS_Nimbus",
-                format: .letterbox
+                size: .mrec
             )
         case .mobileFuseInterstitial: MobileFuseInterstitialViewController(headerTitle: rawValue)
         case .mobileFuseRewarded: MobileFuseRewardedViewController(headerTitle: rawValue)
@@ -206,10 +225,15 @@ enum MobileFuseSample: String, NavigationItem {
 }
 
 enum APSSample: String, NavigationItem {
-    case apsBannerWithRefresh   = "APS Banner With Refresh"
-    case apsInterstitialHybrid  = "APS Interstitial Hybrid"
+    case apsBannerWithRefresh   = "Refreshing Banner"
+    case apsInterstitialHybrid  = "Interstitial Hybrid"
     func destinationController(parent: String) -> UIViewController {
-        APSViewController(adType: self, headerSubTitle: parent)
+        return switch self {
+        case .apsBannerWithRefresh:
+            APSBannerViewController(headerTitle: "APS", headerSubTitle: rawValue, enabledExtension: nil)
+        case .apsInterstitialHybrid:
+            APSInterstitialViewController(headerTitle: "APS", headerSubTitle: rawValue, enabledExtension: nil)
+        }
     }
 }
 

@@ -69,16 +69,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // This is only for testing environment, do NOT add this on production environment
         if let mockServerUrl = ProcessInfo.processInfo.environment["MOCK_SERVER_URL"] {
-            NimbusAdManager.requestUrl = URL(string: mockServerUrl)!
+            NimbusRequestManager.requestUrl = URL(string: mockServerUrl)!
         } else if Nimbus.shared.testMode {
-            NimbusAdManager.requestUrl = URL(string: "https://\(Nimbus.shared.publisher).adsbynimbus.com/rta/test")!
-            NimbusAdManager.additionalRequestHeaders = [
+            NimbusRequestManager.requestUrl = URL(string: "https://\(Nimbus.shared.publisher).adsbynimbus.com/rta/test")!
+            NimbusRequestManager.additionalRequestHeaders = [
                 "Nimbus-Test-No-Fill": String(UserDefaults.standard.forceNoFill)
             ]
         }
 
         // User
-        NimbusAdManager.user = NimbusUser(age: 20, gender: .male)
+        NimbusRequestManager.user = NimbusUser(age: 20, gender: .male)
     }
     
     private func startTrackingATT() {

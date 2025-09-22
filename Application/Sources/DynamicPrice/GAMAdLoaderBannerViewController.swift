@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import NimbusCoreKit
+import NimbusKit
 #if canImport(NimbusGAMKit)                    // Swift Package Manager
 import NimbusGAMKit
 #elseif canImport(NimbusSDK)                   // CocoaPods
@@ -16,7 +18,6 @@ import GoogleMobileAds
 class GAMAdLoaderBannerViewController: GAMBaseViewController {
     private static let refreshInterval: TimeInterval = 30
     
-    private let requestManager = NimbusRequestManager()
     private var adLoader: AdLoader?
     private weak var bannerView: AdManagerBannerView?
     
@@ -33,9 +34,7 @@ class GAMAdLoaderBannerViewController: GAMBaseViewController {
             setupRefreshTimer()
         }
         
-        requestManager.delegate = self
-        
-        fetchNimbusBid()
+        fetchAndLoad()
     }
     
     func setupNotifications() {
@@ -53,11 +52,16 @@ class GAMAdLoaderBannerViewController: GAMBaseViewController {
         )
     }
     
-    func fetchNimbusBid() {
-        requestManager.performRequest(request: NimbusRequest.forBannerAd(position: headerSubTitle))
+    func fetchNimbusBid() async -> NimbusAd? {
+        do {
+            return try await Nimbus.bannerAd(position: headerSubTitle).fetch().response
+        } catch {
+            print("Failed fetching Nimbus bid: \(error)")
+            return nil
+        }
     }
     
-    func load(ad: NimbusAd? = nil) {
+    func load(adResponse: NimbusAd? = nil) {
         adLoader = AdLoader(
             adUnitID: googleDynamicPricePlacementId,
             rootViewController: self,
@@ -65,7 +69,11 @@ class GAMAdLoaderBannerViewController: GAMBaseViewController {
             options: nil
         )
         adLoader?.delegate = self
-        adLoader?.loadDynamicPrice(gamRequest: AdManagerRequest(), ad: ad, mapping: mapping)
+        adLoader?.loadDynamicPrice(gamRequest: AdManagerRequest(), adResponse: adResponse, mapping: mapping)
+    }
+    
+    func fetchAndLoad() {
+        Task { load(adResponse: await fetchNimbusBid()) }
     }
     
     // MARK: - Refreshing Banner Logic
@@ -73,7 +81,7 @@ class GAMAdLoaderBannerViewController: GAMBaseViewController {
     func setupRefreshTimer() {
         refreshTimer?.invalidate() // just to make sure there's no outstanding timer
         refreshTimer = Timer.scheduledTimer(withTimeInterval: Self.refreshInterval, repeats: true) { [weak self] _ in
-            self?.fetchNimbusBid()
+            self?.fetchAndLoad()
         }
         print("\(Self.self) created refresh timer")
     }
@@ -90,7 +98,7 @@ class GAMAdLoaderBannerViewController: GAMBaseViewController {
 
 // MARK: - GADAdLoaderDelegate
 
-extension GAMAdLoaderBannerViewController: AdLoaderDelegate, AdManagerBannerAdLoaderDelegate {
+extension GAMAdLoaderBannerViewController: @preconcurrency AdLoaderDelegate, @preconcurrency AdManagerBannerAdLoaderDelegate {
     func validBannerSizes(for adLoader: AdLoader) -> [NSValue] {
         [nsValue(for: AdSizeBanner)]
     }
@@ -125,7 +133,7 @@ extension GAMAdLoaderBannerViewController: AdLoaderDelegate, AdManagerBannerAdLo
 
 // MARK: - GADAppEventDelegate
 
-extension GAMAdLoaderBannerViewController: AppEventDelegate {
+extension GAMAdLoaderBannerViewController: @preconcurrency AppEventDelegate {
     func adView(_ banner: BannerView, didReceiveAppEvent name: String, with info: String?) {
         print("adView:didReceiveAppEvent")
         bannerView?.handleEventForNimbus(name: name, info: info)
@@ -161,23 +169,5 @@ extension GAMAdLoaderBannerViewController: BannerViewDelegate {
     
     func bannerViewDidDismissScreen(_ bannerView: BannerView) {
         print("bannerViewDidDismissScreen")
-    }
-}
-
-// MARK: - NimbusRequestManagerDelegate
-
-extension GAMAdLoaderBannerViewController: NimbusRequestManagerDelegate {
-    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
-        print("didCompleteNimbusRequest")
-        
-        // Remove old bannerView if exists
-        bannerView?.removeFromSuperview()
-        
-        load(ad: ad)
-    }
-    
-    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
-        print("didFailNimbusRequest: \(error.localizedDescription)")
-        load()
     }
 }

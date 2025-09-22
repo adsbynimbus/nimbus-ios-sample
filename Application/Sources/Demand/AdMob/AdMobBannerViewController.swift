@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import NimbusCoreKit
 import NimbusKit
 #if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK
@@ -16,35 +17,30 @@ import NimbusAdMobKit
 private let bannerPlacementId = Bundle.main.infoDictionary?["AdMob Banner ID"] as? String ?? ""
 
 class AdMobBannerViewController: AdMobViewController {
-    var adController: AdController?
-    let adManager = NimbusAdManager()
+    var bannerAd: InlineAd?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        adManager.delegate = self
-        adManager.showAd(
-            request: .forBannerAd(position: "banner").withAdMobBanner(adUnitId: bannerPlacementId),
-            container: view,
-            refreshInterval: 30,
-            adPresentingViewController: self
-        )
-    }
-}
-
-extension AdMobBannerViewController: NimbusAdManagerDelegate {
-    func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
-        print("didRenderAd")
-        adController = controller
-        adController?.register(delegate: self)
-        nimbusAd = ad
+        Task { await showAd() }
     }
     
-    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
-        print("didCompleteNimbusRequest")
-    }
-    
-    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
-        print("didFailNimbusRequest: \(error.localizedDescription)")
+    func showAd() async {
+        do {
+            self.bannerAd = try await Nimbus.bannerAd(position: "banner", refreshInterval: 30) {
+                demand {
+                    admob(bannerAdUnitId: bannerPlacementId)
+                }
+            }
+            .onEvent { [weak self] event in
+                self?.didReceiveNimbusEvent(event: event, ad: self?.bannerAd)
+            }
+            .onError { [weak self] error in
+                self?.didReceiveNimbusError(error: error)
+            }
+            .show(in: view)
+        } catch {
+            print("Failed to show ad: \(error)")
+        }
     }
 }

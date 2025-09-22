@@ -6,39 +6,42 @@
 //
 
 import UIKit
+import NimbusCoreKit
 import NimbusKit
+#if canImport(NimbusSDK) // CocoaPods
+import NimbusSDK
+#elseif canImport(NimbusMolocoKit) // Swift Package Manager
+import NimbusMolocoKit
+#endif
 
 fileprivate var adUnitId = Bundle.main.infoDictionary?["Moloco Interstitial ID"] as! String
 
 final class MolocoInterstitialViewController: MolocoViewController {
 
-    private let adManager = NimbusAdManager()
-    private var adController: AdController?
+    private var interstitialAd: InterstitialAd?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        adManager.delegate = self
-        adManager.showBlockingAd(
-            request: NimbusRequest.forInterstitialAd(position: "interstitial").withMoloco(adUnitId: adUnitId),
-            adPresentingViewController: self
-        )
-    }
-}
-
-extension MolocoInterstitialViewController: NimbusAdManagerDelegate {
-    func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
-        print("didRenderAd")
-        adController = controller
-        adController?.register(delegate: self)
-        nimbusAd = ad
+        Task { await showAd() }
     }
     
-    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
-        print("didCompleteNimbusRequest")
-    }
-    
-    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
-        print("didFailNimbusRequest: \(error.localizedDescription)")
+    func showAd() async {
+        do {
+            interstitialAd = try await Nimbus.interstitialAd(position: "interstitial") {
+                demand {
+                    moloco(adUnitId: adUnitId)
+                }
+            }
+            .onEvent { [weak self] event in
+                self?.didReceiveNimbusEvent(event: event, ad: self?.interstitialAd)
+            }
+            .onError { [weak self] error in
+                self?.didReceiveNimbusError(error: error)
+            }
+            .show(in: self)
+        } catch {
+            
+        }
     }
 }

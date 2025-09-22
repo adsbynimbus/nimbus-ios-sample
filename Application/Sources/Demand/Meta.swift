@@ -27,11 +27,12 @@ extension UIApplicationDelegate {
     }
 }
 
-final class FANViewController: SampleAdViewController {
+final class FANViewController: SampleAdViewController, AdControllerDelegate {
     
     private let adType: MetaSample
     private var dimensions: NimbusAdDimensions?
     private var adController: AdController?
+    var nimbusAd: NimbusAd?
     
     init(adType: MetaSample, headerSubTitle: String) {
         self.adType = adType
@@ -141,5 +142,13 @@ final class FANViewController: SampleAdViewController {
             isMraid: isMraid,
             extensions: nil
         )
+    }
+    
+    func didReceiveNimbusEvent(controller: any NimbusCoreKit.AdController, event: NimbusCoreKit.NimbusEvent) {
+        super.didReceiveNimbusEvent(event: event)
+    }
+    
+    func didReceiveNimbusError(controller: any NimbusCoreKit.AdController, error: any NimbusCoreKit.NimbusError) {
+        super.didReceiveNimbusError(error: error)
     }
 }

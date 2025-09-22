@@ -7,6 +7,7 @@
 
 import UIKit
 import NimbusKit
+import NimbusCoreKit
 #if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK
 #elseif canImport(NimbusAdMobKit) // Swift Package Manager
@@ -16,35 +17,32 @@ import NimbusAdMobKit
 private let interstitialPlacementId = Bundle.main.infoDictionary?["AdMob Interstitial ID"] as? String ?? ""
 
 class AdMobInterstitialViewController: AdMobViewController {
-    var adController: AdController?
-    let adManager = NimbusAdManager()
+    var interstitialAd: InterstitialAd?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let request = NimbusRequest
-            .forInterstitialAd(position: "interstitial")
-            .withAdMobInterstitial(adUnitId: interstitialPlacementId)
-        request.impressions[0].video = nil
-        
-        adManager.delegate = self
-        adManager.showBlockingAd(request: request, adPresentingViewController: self)
-    }
-}
-
-extension AdMobInterstitialViewController: NimbusAdManagerDelegate {
-    func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
-        print("didRenderAd")
-        adController = controller
-        adController?.register(delegate: self)
-        nimbusAd = ad
+        Task { await showAd() }
     }
     
-    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
-        print("didCompleteNimbusRequest")
-    }
-    
-    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
-        print("didFailNimbusRequest: \(error.localizedDescription)")
+    func showAd() async {
+        do {
+            self.interstitialAd = try await Nimbus.fullscreenAd(position: "interstitial") {
+                banner(size: .interstitial)
+                
+                demand {
+                    admob(interstitialAdUnitId: interstitialPlacementId)
+                }
+            }
+            .onEvent { [weak self] event in
+                self?.didReceiveNimbusEvent(event: event, ad: self?.interstitialAd)
+            }
+            .onError { [weak self] error in
+                self?.didReceiveNimbusError(error: error)
+            }
+            .show(in: self)
+        } catch {
+            print("Failed to show ad: \(error)")
+        }
     }
 }

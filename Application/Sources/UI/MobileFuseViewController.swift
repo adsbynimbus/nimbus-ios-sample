@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import NimbusKit
+import NimbusRequestKit
 
 #if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK
@@ -20,7 +20,7 @@ import NimbusMobileFuseKit
 class MobileFuseViewController: SampleAdViewController {
     
     deinit {
-        Task { @MainActor in NimbusAdManager.removeMobileFuseHeader() }
+        Task { @MainActor in NimbusRequestManager.removeMobileFuseHeader() }
     }
     
     init(headerTitle: String, headerSubTitle: String) {
@@ -34,6 +34,6 @@ class MobileFuseViewController: SampleAdViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NimbusAdManager.insertMobileFuseHeader()
+        NimbusRequestManager.insertMobileFuseHeader()
     }
 }
