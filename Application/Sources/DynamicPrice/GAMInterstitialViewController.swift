@@ -23,21 +23,21 @@ class GAMInterstitialViewController: GAMBaseViewController {
         super.viewDidLoad()
         
         Task {
-            loadInterstitial(ad: await fetchNimbusBid())
+            loadInterstitial(adResponse: await fetchNimbusBid())
         }
     }
     
-    func fetchNimbusBid() async -> Ad? {
+    func fetchNimbusBid() async -> NimbusAd? {
         do {
-            return try await Nimbus.interstitialAd(position: headerSubTitle).fetch()
+            return try await Nimbus.interstitialAd(position: headerSubTitle).fetch().response
         } catch {
             print("Failed fetching Nimbus bid: \(error)")
             return nil
         }
     }
     
-    func loadInterstitial(ad: Ad? = nil) {
-        ad?.applyDynamicPrice(into: gamRequest, mapping: mapping)
+    func loadInterstitial(adResponse: NimbusAd? = nil) {
+        adResponse?.applyDynamicPrice(into: gamRequest, mapping: mapping)
         
         AdManagerInterstitialAd.load(
             with: googleDynamicPricePlacementId,
@@ -54,7 +54,7 @@ class GAMInterstitialViewController: GAMBaseViewController {
             interstitialAd.fullScreenContentDelegate = self
             interstitialAd.appEventDelegate = self
             
-            interstitialAd.applyDynamicPrice(ad: ad)
+            interstitialAd.applyDynamicPrice(adResponse: adResponse)
             interstitialAd.present(from: self)
         }
     }

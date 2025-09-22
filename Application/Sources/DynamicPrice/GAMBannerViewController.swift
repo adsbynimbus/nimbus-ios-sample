@@ -73,9 +73,9 @@ class GAMBannerViewController: GAMBaseViewController {
         ])
     }
     
-    func fetchNimbusBid() async -> Ad? {
+    func fetchNimbusBid() async -> NimbusAd? {
         do {
-            return try await Nimbus.bannerAd(position: headerSubTitle).fetch()
+            return try await Nimbus.bannerAd(position: headerSubTitle).fetch().response
         } catch {
             print("Failed fetching Nimbus bid: \(error)")
             return nil
@@ -84,8 +84,8 @@ class GAMBannerViewController: GAMBaseViewController {
     
     func load() async {
         let request = AdManagerRequest()
-        let nimbusAd = await fetchNimbusBid()
-        bannerView.loadDynamicPrice(gamRequest: request, ad: nimbusAd, mapping: mapping)
+        let adResponse = await fetchNimbusBid()
+        bannerView.loadDynamicPrice(gamRequest: request, adResponse: adResponse, mapping: mapping)
     }
     
     // MARK: - Refreshing Banner Logic

@@ -52,16 +52,16 @@ class GAMAdLoaderBannerViewController: GAMBaseViewController {
         )
     }
     
-    func fetchNimbusBid() async -> Ad? {
+    func fetchNimbusBid() async -> NimbusAd? {
         do {
-            return try await Nimbus.bannerAd(position: headerSubTitle).fetch()
+            return try await Nimbus.bannerAd(position: headerSubTitle).fetch().response
         } catch {
             print("Failed fetching Nimbus bid: \(error)")
             return nil
         }
     }
     
-    func load(ad: Ad? = nil) {
+    func load(adResponse: NimbusAd? = nil) {
         adLoader = AdLoader(
             adUnitID: googleDynamicPricePlacementId,
             rootViewController: self,
@@ -69,11 +69,11 @@ class GAMAdLoaderBannerViewController: GAMBaseViewController {
             options: nil
         )
         adLoader?.delegate = self
-        adLoader?.loadDynamicPrice(gamRequest: AdManagerRequest(), ad: ad, mapping: mapping)
+        adLoader?.loadDynamicPrice(gamRequest: AdManagerRequest(), adResponse: adResponse, mapping: mapping)
     }
     
     func fetchAndLoad() {
-        Task { load(ad: await fetchNimbusBid()) }
+        Task { load(adResponse: await fetchNimbusBid()) }
     }
     
     // MARK: - Refreshing Banner Logic

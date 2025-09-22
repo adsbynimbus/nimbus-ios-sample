@@ -22,20 +22,20 @@ class GAMRewardedViewController: GAMBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Task { loadRewarded(ad: await fetchNimbusBid()) }
+        Task { loadRewarded(adResponse: await fetchNimbusBid()) }
     }
     
-    func fetchNimbusBid() async -> Ad? {
+    func fetchNimbusBid() async -> NimbusAd? {
         do {
-            return try await Nimbus.rewardedAd(position: headerSubTitle).fetch()
+            return try await Nimbus.rewardedAd(position: headerSubTitle).fetch().response
         } catch {
             print("Failed fetching Nimbus bid: \(error)")
             return nil
         }
     }
     
-    func loadRewarded(ad: Ad? = nil) {
-        ad?.applyDynamicPrice(into: gamRequest, mapping: mapping)
+    func loadRewarded(adResponse: NimbusAd? = nil) {
+        adResponse?.applyDynamicPrice(into: gamRequest, mapping: mapping)
         
         RewardedAd.load(
             with: googleDynamicPriceRewardedPlacementId,
@@ -51,7 +51,7 @@ class GAMRewardedViewController: GAMBaseViewController {
                 
                 rewardedAd.fullScreenContentDelegate = self
                 rewardedAd.adMetadataDelegate = self
-                rewardedAd.applyDynamicPrice(ad: ad)
+                rewardedAd.applyDynamicPrice(adResponse: adResponse)
             }
         )
     }
