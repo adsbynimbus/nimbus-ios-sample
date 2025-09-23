@@ -166,14 +166,12 @@ enum Moloco: String, NavigationItem {
 
 enum InMobi: String, NavigationItem {
     case banner                 = "Banner"
-    case native                 = "Native"
     case interstitial           = "Interstitial"
     case rewarded               = "Rewarded Video"
     
     func destinationController(parent: String) -> UIViewController {
         return switch self {
         case .banner: InMobiBannerViewController(headerTitle: "InMobi Banner", headerSubTitle: "")
-        case .native: InMobiNativeViewController(headerTitle: "InMobi Native", headerSubTitle: "")
         case .interstitial: InMobiInterstitialViewController(headerTitle: "InMobi Interstitial", headerSubTitle: "")
         case .rewarded: InMobiRewardedViewController(headerTitle: "InMobi Rewarded", headerSubTitle: "")
         }
