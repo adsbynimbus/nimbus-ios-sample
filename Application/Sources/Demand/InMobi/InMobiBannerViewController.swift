@@ -1,7 +1,7 @@
 //
-//  MolocoBannerViewController.swift
+//  InMobiBannerViewController.swift
 //  Nimbus
-//  Created on 5/28/25
+//  Created on 7/31/25
 //  Copyright © 2025 Nimbus Advertising Solutions Inc. All rights reserved.
 //
 
@@ -10,12 +10,12 @@ import NimbusKit
 #if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK
 #else                    // Swift Package Manager
-import NimbusMolocoKit
+import NimbusInMobiKit
 #endif
 
-fileprivate var adUnitId = Bundle.main.infoDictionary?["Moloco Banner ID"] as! String
+fileprivate var placementId = Int(Bundle.main.infoDictionary?["InMobi Banner ID"] as! String)!
 
-final class MolocoBannerViewController: MolocoViewController {
+final class InMobiBannerViewController: InMobiViewController {
 
     private let adManager = NimbusAdManager()
     private var adController: AdController?
@@ -23,17 +23,29 @@ final class MolocoBannerViewController: MolocoViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let contentView = UIView()
+        
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(contentView)
+        
+        NSLayoutConstraint.activate([
+            contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            contentView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 20),
+        ])
+        
         adManager.delegate = self
         adManager.showAd(
-            request: NimbusRequest.forBannerAd(position: "banner").withMoloco(adUnitId: adUnitId),
-            container: view,
+            request: NimbusRequest.forBannerAd(position: "banner").withInMobi(placementId: placementId),
+            container: contentView,
             refreshInterval: 30,
             adPresentingViewController: self
         )
     }
 }
 
-extension MolocoBannerViewController: NimbusAdManagerDelegate {
+extension InMobiBannerViewController: NimbusAdManagerDelegate {
     func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
         print("didRenderAd")
         adController = controller

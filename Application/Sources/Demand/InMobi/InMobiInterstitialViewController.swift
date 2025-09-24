@@ -1,7 +1,7 @@
 //
-//  MolocoBannerViewController.swift
+//  InMobiInterstitialViewController.swift
 //  Nimbus
-//  Created on 5/28/25
+//  Created on 7/31/25
 //  Copyright © 2025 Nimbus Advertising Solutions Inc. All rights reserved.
 //
 
@@ -10,12 +10,12 @@ import NimbusKit
 #if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK
 #else                    // Swift Package Manager
-import NimbusMolocoKit
+import NimbusInMobiKit
 #endif
 
-fileprivate var adUnitId = Bundle.main.infoDictionary?["Moloco Banner ID"] as! String
+fileprivate var placementId = Int(Bundle.main.infoDictionary?["InMobi Interstitial ID"] as! String)!
 
-final class MolocoBannerViewController: MolocoViewController {
+final class InMobiInterstitialViewController: InMobiViewController {
 
     private let adManager = NimbusAdManager()
     private var adController: AdController?
@@ -24,16 +24,15 @@ final class MolocoBannerViewController: MolocoViewController {
         super.viewDidLoad()
         
         adManager.delegate = self
-        adManager.showAd(
-            request: NimbusRequest.forBannerAd(position: "banner").withMoloco(adUnitId: adUnitId),
-            container: view,
-            refreshInterval: 30,
+        
+        adManager.showBlockingAd(
+            request: .forInterstitialAd(position: "banner").withInMobi(placementId: placementId),
             adPresentingViewController: self
         )
     }
 }
 
-extension MolocoBannerViewController: NimbusAdManagerDelegate {
+extension InMobiInterstitialViewController: NimbusAdManagerDelegate {
     func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
         print("didRenderAd")
         adController = controller
