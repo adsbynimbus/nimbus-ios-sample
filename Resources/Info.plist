@@ -284,5 +284,15 @@
 	<string>$(MOLOCO_INTERSTITIAL_ID)</string>
 	<key>Moloco Rewarded ID</key>
 	<string>$(MOLOCO_REWARDED_ID)</string>
+	<key>InMobi Account ID</key>
+	<string>$(INMOBI_ACCOUNT_ID)</string>
+	<key>InMobi Banner ID</key>
+	<string>$(INMOBI_BANNER_ID)</string>
+	<key>InMobi Native ID</key>
+	<string>$(INMOBI_NATIVE_ID)</string>
+	<key>InMobi Interstitial ID</key>
+	<string>$(INMOBI_INTERSTITIAL_ID)</string>
+	<key>InMobi Rewarded ID</key>
+	<string>$(INMOBI_REWARDED_ID)</string>
 </dict>
 </plist>
