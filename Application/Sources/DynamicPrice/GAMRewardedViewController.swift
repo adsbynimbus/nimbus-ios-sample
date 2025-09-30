@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import NimbusCoreKit
+import NimbusKit
 #if canImport(NimbusGAMKit)                    // Swift Package Manager
 import NimbusGAMKit
 #elseif canImport(NimbusSDK)                   // CocoaPods
@@ -14,16 +16,44 @@ import NimbusSDK
 import GoogleMobileAds
 
 class GAMRewardedViewController: GAMBaseViewController {
-    private let requestManager = NimbusRequestManager()
-    
     private let gamRequest = AdManagerRequest()
-    private var rewardedAd: RewardedAd?
+    private var rewardedAd: GoogleMobileAds.RewardedAd?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        requestManager.delegate = self
-        requestManager.performRequest(request: NimbusRequest.forRewardedVideo(position: headerSubTitle))
+        Task { loadRewarded(adResponse: await fetchNimbusBid()) }
+    }
+    
+    func fetchNimbusBid() async -> NimbusAd? {
+        do {
+            return try await Nimbus.rewardedAd(position: headerSubTitle).fetch().response
+        } catch {
+            print("Failed fetching Nimbus bid: \(error)")
+            return nil
+        }
+    }
+    
+    func loadRewarded(adResponse: NimbusAd? = nil) {
+        adResponse?.applyDynamicPrice(into: gamRequest, mapping: mapping)
+        
+        RewardedAd.load(
+            with: googleDynamicPriceRewardedPlacementId,
+            request: gamRequest,
+            completionHandler: { [weak self] rewardedAd, error in
+                if let error {
+                    print("Failed to load rewarded ad with error: \(error.localizedDescription)")
+                    return
+                }
+                
+                self?.rewardedAd = rewardedAd
+                guard let self, let rewardedAd else { return }
+                
+                rewardedAd.fullScreenContentDelegate = self
+                rewardedAd.adMetadataDelegate = self
+                rewardedAd.applyDynamicPrice(adResponse: adResponse)
+            }
+        )
     }
 }
 
@@ -57,7 +87,7 @@ extension GAMRewardedViewController: FullScreenContentDelegate {
 
 // MARK: - GADAdMetadataDelegate
 
-extension GAMRewardedViewController: AdMetadataDelegate {
+extension GAMRewardedViewController: @preconcurrency AdMetadataDelegate {
     func adMetadataDidChange(_ ad: AdMetadataProvider) {
         rewardedAd?.presentDynamicPrice(from: self, metadataProvider: ad) { adReward in
             print("received reward")
@@ -71,25 +101,7 @@ extension GAMRewardedViewController: NimbusRequestManagerDelegate {
     func didCompleteNimbusRequest(request: NimbusRequestKit.NimbusRequest, ad: NimbusCoreKit.NimbusAd) {
         print("didCompleteNimbusRequest")
         
-        ad.applyDynamicPrice(into: gamRequest, mapping: mapping)
         
-        RewardedAd.load(
-            with: googleDynamicPriceRewardedPlacementId,
-            request: gamRequest,
-            completionHandler: { [weak self] rewardedAd, error in
-                if let error {
-                    print("Failed to load rewarded ad with error: \(error.localizedDescription)")
-                    return
-                }
-                
-                self?.rewardedAd = rewardedAd
-                guard let self, let rewardedAd else { return }
-                
-                rewardedAd.fullScreenContentDelegate = self
-                rewardedAd.adMetadataDelegate = self
-                rewardedAd.applyDynamicPrice(ad: ad)
-            }
-        )
     }
     
     func didFailNimbusRequest(request: NimbusRequestKit.NimbusRequest, error: NimbusCoreKit.NimbusError) {

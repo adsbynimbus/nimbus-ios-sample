@@ -7,6 +7,7 @@
 
 import UIKit
 import NimbusKit
+import NimbusCoreKit
 #if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK
 #elseif canImport(NimbusMintegralKit) // Swift Package Manager
@@ -14,35 +15,30 @@ import NimbusMintegralKit
 #endif
 
 class MintegralBannerViewController: MintegralViewController {
-    var adController: AdController?
-    let adManager = NimbusAdManager()
+    var bannerAd: InlineAd?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        adManager.delegate = self
-        adManager.showAd(
-            request: .forBannerAd(position: "banner").withMintegral(adUnitId: "1541918", placementId: nil),
-            container: view,
-            refreshInterval: 30,
-            adPresentingViewController: self
-        )
-    }
-}
-
-extension MintegralBannerViewController: NimbusAdManagerDelegate {
-    func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
-        print("didRenderAd")
-        adController = controller
-        adController?.register(delegate: self)
-        nimbusAd = ad
+        Task { await showAd() }
     }
     
-    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
-        print("didCompleteNimbusRequest")
-    }
-    
-    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
-        print("didFailNimbusRequest: \(error.localizedDescription)")
+    func showAd() async {
+        do {
+            self.bannerAd = try await Nimbus.bannerAd(position: "banner") {
+                demand {
+                    mintegral(adUnitId: "1541918")
+                }
+            }
+            .onEvent { [weak self] event in
+                self?.didReceiveNimbusEvent(event: event, ad: self?.bannerAd)
+            }
+            .onError { [weak self] error in
+                self?.didReceiveNimbusError(error: error)
+            }
+            .show(in: view)
+        } catch {
+            print("Couldn't show ad: \(error)")
+        }
     }
 }

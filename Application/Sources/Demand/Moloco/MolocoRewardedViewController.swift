@@ -7,38 +7,35 @@
 
 import UIKit
 import NimbusKit
+import NimbusCoreKit
+#if canImport(NimbusSDK) // CocoaPods
+import NimbusSDK
+#elseif canImport(NimbusMolocoKit) // Swift Package Manager
+import NimbusMolocoKit
+#endif
 
 fileprivate var adUnitId = Bundle.main.infoDictionary?["Moloco Rewarded ID"] as! String
 
 final class MolocoRewardedViewController: MolocoViewController {
 
-    private let adManager = NimbusAdManager()
-    private var adController: AdController?
+    private var rewardedAd: RewardedAd?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        adManager.delegate = self
-        adManager.showRewardedAd(
-            request: NimbusRequest.forRewardedVideo(position: "rewarded").withMoloco(adUnitId: adUnitId),
-            adPresentingViewController: self
-        )
-    }
-}
-
-extension MolocoRewardedViewController: NimbusAdManagerDelegate {
-    func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
-        print("didRenderAd")
-        adController = controller
-        adController?.register(delegate: self)
-        nimbusAd = ad
-    }
-    
-    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
-        print("didCompleteNimbusRequest")
-    }
-    
-    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
-        print("didFailNimbusRequest: \(error.localizedDescription)")
+        Task {
+            self.rewardedAd = try await Nimbus.rewardedAd(position: "rewarded") {
+                demand {
+                    moloco(adUnitId: adUnitId)
+                }
+            }
+            .onEvent { [weak self] event in
+                self?.didReceiveNimbusEvent(event: event, ad: self?.rewardedAd)
+            }
+            .onError { [weak self] error in
+                self?.didReceiveNimbusError(error: error)
+            }
+            .show(in: self)
+        }
     }
 }

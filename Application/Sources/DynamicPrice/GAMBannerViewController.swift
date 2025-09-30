@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import NimbusCoreKit
+import NimbusKit
 #if canImport(NimbusGAMKit)                    // Swift Package Manager
 import NimbusGAMKit
 #elseif canImport(NimbusSDK)                   // CocoaPods
@@ -15,10 +17,9 @@ import GoogleMobileAds
 
 class GAMBannerViewController: GAMBaseViewController {
     private static let refreshInterval: TimeInterval = 30
-    
+    private let bannerView = AdManagerBannerView(adSize: AdSizeBanner)
     private let requestManager = NimbusRequestManager()
     
-    private let bannerView = AdManagerBannerView(adSize: AdSizeBanner)
     private var refreshTimer: Timer?
     
     /// Set this to false if you don't want a refreshing banner
@@ -31,16 +32,15 @@ class GAMBannerViewController: GAMBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupBannerView()
-        
-        if isRefreshingBanner {
-            setupNotifications()
-            setupRefreshTimer()
+        Task {
+            setupBannerView()
+            await load()
+            
+            if isRefreshingBanner {
+                setupNotifications()
+                setupRefreshTimer()
+            }
         }
-        
-        requestManager.delegate = self
-        
-        fetchNimbusBid()
     }
     
     func setupNotifications() {
@@ -58,10 +58,6 @@ class GAMBannerViewController: GAMBaseViewController {
         )
     }
     
-    func fetchNimbusBid() {
-        requestManager.performRequest(request: NimbusRequest.forBannerAd(position: headerSubTitle))
-    }
-    
     func setupBannerView() {
         bannerView.translatesAutoresizingMaskIntoConstraints = false
         bannerView.adUnitID = googleDynamicPricePlacementId
@@ -77,12 +73,27 @@ class GAMBannerViewController: GAMBaseViewController {
         ])
     }
     
+    func fetchNimbusBid() async -> NimbusAd? {
+        do {
+            return try await Nimbus.bannerAd(position: headerSubTitle).fetch().response
+        } catch {
+            print("Failed fetching Nimbus bid: \(error)")
+            return nil
+        }
+    }
+    
+    func load() async {
+        let request = AdManagerRequest()
+        let adResponse = await fetchNimbusBid()
+        bannerView.loadDynamicPrice(gamRequest: request, adResponse: adResponse, mapping: mapping)
+    }
+    
     // MARK: - Refreshing Banner Logic
     
     func setupRefreshTimer() {
         refreshTimer?.invalidate() // just to make sure there's no outstanding timer
         refreshTimer = Timer.scheduledTimer(withTimeInterval: Self.refreshInterval, repeats: true) { [weak self] _ in
-            self?.fetchNimbusBid()
+            Task { await self?.load() }
         }
         print("\(Self.self) created refresh timer")
     }
@@ -99,7 +110,7 @@ class GAMBannerViewController: GAMBaseViewController {
 
 // MARK: - GADAppEventDelegate
 
-extension GAMBannerViewController: AppEventDelegate {
+extension GAMBannerViewController: @preconcurrency AppEventDelegate {
     func adView(_ banner: BannerView, didReceiveAppEvent name: String, with info: String?) {
         print("adView:didReceiveAppEvent")
         banner.handleEventForNimbus(name: name, info: info)
@@ -135,20 +146,5 @@ extension GAMBannerViewController: BannerViewDelegate {
     
     func bannerViewDidDismissScreen(_ bannerView: BannerView) {
         print("bannerViewDidDismissScreen")
-    }
-}
-
-// MARK: - NimbusRequestManagerDelegate
-
-extension GAMBannerViewController: NimbusRequestManagerDelegate {
-    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
-        print("didCompleteNimbusRequest")
-        
-        bannerView.loadDynamicPrice(gamRequest: AdManagerRequest(), ad: ad, mapping: mapping)
-    }
-    
-    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
-        print("didFailNimbusRequest: \(error.localizedDescription)")
-        bannerView.loadDynamicPrice(gamRequest: AdManagerRequest(), mapping: mapping)
     }
 }

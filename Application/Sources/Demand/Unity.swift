@@ -6,6 +6,7 @@
 //
 
 import NimbusKit
+import NimbusCoreKit
 #if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK
 #else                    // Swift Package Manager
@@ -16,7 +17,7 @@ import UIKit
 final class UnityViewController: SampleAdViewController {
 
     private let adType: UnitySample
-    private var adManager: NimbusAdManager?
+    private var rewardedAd: RewardedAd?
     
     init(adType: UnitySample, headerSubTitle: String) {
         self.adType = adType
@@ -29,34 +30,25 @@ final class UnityViewController: SampleAdViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        adManager = NimbusAdManager()
-        adManager?.delegate = self
         
         switch adType {
         case .unityRewardedVideo:
-            adManager?.showRewardedAd(
-                request: NimbusRequest.forRewardedVideo(position: adType.description),
-                adPresentingViewController: self
-            )
+            Task { await showAd() }
         }
     }
-}
-
-extension UnityViewController: NimbusAdManagerDelegate {
-  
-    func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
-        print("didRenderAd")
-        
-        controller.register(delegate: self)
-        nimbusAd = ad
-    }
     
-    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
-        print("didCompleteNimbusRequest")
-    }
-    
-    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
-        print("didFailNimbusRequest: \(error.localizedDescription)")
+    func showAd() async {
+        do {
+            rewardedAd = try await Nimbus.rewardedAd(position: adType.description)
+                .onEvent { [weak self] event in
+                    self?.didReceiveNimbusEvent(event: event, ad: self?.rewardedAd)
+                }
+                .onError { [weak self] error in
+                    self?.didReceiveNimbusError(error: error)
+                }
+                .show(in: self)
+        } catch {
+            print("Failed to show ad: \(error)")
+        }
     }
 }
