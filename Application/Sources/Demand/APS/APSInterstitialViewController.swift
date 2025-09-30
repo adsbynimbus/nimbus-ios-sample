@@ -59,6 +59,6 @@ class APSInterstitialViewController: SampleAdViewController {
             adLoaders.append(adLoader)
         }
         
-        return await adLoaders.loadAds()
+        return await APSFetcher(adLoaders: adLoaders).fetchAds()
     }
 }
