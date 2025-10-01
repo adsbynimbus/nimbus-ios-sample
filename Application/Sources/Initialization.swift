@@ -16,6 +16,7 @@ import NimbusAdMobKit
 import NimbusMetaKit
 import NimbusUnityKit
 import NimbusMolocoKit
+import NimbusInMobiKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -49,6 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             MintegralExtension()
             AdMobExtension()
             MolocoExtension()
+            InMobiExtension()
 
             if let appId = Bundle.main.infoDictionary?["Vungle App ID"] as? String {
                 VungleExtension(appId: appId)
