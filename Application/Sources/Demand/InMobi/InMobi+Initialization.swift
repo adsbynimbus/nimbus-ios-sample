@@ -22,10 +22,8 @@ extension UIApplicationDelegate {
         /// Make sure to call IMSdk.init from the main thread
         IMSdk.initWithAccountID(inmobiAccountId) { error in
             if let error {
-                Nimbus.shared.logger.log("InMobi initialization failed with error: \(error)", level: .debug)
+                print("InMobi initialization failed with error: \(error)")
             }
         }
-        
-        Nimbus.shared.renderers[.inmobi] = NimbusInMobiAdRenderer()
     }
 }

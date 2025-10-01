@@ -7,11 +7,16 @@
 
 import UIKit
 import NimbusKit
+#if canImport(NimbusSDK) // CocoaPods
+import NimbusSDK
+#elseif canImport(NimbusMolocoKit) // Swift Package Manager
+import NimbusInMobiKit
+#endif
 
 ///  When integrating InMobi, consider examples like InMobiBannerViewController inherit from UIViewController.
-///  Both DemandViewController and InMobiViewController just facilitate the needs of the sample app.
-class InMobiViewController: DemandViewController {
+///  Both SampleAdViewController and InMobiViewController just facilitate the needs of the sample app.
+class InMobiViewController: SampleAdViewController {
     convenience init(headerTitle: String, headerSubTitle: String) {
-        self.init(network: .inmobi, headerTitle: headerTitle, headerSubTitle: headerSubTitle)
+        self.init(headerTitle: headerTitle, headerSubTitle: headerSubTitle, enabledExtension: InMobiExtension.self)
     }
 }
