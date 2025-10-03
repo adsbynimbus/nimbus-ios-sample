@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import NimbusRequestKit
+import Nimbus
 
 #if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK

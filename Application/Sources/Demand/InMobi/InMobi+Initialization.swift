@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import NimbusKit
+import Nimbus
 import InMobiSDK
 #if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK

@@ -6,7 +6,7 @@
 //
 
 import FBAudienceNetwork
-import NimbusKit
+import Nimbus
 #if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK
 #else                    // Swift Package Manager
@@ -144,11 +144,11 @@ final class FANViewController: SampleAdViewController, AdControllerDelegate {
         )
     }
     
-    func didReceiveNimbusEvent(controller: any NimbusCoreKit.AdController, event: NimbusCoreKit.NimbusEvent) {
+    func didReceiveNimbusEvent(controller: any AdController, event: NimbusEvent) {
         super.didReceiveNimbusEvent(event: event)
     }
     
-    func didReceiveNimbusError(controller: any NimbusCoreKit.AdController, error: any NimbusCoreKit.NimbusError) {
+    func didReceiveNimbusError(controller: any AdController, error: any NimbusError) {
         super.didReceiveNimbusError(error: error)
     }
 }

@@ -5,7 +5,7 @@
 //  Created on 5/8/23.
 //
 
-import NimbusRenderKit
+import Nimbus
 import UIKit
 import WebKit
 

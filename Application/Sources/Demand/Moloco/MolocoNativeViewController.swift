@@ -6,9 +6,8 @@
 //
 
 import UIKit
-import NimbusKit
+import Nimbus
 import MolocoSDK
-import NimbusCoreKit
 #if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK
 #elseif canImport(NimbusMolocoKit) // Swift Package Manager

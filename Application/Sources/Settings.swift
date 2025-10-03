@@ -6,9 +6,7 @@
 //
 
 import DTBiOSSDK
-import NimbusKit
-import NimbusCoreKit
-import NimbusRequestKit
+import Nimbus
 
 @MainActor
 protocol SettingsEnum {

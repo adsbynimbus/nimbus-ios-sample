@@ -6,7 +6,7 @@
 //
 
 import AppTrackingTransparency
-import NimbusKit
+import Nimbus
 import SwiftUI
 import UIKit
 import NimbusVungleKit

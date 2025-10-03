@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import NimbusKit
+import Nimbus
 
 final class TestRenderAdViewController: UIViewController {
     private let ad: NimbusAd

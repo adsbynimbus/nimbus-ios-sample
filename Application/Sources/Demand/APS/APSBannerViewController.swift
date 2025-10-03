@@ -6,8 +6,7 @@
 //
 
 import UIKit
-import NimbusCoreKit
-import NimbusKit
+import Nimbus
 import DTBiOSSDK
 #if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK

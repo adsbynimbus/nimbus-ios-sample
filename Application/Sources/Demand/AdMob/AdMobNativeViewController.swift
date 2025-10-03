@@ -6,8 +6,7 @@
 //
 
 import UIKit
-import NimbusKit
-import NimbusCoreKit
+import Nimbus
 import GoogleMobileAds
 #if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK

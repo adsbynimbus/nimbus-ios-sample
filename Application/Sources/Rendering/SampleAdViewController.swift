@@ -6,10 +6,9 @@
 //  Copyright © 2023 Nimbus Advertising Solutions Inc. All rights reserved.
 //
 
-import NimbusRenderKit
+import Nimbus
 import SwiftUI
 import UIKit
-import NimbusKit
 
 class SampleAdViewController : DemoViewController {
     
