@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Nimbus
+import NimbusKit
 
 final class BannerViewController: SampleAdViewController {
     var bannerAd: InlineAd?

@@ -5,7 +5,7 @@
 //  Copyright © 2025 Nimbus Advertising Solutions Inc. All rights reserved.
 //
 
-import Nimbus
+import NimbusKit
 import Foundation
 
 /// This helper is here only for the purposes of the sample app where we need to disable

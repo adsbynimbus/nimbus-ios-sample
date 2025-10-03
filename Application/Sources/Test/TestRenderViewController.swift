@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Nimbus
+import NimbusKit
 
 class TestRenderViewController: DemoViewController {
     

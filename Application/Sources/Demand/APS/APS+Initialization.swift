@@ -6,7 +6,7 @@
 //
 
 import DTBiOSSDK
-import Nimbus
+import NimbusKit
 import UIKit
 
 fileprivate let apsAppKey = Bundle.main.infoDictionary?["APS App ID"] as? String

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Nimbus
+import NimbusKit
 
 final class InlineVideoViewController: SampleAdViewController {
     var videoAd: InlineAd?

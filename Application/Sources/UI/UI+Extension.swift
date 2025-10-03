@@ -7,7 +7,7 @@
 
 import SwiftUI
 import UIKit
-import Nimbus
+import NimbusKit
 
 extension NimbusAdDimensions {
     static let portraitInlineAd = NimbusAdDimensions(width: 320, height: 480)

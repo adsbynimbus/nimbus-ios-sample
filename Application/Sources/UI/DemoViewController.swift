@@ -5,7 +5,7 @@
 //  Created on 09/11/21.
 //
 
-import Nimbus
+import NimbusKit
 import UIKit
 
 class DemoViewController: UIViewController {

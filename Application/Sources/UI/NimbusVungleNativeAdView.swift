@@ -7,7 +7,7 @@
 //
 import UIKit
 import VungleAdsSDK
-import Nimbus
+import NimbusKit
 
 #if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK

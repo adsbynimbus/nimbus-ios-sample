@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Nimbus
+import NimbusKit
 
 final class InterstitialViewController: SampleAdViewController {
     var interstitialAd: InterstitialAd?

@@ -7,7 +7,7 @@
 //
 
 import AdSupport
-import Nimbus
+import NimbusKit
 #if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK
 #else                    // Swift Package Manager

@@ -1,4 +1,4 @@
-import Nimbus
+import NimbusKit
 import SwiftUI
 
 struct Log: Identifiable, Equatable {

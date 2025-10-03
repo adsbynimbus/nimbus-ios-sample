@@ -5,7 +5,7 @@
 //  Created on 02/05/23.
 //
 
-import Nimbus
+import NimbusKit
 #if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK
 #else                    // Swift Package Manager

@@ -6,7 +6,7 @@
 //  Copyright © 2023 Nimbus Advertising Solutions Inc. All rights reserved.
 //
 
-import Nimbus
+import NimbusKit
 
 private let enableMobileFuseHeaderKey = "Nimbus-Test-EnableMobileFuseSDK"
 

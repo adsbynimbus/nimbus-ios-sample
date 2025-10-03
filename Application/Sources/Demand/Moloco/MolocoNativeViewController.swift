@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Nimbus
+import NimbusKit
 import MolocoSDK
 #if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK
