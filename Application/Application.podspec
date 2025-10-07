@@ -17,14 +17,14 @@ Pod::Spec.new do |spec|
     spec.exclude_files = '**/Package.swift'
     
     spec.dependency 'NimbusSDK', '~> 2'               # Nimbus SDK
-    spec.dependency 'NimbusSDK/NimbusRenderStaticKit' # Static Ad Renderer
-    spec.dependency 'NimbusSDK/NimbusRenderVideoKit'  # Video Ad Renderer
-    spec.dependency 'NimbusSDK/NimbusRequestAPSKit'   # Amazon Publisher Services Request Support
-    spec.dependency 'NimbusSDK/NimbusRequestFANKit'   # Meta Audience Network Request Support
-    spec.dependency 'NimbusSDK/NimbusRenderFANKit'    # Meta Audience Network Ad Renderer
+    spec.dependency 'NimbusSDK/NimbusAPSKit'          # Amazon Publisher Services Request Support
+    spec.dependency 'NimbusSDK/NimbusMetaKit'         # Meta Audience Network Request Support
     spec.dependency 'NimbusSDK/NimbusGAMKit'          # Google Ad MAnager Dynamic Price and Mediation Adapters
-    spec.dependency 'NimbusSDK/NimbusGoogleKit'       # Google AdMob Dynamic Price and Mediation Adapters
     spec.dependency 'NimbusSDK/NimbusUnityKit'        # Unity Ads Request Support and Renderer
     spec.dependency 'NimbusSDK/NimbusVungleKit'       # Vungle Ads Request Support and Renderer
     spec.dependency 'NimbusSDK/NimbusMobileFuseKit'   # MobileFuse Ads Request Support and Renderer (Available from 2.21.0)
+    spec.dependency 'NimbusSDK/NimbusAdMobKit'        # AdMob Bidding Support (Available from 2.22.0)
+    spec.dependency 'NimbusSDK/NimbusMintegralKit'    # Mintegral Support (Available from 2.24.0)
+    spec.dependency 'NimbusSDK/NimbusMolocoKit'       # Moloco Support (Available from 2.29.0)
+    spec.dependency 'NimbusSDK/NimbusInMobiKit'       # InMobi Support (Available from 2.31.0)
   end
