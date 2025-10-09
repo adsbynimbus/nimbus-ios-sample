@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import NimbusCoreKit
 import NimbusKit
 #if canImport(NimbusGAMKit)                    // Swift Package Manager
 import NimbusGAMKit
@@ -98,13 +97,13 @@ extension GAMRewardedViewController: @preconcurrency AdMetadataDelegate {
 // MARK: - NimbusRequestManagerDelegate
 
 extension GAMRewardedViewController: NimbusRequestManagerDelegate {
-    func didCompleteNimbusRequest(request: NimbusRequestKit.NimbusRequest, ad: NimbusCoreKit.NimbusAd) {
+    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
         print("didCompleteNimbusRequest")
         
         
     }
     
-    func didFailNimbusRequest(request: NimbusRequestKit.NimbusRequest, error: NimbusCoreKit.NimbusError) {
+    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
         print("didFailNimbusRequest: \(error.localizedDescription)")
     }
     

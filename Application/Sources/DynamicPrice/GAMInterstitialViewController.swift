@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import NimbusCoreKit
 import NimbusKit
 #if canImport(NimbusGAMKit)                    // Swift Package Manager
 import NimbusGAMKit

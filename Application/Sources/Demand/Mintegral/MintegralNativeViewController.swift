@@ -7,7 +7,6 @@
 
 import UIKit
 import NimbusKit
-import NimbusCoreKit
 import MTGSDK
 #if canImport(NimbusSDK) // CocoaPods
 import NimbusSDK

@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-import NimbusRequestKit
+import NimbusKit
 
 protocol NavigationItem: CaseIterable, CustomStringConvertible {
     var rawValue: String { get }
