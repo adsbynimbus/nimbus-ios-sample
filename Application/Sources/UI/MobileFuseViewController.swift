@@ -20,7 +20,7 @@ import NimbusMobileFuseKit
 class MobileFuseViewController: SampleAdViewController {
     
     deinit {
-        Task { @MainActor in NimbusRequestManager.removeMobileFuseHeader() }
+        Task { @MainActor in Nimbus.removeMobileFuseHeader() }
     }
     
     init(headerTitle: String, headerSubTitle: String) {
@@ -34,6 +34,6 @@ class MobileFuseViewController: SampleAdViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NimbusRequestManager.insertMobileFuseHeader()
+        Nimbus.insertMobileFuseHeader()
     }
 }

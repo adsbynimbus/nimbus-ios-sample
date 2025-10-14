@@ -72,21 +72,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        Nimbus.shared.testMode = UserDefaults.standard.nimbusTestMode
-        Nimbus.shared.coppa = UserDefaults.standard.coppaOn
+        Nimbus.configuration.testMode = UserDefaults.standard.nimbusTestMode
+        Nimbus.configuration.coppa = UserDefaults.standard.coppaOn
         
         // This is only for testing environment, do NOT add this on production environment
         if let mockServerUrl = ProcessInfo.processInfo.environment["MOCK_SERVER_URL"] {
-            NimbusRequestManager.requestUrl = URL(string: mockServerUrl)!
-        } else if Nimbus.shared.testMode {
-            NimbusRequestManager.requestUrl = URL(string: "https://\(Nimbus.shared.publisher).adsbynimbus.com/rta/test")!
-            NimbusRequestManager.additionalRequestHeaders = [
+            Nimbus.configuration.requestUrl = URL(string: mockServerUrl)!
+        } else if Nimbus.configuration.testMode {
+            Nimbus.configuration.requestUrl = URL(string: "https://\(publisher).adsbynimbus.com/rta/test")!
+            Nimbus.configuration.additionalRequestHeaders = [
                 "Nimbus-Test-No-Fill": String(UserDefaults.standard.forceNoFill)
             ]
         }
 
         // User
-        NimbusRequestManager.user = NimbusUser(age: 20, gender: .male)
+        Nimbus.configuration.user = NimbusUser(age: 20, gender: .male)
     }
     
     private func startTrackingATT() {

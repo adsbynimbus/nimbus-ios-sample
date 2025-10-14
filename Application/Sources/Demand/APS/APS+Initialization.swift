@@ -17,7 +17,7 @@ extension UIApplicationDelegate {
             DTBAds.sharedInstance().setAppKey(appKey)
             DTBAds.sharedInstance().mraidPolicy = CUSTOM_MRAID
             DTBAds.sharedInstance().mraidCustomVersions = ["1.0", "2.0", "3.0"]
-            DTBAds.sharedInstance().testMode = Nimbus.shared.testMode
+            DTBAds.sharedInstance().testMode = Nimbus.configuration.testMode
             #if DEBUG
             DTBAds.sharedInstance().setLogLevel(DTBLogLevelDebug)
             #endif
