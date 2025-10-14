@@ -13,12 +13,12 @@ import Foundation
 /// it's not something a client app would normally do.
 struct ExtensionHelper {
     static var enabledState: [ObjectIdentifier: Bool] {
-        Nimbus.shared.extensions.mapValues { $0.enabled }
+        Nimbus.extensions.mapValues { $0.enabled }
     }
     
     static func disableAllExtensions(except: NimbusExtension.Type? = nil) {
         Task { @MainActor in
-            for (key, ext) in Nimbus.shared.extensions {
+            for (key, ext) in Nimbus.extensions {
                 if except == nil || key != ObjectIdentifier(except!) {
                     type(of: ext).disable()
                 }
@@ -29,7 +29,7 @@ struct ExtensionHelper {
     static func restoreExtensionsState(from: [ObjectIdentifier: Bool]) {
         Task { @MainActor in
             for (extType, enabled) in from {
-                guard let ext = Nimbus.shared.extensions[extType] else {
+                guard let ext = Nimbus.extensions[extType] else {
                     continue
                 }
                 

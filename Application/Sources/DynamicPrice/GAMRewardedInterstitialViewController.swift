@@ -93,18 +93,3 @@ extension GAMRewardedInterstitialViewController: AdMetadataDelegate {
         }
     }
 }
-
-// MARK: - NimbusRequestManagerDelegate
-
-extension GAMRewardedInterstitialViewController: NimbusRequestManagerDelegate {
-    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
-        print("didCompleteNimbusRequest")
-        
-        
-    }
-    
-    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
-        print("didFailNimbusRequest: \(error.localizedDescription)")
-    }
-    
-}
