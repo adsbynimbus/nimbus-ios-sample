@@ -125,7 +125,7 @@ extension UserDefaults {
                 user.configureGdprConsent(consentString: testGDPRConsentString)
                 Nimbus.configuration.user = user
             } else {
-                Nimbus.configuration.user?.extensions?.removeValue(forKey: "consent")
+                Nimbus.configuration.user?.extensions.removeValue(forKey: "consent")
             }
         }
     }
