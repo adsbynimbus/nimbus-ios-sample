@@ -93,19 +93,3 @@ extension GAMRewardedViewController: @preconcurrency AdMetadataDelegate {
         }
     }
 }
-
-// MARK: - NimbusRequestManagerDelegate
-
-extension GAMRewardedViewController: NimbusRequestManagerDelegate {
-    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
-        print("didCompleteNimbusRequest")
-        
-        
-    }
-    
-    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
-        print("didFailNimbusRequest: \(error.localizedDescription)")
-    }
-    
-}
-

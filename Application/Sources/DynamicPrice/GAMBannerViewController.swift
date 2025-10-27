@@ -17,7 +17,6 @@ import GoogleMobileAds
 class GAMBannerViewController: GAMBaseViewController {
     private static let refreshInterval: TimeInterval = 30
     private let bannerView = AdManagerBannerView(adSize: AdSizeBanner)
-    private let requestManager = NimbusRequestManager()
     
     private var refreshTimer: Timer?
     

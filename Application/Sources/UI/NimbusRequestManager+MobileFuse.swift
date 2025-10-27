@@ -12,12 +12,12 @@ private let enableMobileFuseHeaderKey = "Nimbus-Test-EnableMobileFuseSDK"
 
 ///  Nimbus test endpoint header manipulation. This is NOT something to do in production environment.
 @MainActor
-extension NimbusRequestManager {
+extension Nimbus {
     static func insertMobileFuseHeader() {
-        NimbusRequestManager.additionalRequestHeaders[enableMobileFuseHeaderKey] = "true"
+        Nimbus.configuration.additionalRequestHeaders[enableMobileFuseHeaderKey] = "true"
     }
     
     static func removeMobileFuseHeader() {
-        NimbusRequestManager.additionalRequestHeaders.removeValue(forKey: enableMobileFuseHeaderKey)
+        Nimbus.configuration.additionalRequestHeaders.removeValue(forKey: enableMobileFuseHeaderKey)
     }
 }

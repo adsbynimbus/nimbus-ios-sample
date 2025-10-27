@@ -88,6 +88,7 @@ enum GeneralSettings: String, SettingsEnum, CaseIterable {
 
 // Nimbus Test Mode
 extension UserDefaults {
+    @MainActor
     var nimbusTestMode: Bool {
         get {
             register(defaults: [#function: true])
@@ -95,10 +96,11 @@ extension UserDefaults {
         }
         set {
             set(newValue, forKey: #function)
-            Nimbus.shared.testMode = newValue
+            Nimbus.configuration.testMode = newValue
         }
     }
     
+    @MainActor
     var coppaOn: Bool {
         get {
             register(defaults: [#function: false])
@@ -106,7 +108,7 @@ extension UserDefaults {
         }
         set {
             set(newValue, forKey: #function)
-            Nimbus.shared.coppa = newValue
+            Nimbus.configuration.coppa = newValue
         }
     }
     
@@ -118,12 +120,12 @@ extension UserDefaults {
         }
         set {
             set(newValue, forKey: #function)
-            if newValue, var user = NimbusRequestManager.user {
+            if newValue, var user = Nimbus.configuration.user {
                 // Same string as Android sample app
                 user.configureGdprConsent(consentString: testGDPRConsentString)
-                NimbusRequestManager.user = user
+                Nimbus.configuration.user = user
             } else {
-                NimbusRequestManager.user?.extensions?.removeValue(forKey: "consent")
+                Nimbus.configuration.user?.extensions?.removeValue(forKey: "consent")
             }
         }
     }
@@ -184,7 +186,7 @@ extension UserDefaults {
         }
         set {
             set(newValue, forKey: #function)
-            NimbusRequestManager.additionalRequestHeaders["Nimbus-Test-No-Fill"] = String(newValue)
+            Nimbus.configuration.additionalRequestHeaders["Nimbus-Test-No-Fill"] = String(newValue)
         }
     }
     
