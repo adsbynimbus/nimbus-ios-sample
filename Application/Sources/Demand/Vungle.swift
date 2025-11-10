@@ -40,7 +40,7 @@ class VungleViewController: SampleAdViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        VungleExtension.nativeViewProvider = { (container, nativeAd) in
+        VungleExtension.nativeAdViewProvider = { (container, nativeAd) in
             NimbusVungleNativeAdView(nativeAd)
         }
         
