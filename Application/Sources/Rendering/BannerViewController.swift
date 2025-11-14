@@ -21,8 +21,8 @@ final class BannerViewController: SampleAdViewController {
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: Constants.headerOffset),
             contentView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            contentView.widthAnchor.constraint(greaterThanOrEqualToConstant: 320),
-            contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 50),
+            contentView.widthAnchor.constraint(equalToConstant: 320),
+            contentView.heightAnchor.constraint(equalToConstant: 50),
         ])
         
         Task { await showAd() }

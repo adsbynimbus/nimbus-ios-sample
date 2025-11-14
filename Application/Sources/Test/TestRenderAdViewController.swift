@@ -44,9 +44,10 @@ final class TestRenderAdViewController: UIViewController {
             ad: ad,
             container: view,
             adPresentingViewController: self,
-            delegate: nil,
-            showsSKOverlay: true
+            delegate: nil
         )
+        
+        adController.adView.showsSKOverlay = true
 
         setupLogo()
         setup(adView: adController.adView)
