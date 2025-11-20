@@ -47,7 +47,7 @@ final class TestRenderAdViewController: UIViewController {
             delegate: nil
         )
         
-        adController.adView.showsSKOverlay = true
+        (adController.adView as? NimbusAdView)?.showsSKOverlay = true
 
         setupLogo()
         setup(adView: adController.adView)
