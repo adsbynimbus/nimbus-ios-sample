@@ -9,10 +9,11 @@ import UIKit
 import NimbusKit
 
 final class TestRenderAdViewController: UIViewController {
-    private let ad: NimbusAd
+    private let response: NimbusAd
+    private var ad: InlineAd?
     
-    init(ad: NimbusAd) {
-        self.ad = ad
+    init(response: NimbusAd) {
+        self.response = response
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -20,37 +21,18 @@ final class TestRenderAdViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    static func showBlocking(from: UIViewController, ad: NimbusAd) -> AdController? {
-        do {
-            return try Nimbus.loadBlocking(
-                ad: ad,
-                presentingViewController: from,
-                delegate: nil,
-                isRewarded: false
-            )
-        } catch {
-            print("\(#file) failed to render blocking ad, error: \(error)")
-        }
-        
-        return nil
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
         
-        let adController = try! Nimbus.load(
-            ad: ad,
-            container: view,
-            adPresentingViewController: self,
-            delegate: nil
-        )
-        
-        (adController.adView as? NimbusAdView)?.showsSKOverlay = true
+        Task {
+            ad = try await Nimbus.inlineAd(response: response).show(in: view)
+            (ad?.adView as? NimbusAdView)?.showsSKOverlay = true
 
-        setupLogo()
-        setup(adView: adController.adView)
+            setupLogo()
+            setup(adView: ad?.adView)
+        }
     }
     
     private func setup(adView: UIView?) {
