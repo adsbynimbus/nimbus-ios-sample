@@ -69,11 +69,11 @@ final class FANViewController: SampleAdViewController, AdControllerDelegate {
         
         switch adType {
         case .metaBanner, .metaNative:
-            ad = try await Nimbus.inlineAd(response: response).show(in: view)
+            ad = try await Nimbus.inlineAd(from: response).show(in: view)
         case .metaInterstitial:
-            ad = try await Nimbus.interstitialAd(response: response).show(in: self)
+            ad = try await Nimbus.interstitialAd(from: response).show(in: self)
         case .metaRewardedVideo:
-            ad = try await Nimbus.rewardedAd(response: response).show(in: self)
+            ad = try await Nimbus.rewardedAd(from: response).show(in: self)
         }
     }
 

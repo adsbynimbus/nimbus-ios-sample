@@ -27,7 +27,7 @@ final class TestRenderAdViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
         Task {
-            ad = try await Nimbus.inlineAd(response: response).show(in: view)
+            ad = try await Nimbus.inlineAd(from: response).show(in: view)
             (ad?.adView as? NimbusAdView)?.showsSKOverlay = true
 
             setupLogo()
