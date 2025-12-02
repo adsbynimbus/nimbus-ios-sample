@@ -71,14 +71,41 @@ class VungleViewController: SampleAdViewController {
         switch adType {
             
         case .vungleBanner:
-            inlineAd = try await Nimbus.bannerAd(position: "TEST_BANNER", refreshInterval: 30).show(in: contentView)
+            inlineAd = try await Nimbus.bannerAd(position: "TEST_BANNER", refreshInterval: 30)
+                .show(in: contentView)
+                .onEvent { [weak self] event in
+                    self?.didReceiveNimbusEvent(event: event, ad: self?.inlineAd)
+                }
+                .onError { [weak self] error in
+                    self?.didReceiveNimbusError(error: error)
+                }
         case .vungleMREC:
             inlineAd = try await Nimbus.bannerAd(position: "TEST_MREC", size: .mrec, refreshInterval: 30)
                 .show(in: contentView)
+                .onEvent { [weak self] event in
+                    self?.didReceiveNimbusEvent(event: event, ad: self?.inlineAd)
+                }
+                .onError { [weak self] error in
+                    self?.didReceiveNimbusError(error: error)
+                }
         case .vungleInterstitial:
-            interstitialAd = try await Nimbus.interstitialAd(position: "TEST_INTERSTITIAL_NOT_SKIPPABLE").show(in: self)
+            interstitialAd = try await Nimbus.interstitialAd(position: "TEST_INTERSTITIAL_NOT_SKIPPABLE")
+                .show(in: self)
+                .onEvent { [weak self] event in
+                    self?.didReceiveNimbusEvent(event: event, ad: self?.interstitialAd)
+                }
+                .onError { [weak self] error in
+                    self?.didReceiveNimbusError(error: error)
+                }
         case .vungleRewarded:
-            rewardedAd = try await Nimbus.rewardedAd(position: "TEST_REWARDED").show(in: self)
+            rewardedAd = try await Nimbus.rewardedAd(position: "TEST_REWARDED")
+                .show(in: self)
+                .onEvent { [weak self] event in
+                    self?.didReceiveNimbusEvent(event: event, ad: self?.rewardedAd)
+                }
+                .onError { [weak self] error in
+                    self?.didReceiveNimbusError(error: error)
+                }
         case .vungleNative:
             nativeAdContentView.translatesAutoresizingMaskIntoConstraints = false
             

@@ -32,15 +32,16 @@ final class FANViewController: SampleAdViewController, AdControllerDelegate {
     private let adType: MetaSample
     private var dimensions: NimbusAdDimensions?
     private var adController: AdController?
-    var nimbusAd: NimbusAd?
+    var response: NimbusAd?
+    private var ad: Ad?
     
     init(adType: MetaSample, headerSubTitle: String) {
         self.adType = adType
         
         super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle, enabledExtension: MetaExtension.self)
        
-        nimbusAd = createNimbusAd(adType: adType)
-        dimensions = nimbusAd?.adDimensions
+        response = createNimbusAd(adType: adType)
+        dimensions = response?.adDimensions
     }
     
     required init?(coder: NSCoder) {
@@ -59,30 +60,26 @@ final class FANViewController: SampleAdViewController, AdControllerDelegate {
         } else if adType == .metaRewardedVideo && metaRewardedVideoId.isEmpty {
             showCustomAlert("META_REWARDED_VIDEO_PLACEMENT_ID")
         } else {
-            setupAdView()
+            Task { try await setupAdView() }
         }
     }
     
-    private func setupAdView() {
-        guard let nimbusAd else { return }
+    private func setupAdView() async throws {
+        guard let response else { return }
         
         switch adType {
         case .metaBanner, .metaNative:
-            adController = try! Nimbus.load(ad: nimbusAd, container: view, adPresentingViewController: self, delegate: self)
-        case .metaInterstitial, .metaRewardedVideo:
-            adController = try! Nimbus.loadBlocking(
-                ad: nimbusAd,
-                presentingViewController: self,
-                delegate: self,
-                isRewarded: adType == .metaRewardedVideo
-            )
-            adController?.start()
+            ad = try await Nimbus.inlineAd(from: response).show(in: view)
+        case .metaInterstitial:
+            ad = try await Nimbus.interstitialAd(from: response).show(in: self)
+        case .metaRewardedVideo:
+            ad = try await Nimbus.rewardedAd(from: response).show(in: self)
         }
     }
 
     private func createNimbusAd(adType: MetaSample) -> NimbusAd {
         switch adType {
-            
+
         case .metaBanner:
             return createNimbusAd(
                 placementId: "IMG_16_9_LINK#\(metaBannerId)",
@@ -144,11 +141,11 @@ final class FANViewController: SampleAdViewController, AdControllerDelegate {
         )
     }
     
-    func didReceiveNimbusEvent(controller: any AdController, event: NimbusEvent) {
+    func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {
         super.didReceiveNimbusEvent(event: event)
     }
     
-    func didReceiveNimbusError(controller: any AdController, error: any NimbusError) {
+    func didReceiveNimbusError(controller: AdController, error: any NimbusError) {
         super.didReceiveNimbusError(error: error)
     }
 }

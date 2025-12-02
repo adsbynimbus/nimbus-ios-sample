@@ -13,6 +13,7 @@ class TestRenderViewController: DemoViewController {
     var isBlocking = false
     var useNimbusRenderer = false
     
+    private var interstitialAd: InterstitialAd?
     private var iTunesAppId: String?
     
     private lazy var skoverlayMenuButton: UIButton = {
@@ -172,13 +173,15 @@ class TestRenderViewController: DemoViewController {
         
         markupTextView.resignFirstResponder()
         
-        let ad = getAdFromMarkup(adMarkup: adMarkup)
+        let response = getAdFromMarkup(adMarkup: adMarkup)
         
         if isBlocking {
-            TestRenderAdViewController.showBlocking(from: self, ad: ad)?.start()
+            Task {
+                self.interstitialAd = try await Nimbus.interstitialAd(from: response).show(in: self)
+            }
         } else {
             navigationController?.pushViewController(
-                TestRenderAdViewController(ad: ad),
+                TestRenderAdViewController(response: response),
                 animated: true
             )
         }
