@@ -50,7 +50,7 @@ class GAMRewardedViewController: GAMBaseViewController {
                 
                 rewardedAd.fullScreenContentDelegate = self
                 rewardedAd.adMetadataDelegate = self
-                rewardedAd.applyDynamicPrice(adResponse: adResponse)
+                rewardedAd.applyDynamicPrice(response: adResponse)
             }
         )
     }

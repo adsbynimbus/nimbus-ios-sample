@@ -53,7 +53,7 @@ class GAMInterstitialViewController: GAMBaseViewController {
             interstitialAd.fullScreenContentDelegate = self
             interstitialAd.appEventDelegate = self
             
-            interstitialAd.applyDynamicPrice(adResponse: adResponse)
+            interstitialAd.applyDynamicPrice(response: adResponse)
             interstitialAd.present(from: self)
         }
     }

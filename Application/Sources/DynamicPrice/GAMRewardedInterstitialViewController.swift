@@ -51,7 +51,7 @@ class GAMRewardedInterstitialViewController: GAMBaseViewController {
             
             rewardedInterstitialAd.fullScreenContentDelegate = self
             rewardedInterstitialAd.adMetadataDelegate = self
-            rewardedInterstitialAd.applyDynamicPrice(adResponse: adResponse)
+            rewardedInterstitialAd.applyDynamicPrice(response: adResponse)
         }
     }
 }
