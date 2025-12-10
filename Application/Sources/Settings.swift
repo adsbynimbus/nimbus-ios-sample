@@ -120,12 +120,10 @@ extension UserDefaults {
         }
         set {
             set(newValue, forKey: #function)
-            if newValue, var user = Nimbus.configuration.user {
-                // Same string as Android sample app
-                user.configureGdprConsent(consentString: testGDPRConsentString)
-                Nimbus.configuration.user = user
+            if newValue {
+                UserDefaults.IAB.gdprConsentString = testGDPRConsentString
             } else {
-                Nimbus.configuration.user?.extensions?.removeValue(forKey: "consent")
+                UserDefaults.IAB.gdprConsentString = nil
             }
         }
     }
