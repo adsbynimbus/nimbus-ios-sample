@@ -9,7 +9,7 @@ import NimbusKit
 import UIKit
 import WebKit
 
-extension NimbusAd {
+extension NimbusResponse {
     var testIdentifier: String {
         var dimens = ""
         if let width = adDimensions?.width, let height = adDimensions?.height {

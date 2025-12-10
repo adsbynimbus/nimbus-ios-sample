@@ -24,7 +24,7 @@ class SampleAppLogger: ObservableObject {
         objectWillChange.send()
     }
     
-    func logRender(_ ad: NimbusAd) {
+    func logRender(_ ad: NimbusResponse) {
         append("Rendered: \(ad.testIdentifier)")
     }
     

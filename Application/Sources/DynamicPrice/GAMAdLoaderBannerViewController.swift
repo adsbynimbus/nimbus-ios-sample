@@ -51,7 +51,7 @@ class GAMAdLoaderBannerViewController: GAMBaseViewController {
         )
     }
     
-    func fetchNimbusBid() async -> NimbusAd? {
+    func fetchNimbusBid() async -> NimbusResponse? {
         do {
             return try await Nimbus.bannerAd(position: headerSubTitle).fetch().response
         } catch {
@@ -60,7 +60,7 @@ class GAMAdLoaderBannerViewController: GAMBaseViewController {
         }
     }
     
-    func load(adResponse: NimbusAd? = nil) {
+    func load(adResponse: NimbusResponse? = nil) {
         adLoader = AdLoader(
             adUnitID: googleDynamicPricePlacementId,
             rootViewController: self,

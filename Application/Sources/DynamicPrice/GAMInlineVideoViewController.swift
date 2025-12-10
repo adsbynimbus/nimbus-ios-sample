@@ -25,7 +25,7 @@ class GAMInlineVideoViewController: GAMBaseViewController {
         }
     }
     
-    func fetchNimbusBid() async -> NimbusAd? {
+    func fetchNimbusBid() async -> NimbusResponse? {
         do {
             return try await Nimbus.videoAd(position: headerSubTitle).fetch().response
         } catch {
@@ -34,7 +34,7 @@ class GAMInlineVideoViewController: GAMBaseViewController {
         }
     }
     
-    func setupBannerView(adResponse: NimbusAd?) {
+    func setupBannerView(adResponse: NimbusResponse?) {
         let bannerView = AdManagerBannerView(adSize: AdSizeMediumRectangle)
         bannerView.translatesAutoresizingMaskIntoConstraints = false
         bannerView.adUnitID = googleDynamicPricePlacementId

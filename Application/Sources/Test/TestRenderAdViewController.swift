@@ -9,10 +9,10 @@ import UIKit
 import NimbusKit
 
 final class TestRenderAdViewController: UIViewController {
-    private let response: NimbusAd
+    private let response: NimbusResponse
     private var ad: InlineAd?
     
-    init(response: NimbusAd) {
+    init(response: NimbusResponse) {
         self.response = response
         super.init(nibName: nil, bundle: nil)
     }

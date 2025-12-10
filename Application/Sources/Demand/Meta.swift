@@ -32,7 +32,7 @@ final class FANViewController: SampleAdViewController, AdControllerDelegate {
     private let adType: MetaSample
     private var dimensions: NimbusAdDimensions?
     private var adController: AdController?
-    var response: NimbusAd?
+    var response: NimbusResponse?
     private var ad: Ad?
     
     init(adType: MetaSample, headerSubTitle: String) {
@@ -77,7 +77,7 @@ final class FANViewController: SampleAdViewController, AdControllerDelegate {
         }
     }
 
-    private func createNimbusAd(adType: MetaSample) -> NimbusAd {
+    private func createNimbusAd(adType: MetaSample) -> NimbusResponse {
         switch adType {
 
         case .metaBanner:
@@ -121,8 +121,8 @@ final class FANViewController: SampleAdViewController, AdControllerDelegate {
         isMraid: Bool = true,
         isInterstitial: Bool,
         adDimensions: NimbusAdDimensions? = nil
-    ) -> NimbusAd {
-        NimbusAd(
+    ) -> NimbusResponse {
+        NimbusResponse(
             position: "",
             auctionType: auctionType,
             bidRaw: 0,
