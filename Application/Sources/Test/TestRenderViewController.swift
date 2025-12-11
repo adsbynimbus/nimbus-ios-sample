@@ -209,7 +209,7 @@ class TestRenderViewController: DemoViewController {
     
     // MARK: - Create NimbusAd
     
-    private func getAdFromMarkup(adMarkup: String) -> NimbusAd {
+    private func getAdFromMarkup(adMarkup: String) -> NimbusResponse {
         let type: NimbusAuctionType = isVideoMarkup(adMarkup: adMarkup) ? .video : .static
         return createNimbusAd(auctionType: type, markup: adMarkup)
     }
@@ -225,7 +225,7 @@ class TestRenderViewController: DemoViewController {
         markup: String,
         isMraid: Bool = true,
         isInterstitial: Bool = true
-    ) -> NimbusAd {
+    ) -> NimbusResponse {
         let adDimensions = isInterstitial ?
         NimbusAdDimensions(width: 320, height: 480) :
         NimbusAdDimensions(width: 300, height: 50)
@@ -234,7 +234,7 @@ class TestRenderViewController: DemoViewController {
             skAdNetwork: iTunesAppId != nil ? NimbusAdSkAdNetwork(advertisedAppStoreItemID: iTunesAppId) : nil
         )
         
-        return NimbusAd(
+        return NimbusResponse(
             position: "",
             auctionType: auctionType,
             bidRaw: 0,

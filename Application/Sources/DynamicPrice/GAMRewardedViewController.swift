@@ -24,7 +24,7 @@ class GAMRewardedViewController: GAMBaseViewController {
         Task { loadRewarded(adResponse: await fetchNimbusBid()) }
     }
     
-    func fetchNimbusBid() async -> NimbusAd? {
+    func fetchNimbusBid() async -> NimbusResponse? {
         do {
             return try await Nimbus.rewardedAd(position: headerSubTitle).fetch().response
         } catch {
@@ -33,7 +33,7 @@ class GAMRewardedViewController: GAMBaseViewController {
         }
     }
     
-    func loadRewarded(adResponse: NimbusAd? = nil) {
+    func loadRewarded(adResponse: NimbusResponse? = nil) {
         adResponse?.applyDynamicPrice(into: gamRequest, mapping: mapping)
         
         RewardedAd.load(
@@ -50,7 +50,7 @@ class GAMRewardedViewController: GAMBaseViewController {
                 
                 rewardedAd.fullScreenContentDelegate = self
                 rewardedAd.adMetadataDelegate = self
-                rewardedAd.applyDynamicPrice(adResponse: adResponse)
+                rewardedAd.applyDynamicPrice(response: adResponse)
             }
         )
     }

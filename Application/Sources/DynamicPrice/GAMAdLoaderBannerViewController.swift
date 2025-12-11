@@ -51,7 +51,7 @@ class GAMAdLoaderBannerViewController: GAMBaseViewController {
         )
     }
     
-    func fetchNimbusBid() async -> NimbusAd? {
+    func fetchNimbusBid() async -> NimbusResponse? {
         do {
             return try await Nimbus.bannerAd(position: headerSubTitle).fetch().response
         } catch {
@@ -60,7 +60,7 @@ class GAMAdLoaderBannerViewController: GAMBaseViewController {
         }
     }
     
-    func load(adResponse: NimbusAd? = nil) {
+    func load(adResponse: NimbusResponse? = nil) {
         adLoader = AdLoader(
             adUnitID: googleDynamicPricePlacementId,
             rootViewController: self,
@@ -68,7 +68,7 @@ class GAMAdLoaderBannerViewController: GAMBaseViewController {
             options: nil
         )
         adLoader?.delegate = self
-        adLoader?.loadDynamicPrice(gamRequest: AdManagerRequest(), adResponse: adResponse, mapping: mapping)
+        adLoader?.loadDynamicPrice(gamRequest: AdManagerRequest(), response: adResponse, mapping: mapping)
     }
     
     func fetchAndLoad() {
@@ -113,7 +113,7 @@ extension GAMAdLoaderBannerViewController: @preconcurrency AdLoaderDelegate, @pr
         bannerView.adUnitID = googleDynamicPricePlacementId
         bannerView.appEventDelegate = self
         bannerView.delegate = self
-        bannerView.applyDynamicPrice(ad: adLoader.nimbusAd)
+        bannerView.applyDynamicPrice(response: adLoader.nimbusResponse)
         
         view.addSubview(bannerView)
         

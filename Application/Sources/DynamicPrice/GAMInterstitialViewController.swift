@@ -26,7 +26,7 @@ class GAMInterstitialViewController: GAMBaseViewController {
         }
     }
     
-    func fetchNimbusBid() async -> NimbusAd? {
+    func fetchNimbusBid() async -> NimbusResponse? {
         do {
             return try await Nimbus.interstitialAd(position: headerSubTitle).fetch().response
         } catch {
@@ -35,7 +35,7 @@ class GAMInterstitialViewController: GAMBaseViewController {
         }
     }
     
-    func loadInterstitial(adResponse: NimbusAd? = nil) {
+    func loadInterstitial(adResponse: NimbusResponse? = nil) {
         adResponse?.applyDynamicPrice(into: gamRequest, mapping: mapping)
         
         AdManagerInterstitialAd.load(
@@ -53,7 +53,7 @@ class GAMInterstitialViewController: GAMBaseViewController {
             interstitialAd.fullScreenContentDelegate = self
             interstitialAd.appEventDelegate = self
             
-            interstitialAd.applyDynamicPrice(adResponse: adResponse)
+            interstitialAd.applyDynamicPrice(response: adResponse)
             interstitialAd.present(from: self)
         }
     }
