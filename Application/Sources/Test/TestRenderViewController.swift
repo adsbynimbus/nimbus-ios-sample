@@ -223,12 +223,18 @@ class TestRenderViewController: DemoViewController {
         placementId: String? = nil,
         markupType: NimbusResponse.Bid.MarkupType,
         markup: String,
-        isMraid: Bool = true,
         isInterstitial: Bool = true
     ) -> NimbusResponse {
-        let adDimensions = isInterstitial ?
-        NimbusAdDimensions(width: 320, height: 480) :
-        NimbusAdDimensions(width: 300, height: 50)
+        let width: Int
+        let height: Int
+        
+        if isInterstitial {
+            width = 320
+            height = 480
+        } else {
+            width = 300
+            height = 50
+        }
         
         let ext = NimbusResponse.Bid.Extensions(skadn: iTunesAppId != nil ? NimbusAdSkAdNetwork(advertisedAppStoreItemID: iTunesAppId) : nil)
         
@@ -240,8 +246,8 @@ class TestRenderViewController: DemoViewController {
                 price: 0,
                 adomain: nil,
                 bundle: nil,
-                w: adDimensions.width,
-                h: adDimensions.height,
+                w: width,
+                h: height,
                 cid: nil,
                 crid: nil,
                 cat: nil,

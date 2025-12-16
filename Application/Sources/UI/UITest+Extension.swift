@@ -12,7 +12,7 @@ import WebKit
 extension NimbusResponse {
     var testIdentifier: String {
         var dimens = ""
-        if let width = bid.adDimensions?.width, let height = bid.adDimensions?.height {
+        if let width = bid.w, let height = bid.h {
             dimens = " \(width)x\(height)"
         }
         return "\(bid.ext?.omp?.buyer ?? "") \(bid.mtype.stringValue)\(dimens)"

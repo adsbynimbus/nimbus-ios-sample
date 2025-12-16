@@ -30,7 +30,7 @@ extension UIApplicationDelegate {
 final class FANViewController: SampleAdViewController, AdControllerDelegate {
     
     private let adType: MetaSample
-    private var dimensions: NimbusAdDimensions?
+    private var dimensions: CGSize?
     private var adController: AdController?
     var response: NimbusResponse?
     private var ad: Ad?
@@ -41,7 +41,7 @@ final class FANViewController: SampleAdViewController, AdControllerDelegate {
         super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle, enabledExtension: MetaExtension.self)
        
         response = createNimbusAd(adType: adType)
-        dimensions = response?.bid.adDimensions
+        dimensions = response?.bid.size
     }
     
     required init?(coder: NSCoder) {
@@ -84,31 +84,42 @@ final class FANViewController: SampleAdViewController, AdControllerDelegate {
             return createNimbusAd(
                 placementId: "IMG_16_9_LINK#\(metaBannerId)",
                 markupType: .static,
-                isInterstitial: false,
-                adDimensions: NimbusAdDimensions(width: 320, height: 50)
+                width: 320,
+                height: 50
             )
             
         case .metaInterstitial:
             return createNimbusAd(
                 placementId: "IMG_16_9_LINK#\(metaInterstitialId)",
                 markupType: .static,
-                isInterstitial: true,
-                adDimensions: NimbusAdDimensions(width: 320, height: 480)
+                width: 320,
+                height: 480
             )
             
         case .metaNative:
+            let width: Int
+            let height: Int
+            
+            if UIDevice.nimbusIsLandscape {
+                width = 220
+                height = 180
+            } else {
+                width = 320
+                height = 480
+            }
+            
             return createNimbusAd(
                 placementId: "IMG_16_9_LINK#\(metaNativeId)",
                 markupType: .native,
-                isInterstitial: false,
-                adDimensions: UIDevice.nimbusIsLandscape ? NimbusAdDimensions.landscapeInlineAd : NimbusAdDimensions.portraitInlineAd
+                width: width,
+                height: height
             )
         case .metaRewardedVideo:
             return createNimbusAd(
                 placementId: "VID_HD_16_9_15S_LINK#\(metaRewardedVideoId)",
                 markupType: .video,
-                isInterstitial: true,
-                adDimensions: NimbusAdDimensions(width: 320, height: 480)
+                width: 320,
+                height: 480
             )
         }
     }
@@ -118,9 +129,8 @@ final class FANViewController: SampleAdViewController, AdControllerDelegate {
         placementId: String? = nil,
         markupType: NimbusResponse.Bid.MarkupType,
         markup: String = "",
-        isMraid: Bool = true,
-        isInterstitial: Bool,
-        adDimensions: NimbusAdDimensions? = nil
+        width: Int? = nil,
+        height: Int? = nil
     ) -> NimbusResponse {
         return NimbusResponse(
             id: nil,
@@ -130,15 +140,15 @@ final class FANViewController: SampleAdViewController, AdControllerDelegate {
                 price: 0,
                 adomain: nil,
                 bundle: nil,
-                w: adDimensions?.width,
-                h: adDimensions?.height,
+                w: width,
+                h: height,
                 cid: nil,
                 crid: nil,
                 cat: nil,
                 attr: nil,
                 dealid: nil,
                 exp: nil,
-                ext: nil))
+                ext: .init(omp: .init(buyer: ThirdPartyDemandNetwork.facebook.rawValue, buyerPlacementId: placementId))))
     }
     
     func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {
