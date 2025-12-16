@@ -210,7 +210,7 @@ class TestRenderViewController: DemoViewController {
     // MARK: - Create NimbusAd
     
     private func getAdFromMarkup(adMarkup: String) -> NimbusResponse {
-        let type: NimbusResponse.Bid.MarkupType = isVideoMarkup(adMarkup: adMarkup) ? .video : .banner
+        let type: NimbusResponse.Bid.MarkupType = isVideoMarkup(adMarkup: adMarkup) ? .video : .static
         return createNimbusAd(markupType: type, markup: adMarkup)
     }
     
@@ -240,6 +240,8 @@ class TestRenderViewController: DemoViewController {
                 price: 0,
                 adomain: nil,
                 bundle: nil,
+                w: adDimensions.width,
+                h: adDimensions.height,
                 cid: nil,
                 crid: nil,
                 cat: nil,

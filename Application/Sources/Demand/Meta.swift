@@ -83,7 +83,7 @@ final class FANViewController: SampleAdViewController, AdControllerDelegate {
         case .metaBanner:
             return createNimbusAd(
                 placementId: "IMG_16_9_LINK#\(metaBannerId)",
-                markupType: .banner,
+                markupType: .static,
                 isInterstitial: false,
                 adDimensions: NimbusAdDimensions(width: 320, height: 50)
             )
@@ -91,7 +91,7 @@ final class FANViewController: SampleAdViewController, AdControllerDelegate {
         case .metaInterstitial:
             return createNimbusAd(
                 placementId: "IMG_16_9_LINK#\(metaInterstitialId)",
-                markupType: .banner,
+                markupType: .static,
                 isInterstitial: true,
                 adDimensions: NimbusAdDimensions(width: 320, height: 480)
             )
