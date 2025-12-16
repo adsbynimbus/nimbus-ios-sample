@@ -210,8 +210,8 @@ class TestRenderViewController: DemoViewController {
     // MARK: - Create NimbusAd
     
     private func getAdFromMarkup(adMarkup: String) -> NimbusResponse {
-        let type: NimbusAuctionType = isVideoMarkup(adMarkup: adMarkup) ? .video : .static
-        return createNimbusAd(auctionType: type, markup: adMarkup)
+        let type: NimbusResponse.Bid.MarkupType = isVideoMarkup(adMarkup: adMarkup) ? .video : .banner
+        return createNimbusAd(markupType: type, markup: adMarkup)
     }
     
     private func isVideoMarkup(adMarkup: String) -> Bool {
@@ -221,7 +221,7 @@ class TestRenderViewController: DemoViewController {
     
     private func createNimbusAd(
         placementId: String? = nil,
-        auctionType: NimbusAuctionType,
+        markupType: NimbusResponse.Bid.MarkupType,
         markup: String,
         isMraid: Bool = true,
         isInterstitial: Bool = true
@@ -230,26 +230,23 @@ class TestRenderViewController: DemoViewController {
         NimbusAdDimensions(width: 320, height: 480) :
         NimbusAdDimensions(width: 300, height: 50)
         
-        let ext = NimbusAdExtensions(
-            skAdNetwork: iTunesAppId != nil ? NimbusAdSkAdNetwork(advertisedAppStoreItemID: iTunesAppId) : nil
-        )
+        let ext = NimbusResponse.Bid.Extensions(skadn: iTunesAppId != nil ? NimbusAdSkAdNetwork(advertisedAppStoreItemID: iTunesAppId) : nil)
         
         return NimbusResponse(
-            position: "",
-            auctionType: auctionType,
-            bidRaw: 0,
-            bidInCents: 0,
-            contentType: "",
-            auctionId: "",
-            network: "test_render",
-            markup: markup,
-            isInterstitial: isInterstitial,
-            placementId: nil,
-            duration: nil,
-            adDimensions: adDimensions,
-            trackers: nil,
-            isMraid: isMraid,
-            extensions: ext
+            id: nil,
+            bid: .init(
+                mtype: markupType,
+                adm: markup,
+                price: 0,
+                adomain: nil,
+                bundle: nil,
+                cid: nil,
+                crid: nil,
+                cat: nil,
+                attr: nil,
+                dealid: nil,
+                exp: nil,
+                ext: ext)
         )
     }
 }
