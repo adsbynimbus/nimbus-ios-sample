@@ -133,22 +133,16 @@ final class FANViewController: SampleAdViewController, AdControllerDelegate {
         height: Int? = nil
     ) -> NimbusResponse {
         return NimbusResponse(
-            id: nil,
+            id: "metaTestAd",
             bid: .init(
                 mtype: markupType,
                 adm: markup,
                 price: 0,
-                adomain: nil,
-                bundle: nil,
+                ext: .init(omp: .init(buyer: ThirdPartyDemandNetwork.facebook.rawValue, buyerPlacementId: placementId)),
                 w: width,
-                h: height,
-                cid: nil,
-                crid: nil,
-                cat: nil,
-                attr: nil,
-                dealid: nil,
-                exp: nil,
-                ext: .init(omp: .init(buyer: ThirdPartyDemandNetwork.facebook.rawValue, buyerPlacementId: placementId))))
+                h: height
+            )
+        )
     }
     
     func didReceiveNimbusEvent(controller: AdController, event: NimbusEvent) {

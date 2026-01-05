@@ -236,25 +236,20 @@ class TestRenderViewController: DemoViewController {
             height = 50
         }
         
-        let ext = NimbusResponse.Bid.Extensions(skadn: iTunesAppId != nil ? NimbusAdSkAdNetwork(advertisedAppStoreItemID: iTunesAppId) : nil)
+        let ext = NimbusResponse.Bid.Extensions(
+            skadn: iTunesAppId != nil ? NimbusAdSkAdNetwork(advertisedAppStoreItemID: iTunesAppId!) : nil
+        )
         
         return NimbusResponse(
-            id: nil,
+            id: "testAd",
             bid: .init(
                 mtype: markupType,
                 adm: markup,
                 price: 0,
-                adomain: nil,
-                bundle: nil,
+                ext: ext,
                 w: width,
-                h: height,
-                cid: nil,
-                crid: nil,
-                cat: nil,
-                attr: nil,
-                dealid: nil,
-                exp: nil,
-                ext: ext)
+                h: height
+            )
         )
     }
 }
