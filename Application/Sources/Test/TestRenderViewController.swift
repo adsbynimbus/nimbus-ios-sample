@@ -229,11 +229,11 @@ class TestRenderViewController: DemoViewController {
         let height: Int
         
         if isInterstitial {
-            width = 320
-            height = 480
+            width = NimbusAdFormat.banner320x50.width
+            height = NimbusAdFormat.banner320x50.height
         } else {
-            width = 300
-            height = 50
+            width = NimbusAdFormat.banner300x50.width
+            height = NimbusAdFormat.banner300x50.height
         }
         
         let ext = NimbusResponse.Bid.Extensions(

@@ -84,16 +84,16 @@ final class FANViewController: SampleAdViewController, AdControllerDelegate {
             return createNimbusAd(
                 placementId: "IMG_16_9_LINK#\(metaBannerId)",
                 markupType: .static,
-                width: 320,
-                height: 50
+                width: NimbusAdFormat.banner320x50.width,
+                height: NimbusAdFormat.banner320x50.height
             )
             
         case .metaInterstitial:
             return createNimbusAd(
                 placementId: "IMG_16_9_LINK#\(metaInterstitialId)",
                 markupType: .static,
-                width: 320,
-                height: 480
+                width: NimbusAdFormat.interstitialPortrait.width,
+                height: NimbusAdFormat.interstitialPortrait.height
             )
             
         case .metaNative:
@@ -104,8 +104,8 @@ final class FANViewController: SampleAdViewController, AdControllerDelegate {
                 width = 220
                 height = 180
             } else {
-                width = 320
-                height = 480
+                width = NimbusAdFormat.interstitialPortrait.width
+                height = NimbusAdFormat.interstitialPortrait.height
             }
             
             return createNimbusAd(
@@ -118,8 +118,8 @@ final class FANViewController: SampleAdViewController, AdControllerDelegate {
             return createNimbusAd(
                 placementId: "VID_HD_16_9_15S_LINK#\(metaRewardedVideoId)",
                 markupType: .video,
-                width: 320,
-                height: 480
+                width: NimbusAdFormat.interstitialPortrait.width,
+                height: NimbusAdFormat.interstitialPortrait.height
             )
         }
     }
