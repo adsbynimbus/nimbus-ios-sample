@@ -210,8 +210,8 @@ class TestRenderViewController: DemoViewController {
     // MARK: - Create NimbusAd
     
     private func getAdFromMarkup(adMarkup: String) -> NimbusResponse {
-        let type: NimbusAuctionType = isVideoMarkup(adMarkup: adMarkup) ? .video : .static
-        return createNimbusAd(auctionType: type, markup: adMarkup)
+        let type: NimbusResponse.Bid.MarkupType = isVideoMarkup(adMarkup: adMarkup) ? .video : .static
+        return createNimbusAd(markupType: type, markup: adMarkup)
     }
     
     private func isVideoMarkup(adMarkup: String) -> Bool {
@@ -221,35 +221,35 @@ class TestRenderViewController: DemoViewController {
     
     private func createNimbusAd(
         placementId: String? = nil,
-        auctionType: NimbusAuctionType,
+        markupType: NimbusResponse.Bid.MarkupType,
         markup: String,
-        isMraid: Bool = true,
         isInterstitial: Bool = true
     ) -> NimbusResponse {
-        let adDimensions = isInterstitial ?
-        NimbusAdDimensions(width: 320, height: 480) :
-        NimbusAdDimensions(width: 300, height: 50)
+        let width: Int
+        let height: Int
         
-        let ext = NimbusAdExtensions(
-            skAdNetwork: iTunesAppId != nil ? NimbusAdSkAdNetwork(advertisedAppStoreItemID: iTunesAppId) : nil
+        if isInterstitial {
+            width = NimbusAdFormat.banner320x50.width
+            height = NimbusAdFormat.banner320x50.height
+        } else {
+            width = NimbusAdFormat.banner300x50.width
+            height = NimbusAdFormat.banner300x50.height
+        }
+        
+        let ext = NimbusResponse.Bid.Extensions(
+            skadn: iTunesAppId != nil ? NimbusAdSkAdNetwork(advertisedAppStoreItemID: iTunesAppId!) : nil
         )
         
         return NimbusResponse(
-            position: "",
-            auctionType: auctionType,
-            bidRaw: 0,
-            bidInCents: 0,
-            contentType: "",
-            auctionId: "",
-            network: "test_render",
-            markup: markup,
-            isInterstitial: isInterstitial,
-            placementId: nil,
-            duration: nil,
-            adDimensions: adDimensions,
-            trackers: nil,
-            isMraid: isMraid,
-            extensions: ext
+            id: "testAd",
+            bid: .init(
+                mtype: markupType,
+                adm: markup,
+                price: 0,
+                ext: ext,
+                w: width,
+                h: height
+            )
         )
     }
 }

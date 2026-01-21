@@ -9,9 +9,13 @@ import SwiftUI
 import UIKit
 import NimbusKit
 
-extension NimbusAdDimensions {
-    static let portraitInlineAd = NimbusAdDimensions(width: 320, height: 480)
-    static let landscapeInlineAd = NimbusAdDimensions(width: 220, height: 180)
+extension CGFloat {
+    var intValue: Int { Int(self) }
+}
+
+extension CGSize {
+    static let portraitInlineAd = CGSize(width: NimbusAdFormat.interstitialPortrait.width, height: NimbusAdFormat.interstitialPortrait.height)
+    static let landscapeInlineAd = CGSize(width: 220, height: 180)
 }
 
 extension NSObject {

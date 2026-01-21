@@ -12,10 +12,10 @@ import WebKit
 extension NimbusResponse {
     var testIdentifier: String {
         var dimens = ""
-        if let width = adDimensions?.width, let height = adDimensions?.height {
+        if let width = bid.w, let height = bid.h {
             dimens = " \(width)x\(height)"
         }
-        return "\(network) \(auctionType.rawValue)\(dimens)"
+        return "\(bid.ext.omp?.buyer ?? "") \(bid.mtype.stringValue)\(dimens)"
     }
 }
 
