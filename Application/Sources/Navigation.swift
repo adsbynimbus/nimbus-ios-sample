@@ -28,7 +28,6 @@ public var mainScreen: () -> UIViewController = MainItem.viewController
 
 enum MainItem: String, NavigationItem {
     case showAdDemo         = "Show Ad Demo"
-    case mediationPlatforms = "Mediation Platforms"
     case thirdPartyDemand   = "Third Party Demand"
     case testRender         = "Test Render"
     case settings           = "Settings"
@@ -50,24 +49,6 @@ enum MainItem: String, NavigationItem {
                 title: self.description,
                 subtitle: "Select to see Nimbus' request and render flow",
                 items: [Section(header: nil, items: AdManagerAdType.allCases)])
-        case .mediationPlatforms:
-            let items: [Section]
-            let isGAM = Bundle.main.infoDictionary?["GADIsAdManagerApp"] as? Bool == true
-            if isGAM {
-                items = [
-                    Section(header: "Google Ad Manager (GAM)", items: DynamicPriceNimbusRendering.allCases)
-                ]
-            } else {
-                items = [
-                    Section(header: "Set GADIsAdManagerApp to true in your Info.plist to see dynamic price samples", items: [])
-                ]
-            }
-            
-            return  NavigationListViewController(
-                title: self.description,
-                subtitle: "For non-standalone Nimbus integrations",
-                items: items
-            )
         case .thirdPartyDemand:
             return NavigationListViewController(
                 title: self.description,
@@ -125,28 +106,6 @@ enum AdManagerAdType: String, NavigationItem {
                 headerSubTitle: rawValue,
                 enabledExtension: nil
             )
-        }
-    }
-}
-
-enum DynamicPriceNimbusRendering: String, NavigationItem {
-    case banner = "Banner"
-    case adLoaderBanner = "AdLoader Banner"
-    case inlineVideo = "Inline Video"
-    case interstitial = "Interstitial"
-    case rewarded = "Rewarded"
-    case rewardedInterstitial = "Rewarded Interstitial"
-    
-    func destinationController(parent: String) -> UIViewController {
-        let title = "Dynamic Price Nimbus Rendering"
-        
-        switch self {
-        case .banner: return GAMBannerViewController(headerTitle: title, headerSubTitle: "Banner")
-        case .adLoaderBanner: return GAMAdLoaderBannerViewController(headerTitle: title, headerSubTitle: "AdLoader Banner")
-        case .inlineVideo: return GAMInlineVideoViewController(headerTitle: title, headerSubTitle: "Inline Video")
-        case .interstitial: return GAMInterstitialViewController(headerTitle: title, headerSubTitle: "Interstitial")
-        case .rewarded: return GAMRewardedViewController(headerTitle: title, headerSubTitle: "Rewarded")
-        case .rewardedInterstitial: return GAMRewardedInterstitialViewController(headerTitle: title, headerSubTitle: "Rewarded Interstitial")
         }
     }
 }
