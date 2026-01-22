@@ -16,15 +16,14 @@ Pod::Spec.new do |spec|
     spec.source_files = '**/*.swift'
     spec.exclude_files = '**/Package.swift'
     
-    spec.dependency 'NimbusSDK', '~> 2'               # Nimbus SDK
-    spec.dependency 'NimbusSDK/NimbusAPSKit'          # Amazon Publisher Services Request Support
-    spec.dependency 'NimbusSDK/NimbusMetaKit'         # Meta Audience Network Request Support
-    spec.dependency 'NimbusSDK/NimbusGAMKit'          # Google Ad MAnager Dynamic Price and Mediation Adapters
-    spec.dependency 'NimbusSDK/NimbusUnityKit'        # Unity Ads Request Support and Renderer
-    spec.dependency 'NimbusSDK/NimbusVungleKit'       # Vungle Ads Request Support and Renderer
-    spec.dependency 'NimbusSDK/NimbusMobileFuseKit'   # MobileFuse Ads Request Support and Renderer (Available from 2.21.0)
-    spec.dependency 'NimbusSDK/NimbusAdMobKit'        # AdMob Bidding Support (Available from 2.22.0)
-    spec.dependency 'NimbusSDK/NimbusMintegralKit'    # Mintegral Support (Available from 2.24.0)
-    spec.dependency 'NimbusSDK/NimbusMolocoKit'       # Moloco Support (Available from 2.29.0)
-    spec.dependency 'NimbusSDK/NimbusInMobiKit'       # InMobi Support (Available from 2.31.0)
+    spec.dependency 'NimbusSDK', '~> 3'               # Nimbus SDK
+    spec.dependency 'NimbusAPSKit', '~> 3'            # Amazon Publisher Services Request Support
+    spec.dependency 'NimbusMetaKit', '~> 3'           # Meta Audience Network Request Support
+    spec.dependency 'NimbusUnityKit', '~> 3'          # Unity Ads Request Support and Renderer
+    spec.dependency 'NimbusVungleKit', '~> 3'         # Vungle Ads Request Support and Renderer
+    spec.dependency 'NimbusMobileFuseKit', '~> 3'     # MobileFuse Ads Request Support and Renderer
+    spec.dependency 'NimbusAdMobKit', '~> 3'          # AdMob Bidding Support
+    spec.dependency 'NimbusMintegralKit', '~> 3'      # Mintegral Support
+    spec.dependency 'NimbusMolocoKit', '~> 3'         # Moloco Support
+    spec.dependency 'NimbusInMobiKit', '~> 3'         # InMobi Support
   end
