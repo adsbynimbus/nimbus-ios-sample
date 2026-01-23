@@ -121,9 +121,9 @@ extension UserDefaults {
         set {
             set(newValue, forKey: #function)
             if newValue {
-                UserDefaults.IAB.gdprConsentString = testGDPRConsentString
+                Nimbus.IAB.gdprConsentString = testGDPRConsentString
             } else {
-                UserDefaults.IAB.gdprConsentString = nil
+                Nimbus.IAB.gdprConsentString = nil
             }
         }
     }
@@ -136,9 +136,9 @@ extension UserDefaults {
         set {
             set(newValue, forKey: #function)
             if newValue {
-                UserDefaults.IAB.usPrivacyString = "1NYN"
+                Nimbus.IAB.usPrivacyString = "1NYN"
             } else {
-                UserDefaults.IAB.usPrivacyString = nil
+                Nimbus.IAB.usPrivacyString = nil
             }
         }
     }
@@ -151,11 +151,11 @@ extension UserDefaults {
         set {
             set(newValue, forKey: #function)
             if newValue {
-                UserDefaults.IAB.gppConsentString = testGppConsentString
-                UserDefaults.IAB.gppSectionId = testGppSectionId
+                Nimbus.IAB.gppConsentString = testGppConsentString
+                Nimbus.IAB.gppSectionId = testGppSectionId
             } else {
-                UserDefaults.IAB.gppConsentString = nil
-                UserDefaults.IAB.gppSectionId = nil
+                Nimbus.IAB.gppConsentString = nil
+                Nimbus.IAB.gppSectionId = nil
             }
         }
     }
