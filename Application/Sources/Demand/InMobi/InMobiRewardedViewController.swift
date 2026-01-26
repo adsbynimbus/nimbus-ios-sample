@@ -13,8 +13,6 @@ import NimbusSDK
 import NimbusInMobiKit
 #endif
 
-fileprivate var placementId = Int(Bundle.main.infoDictionary?["InMobi Rewarded ID"] as! String)!
-
 final class InMobiRewardedViewController: InMobiViewController {
 
     private var rewardedAd: RewardedAd?
@@ -23,18 +21,14 @@ final class InMobiRewardedViewController: InMobiViewController {
         super.viewDidLoad()
         
         Task {
-            self.rewardedAd = try await Nimbus.rewardedAd(position: "rewarded") {
-                demand {
-                    inmobi(placementId: placementId)
+            self.rewardedAd = try await Nimbus.rewardedAd(position: "rewarded")
+                .onEvent { [weak self] event in
+                    self?.didReceiveNimbusEvent(event: event, ad: self?.rewardedAd)
                 }
-            }
-            .onEvent { [weak self] event in
-                self?.didReceiveNimbusEvent(event: event, ad: self?.rewardedAd)
-            }
-            .onError { [weak self] error in
-                self?.didReceiveNimbusError(error: error)
-            }
-            .show(in: self)
+                .onError { [weak self] error in
+                    self?.didReceiveNimbusError(error: error)
+                }
+                .show(in: self)
         }
     }
 }
