@@ -13,8 +13,6 @@ import NimbusSDK
 import NimbusMolocoKit
 #endif
 
-fileprivate var adUnitId = Bundle.main.infoDictionary?["Moloco Banner ID"] as! String
-
 final class MolocoBannerViewController: MolocoViewController {
 
     private var bannerAd: InlineAd?
@@ -27,18 +25,14 @@ final class MolocoBannerViewController: MolocoViewController {
     
     func showAd() async {
         do {
-            bannerAd = try await Nimbus.bannerAd(position: "banner", refreshInterval: 30) {
-                demand {
-                    moloco(adUnitId: adUnitId)
+            bannerAd = try await Nimbus.bannerAd(position: "banner", refreshInterval: 30)
+                .onEvent { [weak self] event in
+                    self?.didReceiveNimbusEvent(event: event, ad: self?.bannerAd)
                 }
-            }
-            .onEvent { [weak self] event in
-                self?.didReceiveNimbusEvent(event: event, ad: self?.bannerAd)
-            }
-            .onError { [weak self] error in
-                self?.didReceiveNimbusError(error: error)
-            }
-            .show(in: view)
+                .onError { [weak self] error in
+                    self?.didReceiveNimbusError(error: error)
+                }
+                .show(in: view)
         } catch {
             print("Failed to show ad: \(error)")
         }

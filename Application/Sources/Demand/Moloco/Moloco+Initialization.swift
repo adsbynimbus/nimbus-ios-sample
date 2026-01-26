@@ -14,7 +14,7 @@ import NimbusSDK
 import NimbusMolocoKit
 #endif
 
-fileprivate var molocoAppKey = Bundle.main.infoDictionary?["Moloco App Key"] as! String
+fileprivate let molocoAppKey = Bundle.main.infoDictionary?["Moloco App Key"] as! String
 
 extension UIApplicationDelegate {
     func setupMolocoDemand() {
