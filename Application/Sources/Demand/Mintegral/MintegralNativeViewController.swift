@@ -41,18 +41,14 @@ class MintegralNativeViewController: MintegralViewController {
     
     func showAd() async {
         do {
-            nativeAd = try await Nimbus.nativeAd(position: "native") {
-                demand {
-                    mintegral(adUnitId: "1541926")
+            nativeAd = try await Nimbus.nativeAd(position: "native")
+                .onEvent { [weak self] event in
+                    self?.didReceiveNimbusEvent(event: event, ad: self?.nativeAd)
                 }
-            }
-            .onEvent { [weak self] event in
-                self?.didReceiveNimbusEvent(event: event, ad: self?.nativeAd)
-            }
-            .onError { [weak self] error in
-                self?.didReceiveNimbusError(error: error)
-            }
-            .show(in: contentView)
+                .onError { [weak self] error in
+                    self?.didReceiveNimbusError(error: error)
+                }
+                .show(in: contentView)
         } catch {
             Nimbus.Log.ad.debug("Failed to show ad: \(error)")
         }

@@ -24,18 +24,14 @@ class MintegralInterstitialViewController: MintegralViewController {
     
     func showAd() async {
         do {
-            self.interstitialAd = try await Nimbus.interstitialAd(position: "interstitial") {
-                demand {
-                    mintegral(adUnitId: "1541952")
+            self.interstitialAd = try await Nimbus.interstitialAd(position: "interstitial")
+                .onEvent { [weak self] event in
+                    self?.didReceiveNimbusEvent(event: event, ad: self?.interstitialAd)
                 }
-            }
-            .onEvent { [weak self] event in
-                self?.didReceiveNimbusEvent(event: event, ad: self?.interstitialAd)
-            }
-            .onError { [weak self] error in
-                self?.didReceiveNimbusError(error: error)
-            }
-            .show(in: self, closeButtonDelay: 0)
+                .onError { [weak self] error in
+                    self?.didReceiveNimbusError(error: error)
+                }
+                .show(in: self, closeButtonDelay: 0)
         } catch {
             Nimbus.Log.ad.error("Failed to show interstitial ad: \(error.localizedDescription)")
         }

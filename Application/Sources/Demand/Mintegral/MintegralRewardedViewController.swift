@@ -24,18 +24,14 @@ class MintegralRewardedViewController: MintegralViewController {
     
     func showAd() async {
         do {
-            rewardedAd = try await Nimbus.rewardedAd(position: "rewarded") {
-                demand {
-                    mintegral(adUnitId: "1541935")
+            rewardedAd = try await Nimbus.rewardedAd(position: "rewarded")
+                .onEvent { [weak self] event in
+                    self?.didReceiveNimbusEvent(event: event, ad: self?.rewardedAd)
                 }
-            }
-            .onEvent { [weak self] event in
-                self?.didReceiveNimbusEvent(event: event, ad: self?.rewardedAd)
-            }
-            .onError { [weak self] error in
-                self?.didReceiveNimbusError(error: error)
-            }
-            .show(in: self)
+                .onError { [weak self] error in
+                    self?.didReceiveNimbusError(error: error)
+                }
+                .show(in: self)
         } catch {
             print("Failed to show ad: \(error)")
         }
