@@ -11,7 +11,8 @@ import NimbusKit
 
 protocol NavigationItem: CaseIterable, CustomStringConvertible {
     var rawValue: String { get }
-    
+
+    @MainActor
     func destinationController(parent: String) -> UIViewController
 }
 
@@ -24,7 +25,7 @@ struct Section {
     let items: [any NavigationItem]
 }
 
-public var mainScreen: () -> UIViewController = MainItem.viewController
+@MainActor public var mainScreen: () -> UIViewController = MainItem.viewController
 
 enum MainItem: String, NavigationItem {
     case showAdDemo         = "Show Ad Demo"
@@ -34,6 +35,8 @@ enum MainItem: String, NavigationItem {
     
     static let title = "Integration Assist".uppercased()
     static let subtitle = "Ad Call Demos and Render Testing"
+    
+    @MainActor
     static let viewController = {
         NavigationListViewController(
             title: MainItem.title,
@@ -222,9 +225,15 @@ enum MetaSample: String, NavigationItem {
 }
 
 enum UnitySample: String, NavigationItem {
-    case unityRewardedVideo     = "Unity Rewarded Video"
+    case unityBanner            = "Unity Banner"
+    case unityInterstitial      = "Unity Interstitial"
+    case unityRewarded          = "Unity Rewarded"
     func destinationController(parent: String) -> UIViewController {
-        UnityViewController(adType: self, headerSubTitle: parent)
+        switch self {
+        case .unityBanner: UnityBannerViewController(headerTitle: rawValue, headerSubTitle: "")
+        case .unityInterstitial: UnityInterstitialViewController(headerTitle: rawValue, headerSubTitle: "")
+        case .unityRewarded: UnityRewardedViewController(headerTitle: rawValue, headerSubTitle: "")
+        }
     }
 }
 
