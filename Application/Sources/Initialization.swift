@@ -26,15 +26,22 @@ import NimbusInMobiKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    // This is a temporary fix for FBAudienceNetwork 6.17.0+ that crashes trying to read AppDelegate.window
+    var window: UIWindow? {
+        get {
+            let allScenes = UIApplication.shared.connectedScenes
+            let scene = allScenes.first { $0.activationState == .foregroundActive } as? UIWindowScene
+            return scene?.keyWindow
+        }
+        set {}
+    }
+    
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         setupNimbusSDK()
         setupAmazonDemand()
-        setupMintegralDemand()
-        setupMolocoDemand()
-        setupInMobiDemand()
         
         // Meta and LiveRamp requires att permissions to run properly
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) { [weak self] in
@@ -52,11 +59,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         Nimbus.initialize(publisher: publisher, apiKey: apiKey) {
-            MobileFuseExtension()
-            MintegralExtension()
             AdMobExtension()
-            MolocoExtension()
-            InMobiExtension()
+            MobileFuseExtension()
+            MintegralExtension(
+                appId: Bundle.main.infoDictionary?["Mintegral App ID"] as? String,
+                appKey: Bundle.main.infoDictionary?["Mintegral App Key"] as? String
+            )
+            MolocoExtension(appKey: Bundle.main.infoDictionary?["Moloco App Key"] as? String)
+            InMobiExtension(accountId: Bundle.main.infoDictionary?["InMobi Account ID"] as? String)
 
             if let appId = Bundle.main.infoDictionary?["Vungle App ID"] as? String {
                 VungleExtension(appId: appId)
@@ -64,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             if let metaNativeId = Bundle.main.infoDictionary?["Meta Native Placement ID"] as? String,
                let metaAppId = metaNativeId.components(separatedBy: "_").first {
-                MetaExtension(appId: metaAppId)
+                MetaExtension(appId: metaAppId, forceTestAdd: true)
             }
             
             if let gameId = Bundle.main.infoDictionary?["Unity Game ID"] as? String {
