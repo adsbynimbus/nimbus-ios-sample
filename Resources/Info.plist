@@ -272,8 +272,8 @@
 	<string>$(VUNGLE_APP_ID)</string>
 	<key>Mintegral App ID</key>
 	<string>$(MINTEGRAL_APP_ID)</string>
-	<key>Mintegral App Key</key>
-	<string>$(MINTEGRAL_APP_KEY)</string>
+	<key>Mintegral API Key</key>
+	<string>$(MINTEGRAL_API_KEY)</string>
 	<key>Moloco App Key</key>
 	<string>$(MOLOCO_APP_KEY)</string>
 	<key>InMobi Account ID</key>

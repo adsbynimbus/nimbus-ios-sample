@@ -63,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             MobileFuseExtension()
             MintegralExtension(
                 appId: Bundle.main.infoDictionary?["Mintegral App ID"] as? String,
-                appKey: Bundle.main.infoDictionary?["Mintegral App Key"] as? String
+                apiKey: Bundle.main.infoDictionary?["Mintegral API Key"] as? String
             )
             MolocoExtension(appKey: Bundle.main.infoDictionary?["Moloco App Key"] as? String)
             InMobiExtension(accountId: Bundle.main.infoDictionary?["InMobi Account ID"] as? String)
