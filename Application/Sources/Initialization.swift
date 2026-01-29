@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         Nimbus.initialize(publisher: publisher, apiKey: apiKey) {
-            AdMobExtension()
+            AdMobExtension(autoInitialize: true)
             MobileFuseExtension()
             MintegralExtension(
                 appId: Bundle.main.infoDictionary?["Mintegral App ID"] as? String,
