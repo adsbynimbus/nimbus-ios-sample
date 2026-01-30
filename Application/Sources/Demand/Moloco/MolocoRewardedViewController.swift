@@ -28,7 +28,7 @@ final class MolocoRewardedViewController: MolocoViewController {
                 .onError { [weak self] error in
                     self?.didReceiveNimbusError(error: error)
                 }
-                .show(in: self)
+                .show(from: self)
         }
     }
 }

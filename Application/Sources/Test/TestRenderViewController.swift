@@ -177,7 +177,7 @@ class TestRenderViewController: DemoViewController {
         
         if isBlocking {
             Task {
-                self.interstitialAd = try await Nimbus.interstitialAd(from: response).show(in: self)
+                self.interstitialAd = try await Nimbus.interstitialAd(from: response).show(from: self)
             }
         } else {
             navigationController?.pushViewController(

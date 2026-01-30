@@ -90,7 +90,7 @@ class VungleViewController: SampleAdViewController {
                 }
         case .vungleInterstitial:
             interstitialAd = try await Nimbus.interstitialAd(position: "TEST_INTERSTITIAL_NOT_SKIPPABLE")
-                .show(in: self)
+                .show(from: self)
                 .onEvent { [weak self] event in
                     self?.didReceiveNimbusEvent(event: event, ad: self?.interstitialAd)
                 }
@@ -99,7 +99,7 @@ class VungleViewController: SampleAdViewController {
                 }
         case .vungleRewarded:
             rewardedAd = try await Nimbus.rewardedAd(position: "TEST_REWARDED")
-                .show(in: self)
+                .show(from: self)
                 .onEvent { [weak self] event in
                     self?.didReceiveNimbusEvent(event: event, ad: self?.rewardedAd)
                 }

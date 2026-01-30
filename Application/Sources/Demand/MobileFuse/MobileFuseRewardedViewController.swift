@@ -40,7 +40,7 @@ final class MobileFuseRewardedViewController: MobileFuseViewController {
                 .onError { [weak self] error in
                     self?.didReceiveNimbusError(error: error)
                 }
-                .show(in: self)
+                .show(from: self)
         } catch {
             Nimbus.Log.ad.error("Failed to show rewarded ad: \(error.localizedDescription)")
         }

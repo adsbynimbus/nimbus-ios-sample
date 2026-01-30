@@ -28,7 +28,7 @@ final class InMobiRewardedViewController: InMobiViewController {
                 .onError { [weak self] error in
                     self?.didReceiveNimbusError(error: error)
                 }
-                .show(in: self)
+                .show(from: self)
         }
     }
 }

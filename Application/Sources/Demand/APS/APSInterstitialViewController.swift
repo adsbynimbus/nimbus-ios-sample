@@ -45,7 +45,7 @@ class APSInterstitialViewController: SampleAdViewController {
             .onError { [weak self] error in
                 self?.didReceiveNimbusError(error: error)
             }
-            .show(in: self)
+            .show(from: self)
         } catch {
             print("Failed to show ad: \(error)")
         }

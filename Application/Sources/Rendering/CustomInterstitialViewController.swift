@@ -46,7 +46,7 @@ final class CustomInterstitialViewController: SampleAdViewController {
             .onError { [weak self] error in
                 self?.didReceiveNimbusError(error: error)
             }
-            .show(in: self, closeButtonDelay: 0)
+            .show(from: self, closeButtonDelay: 0)
         } catch {
             print("Couldn't show ad: \(error)")
         }
