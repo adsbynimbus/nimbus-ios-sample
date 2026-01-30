@@ -11,7 +11,8 @@ import NimbusKit
 
 protocol NavigationItem: CaseIterable, CustomStringConvertible {
     var rawValue: String { get }
-    
+
+    @MainActor
     func destinationController(parent: String) -> UIViewController
 }
 
@@ -24,7 +25,7 @@ struct Section {
     let items: [any NavigationItem]
 }
 
-public var mainScreen: () -> UIViewController = MainItem.viewController
+@MainActor public var mainScreen: () -> UIViewController = MainItem.viewController
 
 enum MainItem: String, NavigationItem {
     case showAdDemo         = "Show Ad Demo"
@@ -34,6 +35,8 @@ enum MainItem: String, NavigationItem {
     
     static let title = "Integration Assist".uppercased()
     static let subtitle = "Ad Call Demos and Render Testing"
+    
+    @MainActor
     static let viewController = {
         NavigationListViewController(
             title: MainItem.title,
@@ -217,14 +220,25 @@ enum MetaSample: String, NavigationItem {
     case metaNative             = "Meta Native"
     case metaRewardedVideo      = "Meta Rewarded Video"
     func destinationController(parent: String) -> UIViewController {
-        FANViewController(adType: self, headerSubTitle: parent)
+        switch self {
+        case .metaBanner: MetaBannerViewController(headerTitle: rawValue, headerSubTitle: "")
+        case .metaNative: MetaNativeViewController(headerTitle: rawValue, headerSubTitle: "")
+        case .metaInterstitial: MetaInterstitialViewController(headerTitle: rawValue, headerSubTitle: "")
+        case .metaRewardedVideo: MetaRewardedViewController(headerTitle: rawValue, headerSubTitle: "")
+        }
     }
 }
 
 enum UnitySample: String, NavigationItem {
-    case unityRewardedVideo     = "Unity Rewarded Video"
+    case unityBanner            = "Unity Banner"
+    case unityInterstitial      = "Unity Interstitial"
+    case unityRewarded          = "Unity Rewarded"
     func destinationController(parent: String) -> UIViewController {
-        UnityViewController(adType: self, headerSubTitle: parent)
+        switch self {
+        case .unityBanner: UnityBannerViewController(headerTitle: rawValue, headerSubTitle: "")
+        case .unityInterstitial: UnityInterstitialViewController(headerTitle: rawValue, headerSubTitle: "")
+        case .unityRewarded: UnityRewardedViewController(headerTitle: rawValue, headerSubTitle: "")
+        }
     }
 }
 

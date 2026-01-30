@@ -1,26 +1,25 @@
 //
-//  InMobiRewardedViewController.swift
+//  UnityRewardedViewController.swift
 //  Nimbus
-//  Created on 7/31/25
-//  Copyright © 2025 Nimbus Advertising Solutions Inc. All rights reserved.
+//  Created on 1/27/26
+//  Copyright © 2026 Nimbus Advertising Solutions Inc. All rights reserved.
 //
 
-import UIKit
 import NimbusKit
-#if canImport(NimbusSDK) // CocoaPods
-import NimbusSDK
-#else                    // Swift Package Manager
-import NimbusInMobiKit
-#endif
+import NimbusUnityKit
 
-final class InMobiRewardedViewController: InMobiViewController {
-
-    private var rewardedAd: RewardedAd?
+class UnityRewardedViewController: UnityViewController {
+    var adController: AdController?
+    var rewardedAd: RewardedAd?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Task {
+        Task { await showAd() }
+    }
+    
+    func showAd() async {
+        do {
             self.rewardedAd = try await Nimbus.rewardedAd(position: "rewarded")
                 .onEvent { [weak self] event in
                     self?.didReceiveNimbusEvent(event: event, ad: self?.rewardedAd)
@@ -29,6 +28,8 @@ final class InMobiRewardedViewController: InMobiViewController {
                     self?.didReceiveNimbusError(error: error)
                 }
                 .show(in: self)
+        } catch {
+            print("Failed to show ad: \(error)")
         }
     }
 }

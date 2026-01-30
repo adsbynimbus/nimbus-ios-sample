@@ -13,8 +13,6 @@ import NimbusSDK
 import NimbusMolocoKit
 #endif
 
-fileprivate var adUnitId = Bundle.main.infoDictionary?["Moloco Interstitial ID"] as! String
-
 final class MolocoInterstitialViewController: MolocoViewController {
 
     private var interstitialAd: InterstitialAd?
@@ -27,20 +25,16 @@ final class MolocoInterstitialViewController: MolocoViewController {
     
     func showAd() async {
         do {
-            interstitialAd = try await Nimbus.interstitialAd(position: "interstitial") {
-                demand {
-                    moloco(adUnitId: adUnitId)
+            interstitialAd = try await Nimbus.interstitialAd(position: "interstitial")
+                .onEvent { [weak self] event in
+                    self?.didReceiveNimbusEvent(event: event, ad: self?.interstitialAd)
                 }
-            }
-            .onEvent { [weak self] event in
-                self?.didReceiveNimbusEvent(event: event, ad: self?.interstitialAd)
-            }
-            .onError { [weak self] error in
-                self?.didReceiveNimbusError(error: error)
-            }
-            .show(in: self)
+                .onError { [weak self] error in
+                    self?.didReceiveNimbusError(error: error)
+                }
+                .show(in: self)
         } catch {
-            
+            print("Failed to show ad: \(error)")
         }
     }
 }

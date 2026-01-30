@@ -24,18 +24,14 @@ class MintegralBannerViewController: MintegralViewController {
     
     func showAd() async {
         do {
-            self.bannerAd = try await Nimbus.bannerAd(position: "banner") {
-                demand {
-                    mintegral(adUnitId: "1541918")
+            self.bannerAd = try await Nimbus.bannerAd(position: "banner")
+                .onEvent { [weak self] event in
+                    self?.didReceiveNimbusEvent(event: event, ad: self?.bannerAd)
                 }
-            }
-            .onEvent { [weak self] event in
-                self?.didReceiveNimbusEvent(event: event, ad: self?.bannerAd)
-            }
-            .onError { [weak self] error in
-                self?.didReceiveNimbusError(error: error)
-            }
-            .show(in: view)
+                .onError { [weak self] error in
+                    self?.didReceiveNimbusError(error: error)
+                }
+                .show(in: view)
         } catch {
             print("Couldn't show ad: \(error)")
         }

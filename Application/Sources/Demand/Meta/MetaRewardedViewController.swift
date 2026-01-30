@@ -1,19 +1,14 @@
 //
-//  MintegralRewardedViewController.swift
+//  MetaRewardedViewController.swift
 //  Nimbus
-//  Created on 11/1/24
-//  Copyright © 2024 Nimbus Advertising Solutions Inc. All rights reserved.
+//  Created on 1/28/26
+//  Copyright © 2026 Nimbus Advertising Solutions Inc. All rights reserved.
 //
 
 import UIKit
 import NimbusKit
-#if canImport(NimbusSDK) // CocoaPods
-import NimbusSDK
-#elseif canImport(NimbusMintegralKit) // Swift Package Manager
-import NimbusMintegralKit
-#endif
 
-class MintegralRewardedViewController: MintegralViewController {
+class MetaRewardedViewController: MetaViewController {
     var rewardedAd: RewardedAd?
     
     override func viewDidLoad() {

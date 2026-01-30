@@ -13,8 +13,6 @@ import NimbusSDK
 import NimbusInMobiKit
 #endif
 
-fileprivate var placementId = Int(Bundle.main.infoDictionary?["InMobi Interstitial ID"] as! String)!
-
 final class InMobiInterstitialViewController: InMobiViewController {
 
     private var interstitialAd: InterstitialAd?
@@ -27,18 +25,14 @@ final class InMobiInterstitialViewController: InMobiViewController {
     
     func showAd() async {
         do {
-            interstitialAd = try await Nimbus.interstitialAd(position: "interstitial") {
-                demand {
-                    inmobi(placementId: placementId)
+            interstitialAd = try await Nimbus.interstitialAd(position: "interstitial")
+                .onEvent { [weak self] event in
+                    self?.didReceiveNimbusEvent(event: event, ad: self?.interstitialAd)
                 }
-            }
-            .onEvent { [weak self] event in
-                self?.didReceiveNimbusEvent(event: event, ad: self?.interstitialAd)
-            }
-            .onError { [weak self] error in
-                self?.didReceiveNimbusError(error: error)
-            }
-            .show(in: self)
+                .onError { [weak self] error in
+                    self?.didReceiveNimbusError(error: error)
+                }
+                .show(in: self)
         } catch {
             
         }

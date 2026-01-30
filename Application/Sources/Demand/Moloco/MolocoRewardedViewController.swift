@@ -13,8 +13,6 @@ import NimbusSDK
 import NimbusMolocoKit
 #endif
 
-fileprivate var adUnitId = Bundle.main.infoDictionary?["Moloco Rewarded ID"] as! String
-
 final class MolocoRewardedViewController: MolocoViewController {
 
     private var rewardedAd: RewardedAd?
@@ -23,18 +21,14 @@ final class MolocoRewardedViewController: MolocoViewController {
         super.viewDidLoad()
         
         Task {
-            self.rewardedAd = try await Nimbus.rewardedAd(position: "rewarded") {
-                demand {
-                    moloco(adUnitId: adUnitId)
+            self.rewardedAd = try await Nimbus.rewardedAd(position: "rewarded")
+                .onEvent { [weak self] event in
+                    self?.didReceiveNimbusEvent(event: event, ad: self?.rewardedAd)
                 }
-            }
-            .onEvent { [weak self] event in
-                self?.didReceiveNimbusEvent(event: event, ad: self?.rewardedAd)
-            }
-            .onError { [weak self] error in
-                self?.didReceiveNimbusError(error: error)
-            }
-            .show(in: self)
+                .onError { [weak self] error in
+                    self?.didReceiveNimbusError(error: error)
+                }
+                .show(in: self)
         }
     }
 }

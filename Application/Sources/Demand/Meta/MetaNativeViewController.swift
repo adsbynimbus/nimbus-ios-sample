@@ -1,30 +1,21 @@
 //
-//  MintegralNativeViewController.swift
+//  MetaNativeViewController.swift
 //  Nimbus
-//  Created on 11/8/24
-//  Copyright © 2024 Nimbus Advertising Solutions Inc. All rights reserved.
+//  Created on 1/28/26
+//  Copyright © 2026 Nimbus Advertising Solutions Inc. All rights reserved.
 //
 
 import UIKit
 import NimbusKit
-import MTGSDK
-#if canImport(NimbusSDK) // CocoaPods
-import NimbusSDK
-#elseif canImport(NimbusMintegralKit) // Swift Package Manager
-import NimbusMintegralKit
-#endif
+import NimbusMetaKit
 
-class MintegralNativeViewController: MintegralViewController {
+class MetaNativeViewController: MetaViewController {
     var nativeAd: InlineAd?
     
     let contentView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        MintegralExtension.nativeAdViewProvider = { _, campaign in
-            MintegralNativeAdView(campaign: campaign)
-        }
         
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
