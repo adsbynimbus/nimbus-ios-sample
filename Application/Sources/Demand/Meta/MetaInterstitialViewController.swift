@@ -26,7 +26,7 @@ class MetaInterstitialViewController: MetaViewController {
                 .onError { [weak self] error in
                     self?.didReceiveNimbusError(error: error)
                 }
-                .show(in: self, closeButtonDelay: 0)
+                .show(from: self, closeButtonDelay: 0)
         } catch {
             Nimbus.Log.ad.error("Failed to show interstitial ad: \(error.localizedDescription)")
         }
