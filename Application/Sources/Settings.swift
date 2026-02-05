@@ -171,7 +171,7 @@ extension UserDefaults {
             if newValue && nimbusTestMode {
                 Nimbus.EID.set(.init(source: "uidapi.com", uids: [.init(id: "TestUID2Token")]))
             } else {
-                Nimbus.EID.remove(source: "uidapi.com")
+                Nimbus.EID.removeAll()
             }
         }
     }
