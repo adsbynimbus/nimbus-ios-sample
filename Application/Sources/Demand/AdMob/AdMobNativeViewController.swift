@@ -49,7 +49,7 @@ class AdMobNativeViewController: AdMobViewController {
             /// Shows how to pass AdMob native ad options, like changing the adChoices position.
             let nativeOptions = NimbusAdMobNativeAdOptions(preferredAdChoicesPosition: .topLeftCorner)
             
-            self.nativeAd = try await Nimbus.nativeAd(position: "native") {
+            self.nativeAd = try await Nimbus.nativeAd(position: "native", size: .medium) {
                 demand {
                     admob(nativeAdUnitId: nativePlacementId, options: nativeOptions)
                 }

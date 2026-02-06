@@ -71,7 +71,7 @@ class VungleViewController: SampleAdViewController {
         switch adType {
             
         case .vungleBanner:
-            inlineAd = try await Nimbus.bannerAd(position: "TEST_BANNER", refreshInterval: 30)
+            inlineAd = try await Nimbus.bannerAd(position: "TEST_BANNER", size: .banner, refreshInterval: 30)
                 .show(in: contentView)
                 .onEvent { [weak self] event in
                     self?.didReceiveNimbusEvent(event: event, ad: self?.inlineAd)
@@ -119,7 +119,7 @@ class VungleViewController: SampleAdViewController {
                 nativeAdContentView.heightAnchor.constraint(equalToConstant: 300)
             ])
             
-            inlineAd = try await Nimbus.nativeAd(position: "TEST_NATIVE")
+            inlineAd = try await Nimbus.nativeAd(position: "TEST_NATIVE", size: .medium)
                 .onEvent { [weak self] event in
                     self?.didReceiveNimbusEvent(event: event, ad: self?.inlineAd)
                 }

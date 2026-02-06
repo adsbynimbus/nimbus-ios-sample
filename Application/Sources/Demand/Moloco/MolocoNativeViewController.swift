@@ -45,7 +45,7 @@ final class MolocoNativeViewController: MolocoViewController {
     
     func showAd() async {
         do {
-            nativeAd = try await Nimbus.nativeAd(position: "native")
+            nativeAd = try await Nimbus.nativeAd(position: "native", size: .medium)
                 .onEvent { [weak self] event in
                     self?.didReceiveNimbusEvent(event: event, ad: self?.nativeAd)
                 }

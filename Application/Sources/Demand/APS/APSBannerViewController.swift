@@ -33,7 +33,7 @@ class APSBannerViewController: SampleAdViewController {
         do {
             let customTargeting = await loadAPSBannerAds()
             
-            self.bannerAd = try await Nimbus.bannerAd(position: "banner", refreshInterval: 30) {
+            self.bannerAd = try await Nimbus.bannerAd(position: "banner", size: .banner, refreshInterval: 30) {
                 demand {
                     aps(customTargeting: customTargeting, refreshWith: adLoaders)
                 }
