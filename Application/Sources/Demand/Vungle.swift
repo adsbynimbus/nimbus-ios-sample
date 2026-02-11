@@ -119,14 +119,16 @@ class VungleViewController: SampleAdViewController {
                 nativeAdContentView.heightAnchor.constraint(equalToConstant: 300)
             ])
             
-            inlineAd = try await Nimbus.nativeAd(position: "TEST_NATIVE", size: .medium)
-                .onEvent { [weak self] event in
-                    self?.didReceiveNimbusEvent(event: event, ad: self?.inlineAd)
-                }
-                .onError { [weak self] error in
-                    self?.didReceiveNimbusError(error: error)
-                }
-                .show(in: nativeAdContentView)
+            inlineAd = try await Nimbus.inlineAd(position: "TEST_NATIVE") {
+                native()
+            }
+            .onEvent { [weak self] event in
+                self?.didReceiveNimbusEvent(event: event, ad: self?.inlineAd)
+            }
+            .onError { [weak self] error in
+                self?.didReceiveNimbusError(error: error)
+            }
+            .show(in: nativeAdContentView)
         }
     }
 }
