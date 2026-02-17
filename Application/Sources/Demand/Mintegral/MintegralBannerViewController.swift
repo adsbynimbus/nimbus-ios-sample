@@ -24,7 +24,7 @@ class MintegralBannerViewController: MintegralViewController {
     
     func showAd() async {
         do {
-            self.bannerAd = try await Nimbus.bannerAd(position: "banner")
+            self.bannerAd = try await Nimbus.bannerAd(position: "banner", size: .banner)
                 .onEvent { [weak self] event in
                     self?.didReceiveNimbusEvent(event: event, ad: self?.bannerAd)
                 }

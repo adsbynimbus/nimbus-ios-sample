@@ -25,7 +25,7 @@ final class InMobiBannerViewController: InMobiViewController {
     
     func showAd() async {
         do {
-            bannerAd = try await Nimbus.bannerAd(position: "banner", refreshInterval: 30)
+            bannerAd = try await Nimbus.bannerAd(position: "banner", size: .banner, refreshInterval: 30)
                 .onEvent { [weak self] event in
                     self?.didReceiveNimbusEvent(event: event, ad: self?.bannerAd)
                 }

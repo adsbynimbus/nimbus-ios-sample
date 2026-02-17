@@ -14,7 +14,7 @@ extension CGFloat {
 }
 
 extension CGSize {
-    static let portraitInlineAd = CGSize(width: AdSize.interstitialPortrait.adFormat.width, height: AdSize.interstitialPortrait.adFormat.height)
+    static let portraitInlineAd = CGSize(width: NimbusAdFormat.interstitialPortrait.width, height: NimbusAdFormat.interstitialPortrait.height)
     static let landscapeInlineAd = CGSize(width: 220, height: 180)
 }
 

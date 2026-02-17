@@ -26,7 +26,7 @@ class AdMobBannerViewController: AdMobViewController {
     
     func showAd() async {
         do {
-            self.bannerAd = try await Nimbus.bannerAd(position: "banner", refreshInterval: 30) {
+            self.bannerAd = try await Nimbus.bannerAd(position: "banner", size: .banner, refreshInterval: 30) {
                 demand {
                     admob(bannerAdUnitId: bannerPlacementId)
                 }

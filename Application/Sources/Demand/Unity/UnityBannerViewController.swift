@@ -20,7 +20,7 @@ class UnityBannerViewController: UnityViewController {
     
     func showAd() async {
         do {
-            self.bannerAd = try await Nimbus.bannerAd(position: "banner", refreshInterval: 30)
+            self.bannerAd = try await Nimbus.bannerAd(position: "banner", size: .banner, refreshInterval: 30)
                 .onEvent { [weak self] event in
                     self?.didReceiveNimbusEvent(event: event, ad: self?.bannerAd)
                 }

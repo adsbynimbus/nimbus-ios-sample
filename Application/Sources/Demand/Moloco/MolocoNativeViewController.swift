@@ -45,14 +45,16 @@ final class MolocoNativeViewController: MolocoViewController {
     
     func showAd() async {
         do {
-            nativeAd = try await Nimbus.nativeAd(position: "native")
-                .onEvent { [weak self] event in
-                    self?.didReceiveNimbusEvent(event: event, ad: self?.nativeAd)
-                }
-                .onError { [weak self] error in
-                    self?.didReceiveNimbusError(error: error)
-                }
-                .show(in: contentView)
+            nativeAd = try await Nimbus.inlineAd(position: "native") {
+                native()
+            }
+            .onEvent { [weak self] event in
+                self?.didReceiveNimbusEvent(event: event, ad: self?.nativeAd)
+            }
+            .onError { [weak self] error in
+                self?.didReceiveNimbusError(error: error)
+            }
+            .show(in: contentView)
         } catch {
             print("Failed to show ad: \(error)")
         }
