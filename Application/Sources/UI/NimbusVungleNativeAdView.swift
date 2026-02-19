@@ -9,11 +9,7 @@ import UIKit
 import VungleAdsSDK
 import NimbusKit
 
-#if canImport(NimbusSDK) // CocoaPods
-import NimbusSDK
-#else                    // Swift Package Manager
 import NimbusVungleKit
-#endif
 
 /// Nimbus default view used for Vungle native ads
 final class NimbusVungleNativeAdView: UIView, NimbusVungleNativeAdViewType {

@@ -7,11 +7,7 @@
 
 import UIKit
 import MolocoSDK
-#if canImport(NimbusSDK) // CocoaPods
-import NimbusSDK
-#else // Swift Package Manager
 import NimbusMolocoKit
-#endif
 
 final class MolocoNativeAdView: UIView, NimbusMolocoNativeAdViewType {
     

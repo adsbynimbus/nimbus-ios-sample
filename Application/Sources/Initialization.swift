@@ -9,10 +9,6 @@ import AppTrackingTransparency
 import NimbusKit
 import SwiftUI
 import UIKit
-
-#if canImport(NimbusSDK) // CocoaPods
-import NimbusSDK
-#else                    // Swift Package Manager
 import NimbusVungleKit
 import NimbusMobileFuseKit
 import NimbusMintegralKit
@@ -21,7 +17,6 @@ import NimbusMetaKit
 import NimbusUnityKit
 import NimbusMolocoKit
 import NimbusInMobiKit
-#endif
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {

@@ -7,11 +7,7 @@
 
 import UIKit
 import NimbusKit
-#if canImport(NimbusSDK) // CocoaPods
-import NimbusSDK
-#else                    // Swift Package Manager
 import NimbusInMobiKit
-#endif
 
 final class InMobiBannerViewController: InMobiViewController {
 

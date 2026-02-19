@@ -7,11 +7,7 @@
 
 import UIKit
 import NimbusKit
-#if canImport(NimbusSDK) // CocoaPods
-import NimbusSDK
-#elseif canImport(NimbusMintegralKit) // Swift Package Manager
 import NimbusMintegralKit
-#endif
 
 class MintegralInterstitialViewController: MintegralViewController {
     var interstitialAd: InterstitialAd?

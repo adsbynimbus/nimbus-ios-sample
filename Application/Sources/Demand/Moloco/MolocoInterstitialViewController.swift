@@ -7,11 +7,7 @@
 
 import UIKit
 import NimbusKit
-#if canImport(NimbusSDK) // CocoaPods
-import NimbusSDK
-#elseif canImport(NimbusMolocoKit) // Swift Package Manager
 import NimbusMolocoKit
-#endif
 
 final class MolocoInterstitialViewController: MolocoViewController {
 

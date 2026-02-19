@@ -8,11 +8,7 @@
 import UIKit
 import NimbusKit
 import GoogleMobileAds
-#if canImport(NimbusSDK) // CocoaPods
-import NimbusSDK
-#elseif canImport(NimbusAdMobKit) // Swift Package Manager
 import NimbusAdMobKit
-#endif
 
 let nativePlacementId = Bundle.main.infoDictionary?["AdMob Native ID"] as? String ?? ""
 

@@ -8,11 +8,7 @@
 import UIKit
 import NimbusKit
 import DTBiOSSDK
-#if canImport(NimbusSDK) // CocoaPods
-import NimbusSDK
-#elseif canImport(NimbusAPSKit) // Swift Package Manager
 import NimbusAPSKit
-#endif
 
 class APSBannerViewController: SampleAdViewController {
     

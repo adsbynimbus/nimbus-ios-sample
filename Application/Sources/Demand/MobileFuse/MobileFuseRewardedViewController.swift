@@ -8,11 +8,7 @@
 
 import UIKit
 import NimbusKit
-#if canImport(NimbusSDK) // CocoaPods
-import NimbusSDK
-#elseif canImport(NimbusMobileFuseKit) // Swift Package Manager
 import NimbusMobileFuseKit
-#endif
 
 final class MobileFuseRewardedViewController: MobileFuseViewController {
     private var rewardedAd: RewardedAd?
