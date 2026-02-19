@@ -9,11 +9,7 @@
 import UIKit
 import NimbusKit
 
-#if canImport(NimbusSDK) // CocoaPods
-import NimbusSDK
-#elseif canImport(NimbusMobileFuseKit) // Swift Package Manager
 import NimbusMobileFuseKit
-#endif
 
 ///  When integrating MobileFuse, consider examples like MobileFuseBannerViewController inherit from UIViewController.
 ///  Both SampleAdViewController and MobileFuseViewController just facilitate the needs of the sample app.

@@ -8,11 +8,7 @@
 import UIKit
 import NimbusKit
 import MolocoSDK
-#if canImport(NimbusSDK) // CocoaPods
-import NimbusSDK
-#elseif canImport(NimbusMolocoKit) // Swift Package Manager
 import NimbusMolocoKit
-#endif
 
 fileprivate var adUnitId = Bundle.main.infoDictionary?["Moloco Native ID"] as! String
 

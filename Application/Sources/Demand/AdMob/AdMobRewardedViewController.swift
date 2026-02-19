@@ -7,11 +7,7 @@
 
 import UIKit
 import NimbusKit
-#if canImport(NimbusSDK) // CocoaPods
-import NimbusSDK
-#elseif canImport(NimbusAdMobKit) // Swift Package Manager
 import NimbusAdMobKit
-#endif
 
 private let rewardedPlacementId = Bundle.main.infoDictionary?["AdMob Rewarded ID"] as? String ?? ""
 

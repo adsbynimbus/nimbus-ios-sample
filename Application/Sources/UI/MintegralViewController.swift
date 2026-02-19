@@ -5,11 +5,7 @@
 //  Copyright © 2024 Nimbus Advertising Solutions Inc. All rights reserved.
 //
 
-#if canImport(NimbusSDK) // CocoaPods
-import NimbusSDK
-#elseif canImport(NimbusMintegralKit) // Swift Package Manager
 import NimbusMintegralKit
-#endif
 
 ///  When integrating Mintegral, consider examples like MintegralBannerViewController inherit from UIViewController.
 ///  Both SampleAdViewController and MintegralViewController just facilitate the needs of the sample app.

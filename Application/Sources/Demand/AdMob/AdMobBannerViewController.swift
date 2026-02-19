@@ -7,11 +7,7 @@
 
 import UIKit
 import NimbusKit
-#if canImport(NimbusSDK) // CocoaPods
-import NimbusSDK
-#elseif canImport(NimbusAdMobKit) // Swift Package Manager
 import NimbusAdMobKit
-#endif
 
 private let bannerPlacementId = Bundle.main.infoDictionary?["AdMob Banner ID"] as? String ?? ""
 

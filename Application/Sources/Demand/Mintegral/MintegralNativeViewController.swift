@@ -8,11 +8,7 @@
 import UIKit
 import NimbusKit
 import MTGSDK
-#if canImport(NimbusSDK) // CocoaPods
-import NimbusSDK
-#elseif canImport(NimbusMintegralKit) // Swift Package Manager
 import NimbusMintegralKit
-#endif
 
 class MintegralNativeViewController: MintegralViewController {
     var nativeAd: InlineAd?

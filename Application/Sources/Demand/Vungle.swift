@@ -8,11 +8,7 @@
 
 import AdSupport
 import NimbusKit
-#if canImport(NimbusSDK) // CocoaPods
-import NimbusSDK
-#else                    // Swift Package Manager
 import NimbusVungleKit
-#endif
 import UIKit
 import VungleAdsSDK
 
