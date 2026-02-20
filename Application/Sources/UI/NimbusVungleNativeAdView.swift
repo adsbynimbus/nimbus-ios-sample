@@ -12,7 +12,7 @@ import NimbusKit
 import NimbusVungleKit
 
 /// Nimbus default view used for Vungle native ads
-final class NimbusVungleNativeAdView: UIView, NimbusVungleNativeAdViewType {
+final class NimbusVungleNativeAdView: UIView, VungleNativeAdViewType {
 
     /// Label used for title
     let titleLabel: UILabel = {

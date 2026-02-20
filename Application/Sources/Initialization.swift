@@ -91,7 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         // User
-        Nimbus.configuration.user = NimbusUser(age: 20, gender: .male)
+        Nimbus.configuration.user = RTB.User(age: 20, gender: .male)
     }
     
     private func startTrackingATT() {
