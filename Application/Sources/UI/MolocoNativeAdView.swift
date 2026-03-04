@@ -9,7 +9,7 @@ import UIKit
 import MolocoSDK
 import NimbusMolocoKit
 
-final class MolocoNativeAdView: UIView, NimbusMolocoNativeAdViewType {
+final class MolocoNativeAdView: UIView, MolocoNativeAdViewType {
     
     private let assets: MolocoNativeAdAssests
     

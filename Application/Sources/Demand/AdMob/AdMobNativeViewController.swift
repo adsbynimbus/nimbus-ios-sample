@@ -43,7 +43,7 @@ class AdMobNativeViewController: AdMobViewController {
     func showAd() async {
         do {
             /// Shows how to pass AdMob native ad options, like changing the adChoices position.
-            let nativeOptions = NimbusAdMobNativeAdOptions(preferredAdChoicesPosition: .topLeftCorner)
+            let nativeOptions = AdMobNativeAdOptions(preferredAdChoicesPosition: .topLeftCorner)
             
             self.nativeAd = try await Nimbus.inlineAd(position: "native") {
                 native()
