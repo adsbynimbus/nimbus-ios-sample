@@ -237,7 +237,7 @@ class TestRenderViewController: DemoViewController {
         }
         
         let ext = NimbusResponse.Bid.Extensions(
-            skadn: iTunesAppId != nil ? SKAdNetworkInfo(advertisedAppStoreItemID: iTunesAppId!) : nil
+            skadn: iTunesAppId != nil ? SKAdNetworkInfo(itunesitem: iTunesAppId!) : nil
         )
         
         return NimbusResponse(
