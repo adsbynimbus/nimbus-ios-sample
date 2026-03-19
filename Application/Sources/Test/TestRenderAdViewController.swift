@@ -17,6 +17,12 @@ final class TestRenderAdViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
+    deinit {
+        Task { @MainActor in
+            Nimbus.configuration.isSKOverlayEnabledForAllUnits = false
+        }
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -24,11 +30,11 @@ final class TestRenderAdViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        Nimbus.configuration.isSKOverlayEnabledForAllUnits = true
         view.backgroundColor = .systemBackground
         
         Task {
             ad = try await Nimbus.inlineAd(from: response).show(in: view)
-            (ad?.adView as? NimbusAdView)?.showsSKOverlay = true
 
             setupLogo()
             setup(adView: ad?.adView)
