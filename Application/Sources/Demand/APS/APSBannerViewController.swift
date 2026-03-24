@@ -12,10 +12,6 @@ import NimbusAPSKit
 
 class APSBannerViewController: SampleAdViewController {
     
-    static let apsBannerSizes: [DTBAdSize] = [
-        .init(bannerAdSizeWithWidth: 320, height: 50, andSlotUUID: "5ab6a4ae-4aa5-43f4-9da4-e30755f2b295")
-    ]
-    
     var bannerAd: InlineAd?
     private var adLoaders: [DTBAdLoader] = []
     
@@ -27,11 +23,11 @@ class APSBannerViewController: SampleAdViewController {
     
     func showAd() async {
         do {
-            let customTargeting = await loadAPSBannerAds()
+            let apsBannerAd = try await loadAPSBannerAd()
             
             self.bannerAd = try await Nimbus.bannerAd(position: "banner", size: .banner, refreshInterval: 30) {
                 demand {
-                    aps(customTargeting: customTargeting, refreshWith: adLoaders)
+                    aps(ads: [apsBannerAd])
                 }
             }
             .onEvent { [weak self] event in
@@ -46,13 +42,13 @@ class APSBannerViewController: SampleAdViewController {
         }
     }
     
-    private func loadAPSBannerAds() async -> [[String: String]] {
-        for size in Self.apsBannerSizes {
-            let adLoader = DTBAdLoader(adNetworkInfo: .init(networkName: DTBADNETWORK_NIMBUS))
-            adLoader.setAdSizes([size as Any])
-            adLoaders.append(adLoader)
-        }
+    private func loadAPSBannerAd() async throws -> APSAd {
+        let bannerAdRequest = APSAdRequest(
+            slotUUID: "88e6293b-0bf0-43fc-947b-925babe7bf3f",
+            adNetworkInfo: .init(networkName: .nimbus)
+        )
+        bannerAdRequest.setAdFormat(.banner)
         
-        return await APSFetcher(adLoaders: adLoaders).fetchAds()
+        return try await bannerAdRequest.loadAd()
     }
 }
