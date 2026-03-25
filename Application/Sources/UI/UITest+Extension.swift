@@ -15,7 +15,7 @@ extension NimbusResponse {
         if let width = bid.w, let height = bid.h {
             dimens = " \(width)x\(height)"
         }
-        return "\(bid.ext.omp?.buyer ?? "") \(bid.mtype.stringValue)\(dimens)"
+        return "\(bid.ext?.omp?.buyer ?? "") \(bid.mtype.stringValue)\(dimens)"
     }
 }
 
