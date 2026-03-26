@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             if let metaNativeId = Bundle.main.infoDictionary?["Meta Native Placement ID"] as? String,
                let metaAppId = metaNativeId.components(separatedBy: "_").first {
-                MetaExtension(appId: metaAppId, forceTestAdd: true)
+                MetaExtension(appId: metaAppId, forceTestAd: true)
             }
             
             if let gameId = Bundle.main.infoDictionary?["Unity Game ID"] as? String {
