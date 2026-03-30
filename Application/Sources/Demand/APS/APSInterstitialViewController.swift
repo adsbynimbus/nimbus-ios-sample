@@ -7,15 +7,10 @@
 
 import UIKit
 import NimbusKit
-import DTBiOSSDK
+@preconcurrency import DTBiOSSDK
 import NimbusAPSKit
 
 class APSInterstitialViewController: SampleAdViewController {
-    
-    static let apsInterstitialSizes: [DTBAdSize] = [
-        .init(interstitialAdSizeWithSlotUUID: "4e918ac0-5c68-4fe1-8d26-4e76e8f74831"),
-        .init(videoAdSizeWithSlotUUID: "4acc26e6-3ada-4ee8-bae0-753c1e0ad278")
-    ]
     
     var interstitialAd: InterstitialAd?
     private var adLoaders: [DTBAdLoader] = []
@@ -28,11 +23,10 @@ class APSInterstitialViewController: SampleAdViewController {
     
     func showAd() async {
         do {
-            let customTargeting = await loadAPSInterstitialAds()
-            
+            let ads = await loadAPSInterstitialAds()
             self.interstitialAd = try await Nimbus.interstitialAd(position: "interstitial") {
                 demand {
-                    aps(customTargeting: customTargeting)
+                    aps(ads: ads)
                 }
             }
             .onEvent { [weak self] event in
@@ -47,13 +41,43 @@ class APSInterstitialViewController: SampleAdViewController {
         }
     }
     
-    private func loadAPSInterstitialAds() async -> [[String: String]] {
-        for size in Self.apsInterstitialSizes {
-            let adLoader = DTBAdLoader(adNetworkInfo: .init(networkName: DTBADNETWORK_NIMBUS))
-            adLoader.setAdSizes([size as Any])
-            adLoaders.append(adLoader)
-        }
+    private func loadAPSInterstitialAds() async -> [APSAd] {
+        let interstitialAdRequest = APSAdRequest(
+            slotUUID: "424c37b6-38e0-4076-94e6-0933a6213496",
+            adNetworkInfo: .init(networkName: .nimbus)
+        )
+        interstitialAdRequest.setAdFormat(.interstitial)
         
-        return await APSFetcher(adLoaders: adLoaders).fetchAds()
+        let videoAdRequest = APSAdRequest(
+            slotUUID: "671086df-06f2-4ee7-86f6-e578d10b3128",
+            adNetworkInfo: .init(networkName: .nimbus)
+        )
+        videoAdRequest.setAdFormat(.interstitial)
+        
+        let requests = [
+            interstitialAdRequest,
+            videoAdRequest
+        ]
+        
+        return await withTaskGroup(of: APSAd?.self) { group in
+            for request in requests {
+                group.addTask {
+                    do {
+                        return try await request.loadAd()
+                    } catch {
+                        print("Couldn't fetch APS ad, error: \(error.localizedDescription)")
+                        return nil
+                    }
+                }
+            }
+            
+            var ads: [APSAd] = []
+
+            for await ad in group {
+                if let ad { ads.append(ad) }
+            }
+
+            return ads
+        }
     }
 }

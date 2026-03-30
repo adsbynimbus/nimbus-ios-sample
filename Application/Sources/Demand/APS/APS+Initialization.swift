@@ -21,6 +21,10 @@ extension UIApplicationDelegate {
             #if DEBUG
             DTBAds.sharedInstance().setLogLevel(DTBLogLevelDebug)
             #endif
+            
+            DTBAds.sharedInstance().setAPSPublisherExtendedIdFeatureEnabled(true)
+            
+            
         }
     }
 }
