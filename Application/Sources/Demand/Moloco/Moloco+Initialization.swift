@@ -20,7 +20,7 @@ extension UIApplicationDelegate {
     func setupMolocoDemand() {
         /// It's important to call initialize as soon as the app launches.
         /// Make sure to call Moloco.shared.initialize from the main thread
-        MolocoSDK.Moloco.shared.initialize(initParams: .init(appKey: molocoAppKey)) { done, error in
+        MolocoSDK.Moloco.shared.initialize(params: .init(appKey: molocoAppKey, mediation: Nimbus.shared.sdkName)) { done, error in
             if let error {
                 print("Moloco initialization failed: \(error)")
             } else {
