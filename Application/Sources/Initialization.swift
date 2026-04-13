@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError("Publisher or API Key were not set in Info.plist")
         }
         
-        Nimbus.initialize(publisher: publisher, apiKey: apiKey) {
+        Nimbus.initialize(publisherKey: publisher, apiKey: apiKey) {
             AdMobExtension(autoInitialize: true)
             MobileFuseExtension()
             MintegralExtension(
