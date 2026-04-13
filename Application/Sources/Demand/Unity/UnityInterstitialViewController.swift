@@ -9,7 +9,7 @@ import NimbusKit
 import NimbusUnityKit
 
 class UnityInterstitialViewController: UnityViewController {
-    var interstitialAd: InterstitialAd?
+    var interstitialAd: FullscreenAd?
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -9,7 +9,7 @@ import UIKit
 import NimbusKit
 
 final class CustomInterstitialViewController: SampleAdViewController {
-    var interstitialAd: InterstitialAd?
+    var interstitialAd: FullscreenAd?
     let kind: Kind
     
     enum Kind: String {
