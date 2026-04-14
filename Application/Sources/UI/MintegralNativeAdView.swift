@@ -121,7 +121,9 @@ final class MintegralNativeAdView: UIView, MintegralNativeAdViewType {
         installButton?.setTitle(campaign.adCall, for: .normal)
         
         campaign.loadIconUrlAsync { [weak self] image in
-            self?.iconView?.image = image
+            Task { @MainActor in
+                self?.iconView?.image = image
+            }
         }
     }
 }

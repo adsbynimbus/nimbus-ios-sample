@@ -12,6 +12,7 @@ import Foundation
 /// certain extensions to make sure an AdMob test case always shows an AdMob ad for instance,
 /// it's not something a client app would normally do.
 struct ExtensionHelper {
+    @MainActor
     static var enabledState: [ObjectIdentifier: Bool] {
         Nimbus.extensions.mapValues { $0.enabled }
     }
