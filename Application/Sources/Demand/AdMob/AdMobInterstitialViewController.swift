@@ -12,7 +12,7 @@ import NimbusAdMobKit
 private let interstitialPlacementId = Bundle.main.infoDictionary?["AdMob Interstitial ID"] as? String ?? ""
 
 class AdMobInterstitialViewController: AdMobViewController {
-    var interstitialAd: InterstitialAd?
+    var interstitialAd: FullscreenAd?
     
     override func viewDidLoad() {
         super.viewDidLoad()

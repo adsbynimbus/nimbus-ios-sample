@@ -73,7 +73,7 @@ class SampleAdViewController : DemoViewController {
         navigationItem.rightBarButtonItems = rightItems
     }
     
-    func didReceiveNimbusEvent(event: NimbusEvent, ad: Ad? = nil) {
+    func didReceiveNimbusEvent(event: AdEvent, ad: Ad? = nil) {
         if let response = ad?.response, event == .loaded {
             screenLogger.logRender(response)
         }

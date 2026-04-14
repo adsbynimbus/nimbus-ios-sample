@@ -118,6 +118,7 @@ class DemoViewController: UIViewController {
     }
 }
 
+@MainActor
 protocol HasAnchors {
     var leadingAnchor: NSLayoutXAxisAnchor { get }
     var trailingAnchor: NSLayoutXAxisAnchor { get }
@@ -140,6 +141,7 @@ extension UIView {
         case width, height, both
     }
     
+    @MainActor
     struct ConstraintBuilder {
         let parent: UIView
         let child: UIView

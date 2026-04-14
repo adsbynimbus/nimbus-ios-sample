@@ -10,8 +10,6 @@ import NimbusKit
 import MolocoSDK
 import NimbusMolocoKit
 
-fileprivate var adUnitId = Bundle.main.infoDictionary?["Moloco Native ID"] as! String
-
 final class MolocoNativeViewController: MolocoViewController {
 
     private var nativeAd: InlineAd?

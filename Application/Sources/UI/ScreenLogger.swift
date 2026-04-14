@@ -28,7 +28,7 @@ class SampleAppLogger: ObservableObject {
         append("Rendered: \(ad.testIdentifier)")
     }
     
-    func logEvent(_ event: NimbusEvent) {
+    func logEvent(_ event: AdEvent) {
         var formattedEvent: String
         switch event {
         case .firstQuartile:

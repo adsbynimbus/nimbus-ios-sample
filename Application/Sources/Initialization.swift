@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError("Publisher or API Key were not set in Info.plist")
         }
         
-        Nimbus.initialize(publisher: publisher, apiKey: apiKey) {
+        Nimbus.initialize(publisherKey: publisher, apiKey: apiKey) {
             AdMobExtension(autoInitialize: true)
             MobileFuseExtension()
             MintegralExtension(
@@ -96,8 +96,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func startTrackingATT() {
         if ATTrackingManager.trackingAuthorizationStatus == .notDetermined {
-            var message = ""
             ATTrackingManager.requestTrackingAuthorization {
+                var message = ""
+                
                 switch $0 {
                 case .authorized:
                     print("ATT authorized")
@@ -116,12 +117,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     message = "unknown default"
                 }
                 
-                DispatchQueue.main.async {
-                    Alert.showAlert(
-                        title: "Request Tracking Authorization Result",
-                        message: message
-                    )
-                }
+                Alert.showAlert(
+                    title: "Request Tracking Authorization Result",
+                    message: message
+                )
             }
         }
     }

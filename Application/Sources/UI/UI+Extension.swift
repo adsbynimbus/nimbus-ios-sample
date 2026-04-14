@@ -48,8 +48,13 @@ extension Alert {
 }
 
 extension UIColor {
+    @MainActor
     static var pink = UIColor(named: "pink")!
+    
+    @MainActor
     static var raisingBlack = UIColor(named: "raisinBlack")!
+    
+    @MainActor
     static var turquoise = UIColor(named: "turquoise")!
 }
 
