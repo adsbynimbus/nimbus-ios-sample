@@ -21,6 +21,10 @@ final class RewardedViewController: SampleAdViewController {
         do {
             rewardedAd = try await Nimbus.rewardedAd(position: "rewarded")
                 .onEvent { [weak self] event in
+                    if event == .rewardEarned {
+                        print("Reward Earned!")
+                    }
+                    
                     self?.didReceiveNimbusEvent(event: event, ad: self?.rewardedAd)
                 }
                 .onError { [weak self] error in
