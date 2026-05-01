@@ -121,9 +121,9 @@ extension UserDefaults {
         set {
             set(newValue, forKey: #function)
             if newValue {
-                Nimbus.IAB.gdprConsentString = testGDPRConsentString
+                Nimbus.IAB.tcfString = testGDPRConsentString
             } else {
-                Nimbus.IAB.gdprConsentString = nil
+                Nimbus.IAB.tcfString = nil
             }
         }
     }
