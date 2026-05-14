@@ -169,9 +169,9 @@ extension UserDefaults {
         set {
             set(newValue, forKey: #function)
             if newValue && nimbusTestMode {
-                Nimbus.EID.set(.init(source: "uidapi.com", uids: [.init(id: "TestUID2Token")]))
+                Nimbus.configuration.identity.add(source: "uidapi.com", ids: [.init(id: "TestUID2Token")])
             } else {
-                Nimbus.EID.removeAll()
+                Nimbus.configuration.identity.clear()
             }
         }
     }
