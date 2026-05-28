@@ -17,6 +17,7 @@ import NimbusMetaKit
 import NimbusUnityKit
 import NimbusMolocoKit
 import NimbusInMobiKit
+import NimbusDTKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -62,7 +63,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             )
             MolocoExtension(appKey: Bundle.main.infoDictionary?["Moloco App Key"] as? String)
             InMobiExtension(accountId: Bundle.main.infoDictionary?["InMobi Account ID"] as? String)
-
+            DigitalTurbineExtension(appId: Bundle.main.infoDictionary?["Digital Turbine App ID"] as? String)
+            
             if let appId = Bundle.main.infoDictionary?["Vungle App ID"] as? String {
                 VungleExtension(appId: appId)
             }
