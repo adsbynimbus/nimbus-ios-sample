@@ -44,6 +44,7 @@ final class DTNativeAdView: UIView, DTNativeAdViewType {
     func setupViews() {
         let icon = UIImageView()
         icon.translatesAutoresizingMaskIntoConstraints = false
+        icon.tag = ViewTag.icon.rawValue
         addSubview(icon)
         self.iconView = icon
         
@@ -51,6 +52,7 @@ final class DTNativeAdView: UIView, DTNativeAdViewType {
         headline.translatesAutoresizingMaskIntoConstraints = false
         headline.lineBreakMode = .byWordWrapping
         headline.numberOfLines = 0
+        headline.tag = ViewTag.title.rawValue
         addSubview(headline)
         self.headlineView = headline
         
@@ -59,6 +61,7 @@ final class DTNativeAdView: UIView, DTNativeAdViewType {
         body.font = .systemFont(ofSize: 14)
         body.lineBreakMode = .byWordWrapping
         body.numberOfLines = 0
+        body.tag = ViewTag.description.rawValue
         
         addSubview(body)
         self.descriptionView = body
@@ -71,6 +74,7 @@ final class DTNativeAdView: UIView, DTNativeAdViewType {
         
         let install = UIButton(configuration: installConfig)
         install.translatesAutoresizingMaskIntoConstraints = false
+        install.tag = ViewTag.cta.rawValue
         self.callToActionView = install
         addSubview(install)
         
@@ -113,6 +117,7 @@ final class DTNativeAdView: UIView, DTNativeAdViewType {
         stars.axis = .horizontal
         stars.spacing = 8
         stars.distribution = .equalCentering
+        stars.tag = ViewTag.rating.rawValue
         
         for i in 0..<5 {
             let style = i < rating ? "star.fill" : "star"
@@ -131,12 +136,24 @@ final class DTNativeAdView: UIView, DTNativeAdViewType {
     }
     
     func configure() {
-        iconView = assets.appIcon
+        if let appIcon = assets.appIcon, let iconView {
+            appIcon.translatesAutoresizingMaskIntoConstraints = false
+            iconView.addSubview(appIcon)
+            
+            NSLayoutConstraint.activate([
+                appIcon.leadingAnchor.constraint(equalTo: iconView.leadingAnchor),
+                appIcon.trailingAnchor.constraint(equalTo: iconView.trailingAnchor),
+                appIcon.topAnchor.constraint(equalTo: iconView.topAnchor),
+                appIcon.bottomAnchor.constraint(equalTo: iconView.bottomAnchor)
+            ])
+        }
+        
         headlineView?.text = assets.adTitle
         descriptionView?.text = assets.adDescription
         callToActionView?.setTitle(assets.callToActionText, for: .normal)
         
         assets.mediaView.translatesAutoresizingMaskIntoConstraints = false
+        _mediaView.tag = ViewTag.mediaView.rawValue
         _mediaView.addSubview(assets.mediaView)
             
         NSLayoutConstraint.activate([
