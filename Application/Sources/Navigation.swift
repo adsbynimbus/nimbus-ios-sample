@@ -66,6 +66,7 @@ enum MainItem: String, NavigationItem {
                     Section(header: "Mintegral", items: Mintegral.allCases),
                     Section(header: "Moloco", items: Moloco.allCases),
                     Section(header: "InMobi", items: InMobi.allCases),
+                    Section(header: "Digital Turbine", items: DigitalTurbineSample.allCases),
                 ])
         case .testRender:
             return TestRenderViewController(
@@ -251,6 +252,22 @@ enum VungleSample: String, NavigationItem {
     
     func destinationController(parent: String) -> UIViewController {
         VungleViewController(adType: self, headerSubTitle: parent)
+    }
+}
+
+enum DigitalTurbineSample: String, NavigationItem {
+    case dtBanner               = "Digital Turbine Banner"
+    case dtNative               = "Digital Turbine Native"
+    case dtInterstitial         = "Digital Turbine Interstitial"
+    case dtRewarded             = "Digital Turbine Rewarded"
+    
+    func destinationController(parent: String) -> UIViewController {
+        switch self {
+        case .dtBanner: DTBannerViewController(headerTitle: rawValue, headerSubTitle: "")
+        case .dtNative: DTNativeViewController(headerTitle: rawValue, headerSubTitle: "")
+        case .dtInterstitial: DTInterstitialViewController(headerTitle: rawValue, headerSubTitle: "")
+        case .dtRewarded: DTRewardedViewController(headerTitle: rawValue, headerSubTitle: "")
+        }
     }
 }
                                                 

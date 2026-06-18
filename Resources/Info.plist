@@ -278,5 +278,7 @@
 	<string>$(MOLOCO_APP_KEY)</string>
 	<key>InMobi Account ID</key>
 	<string>$(INMOBI_ACCOUNT_ID)</string>
+	<key>Digital Turbine App ID</key>
+	<string>$(DIGITAL_TURBINE_APP_ID)</string>
 </dict>
 </plist>
