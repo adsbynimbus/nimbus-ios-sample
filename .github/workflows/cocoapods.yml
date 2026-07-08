@@ -12,9 +12,9 @@ jobs:
     runs-on: macos-26
     steps:
     - name: Select Xcode Version
-      run: sudo xcode-select --switch /Applications/Xcode_26.1.app
+      run: sudo xcode-select --switch /Applications/Xcode_26.6.app
 
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         lfs: true
 
@@ -23,7 +23,7 @@ jobs:
         ! grep -q Pods nimbus-ios-sample.xcodeproj/project.pbxproj
 
     - name: Restore Build Cache
-      uses: actions/cache@v4
+      uses: actions/cache@v6
       with:
         path: |
           Pods
@@ -41,4 +41,4 @@ jobs:
       run: brew install xcbeautify
 
     - name: Build Sample App
-      run: set -o pipefail && xcodebuild -workspace "nimbus-ios-sample.xcworkspace" -scheme "nimbus-ios-sample-pods" -configuration "Debug" -destination "platform=iOS Simulator,OS=26.1,name=iPhone 17" -derivedDataPath .build/DerivedData | xcbeautify
+      run: set -o pipefail && xcodebuild -workspace "nimbus-ios-sample.xcworkspace" -scheme "nimbus-ios-sample-pods" -configuration "Debug" -destination "platform=iOS Simulator,OS=26.5,name=iPhone 17" -derivedDataPath .build/DerivedData | xcbeautify
