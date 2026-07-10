@@ -264,8 +264,6 @@
 			</array>
 		</dict>
 	</dict>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
 	<key>Unity Game ID</key>
 	<string>$(UNITY_GAME_ID)</string>
 	<key>Vungle App ID</key>
@@ -280,5 +278,7 @@
 	<string>$(INMOBI_ACCOUNT_ID)</string>
 	<key>Digital Turbine App ID</key>
 	<string>$(DIGITAL_TURBINE_APP_ID)</string>
+	<key>DisplayIO App ID</key>
+	<string>$(DISPLAYIO_APP_ID)</string>
 </dict>
 </plist>

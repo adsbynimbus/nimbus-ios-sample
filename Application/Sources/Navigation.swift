@@ -67,6 +67,7 @@ enum MainItem: String, NavigationItem {
                     Section(header: "Moloco", items: Moloco.allCases),
                     Section(header: "InMobi", items: InMobi.allCases),
                     Section(header: "Digital Turbine", items: DigitalTurbineSample.allCases),
+                    Section(header: "display.io", items: DisplayIOSample.allCases),
                 ])
         case .testRender:
             return TestRenderViewController(
@@ -267,6 +268,22 @@ enum DigitalTurbineSample: String, NavigationItem {
         case .dtNative: DTNativeViewController(headerTitle: rawValue, headerSubTitle: "")
         case .dtInterstitial: DTInterstitialViewController(headerTitle: rawValue, headerSubTitle: "")
         case .dtRewarded: DTRewardedViewController(headerTitle: rawValue, headerSubTitle: "")
+        }
+    }
+}
+
+enum DisplayIOSample: String, NavigationItem {
+    case dioBanner               = "DisplayIO Banner"
+    case dioNative               = "DisplayIO Native"
+    case dioInterstitial         = "DisplayIO Interstitial"
+    case dioRewarded             = "DisplayIO Rewarded"
+    
+    func destinationController(parent: String) -> UIViewController {
+        switch self {
+        case .dioBanner: DisplayIOBannerViewController(headerTitle: rawValue, headerSubTitle: "")
+        case .dioNative: DisplayIONativeViewController(headerTitle: rawValue, headerSubTitle: "")
+        case .dioInterstitial: DisplayIOInterstitialViewController(headerTitle: rawValue, headerSubTitle: "")
+        case .dioRewarded: DisplayIORewardedViewController(headerTitle: rawValue, headerSubTitle: "")
         }
     }
 }
