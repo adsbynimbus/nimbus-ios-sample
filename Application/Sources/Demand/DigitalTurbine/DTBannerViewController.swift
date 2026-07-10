@@ -9,9 +9,17 @@ import UIKit
 import NimbusKit
 import NimbusDTKit
 
-final class DTBannerViewController: DTViewController {
+final class DTBannerViewController: SampleAdViewController {
 
     private var bannerAd: InlineAd?
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: DigitalTurbineExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -2,16 +2,25 @@
 //  DisplayIOInterstitialViewController.swift
 //  Nimbus
 //  Created on 7/8/26
-//  Copyright © 2025 Nimbus Advertising Solutions Inc. All rights reserved.
+//  Copyright © 2026 Nimbus Advertising Solutions Inc. All rights reserved.
 //
 
 import UIKit
 import NimbusKit
 import NimbusDTKit
+import NimbusDisplayIOKit
 
-final class DisplayIOInterstitialViewController: DisplayIOViewController {
+final class DisplayIOInterstitialViewController: SampleAdViewController {
 
     private var interstitialAd: InterstitialAd?
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: DisplayIOExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

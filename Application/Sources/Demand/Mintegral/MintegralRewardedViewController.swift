@@ -9,8 +9,16 @@ import UIKit
 import NimbusKit
 import NimbusMintegralKit
 
-class MintegralRewardedViewController: MintegralViewController {
+class MintegralRewardedViewController: SampleAdViewController {
     var rewardedAd: RewardedAd?
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: MintegralExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

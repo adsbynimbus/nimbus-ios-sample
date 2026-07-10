@@ -10,11 +10,19 @@ import NimbusKit
 import IASDKCore
 import NimbusDTKit
 
-final class DTNativeViewController: DTViewController {
+final class DTNativeViewController: SampleAdViewController {
 
     private var nativeAd: InlineAd?
     
     let contentView = UIView()
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: DigitalTurbineExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

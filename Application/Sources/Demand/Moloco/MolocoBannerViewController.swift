@@ -9,9 +9,17 @@ import UIKit
 import NimbusKit
 import NimbusMolocoKit
 
-final class MolocoBannerViewController: MolocoViewController {
+final class MolocoBannerViewController: SampleAdViewController {
 
     private var bannerAd: InlineAd?
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: MolocoExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

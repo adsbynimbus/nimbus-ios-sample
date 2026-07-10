@@ -26,7 +26,7 @@ class VungleViewController: SampleAdViewController {
     init(adType: VungleSample, headerSubTitle: String) {
         self.adType = adType
         
-        super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle, enabledExtension: VungleExtension.self)
+        super.init(headerTitle: adType.description, headerSubTitle: headerSubTitle, requiredExtension: VungleExtension.self)
     }
     
     required init?(coder: NSCoder) {

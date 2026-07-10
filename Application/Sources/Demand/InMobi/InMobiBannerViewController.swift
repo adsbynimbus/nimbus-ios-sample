@@ -9,9 +9,17 @@ import UIKit
 import NimbusKit
 import NimbusInMobiKit
 
-final class InMobiBannerViewController: InMobiViewController {
+final class InMobiBannerViewController: SampleAdViewController {
 
     private var bannerAd: InlineAd?
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: InMobiExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

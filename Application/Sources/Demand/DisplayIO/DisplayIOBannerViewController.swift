@@ -2,17 +2,25 @@
 //  DisplayIOBannerViewController.swift
 //  Nimbus
 //  Created on 7/8/26
-//  Copyright © 2025 Nimbus Advertising Solutions Inc. All rights reserved.
+//  Copyright © 2026 Nimbus Advertising Solutions Inc. All rights reserved.
 //
 
 import UIKit
 import NimbusKit
-import NimbusDTKit
+import NimbusDisplayIOKit
 
-final class DisplayIOBannerViewController: DisplayIOViewController {
+final class DisplayIOBannerViewController: SampleAdViewController {
 
     private var bannerAd: InlineAd?
     let contentView = UIView()
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: DisplayIOExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +29,7 @@ final class DisplayIOBannerViewController: DisplayIOViewController {
         view.addSubview(contentView)
         
         NSLayoutConstraint.activate([
-            contentView.topAnchor.constraint(equalTo: view.topAnchor, constant: 200),
+            contentView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
             contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor),

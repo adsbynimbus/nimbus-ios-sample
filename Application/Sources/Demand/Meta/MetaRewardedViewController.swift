@@ -7,9 +7,18 @@
 
 import UIKit
 import NimbusKit
+import NimbusMetaKit
 
-class MetaRewardedViewController: MetaViewController {
+class MetaRewardedViewController: SampleAdViewController {
     var rewardedAd: RewardedAd?
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: MetaExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -11,8 +11,16 @@ import NimbusAdMobKit
 
 private let bannerPlacementId = Bundle.main.infoDictionary?["AdMob Banner ID"] as? String ?? ""
 
-class AdMobBannerViewController: AdMobViewController {
+class AdMobBannerViewController: SampleAdViewController {
     var bannerAd: InlineAd?
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: AdMobExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

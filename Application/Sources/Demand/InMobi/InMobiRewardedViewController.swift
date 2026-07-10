@@ -9,9 +9,17 @@ import UIKit
 import NimbusKit
 import NimbusInMobiKit
 
-final class InMobiRewardedViewController: InMobiViewController {
+final class InMobiRewardedViewController: SampleAdViewController {
 
     private var rewardedAd: RewardedAd?
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: InMobiExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

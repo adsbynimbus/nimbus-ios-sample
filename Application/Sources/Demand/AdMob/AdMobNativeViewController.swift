@@ -12,12 +12,20 @@ import NimbusAdMobKit
 
 let nativePlacementId = Bundle.main.infoDictionary?["AdMob Native ID"] as? String ?? ""
 
-class AdMobNativeViewController: AdMobViewController {
+class AdMobNativeViewController: SampleAdViewController {
     
     var nativeAd: InlineAd?
     
     var adView: AdMobNativeAdView!
     let contentView = UIView()
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: AdMobExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

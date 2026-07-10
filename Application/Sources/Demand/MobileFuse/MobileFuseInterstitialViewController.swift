@@ -10,11 +10,11 @@ import UIKit
 import NimbusKit
 import NimbusMobileFuseKit
 
-final class MobileFuseInterstitialViewController: MobileFuseViewController {
+final class MobileFuseInterstitialViewController: SampleAdViewController {
     private var interstitialAd: InterstitialAd?
     
     init(headerTitle: String) {
-        super.init(headerTitle: headerTitle, headerSubTitle: "")
+        super.init(headerTitle: headerTitle, headerSubTitle: "", requiredExtension: MobileFuseExtension.self)
     }
     
     required init?(coder: NSCoder) {

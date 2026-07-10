@@ -2,7 +2,7 @@
 //  DisplayIONativeViewController.swift
 //  Nimbus
 //  Created on 7/8/26
-//  Copyright © 2025 Nimbus Advertising Solutions Inc. All rights reserved.
+//  Copyright © 2026 Nimbus Advertising Solutions Inc. All rights reserved.
 //
 
 import UIKit
@@ -10,11 +10,19 @@ import NimbusKit
 import IASDKCore
 import NimbusDisplayIOKit
 
-final class DisplayIONativeViewController: DisplayIOViewController {
+final class DisplayIONativeViewController: SampleAdViewController {
 
     private var nativeAd: InlineAd?
     
     let contentView = UIView()
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: DisplayIOExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

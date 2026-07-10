@@ -7,9 +7,18 @@
 
 import UIKit
 import NimbusKit
+import NimbusMetaKit
 
-class MetaInterstitialViewController: MetaViewController {
+class MetaInterstitialViewController: SampleAdViewController {
     var interstitialAd: InterstitialAd?
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: MetaExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

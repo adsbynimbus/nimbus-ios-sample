@@ -7,9 +7,18 @@
 
 import UIKit
 import NimbusKit
+import NimbusMetaKit
 
-class MetaBannerViewController: MetaViewController {
+class MetaBannerViewController: SampleAdViewController {
     var bannerAd: InlineAd?
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: MetaExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

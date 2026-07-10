@@ -9,8 +9,16 @@ import UIKit
 import NimbusKit
 import NimbusMintegralKit
 
-class MintegralInterstitialViewController: MintegralViewController {
+class MintegralInterstitialViewController: SampleAdViewController {
     var interstitialAd: InterstitialAd?
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: MintegralExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

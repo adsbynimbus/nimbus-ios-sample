@@ -11,32 +11,20 @@ import Foundation
 /// This helper is here only for the purposes of the sample app where we need to disable
 /// certain extensions to make sure an AdMob test case always shows an AdMob ad for instance,
 /// it's not something a client app would normally do.
+@MainActor
 struct ExtensionHelper {
-    @MainActor
-    static var enabledState: [ObjectIdentifier: Bool] {
-        Nimbus.extensions.mapValues { $0.enabled }
+    static func enableAllExtensions() {
+        setAllExtensions(enabled: true)
     }
     
-    static func disableAllExtensions(except: NimbusExtension.Type? = nil) {
-        Task { @MainActor in
-            for (key, ext) in Nimbus.extensions {
-                if except == nil || key != ObjectIdentifier(except!) {
-                    type(of: ext).disable()
-                }
-            }
-        }
+    static func disableAllExtensions() {
+        setAllExtensions(enabled: false)
     }
     
-    static func restoreExtensionsState(from: [ObjectIdentifier: Bool]) {
-        Task { @MainActor in
-            for (extType, enabled) in from {
-                guard let ext = Nimbus.extensions[extType] else {
-                    continue
-                }
-                
-                if enabled && !ext.enabled { type(of: ext).enable() }
-                else if !enabled && ext.enabled { type(of: ext).disable() }
-            }
+    static func setAllExtensions(enabled: Bool) {
+        for (key, ext) in Nimbus.extensions {
+            let t = type(of: ext)
+            enabled ? t.enable() : t.disable()
         }
     }
 }

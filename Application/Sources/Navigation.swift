@@ -94,13 +94,13 @@ enum AdManagerAdType: String, NavigationItem {
         
         return switch self {
         case .banner:
-            BannerViewController(headerTitle: title, headerSubTitle: rawValue, enabledExtension: nil)
+            BannerViewController(headerTitle: title, headerSubTitle: rawValue, requiredExtension: nil)
         case .inlineVideo:
-            InlineVideoViewController(headerTitle: title, headerSubTitle: rawValue, enabledExtension: nil)
+            InlineVideoViewController(headerTitle: title, headerSubTitle: rawValue, requiredExtension: nil)
         case .manuallyRenderedAd:
-            ManuallyRenderedViewController(headerTitle: title, headerSubTitle: rawValue, enabledExtension: nil)
+            ManuallyRenderedViewController(headerTitle: title, headerSubTitle: rawValue, requiredExtension: nil)
         case .interstitialHybrid:
-            InterstitialViewController(headerTitle: title, headerSubTitle: rawValue, enabledExtension: nil)
+            InterstitialViewController(headerTitle: title, headerSubTitle: rawValue, requiredExtension: nil)
         case .interstitialStatic:
             CustomInterstitialViewController(headerTitle: title, kind: .staticOnly)
         case .interstitialVideo:
@@ -109,7 +109,7 @@ enum AdManagerAdType: String, NavigationItem {
             RewardedViewController(
                 headerTitle: "Nimbus Rendering",
                 headerSubTitle: rawValue,
-                enabledExtension: nil
+                requiredExtension: nil
             )
         }
     }
@@ -209,9 +209,9 @@ enum APSSample: String, NavigationItem {
     func destinationController(parent: String) -> UIViewController {
         return switch self {
         case .apsBannerWithRefresh:
-            APSBannerViewController(headerTitle: "APS", headerSubTitle: rawValue, enabledExtension: nil)
+            APSBannerViewController(headerTitle: "APS", headerSubTitle: rawValue, requiredExtension: nil)
         case .apsInterstitialHybrid:
-            APSInterstitialViewController(headerTitle: "APS", headerSubTitle: rawValue, enabledExtension: nil)
+            APSInterstitialViewController(headerTitle: "APS", headerSubTitle: rawValue, requiredExtension: nil)
         }
     }
 }

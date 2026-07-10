@@ -9,10 +9,18 @@ import UIKit
 import NimbusKit
 import NimbusMetaKit
 
-class MetaNativeViewController: MetaViewController {
+class MetaNativeViewController: SampleAdViewController {
     var nativeAd: InlineAd?
     
     let contentView = UIView()
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: MetaExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

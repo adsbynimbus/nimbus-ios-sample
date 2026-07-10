@@ -10,11 +10,11 @@ import UIKit
 import NimbusKit
 import NimbusMobileFuseKit
 
-final class MobileFuseRewardedViewController: MobileFuseViewController {
+final class MobileFuseRewardedViewController: SampleAdViewController {
     private var rewardedAd: RewardedAd?
     
     init(headerTitle: String) {
-        super.init(headerTitle: headerTitle, headerSubTitle: "")
+        super.init(headerTitle: headerTitle, headerSubTitle: "", requiredExtension: MobileFuseExtension.self)
     }
     
     required init?(coder: NSCoder) {
