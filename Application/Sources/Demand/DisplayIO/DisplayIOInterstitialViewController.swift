@@ -1,23 +1,24 @@
 //
-//  MolocoBannerViewController.swift
+//  DisplayIOInterstitialViewController.swift
 //  Nimbus
-//  Created on 5/28/25
-//  Copyright © 2025 Nimbus Advertising Solutions Inc. All rights reserved.
+//  Created on 7/8/26
+//  Copyright © 2026 Nimbus Advertising Solutions Inc. All rights reserved.
 //
 
 import UIKit
 import NimbusKit
-import NimbusMolocoKit
+import NimbusDTKit
+import NimbusDisplayIOKit
 
-final class MolocoBannerViewController: SampleAdViewController {
+final class DisplayIOInterstitialViewController: SampleAdViewController {
 
-    private var bannerAd: InlineAd?
+    private var interstitialAd: InterstitialAd?
     
     convenience init(headerTitle: String, headerSubTitle: String) {
         self.init(
             headerTitle: headerTitle,
             headerSubTitle: headerSubTitle,
-            requiredExtension: MolocoExtension.self
+            requiredExtension: DisplayIOExtension.self
         )
     }
     
@@ -29,14 +30,14 @@ final class MolocoBannerViewController: SampleAdViewController {
     
     func showAd() async {
         do {
-            bannerAd = try await Nimbus.bannerAd(position: "banner", size: .banner, refreshInterval: 30)
+            interstitialAd = try await Nimbus.interstitialAd(position: "interstitial")
                 .onEvent { [weak self] event in
-                    self?.didReceiveNimbusEvent(event: event, ad: self?.bannerAd)
+                    self?.didReceiveNimbusEvent(event: event, ad: self?.interstitialAd)
                 }
                 .onError { [weak self] error in
                     self?.didReceiveNimbusError(error: error)
                 }
-                .show(in: view)
+                .show(from: self)
         } catch {
             print("Failed to show ad: \(error)")
         }

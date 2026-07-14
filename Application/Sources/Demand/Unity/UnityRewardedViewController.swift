@@ -8,9 +8,17 @@
 import NimbusKit
 import NimbusUnityKit
 
-class UnityRewardedViewController: UnityViewController {
+class UnityRewardedViewController: SampleAdViewController {
     var adController: AdController?
     var rewardedAd: RewardedAd?
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: UnityExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

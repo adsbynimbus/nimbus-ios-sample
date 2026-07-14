@@ -8,8 +8,16 @@
 import NimbusKit
 import NimbusUnityKit
 
-class UnityInterstitialViewController: UnityViewController {
+class UnityInterstitialViewController: SampleAdViewController {
     var interstitialAd: FullscreenAd?
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: UnityExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -10,11 +10,19 @@ import NimbusKit
 import MolocoSDK
 import NimbusMolocoKit
 
-final class MolocoNativeViewController: MolocoViewController {
+final class MolocoNativeViewController: SampleAdViewController {
 
     private var nativeAd: InlineAd?
     
     let contentView = UIView()
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: MolocoExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

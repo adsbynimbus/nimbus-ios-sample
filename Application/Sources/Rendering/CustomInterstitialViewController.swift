@@ -19,7 +19,7 @@ final class CustomInterstitialViewController: SampleAdViewController {
     
     init(headerTitle: String, kind: Kind) {
         self.kind = kind
-        super.init(headerTitle: headerTitle, headerSubTitle: kind.rawValue, enabledExtension: nil)
+        super.init(headerTitle: headerTitle, headerSubTitle: kind.rawValue, requiredExtension: nil)
     }
     
     @MainActor required init?(coder: NSCoder) {

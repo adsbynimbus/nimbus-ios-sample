@@ -9,9 +9,17 @@ import UIKit
 import NimbusKit
 import NimbusDTKit
 
-final class DTRewardedViewController: DTViewController {
+final class DTRewardedViewController: SampleAdViewController {
 
     private var rewardedAd: RewardedAd?
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: DigitalTurbineExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

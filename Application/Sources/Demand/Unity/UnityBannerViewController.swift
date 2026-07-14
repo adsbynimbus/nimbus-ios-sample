@@ -9,8 +9,16 @@ import UIKit
 import NimbusKit
 import NimbusUnityKit
 
-class UnityBannerViewController: UnityViewController {
+class UnityBannerViewController: SampleAdViewController {
     var bannerAd: InlineAd?
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: UnityExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

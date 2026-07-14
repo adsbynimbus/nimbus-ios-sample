@@ -1,15 +1,16 @@
 //
-//  InMobiRewardedViewController.swift
+//  DisplayIORewardedViewController.swift
 //  Nimbus
-//  Created on 7/31/25
-//  Copyright © 2025 Nimbus Advertising Solutions Inc. All rights reserved.
+//  Created on 7/8/26
+//  Copyright © 2026 Nimbus Advertising Solutions Inc. All rights reserved.
 //
 
 import UIKit
 import NimbusKit
-import NimbusInMobiKit
+import NimbusDTKit
+import NimbusDisplayIOKit
 
-final class InMobiRewardedViewController: SampleAdViewController {
+final class DisplayIORewardedViewController: SampleAdViewController {
 
     private var rewardedAd: RewardedAd?
     
@@ -17,7 +18,7 @@ final class InMobiRewardedViewController: SampleAdViewController {
         self.init(
             headerTitle: headerTitle,
             headerSubTitle: headerSubTitle,
-            requiredExtension: InMobiExtension.self
+            requiredExtension: DisplayIOExtension.self
         )
     }
     

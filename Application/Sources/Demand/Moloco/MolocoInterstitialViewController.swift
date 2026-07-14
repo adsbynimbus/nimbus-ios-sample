@@ -9,9 +9,17 @@ import UIKit
 import NimbusKit
 import NimbusMolocoKit
 
-final class MolocoInterstitialViewController: MolocoViewController {
+final class MolocoInterstitialViewController: SampleAdViewController {
 
     private var interstitialAd: InterstitialAd?
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: MolocoExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

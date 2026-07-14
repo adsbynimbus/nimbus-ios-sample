@@ -10,7 +10,7 @@ import UIKit
 import NimbusKit
 import NimbusMobileFuseKit
 
-final class MobileFuseBannerViewController: MobileFuseViewController {
+final class MobileFuseBannerViewController: SampleAdViewController {
     
     private var bannerAd: InlineAd?
     private let position: String
@@ -20,7 +20,7 @@ final class MobileFuseBannerViewController: MobileFuseViewController {
         self.position = position
         self.size = size
         
-        super.init(headerTitle: headerTitle, headerSubTitle: "")
+        super.init(headerTitle: headerTitle, headerSubTitle: "", requiredExtension: MobileFuseExtension.self)
     }
     
     required init?(coder: NSCoder) {

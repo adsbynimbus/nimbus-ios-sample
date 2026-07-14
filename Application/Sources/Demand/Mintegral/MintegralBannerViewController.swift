@@ -9,8 +9,16 @@ import UIKit
 import NimbusKit
 import NimbusMintegralKit
 
-class MintegralBannerViewController: MintegralViewController {
+class MintegralBannerViewController: SampleAdViewController {
     var bannerAd: InlineAd?
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: MintegralExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

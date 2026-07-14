@@ -11,9 +11,17 @@ import NimbusAdMobKit
 
 private let rewardedPlacementId = Bundle.main.infoDictionary?["AdMob Rewarded ID"] as? String ?? ""
 
-class AdMobRewardedViewController: AdMobViewController {
+class AdMobRewardedViewController: SampleAdViewController {
     var adController: AdController?
     var rewardedAd: RewardedAd?
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: AdMobExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

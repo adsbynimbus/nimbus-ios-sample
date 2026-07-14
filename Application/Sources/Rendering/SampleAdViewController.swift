@@ -15,16 +15,15 @@ class SampleAdViewController : DemoViewController {
     let screenLogger = SampleAppLogger()
     weak var loggerView: UIView?
     
-    private let enabledState = ExtensionHelper.enabledState
-    
     deinit {
-        ExtensionHelper.restoreExtensionsState(from: enabledState)
+        Task { @MainActor in ExtensionHelper.enableAllExtensions() }
     }
     
-    init(headerTitle: String, headerSubTitle: String, enabledExtension: NimbusExtension.Type?) {
+    init(headerTitle: String, headerSubTitle: String, requiredExtension: NimbusExtension.Type?) {
         super.init(headerTitle: headerTitle, headerSubTitle: headerSubTitle)
-        
-        ExtensionHelper.disableAllExtensions(except: enabledExtension)
+                
+        ExtensionHelper.disableAllExtensions()
+        requiredExtension?.enable()
     }
     
     required init?(coder: NSCoder) {

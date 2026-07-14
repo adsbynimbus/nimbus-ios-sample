@@ -10,10 +10,18 @@ import NimbusKit
 import MTGSDK
 import NimbusMintegralKit
 
-class MintegralNativeViewController: MintegralViewController {
+class MintegralNativeViewController: SampleAdViewController {
     var nativeAd: InlineAd?
     
     let contentView = UIView()
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: MintegralExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

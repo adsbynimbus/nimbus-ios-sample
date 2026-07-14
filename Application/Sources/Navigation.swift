@@ -67,6 +67,7 @@ enum MainItem: String, NavigationItem {
                     Section(header: "Moloco", items: Moloco.allCases),
                     Section(header: "InMobi", items: InMobi.allCases),
                     Section(header: "Digital Turbine", items: DigitalTurbineSample.allCases),
+                    Section(header: "display.io", items: DisplayIOSample.allCases),
                 ])
         case .testRender:
             return TestRenderViewController(
@@ -93,13 +94,13 @@ enum AdManagerAdType: String, NavigationItem {
         
         return switch self {
         case .banner:
-            BannerViewController(headerTitle: title, headerSubTitle: rawValue, enabledExtension: nil)
+            BannerViewController(headerTitle: title, headerSubTitle: rawValue, requiredExtension: nil)
         case .inlineVideo:
-            InlineVideoViewController(headerTitle: title, headerSubTitle: rawValue, enabledExtension: nil)
+            InlineVideoViewController(headerTitle: title, headerSubTitle: rawValue, requiredExtension: nil)
         case .manuallyRenderedAd:
-            ManuallyRenderedViewController(headerTitle: title, headerSubTitle: rawValue, enabledExtension: nil)
+            ManuallyRenderedViewController(headerTitle: title, headerSubTitle: rawValue, requiredExtension: nil)
         case .interstitialHybrid:
-            InterstitialViewController(headerTitle: title, headerSubTitle: rawValue, enabledExtension: nil)
+            InterstitialViewController(headerTitle: title, headerSubTitle: rawValue, requiredExtension: nil)
         case .interstitialStatic:
             CustomInterstitialViewController(headerTitle: title, kind: .staticOnly)
         case .interstitialVideo:
@@ -108,7 +109,7 @@ enum AdManagerAdType: String, NavigationItem {
             RewardedViewController(
                 headerTitle: "Nimbus Rendering",
                 headerSubTitle: rawValue,
-                enabledExtension: nil
+                requiredExtension: nil
             )
         }
     }
@@ -208,9 +209,9 @@ enum APSSample: String, NavigationItem {
     func destinationController(parent: String) -> UIViewController {
         return switch self {
         case .apsBannerWithRefresh:
-            APSBannerViewController(headerTitle: "APS", headerSubTitle: rawValue, enabledExtension: nil)
+            APSBannerViewController(headerTitle: "APS", headerSubTitle: rawValue, requiredExtension: nil)
         case .apsInterstitialHybrid:
-            APSInterstitialViewController(headerTitle: "APS", headerSubTitle: rawValue, enabledExtension: nil)
+            APSInterstitialViewController(headerTitle: "APS", headerSubTitle: rawValue, requiredExtension: nil)
         }
     }
 }
@@ -267,6 +268,22 @@ enum DigitalTurbineSample: String, NavigationItem {
         case .dtNative: DTNativeViewController(headerTitle: rawValue, headerSubTitle: "")
         case .dtInterstitial: DTInterstitialViewController(headerTitle: rawValue, headerSubTitle: "")
         case .dtRewarded: DTRewardedViewController(headerTitle: rawValue, headerSubTitle: "")
+        }
+    }
+}
+
+enum DisplayIOSample: String, NavigationItem {
+    case dioBanner               = "DisplayIO Banner"
+    case dioNative               = "DisplayIO Native"
+    case dioInterstitial         = "DisplayIO Interstitial"
+    case dioRewarded             = "DisplayIO Rewarded"
+    
+    func destinationController(parent: String) -> UIViewController {
+        switch self {
+        case .dioBanner: DisplayIOBannerViewController(headerTitle: rawValue, headerSubTitle: "")
+        case .dioNative: DisplayIONativeViewController(headerTitle: rawValue, headerSubTitle: "")
+        case .dioInterstitial: DisplayIOInterstitialViewController(headerTitle: rawValue, headerSubTitle: "")
+        case .dioRewarded: DisplayIORewardedViewController(headerTitle: rawValue, headerSubTitle: "")
         }
     }
 }

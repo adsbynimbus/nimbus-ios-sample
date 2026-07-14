@@ -9,9 +9,17 @@ import UIKit
 import NimbusKit
 import NimbusInMobiKit
 
-final class InMobiInterstitialViewController: InMobiViewController {
+final class InMobiInterstitialViewController: SampleAdViewController {
 
     private var interstitialAd: InterstitialAd?
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: InMobiExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

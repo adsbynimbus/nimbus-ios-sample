@@ -1,37 +1,34 @@
 //
-//  AdMobNativeViewController.swift
-//  NimbusInternalSampleApp
-//  Created on 9/6/24
-//  Copyright © 2024 Nimbus Advertising Solutions Inc. All rights reserved.
+//  DisplayIONativeViewController.swift
+//  Nimbus
+//  Created on 7/8/26
+//  Copyright © 2026 Nimbus Advertising Solutions Inc. All rights reserved.
 //
 
 import UIKit
 import NimbusKit
-import GoogleMobileAds
-import NimbusAdMobKit
+import IASDKCore
+import NimbusDisplayIOKit
 
-let nativePlacementId = Bundle.main.infoDictionary?["AdMob Native ID"] as? String ?? ""
+final class DisplayIONativeViewController: SampleAdViewController {
 
-class AdMobNativeViewController: SampleAdViewController {
+    private var nativeAd: InlineAd?
     
-    var nativeAd: InlineAd?
-    
-    var adView: AdMobNativeAdView!
     let contentView = UIView()
     
     convenience init(headerTitle: String, headerSubTitle: String) {
         self.init(
             headerTitle: headerTitle,
             headerSubTitle: headerSubTitle,
-            requiredExtension: AdMobExtension.self
+            requiredExtension: DisplayIOExtension.self
         )
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
-        AdMobExtension.nativeAdViewProvider = { _, nativeAd in
-            AdMobNativeAdView(nativeAd: nativeAd)
+        
+        DisplayIOExtension.nativeAdViewProvider = { container, ad in
+            DisplayIONativeAdView(nativeAd: ad)
         }
         
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -50,14 +47,8 @@ class AdMobNativeViewController: SampleAdViewController {
     
     func showAd() async {
         do {
-            /// Shows how to pass AdMob native ad options, like changing the adChoices position.
-            let nativeOptions = AdMobNativeAdOptions(preferredAdChoicesPosition: .topLeftCorner)
-            
-            self.nativeAd = try await Nimbus.inlineAd(position: "native") {
+            nativeAd = try await Nimbus.inlineAd(position: "native") {
                 native()
-                demand {
-                    admob(nativeAdUnitId: nativePlacementId, options: nativeOptions)
-                }
             }
             .onEvent { [weak self] event in
                 self?.didReceiveNimbusEvent(event: event, ad: self?.nativeAd)
