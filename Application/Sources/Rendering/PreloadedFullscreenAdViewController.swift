@@ -1,5 +1,5 @@
 //
-//  ManuallyRenderedViewController.swift
+//  PreloadedFullscreenAdViewController.swift
 //  Nimbus
 //  Created on 9/2/25
 //  Copyright © 2025 Nimbus Advertising Solutions Inc. All rights reserved.
@@ -8,7 +8,7 @@
 import UIKit
 import NimbusKit
 
-final class ManuallyRenderedViewController: SampleAdViewController {
+final class PreloadedFullscreenAdViewController: SampleAdViewController {
     var interstitialAd: InterstitialAd?
     let loadButton = UIButton(type: .system)
     var isLoading = false

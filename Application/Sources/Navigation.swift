@@ -81,24 +81,26 @@ enum MainItem: String, NavigationItem {
 }
 
 enum AdManagerAdType: String, NavigationItem {
-    case manuallyRenderedAd         = "Manually Rendered Ad"
     case banner                     = "Banner"
+    case mrec                       = "Medium Rectangle (300x250)"
     case inlineVideo                = "Inline Video"
     case interstitialHybrid         = "Interstitial Hybrid"
     case interstitialStatic         = "Interstitial Static"
     case interstitialVideo          = "Interstitial Video"
     case rewardedVideo              = "Rewarded Video"
+    case preloadedBanner            = "Preloaded Banner Ad"
+    case preloadedInterstitial      = "Preloaded Interstitial Ad"
     
     func destinationController(parent: String) -> UIViewController {
         let title = "Nimbus Rendering"
         
         return switch self {
         case .banner:
-            BannerViewController(headerTitle: title, headerSubTitle: rawValue, requiredExtension: nil)
+            BannerViewController(headerTitle: title, headerSubTitle: rawValue, size: .banner)
+        case .mrec:
+            BannerViewController(headerTitle: title, headerSubTitle: rawValue, size: .mrec)
         case .inlineVideo:
             InlineVideoViewController(headerTitle: title, headerSubTitle: rawValue, requiredExtension: nil)
-        case .manuallyRenderedAd:
-            ManuallyRenderedViewController(headerTitle: title, headerSubTitle: rawValue, requiredExtension: nil)
         case .interstitialHybrid:
             InterstitialViewController(headerTitle: title, headerSubTitle: rawValue, requiredExtension: nil)
         case .interstitialStatic:
@@ -111,6 +113,10 @@ enum AdManagerAdType: String, NavigationItem {
                 headerSubTitle: rawValue,
                 requiredExtension: nil
             )
+        case .preloadedBanner:
+            PreloadedInlineAdViewController(headerTitle: title, headerSubTitle: rawValue, requiredExtension: nil)
+        case .preloadedInterstitial:
+            PreloadedFullscreenAdViewController(headerTitle: title, headerSubTitle: rawValue, requiredExtension: nil)
         }
     }
 }
