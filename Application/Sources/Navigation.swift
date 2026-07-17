@@ -88,8 +88,6 @@ enum AdManagerAdType: String, NavigationItem {
     case interstitialStatic         = "Interstitial Static"
     case interstitialVideo          = "Interstitial Video"
     case rewardedVideo              = "Rewarded Video"
-    case preloadedBanner            = "Preloaded Banner Ad"
-    case preloadedInterstitial      = "Preloaded Interstitial Ad"
     
     func destinationController(parent: String) -> UIViewController {
         let title = "Nimbus Rendering"
@@ -113,10 +111,6 @@ enum AdManagerAdType: String, NavigationItem {
                 headerSubTitle: rawValue,
                 requiredExtension: nil
             )
-        case .preloadedBanner:
-            PreloadedInlineAdViewController(headerTitle: title, headerSubTitle: rawValue, requiredExtension: nil)
-        case .preloadedInterstitial:
-            PreloadedFullscreenAdViewController(headerTitle: title, headerSubTitle: rawValue, requiredExtension: nil)
         }
     }
 }
