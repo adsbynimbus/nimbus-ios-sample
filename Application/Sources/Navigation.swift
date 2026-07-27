@@ -280,13 +280,15 @@ enum DigitalTurbineSample: String, NavigationItem {
 
 enum DisplayIOSample: String, NavigationItem {
     case dioBanner               = "DisplayIO Banner"
+    case dioMREC                 = "DisplayIO MREC"
     case dioNative               = "DisplayIO Native"
     case dioInterstitial         = "DisplayIO Interstitial"
     case dioRewarded             = "DisplayIO Rewarded"
     
     func destinationController(parent: String) -> UIViewController {
         switch self {
-        case .dioBanner: DisplayIOBannerViewController(headerTitle: rawValue, headerSubTitle: "")
+        case .dioBanner: DisplayIOBannerViewController(headerTitle: rawValue, headerSubTitle: "", size: .banner)
+        case .dioMREC: DisplayIOBannerViewController(headerTitle: rawValue, headerSubTitle: "", size: .mrec)
         case .dioNative: DisplayIONativeViewController(headerTitle: rawValue, headerSubTitle: "")
         case .dioInterstitial: DisplayIOInterstitialViewController(headerTitle: rawValue, headerSubTitle: "")
         case .dioRewarded: DisplayIORewardedViewController(headerTitle: rawValue, headerSubTitle: "")

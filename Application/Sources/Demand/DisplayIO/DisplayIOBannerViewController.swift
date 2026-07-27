@@ -13,13 +13,19 @@ final class DisplayIOBannerViewController: SampleAdViewController {
 
     private var bannerAd: InlineAd?
     let contentView = UIView()
+    let size: AdSize
     
-    convenience init(headerTitle: String, headerSubTitle: String) {
-        self.init(
+    init(headerTitle: String, headerSubTitle: String, size: AdSize) {
+        self.size = size
+        super.init(
             headerTitle: headerTitle,
             headerSubTitle: headerSubTitle,
             requiredExtension: DisplayIOExtension.self
         )
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -40,7 +46,7 @@ final class DisplayIOBannerViewController: SampleAdViewController {
     
     func showAd() async {
         do {
-            bannerAd = try await Nimbus.bannerAd(position: "banner", size: .banner, refreshInterval: 0)
+            bannerAd = try await Nimbus.bannerAd(position: "banner", size: size, refreshInterval: 0)
                 .onEvent { [weak self] event in
                     self?.didReceiveNimbusEvent(event: event, ad: self?.bannerAd)
                 }
