@@ -7,9 +7,7 @@ target 'nimbus-ios-sample-pods' do
 
   pod 'Application', :path => 'Application'
 
-  pod 'GoogleAds-IMA-iOS-SDK', '3.27.4'
-
-  pod 'NimbusSDK', '~> 2', subspecs: [
+  pod 'NimbusSDK', '~> 2.34', subspecs: [
      'NimbusKit',               # Nimbus SDK
      'NimbusRenderStaticKit',   # Static Ad Renderer
      'NimbusRenderVideoKit',    # Video Ad Renderer
