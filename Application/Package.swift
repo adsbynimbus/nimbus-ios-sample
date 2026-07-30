@@ -12,6 +12,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/adsbynimbus/nimbus-ios-sdk.git", from: "2.34.0"),
+        .package(url: "https://github.com/facebook/FBAudienceNetwork", exact: "6.21.1")
     ],
     targets: [
         .target(
