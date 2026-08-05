@@ -11,17 +11,19 @@ let package = Package(
             targets: ["Application"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/adsbynimbus/nimbus-ios-sdk", from: "3.0.0-rc.2"),
-        .package(url: "https://github.com/adsbynimbus/nimbus-ios-admob", from: "13.0.0-rc.2"),
-        .package(url: "https://github.com/adsbynimbus/nimbus-ios-aps", from: "5.0.0-rc.2"),
-        .package(url: "https://github.com/adsbynimbus/nimbus-ios-inmobi", from: "10.0.0-rc.2"),
-        .package(url: "https://github.com/adsbynimbus/nimbus-ios-liveramp", from: "2.0.0-rc.2"),
-        .package(url: "https://github.com/adsbynimbus/nimbus-ios-meta", from: "6.0.0-rc.2"),
-        .package(url: "https://github.com/adsbynimbus/nimbus-ios-mintegral", from: "7.0.0-rc.2"),
-        .package(url: "https://github.com/adsbynimbus/nimbus-ios-mobilefuse", from: "1.0.0-rc.2"),
-        .package(url: "https://github.com/adsbynimbus/nimbus-ios-moloco", from: "4.0.0-rc.2"),
-        .package(url: "https://github.com/adsbynimbus/nimbus-ios-unity", from: "4.0.0-rc.2"),
-        .package(url: "https://github.com/adsbynimbus/nimbus-ios-vungle", from: "7.0.0-rc.2"),
+        .package(url: "https://github.com/adsbynimbus/nimbus-ios-sdk", from: "3.0.0-rc.3"),
+        .package(url: "https://github.com/adsbynimbus/nimbus-ios-admob", from: "13.0.0-rc.3"),
+        .package(url: "https://github.com/adsbynimbus/nimbus-ios-aps", from: "5.0.0-rc.3"),
+        .package(url: "https://github.com/adsbynimbus/nimbus-ios-inmobi", from: "10.0.0-rc.3"),
+        .package(url: "https://github.com/adsbynimbus/nimbus-ios-liveramp", from: "2.0.0-rc.3"),
+        .package(url: "https://github.com/adsbynimbus/nimbus-ios-meta", from: "6.0.0-rc.3"),
+        .package(url: "https://github.com/adsbynimbus/nimbus-ios-mintegral", from: "7.0.0-rc.3"),
+        .package(url: "https://github.com/adsbynimbus/nimbus-ios-mobilefuse", from: "1.0.0-rc.3"),
+        .package(url: "https://github.com/adsbynimbus/nimbus-ios-moloco", from: "4.0.0-rc.3"),
+        .package(url: "https://github.com/adsbynimbus/nimbus-ios-unity", from: "4.0.0-rc.3"),
+        .package(url: "https://github.com/adsbynimbus/nimbus-ios-vungle", from: "7.0.0-rc.3"),
+        .package(url: "https://github.com/adsbynimbus/nimbus-ios-dt", from: "8.0.0-rc.3"),
+        .package(url: "https://github.com/adsbynimbus/nimbus-ios-displayio", from: "4.0.0-rc.3"),
     ],
     targets: [
         .target(
@@ -36,7 +38,9 @@ let package = Package(
                 .product(name: "NimbusAdMobKit", package: "nimbus-ios-admob"),
                 .product(name: "NimbusMintegralKit", package: "nimbus-ios-mintegral"),
                 .product(name: "NimbusMolocoKit", package: "nimbus-ios-moloco"),
-                .product(name: "NimbusInMobiKit", package: "nimbus-ios-inmobi")
+                .product(name: "NimbusInMobiKit", package: "nimbus-ios-inmobi"),
+                .product(name: "NimbusDisplayIOKit", package: "nimbus-ios-displayio"),
+                .product(name: "NimbusDTKit", package: "nimbus-ios-dt"),
             ],
             path: "Sources")
     ]
