@@ -39,7 +39,7 @@ final class PreloadedFullscreenAdViewController: SampleAdViewController {
         Task {
             do {
                 interstitialAd = try await Nimbus.interstitialAd(position: "manual-interstitial")
-                    .onEvent { event in
+                    .onEvent { [unowned self] event in
                         print("Received Nimbus event: \(event)")
                         
                         if event == .loaded {
