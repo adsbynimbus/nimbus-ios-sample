@@ -22,16 +22,6 @@ import NimbusDisplayIOKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    // This is a temporary fix for FBAudienceNetwork 6.17.0+ that crashes trying to read AppDelegate.window
-    var window: UIWindow? {
-        get {
-            let allScenes = UIApplication.shared.connectedScenes
-            let scene = allScenes.first { $0.activationState == .foregroundActive } as? UIWindowScene
-            return scene?.keyWindow
-        }
-        set {}
-    }
     
     func application(
         _ application: UIApplication,

@@ -38,8 +38,8 @@ final class PreloadedInlineAdViewController: SampleAdViewController {
         
         Task {
             do {
-                bannerAd = try await Nimbus.bannerAd(position: "manual-interstitial", size: .banner)
-                    .onEvent { event in
+                bannerAd = try await Nimbus.inlineAd(position: "manual-interstitial")
+                    .onEvent { [unowned self] event in
                         print("Received Nimbus event: \(event)")
                         
                         if event == .loaded {
