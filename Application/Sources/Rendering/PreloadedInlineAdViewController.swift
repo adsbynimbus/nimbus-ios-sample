@@ -12,6 +12,7 @@ final class PreloadedInlineAdViewController: SampleAdViewController {
     var bannerAd: InlineAd?
     let loadButton = UIButton(type: .system)
     var isLoading = false
+    let contentView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,14 +23,20 @@ final class PreloadedInlineAdViewController: SampleAdViewController {
         
         view.addSubview(loadButton)
         
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(contentView)
+        
         NSLayoutConstraint.activate([
             loadButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loadButton.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 50),
+            loadButton.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 20),
             loadButton.widthAnchor.constraint(equalToConstant: 200),
-            loadButton.heightAnchor.constraint(equalToConstant: 50)
+            loadButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            contentView.topAnchor.constraint(equalTo: loadButton.bottomAnchor, constant: 20),
+            contentView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
-        
-        
     }
     
     @objc private func loadAd() {
@@ -38,7 +45,7 @@ final class PreloadedInlineAdViewController: SampleAdViewController {
         
         Task {
             do {
-                bannerAd = try await Nimbus.inlineAd(position: "manual-interstitial")
+                bannerAd = try await Nimbus.bannerAd(position: "manual-banner", size: .mrec)
                     .onEvent { [unowned self] event in
                         print("Received Nimbus event: \(event)")
                         
@@ -62,7 +69,7 @@ final class PreloadedInlineAdViewController: SampleAdViewController {
     @objc private func showAd() {
         Task {
             do {
-                try await bannerAd?.show(in: view)
+                try await bannerAd?.show(in: contentView)
             } catch {
                 print("Couldn't show ad: \(error)")
             }
