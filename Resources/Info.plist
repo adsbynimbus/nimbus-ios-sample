@@ -8,12 +8,16 @@
 	<string>c5f20fe6e37146b08749d09bb2b6a4dd</string>
 	<key>AdMob Banner ID</key>
 	<string>$(ADMOB_BANNER_ID)</string>
-	<key>AdMob Native ID</key>
-	<string>$(ADMOB_NATIVE_ID)</string>
 	<key>AdMob Interstitial ID</key>
 	<string>$(ADMOB_INTERSTITIAL_ID)</string>
+	<key>AdMob Native ID</key>
+	<string>$(ADMOB_NATIVE_ID)</string>
 	<key>AdMob Rewarded ID</key>
 	<string>$(ADMOB_REWARDED_ID)</string>
+	<key>Digital Turbine App ID</key>
+	<string>$(DIGITAL_TURBINE_APP_ID)</string>
+	<key>DisplayIO App ID</key>
+	<string>$(DISPLAYIO_APP_ID)</string>
 	<key>GADApplicationIdentifier</key>
 	<string>$(GOOGLE_APP_ID)</string>
 	<key>GADIsAdManagerApp</key>
@@ -24,8 +28,8 @@
 	<string>$(GOOGLE_NIMBUS_RENDERING_REWARDED_PLACEMENT_ID)</string>
 	<key>Google Placement ID</key>
 	<string>$(GOOGLE_PLACEMENT_ID)</string>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
+	<key>InMobi Account ID</key>
+	<string>$(INMOBI_ACCOUNT_ID)</string>
 	<key>LiveRamp Config ID</key>
 	<string>$(LIVERAMP_CONFIG_ID)</string>
 	<key>Meta Banner Placement ID</key>
@@ -36,6 +40,12 @@
 	<string>$(META_NATIVE_PLACEMENT_ID)</string>
 	<key>Meta Rewarded Video Placement ID</key>
 	<string>$(META_REWARDED_VIDEO_PLACEMENT_ID)</string>
+	<key>Mintegral App ID</key>
+	<string>$(MINTEGRAL_APP_ID)</string>
+	<key>Mintegral App Key</key>
+	<string>$(MINTEGRAL_APP_KEY)</string>
+	<key>Moloco App Key</key>
+	<string>$(MOLOCO_APP_KEY)</string>
 	<key>Publisher Key</key>
 	<string>dev-sdk</string>
 	<key>SKAdNetworkItems</key>
@@ -268,17 +278,5 @@
 	<string>$(UNITY_GAME_ID)</string>
 	<key>Vungle App ID</key>
 	<string>$(VUNGLE_APP_ID)</string>
-	<key>Mintegral App ID</key>
-	<string>$(MINTEGRAL_APP_ID)</string>
-	<key>Mintegral App Key</key>
-	<string>$(MINTEGRAL_APP_KEY)</string>
-	<key>Moloco App Key</key>
-	<string>$(MOLOCO_APP_KEY)</string>
-	<key>InMobi Account ID</key>
-	<string>$(INMOBI_ACCOUNT_ID)</string>
-	<key>Digital Turbine App ID</key>
-	<string>$(DIGITAL_TURBINE_APP_ID)</string>
-	<key>DisplayIO App ID</key>
-	<string>$(DISPLAYIO_APP_ID)</string>
 </dict>
 </plist>

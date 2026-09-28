@@ -43,7 +43,7 @@ final class PreloadedInlineAdViewController: SampleAdViewController {
         guard !isLoading else { return }
         isLoading = true
         
-        Task {
+        Task { [self] in
             do {
                 bannerAd = try await Nimbus.bannerAd(position: "manual-banner", size: .mrec)
                     .onEvent { [unowned self] event in

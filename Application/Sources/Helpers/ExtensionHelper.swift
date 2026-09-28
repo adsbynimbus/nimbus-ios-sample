@@ -22,7 +22,7 @@ struct ExtensionHelper {
     }
     
     static func setAllExtensions(enabled: Bool) {
-        for (key, ext) in Nimbus.extensions {
+        for (_, ext) in Nimbus.extensions {
             let t = type(of: ext)
             enabled ? t.enable() : t.disable()
         }

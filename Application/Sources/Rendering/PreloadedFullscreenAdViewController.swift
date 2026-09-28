@@ -36,7 +36,7 @@ final class PreloadedFullscreenAdViewController: SampleAdViewController {
         guard !isLoading else { return }
         isLoading = true
         
-        Task {
+        Task { [self] in
             do {
                 interstitialAd = try await Nimbus.interstitialAd(position: "manual-interstitial")
                     .onEvent { [unowned self] event in
