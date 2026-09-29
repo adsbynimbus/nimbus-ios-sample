@@ -278,5 +278,7 @@
 	<string>$(UNITY_GAME_ID)</string>
 	<key>Vungle App ID</key>
 	<string>$(VUNGLE_APP_ID)</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Some ads may offer to add an event to your calendar</string>
 </dict>
 </plist>
