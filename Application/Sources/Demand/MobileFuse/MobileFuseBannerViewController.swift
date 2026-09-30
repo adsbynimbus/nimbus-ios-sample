@@ -30,7 +30,11 @@ final class MobileFuseBannerViewController: SampleAdViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Task {
+        Task { await showAd() }
+    }
+    
+    func showAd() async {
+        do {
             self.bannerAd = try await Nimbus.bannerAd(position: position, size: size, refreshInterval: 30)
                 .onEvent { [weak self] event in
                     self?.didReceiveNimbusEvent(event: event, ad: self?.bannerAd)
@@ -39,6 +43,8 @@ final class MobileFuseBannerViewController: SampleAdViewController {
                     self?.didReceiveNimbusError(error: error)
                 }
                 .show(in: view)
+        } catch {
+            print("Failed to show ad: \(error)")
         }
     }
 }

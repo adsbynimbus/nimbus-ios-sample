@@ -34,7 +34,7 @@ final class TestRenderAdViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
         Task {
-            ad = try await Nimbus.inlineAd(from: response).show(in: view)
+            ad = try! await Nimbus.inlineAd(from: response).show(in: view)
 
             setupLogo()
             setup(adView: ad?.adView)

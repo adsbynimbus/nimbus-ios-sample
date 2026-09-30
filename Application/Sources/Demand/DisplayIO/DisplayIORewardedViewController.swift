@@ -25,7 +25,11 @@ final class DisplayIORewardedViewController: SampleAdViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Task {
+        Task { await showAd() }
+    }
+    
+    func showAd() async {
+        do {
             self.rewardedAd = try await Nimbus.rewardedAd(position: "rewarded")
                 .onEvent { [weak self] event in
                     self?.didReceiveNimbusEvent(event: event, ad: self?.rewardedAd)
@@ -34,6 +38,8 @@ final class DisplayIORewardedViewController: SampleAdViewController {
                     self?.didReceiveNimbusError(error: error)
                 }
                 .show(from: self)
+        } catch {
+            print("Failed to show ad: \(error)")
         }
     }
 }
