@@ -12,13 +12,19 @@ import NimbusMolocoKit
 final class MolocoBannerViewController: SampleAdViewController {
 
     private var bannerAd: InlineAd?
+    private let size: AdSize
     
-    convenience init(headerTitle: String, headerSubTitle: String) {
-        self.init(
+    init(headerTitle: String, headerSubTitle: String, size: AdSize) {
+        self.size = size
+        super.init(
             headerTitle: headerTitle,
             headerSubTitle: headerSubTitle,
             requiredExtension: MolocoExtension.self
         )
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -29,7 +35,7 @@ final class MolocoBannerViewController: SampleAdViewController {
     
     func showAd() async {
         do {
-            bannerAd = try await Nimbus.bannerAd(position: "banner", size: .banner, refreshInterval: 30)
+            bannerAd = try await Nimbus.bannerAd(position: "banner", size: size, refreshInterval: 30)
                 .onEvent { [weak self] event in
                     self?.didReceiveNimbusEvent(event: event, ad: self?.bannerAd)
                 }
