@@ -139,13 +139,15 @@ enum Mintegral: String, NavigationItem {
 
 enum Moloco: String, NavigationItem {
     case banner                 = "Banner"
+    case mrec                   = "MREC"
     case native                 = "Native"
     case interstitial           = "Interstitial"
     case rewarded               = "Rewarded Video"
     
     func destinationController(parent: String) -> UIViewController {
         return switch self {
-        case .banner: MolocoBannerViewController(headerTitle: "Moloco Banner", headerSubTitle: "")
+        case .banner: MolocoBannerViewController(headerTitle: "Moloco Banner", headerSubTitle: "", size: .banner)
+        case .mrec: MolocoBannerViewController(headerTitle: "Moloco MREC", headerSubTitle: "", size: .mrec)
         case .native: MolocoNativeViewController(headerTitle: "Moloco Native", headerSubTitle: "")
         case .interstitial: MolocoInterstitialViewController(headerTitle: "Moloco Interstitial", headerSubTitle: "")
         case .rewarded: MolocoRewardedViewController(headerTitle: "Moloco Rewarded", headerSubTitle: "")
