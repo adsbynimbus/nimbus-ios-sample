@@ -16,14 +16,16 @@ Pod::Spec.new do |spec|
     spec.source_files = '**/*.swift'
     spec.exclude_files = '**/Package.swift'
     
-    spec.dependency 'NimbusSDK', '~> 3'               # Nimbus SDK
-    spec.dependency 'NimbusAPSKit', '~> 3'            # Amazon Publisher Services Request Support
-    spec.dependency 'NimbusMetaKit', '~> 3'           # Meta Audience Network Request Support
-    spec.dependency 'NimbusUnityKit', '~> 3'          # Unity Ads Request Support and Renderer
-    spec.dependency 'NimbusVungleKit', '~> 3'         # Vungle Ads Request Support and Renderer
-    spec.dependency 'NimbusMobileFuseKit', '~> 3'     # MobileFuse Ads Request Support and Renderer
-    spec.dependency 'NimbusAdMobKit', '~> 3'          # AdMob Bidding Support
-    spec.dependency 'NimbusMintegralKit', '~> 3'      # Mintegral Support
-    spec.dependency 'NimbusMolocoKit', '~> 3'         # Moloco Support
-    spec.dependency 'NimbusInMobiKit', '~> 3'         # InMobi Support
+    spec.dependency 'NimbusSDK', '~> 3'                           # Nimbus SDK
+    spec.dependency 'NimbusAdMobKit', '~> 13'                     # AdMob Bidding Support
+    spec.dependency 'NimbusAPSKit', '~> 5'                        # Amazon Publisher Services Request Support
+    spec.dependency 'NimbusDisplayIOKit', '~> 4'                  # display.io Support
+    spec.dependency 'NimbusDTKit', '~> 8'                         # Digital Turbine Support
+    spec.dependency 'NimbusInMobiKit', '~> 11'                    # InMobi Support
+    spec.dependency 'NimbusMetaKit', '~> 6'                       # Meta Audience Network Request Support
+    spec.dependency 'NimbusMintegralKit', '~> 8'                  # Mintegral Support
+    spec.dependency 'NimbusMobileFuseKit', '~> 1'                 # MobileFuse Ads Request Support and Renderer
+    spec.dependency 'NimbusMolocoKit', '~> 4'                     # Moloco Support
+    spec.dependency 'NimbusUnityKit', '~> 4'                      # Unity Ads Request Support and Renderer
+    spec.dependency 'NimbusVungleKit', '~> 7'                     # Vungle Ads Request Support and Renderer
   end
