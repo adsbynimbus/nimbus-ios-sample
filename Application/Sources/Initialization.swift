@@ -56,18 +56,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             InMobiExtension(accountId: Bundle.main.infoDictionary?["InMobi Account ID"] as? String)
             DigitalTurbineExtension(appId: Bundle.main.infoDictionary?["Digital Turbine App ID"] as? String)
             DisplayIOExtension(appId: Bundle.main.infoDictionary?["DisplayIO App ID"] as? String)
+            UnityExtension(gameId: Bundle.main.infoDictionary?["Unity Game ID"] as? String)
+            VungleExtension(appId: Bundle.main.infoDictionary?["Vungle App ID"] as? String)
             
-            if let appId = Bundle.main.infoDictionary?["Vungle App ID"] as? String {
-                VungleExtension(appId: appId)
-            }
-            
-            if let metaNativeId = Bundle.main.infoDictionary?["Meta Native Placement ID"] as? String,
-               let metaAppId = metaNativeId.components(separatedBy: "_").first {
-                MetaExtension(appId: metaAppId, forceTestAd: true)
-            }
-            
-            if let gameId = Bundle.main.infoDictionary?["Unity Game ID"] as? String {
-                UnityExtension(gameId: gameId)
+            if let appId = Bundle.main.infoDictionary?["Meta App ID"] as? String {
+                MetaExtension(appId: appId, forceTestAd: true)
             }
         }
         

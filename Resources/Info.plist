@@ -32,14 +32,8 @@
 	<string>$(INMOBI_ACCOUNT_ID)</string>
 	<key>LiveRamp Config ID</key>
 	<string>$(LIVERAMP_CONFIG_ID)</string>
-	<key>Meta Banner Placement ID</key>
-	<string>$(META_BANNER_PLACEMENT_ID)</string>
-	<key>Meta Interstitial Placement ID</key>
-	<string>$(META_INTERSTITIAL_PLACEMENT_ID)</string>
-	<key>Meta Native Placement ID</key>
-	<string>$(META_NATIVE_PLACEMENT_ID)</string>
-	<key>Meta Rewarded Video Placement ID</key>
-	<string>$(META_REWARDED_VIDEO_PLACEMENT_ID)</string>
+	<key>Meta App ID</key>
+	<string>$(META_APP_ID)</string>
 	<key>Mintegral App ID</key>
 	<string>$(MINTEGRAL_APP_ID)</string>
 	<key>Mintegral App Key</key>
