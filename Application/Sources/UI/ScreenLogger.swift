@@ -24,11 +24,11 @@ class SampleAppLogger: ObservableObject {
         objectWillChange.send()
     }
     
-    func logRender(_ ad: NimbusAd) {
+    func logRender(_ ad: NimbusResponse) {
         append("Rendered: \(ad.testIdentifier)")
     }
     
-    func logEvent(_ event: NimbusEvent) {
+    func logEvent(_ event: AdEvent) {
         var formattedEvent: String
         switch event {
         case .firstQuartile:

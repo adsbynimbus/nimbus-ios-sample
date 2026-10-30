@@ -7,11 +7,12 @@
 
 import Foundation
 import UIKit
-import NimbusRequestKit
+import NimbusKit
 
 protocol NavigationItem: CaseIterable, CustomStringConvertible {
     var rawValue: String { get }
-    
+
+    @MainActor
     func destinationController(parent: String) -> UIViewController
 }
 
@@ -24,7 +25,7 @@ struct Section {
     let items: [any NavigationItem]
 }
 
-public var mainScreen: () -> UIViewController = MainItem.viewController
+@MainActor public var mainScreen: () -> UIViewController = MainItem.viewController
 
 enum MainItem: String, NavigationItem {
     case showAdDemo         = "Show Ad Demo"
@@ -34,6 +35,8 @@ enum MainItem: String, NavigationItem {
     
     static let title = "Integration Assist".uppercased()
     static let subtitle = "Ad Call Demos and Render Testing"
+    
+    @MainActor
     static let viewController = {
         NavigationListViewController(
             title: MainItem.title,
@@ -63,6 +66,8 @@ enum MainItem: String, NavigationItem {
                     Section(header: "Mintegral", items: Mintegral.allCases),
                     Section(header: "Moloco", items: Moloco.allCases),
                     Section(header: "InMobi", items: InMobi.allCases),
+                    Section(header: "Digital Turbine", items: DigitalTurbineSample.allCases),
+                    Section(header: "display.io", items: DisplayIOSample.allCases),
                 ])
         case .testRender:
             return TestRenderViewController(
@@ -76,18 +81,43 @@ enum MainItem: String, NavigationItem {
 }
 
 enum AdManagerAdType: String, NavigationItem {
-    case manuallyRenderedAd         = "Manually Rendered Ad"
     case banner                     = "Banner"
-    case bannerWithRefresh          = "Banner With Refresh"
+    case mrec                       = "Medium Rectangle (300x250)"
     case inlineVideo                = "Inline Video"
     case interstitialHybrid         = "Interstitial Hybrid"
     case interstitialStatic         = "Interstitial Static"
     case interstitialVideo          = "Interstitial Video"
-    case interstitialVideoWithoutUI = "Interstitial Video Without UI"
     case rewardedVideo              = "Rewarded Video"
+    case preloadedBanner            = "Preloaded Banner Ad"
+    case preloadedInterstitial      = "Preloaded Interstitial Ad"
     
     func destinationController(parent: String) -> UIViewController {
-        AdManagerViewController(adType: self, headerSubTitle: parent)
+        let title = "Nimbus Rendering"
+        
+        return switch self {
+        case .banner:
+            BannerViewController(headerTitle: title, headerSubTitle: rawValue, size: .banner)
+        case .mrec:
+            BannerViewController(headerTitle: title, headerSubTitle: rawValue, size: .mrec)
+        case .inlineVideo:
+            InlineVideoViewController(headerTitle: title, headerSubTitle: rawValue, requiredExtension: nil)
+        case .interstitialHybrid:
+            InterstitialViewController(headerTitle: title, headerSubTitle: rawValue, requiredExtension: nil)
+        case .interstitialStatic:
+            CustomInterstitialViewController(headerTitle: title, kind: .staticOnly)
+        case .interstitialVideo:
+            CustomInterstitialViewController(headerTitle: title, kind: .videoOnly)
+        case .rewardedVideo:
+            RewardedViewController(
+                headerTitle: "Nimbus Rendering",
+                headerSubTitle: rawValue,
+                requiredExtension: nil
+            )
+        case .preloadedBanner:
+            PreloadedInlineAdViewController(headerTitle: title, headerSubTitle: rawValue, requiredExtension: nil)
+        case .preloadedInterstitial:
+            PreloadedFullscreenAdViewController(headerTitle: title, headerSubTitle: rawValue, requiredExtension: nil)
+        }
     }
 }
 
@@ -109,13 +139,15 @@ enum Mintegral: String, NavigationItem {
 
 enum Moloco: String, NavigationItem {
     case banner                 = "Banner"
+    case mrec                   = "MREC"
     case native                 = "Native"
     case interstitial           = "Interstitial"
     case rewarded               = "Rewarded Video"
     
     func destinationController(parent: String) -> UIViewController {
         return switch self {
-        case .banner: MolocoBannerViewController(headerTitle: "Moloco Banner", headerSubTitle: "")
+        case .banner: MolocoBannerViewController(headerTitle: "Moloco Banner", headerSubTitle: "", size: .banner)
+        case .mrec: MolocoBannerViewController(headerTitle: "Moloco MREC", headerSubTitle: "", size: .mrec)
         case .native: MolocoNativeViewController(headerTitle: "Moloco Native", headerSubTitle: "")
         case .interstitial: MolocoInterstitialViewController(headerTitle: "Moloco Interstitial", headerSubTitle: "")
         case .rewarded: MolocoRewardedViewController(headerTitle: "Moloco Rewarded", headerSubTitle: "")
@@ -156,7 +188,6 @@ enum AdMob: String, NavigationItem {
 enum MobileFuseSample: String, NavigationItem {
     case mobileFuseBanner = "MobileFuse - Banner"
     case mobileFuseMREC = "MobileFuse - MREC"
-    case mobileFuseManualMREC = "MobileFuse - Manually rendered MREC"
     case mobileFuseInterstitial = "MobileFuse - Interstitial"
     case mobileFuseRewarded = "MobileFuse - Rewarded"
     
@@ -166,18 +197,13 @@ enum MobileFuseSample: String, NavigationItem {
             MobileFuseBannerViewController(
                 headerTitle: rawValue,
                 position: "MobileFuse_Testing_Display_iOS_Nimbus",
-                format: .banner320x50
+                size: .banner
             )
         case .mobileFuseMREC:
             MobileFuseBannerViewController(
                 headerTitle: rawValue,
                 position: "MobileFuse_Testing_MREC_iOS_Nimbus",
-                format: .letterbox
-            )
-        case .mobileFuseManualMREC:
-            MobileFuseManualBannerViewController(
-                headerTitle: rawValue,
-                headerSubTitle: ""
+                size: .mrec
             )
         case .mobileFuseInterstitial: MobileFuseInterstitialViewController(headerTitle: rawValue)
         case .mobileFuseRewarded: MobileFuseRewardedViewController(headerTitle: rawValue)
@@ -186,10 +212,15 @@ enum MobileFuseSample: String, NavigationItem {
 }
 
 enum APSSample: String, NavigationItem {
-    case apsBannerWithRefresh   = "APS Banner With Refresh"
-    case apsInterstitialHybrid  = "APS Interstitial Hybrid"
+    case apsBannerWithRefresh   = "Refreshing Banner"
+    case apsInterstitialHybrid  = "Interstitial Hybrid"
     func destinationController(parent: String) -> UIViewController {
-        APSViewController(adType: self, headerSubTitle: parent)
+        return switch self {
+        case .apsBannerWithRefresh:
+            APSBannerViewController(headerTitle: "APS", headerSubTitle: rawValue, requiredExtension: nil)
+        case .apsInterstitialHybrid:
+            APSInterstitialViewController(headerTitle: "APS", headerSubTitle: rawValue, requiredExtension: nil)
+        }
     }
 }
 
@@ -199,14 +230,25 @@ enum MetaSample: String, NavigationItem {
     case metaNative             = "Meta Native"
     case metaRewardedVideo      = "Meta Rewarded Video"
     func destinationController(parent: String) -> UIViewController {
-        FANViewController(adType: self, headerSubTitle: parent)
+        switch self {
+        case .metaBanner: MetaBannerViewController(headerTitle: rawValue, headerSubTitle: "")
+        case .metaNative: MetaNativeViewController(headerTitle: rawValue, headerSubTitle: "")
+        case .metaInterstitial: MetaInterstitialViewController(headerTitle: rawValue, headerSubTitle: "")
+        case .metaRewardedVideo: MetaRewardedViewController(headerTitle: rawValue, headerSubTitle: "")
+        }
     }
 }
 
 enum UnitySample: String, NavigationItem {
-    case unityRewardedVideo     = "Unity Rewarded Video"
+    case unityBanner            = "Unity Banner"
+    case unityInterstitial      = "Unity Interstitial"
+    case unityRewarded          = "Unity Rewarded"
     func destinationController(parent: String) -> UIViewController {
-        UnityViewController(adType: self, headerSubTitle: parent)
+        switch self {
+        case .unityBanner: UnityBannerViewController(headerTitle: rawValue, headerSubTitle: "")
+        case .unityInterstitial: UnityInterstitialViewController(headerTitle: rawValue, headerSubTitle: "")
+        case .unityRewarded: UnityRewardedViewController(headerTitle: rawValue, headerSubTitle: "")
+        }
     }
 }
 
@@ -219,6 +261,40 @@ enum VungleSample: String, NavigationItem {
     
     func destinationController(parent: String) -> UIViewController {
         VungleViewController(adType: self, headerSubTitle: parent)
+    }
+}
+
+enum DigitalTurbineSample: String, NavigationItem {
+    case dtBanner               = "Digital Turbine Banner"
+    case dtNative               = "Digital Turbine Native"
+    case dtInterstitial         = "Digital Turbine Interstitial"
+    case dtRewarded             = "Digital Turbine Rewarded"
+    
+    func destinationController(parent: String) -> UIViewController {
+        switch self {
+        case .dtBanner: DTBannerViewController(headerTitle: rawValue, headerSubTitle: "")
+        case .dtNative: DTNativeViewController(headerTitle: rawValue, headerSubTitle: "")
+        case .dtInterstitial: DTInterstitialViewController(headerTitle: rawValue, headerSubTitle: "")
+        case .dtRewarded: DTRewardedViewController(headerTitle: rawValue, headerSubTitle: "")
+        }
+    }
+}
+
+enum DisplayIOSample: String, NavigationItem {
+    case dioBanner               = "DisplayIO Banner"
+    case dioMREC                 = "DisplayIO MREC"
+    case dioNative               = "DisplayIO Native"
+    case dioInterstitial         = "DisplayIO Interstitial"
+    case dioRewarded             = "DisplayIO Rewarded"
+    
+    func destinationController(parent: String) -> UIViewController {
+        switch self {
+        case .dioBanner: DisplayIOBannerViewController(headerTitle: rawValue, headerSubTitle: "", size: .banner)
+        case .dioMREC: DisplayIOBannerViewController(headerTitle: rawValue, headerSubTitle: "", size: .mrec)
+        case .dioNative: DisplayIONativeViewController(headerTitle: rawValue, headerSubTitle: "")
+        case .dioInterstitial: DisplayIOInterstitialViewController(headerTitle: rawValue, headerSubTitle: "")
+        case .dioRewarded: DisplayIORewardedViewController(headerTitle: rawValue, headerSubTitle: "")
+        }
     }
 }
                                                 

@@ -13,6 +13,7 @@ class TestRenderViewController: DemoViewController {
     var isBlocking = false
     var useNimbusRenderer = false
     
+    private var interstitialAd: InterstitialAd?
     private var iTunesAppId: String?
     
     private lazy var skoverlayMenuButton: UIButton = {
@@ -172,13 +173,15 @@ class TestRenderViewController: DemoViewController {
         
         markupTextView.resignFirstResponder()
         
-        let ad = getAdFromMarkup(adMarkup: adMarkup)
+        let response = getAdFromMarkup(adMarkup: adMarkup)
         
         if isBlocking {
-            TestRenderAdViewController.showBlocking(from: self, ad: ad)?.start()
+            Task {
+                self.interstitialAd = try! await Nimbus.interstitialAd(from: response).show(from: self)
+            }
         } else {
             navigationController?.pushViewController(
-                TestRenderAdViewController(ad: ad),
+                TestRenderAdViewController(response: response),
                 animated: true
             )
         }
@@ -206,9 +209,9 @@ class TestRenderViewController: DemoViewController {
     
     // MARK: - Create NimbusAd
     
-    private func getAdFromMarkup(adMarkup: String) -> NimbusAd {
-        let type: NimbusAuctionType = isVideoMarkup(adMarkup: adMarkup) ? .video : .static
-        return createNimbusAd(auctionType: type, markup: adMarkup)
+    private func getAdFromMarkup(adMarkup: String) -> NimbusResponse {
+        let type: NimbusResponse.Bid.MarkupType = isVideoMarkup(adMarkup: adMarkup) ? .video : .static
+        return createNimbusAd(markupType: type, markup: adMarkup)
     }
     
     private func isVideoMarkup(adMarkup: String) -> Bool {
@@ -218,35 +221,35 @@ class TestRenderViewController: DemoViewController {
     
     private func createNimbusAd(
         placementId: String? = nil,
-        auctionType: NimbusAuctionType,
+        markupType: NimbusResponse.Bid.MarkupType,
         markup: String,
-        isMraid: Bool = true,
         isInterstitial: Bool = true
-    ) -> NimbusAd {
-        let adDimensions = isInterstitial ?
-        NimbusAdDimensions(width: 320, height: 480) :
-        NimbusAdDimensions(width: 300, height: 50)
+    ) -> NimbusResponse {
+        let width: Int
+        let height: Int
         
-        let ext = NimbusAdExtensions(
-            skAdNetwork: iTunesAppId != nil ? NimbusAdSkAdNetwork(advertisedAppStoreItemID: iTunesAppId) : nil
+        if isInterstitial {
+            width = RTB.Format.interstitialPortrait.width
+            height = RTB.Format.interstitialPortrait.height
+        } else {
+            width = RTB.Format.banner.width
+            height = RTB.Format.banner.height
+        }
+        
+        let ext = NimbusResponse.Bid.Extensions(
+            skadn: iTunesAppId != nil ? SKAdNetworkInfo(itunesitem: iTunesAppId!) : nil
         )
         
-        return NimbusAd(
-            position: "",
-            auctionType: auctionType,
-            bidRaw: 0,
-            bidInCents: 0,
-            contentType: "",
-            auctionId: "",
-            network: "test_render",
-            markup: markup,
-            isInterstitial: isInterstitial,
-            placementId: nil,
-            duration: nil,
-            adDimensions: adDimensions,
-            trackers: nil,
-            isMraid: isMraid,
-            extensions: ext
+        return NimbusResponse(
+            id: "testAd",
+            bid: .init(
+                mtype: markupType,
+                adm: markup,
+                price: 0,
+                ext: ext,
+                w: width,
+                h: height
+            )
         )
     }
 }

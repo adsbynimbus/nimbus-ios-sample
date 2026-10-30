@@ -7,57 +7,38 @@
 
 import UIKit
 import NimbusKit
-#if canImport(NimbusSDK) // CocoaPods
-import NimbusSDK
-#else                    // Swift Package Manager
 import NimbusInMobiKit
-#endif
 
-fileprivate var placementId = Int(Bundle.main.infoDictionary?["InMobi Banner ID"] as! String)!
+final class InMobiBannerViewController: SampleAdViewController {
 
-final class InMobiBannerViewController: InMobiViewController {
-
-    private let adManager = NimbusAdManager()
-    private var adController: AdController?
+    private var bannerAd: InlineAd?
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: InMobiExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let contentView = UIView()
-        
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(contentView)
-        
-        NSLayoutConstraint.activate([
-            contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            contentView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 20),
-        ])
-        
-        adManager.delegate = self
-        adManager.showAd(
-            request: NimbusRequest.forBannerAd(position: "banner").withInMobi(placementId: placementId),
-            container: contentView,
-            refreshInterval: 30,
-            adPresentingViewController: self
-        )
-    }
-}
-
-extension InMobiBannerViewController: NimbusAdManagerDelegate {
-    func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
-        print("didRenderAd")
-        adController = controller
-        adController?.delegate = self
-        nimbusAd = ad
+        Task { await showAd() }
     }
     
-    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
-        print("didCompleteNimbusRequest")
-    }
-    
-    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
-        print("didFailNimbusRequest: \(error.localizedDescription)")
+    func showAd() async {
+        do {
+            bannerAd = try await Nimbus.bannerAd(position: "banner", size: .banner, refreshInterval: 30)
+                .onEvent { [weak self] event in
+                    self?.didReceiveNimbusEvent(event: event, ad: self?.bannerAd)
+                }
+                .onError { [weak self] error in
+                    self?.didReceiveNimbusError(error: error)
+                }
+                .show(in: view)
+        } catch {
+            print("Failed to show ad: \(error)")
+        }
     }
 }

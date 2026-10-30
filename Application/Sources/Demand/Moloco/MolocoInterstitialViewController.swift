@@ -7,38 +7,38 @@
 
 import UIKit
 import NimbusKit
+import NimbusMolocoKit
 
-fileprivate var adUnitId = Bundle.main.infoDictionary?["Moloco Interstitial ID"] as! String
+final class MolocoInterstitialViewController: SampleAdViewController {
 
-final class MolocoInterstitialViewController: MolocoViewController {
-
-    private let adManager = NimbusAdManager()
-    private var adController: AdController?
+    private var interstitialAd: InterstitialAd?
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: MolocoExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        adManager.delegate = self
-        adManager.showBlockingAd(
-            request: NimbusRequest.forInterstitialAd(position: "interstitial").withMoloco(adUnitId: adUnitId),
-            adPresentingViewController: self
-        )
-    }
-}
-
-extension MolocoInterstitialViewController: NimbusAdManagerDelegate {
-    func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
-        print("didRenderAd")
-        adController = controller
-        adController?.delegate = self
-        nimbusAd = ad
+        Task { await showAd() }
     }
     
-    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
-        print("didCompleteNimbusRequest")
-    }
-    
-    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
-        print("didFailNimbusRequest: \(error.localizedDescription)")
+    func showAd() async {
+        do {
+            interstitialAd = try await Nimbus.interstitialAd(position: "interstitial")
+                .onEvent { [weak self] event in
+                    self?.didReceiveNimbusEvent(event: event, ad: self?.interstitialAd)
+                }
+                .onError { [weak self] error in
+                    self?.didReceiveNimbusError(error: error)
+                }
+                .show(from: self)
+        } catch {
+            print("Failed to show ad: \(error)")
+        }
     }
 }

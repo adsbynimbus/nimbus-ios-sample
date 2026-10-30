@@ -8,26 +8,27 @@
 import UIKit
 import NimbusKit
 import MolocoSDK
-#if canImport(NimbusSDK) // CocoaPods
-import NimbusSDK
-#else // Swift Package Manager
 import NimbusMolocoKit
-#endif
 
-fileprivate var adUnitId = Bundle.main.infoDictionary?["Moloco Native ID"] as! String
+final class MolocoNativeViewController: SampleAdViewController {
 
-final class MolocoNativeViewController: MolocoViewController {
-
-    private let adManager = NimbusAdManager()
-    private var adController: AdController?
+    private var nativeAd: InlineAd?
     
     let contentView = UIView()
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: MolocoExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let renderer = Nimbus.shared.renderers[.moloco] as? NimbusMolocoAdRenderer {
-            renderer.adRendererDelegate = self
+        MolocoExtension.nativeAdViewProvider = { _, assets in
+            MolocoNativeAdView(assets: assets)
         }
         
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -41,34 +42,23 @@ final class MolocoNativeViewController: MolocoViewController {
             contentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
         
-        adManager.delegate = self
-        adManager.showAd(
-            request: NimbusRequest.forNativeAd(position: "native").withMoloco(adUnitId: adUnitId),
-            container: contentView,
-            adPresentingViewController: self
-        )
-    }
-}
-
-extension MolocoNativeViewController: NimbusAdManagerDelegate {
-    func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
-        print("didRenderAd")
-        adController = controller
-        adController?.delegate = self
-        nimbusAd = ad
+        Task { await showAd() }
     }
     
-    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
-        print("didCompleteNimbusRequest")
-    }
-    
-    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
-        print("didFailNimbusRequest: \(error.localizedDescription)")
-    }
-}
-
-extension MolocoNativeViewController: NimbusMolocoAdRendererDelegate {
-    func nativeAdViewForRendering(container: UIView, assets: any MolocoNativeAdAssests) -> NimbusMolocoNativeAdViewType {
-        MolocoNativeAdView(assets: assets)
+    func showAd() async {
+        do {
+            nativeAd = try await Nimbus.inlineAd(position: "native") {
+                native()
+            }
+            .onEvent { [weak self] event in
+                self?.didReceiveNimbusEvent(event: event, ad: self?.nativeAd)
+            }
+            .onError { [weak self] error in
+                self?.didReceiveNimbusError(error: error)
+            }
+            .show(in: contentView)
+        } catch {
+            print("Failed to show ad: \(error)")
+        }
     }
 }

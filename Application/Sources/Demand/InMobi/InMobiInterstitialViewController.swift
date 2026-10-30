@@ -7,44 +7,38 @@
 
 import UIKit
 import NimbusKit
-#if canImport(NimbusSDK) // CocoaPods
-import NimbusSDK
-#else                    // Swift Package Manager
 import NimbusInMobiKit
-#endif
 
-fileprivate var placementId = Int(Bundle.main.infoDictionary?["InMobi Interstitial ID"] as! String)!
+final class InMobiInterstitialViewController: SampleAdViewController {
 
-final class InMobiInterstitialViewController: InMobiViewController {
-
-    private let adManager = NimbusAdManager()
-    private var adController: AdController?
+    private var interstitialAd: InterstitialAd?
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: InMobiExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        adManager.delegate = self
-        
-        adManager.showBlockingAd(
-            request: .forInterstitialAd(position: "banner").withInMobi(placementId: placementId),
-            adPresentingViewController: self
-        )
-    }
-}
-
-extension InMobiInterstitialViewController: NimbusAdManagerDelegate {
-    func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
-        print("didRenderAd")
-        adController = controller
-        adController?.delegate = self
-        nimbusAd = ad
+        Task { await showAd() }
     }
     
-    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
-        print("didCompleteNimbusRequest")
-    }
-    
-    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
-        print("didFailNimbusRequest: \(error.localizedDescription)")
+    func showAd() async {
+        do {
+            interstitialAd = try await Nimbus.interstitialAd(position: "interstitial")
+                .onEvent { [weak self] event in
+                    self?.didReceiveNimbusEvent(event: event, ad: self?.interstitialAd)
+                }
+                .onError { [weak self] error in
+                    self?.didReceiveNimbusError(error: error)
+                }
+                .show(from: self)
+        } catch {
+            
+        }
     }
 }

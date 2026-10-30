@@ -7,16 +7,12 @@
 //
 import UIKit
 import VungleAdsSDK
-import NimbusCoreKit
+import NimbusKit
 
-#if canImport(NimbusSDK) // CocoaPods
-import NimbusSDK
-#else                    // Swift Package Manager
 import NimbusVungleKit
-#endif
 
 /// Nimbus default view used for Vungle native ads
-final class NimbusVungleNativeAdView: UIView, NimbusVungleNativeAdViewType {
+final class NimbusVungleNativeAdView: UIView, VungleNativeAdViewType {
 
     /// Label used for title
     let titleLabel: UILabel = {

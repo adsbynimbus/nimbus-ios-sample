@@ -8,10 +8,11 @@
 import UIKit
 
 private extension UIView {
-    static func label(color: UIColor? = .pink) -> UILabel {
+    @MainActor
+    static func label(color: UIColor? = nil) -> UILabel {
         let label = UILabel()
         label.font = .proximaNova(size: 18, weight: .bold)
-        label.textColor = color
+        label.textColor = color ?? .pink
         return label
     }
     

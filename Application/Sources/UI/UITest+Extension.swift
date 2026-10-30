@@ -5,17 +5,17 @@
 //  Created on 5/8/23.
 //
 
-import NimbusRenderKit
+import NimbusKit
 import UIKit
 import WebKit
 
-extension NimbusAd {
+extension NimbusResponse {
     var testIdentifier: String {
         var dimens = ""
-        if let width = adDimensions?.width, let height = adDimensions?.height {
+        if let width = bid.w, let height = bid.h {
             dimens = " \(width)x\(height)"
         }
-        return "\(network) \(auctionType.rawValue)\(dimens)"
+        return "\(bid.ext?.omp?.buyer ?? "") \(bid.mtype.stringValue)\(dimens)"
     }
 }
 

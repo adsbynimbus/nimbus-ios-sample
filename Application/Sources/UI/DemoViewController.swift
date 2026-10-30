@@ -87,7 +87,7 @@ class DemoViewController: UIViewController {
             child.height(Self.headerHeight)
         }
         
-        headerTopConstraint = headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: UIDevice.nimbusIsLandscape ? -Self.headerHeight : 0)
+        headerTopConstraint = headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: UIDevice.isLandscape ? -Self.headerHeight : 0)
         view.addConstraint(headerTopConstraint)
         
         setupLogo()
@@ -118,6 +118,7 @@ class DemoViewController: UIViewController {
     }
 }
 
+@MainActor
 protocol HasAnchors {
     var leadingAnchor: NSLayoutXAxisAnchor { get }
     var trailingAnchor: NSLayoutXAxisAnchor { get }
@@ -140,6 +141,7 @@ extension UIView {
         case width, height, both
     }
     
+    @MainActor
     struct ConstraintBuilder {
         let parent: UIView
         let child: UIView

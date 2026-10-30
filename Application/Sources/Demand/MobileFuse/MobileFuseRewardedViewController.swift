@@ -8,14 +8,13 @@
 
 import UIKit
 import NimbusKit
+import NimbusMobileFuseKit
 
-final class MobileFuseRewardedViewController: MobileFuseViewController {
-    
-    private let adManager = NimbusAdManager()
-    private var adController: AdController?
+final class MobileFuseRewardedViewController: SampleAdViewController {
+    private var rewardedAd: RewardedAd?
     
     init(headerTitle: String) {
-        super.init(headerTitle: headerTitle, headerSubTitle: "")
+        super.init(headerTitle: headerTitle, headerSubTitle: "", requiredExtension: MobileFuseExtension.self)
     }
     
     required init?(coder: NSCoder) {
@@ -25,27 +24,21 @@ final class MobileFuseRewardedViewController: MobileFuseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        adManager.delegate = self
-        adManager.showRewardedAd(
-            request: NimbusRequest.forRewardedVideo(position: "MobileFuse_Testing_Rewarded_iOS_Nimbus"),
-            adPresentingViewController: self
-        )
-    }
-}
-
-extension MobileFuseRewardedViewController: NimbusAdManagerDelegate {
-    func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
-        print("didRenderAd")
-        adController = controller
-        adController?.delegate = self
-        nimbusAd = ad
+        Task { await showAd() }
     }
     
-    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
-        print("didCompleteNimbusRequest")
-    }
-    
-    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
-        print("didFailNimbusRequest: \(error.localizedDescription)")
+    func showAd() async {
+        do {
+            rewardedAd = try await Nimbus.rewardedAd(position: "MobileFuse_Testing_Rewarded_iOS_Nimbus")
+                .onEvent { [weak self] event in
+                    self?.didReceiveNimbusEvent(event: event, ad: self?.rewardedAd)
+                }
+                .onError { [weak self] error in
+                    self?.didReceiveNimbusError(error: error)
+                }
+                .show(from: self)
+        } catch {
+            Nimbus.Log.ad.error("Failed to show rewarded ad: \(error.localizedDescription)")
+        }
     }
 }

@@ -16,15 +16,16 @@ Pod::Spec.new do |spec|
     spec.source_files = '**/*.swift'
     spec.exclude_files = '**/Package.swift'
     
-    spec.dependency 'NimbusSDK', '~> 2'               # Nimbus SDK
-    spec.dependency 'NimbusSDK/NimbusRenderStaticKit' # Static Ad Renderer
-    spec.dependency 'NimbusSDK/NimbusRenderVideoKit'  # Video Ad Renderer
-    spec.dependency 'NimbusSDK/NimbusRequestAPSKit'   # Amazon Publisher Services Request Support
-    spec.dependency 'NimbusSDK/NimbusRequestFANKit'   # Meta Audience Network Request Support
-    spec.dependency 'NimbusSDK/NimbusRenderFANKit'    # Meta Audience Network Ad Renderer
-    spec.dependency 'NimbusSDK/NimbusGAMKit'          # Google Ad MAnager Dynamic Price and Mediation Adapters
-    spec.dependency 'NimbusSDK/NimbusGoogleKit'       # Google AdMob Dynamic Price and Mediation Adapters
-    spec.dependency 'NimbusSDK/NimbusUnityKit'        # Unity Ads Request Support and Renderer
-    spec.dependency 'NimbusSDK/NimbusVungleKit'       # Vungle Ads Request Support and Renderer
-    spec.dependency 'NimbusSDK/NimbusMobileFuseKit'   # MobileFuse Ads Request Support and Renderer (Available from 2.21.0)
+    spec.dependency 'NimbusSDK', '~> 3'                           # Nimbus SDK
+    spec.dependency 'NimbusAdMobKit', '~> 13'                     # AdMob Bidding Support
+    spec.dependency 'NimbusAPSKit', '~> 5'                        # Amazon Publisher Services Request Support
+    spec.dependency 'NimbusDisplayIOKit', '~> 4'                  # display.io Support
+    spec.dependency 'NimbusDTKit', '~> 8'                         # Digital Turbine Support
+    spec.dependency 'NimbusInMobiKit', '~> 11'                    # InMobi Support
+    spec.dependency 'NimbusMetaKit', '~> 6'                       # Meta Audience Network Request Support
+    spec.dependency 'NimbusMintegralKit', '~> 8'                  # Mintegral Support
+    spec.dependency 'NimbusMobileFuseKit', '~> 1'                 # MobileFuse Ads Request Support and Renderer
+    spec.dependency 'NimbusMolocoKit', '~> 4'                     # Moloco Support
+    spec.dependency 'NimbusUnityKit', '~> 4'                      # Unity Ads Request Support and Renderer
+    spec.dependency 'NimbusVungleKit', '~> 7'                     # Vungle Ads Request Support and Renderer
   end

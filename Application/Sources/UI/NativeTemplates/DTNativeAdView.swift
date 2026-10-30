@@ -1,36 +1,33 @@
 //
-//  MolocoNativeAdView.swift
+//  DTNativeAdView.swift
 //  Nimbus
-//  Created on 5/29/25
+//  Created on 5/29/26
 //  Copyright © 2025 Nimbus Advertising Solutions Inc. All rights reserved.
 //
 
 import UIKit
-import MolocoSDK
-#if canImport(NimbusSDK) // CocoaPods
-import NimbusSDK
-#else // Swift Package Manager
-import NimbusMolocoKit
-#endif
+import IASDKCore
+import NimbusDTKit
 
-final class MolocoNativeAdView: UIView, NimbusMolocoNativeAdViewType {
+final class DTNativeAdView: UIView, DTNativeAdViewType {
     
-    private let assets: MolocoNativeAdAssests
+    private let assets: IANativeAdAssets
     
-    weak var iconView: UIImageView?
+    var iconView: UIView?
     weak var headlineView: UILabel?
     weak var advertiserView: UILabel?
     weak var descriptionView: UILabel?
     weak var starRatingView: UIView?
     weak var callToActionView: UIButton?
     
-    let mediaView = UIView()
+    var mediaView: UIView? { _mediaView }
+    let _mediaView = UIView()
     
     var clickableViews: [UIView] {
         [mediaView, callToActionView].compactMap { $0 }
     }
     
-    init(assets: MolocoNativeAdAssests) {
+    init(assets: IANativeAdAssets) {
         self.assets = assets
         super.init(frame: .zero)
         
@@ -47,6 +44,7 @@ final class MolocoNativeAdView: UIView, NimbusMolocoNativeAdViewType {
     func setupViews() {
         let icon = UIImageView()
         icon.translatesAutoresizingMaskIntoConstraints = false
+        icon.tag = ViewTag.icon.rawValue
         addSubview(icon)
         self.iconView = icon
         
@@ -54,35 +52,29 @@ final class MolocoNativeAdView: UIView, NimbusMolocoNativeAdViewType {
         headline.translatesAutoresizingMaskIntoConstraints = false
         headline.lineBreakMode = .byWordWrapping
         headline.numberOfLines = 0
+        headline.tag = ViewTag.title.rawValue
         addSubview(headline)
         self.headlineView = headline
-        
-        let advertiser = UILabel()
-        advertiser.translatesAutoresizingMaskIntoConstraints = false
-        advertiser.lineBreakMode = .byWordWrapping
-        advertiser.numberOfLines = 0
-        advertiser.textColor = .darkGray
-        advertiser.font = .systemFont(ofSize: 15)
-        addSubview(advertiser)
-        self.advertiserView = advertiser
         
         let body = UILabel()
         body.translatesAutoresizingMaskIntoConstraints = false
         body.font = .systemFont(ofSize: 14)
         body.lineBreakMode = .byWordWrapping
         body.numberOfLines = 0
+        body.tag = ViewTag.description.rawValue
         
         addSubview(body)
         self.descriptionView = body
                 
-        mediaView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(mediaView)
+        _mediaView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(_mediaView)
         
         var installConfig = UIButton.Configuration.borderedTinted()
         installConfig.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20)
         
         let install = UIButton(configuration: installConfig)
         install.translatesAutoresizingMaskIntoConstraints = false
+        install.tag = ViewTag.cta.rawValue
         self.callToActionView = install
         addSubview(install)
         
@@ -96,20 +88,16 @@ final class MolocoNativeAdView: UIView, NimbusMolocoNativeAdViewType {
             headline.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             headline.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             
-            advertiser.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: 8),
-            advertiser.topAnchor.constraint(equalTo: headline.bottomAnchor, constant: 4),
-            advertiser.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            
             body.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             body.topAnchor.constraint(equalTo: icon.bottomAnchor, constant: 16),
             body.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             
-            mediaView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            mediaView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            mediaView.topAnchor.constraint(equalTo: body.bottomAnchor, constant: 8),
-            mediaView.heightAnchor.constraint(equalToConstant: 200),
+            _mediaView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            _mediaView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            _mediaView.topAnchor.constraint(equalTo: body.bottomAnchor, constant: 8),
+            _mediaView.heightAnchor.constraint(equalToConstant: 200),
             
-            install.topAnchor.constraint(equalTo: mediaView.bottomAnchor, constant: 8),
+            install.topAnchor.constraint(equalTo: _mediaView.bottomAnchor, constant: 8),
             install.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             install.widthAnchor.constraint(equalToConstant: 100),
             install.heightAnchor.constraint(equalToConstant: 40),
@@ -119,13 +107,17 @@ final class MolocoNativeAdView: UIView, NimbusMolocoNativeAdViewType {
     }
     
     func setupRatingViewIfNeeded() {
-        let rating = Int(assets.rating.rounded())
+        guard let nsRating = assets.rating else {
+            return
+        }
+        let rating = Int(truncating: nsRating)
         
         let stars = UIStackView()
         stars.translatesAutoresizingMaskIntoConstraints = false
         stars.axis = .horizontal
         stars.spacing = 8
         stars.distribution = .equalCentering
+        stars.tag = ViewTag.rating.rawValue
         
         for i in 0..<5 {
             let style = i < rating ? "star.fill" : "star"
@@ -138,40 +130,37 @@ final class MolocoNativeAdView: UIView, NimbusMolocoNativeAdViewType {
         addSubview(stars)
         
         NSLayoutConstraint.activate([
-            stars.topAnchor.constraint(equalTo: mediaView.bottomAnchor, constant: 16),
+            stars.topAnchor.constraint(equalTo: _mediaView.bottomAnchor, constant: 16),
             stars.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
         ])
     }
     
     func configure() {
-        iconView?.image = assets.appIcon
-        headlineView?.text = assets.title
-        descriptionView?.text = assets.description
-        advertiserView?.text = assets.sponsorText
-        callToActionView?.setTitle(assets.ctaTitle, for: .normal)
-        
-        if let mainImage = assets.mainImage {
-            let imageView = UIImageView(image: mainImage)
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            
-            mediaView.addSubview(imageView)
+        if let appIcon = assets.appIcon, let iconView {
+            appIcon.translatesAutoresizingMaskIntoConstraints = false
+            iconView.addSubview(appIcon)
             
             NSLayoutConstraint.activate([
-                imageView.leadingAnchor.constraint(equalTo: mediaView.leadingAnchor),
-                imageView.trailingAnchor.constraint(equalTo: mediaView.trailingAnchor),
-                imageView.topAnchor.constraint(equalTo: mediaView.topAnchor),
-                imageView.bottomAnchor.constraint(equalTo: mediaView.bottomAnchor)
-            ])
-        } else if let videoView = assets.videoView {
-            videoView.translatesAutoresizingMaskIntoConstraints = false
-            mediaView.addSubview(videoView)
-            
-            NSLayoutConstraint.activate([
-                videoView.leadingAnchor.constraint(equalTo: mediaView.leadingAnchor),
-                videoView.trailingAnchor.constraint(equalTo: mediaView.trailingAnchor),
-                videoView.topAnchor.constraint(equalTo: mediaView.topAnchor),
-                videoView.bottomAnchor.constraint(equalTo: mediaView.bottomAnchor)
+                appIcon.leadingAnchor.constraint(equalTo: iconView.leadingAnchor),
+                appIcon.trailingAnchor.constraint(equalTo: iconView.trailingAnchor),
+                appIcon.topAnchor.constraint(equalTo: iconView.topAnchor),
+                appIcon.bottomAnchor.constraint(equalTo: iconView.bottomAnchor)
             ])
         }
+        
+        headlineView?.text = assets.adTitle
+        descriptionView?.text = assets.adDescription
+        callToActionView?.setTitle(assets.callToActionText, for: .normal)
+        
+        assets.mediaView.translatesAutoresizingMaskIntoConstraints = false
+        _mediaView.tag = ViewTag.mediaView.rawValue
+        _mediaView.addSubview(assets.mediaView)
+            
+        NSLayoutConstraint.activate([
+            assets.mediaView.leadingAnchor.constraint(equalTo: _mediaView.leadingAnchor),
+            assets.mediaView.trailingAnchor.constraint(equalTo: _mediaView.trailingAnchor),
+            assets.mediaView.topAnchor.constraint(equalTo: _mediaView.topAnchor),
+            assets.mediaView.bottomAnchor.constraint(equalTo: _mediaView.bottomAnchor)
+        ])
     }
 }

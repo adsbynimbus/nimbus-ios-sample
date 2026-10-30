@@ -8,14 +8,13 @@
 
 import UIKit
 import NimbusKit
+import NimbusMobileFuseKit
 
-final class MobileFuseInterstitialViewController: MobileFuseViewController {
-    
-    private let adManager = NimbusAdManager()
-    private var adController: AdController?
+final class MobileFuseInterstitialViewController: SampleAdViewController {
+    private var interstitialAd: InterstitialAd?
     
     init(headerTitle: String) {
-        super.init(headerTitle: headerTitle, headerSubTitle: "")
+        super.init(headerTitle: headerTitle, headerSubTitle: "", requiredExtension: MobileFuseExtension.self)
     }
     
     required init?(coder: NSCoder) {
@@ -25,31 +24,22 @@ final class MobileFuseInterstitialViewController: MobileFuseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let request = NimbusRequest.forInterstitialAd(position: "MobileFuse_Testing_INSTL_iOS_Nimbus")
-        request.impressions[0].video = nil
-        
-        adManager.delegate = self
-        adManager.showBlockingAd(
-            request: request,
-            adPresentingViewController: self
-        )
+        Task { await showAd() }
     }
     
-}
-
-extension MobileFuseInterstitialViewController: NimbusAdManagerDelegate {
-    func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
-        print("didRenderAd")
-        adController = controller
-        adController?.delegate = self
-        nimbusAd = ad
+    func showAd() async {
+        do {
+            self.interstitialAd = try await Nimbus.interstitialAd(position: "MobileFuse_Testing_INSTL_iOS_Nimbus")
+                .onEvent { [weak self] event in
+                    self?.didReceiveNimbusEvent(event: event, ad: self?.interstitialAd)
+                }
+                .onError { [weak self] error in
+                    self?.didReceiveNimbusError(error: error)
+                }
+                .show(from: self, closeButtonDelay: 0)
+        } catch {
+            Nimbus.Log.ad.error("Failed to show interstitial ad: \(error.localizedDescription)")
+        }
     }
     
-    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
-        print("didCompleteNimbusRequest")
-    }
-    
-    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
-        print("didFailNimbusRequest: \(error.localizedDescription)")
-    }
 }

@@ -8,23 +8,26 @@
 import UIKit
 import NimbusKit
 import MTGSDK
-#if canImport(NimbusSDK) // CocoaPods
-import NimbusSDK
-#elseif canImport(NimbusMintegralKit) // Swift Package Manager
 import NimbusMintegralKit
-#endif
 
-class MintegralNativeViewController: MintegralViewController {
-    var adController: AdController?
-    let adManager = NimbusAdManager()
+class MintegralNativeViewController: SampleAdViewController {
+    var nativeAd: InlineAd?
     
     let contentView = UIView()
+    
+    convenience init(headerTitle: String, headerSubTitle: String) {
+        self.init(
+            headerTitle: headerTitle,
+            headerSubTitle: headerSubTitle,
+            requiredExtension: MintegralExtension.self
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let renderer = Nimbus.shared.renderers[.mintegral] as? NimbusMintegralAdRenderer {
-            renderer.adRendererDelegate = self
+        MintegralExtension.nativeAdViewProvider = { _, campaign in
+            MintegralNativeAdView(campaign: campaign)
         }
         
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -37,34 +40,23 @@ class MintegralNativeViewController: MintegralViewController {
             contentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
         
-        adManager.delegate = self
-        adManager.showAd(
-            request: NimbusRequest.forNativeAd(position: "native").withMintegral(adUnitId: "1541926"),
-            container: contentView,
-            adPresentingViewController: self
-        )
-    }
-}
-
-extension MintegralNativeViewController: NimbusAdManagerDelegate {
-    func didRenderAd(request: NimbusRequest, ad: NimbusAd, controller: AdController) {
-        print("didRenderAd")
-        adController = controller
-        adController?.delegate = self
-        nimbusAd = ad
+        Task { await showAd() }
     }
     
-    func didCompleteNimbusRequest(request: NimbusRequest, ad: NimbusAd) {
-        print("didCompleteNimbusRequest")
-    }
-    
-    func didFailNimbusRequest(request: NimbusRequest, error: NimbusError) {
-        print("didFailNimbusRequest: \(error.localizedDescription)")
-    }
-}
-
-extension MintegralNativeViewController: NimbusMintegralAdRendererDelegate {
-    func nativeAdViewForRendering(container: UIView, campaign: MTGCampaign) -> any NimbusMintegralNativeAdViewType {
-        MintegralNativeAdView(campaign: campaign)
+    func showAd() async {
+        do {
+            nativeAd = try await Nimbus.inlineAd(position: "native") {
+                native()
+            }
+            .onEvent { [weak self] event in
+                self?.didReceiveNimbusEvent(event: event, ad: self?.nativeAd)
+            }
+            .onError { [weak self] error in
+                self?.didReceiveNimbusError(error: error)
+            }
+            .show(in: contentView)
+        } catch {
+            Nimbus.Log.ad.debug("Failed to show ad: \(error)")
+        }
     }
 }

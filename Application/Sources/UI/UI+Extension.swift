@@ -7,11 +7,15 @@
 
 import SwiftUI
 import UIKit
-import NimbusCoreKit
+import NimbusKit
 
-extension NimbusAdDimensions {
-    static let portraitInlineAd = NimbusAdDimensions(width: 320, height: 480)
-    static let landscapeInlineAd = NimbusAdDimensions(width: 220, height: 180)
+extension CGFloat {
+    var intValue: Int { Int(self) }
+}
+
+extension CGSize {
+    static let portraitInlineAd = CGSize(width: RTB.Format.interstitialPortrait.width, height: RTB.Format.interstitialPortrait.height)
+    static let landscapeInlineAd = CGSize(width: 220, height: 180)
 }
 
 extension NSObject {
@@ -44,8 +48,13 @@ extension Alert {
 }
 
 extension UIColor {
+    @MainActor
     static var pink = UIColor(named: "pink")!
+    
+    @MainActor
     static var raisingBlack = UIColor(named: "raisinBlack")!
+    
+    @MainActor
     static var turquoise = UIColor(named: "turquoise")!
 }
 

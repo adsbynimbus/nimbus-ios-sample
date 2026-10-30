@@ -7,37 +7,28 @@
 
 import AppTrackingTransparency
 import NimbusKit
-import NimbusRenderStaticKit
-import NimbusRenderVideoKit
 import SwiftUI
 import UIKit
+import NimbusVungleKit
+import NimbusMobileFuseKit
+import NimbusMintegralKit
+import NimbusAdMobKit
+import NimbusMetaKit
+import NimbusUnityKit
+import NimbusMolocoKit
+import NimbusInMobiKit
+import NimbusDTKit
+import NimbusDisplayIOKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    // This is a temporary fix for FBAudienceNetwork 6.17.0+ that crashes trying to read AppDelegate.window
-    var window: UIWindow? {
-        get {
-            let allScenes = UIApplication.shared.connectedScenes
-            let scene = allScenes.first { $0.activationState == .foregroundActive } as? UIWindowScene
-            return scene?.keyWindow
-        }
-        set {}
-    }
     
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         setupNimbusSDK()
-        setupAdMobDemand()
-        setupMobileFuseDemand()
         setupAmazonDemand()
-        setupUnityDemand()
-        setupVungleDemand()
-        setupMintegralDemand()
-        setupMolocoDemand()
-        setupInMobiDemand()
         
         // Meta and LiveRamp requires att permissions to run properly
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) { [weak self] in
@@ -49,45 +40,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func setupNimbusSDK() {
-        Nimbus.shared.initialize(
-            publisher: Bundle.main.infoDictionary?["Publisher Key"] as! String,
-            apiKey: Bundle.main.infoDictionary?["API Key"] as! String
-        )
+        guard let publisher = Bundle.main.infoDictionary?["Publisher Key"] as? String,
+           let apiKey = Bundle.main.infoDictionary?["API Key"] as? String else {
+            fatalError("Publisher or API Key were not set in Info.plist")
+        }
         
-        #if DEBUG
-        Nimbus.shared.logLevel = .info
-        #endif
-        Nimbus.shared.testMode = UserDefaults.standard.nimbusTestMode
-        Nimbus.shared.coppa = UserDefaults.standard.coppaOn
+        Nimbus.initialize(publisherKey: publisher, apiKey: apiKey) {
+            AdMobExtension(autoInitialize: true)
+            MobileFuseExtension()
+            MintegralExtension(
+                appId: Bundle.main.infoDictionary?["Mintegral App ID"] as? String,
+                appKey: Bundle.main.infoDictionary?["Mintegral App Key"] as? String
+            )
+            MolocoExtension(appKey: Bundle.main.infoDictionary?["Moloco App Key"] as? String)
+            InMobiExtension(accountId: Bundle.main.infoDictionary?["InMobi Account ID"] as? String)
+            DigitalTurbineExtension(appId: Bundle.main.infoDictionary?["Digital Turbine App ID"] as? String)
+            DisplayIOExtension(appId: Bundle.main.infoDictionary?["DisplayIO App ID"] as? String)
+            UnityExtension(gameId: Bundle.main.infoDictionary?["Unity Game ID"] as? String)
+            VungleExtension(appId: Bundle.main.infoDictionary?["Vungle App ID"] as? String)
+            
+            if let appId = Bundle.main.infoDictionary?["Meta App ID"] as? String {
+                MetaExtension(appId: appId, forceTestAd: true)
+            }
+        }
+        
+        Nimbus.configuration.testMode = UserDefaults.standard.nimbusTestMode
+        Nimbus.configuration.coppa = UserDefaults.standard.coppaOn
         
         // This is only for testing environment, do NOT add this on production environment
         if let mockServerUrl = ProcessInfo.processInfo.environment["MOCK_SERVER_URL"] {
-            NimbusAdManager.requestUrl = URL(string: mockServerUrl)!
-        } else if let publisherKey = Nimbus.shared.publisher, Nimbus.shared.testMode {
-            NimbusAdManager.requestUrl = URL(string: "https://\(publisherKey).adsbynimbus.com/rta/test")!
-            NimbusAdManager.additionalRequestHeaders = [
+            Nimbus.configuration.requestUrl = URL(string: mockServerUrl)!
+        } else if Nimbus.configuration.testMode {
+            Nimbus.configuration.requestUrl = URL(string: "https://\(publisher).adsbynimbus.com/rta/test")!
+            Nimbus.configuration.additionalRequestHeaders = [
                 "Nimbus-Test-No-Fill": String(UserDefaults.standard.forceNoFill)
             ]
         }
-        
-        NimbusAdManager.requestInterceptors = []
-
-        // Renderers
-        let videoRenderer = NimbusVideoAdRenderer()
-        videoRenderer.showMuteButton = true
-        Nimbus.shared.renderers = [
-            .forAuctionType(.static): NimbusStaticAdRenderer(),
-            .forAuctionType(.video): videoRenderer,
-        ]
 
         // User
-        NimbusAdManager.user = NimbusUser(age: 20, gender: .male)
+        Nimbus.configuration.user = RTB.User(age: 20, gender: .male)
     }
     
     private func startTrackingATT() {
         if ATTrackingManager.trackingAuthorizationStatus == .notDetermined {
-            var message = ""
             ATTrackingManager.requestTrackingAuthorization {
+                var message = ""
+                
                 switch $0 {
                 case .authorized:
                     print("ATT authorized")
@@ -106,12 +104,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     message = "unknown default"
                 }
                 
-                DispatchQueue.main.async {
-                    Alert.showAlert(
-                        title: "Request Tracking Authorization Result",
-                        message: message
-                    )
-                }
+                Alert.showAlert(
+                    title: "Request Tracking Authorization Result",
+                    message: message
+                )
             }
         }
     }

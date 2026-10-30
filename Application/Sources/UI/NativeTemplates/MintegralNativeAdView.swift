@@ -7,13 +7,9 @@
 
 import UIKit
 import MTGSDK
-#if canImport(NimbusSDK) // CocoaPods
-import NimbusSDK
-#elseif canImport(NimbusMintegralKit) // Swift Package Manager
 import NimbusMintegralKit
-#endif
 
-final class MintegralNativeAdView: UIView, NimbusMintegralNativeAdViewType {
+final class MintegralNativeAdView: UIView, MintegralNativeAdViewType {
     let mediaView: MTGMediaView = {
         let media = MTGMediaView(frame: .zero)
         media.translatesAutoresizingMaskIntoConstraints = false
@@ -125,7 +121,9 @@ final class MintegralNativeAdView: UIView, NimbusMintegralNativeAdViewType {
         installButton?.setTitle(campaign.adCall, for: .normal)
         
         campaign.loadIconUrlAsync { [weak self] image in
-            self?.iconView?.image = image
+            Task { @MainActor in
+                self?.iconView?.image = image
+            }
         }
     }
 }

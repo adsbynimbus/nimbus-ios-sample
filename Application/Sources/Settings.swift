@@ -8,6 +8,7 @@
 import DTBiOSSDK
 import NimbusKit
 
+@MainActor
 protocol SettingsEnum {
     static var allCases: [Self] { get }
     
@@ -49,7 +50,6 @@ enum GeneralSettings: String, SettingsEnum, CaseIterable {
     case nimbusTestMode          = "Nimbus Test Mode"
     case coppaOn                 = "Set COPPA On"
     case forceNoFill             = "Force No Fill"
-    case omThirdPartyViewability = "Send OMID Viewability Flag"
     case tradeDesk               = "Send Trade Desk Identity"
     case eventLogHidden          = "Hide Event Log By Default"
     
@@ -61,8 +61,6 @@ enum GeneralSettings: String, SettingsEnum, CaseIterable {
             return UserDefaults.standard.coppaOn
         case .forceNoFill:
             return UserDefaults.standard.forceNoFill
-        case .omThirdPartyViewability:
-            return UserDefaults.standard.omThirdPartyViewability
         case .tradeDesk:
             return UserDefaults.standard.tradeDesk
         case .eventLogHidden:
@@ -79,8 +77,6 @@ enum GeneralSettings: String, SettingsEnum, CaseIterable {
             UserDefaults.standard.coppaOn = isEnabled
         case .forceNoFill:
             UserDefaults.standard.forceNoFill = isEnabled
-        case .omThirdPartyViewability:
-            UserDefaults.standard.omThirdPartyViewability = isEnabled
         case .tradeDesk:
             UserDefaults.standard.tradeDesk = isEnabled
         case .eventLogHidden:
@@ -92,6 +88,7 @@ enum GeneralSettings: String, SettingsEnum, CaseIterable {
 
 // Nimbus Test Mode
 extension UserDefaults {
+    @MainActor
     var nimbusTestMode: Bool {
         get {
             register(defaults: [#function: true])
@@ -99,21 +96,11 @@ extension UserDefaults {
         }
         set {
             set(newValue, forKey: #function)
-            Nimbus.shared.testMode = newValue
+            Nimbus.configuration.testMode = newValue
         }
     }
     
-    var omThirdPartyViewability: Bool {
-        get {
-            register(defaults: [#function: true])
-            return bool(forKey: #function)
-        }
-        set {
-            set(newValue, forKey: #function)
-            Nimbus.shared.isThirdPartyViewabilityEnabled = newValue
-        }
-    }
-    
+    @MainActor
     var coppaOn: Bool {
         get {
             register(defaults: [#function: false])
@@ -121,10 +108,11 @@ extension UserDefaults {
         }
         set {
             set(newValue, forKey: #function)
-            Nimbus.shared.coppa = newValue
+            Nimbus.configuration.coppa = newValue
         }
     }
     
+    @MainActor
     var gdprConsent: Bool {
         get {
             register(defaults: [#function: false])
@@ -132,12 +120,10 @@ extension UserDefaults {
         }
         set {
             set(newValue, forKey: #function)
-            if newValue, var user = NimbusAdManager.user {
-                // Same string as Android sample app
-                user.configureGdprConsent(consentString: testGDPRConsentString)
-                NimbusAdManager.user = user
+            if newValue {
+                Nimbus.IAB.tcfString = testGDPRConsentString
             } else {
-                NimbusAdManager.user?.extensions?.removeValue(forKey: "consent")
+                Nimbus.IAB.tcfString = nil
             }
         }
     }
@@ -150,9 +136,9 @@ extension UserDefaults {
         set {
             set(newValue, forKey: #function)
             if newValue {
-                UserDefaults.standard.set("1NYN", forKey: "IABUSPrivacy_String")
+                Nimbus.IAB.usPrivacyString = "1NYN"
             } else {
-                UserDefaults.standard.removeObject(forKey: "IABUSPrivacy_String")
+                Nimbus.IAB.usPrivacyString = nil
             }
         }
     }
@@ -165,15 +151,16 @@ extension UserDefaults {
         set {
             set(newValue, forKey: #function)
             if newValue {
-                UserDefaults.standard.set(testGppConsentString, forKey: "IABGPP_HDR_GppString")
-                UserDefaults.standard.set(testGppSectionId, forKey: "IABGPP_GppSID")
+                Nimbus.IAB.gppConsentString = testGppConsentString
+                Nimbus.IAB.gppSectionId = testGppSectionId
             } else {
-                UserDefaults.standard.removeObject(forKey: "IABGPP_HDR_GppString")
-                UserDefaults.standard.removeObject(forKey: "IABGPP_GppSID")
+                Nimbus.IAB.gppConsentString = nil
+                Nimbus.IAB.gppSectionId = nil
             }
         }
     }
     
+    @MainActor
     var tradeDesk: Bool {
         get {
             register(defaults: [#function: false])
@@ -181,18 +168,15 @@ extension UserDefaults {
         }
         set {
             set(newValue, forKey: #function)
-            if newValue && nimbusTestMode && NimbusAdManager.extendedIds?.first(where: { $0.source == "tradedesk.com" }) == nil {
-                var extendedIds = NimbusAdManager.extendedIds ?? []
-                extendedIds.insert(NimbusExtendedId(source: "tradedesk.com", uids: [.init(id: "TestUID2Token")]))
-                NimbusAdManager.extendedIds = extendedIds
+            if newValue && nimbusTestMode {
+                Nimbus.configuration.identity.add(source: "uidapi.com", ids: [.init(id: "TestUID2Token")])
             } else {
-                if let extendedId = NimbusAdManager.extendedIds?.first(where: { $0.source == "tradedesk.com" }) {
-                    NimbusAdManager.extendedIds?.remove(extendedId)
-                }
+                Nimbus.configuration.identity.clear()
             }
         }
     }
     
+    @MainActor
     var forceNoFill: Bool {
         get {
             register(defaults: [#function: false])
@@ -200,9 +184,7 @@ extension UserDefaults {
         }
         set {
             set(newValue, forKey: #function)
-            var headers = NimbusAdManager.additionalRequestHeaders ?? [:]
-            headers["Nimbus-Test-No-Fill"] = String(newValue)
-            NimbusAdManager.additionalRequestHeaders = headers
+            Nimbus.configuration.additionalRequestHeaders["Nimbus-Test-No-Fill"] = String(newValue)
         }
     }
     
