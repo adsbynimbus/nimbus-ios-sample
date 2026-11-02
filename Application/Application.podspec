@@ -8,7 +8,7 @@ Pod::Spec.new do |spec|
     spec.author = 'Nimbus'
     spec.summary = 'Nimbus Sample Application for iOS'
     spec.homepage = 'https://www.adsbynimbus.com'
-    spec.documentation_url = 'https://docs.adsbynimbus.com/docs/sdk/ios'
+    spec.documentation_url = 'https://docs.adsbynimbus.com/docs'
     spec.license = { :type => 'Copyright', :text => 'Nimbus. All rights reserved.' }
     
 
