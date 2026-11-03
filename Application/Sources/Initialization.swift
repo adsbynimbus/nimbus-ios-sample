@@ -19,6 +19,8 @@ import NimbusMolocoKit
 import NimbusInMobiKit
 import NimbusDTKit
 import NimbusDisplayIOKit
+import DTBiOSSDK
+import FBAudienceNetwork
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -30,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupNimbusSDK()
         setupAmazonDemand()
         
-        // Meta and LiveRamp requires att permissions to run properly
+        // Meta requires att permissions to run properly
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) { [weak self] in
             self?.startTrackingATT()
             self?.setupMetaDemand()
@@ -110,5 +112,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 )
             }
         }
+    }
+    
+    // MARK: - Demand-specific Setup
+    
+    func setupAmazonDemand() {
+        guard let appKey = Bundle.main.infoDictionary?["APS App ID"] as? String else {
+            debugPrint("Skipping APS setup: no app key found")
+            return
+        }
+        
+        DTBAds.sharedInstance().setAppKey(appKey)
+        DTBAds.sharedInstance().mraidPolicy = CUSTOM_MRAID
+        DTBAds.sharedInstance().mraidCustomVersions = ["1.0", "2.0", "3.0"]
+        DTBAds.sharedInstance().testMode = Nimbus.configuration.testMode
+        #if DEBUG
+        DTBAds.sharedInstance().setLogLevel(DTBLogLevelDebug)
+        #endif
+        
+        DTBAds.sharedInstance().setAPSPublisherExtendedIdFeatureEnabled(true)
+    }
+    
+    func setupMetaDemand() {
+        FBAdSettings.addTestDevice(FBAdSettings.testDeviceHash())
+        
+        // Required for test ads
+        FBAdSettings.setAdvertiserTrackingEnabled(true)
     }
 }
