@@ -26,10 +26,6 @@ class MintegralNativeViewController: SampleAdViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        MintegralExtension.nativeAdViewProvider = { _, campaign in
-            MintegralNativeAdView(campaign: campaign)
-        }
-        
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(contentView)
@@ -46,7 +42,9 @@ class MintegralNativeViewController: SampleAdViewController {
     func showAd() async {
         do {
             nativeAd = try await Nimbus.inlineAd(position: "native") {
-                native()
+                native { content, ad in
+                    NativeTemplateView(content: content, ad: ad)
+                }
             }
             .onEvent { [weak self] event in
                 self?.didReceiveNimbusEvent(event: event, ad: self?.nativeAd)

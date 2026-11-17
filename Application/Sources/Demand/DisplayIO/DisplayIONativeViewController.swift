@@ -27,10 +27,6 @@ final class DisplayIONativeViewController: SampleAdViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        DisplayIOExtension.nativeAdViewProvider = { container, ad in
-            DisplayIONativeAdView(nativeAd: ad)
-        }
-        
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.backgroundColor = .clear
         
@@ -48,7 +44,9 @@ final class DisplayIONativeViewController: SampleAdViewController {
     func showAd() async {
         do {
             nativeAd = try await Nimbus.inlineAd(position: "native") {
-                native()
+                native { content, ad in
+                    NativeTemplateView(content: content, ad: ad)
+                }
             }
             .onEvent { [weak self] event in
                 self?.didReceiveNimbusEvent(event: event, ad: self?.nativeAd)

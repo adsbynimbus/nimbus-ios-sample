@@ -27,10 +27,6 @@ final class MolocoNativeViewController: SampleAdViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        MolocoExtension.nativeAdViewProvider = { _, assets in
-            MolocoNativeAdView(assets: assets)
-        }
-        
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.backgroundColor = .clear
         
@@ -48,7 +44,9 @@ final class MolocoNativeViewController: SampleAdViewController {
     func showAd() async {
         do {
             nativeAd = try await Nimbus.inlineAd(position: "native") {
-                native()
+                native { content, ad in
+                    NativeTemplateView(content: content, ad: ad)
+                }
             }
             .onEvent { [weak self] event in
                 self?.didReceiveNimbusEvent(event: event, ad: self?.nativeAd)

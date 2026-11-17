@@ -36,10 +36,6 @@ class VungleViewController: SampleAdViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        VungleExtension.nativeAdViewProvider = { (container, nativeAd) in
-            NimbusVungleNativeAdView(nativeAd)
-        }
-        
         setupContentView()
         
         Task {
@@ -116,7 +112,9 @@ class VungleViewController: SampleAdViewController {
             ])
             
             inlineAd = try await Nimbus.inlineAd(position: "TEST_NATIVE") {
-                native()
+                native { content, ad in
+                    NativeTemplateView(content: content, ad: ad)
+                }
             }
             .onEvent { [weak self] event in
                 self?.didReceiveNimbusEvent(event: event, ad: self?.inlineAd)

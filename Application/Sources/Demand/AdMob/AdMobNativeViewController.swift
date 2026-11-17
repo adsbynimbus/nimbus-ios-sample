@@ -16,7 +16,6 @@ class AdMobNativeViewController: SampleAdViewController {
     
     var nativeAd: InlineAd?
     
-    var adView: AdMobNativeAdView!
     let contentView = UIView()
     
     convenience init(headerTitle: String, headerSubTitle: String) {
@@ -29,10 +28,6 @@ class AdMobNativeViewController: SampleAdViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
-        AdMobExtension.nativeAdViewProvider = { _, nativeAd in
-            AdMobNativeAdView(nativeAd: nativeAd)
-        }
         
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.backgroundColor = .clear
@@ -54,7 +49,9 @@ class AdMobNativeViewController: SampleAdViewController {
             let nativeOptions = AdMobNativeAdOptions(preferredAdChoicesPosition: .topLeftCorner)
             
             self.nativeAd = try await Nimbus.inlineAd(position: "native") {
-                native()
+                native { nativeAd, ad in
+                    NativeTemplateView(content: nativeAd, ad: ad)
+                }
                 demand {
                     admob(nativeAdUnitId: nativePlacementId, options: nativeOptions)
                 }
