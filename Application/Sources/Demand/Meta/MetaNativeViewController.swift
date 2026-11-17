@@ -41,7 +41,9 @@ class MetaNativeViewController: SampleAdViewController {
     func showAd() async {
         do {
             nativeAd = try await Nimbus.inlineAd(position: "native") {
-                native()
+                native { nativeAd, ad in
+                    NativeTemplateView(content: nativeAd, ad: ad)
+                }
             }
             .onEvent { [weak self] event in
                 self?.didReceiveNimbusEvent(event: event, ad: self?.nativeAd)
