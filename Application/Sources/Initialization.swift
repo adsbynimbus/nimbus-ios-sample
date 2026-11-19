@@ -21,6 +21,7 @@ import NimbusDTKit
 import NimbusDisplayIOKit
 import DTBiOSSDK
 import FBAudienceNetwork
+import NimbusOguryKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -60,6 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             DisplayIOExtension(appId: Bundle.main.infoDictionary?["DisplayIO App ID"] as? String)
             UnityExtension(gameId: Bundle.main.infoDictionary?["Unity Game ID"] as? String)
             VungleExtension(appId: Bundle.main.infoDictionary?["Vungle App ID"] as? String)
+            OguryExtension(assetKey: Bundle.main.infoDictionary?["Ogury Asset Key"] as? String)
             
             if let appId = Bundle.main.infoDictionary?["Meta App ID"] as? String {
                 MetaExtension(appId: appId, forceTestAd: true)

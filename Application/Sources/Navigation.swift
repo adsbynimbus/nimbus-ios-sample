@@ -68,6 +68,7 @@ enum MainItem: String, NavigationItem {
                     Section(header: "InMobi", items: InMobi.allCases),
                     Section(header: "Digital Turbine", items: DigitalTurbineSample.allCases),
                     Section(header: "display.io", items: DisplayIOSample.allCases),
+                    Section(header: "Ogury", items: OgurySample.allCases),
                 ])
         case .testRender:
             return TestRenderViewController(
@@ -294,6 +295,20 @@ enum DisplayIOSample: String, NavigationItem {
         case .dioNative: DisplayIONativeViewController(headerTitle: rawValue, headerSubTitle: "")
         case .dioInterstitial: DisplayIOInterstitialViewController(headerTitle: rawValue, headerSubTitle: "")
         case .dioRewarded: DisplayIORewardedViewController(headerTitle: rawValue, headerSubTitle: "")
+        }
+    }
+}
+
+enum OgurySample: String, NavigationItem {
+    case oguryBanner                = "Ogury Banner"
+    case oguryInterstitial          = "Ogury Interstitial"
+    case oguryRewarded              = "Ogury Rewarded"
+    
+    func destinationController(parent: String) -> UIViewController {
+        switch self {
+        case .oguryBanner: OguryBannerViewController(headerTitle: rawValue, headerSubTitle: "", size: .banner)
+        case .oguryInterstitial: OguryInterstitialViewController(headerTitle: rawValue, headerSubTitle: "")
+        case .oguryRewarded: OguryRewardedViewController(headerTitle: rawValue, headerSubTitle: "")
         }
     }
 }
